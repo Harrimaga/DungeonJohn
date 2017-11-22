@@ -18,5 +18,6 @@ namespace DeGame
                 game.Run();
         }
     }
+    //ja
 #endif
 }
