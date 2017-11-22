@@ -6,6 +6,7 @@ namespace DeGame
 {
     /// <summary>
     /// This is the main type for your game.
+    /// This line was added for testing
     /// </summary>
     public class Game1 : Game
     {
