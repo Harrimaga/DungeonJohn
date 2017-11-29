@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DeGame.GameManagement;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace DeGame
 {
@@ -8,10 +10,20 @@ namespace DeGame
     /// This is the main type for your game.
     /// This line was added for testing
     /// </summary>
-    public class Game1 : Game
+    public class Game1 : GameEnvironment
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            using (var game = new Game1())
+                game.Run();
+        }
 
         public Game1()
         {
