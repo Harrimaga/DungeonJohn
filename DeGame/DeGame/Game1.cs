@@ -13,7 +13,7 @@ namespace DeGame
     public class Game1 : GameEnvironment
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        //SpriteBatch spriteBatch;
 
         /// <summary>
         /// The main entry point for the application.
@@ -27,7 +27,7 @@ namespace DeGame
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            //graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
@@ -50,8 +50,9 @@ namespace DeGame
         /// </summary>
         protected override void LoadContent()
         {
+            base.LoadContent();
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            //spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
