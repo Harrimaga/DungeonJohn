@@ -3,10 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 //namespace DeGame.GameManagement
 
@@ -23,7 +19,6 @@ public class GameEnvironment : Game
     public GameEnvironment()
     {
         graphics = new GraphicsDeviceManager(this);
-
 
         inputHelper = new InputHelper();
         gameStateManager = new GameStateManager();
@@ -43,10 +38,12 @@ public class GameEnvironment : Game
         {
             Exit();
         }
-        /*if (inputHelper.KeyPressed(Keys.F5))
+        /*
+        if (inputHelper.KeyPressed(Keys.F5))
         {
             FullScreen = !FullScreen;
-        }*/
+        }
+        */
         gameStateManager.HandleInput(inputHelper);
     }
 

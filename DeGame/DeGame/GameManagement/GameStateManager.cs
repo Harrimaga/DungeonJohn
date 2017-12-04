@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class GameStateManager : IGameObject
 {
     IGameObject currentGameState;
+    Dictionary<string, IGameObject> gameStates;
+
+    public GameStateManager()
+    {
+        gameStates = new Dictionary<string, IGameObject>();
+        currentGameState = null;
+    }
 
     public void SwitchTo()
     {
