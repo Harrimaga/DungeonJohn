@@ -1,5 +1,4 @@
-﻿//using DeGame.GameManagement;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//namespace DeGame.GameManagement
+
 
 public class GameEnvironment : Game
     {
@@ -18,13 +17,14 @@ public class GameEnvironment : Game
  
     protected static GameStateManager gameStateManager;
     protected static Random random;
-    protected static AssetManager assetManager;
+    public static AssetManager assetManager;
+    
 
     public GameEnvironment()
     {
         graphics = new GraphicsDeviceManager(this);
 
-
+        
         inputHelper = new InputHelper();
         gameStateManager = new GameStateManager();
         random = new Random();
@@ -58,9 +58,9 @@ public class GameEnvironment : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.Purple);
+        GraphicsDevice.Clear(Color.Black);
         spriteBatch.Begin();
-        spriteBatch.Draw(assetManager.GetSprite("Sprites/Random"), Vector2.Zero);
+        //spriteBatch.Draw(assetManager.GetSprite("Sprites/Random"), Vector2.Zero);
         gameStateManager.Draw(gameTime, spriteBatch);
         spriteBatch.End();
     }
