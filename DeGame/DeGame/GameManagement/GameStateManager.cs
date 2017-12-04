@@ -10,7 +10,7 @@ public class GameStateManager : IGameObject
 {
     IGameObject currentGameState;
 
-    public void SwitchTo()
+    public void SwitchTo(string name)
     {
         /*if (gameStates.ContainsKey(name))
         {
@@ -33,6 +33,7 @@ public class GameStateManager : IGameObject
 
     public void Update(GameTime gameTime)
     {
+        
         if (currentGameState != null)
         {
             currentGameState.Update(gameTime);

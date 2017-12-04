@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public abstract class GameObject
+public abstract class GameObject : IGameObject
     {
 
     protected GameObject parent;
