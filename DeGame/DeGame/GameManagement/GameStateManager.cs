@@ -15,16 +15,20 @@ public class GameStateManager : IGameObject
 
     public void SwitchTo(string name)
     {
-        /*if (gameStates.ContainsKey(name))
+        if (gameStates.ContainsKey(name))
         {
             currentGameState = gameStates[name];
         }
         else
         {
             throw new KeyNotFoundException("Could not find game state: " + name);
-        }*/
+        }
     }
 
+    public void AddGameState(string name, IGameObject state)
+    {
+        gameStates[name] = state;
+    }
 
     public void HandleInput(InputHelper inputHelper)
     {
