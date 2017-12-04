@@ -1,10 +1,9 @@
-﻿//using DeGame.GameManagement;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-//namespace DeGame.GameManagement
+
 
 public class GameEnvironment : Game
     {
@@ -14,7 +13,10 @@ public class GameEnvironment : Game
  
     protected static GameStateManager gameStateManager;
     protected static Random random;
-    protected static AssetManager assetManager;
+
+    public static AssetManager assetManager;
+    protected static Camera cam;
+
 
     public GameEnvironment()
     {
@@ -55,10 +57,16 @@ public class GameEnvironment : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.Purple);
+        GraphicsDevice.Clear(Color.Black);
         spriteBatch.Begin();
-        spriteBatch.Draw(assetManager.GetSprite("Sprites/Random"), Vector2.Zero);
+        //spriteBatch.Draw(assetManager.GetSprite("Sprites/Random"), Vector2.Zero);
         gameStateManager.Draw(gameTime, spriteBatch);
         spriteBatch.End();
+    }
+
+    public static Camera Camera
+    {
+        get { return cam; }
+        set { cam = value; }
     }
 }

@@ -1,13 +1,12 @@
-﻿//using DeGame.GameManagement;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-    class PlayingState : GameObjectList
-    {
-    }
+public class Camera : GameObject
+{
+    public Vector2 Positie;
+}
 

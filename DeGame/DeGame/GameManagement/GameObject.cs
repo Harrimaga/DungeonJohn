@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public abstract class GameObject
+public abstract class GameObject : IGameObject
     {
 
     protected GameObject parent;
@@ -29,6 +29,52 @@ public abstract class GameObject
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+    }
+
+    public virtual GameObject Parent
+    {
+        get { return parent; }
+        set { parent = value; }
+    }
+
+    public virtual int Layer
+    {
+        get { return layer; }
+        set { layer = value; }
+    }
+
+    public string Id
+    {
+        get { return id; }
+    }
+
+    public virtual Vector2 Position
+    {
+        get { return position; }
+        set { position = value; }
+    }
+
+    public virtual Vector2 GlobalPosition
+    {
+        get
+        {
+            if (parent != null)
+            {
+                return parent.GlobalPosition + Position;
+            }
+            else
+            {
+                return Position;
+            }
+        }
+    }
+
+    public virtual Rectangle BoundingBox
+    {
+        get
+        {
+            return new Rectangle((int)GlobalPosition.X, (int)GlobalPosition.Y, 0, 0);
+        }
     }
 
     public virtual void Reset()
