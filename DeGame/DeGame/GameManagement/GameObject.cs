@@ -54,6 +54,35 @@ public abstract class GameObject : IGameObject
         get { return id; }
     }
 
+    public virtual Vector2 Position
+    {
+        get { return position; }
+        set { position = value; }
+    }
+
+    public virtual Vector2 GlobalPosition
+    {
+        get
+        {
+            if (parent != null)
+            {
+                return parent.GlobalPosition + Position;
+            }
+            else
+            {
+                return Position;
+            }
+        }
+    }
+
+    public virtual Rectangle BoundingBox
+    {
+        get
+        {
+            return new Rectangle((int)GlobalPosition.X, (int)GlobalPosition.Y, 0, 0);
+        }
+    }
+
     public virtual void Reset()
     {
         visible = true;
