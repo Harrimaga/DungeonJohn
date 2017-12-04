@@ -11,8 +11,8 @@ public class SpriteGameObject : GameObject
 {
     protected Vector2 origin;
     public bool PerPixelCollisionDetection = true;
-    public float UsesCameraX = 1;
-    public float UsesCameraY = 1;
+    //public float UsesCameraX = 1;
+    //public float UsesCameraY = 1;
     protected SpriteGameObject sprite; //Niet zeker of dit klopt
     
     public SpriteGameObject(string assetName, int layer = 0, string id = "")
