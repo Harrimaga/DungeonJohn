@@ -17,13 +17,10 @@ public class GameEnvironment : Game
  
     protected static GameStateManager gameStateManager;
     protected static Random random;
-<<<<<<< DeGame/DeGame/GameManagement/GameEnvironment.cs
-    public static AssetManager assetManager;
-    
-=======
+
     public static AssetManager assetManager;
     protected static Camera cam;
->>>>>>> DeGame/DeGame/GameManagement/GameEnvironment.cs
+
 
     public GameEnvironment()
     {
