@@ -51,6 +51,11 @@ namespace DeGame
         protected override void LoadContent()
         {
             base.LoadContent();
+            gameStateManager.AddGameState("MainMenu", new MainMenuState());
+            gameStateManager.AddGameState("Playing", new PlayingState());
+            gameStateManager.AddGameState("GameOver", new GameOverState());
+            gameStateManager.AddGameState("PauseMenu", new PauseMenuState());
+            gameStateManager.SwitchTo("MainMenu");
             // Create a new SpriteBatch, which can be used to draw textures.
             //spriteBatch = new SpriteBatch(GraphicsDevice);
 
