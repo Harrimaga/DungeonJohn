@@ -19,6 +19,7 @@ public class GameEnvironment : Game
     protected static GameStateManager gameStateManager;
     protected static Random random;
     protected static AssetManager assetManager;
+    protected static Camera cam;
 
     public GameEnvironment()
     {
@@ -63,5 +64,11 @@ public class GameEnvironment : Game
         spriteBatch.Draw(assetManager.GetSprite("Sprites/Random"), Vector2.Zero);
         gameStateManager.Draw(gameTime, spriteBatch);
         spriteBatch.End();
+    }
+
+    public static Camera Camera
+    {
+        get { return cam; }
+        set { cam = value; }
     }
 }
