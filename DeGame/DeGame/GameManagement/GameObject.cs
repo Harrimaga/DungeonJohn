@@ -37,6 +37,23 @@ public abstract class GameObject
     {
     }
 
+    public virtual GameObject Parent
+    {
+        get { return parent; }
+        set { parent = value; }
+    }
+
+    public virtual int Layer
+    {
+        get { return layer; }
+        set { layer = value; }
+    }
+
+    public string Id
+    {
+        get { return id; }
+    }
+
     public virtual void Reset()
     {
         visible = true;
