@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    class Room
+    class Room : GameObject
     {
     public void LoadTiles(string path)
     {
