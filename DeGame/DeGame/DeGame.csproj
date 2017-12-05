@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Sprites\BearEnemy.png" />
     <Content Include="Content\Sprites\Random.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>

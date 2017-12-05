@@ -27,7 +27,7 @@ public class GameEnvironment : Game
         random = new Random();
         assetManager = new AssetManager(Content);
     }
-
+    
     protected override void LoadContent()
     {
         //DrawingHelper.Initialize(this.GraphicsDevice);
@@ -53,6 +53,7 @@ public class GameEnvironment : Game
     protected override void Update(GameTime gameTime)
     {
         HandleInput();
+        
         gameStateManager.Update(gameTime);
     }
 

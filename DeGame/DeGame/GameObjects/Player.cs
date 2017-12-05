@@ -15,7 +15,7 @@ class Player : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 position;
+    public Vector2 position;
 
     public Player()
     {
@@ -33,19 +33,19 @@ class Player : SpriteGameObject
     }
     public override void HandleInput(InputHelper inputHelper)
     {
-        if (inputHelper.KeyPressed(Keys.W))
+        if (inputHelper.IsKeyDown(Keys.W))
         {
-            position.Y = position.Y - 1000;
+            position.Y = position.Y - 5;
         }
         if (inputHelper.IsKeyDown(Keys.S))
         {
             position.Y = position.Y + 5;
         }
-        if (inputHelper.IsKeyDown(Keys.D))
+        if (inputHelper.IsKeyDown(Keys.A))
         {
             position.X = position.X - 5;
         }
-        if (inputHelper.IsKeyDown(Keys.A))
+        if (inputHelper.IsKeyDown(Keys.D))
         {
             position.X = position.X + 5;
         }
