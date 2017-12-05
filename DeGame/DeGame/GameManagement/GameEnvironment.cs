@@ -11,7 +11,7 @@ public class GameEnvironment : Game
     protected SpriteBatch spriteBatch;
     protected InputHelper inputHelper;
  
-    protected static GameStateManager gameStateManager;
+    public static GameStateManager gameStateManager;
     protected static Random random;
 
     public static AssetManager assetManager;

@@ -37,19 +37,19 @@ class Player : SpriteGameObject
     {
         if (inputHelper.IsKeyDown(Keys.W))
         {
-            position.Y = position.Y - 5;
+            position.Y -= 5;
         }
         if (inputHelper.IsKeyDown(Keys.S))
         {
-            position.Y = position.Y + 5;
+            position.Y += 5;
         }
         if (inputHelper.IsKeyDown(Keys.A))
         {
-            position.X = position.X - 5;
+            position.X -= 5;
         }
         if (inputHelper.IsKeyDown(Keys.D))
         {
-            position.X = position.X + 5;
+            position.X += 5;
         }
 
     }
