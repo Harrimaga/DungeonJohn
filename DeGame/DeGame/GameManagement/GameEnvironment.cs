@@ -66,5 +66,7 @@ public class GameEnvironment : Game
 
     public static Camera Camera
     {
+        get { return cam; }
+        set { cam = value; }
     }
 }
