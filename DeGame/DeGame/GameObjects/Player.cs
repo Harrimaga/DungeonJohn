@@ -21,12 +21,13 @@ class Player : SpriteGameObject
 
     public Player()
     {
-        position = new Vector2(100, 100);
+        position = new Vector2();
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

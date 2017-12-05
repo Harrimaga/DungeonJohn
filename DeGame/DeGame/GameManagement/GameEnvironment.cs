@@ -52,7 +52,6 @@ public class GameEnvironment : Game
     protected override void Update(GameTime gameTime)
     {
         HandleInput();
-        
         gameStateManager.Update(gameTime);
     }
 
