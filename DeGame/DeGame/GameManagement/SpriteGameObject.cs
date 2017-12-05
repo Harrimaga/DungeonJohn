@@ -20,7 +20,10 @@ public class SpriteGameObject : GameObject
     {
         //this.sprite = GameEnvironment.assetManager.GetSprite(assetName);
     }
-
+    public override void Update(GameTime gameTime)
+    {
+    }
+    
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
     }

@@ -19,17 +19,32 @@ public class Enemy : SpriteGameObject
 
     public Enemy()
     {
-        position = new Vector2(100, 100);
+        position = new Vector2(100, 50);
+        player = new Player();
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if(position != player.position)
+        if(position.Y > player.position.Y)
         {
-
+            position.Y--;
         }
+        if (position.Y < player.Position.Y)
+        {
+            position.Y++;
+        }
+        if (position.X > player.position.X)
+        {
+            position.X--;
+        }
+        if (position.X < player.position.X)
+        {
+            position.X++;
+        }
+        player.Update(gameTime);
     }
+    
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
