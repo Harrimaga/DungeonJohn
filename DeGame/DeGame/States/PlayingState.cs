@@ -17,6 +17,7 @@ class PlayingState : IGameObject
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {
+        player.HandleInput(inputHelper);
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
@@ -26,6 +27,7 @@ class PlayingState : IGameObject
     }
     public virtual void Update(GameTime gameTime)
     {
+        player.Update(gameTime);
     }
     public virtual void Reset()
     {

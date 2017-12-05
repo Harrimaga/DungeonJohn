@@ -1,0 +1,27 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+class Bullet : SpriteGameObject
+{
+    public Bullet(Vector2 Startposition, int Direction)
+    {
+        if (Direction == 0)
+            velocity.Y = 400;
+        else if (Direction == 1)
+            velocity.X = -400;
+        else if (Direction == 2)
+            velocity.Y = -400;
+        else if (Direction == 3)
+            velocity.X = 400;
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
+    }
+}
