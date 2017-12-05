@@ -13,7 +13,7 @@ public class SpriteGameObject : GameObject
     public bool PerPixelCollisionDetection = true;
     //public float UsesCameraX = 1;
     //public float UsesCameraY = 1;
-    protected SpriteGameObject sprite; //Niet zeker of dit klopt
+    protected SpriteGameObject sprite; //Niet zeker of dit klopt --- Nee, maar ik weet hier niet zo snel een oplossing voor :/
     
     public SpriteGameObject(/*string assetName, int layer = 0, string id = ""*/)
        // : base(layer, id)
