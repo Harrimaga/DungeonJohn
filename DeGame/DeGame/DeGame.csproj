@@ -56,7 +56,6 @@
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\Tile.cs" />
     <Compile Include="Level\Floor.cs" />
-    <Compile Include="Level\LevelLoading.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Menu\Button.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
