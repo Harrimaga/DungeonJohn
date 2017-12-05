@@ -11,7 +11,7 @@ public class GameEnvironment : Game
     protected SpriteBatch spriteBatch;
     protected InputHelper inputHelper;
  
-    protected static GameStateManager gameStateManager;
+    public static GameStateManager gameStateManager;
     protected static Random random;
 
     public static AssetManager assetManager;
@@ -21,7 +21,6 @@ public class GameEnvironment : Game
     public GameEnvironment()
     {
         graphics = new GraphicsDeviceManager(this);
-
         inputHelper = new InputHelper();
         gameStateManager = new GameStateManager();
         random = new Random();
