@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public abstract class GameObject : IGameObject
     {
-
     protected GameObject parent;
     protected Vector2 position, velocity;
     protected int layer;
