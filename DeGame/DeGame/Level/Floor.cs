@@ -32,10 +32,17 @@ public class Floor
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        
+        foreach (Room room in floor)
+        {
+            room.Draw(gameTime, spriteBatch);
+        }
     }
     public virtual void Update(GameTime gameTime)
     {
+        foreach (Room room in floor)
+        {
+            room.Update(gameTime);
+        }
         //TODO als nextFloor true is dan voor NextFloor() uit
     }
 

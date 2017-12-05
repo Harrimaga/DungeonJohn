@@ -21,7 +21,6 @@ public class GameEnvironment : Game
     public GameEnvironment()
     {
         graphics = new GraphicsDeviceManager(this);
-
         inputHelper = new InputHelper();
         gameStateManager = new GameStateManager();
         random = new Random();
