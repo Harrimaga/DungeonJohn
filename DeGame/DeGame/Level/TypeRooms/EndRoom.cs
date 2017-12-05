@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 
 class EndRoom : Room
-    {
+{
     bool nextFloor = false;
     public EndRoom(Vector2 floorPosition)
     {
@@ -16,7 +16,7 @@ class EndRoom : Room
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        
+
     }
     public virtual void Update(GameTime gameTime)
     {

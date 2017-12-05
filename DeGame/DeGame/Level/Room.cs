@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    //class Room
-    //{
+//class Room
+//{
     //public void LoadTiles(string path)
     //{
     //    List<string> textLines = new List<string>();
