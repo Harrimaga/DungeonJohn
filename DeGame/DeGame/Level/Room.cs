@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-class Room : GameObject
+public class Room : GameObjectList
     {
     public void LoadTiles(string path)
     {
         List<string> textLines = new List<string>();
-        StreamReader fileReader = new StreamReader(path);
+        StreamReader fileReader = new StreamReader("Content/Levels/1.txt"); /*+ RoomListIndex*/
         string line = fileReader.ReadLine();
         string[,] roomarray = new string[10, 8];
 
@@ -14,7 +14,6 @@ class Room : GameObject
         //int CellHeight = 50;
         //int levelwidth = line.Length * CellWidth;
         //int levelheight = textLines.Count * CellHeight;
-
 
         while (line != null)
         {
@@ -36,19 +35,19 @@ class Room : GameObject
         switch (tileType)
         {
             case '?':
-                return "Blank";
+                return "Unknown";
             case '.':
-                return "Normal";
+                return "Background";
             case '!':
                 return "Rock";
             case '+':
                 return "Wall";
             case 'X':
-                return "End";
+                return "Exit";
             case 'S':
                 return "Start";
             default:
-                return "Unkown"; 
+                return "N/A"; 
         }
     }
 }
