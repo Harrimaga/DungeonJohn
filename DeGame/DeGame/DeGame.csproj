@@ -58,6 +58,8 @@
     <Compile Include="GameObjects\Tile.cs" />
     <Compile Include="Level\Floor.cs" />
     <Compile Include="Level\Room.cs" />
+    <Compile Include="Level\TypeRooms\EndRoom.cs" />
+    <Compile Include="Level\TypeRooms\StartRoom.cs" />
     <Compile Include="Menu\Button.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\GameOverState.cs" />
@@ -73,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Sprites\BearEnemy.png" />
     <Content Include="Content\Sprites\Random.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>

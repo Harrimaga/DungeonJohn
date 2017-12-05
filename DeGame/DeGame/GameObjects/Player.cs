@@ -15,7 +15,7 @@ class Player : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 position;
+    public Vector2 position;
 
     GameObjectList bullets;
 
