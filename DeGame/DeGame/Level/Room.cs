@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    class Room
-    {
+    //class Room
+    //{
     //public void LoadTiles(string path)
     //{
     //    List<string> textLines = new List<string>();
@@ -159,5 +161,5 @@ using System.Threading.Tasks;
     //    waterdrops.add(w);
     //    return new tile();
     //}
-}
+//}
 

@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 class StartRoom : Room
     {
+    
     public StartRoom(Vector2 floorPosition)
     {
-
+        
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
