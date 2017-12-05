@@ -4,74 +4,74 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    class Room
-    {
-    public void LoadTiles(string path)
-    {
-        List<string> textLines = new List<string>();
-        StreamReader fileReader = new StreamReader(path);
-        string line = fileReader.ReadLine();
-        int width = line.Length;
-        while (line != null)
-        {
-            textLines.Add(line);
-            line = fileReader.ReadLine();
-        }
-        TileField tiles = new TileField(textLines.Count - 2, width, 1, "tiles");
+    //class Room
+    //{
+    //public void LoadTiles(string path)
+    //{
+    //    List<string> textLines = new List<string>();
+    //    StreamReader fileReader = new StreamReader(path);
+    //    string line = fileReader.ReadLine();
+    //    int width = line.Length;
+    //    while (line != null)
+    //    {
+    //        textLines.Add(line);
+    //        line = fileReader.ReadLine();
+    //    }
+    //    TileField tiles = new TileField(textLines.Count - 2, width, 1, "tiles");
 
-        Add(tiles);
-        tiles.CellWidth = 72;
-        tiles.CellHeight = 55;
-        for (int x = 0; x < width; ++x)
-        {
-            for (int y = 0; y < textLines.Count - 2; ++y)
-            {
-                Tile t = LoadTile(textLines[y][x], x, y);
-                tiles.Add(t, x, y);
-            }
-        }
-    }
+    //    Add(tiles);
+    //    tiles.CellWidth = 72;
+    //    tiles.CellHeight = 55;
+    //    for (int x = 0; x < width; ++x)
+    //    {
+    //        for (int y = 0; y < textLines.Count - 2; ++y)
+    //        {
+    //            Tile t = LoadTile(textLines[y][x], x, y);
+    //            tiles.Add(t, x, y);
+    //        }
+    //    }
+    //}
 
-    private Tile LoadTile(char tileType, int x, int y)
-    {
-        switch (tileType)
-        {
-            case '.':
-                return new Tile();
-            case '-':
-                return LoadBasicTile("spr_platform", TileType.Platform);
-            case '+':
-                return LoadBasicTile("spr_platform_hot", TileType.Platform, true, false);
-            case '@':
-                return LoadBasicTile("spr_platform_ice", TileType.Platform, false, true);
-            case 'X':
-                return LoadEndTile(x, y);
-            case 'W':
-                return LoadWaterTile(x, y);
-            case '1':
-                return LoadStartTile(x, y);
-            case '#':
-                return LoadBasicTile("spr_wall", TileType.Normal);
-            case '^':
-                return LoadBasicTile("spr_wall_hot", TileType.Normal, true, false);
-            case '*':
-                return LoadBasicTile("spr_wall_ice", TileType.Normal, false, true);
-            case 'T':
-                return LoadTurtleTile(x, y);
-            case 'R':
-                return LoadRocketTile(x, y, true);
-            case 'r':
-                return LoadRocketTile(x, y, false);
-            case 'S':
-                return LoadSparkyTile(x, y);
-            case 'A':
-            case 'B':
-            case 'C':
-                return LoadFlameTile(x, y, tileType);
-            default:
-                return new Tile("");
-        }
-    }
+    //private Tile LoadTile(char tileType, int x, int y)
+    //{
+    //    switch (tileType)
+    //    {
+    //        case '.':
+    //            return new Tile();
+    //        case '-':
+    //            return LoadBasicTile("spr_platform", TileType.Platform);
+    //        case '+':
+    //            return LoadBasicTile("spr_platform_hot", TileType.Platform, true, false);
+    //        case '@':
+    //            return LoadBasicTile("spr_platform_ice", TileType.Platform, false, true);
+    //        case 'X':
+    //            return LoadEndTile(x, y);
+    //        case 'W':
+    //            return LoadWaterTile(x, y);
+    //        case '1':
+    //            return LoadStartTile(x, y);
+    //        case '#':
+    //            return LoadBasicTile("spr_wall", TileType.Normal);
+    //        case '^':
+    //            return LoadBasicTile("spr_wall_hot", TileType.Normal, true, false);
+    //        case '*':
+    //            return LoadBasicTile("spr_wall_ice", TileType.Normal, false, true);
+    //        case 'T':
+    //            return LoadTurtleTile(x, y);
+    //        case 'R':
+    //            return LoadRocketTile(x, y, true);
+    //        case 'r':
+    //            return LoadRocketTile(x, y, false);
+    //        case 'S':
+    //            return LoadSparkyTile(x, y);
+    //        case 'A':
+    //        case 'B':
+    //        case 'C':
+    //            return LoadFlameTile(x, y, tileType);
+    //        default:
+    //            return new Tile("");
+    //    }
+    //}
 
     //private tile loadbasictile(string name, tiletype tiletype, bool hot = false, bool ice = false)
     //{
@@ -159,5 +159,5 @@ using System.Threading.Tasks;
     //    waterdrops.add(w);
     //    return new tile();
     //}
-}
+//}
 

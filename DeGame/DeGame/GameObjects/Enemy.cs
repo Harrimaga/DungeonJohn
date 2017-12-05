@@ -1,20 +1,41 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 
-   public class Enemy : SpriteGameObject
-    {
+public class Enemy : SpriteGameObject
+{
+    Player player;
     protected float health;
     protected float maxhealth;
     protected float attack;
     protected float attackspeed;
     protected float range;
+    protected Vector2 position;
 
     public Enemy()
     {
+        position = new Vector2(100, 100);
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+        if(position != player.position)
+        {
+
+        }
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
 }
+
+
 

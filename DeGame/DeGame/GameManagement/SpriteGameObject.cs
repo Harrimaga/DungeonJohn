@@ -25,6 +25,11 @@ public class SpriteGameObject : GameObject
     {
     }
 
+    public override void HandleInput(InputHelper inputHelper)
+    {
+    }
+
+
     public Vector2 Center
     {
         get { return new Vector2(Width, Height) / 2; }
