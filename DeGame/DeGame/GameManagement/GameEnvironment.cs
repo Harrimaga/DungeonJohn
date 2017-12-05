@@ -46,6 +46,7 @@ public class GameEnvironment : Game
             FullScreen = !FullScreen;
         }
         */
+
         gameStateManager.HandleInput(inputHelper);
     }
 
