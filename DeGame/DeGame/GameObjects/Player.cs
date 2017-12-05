@@ -17,6 +17,8 @@ class Player : SpriteGameObject
     protected float range;
     public Vector2 position;
 
+    public GameObjectList bullets = new GameObjectList();
+
     public Player()
     {
         position = new Vector2(100, 100);
