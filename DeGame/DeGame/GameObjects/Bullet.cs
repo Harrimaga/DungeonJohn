@@ -10,6 +10,9 @@ class Bullet : SpriteGameObject
 {
     public Bullet(Vector2 Startposition, int Direction)
     {
+
+        this.position = Startposition;
+
         if (Direction == 0)
             velocity.Y = 400;
         else if (Direction == 1)
