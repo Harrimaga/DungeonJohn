@@ -3,12 +3,14 @@ using System.IO;
 
 public class Room : GameObjectList
     {
+
+    public string[,] roomarray;
     public void LoadTiles(int RoomListIndex)
     {
         List<string> textLines = new List<string>();
         StreamReader fileReader = new StreamReader("Content/Levels/1.txt"); /*+ RoomListIndex*/
         string line = fileReader.ReadLine(); 
-        string[,] roomarray = new string[10, 8];
+        roomarray = new string[10, 8];
 
         //int CellWidth = 50;
         //int CellHeight = 50;
