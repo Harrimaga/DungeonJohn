@@ -169,17 +169,23 @@ class Room
     public void Update(GameTime gameTime)
     {
         //TODO: Update
-        foreach (Enemy enemy in enemies)
+        if (enemies != null)
         {
-            enemy.Update(gameTime);
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Update(gameTime);
+            }
         }
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        foreach (Enemy enemy in enemies)
+        if (enemies != null)
         {
-            enemy.Draw(gameTime, spriteBatch);
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Draw(gameTime, spriteBatch);
+            }
         }
     }
 }

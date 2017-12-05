@@ -34,14 +34,20 @@ public class Floor
     {
         foreach (Room room in floor)
         {
-            room.Draw(gameTime, spriteBatch);
+            if (room != null)
+            {
+                room.Draw(gameTime, spriteBatch);
+            }
         }
     }
     public virtual void Update(GameTime gameTime)
     {
         foreach (Room room in floor)
         {
-            room.Update(gameTime);
+            if(room != null)
+            {
+                room.Update(gameTime);
+            }
         }
         //TODO als nextFloor true is dan voor NextFloor() uit
     }
