@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,10 @@ class MainMenuState : IGameObject
 {
     public virtual void HandleInput(InputHelper inputHelper)
     {
+        if (inputHelper.IsKeyDown(Keys.Space))
+        {
+            GameEnvironment.gameStateManager.SwitchTo("Playing");
+        }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
