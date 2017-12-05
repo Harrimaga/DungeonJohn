@@ -15,8 +15,8 @@ public class SpriteGameObject : GameObject
     //public float UsesCameraY = 1;
     protected SpriteGameObject sprite; //Niet zeker of dit klopt
     
-    public SpriteGameObject(string assetName, int layer = 0, string id = "")
-        : base(layer, id)
+    public SpriteGameObject(/*string assetName, int layer = 0, string id = ""*/)
+        //: base(layer, id)
     {
 
     }
