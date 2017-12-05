@@ -14,20 +14,21 @@ class Player : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
+    protected Vector2 position;
 
     public Player()
     {
+        position = new Vector2(0, 0);
     }
 
     public override void Update(GameTime gameTime)
     {
+        base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Begin();
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), Vector2.Zero);
-        spriteBatch.End();
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
     }
 }
 
