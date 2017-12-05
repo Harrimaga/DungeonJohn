@@ -10,17 +10,18 @@ class Floor
     int minRooms = 15;
     string[,] array;
 
-    public void MergeArrays(string [,]roomarray)
+    public void MergeArrays()
     {
         foreach (Room room in floor)
         {
+            room.LoadTiles(1);
             string[,] array = room.roomarray;
         }
         int a = 0, b = 0;
         // TODO algoritme dat kamers indeeld en offset waarde aan a en b geeft
         for (int x = 0; x == 10; x++)
             for (int y = 0; y == 10; y++)
-                Mergearray[x, y] = roomarray[x + 10 * a, y + 10 * b];
+                Mergearray[x, y] = array[x + 10 * a, y + 10 * b];
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
