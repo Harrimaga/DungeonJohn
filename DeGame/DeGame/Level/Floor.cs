@@ -5,10 +5,17 @@ class Floor
 {
     string[,,] FloorLayout = new string[10, 10, 2];
     string[,] Mergearray = new string[100, 100];
-    Room room = new Room();
+    Room[,] floor;
+    int maxRooms = 20;
+    int minRooms = 15;
+    string[,] array;
 
     public void MergeArrays(string [,]roomarray)
     {
+        foreach (Room room in floor)
+        {
+            string[,] array = room.roomarray;
+        }
         int a = 0, b = 0;
         // TODO algoritme dat kamers indeeld en offset waarde aan a en b geeft
         for (int x = 0; x == 10; x++)
