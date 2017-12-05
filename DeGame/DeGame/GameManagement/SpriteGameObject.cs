@@ -16,7 +16,7 @@ public class SpriteGameObject : GameObject
     protected SpriteGameObject sprite; //Niet zeker of dit klopt
     
     public SpriteGameObject(/*string assetName, int layer = 0, string id = ""*/)
-        //: base(layer, id)
+       // : base(layer, id)
     {
 
     }
