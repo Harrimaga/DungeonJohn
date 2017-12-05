@@ -54,7 +54,7 @@
     <Compile Include="GameManagement\SpriteGameObject.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="GameObjects\Player.cs" />
-    <Compile Include="GameObjects\Tile.cs" />
+    <Compile Include="GameObjects\CheckCurrentTile.cs" />
     <Compile Include="Level\Floor.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Menu\Button.cs" />
