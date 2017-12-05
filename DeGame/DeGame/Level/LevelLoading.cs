@@ -71,91 +71,91 @@ class LevelLoading
             }
         }
 
-        private Tile LoadBasicTile(string name, TileType tileType, bool hot = false, bool ice = false)
-        {
-            Tile t = new Tile("Tiles/" + name, tileType);
-            t.Hot = hot;
-            t.Ice = ice;
-            return t;
-        }
+    //private tile loadbasictile(string name, tiletype tiletype, bool hot = false, bool ice = false)
+    //{
+    //    tile t = new tile("tiles/" + name, tiletype);
+    //    t.hot = hot;
+    //    t.ice = ice;
+    //    return t;
+    //}
 
-        private Tile LoadStartTile(int x, int y)
-        {
-            TileField tiles = Find("tiles") as TileField;
-            Vector2 startPosition = new Vector2(((float)x + 0.5f) * tiles.CellWidth, (y + 1) * tiles.CellHeight);
-            Player player = new Player(startPosition);
-            Add(player);
-            return new Tile("", TileType.Background);
-        }
+    //private tile loadstarttile(int x, int y)
+    //{
+    //    tilefield tiles = find("tiles") as tilefield;
+    //    vector2 startposition = new vector2(((float)x + 0.5f) * tiles.cellwidth, (y + 1) * tiles.cellheight);
+    //    player player = new player(startposition);
+    //    add(player);
+    //    return new tile("", tiletype.background);
+    //}
 
-        private Tile LoadFlameTile(int x, int y, char enemyType)
-        {
-            GameObjectList enemies = Find("enemies") as GameObjectList;
-            TileField tiles = Find("tiles") as TileField;
-            GameObject enemy = null;
-            switch (enemyType)
-            {
-                case 'A': enemy = new UnpredictableEnemy(); break;
-                case 'B': enemy = new PlayerFollowingEnemy(); break;
-                case 'C':
-                default: enemy = new PatrollingEnemy(); break;
-            }
-            enemy.Position = new Vector2(((float)x + 0.5f) * tiles.CellWidth, (y + 1) * tiles.CellHeight);
-            enemies.Add(enemy);
-            return new Tile();
-        }
+    //private tile loadflametile(int x, int y, char enemytype)
+    //{
+    //    gameobjectlist enemies = find("enemies") as gameobjectlist;
+    //    tilefield tiles = find("tiles") as tilefield;
+    //    gameobject enemy = null;
+    //    switch (enemytype)
+    //    {
+    //        case 'a': enemy = new unpredictableenemy(); break;
+    //        case 'b': enemy = new playerfollowingenemy(); break;
+    //        case 'c':
+    //        default: enemy = new patrollingenemy(); break;
+    //    }
+    //    enemy.position = new vector2(((float)x + 0.5f) * tiles.cellwidth, (y + 1) * tiles.cellheight);
+    //    enemies.add(enemy);
+    //    return new tile();
+    //}
 
-        private Tile LoadTurtleTile(int x, int y)
-        {
-            GameObjectList enemies = Find("enemies") as GameObjectList;
-            TileField tiles = Find("tiles") as TileField;
-            Turtle enemy = new Turtle();
-            enemy.Position = new Vector2(((float)x + 0.5f) * tiles.CellWidth, (y + 1) * tiles.CellHeight + 25.0f);
-            enemies.Add(enemy);
-            return new Tile();
-        }
+    //private tile loadturtletile(int x, int y)
+    //{
+    //    gameobjectlist enemies = find("enemies") as gameobjectlist;
+    //    tilefield tiles = find("tiles") as tilefield;
+    //    turtle enemy = new turtle();
+    //    enemy.position = new vector2(((float)x + 0.5f) * tiles.cellwidth, (y + 1) * tiles.cellheight + 25.0f);
+    //    enemies.add(enemy);
+    //    return new tile();
+    //}
 
 
-        private Tile LoadSparkyTile(int x, int y)
-        {
-            GameObjectList enemies = Find("enemies") as GameObjectList;
-            TileField tiles = Find("tiles") as TileField;
-            Sparky enemy = new Sparky((y + 1) * tiles.CellHeight - 100f);
-            enemy.Position = new Vector2(((float)x + 0.5f) * tiles.CellWidth, (y + 1) * tiles.CellHeight - 100f);
-            enemies.Add(enemy);
-            return new Tile();
-        }
+    //private tile loadsparkytile(int x, int y)
+    //{
+    //    gameobjectlist enemies = find("enemies") as gameobjectlist;
+    //    tilefield tiles = find("tiles") as tilefield;
+    //    sparky enemy = new sparky((y + 1) * tiles.cellheight - 100f);
+    //    enemy.position = new vector2(((float)x + 0.5f) * tiles.cellwidth, (y + 1) * tiles.cellheight - 100f);
+    //    enemies.add(enemy);
+    //    return new tile();
+    //}
 
-        private Tile LoadRocketTile(int x, int y, bool moveToLeft)
-        {
-            GameObjectList enemies = Find("enemies") as GameObjectList;
-            TileField tiles = Find("tiles") as TileField;
-            Vector2 startPosition = new Vector2(((float)x + 0.5f) * tiles.CellWidth, (y + 1) * tiles.CellHeight);
-            Rocket enemy = new Rocket(moveToLeft, startPosition);
-            enemies.Add(enemy);
-            return new Tile();
-        }
+    //private tile loadrockettile(int x, int y, bool movetoleft)
+    //{
+    //    gameobjectlist enemies = find("enemies") as gameobjectlist;
+    //    tilefield tiles = find("tiles") as tilefield;
+    //    vector2 startposition = new vector2(((float)x + 0.5f) * tiles.cellwidth, (y + 1) * tiles.cellheight);
+    //    rocket enemy = new rocket(movetoleft, startposition);
+    //    enemies.add(enemy);
+    //    return new tile();
+    //}
 
-        private Tile LoadEndTile(int x, int y)
-        {
-            TileField tiles = Find("tiles") as TileField;
-            SpriteGameObject exitObj = new SpriteGameObject("Sprites/spr_goal", 1, "exit");
-            exitObj.Position = new Vector2(x * tiles.CellWidth, (y + 1) * tiles.CellHeight);
-            exitObj.Origin = new Vector2(0, exitObj.Height);
-            Add(exitObj);
-            return new Tile();
-        }
+    //private tile loadendtile(int x, int y)
+    //{
+    //    tilefield tiles = find("tiles") as tilefield;
+    //    spritegameobject exitobj = new spritegameobject("sprites/spr_goal", 1, "exit");
+    //    exitobj.position = new vector2(x * tiles.cellwidth, (y + 1) * tiles.cellheight);
+    //    exitobj.origin = new vector2(0, exitobj.height);
+    //    add(exitobj);
+    //    return new tile();
+    //}
 
-        private Tile LoadWaterTile(int x, int y)
-        {
-            GameObjectList waterdrops = Find("waterdrops") as GameObjectList;
-            TileField tiles = Find("tiles") as TileField;
-            WaterDrop w = new RisingDrop();
-            w.Origin = w.Center;
-            w.Position = new Vector2(x * tiles.CellWidth, y * tiles.CellHeight - 10);
-            w.Position += new Vector2(tiles.CellWidth, tiles.CellHeight) / 2;
-            waterdrops.Add(w);
-            return new Tile();
-        }
-    }
+    //private tile loadwatertile(int x, int y)
+    //{
+    //    gameobjectlist waterdrops = find("waterdrops") as gameobjectlist;
+    //    tilefield tiles = find("tiles") as tilefield;
+    //    waterdrop w = new risingdrop();
+    //    w.origin = w.center;
+    //    w.position = new vector2(x * tiles.cellwidth, y * tiles.cellheight - 10);
+    //    w.position += new vector2(tiles.cellwidth, tiles.cellheight) / 2;
+    //    waterdrops.add(w);
+    //    return new tile();
+    //}
+}
 
