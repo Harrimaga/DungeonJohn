@@ -30,27 +30,27 @@ public class Floor
     {
         //TODO dus new floor maken en oude weg halen
     }
-    //public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    //{
-    //    foreach (Room room in floor)
-    //    {
-    //        if (room != null)
-    //        {
-    //            room.Draw(gameTime, spriteBatch);
-    //        }
-    //    }
-    //}
-    //public virtual void Update(GameTime gameTime)
-    //{
-    //    foreach (Room room in floor)
-    //    {
-    //        if(room != null)
-    //        {
-    //            room.Update(gameTime);
-    //        }
-    //    }
-    //    //TODO als nextFloor true is dan voor NextFloor() uit
-    //}
+    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        foreach (Room room in floor)
+        {
+            if (room != null)
+            {
+                //room.Draw(gameTime, spriteBatch);
+            }
+        }
+    }
+    public virtual void Update(GameTime gameTime)
+    {
+        foreach (Room room in floor)
+        {
+            if(room != null)
+            {
+                //room.Update(gameTime);
+            }
+        }
+        //TODO als nextFloor true is dan voor NextFloor() uit
+    }
 
 }
 
