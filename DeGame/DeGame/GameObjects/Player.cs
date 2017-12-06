@@ -21,11 +21,13 @@ class Player : SpriteGameObject
 
     public Player()
     {
-        position = new Vector2(100, 100); 
+        bullets = new GameObjectList();
+        position = new Vector2(100, 100);
     }
 
     public override void Update(GameTime gameTime)
     {
+        bullets.Update(gameTime);
         base.Update(gameTime);
     }
 
@@ -38,13 +40,13 @@ class Player : SpriteGameObject
     public override void HandleInput(InputHelper inputHelper)
     {
         if (inputHelper.IsKeyDown(Keys.W))
-            position.Y = position.Y - 5;
+            position.Y -= 5;
         if (inputHelper.IsKeyDown(Keys.S))
-            position.Y = position.Y + 5;
+            position.Y += 5;
         if (inputHelper.IsKeyDown(Keys.D))
-            position.X = position.X + 5;
+            position.X += 5;
         if (inputHelper.IsKeyDown(Keys.A))
-            position.X = position.X - 5;
+            position.X -= 5;
 
         if (inputHelper.KeyPressed(Keys.Down))
         {
