@@ -2,14 +2,14 @@
 using System.IO;
 
 public class Room : GameObjectList
-    {
+{
 
     public string[,] roomarray;
     public void LoadTiles(int RoomListIndex)
     {
         List<string> textLines = new List<string>();
         StreamReader fileReader = new StreamReader("Content/Levels/1.txt"); /*+ RoomListIndex*/
-        string line = fileReader.ReadLine(); 
+        string line = fileReader.ReadLine();
         roomarray = new string[10, 8];
 
         //int CellWidth = 50;
@@ -49,8 +49,7 @@ public class Room : GameObjectList
             case 'S':
                 return "Start";
             default:
-                return "N/A"; 
+                return "N/A";
         }
     }
 }
-

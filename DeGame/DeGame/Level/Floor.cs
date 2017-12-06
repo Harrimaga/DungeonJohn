@@ -1,59 +1,56 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-class Floor
-{
-    string[,,] FloorLayout = new string[10, 10, 2];
-    string[,] Mergearray = new string[100, 100];
+public class Floor
+    {
     Room[,] floor;
     int maxRooms = 20;
     int minRooms = 15;
-    string[,] array;
 
-    public void MergeArrays()
+    public Floor()
+    {
+        floor = new Room[9, 9];
+        //hele simpele layout voor testen
+        //floor[5, 5] = new StartRoom(new Vector2(5,5));
+        //floor[6, 5] = new Room();
+        //floor[7, 5] = new EndRoom(new Vector2(7,5));
+    }
+
+    void FloorGenerator()
+    {
+        //TODO
+    }
+
+    void NextFloor()
+    {
+        //TODO dus new floor maken en oude weg halen
+    }
+    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         foreach (Room room in floor)
         {
-            room.LoadTiles(1);
-            string[,] array = room.roomarray;
+            if (room != null)
+            {
+                room.Draw(gameTime, spriteBatch);
+            }
         }
-        int a = 0, b = 0;
-        // TODO algoritme dat kamers indeeld en offset waarde aan a en b geeft
-        for (int x = 0; x == 10; x++)
-            for (int y = 0; y == 10; y++)
-                Mergearray[x, y] = array[x + 10 * a, y + 10 * b];
+    }
+    public virtual void Update(GameTime gameTime)
+    {
+        foreach (Room room in floor)
+        {
+            if(room != null)
+            {
+                room.Update(gameTime);
+            }
+        }
+        //TODO als nextFloor true is dan voor NextFloor() uit
     }
 
-    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        for (int x = 0; x < 100; x++)
-            for (int y = 0; y < 100; y++)
-            {
-                switch (Mergearray[x, y])
-                {
-                    case "Unknown":
-                        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), new Vector2(x * 50, y * 50), Color.Black);
-                        break;
-                    case "Background":
-                        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), new Vector2(x * 50, y * 50), Color.LightGray);
-                        break;
-                    case "Rock":
-                        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), new Vector2(x * 50, y * 50), Color.DarkOrange); 
-                        break;
-                    case "Wall":
-                        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), new Vector2(x * 50, y * 50), Color.Brown);
-                        break;
-                    case "Exit":
-                        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), new Vector2(x * 50, y * 50), Color.Red);
-                        break;
-                    case "Start":
-                        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), new Vector2(x * 50, y * 50), Color.Blue);
-                        break;
-                    default:
-                        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), new Vector2(x * 50, y * 50), Color.Gray);
-                        break;
-                }
-            }
-    }
 }
 
