@@ -1,20 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-class room
+public class Room : GameObjectList
 {
-    public void loadtiles(string path)
-    {
-        list<string> textlines = new list<string>();
-        streamreader filereader = new streamreader(path);
-        string line = filereader.readline();
-        int width = line.length;
-        while (line != null)
-        {
-            textlines.add(line);
-            line = filereader.readline();
-        }
-        tilefield tiles = new tilefield(textlines.count - 2, width, 1, "tiles");
 
     public string[,] roomarray;
     public void LoadTiles(int RoomListIndex)
