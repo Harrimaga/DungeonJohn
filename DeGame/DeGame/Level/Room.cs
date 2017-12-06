@@ -4,7 +4,7 @@ using System.IO;
 class Room
 {
 
-    public Enemy[] enemies;
+    /*public Enemy[] enemies;
 
 
         while (line != null)
@@ -169,6 +169,6 @@ class Room
         {
             enemy.Draw(gameTime, spriteBatch);
         }
-    }
+    }*/
 }
 
