@@ -36,7 +36,7 @@ public class Floor
         {
             if (room != null)
             {
-                //room.Draw(gameTime, spriteBatch);
+                room.Draw(gameTime, spriteBatch);
             }
         }
     }
@@ -46,7 +46,7 @@ public class Floor
         {
             if(room != null)
             {
-                //room.Update(gameTime);
+                room.Update(gameTime);
             }
         }
         //TODO als nextFloor true is dan voor NextFloor() uit
