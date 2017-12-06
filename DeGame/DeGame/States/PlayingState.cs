@@ -12,8 +12,7 @@ class PlayingState : IGameObject
     Enemy enemy;
     Floor floor;
 
-    public Vector2 d { get; private set; }
-
+    
     public PlayingState()
     {
         player = new Player();

@@ -7,11 +7,11 @@ class Room
     public Enemy[] enemies;
 
 
-        //while (line != null)
-        //{
-        //    textLines.Add(line);
-        //    line = fileReader.ReadLine();
-        //}
+        while (line != null)
+        {
+            textLines.Add(line);
+            line = fileReader.ReadLine();
+        }
 
     //    Add(tiles);
     //    tiles.CellWidth = 72;
@@ -154,21 +154,21 @@ class Room
     //    return new tile();
     //}
 
-    //public void Update(GameTime gameTime)
-    //{
-    //    //TODO: Update
-    //    foreach (Enemy enemy in enemies)
-    //    {
-    //        enemy.Update(gameTime);
-    //    }
-    //}
+    public void Update(GameTime gameTime)
+    {
+        //TODO: Update
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.Update(gameTime);
+        }
+    }
 
-    //public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    //{
-    //    foreach (Enemy enemy in enemies)
-    //    {
-    //        enemy.Draw(gameTime, spriteBatch);
-    //    }
-    //}
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.Draw(gameTime, spriteBatch);
+        }
+    }
 }
 
