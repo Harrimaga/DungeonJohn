@@ -33,9 +33,8 @@ class PlayingState : IGameObject
     }
     public virtual void Update(GameTime gameTime)
     {
-        floor.Update(gameTime);
-        enemy.Update(gameTime);
         player.Update(gameTime);
+        floor.Update(gameTime);
     }
     public virtual void Reset()
     {
