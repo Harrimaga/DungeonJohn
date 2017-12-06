@@ -13,17 +13,25 @@ public class SpriteGameObject : GameObject
     public bool PerPixelCollisionDetection = true;
     //public float UsesCameraX = 1;
     //public float UsesCameraY = 1;
-    protected SpriteGameObject sprite; //Niet zeker of dit klopt
+    protected Texture2D sprite;
     
     public SpriteGameObject(/*string assetName, int layer = 0, string id = ""*/)
        // : base(layer, id)
     {
-
+        //this.sprite = GameEnvironment.assetManager.GetSprite(assetName);
     }
-
+    public override void Update(GameTime gameTime)
+    {
+    }
+    
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
     }
+
+    public override void HandleInput(InputHelper inputHelper)
+    {
+    }
+
 
     public Vector2 Center
     {
@@ -48,8 +56,8 @@ public class SpriteGameObject : GameObject
 
     public bool Mirror
     {
-        get { return sprite.Mirror; }
-        set { sprite.Mirror = value; }
+        get { return this.Mirror; }
+        set { this.Mirror = value; }
     }
 
     public Vector2 Origin

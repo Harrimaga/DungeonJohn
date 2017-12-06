@@ -24,7 +24,7 @@ public abstract class GameObject : IGameObject
 
     public virtual void Update(GameTime gameTime)
     {
-        position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+       // position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

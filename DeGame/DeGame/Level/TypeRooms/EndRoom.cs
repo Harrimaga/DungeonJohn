@@ -1,30 +1,26 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class MainMenuState : IGameObject
+
+class EndRoom : Room
 {
-    public virtual void HandleInput(InputHelper inputHelper)
+    bool nextFloor = false;
+    public EndRoom(Vector2 floorPosition)
     {
-        if (inputHelper.IsKeyDown(Keys.Space))
-        {
-            GameEnvironment.gameStateManager.SwitchTo("Playing");
-        }
+
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+
     }
     public virtual void Update(GameTime gameTime)
     {
+        //TODO check player volgende floor mag nextFloor true maken
     }
-    public virtual void Reset()
-    {
-    }
-
 }
 
