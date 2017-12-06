@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 public class Floor
-    {
+{
     Room[,] floor;
     int maxRooms = 20;
     int minRooms = 15;
