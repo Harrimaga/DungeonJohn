@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 class StartRoom : Room
     {
-    
     public StartRoom(Vector2 floorPosition)
     {
         
