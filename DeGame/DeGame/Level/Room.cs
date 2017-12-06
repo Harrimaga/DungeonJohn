@@ -1,8 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-public class Room : GameObjectList
-{
+    //class Room
+    //{
+    //public void LoadTiles(string path)
+    //{
+    //    List<string> textLines = new List<string>();
+    //    StreamReader fileReader = new StreamReader(path);
+    //    string line = fileReader.ReadLine();
+    //    int width = line.Length;
+    //    while (line != null)
+    //    {
+    //        textLines.Add(line);
+    //        line = fileReader.ReadLine();
+    //    }
+    //    TileField tiles = new TileField(textLines.Count - 2, width, 1, "tiles");
 
     public string[,] roomarray;
     public void LoadTiles(int RoomListIndex)
