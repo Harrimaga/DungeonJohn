@@ -19,7 +19,6 @@ public class Enemy : SpriteGameObject
 
     public Enemy()
     {
-        position = new Vector2(100, 50);
         player = new Player();
     }
 
