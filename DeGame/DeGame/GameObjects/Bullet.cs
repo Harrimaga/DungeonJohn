@@ -14,13 +14,13 @@ class Bullet : SpriteGameObject
         this.position = Startposition;
 
         if (Direction == 0)
-            velocity.Y = 10;
+            velocity.Y = 5;
         else if (Direction == 1)
-            velocity.X = -10;
+            velocity.X = -5;
         else if (Direction == 2)
-            velocity.Y = -10;
+            velocity.Y = -5;
         else if (Direction == 3)
-            velocity.X = 10;
+            velocity.X = 5;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
