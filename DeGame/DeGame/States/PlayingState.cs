@@ -10,14 +10,14 @@ class PlayingState : IGameObject
 {
     Player player;
     Enemy enemy;
-    Floor floor;
+    //Floor floor;
 
     
     public PlayingState()
     {
         player = new Player();
         enemy = new Enemy();
-        floor = new Floor();
+        //floor = new Floor();
 
     }
     public virtual void HandleInput(InputHelper inputHelper)
@@ -28,13 +28,13 @@ class PlayingState : IGameObject
     {
         player.Draw(gameTime, spriteBatch);
         enemy.Draw(gameTime, spriteBatch);
-        floor.Draw(gameTime, spriteBatch);  
+        //floor.Draw(gameTime, spriteBatch);  
 
     }
     public virtual void Update(GameTime gameTime)
     {
         player.Update(gameTime);
-        floor.Update(gameTime);
+        //floor.Update(gameTime);
     }
     public virtual void Reset()
     {

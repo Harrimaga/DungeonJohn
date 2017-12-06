@@ -1,56 +1,56 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using microsoft.xna.framework;
+//using microsoft.xna.framework.graphics;
+//using system;
+//using system.collections.generic;
+//using system.linq;
+//using system.text;
+//using system.threading.tasks;
 
-public class Floor
-    {
-    Room[,] floor;
-    int maxRooms = 20;
-    int minRooms = 15;
+//public class floor
+//    {
+//    room[,] floor;
+//    int maxrooms = 20;
+//    int minrooms = 15;
 
-    public Floor()
-    {
-        floor = new Room[9, 9];
-        //hele simpele layout voor testen
-        floor[5, 5] = new StartRoom(new Vector2(5,5));
-        floor[6, 5] = new Room();
-        floor[7, 5] = new EndRoom(new Vector2(7,5));
-    }
+//    public floor()
+//    {
+//        floor = new room[9, 9];
+//        //hele simpele layout voor testen
+//        floor[5, 5] = new startroom(new vector2(5,5));
+//        floor[6, 5] = new room();
+//        floor[7, 5] = new endroom(new vector2(7,5));
+//    }
 
-    void FloorGenerator()
-    {
-        //TODO
-    }
+//    void floorgenerator()
+//    {
+//        //todo
+//    }
 
-    void NextFloor()
-    {
-        //TODO dus new floor maken en oude weg halen
-    }
-    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        foreach (Room room in floor)
-        {
-            if (room != null)
-            {
-                room.Draw(gameTime, spriteBatch);
-            }
-        }
-    }
-    public virtual void Update(GameTime gameTime)
-    {
-        foreach (Room room in floor)
-        {
-            if(room != null)
-            {
-                room.Update(gameTime);
-            }
-        }
-        //TODO als nextFloor true is dan voor NextFloor() uit
-    }
+//    void nextfloor()
+//    {
+//        //todo dus new floor maken en oude weg halen
+//    }
+//    public virtual void draw(gametime gametime, spritebatch spritebatch)
+//    {
+//        foreach (room room in floor)
+//        {
+//            if (room != null)
+//            {
+//                room.draw(gametime, spritebatch);
+//            }
+//        }
+//    }
+//    public virtual void update(gametime gametime)
+//    {
+//        foreach (room room in floor)
+//        {
+//            if(room != null)
+//            {
+//                room.update(gametime);
+//            }
+//        }
+//        //todo als nextfloor true is dan voor nextfloor() uit
+//    }
 
-}
+//}
 
