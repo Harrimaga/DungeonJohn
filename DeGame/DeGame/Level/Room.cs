@@ -7,17 +7,18 @@ public class Room : GameObjectList
 {
 
     public string[,] roomarray;
+
     public void LoadTiles(int RoomListIndex)
     {
         List<string> textLines = new List<string>();
-        StreamReader fileReader = new StreamReader("Content/Levels/1.txt"); /*+ RoomListIndex*/
+        StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
         string line = fileReader.ReadLine();
         roomarray = new string[10, 8];
 
         //int CellWidth = 50;
         //int CellHeight = 50;
-        //int levelwidth = line.Length * CellWidth;
-        //int levelheight = textLines.Count * CellHeight;
+        //int roomwidth = line.Length * CellWidth;
+        //int roomheight = textLines.Count * CellHeight;
 
         while (line != null)
         {
@@ -29,14 +30,14 @@ public class Room : GameObjectList
         {
             for (int y = 0; y < textLines.Count; ++y)
             {
-                roomarray[x, y] = AssignType(textLines[y][x], x, y);
+                roomarray[x, y] = AssignType(textLines[y][x]);
             }
         }
     }
 
-    private string AssignType(char tileType, int x, int y)
+    private string AssignType(char filetext)
     {
-        switch (tileType)
+        switch (filetext)
         {
             case '.':
                 return "Background";
@@ -63,10 +64,10 @@ public class Room : GameObjectList
                 switch (roomarray[x, y])
                 {
                     case "Background":
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile.png")), new Vector2(x * 50 + a * 500, y * 50 + b * 400), Color.Blue);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * 50 + a * 500, y * 50 + b * 400), Color.Yellow);
                         break;
                     default:
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile.png")), new Vector2(x * 50 + a * 500, y * 50 + b * 400), Color.Black);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * 50 + a * 500, y * 50 + b * 400), Color.Red);
                         break;
                 }
             }
