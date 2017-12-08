@@ -17,7 +17,8 @@ public class Enemy : SpriteGameObject
     protected float range;
     protected Vector2 position, Startposition;
 
-    public Enemy()
+    public Enemy(int layer = 0, string id = "bullet")
+    : base("Sprites/BearEnemy", layer, id)
     {
         this.position = Startposition;
         player = new Player();

@@ -39,6 +39,7 @@ public class GameEnvironment : Game
         {
             Exit();
         }
+        
         /*
         if (inputHelper.KeyPressed(Keys.F5))
         {
