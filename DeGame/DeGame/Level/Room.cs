@@ -5,15 +5,16 @@ using Microsoft.Xna.Framework;
 
 public class Room : GameObjectList
 {
-    public Room(int layer = 0, string id = "") : base(layer, id)
+    int RoomListIndex;
+    public Room(int roomListIndex, int layer = 0, string id = "") : base(layer)
     {
-
+        RoomListIndex = roomListIndex;
     }
 
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight;
 
-    public void LoadTiles(int RoomListIndex)
+    public void LoadTiles()
     {
         List<string> textLines = new List<string>();
         StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
@@ -35,7 +36,7 @@ public class Room : GameObjectList
 
         for (int x = 0; x < line.Length; ++x)
         {
-            for (int y = 0; y < textLines.Count - 1; ++y)
+            for (int y = 0; y < textLines.Count; ++y)
             {
                 roomarray[x, y] = AssignType(textLines[y][x]);
                 System.Console.WriteLine(roomarray[x, y]);

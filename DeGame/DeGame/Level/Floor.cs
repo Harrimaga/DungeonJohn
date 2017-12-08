@@ -1,22 +1,24 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 public class Floor
 {
     Room[,] floor;
     int RoomListIndex = 1;
+    Random random = new Random();
 
     public Floor()
     {
         floor = new Room[9, 9];
-        floor[0, 0] = new Room();
-        floor[1, 0] = new Room();
+        floor[0, 0] = new Room(1);
+        floor[1, 0] = new Room(2);
 
 
         foreach (Room room in floor)
         {
             if (room != null)
-                room.LoadTiles(RoomListIndex);
+                room.LoadTiles();
         }
         //hele simpele layout voor testen
         //floor[5, 5] = new StartRoom(new Vector2(5,5));
@@ -28,6 +30,7 @@ public class Floor
     {
         int maxRooms = 20;
         int minRooms = 15;
+        int StartingRoomPosition = random.Next(9);
         //TODO iets wat elke room aan een plekje in een floorarray linked met coordinaat [a,b]
     }
 
