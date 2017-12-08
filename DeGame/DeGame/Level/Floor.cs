@@ -10,7 +10,10 @@ public class Floor
     public Floor()
     {
         floor = new Room[9, 9];
-        floor[1,1] = new Room();
+
+        for (int x = 0; x < 9; x++)
+            for (int y = 0; y < 9; y++)
+                floor[x, y] = new Room();
 
         foreach (Room room in floor)
         {

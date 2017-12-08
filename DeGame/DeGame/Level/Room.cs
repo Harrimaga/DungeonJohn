@@ -7,6 +7,7 @@ public class Room : GameObjectList
 {
 
     public string[,] roomarray;
+    int CellWidth, CellHeight, roomwidth, roomheight;
 
     public void LoadTiles(int RoomListIndex)
     {
@@ -15,10 +16,10 @@ public class Room : GameObjectList
         string line = fileReader.ReadLine();
         roomarray = new string[10, 8];
 
-        //int CellWidth = 50;
-        //int CellHeight = 50;
-        //int roomwidth = line.Length * CellWidth;
-        //int roomheight = textLines.Count * CellHeight;
+        int CellWidth = 50;
+        int CellHeight = 50;
+        int roomwidth = line.Length * CellWidth;
+        int roomheight = textLines.Count * CellHeight;
 
         while (line != null)
         {
@@ -67,10 +68,10 @@ public class Room : GameObjectList
                 switch (roomarray[x, y])
                 {
                     case "Background":
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * 50 + a * 500, y * 50 + b * 400), Color.Yellow);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Yellow);
                         break;
                     default:
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * 50 + a * 500, y * 50 + b * 400), Color.Red);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Red);
                         break;
                 }
             }
