@@ -11,6 +11,11 @@ public class Floor
     {
         floor = new Room[9, 9];
         floor[1,1] = new Room();
+
+        foreach (Room room in floor)
+        {
+            room.LoadTiles(RoomListIndex);
+        }
         //hele simpele layout voor testen
         //floor[5, 5] = new StartRoom(new Vector2(5,5));
         //floor[6, 5] = new Room();
@@ -47,7 +52,6 @@ public class Floor
         {
             if (room != null)
             {
-                room.LoadTiles(RoomListIndex);
                 room.Draw(gameTime, spriteBatch, a, b);
             }
         }

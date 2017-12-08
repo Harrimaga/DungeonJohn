@@ -33,6 +33,7 @@ public class Room : GameObjectList
             for (int y = 0; y < textLines.Count - 1; ++y)
             {
                 roomarray[x, y] = AssignType(textLines[y][x]);
+                System.Console.WriteLine(roomarray[x, y]);
             }
         }
     }
@@ -43,16 +44,16 @@ public class Room : GameObjectList
         {
             case '.':
                 return "Background";
-            //case '!':
-            //    return "Rock";
-            //case '+':
-            //    return "Wall";
-            //case 'X':
-            //    return "Exit";
-            //case 'S':
-            //    return "Start";
-            //case '?':
-            //    return "Unknown";
+            case '!':
+                return "Rock";
+            case '+':
+                return "Wall";
+            case 'X':
+                return "Exit";
+            case 'S':
+                return "Start";
+            case '?':
+                return "Unknown";
             default:
                 return "N/A";
         }
