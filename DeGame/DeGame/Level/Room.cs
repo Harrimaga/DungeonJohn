@@ -26,9 +26,11 @@ public class Room : GameObjectList
             line = fileReader.ReadLine();
         }
 
+        line = textLines[0];
+
         for (int x = 0; x < line.Length; ++x)
         {
-            for (int y = 0; y < textLines.Count; ++y)
+            for (int y = 0; y < textLines.Count - 1; ++y)
             {
                 roomarray[x, y] = AssignType(textLines[y][x]);
             }
