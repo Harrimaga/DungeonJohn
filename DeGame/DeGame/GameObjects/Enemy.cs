@@ -15,11 +15,11 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 position;
+    protected Vector2 position, Startposition;
 
     public Enemy()
     {
-        position = new Vector2(100, 50);
+        this.position = Startposition;
         player = new Player();
     }
 
