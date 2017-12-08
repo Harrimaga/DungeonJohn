@@ -14,7 +14,10 @@ public class Floor
 
         foreach (Room room in floor)
         {
-            room.LoadTiles(RoomListIndex);
+            if (room != null)
+            {
+                room.LoadTiles(RoomListIndex);
+            }
         }
         //hele simpele layout voor testen
         //floor[5, 5] = new StartRoom(new Vector2(5,5));
