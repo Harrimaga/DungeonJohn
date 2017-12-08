@@ -5,6 +5,10 @@ using Microsoft.Xna.Framework;
 
 public class Room : GameObjectList
 {
+    public Room(int layer = 0, string id = "") : base(layer, id)
+    {
+
+    }
 
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight;
@@ -16,10 +20,10 @@ public class Room : GameObjectList
         string line = fileReader.ReadLine();
         roomarray = new string[10, 8];
 
-        int CellWidth = 50;
-        int CellHeight = 50;
-        int roomwidth = line.Length * CellWidth;
-        int roomheight = textLines.Count * CellHeight;
+        CellWidth = 50;
+        CellHeight = 50;
+        roomwidth = line.Length * CellWidth;
+        roomheight = textLines.Count * CellHeight;
 
         while (line != null)
         {
@@ -68,7 +72,22 @@ public class Room : GameObjectList
                 switch (roomarray[x, y])
                 {
                     case "Background":
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
+                        break;
+                    case "Rock":
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.LightGray);
+                        break;
+                    case "Wall":
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Brown);
+                        break;
+                    case "Exit":
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.DarkCyan);
+                        break;
+                    case "Start":
                         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Yellow);
+                        break;
+                    case "Unkown":
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.DarkBlue);
                         break;
                     default:
                         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Red);

@@ -9,7 +9,7 @@ namespace DeGame
     public class Game1 : GameEnvironment
     {
         GraphicsDeviceManager graphics;
-        //SpriteBatch spriteBatch;
+        SpriteBatch spriteBatch;
 
         [STAThread]
         static void Main()
@@ -20,7 +20,7 @@ namespace DeGame
 
         public Game1()
         {
-            //graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 

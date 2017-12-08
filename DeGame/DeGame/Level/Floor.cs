@@ -4,20 +4,19 @@ using Microsoft.Xna.Framework.Graphics;
 public class Floor
 {
     Room[,] floor;
-    int a = 2, b = 2;
     int RoomListIndex = 1;
 
     public Floor()
     {
         floor = new Room[9, 9];
+        floor[0, 0] = new Room();
+        floor[1, 0] = new Room();
 
-        for (int x = 0; x < 9; x++)
-            for (int y = 0; y < 9; y++)
-                floor[x, y] = new Room();
 
         foreach (Room room in floor)
         {
-            room.LoadTiles(RoomListIndex);
+            if (room != null)
+                room.LoadTiles(RoomListIndex);
         }
         //hele simpele layout voor testen
         //floor[5, 5] = new StartRoom(new Vector2(5,5));
@@ -41,7 +40,7 @@ public class Floor
     {
         foreach (Room room in floor)
         {
-            if(room != null)
+            if (room != null)
             {
                 room.Update(gameTime);
             }
@@ -51,13 +50,10 @@ public class Floor
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        foreach (Room room in floor)
-        {
-            if (room != null)
-            {
-                room.Draw(gameTime, spriteBatch, a, b);
-            }
-        }
+        for (int a = 0; a < 9; a++)
+            for (int b = 0; b < 9; b++)
+                if (floor[a, b] != null)                
+                    floor[a, b].Draw(gameTime, spriteBatch, a, b);   
     }
 
 }
