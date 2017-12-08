@@ -30,7 +30,9 @@ public class Floor
     {
         int maxRooms = 20;
         int minRooms = 15;
-        int StartingRoomPosition = random.Next(9);
+        int x = random.Next(9);
+        int y = random.Next(9);
+        floot[x,y]
         //TODO iets wat elke room aan een plekje in een floorarray linked met coordinaat [a,b]
     }
 
