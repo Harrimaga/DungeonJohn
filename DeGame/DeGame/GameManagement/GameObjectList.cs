@@ -34,6 +34,7 @@ public class GameObjectList : GameObject
         children.Add(obj);
     }
 
+    // Moeten misschien kijken of dit werkt
     public void Remove(GameObject obj)
     {
         children.Remove(obj);

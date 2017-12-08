@@ -31,4 +31,10 @@ class Bullet : SpriteGameObject
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
     }
+
+    public override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+        position += velocity;
+    }
 }

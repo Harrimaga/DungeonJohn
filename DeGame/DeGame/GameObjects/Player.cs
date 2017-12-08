@@ -15,7 +15,7 @@ class Player : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 position;
+    public Vector2 position;
 
     GameObjectList bullets;
 
@@ -27,8 +27,8 @@ class Player : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
         bullets.Update(gameTime);
+        base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -42,7 +42,7 @@ class Player : SpriteGameObject
         if (inputHelper.IsKeyDown(Keys.W))
             position.Y = position.Y - 5;
         if (inputHelper.IsKeyDown(Keys.S))
-            position.Y = position.Y + 5;
+            position.Y += 5;
         if (inputHelper.IsKeyDown(Keys.D))
             position.X = position.X + 5;
         if (inputHelper.IsKeyDown(Keys.A))

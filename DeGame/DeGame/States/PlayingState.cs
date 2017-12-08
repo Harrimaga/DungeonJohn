@@ -1,4 +1,3 @@
-﻿//using DeGame.GameManagement;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,10 +9,16 @@ using System.Threading.Tasks;
 class PlayingState : IGameObject
 {
     Player player;
+    Enemy enemy;
+    Floor floor;
+
     
     public PlayingState()
     {
         player = new Player();
+        enemy = new Enemy();
+        floor = new Floor();
+
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {
@@ -21,13 +26,15 @@ class PlayingState : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        //spriteBatch.Begin();
         player.Draw(gameTime, spriteBatch);
-        //spriteBatch.End();
+        enemy.Draw(gameTime, spriteBatch);
+        floor.Draw(gameTime, spriteBatch);  
+
     }
     public virtual void Update(GameTime gameTime)
     {
         player.Update(gameTime);
+        floor.Update(gameTime);
     }
     public virtual void Reset()
     {

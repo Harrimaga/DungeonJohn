@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.IO;
 
-    //class Room : GameObject
-    //{
-    //public void LoadTiles(string path)
-    //{
-    //    List<string> textLines = new List<string>();
-    //    StreamReader fileReader = new StreamReader(path);
-    //    string line = fileReader.ReadLine();
-    //    int width = line.Length;
-    //    while (line != null)
-    //    {
-    //        textLines.Add(line);
-    //        line = fileReader.ReadLine();
-    //    }
-    //    TileField tiles = new TileField(textLines.Count - 2, width, 1, "tiles");
+class Room
+{
+
+    /*public Enemy[] enemies;
+
+
+        while (line != null)
+        {
+            textLines.Add(line);
+            line = fileReader.ReadLine();
+        }
 
     //    Add(tiles);
     //    tiles.CellWidth = 72;
@@ -159,5 +153,22 @@ using System.Threading.Tasks;
     //    waterdrops.add(w);
     //    return new tile();
     //}
-//}
+
+    public void Update(GameTime gameTime)
+    {
+        //TODO: Update
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.Update(gameTime);
+        }
+    }
+
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.Draw(gameTime, spriteBatch);
+        }
+    }*/
+}
 
