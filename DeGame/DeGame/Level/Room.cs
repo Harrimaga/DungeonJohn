@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 public class Room : GameObjectList
 {
     int RoomListIndex;
+    public bool up = false, down = false, left = false, right = false;
     public Room(int roomListIndex, int layer = 0, string id = "") : base(layer)
     {
         RoomListIndex = roomListIndex;
