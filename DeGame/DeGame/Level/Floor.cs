@@ -4,7 +4,6 @@ using System;
 
 public class Floor
 {
-    //cream was here
     Room[,] floor;
     int RoomListIndex = 1;
     Random random = new Random();
@@ -32,15 +31,14 @@ public class Floor
     {
         int maxRooms = 20;
         int minRooms = 15;
-        int x = 5;//random.Next(9);
-        int y = 5;//random.Next(9);
-        //floor[x,y]
+        int x = random.Next(9);
+        int y = random.Next(9);
+        floor[x, y] = new StartRoom(1, 0, "");
         //TODO iets wat elke room aan een plekje in een floorarray linked met coordinaat [a,b]
     }
 
     void NextFloor()
     {
-        
         //TODO dus new floor maken (FloorGenerator aanroepen) en oude weg halen
     }
     void DoorCheck()
@@ -56,7 +54,7 @@ public class Floor
                         // door right
                     }
 
-                    if (x - 1 > 0 && floor[x - 1, y] != null)
+                    if (x - 1 >= 0 && floor[x - 1, y] != null)
                     {
                         //door left
                     }
@@ -64,7 +62,7 @@ public class Floor
                     {
                         //door down
                     }
-                    if (y - 1 > 0 && floor[x, y - 1] != null)
+                    if (y - 1 >= 0 && floor[x, y - 1] != null)
                     {
                         //door up
                     }
