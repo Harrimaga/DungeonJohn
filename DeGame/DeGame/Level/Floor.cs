@@ -32,7 +32,7 @@ public class Floor
         int minRooms = 15;
         int x = random.Next(9);
         int y = random.Next(9);
-        //floor[x,y]
+        floor[x, y] = new StartRoom(1, 0, "");
         //TODO iets wat elke room aan een plekje in een floorarray linked met coordinaat [a,b]
     }
 
