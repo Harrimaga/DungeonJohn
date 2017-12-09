@@ -52,6 +52,11 @@ public class Enemy : SpriteGameObject
             position.X++;
         }
     }
+
+    public void checkPlayerDetection()
+    {
+        // Omdate player static is zou je dit hier zonder Find kunnen doen
+    }
 }
 
 public class ChasingEnemy : Enemy

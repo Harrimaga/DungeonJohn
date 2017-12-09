@@ -28,4 +28,21 @@ class Bullet : SpriteGameObject
         base.Update(gameTime);
         position += velocity;
     }
+
+    public void CheckCollisionEnemies()
+    {
+        // Als enemies in de room class zitten, en ze hebben op een of andere manier t goede ID, zou dit moeten werken
+        GameObjectList enemies = Floor.currentRoom.Find("enemies") as GameObjectList;
+
+        if (enemies != null)
+        {
+            foreach (SpriteGameObject enemy in enemies.Children)
+            {
+                if (CollidesWith(enemy))
+                {
+                    // Collission logic
+                }
+            }
+        }
+    }
 }

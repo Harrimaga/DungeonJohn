@@ -7,6 +7,7 @@ public class Floor
     Room[,] floor;
     int RoomListIndex = 1;
     Random random = new Random();
+    public static Room currentRoom; // moeten kijken waar we de current room opslaan, voor nu hier, wordt nog niet gevuld
 
     public Floor()
     {
