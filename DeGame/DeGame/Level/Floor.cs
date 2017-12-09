@@ -7,15 +7,19 @@ public class Floor
     Room[,] floor;
     bool[,] Checked;
     int RoomListIndex = 1;
-    Random random = new Random();
-    int CurrentRooms = 0;
     int maxRooms = 20;
     int minRooms = 15;
+    int floorWidth = 9;
+    int floorHeight = 9;
+    Random random = new Random();
+    int CurrentRooms = 0;
 
     public Floor()
     {
-        floor = new Room[9, 9];
         Checked = new bool[floor.GetLength(0), floor.GetLength(1)];
+        floor = new Room[floorWidth, floorHeight];
+        floor[0, 0] = new Room(1);
+        floor[1, 0] = new Room(2);
 
         foreach (Room room in floor)
         {
@@ -90,8 +94,16 @@ public class Floor
                 }
     }
 
+    void ClearFloor()
+    {
+        floor = new Room[floorWidth + 2, floorHeight + 2];
+    }
     void NextFloor()
     {
+        maxRooms += 5;
+        minRooms += 5;
+        ClearFloor();
+        FloorGenerator();
         //TODO dus new floor maken (FloorGenerator aanroepen) en oude weg halen
     }
     void DoorCheck()
@@ -125,8 +137,8 @@ public class Floor
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        for (int a = 0; a < floor.GetLength(0); a++)
-            for (int b = 0; b < floor.GetLength(1); b++)
+        for (int a = 0; a < floorWidth; a++)
+            for (int b = 0; b < floorHeight; b++)
                 if (floor[a, b] != null)                
                     floor[a, b].Draw(gameTime, spriteBatch, a, b);
     }
