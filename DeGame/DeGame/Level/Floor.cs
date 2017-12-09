@@ -16,10 +16,8 @@ public class Floor
 
     public Floor()
     {
-        Checked = new bool[floor.GetLength(0), floor.GetLength(1)];
         floor = new Room[floorWidth, floorHeight];
-        floor[0, 0] = new Room(1);
-        floor[1, 0] = new Room(2);
+        Checked = new bool[floorWidth, floorHeight];
 
         foreach (Room room in floor)
         {
@@ -36,8 +34,8 @@ public class Floor
 
     void FloorGenerator()
     {
-        int p = random.Next(9);
-        int q = random.Next(9);
+        int p = random.Next(floorWidth);
+        int q = random.Next(floorHeight);
         floor[0, 0] = new Room(1, 0, ""); //StartRoom(1, 0, "");
         int RoomAmount = random.Next(maxRooms - minRooms) + minRooms;
         FloorGeneratorRecursive(0, 0, RoomAmount);
@@ -45,10 +43,11 @@ public class Floor
 
     void FloorGeneratorRecursive(int x,int y, int RoomAmount)
     {
+        int RoomSpawnChance = 30;
         Checked[x, y] = true;
-        if (CurrentRooms < RoomAmount && x + 1 < floor.GetLength(0) && floor[x + 1, y] == null)
+        if (CurrentRooms < RoomAmount && x + 1 < floorWidth && floor[x + 1, y] == null)
         {
-            if (random.Next(100) < 30)
+            if (random.Next(100) < RoomSpawnChance)
             {
                 CurrentRooms++;
                 floor[x + 1, y] = new Room(random.Next(2) + 1, 0, "");
@@ -58,16 +57,16 @@ public class Floor
         }
         if (CurrentRooms < RoomAmount && x - 1 >= 0 && floor[x - 1, y] == null)
         {
-            if (random.Next(100) < 30)
+            if (random.Next(100) < RoomSpawnChance)
             {
                 CurrentRooms++;
                 floor[x - 1, y] = new Room(random.Next(2) + 1, 0, "");
             }
             Checked[x - 1, y] = true;
         }
-        if (CurrentRooms < RoomAmount && y + 1 < floor.GetLength(1) && floor[x, y + 1] == null)
+        if (CurrentRooms < RoomAmount && y + 1 < floorHeight && floor[x, y + 1] == null)
         {
-            if (random.Next(100) < 30)
+            if (random.Next(100) < RoomSpawnChance)
             {
                 CurrentRooms++;
                 floor[x, y + 1] = new Room(random.Next(2) + 1, 0, "");
@@ -77,7 +76,7 @@ public class Floor
         }
         if (CurrentRooms < RoomAmount && y - 1 >= 0 && floor[x, y - 1] == null)
         {
-            if (random.Next(100) < 30)
+            if (random.Next(100) < RoomSpawnChance)
             {
                 CurrentRooms++;
                 floor[x, y - 1] = new Room(random.Next(2) + 1, 0, "");
@@ -86,8 +85,8 @@ public class Floor
                 Checked[x, y - 1] = true;
         }
         if (CurrentRooms < RoomAmount)
-            for (int m = 0; m < floor.GetLength(0); m++)
-                for (int n = 0; n < floor.GetLength(1); n++)
+            for (int m = 0; m < floorWidth; m++)
+                for (int n = 0; n < floorHeight; n++)
                 {
                     if (floor[m, n] != null && Checked[m, n] == false)
                         FloorGeneratorRecursive(m, n, RoomAmount);
@@ -96,7 +95,9 @@ public class Floor
 
     void ClearFloor()
     {
-        floor = new Room[floorWidth + 2, floorHeight + 2];
+        floor = new Room[floor.GetLength(0) + 2, floor.GetLength(1) + 2];
+        floorWidth = floor.GetLength(0);
+        floorHeight = floor.GetLength(1);
     }
     void NextFloor()
     {
