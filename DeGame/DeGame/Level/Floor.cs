@@ -4,7 +4,6 @@ using System;
 
 public class Floor
 {
-    //cream was here
     Room[,] floor;
     int RoomListIndex = 1;
     Random random = new Random();
@@ -55,7 +54,7 @@ public class Floor
                         // door right
                     }
 
-                    if (x - 1 > 0 && floor[x - 1, y] != null)
+                    if (x - 1 >= 0 && floor[x - 1, y] != null)
                     {
                         //door left
                     }
@@ -63,7 +62,7 @@ public class Floor
                     {
                         //door down
                     }
-                    if (y - 1 > 0 && floor[x, y - 1] != null)
+                    if (y - 1 >= 0 && floor[x, y - 1] != null)
                     {
                         //door up
                     }
