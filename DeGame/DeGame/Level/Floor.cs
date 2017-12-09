@@ -51,20 +51,19 @@ public class Floor
                 {
                     if (x + 1 < 9 && floor[x + 1, y] != null)
                     {
-                        // door right
+                        floor[x, y].right = true;
                     }
-
                     if (x - 1 >= 0 && floor[x - 1, y] != null)
                     {
-                        //door left
+                        floor[x, y].left = true;
                     }
                     if (y + 1 < 9 &&  floor[x, y + 1] != null)
                     {
-                        //door down
+                        floor[x, y].down = true;
                     }
                     if (y - 1 >= 0 && floor[x, y - 1] != null)
                     {
-                        //door up
+                        floor[x, y].up = true;
                     }
                 }
             }
