@@ -19,7 +19,8 @@ class Player : SpriteGameObject
 
     GameObjectList bullets;
 
-    public Player()
+    public Player(int layer = 0, string id = "bullet")
+    : base("Sprites/Random", layer, id)
     {
         bullets = new GameObjectList();
         position = new Vector2(100, 100);

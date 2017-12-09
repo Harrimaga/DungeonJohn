@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 class StartRoom : Room
     {
-    public StartRoom(Vector2 floorPosition)
+    public StartRoom(Vector2 floorPosition, int roomListIndex, int layer = 0, string id = "") : base(layer)
     {
         
     }

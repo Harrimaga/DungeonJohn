@@ -14,11 +14,11 @@ public class SpriteGameObject : GameObject
     //public float UsesCameraX = 1;
     //public float UsesCameraY = 1;
     protected Texture2D sprite;
-    
-    public SpriteGameObject(/*string assetName, int layer = 0, string id = ""*/)
-       // : base(layer, id)
+
+    public SpriteGameObject(string assetName, int layer = 0, string id = "")
+        : base(layer, id)
     {
-        //this.sprite = GameEnvironment.assetManager.GetSprite(assetName);
+        this.sprite = GameEnvironment.assetManager.GetSprite(assetName);
     }
     public override void Update(GameTime gameTime)
     {

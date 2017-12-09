@@ -1,16 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 class Bullet : SpriteGameObject
 {
-    public Bullet(Vector2 Startposition, int Direction)
+    public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
+    : base("Sprites/Random", layer, id)
     {
-        this.position = Startposition;
+        position = Startposition;
+
         if (Direction == 0)
             velocity.Y = 10;
         else if (Direction == 1)
