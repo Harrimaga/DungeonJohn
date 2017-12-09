@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class PlayingState : IGameObject
+public class PlayingState : IGameObject
 {
-    Player player;
+    public static Player player;
     Enemy enemy;
     Floor floor;
 
@@ -16,7 +16,7 @@ class PlayingState : IGameObject
     public PlayingState()
     {
         player = new Player();
-        enemy = new Enemy();
+        enemy = new ChasingEnemy();
         floor = new Floor();
 
     }
@@ -35,6 +35,7 @@ class PlayingState : IGameObject
     {
         player.Update(gameTime);
         floor.Update(gameTime);
+        enemy.Update(gameTime);
     }
     public virtual void Reset()
     {

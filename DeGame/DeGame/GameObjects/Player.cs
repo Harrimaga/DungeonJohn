@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-class Player : SpriteGameObject
+public class Player : SpriteGameObject
 {
     protected float health;
     protected float maxhealth;
@@ -19,8 +19,8 @@ class Player : SpriteGameObject
 
     GameObjectList bullets;
 
-    public Player(int layer = 0, string id = "bullet")
-    : base("Sprites/Random", layer, id)
+    public Player(int layer = 0, string id = "Player")
+    : base("Sprites/Random", 0, "Player")
     {
         bullets = new GameObjectList();
         position = new Vector2(100, 100);
@@ -30,6 +30,7 @@ class Player : SpriteGameObject
     {
         bullets.Update(gameTime);
         base.Update(gameTime);
+        
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
