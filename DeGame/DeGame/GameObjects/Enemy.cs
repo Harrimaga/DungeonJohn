@@ -26,7 +26,16 @@ public class Enemy : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if(position.Y > PlayingState.player.position.Y)
+
+    }
+
+    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+    }
+
+    public void Chase()
+    {
+        if (position.Y > PlayingState.player.position.Y)
         {
             position.Y--;
         }
@@ -43,11 +52,20 @@ public class Enemy : SpriteGameObject
             position.X++;
         }
     }
+}
+
+public class ChasingEnemy : Enemy
+{
+    public override void Update(GameTime gameTime)
+    {
+        Chase();
+    }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
+
 }
 
 
