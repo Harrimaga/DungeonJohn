@@ -40,7 +40,7 @@ public class Floor
 
     void NextFloor()
     {
-
+        
         //TODO dus new floor maken (FloorGenerator aanroepen) en oude weg halen
     }
     void DoorCheck()
