@@ -6,7 +6,6 @@ public class Floor
 {
     Room[,] floor;
     bool[,] Checked;
-    int RoomListIndex = 1;
     int maxRooms = 20;
     int minRooms = 15;
     int floorWidth = 9;
@@ -18,27 +17,28 @@ public class Floor
     {
         floor = new Room[floorWidth, floorHeight];
         Checked = new bool[floorWidth, floorHeight];
-
+        floor[0, 0] = new Room(3);
         foreach (Room room in floor)
         {
             if (room != null)
                 room.LoadTiles();
         }
+        for (int x = 0; x < floorWidth; x++)
+            for (int y = 0; y < floorHeight; y++)
+                Checked[x, y] = false;
 
+        //int a = 1 + 1;
+        //string dit = a.ToString();
         FloorGenerator();
-        //hele simpele layout voor testen
-        //floor[5, 5] = new StartRoom(new Vector2(5,5));
-        //floor[6, 5] = new Room();
-        //floor[7, 5] = new EndRoom(new Vector2(7,5));
     }
 
     void FloorGenerator()
     {
-        int p = random.Next(floorWidth);
-        int q = random.Next(floorHeight);
-        floor[0, 0] = new Room(1, 0, ""); //StartRoom(1, 0, "");
-        int RoomAmount = random.Next(maxRooms - minRooms) + minRooms;
-        FloorGeneratorRecursive(0, 0, RoomAmount);
+        //int p = random.Next(floorWidth);
+        //int q = random.Next(floorHeight);
+        floor[1, 0] = new Room(1);
+        //int RoomAmount = random.Next(maxRooms - minRooms) + minRooms;
+        //FloorGeneratorRecursive(0, 0, RoomAmount);
     }
 
     void FloorGeneratorRecursive(int x,int y, int RoomAmount)
@@ -50,7 +50,7 @@ public class Floor
             if (random.Next(100) < RoomSpawnChance)
             {
                 CurrentRooms++;
-                floor[x + 1, y] = new Room(random.Next(2) + 1, 0, "");
+                floor[x + 1, y] = new Room(random.Next(2) + 1);
             }
             else
                 Checked[x + 1, y] = true;
@@ -60,7 +60,7 @@ public class Floor
             if (random.Next(100) < RoomSpawnChance)
             {
                 CurrentRooms++;
-                floor[x - 1, y] = new Room(random.Next(2) + 1, 0, "");
+                floor[x - 1, y] = new Room(random.Next(2) + 1);
             }
             Checked[x - 1, y] = true;
         }
@@ -69,7 +69,7 @@ public class Floor
             if (random.Next(100) < RoomSpawnChance)
             {
                 CurrentRooms++;
-                floor[x, y + 1] = new Room(random.Next(2) + 1, 0, "");
+                floor[x, y + 1] = new Room(random.Next(2) + 1, 0);
             }
             else
                 Checked[x, y + 1] = true;
@@ -79,7 +79,7 @@ public class Floor
             if (random.Next(100) < RoomSpawnChance)
             {
                 CurrentRooms++;
-                floor[x, y - 1] = new Room(random.Next(2) + 1, 0, "");
+                floor[x, y - 1] = new Room(random.Next(2) + 1);
             }
             else
                 Checked[x, y - 1] = true;
@@ -98,8 +98,10 @@ public class Floor
         floor = new Room[floor.GetLength(0) + 2, floor.GetLength(1) + 2];
         floorWidth = floor.GetLength(0);
         floorHeight = floor.GetLength(1);
+        CurrentRooms = 0;
     }
-    void NextFloor()
+
+    void NextFloor(Room[,] floor)
     {
         maxRooms += 5;
         minRooms += 5;
@@ -107,6 +109,7 @@ public class Floor
         FloorGenerator();
         //TODO dus new floor maken (FloorGenerator aanroepen) en oude weg halen
     }
+
     void DoorCheck()
     {
         for (int x = 0; x < 9; x++)
