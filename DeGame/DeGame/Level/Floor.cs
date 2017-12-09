@@ -16,10 +16,11 @@ public class Floor
 
     public Floor()
     {
-        Checked = new bool[floor.GetLength(0), floor.GetLength(1)];
+        
         floor = new Room[floorWidth, floorHeight];
         floor[0, 0] = new Room(1);
         floor[1, 0] = new Room(2);
+        Checked = new bool[floor.GetLength(0), floor.GetLength(1)];
 
         foreach (Room room in floor)
         {
