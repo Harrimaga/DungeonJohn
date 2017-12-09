@@ -15,12 +15,12 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 position;
+    protected Vector2 position, Startposition;
 
     public Enemy(int layer = 0, string id = "bullet")
     : base("Sprites/BearEnemy", layer, id)
     {
-        position = new Vector2(100, 50);
+        this.position = Startposition;
         player = new Player();
     }
 

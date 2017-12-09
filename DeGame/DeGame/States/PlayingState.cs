@@ -12,7 +12,7 @@ class PlayingState : IGameObject
     Enemy enemy;
     Floor floor;
 
-    
+
     public PlayingState()
     {
         player = new Player();
