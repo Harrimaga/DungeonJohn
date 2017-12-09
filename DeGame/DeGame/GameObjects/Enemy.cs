@@ -9,43 +9,40 @@ using System.Threading.Tasks;
 
 public class Enemy : SpriteGameObject
 {
-    Player player;
     protected float health;
     protected float maxhealth;
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 position, Startposition;
+    protected Vector2 position;
 
-    public Enemy(int layer = 0, string id = "bullet")
+    public Enemy(int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
-        this.position = Startposition;
-        player = new Player();
+       
+        
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if(position.Y > player.position.Y)
+        if(position.Y > PlayingState.player.position.Y)
         {
             position.Y--;
         }
-        if (position.Y < player.Position.Y)
+        if (position.Y < PlayingState.player.position.Y)
         {
             position.Y++;
         }
-        if (position.X > player.position.X)
+        if (position.X > PlayingState.player.position.X)
         {
             position.X--;
         }
-        if (position.X < player.position.X)
+        if (position.X < PlayingState.player.position.X)
         {
             position.X++;
         }
-        player.Update(gameTime);
     }
-    
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
