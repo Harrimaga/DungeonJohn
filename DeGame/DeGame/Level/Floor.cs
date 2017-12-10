@@ -6,48 +6,39 @@ public class Floor
 {
     Room[,] floor;
     bool[,] Checked;
-    int maxRooms = 20;
-    int minRooms = 15;
-    int floorWidth = 9;
-    int floorHeight = 9;
+    int maxRooms = 20, minRooms = 15, CurrentRooms = 0, floorWidth = 9, floorHeight = 9;
     Random random = new Random();
-    int CurrentRooms = 0;
+    bool FloorGenerated = false;
 
     public Floor()
     {
         floor = new Room[floorWidth, floorHeight];
         Checked = new bool[floorWidth, floorHeight];
-        floor[0, 0] = new Room(3);
-        foreach (Room room in floor)
-        {
-            if (room != null)
-                room.LoadTiles();
-        }
-        for (int x = 0; x < floorWidth; x++)
-            for (int y = 0; y < floorHeight; y++)
-                Checked[x, y] = false;
-
+        FloorGenerator();
         //int a = 1 + 1;
         //string dit = a.ToString();
-        FloorGenerator();
     }
 
     void FloorGenerator()
     {
-        //int p = random.Next(floorWidth);
-        //int q = random.Next(floorHeight);
-        floor[1, 0] = new Room(1);
-        //int RoomAmount = random.Next(maxRooms - minRooms) + minRooms;
-        //FloorGeneratorRecursive(0, 0, RoomAmount);
+        for (int e = 0; e < floorWidth; e++)
+            for (int f = 0; f < floorHeight; f++)
+                Checked[e, f] = false;
+        int p = random.Next(floorWidth);
+        int q = random.Next(floorHeight);
+        floor[0, 0] = new Room(1);
+        int RoomAmount = random.Next(maxRooms - minRooms) + minRooms;
+        FloorGeneratorRecursive(0, 0, RoomAmount);
+        FloorGenerated = true;
     }
 
     void FloorGeneratorRecursive(int x,int y, int RoomAmount)
     {
-        int RoomSpawnChance = 30;
+        int RoomSpawnChance = 60;
         Checked[x, y] = true;
         if (CurrentRooms < RoomAmount && x + 1 < floorWidth && floor[x + 1, y] == null)
         {
-            if (random.Next(100) < RoomSpawnChance)
+            if (random.Next(100) <= RoomSpawnChance)
             {
                 CurrentRooms++;
                 floor[x + 1, y] = new Room(random.Next(2) + 1);
@@ -57,7 +48,7 @@ public class Floor
         }
         if (CurrentRooms < RoomAmount && x - 1 >= 0 && floor[x - 1, y] == null)
         {
-            if (random.Next(100) < RoomSpawnChance)
+            if (random.Next(100) <= RoomSpawnChance)
             {
                 CurrentRooms++;
                 floor[x - 1, y] = new Room(random.Next(2) + 1);
@@ -66,7 +57,7 @@ public class Floor
         }
         if (CurrentRooms < RoomAmount && y + 1 < floorHeight && floor[x, y + 1] == null)
         {
-            if (random.Next(100) < RoomSpawnChance)
+            if (random.Next(100) <= RoomSpawnChance)
             {
                 CurrentRooms++;
                 floor[x, y + 1] = new Room(random.Next(2) + 1, 0);
@@ -76,7 +67,7 @@ public class Floor
         }
         if (CurrentRooms < RoomAmount && y - 1 >= 0 && floor[x, y - 1] == null)
         {
-            if (random.Next(100) < RoomSpawnChance)
+            if (random.Next(100) <= RoomSpawnChance)
             {
                 CurrentRooms++;
                 floor[x, y - 1] = new Room(random.Next(2) + 1);
@@ -84,13 +75,13 @@ public class Floor
             else
                 Checked[x, y - 1] = true;
         }
-        if (CurrentRooms < RoomAmount)
+        if (CurrentRooms < RoomAmount)        
             for (int m = 0; m < floorWidth; m++)
                 for (int n = 0; n < floorHeight; n++)
-                {
-                    if (floor[m, n] != null && Checked[m, n] == false)
-                        FloorGeneratorRecursive(m, n, RoomAmount);
-                }
+                    if (floor[m, n] != null && Checked[m, n] == false)                    
+                        FloorGeneratorRecursive(m, n, RoomAmount);                   
+        else
+            return;
     }
 
     void ClearFloor()
@@ -112,19 +103,24 @@ public class Floor
 
     void DoorCheck()
     {
-        for (int x = 0; x < 9; x++)
-            for (int y = 0; y < 9; y++)
-                if (floor[x, y] != null)
-                {
-                    if (x + 1 < 9 && floor[x + 1, y] != null)                    
-                        floor[x, y].right = true;
-                    if (x - 1 >= 0 && floor[x - 1, y] != null)                    
-                        floor[x, y].left = true;                    
-                    if (y + 1 < 9 && floor[x, y + 1] != null)                    
-                        floor[x, y].down = true;                    
-                    if (y - 1 >= 0 && floor[x, y - 1] != null)                    
-                        floor[x, y].up = true;                    
-                }
+        if (FloorGenerated == true)
+        {
+            for (int x = 0; x < 9; x++)
+                for (int y = 0; y < 9; y++)
+                    if (floor[x, y] != null)
+                    {
+                        if (x + 1 < 9 && floor[x + 1, y] != null)
+                            floor[x, y].right = true;
+                        if (x - 1 >= 0 && floor[x - 1, y] != null)
+                            floor[x, y].left = true;
+                        if (y + 1 < 9 && floor[x, y + 1] != null)
+                            floor[x, y].down = true;
+                        if (y - 1 >= 0 && floor[x, y - 1] != null)
+                            floor[x, y].up = true;
+                        FloorGenerated = false;
+                    }
+
+        }
     }
 
     public virtual void Update(GameTime gameTime)
@@ -143,9 +139,11 @@ public class Floor
     {
         for (int a = 0; a < floorWidth; a++)
             for (int b = 0; b < floorHeight; b++)
-                if (floor[a, b] != null)                
+                if (floor[a, b] != null)
+                {
                     floor[a, b].Draw(gameTime, spriteBatch, a, b);
+                    floor[a, b].LoadTiles();
+                }
     }
-
 }
 
