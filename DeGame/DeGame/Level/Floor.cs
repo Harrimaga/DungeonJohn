@@ -26,9 +26,9 @@ public class Floor
                 Checked[e, f] = false;
         int p = random.Next(floorWidth);
         int q = random.Next(floorHeight);
-        floor[0, 0] = new Room(1);
+        floor[1, 1] = new Room(1);
         int RoomAmount = random.Next(maxRooms - minRooms) + minRooms;
-        FloorGeneratorRecursive(0, 0, RoomAmount);
+        FloorGeneratorRecursive(1, 1, RoomAmount);
         FloorGenerated = true;
     }
 
@@ -141,8 +141,8 @@ public class Floor
             for (int b = 0; b < floorHeight; b++)
                 if (floor[a, b] != null)
                 {
+                    //floor[a, b].LoadTiles(); light hier aan <--------------------
                     floor[a, b].Draw(gameTime, spriteBatch, a, b);
-                    floor[a, b].LoadTiles();
                 }
     }
 }
