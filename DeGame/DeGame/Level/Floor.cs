@@ -14,7 +14,7 @@ public class Floor
         floor = new Room[9, 9];
         floor[0, 0] = new Room(1);
         floor[1, 0] = new Room(2);
-
+        
 
         foreach (Room room in floor)
         {

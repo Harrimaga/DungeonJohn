@@ -27,6 +27,7 @@ class Bullet : SpriteGameObject
     {
         base.Update(gameTime);
         position += velocity;
+        CheckCollisionEnemies();
     }
 
     public void CheckCollisionEnemies()
@@ -38,9 +39,9 @@ class Bullet : SpriteGameObject
         {
             foreach (SpriteGameObject enemy in enemies.Children)
             {
-                if (CollidesWith(enemy))
+                if (CollidesWith(enemy) == true)
                 {
-                    // Collission logic
+                    enemy.Die = false;
                 }
             }
         }

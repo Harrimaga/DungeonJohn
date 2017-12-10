@@ -15,7 +15,7 @@ public class Enemy : SpriteGameObject
     protected float attackspeed;
     protected float range;
     protected Vector2 position;
-
+    //public bool Die = true;
     public Enemy(int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
@@ -26,7 +26,7 @@ public class Enemy : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-
+        CheckBulletCollision();
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -57,6 +57,18 @@ public class Enemy : SpriteGameObject
     {
         // Omdate player static is zou je dit hier zonder Find kunnen doen
     }
+
+    public void CheckBulletCollision()
+    {
+        GameObjectList bullets = Floor.currentRoom.Find("bullet") as GameObjectList;
+        foreach (SpriteGameObject bullet in bullets.Children)
+        {
+            if (CollidesWith(bullet))
+            {
+                Die = false;
+            }
+        }
+    }
 }
 
 public class ChasingEnemy : Enemy
@@ -68,7 +80,10 @@ public class ChasingEnemy : Enemy
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
+        if (Die == true)
+        {
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
+        }
     }
 
 }
