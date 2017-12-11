@@ -71,15 +71,20 @@ public class SpriteGameObject : GameObject
     {
         get
         {
-            int left = (int)(GlobalPosition.X - origin.X);
-            int top = (int)(GlobalPosition.Y - origin.Y);
+            int left = (int)(position.X - origin.X);
+            int top = (int)(position.Y - origin.Y);
             return new Rectangle(left, top, Width, Height);
         }
     }
 
     public bool CollidesWith(SpriteGameObject obj)
     {
-        return true; //placeholder
+        if (BoundingBox.Intersects(obj.BoundingBox))
+        {
+            System.Console.WriteLine("Colission!");
+            return true;
+        }
+        System.Console.WriteLine("No Colission!");
+        return false;
     }
 }
-

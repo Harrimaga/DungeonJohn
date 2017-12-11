@@ -30,6 +30,11 @@ public class GameStateManager : IGameObject
         gameStates[name] = state;
     }
 
+    public IGameObject GetGameState(string name)
+    {
+        return gameStates[name];
+    }
+
     public void HandleInput(InputHelper inputHelper)
     {
         if (currentGameState != null)
