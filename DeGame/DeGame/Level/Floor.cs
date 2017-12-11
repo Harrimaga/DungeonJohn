@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Microsoft.Xna.Framework.Input;
 
 public class Floor
 {
     Room[,] floor;
     bool[,] Checked;
-    int maxRooms = 20, minRooms = 15, CurrentRooms = 1, floorWidth = 9, floorHeight = 9;
+    int maxRooms = 8, minRooms = 6, CurrentRooms = 1, floorWidth = 9, floorHeight = 9;
     Random random = new Random();
     bool FloorGenerated = false;
 
@@ -24,21 +25,19 @@ public class Floor
         for (int e = 0; e < floorWidth; e++)
             for (int f = 0; f < floorHeight; f++)
                 Checked[e, f] = false;
-        int p = random.Next(floorWidth);
-        int q = random.Next(floorHeight);
-        floor[5, 1] = new Room(1);
         int RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
-        FloorGeneratorRecursive(5, 1, RoomAmount);
+        int p = random.Next(floorWidth - 2) + 2;
+        int q = random.Next(floorHeight - 2) + 2;
+        floor[p, q] = new Room(1);
+        FloorGeneratorRecursive(p, q, RoomAmount);
         FloorGenerated = true;
     }
 
-    void FloorGeneratorRecursive(int x,int y, int RoomAmount)
+    void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
-        //random.Next(2) + 1
-        int RoomSpawnChance = 99;
         if (y + 1 < floorHeight)
         {
-            if (CurrentRooms < RoomAmount && floor[x, y + 1] == null && random.Next(100) <= RoomSpawnChance)
+            if (CurrentRooms < RoomAmount && floor[x, y + 1] == null && random.Next(100) <= CheckAdjacent(x, y + 1))
             {
                 CurrentRooms++;
                 floor[x, y + 1] = new Room(2);
@@ -49,7 +48,7 @@ public class Floor
 
         if (y - 1 >= 0)
         {
-            if (CurrentRooms < RoomAmount && floor[x, y - 1] == null && random.Next(100) <= RoomSpawnChance)
+            if (CurrentRooms < RoomAmount && floor[x, y - 1] == null && random.Next(100) <= CheckAdjacent(x, y - 1))
             {
                 CurrentRooms++;
                 floor[x, y - 1] = new Room(2);
@@ -60,7 +59,7 @@ public class Floor
 
         if (x + 1 < floorWidth)
         {
-            if (CurrentRooms < RoomAmount && floor[x + 1, y] == null && random.Next(100) <= RoomSpawnChance)
+            if (CurrentRooms < RoomAmount && floor[x + 1, y] == null && random.Next(100) <= CheckAdjacent(x + 1, y))
             {
                 CurrentRooms++;
                 floor[x + 1, y] = new Room(2);
@@ -71,7 +70,7 @@ public class Floor
 
         if (x - 1 >= 0)
         {
-            if (CurrentRooms < RoomAmount && floor[x - 1, y] == null && random.Next(100) <= RoomSpawnChance)
+            if (CurrentRooms < RoomAmount && floor[x - 1, y] == null && random.Next(100) <= CheckAdjacent(x - 1, y))
             {
                 CurrentRooms++;
                 floor[x - 1, y] = new Room(2);
@@ -81,32 +80,61 @@ public class Floor
         }
 
         Checked[x, y] = true;
-
-        //if (CurrentRooms < RoomAmount)        
+        int counter = 0;
+        if (CurrentRooms < RoomAmount)
+        {
             for (int m = 0; m < floorWidth; m++)
+            {
                 for (int n = 0; n < floorHeight; n++)
-                    if (floor[m, n] != null && Checked[m, n] == false)                    
-                        FloorGeneratorRecursive(m, n, RoomAmount);                   
-        else
-            return;
+                {
+                    if (floor[m, n] != null && Checked[m, n] == false)
+                    {
+                        FloorGeneratorRecursive(m, n, RoomAmount);
+                        counter++;
+                    }
+                }
+            }
+            if (counter == 0)
+            {
+                ClearFloor();
+                FloorGenerator();
+            }                  
+        }
     }
 
-    //void ClearFloor()
-    //{
-    //    floor = new Room[floor.GetLength(0) + 2, floor.GetLength(1) + 2];
-    //    floorWidth = floor.GetLength(0);
-    //    floorHeight = floor.GetLength(1);
-    //    CurrentRooms = 0;
-    //}
+    int CheckAdjacent(int x, int y)
+    {
+        int RoomSpawnChance = 50;
+        if (y + 1 < floorHeight && floor[x, y + 1] != null)
+            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+        if (y - 1 >= 0 && floor[x, y - 1] != null)
+            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+        if (x + 1 < floorWidth && floor[x + 1, y] != null)
+            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+        if (x - 1 >= 0 && floor[x - 1, y] != null)
+            RoomSpawnChance = RoomSpawnChance / 12 * 10;        
+        return RoomSpawnChance * 12 / 10;
+    }
 
-    //void NextFloor(Room[,] floor)
-    //{
-    //    maxRooms += 5;
-    //    minRooms += 5;
-    //    ClearFloor();
-    //    FloorGenerator();
-    //    //TODO dus new floor maken (FloorGenerator aanroepen) en oude weg halen
-    //}
+    void ClearFloor()
+    {
+        for (int x = 0; x < floorWidth; x++)
+            for (int y = 0; y < floorHeight; y++)
+                floor[x,y] = null;
+        CurrentRooms = 1;
+    }
+
+    void NextFloor(Room[,] floor)
+    {
+        ClearFloor();
+        floor = new Room[floor.GetLength(0) + 2, floor.GetLength(1) + 2];
+        floorWidth = floor.GetLength(0);
+        floorHeight = floor.GetLength(1);
+        maxRooms += 5;
+        minRooms += 5;
+        FloorGenerator();
+        //TODO dus new floor maken (FloorGenerator aanroepen) en oude weg halen
+    }
 
     //void DoorCheck()
     //{
