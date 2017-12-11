@@ -26,7 +26,8 @@ public class Enemy : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        CheckBulletCollision();
+        //CheckBulletCollision();
+        checkPlayerDetection();
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -55,6 +56,10 @@ public class Enemy : SpriteGameObject
 
     public void checkPlayerDetection()
     {
+        if (BoundingBox.Intersects(PlayingState.player.BoundingBox))
+        {
+            Die = false;
+        }
         // Omdate player static is zou je dit hier zonder Find kunnen doen
     }
 
@@ -65,7 +70,7 @@ public class Enemy : SpriteGameObject
         {
             if (CollidesWith(bullet))
             {
-                Die = false;
+                Die = true;
             }
         }
     }
@@ -80,7 +85,7 @@ public class ChasingEnemy : Enemy
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        if (Die == true)
+        if (Die == false)
         {
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
         }
