@@ -19,7 +19,7 @@ public class Room : GameObjectList
         List<string> textLines = new List<string>();
         StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
         string line = fileReader.ReadLine();
-        roomarray = new string[10, 8];
+        roomarray = new string[16, 10];
 
         CellWidth = 50;
         CellHeight = 50;
@@ -76,7 +76,7 @@ public class Room : GameObjectList
                         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Gray);
                         break;
                     case "Rock":
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Rock Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.LightGray);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Rock Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.SlateGray);
                         break;
                     case "Wall":
                         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Gray);
