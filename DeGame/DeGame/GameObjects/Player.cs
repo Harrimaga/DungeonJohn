@@ -15,7 +15,6 @@ public class Player : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    public Vector2 position;
 
     GameObjectList bullets;
 
@@ -29,6 +28,7 @@ public class Player : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         bullets.Update(gameTime);
+        Console.WriteLine(position);
         base.Update(gameTime);
         
     }
