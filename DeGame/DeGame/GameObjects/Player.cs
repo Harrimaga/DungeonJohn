@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 
 public class Player : SpriteGameObject
 {
-    protected float health;
+    public float health = 100;
     protected float maxhealth;
     protected float attack;
     protected float attackspeed;
     protected float range;
+    bool next = false;
 
     GameObjectList bullets;
 
@@ -30,7 +31,9 @@ public class Player : SpriteGameObject
         bullets.Update(gameTime);
         Console.WriteLine(position);
         base.Update(gameTime);
-        
+        if (health <= 0)
+            GameEnvironment.gameStateManager.SwitchTo("GameOver");
+
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

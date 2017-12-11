@@ -80,10 +80,8 @@ public class SpriteGameObject : GameObject
     {
         if (BoundingBox.Intersects(obj.BoundingBox))
         {
-            System.Console.WriteLine("Colission!");
             return true;
         }
-        System.Console.WriteLine("No Colission!");
         return false;
     }
 }

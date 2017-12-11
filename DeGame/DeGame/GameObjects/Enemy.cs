@@ -24,6 +24,9 @@ public class Enemy : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        if (CollidesWith(PlayingState.player))
+            //velocity = Vector2.Zero;
+            PlayingState.player.health -= 1;
 
     }
 
