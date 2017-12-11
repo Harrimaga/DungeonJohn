@@ -9,7 +9,7 @@ public class GameEnvironment : Game
     {
     protected GraphicsDeviceManager graphics;
     protected SpriteBatch spriteBatch;
-    protected InputHelper inputHelper;
+    public InputHelper inputHelper;
  
     public static GameStateManager gameStateManager;
     protected static Random random;
@@ -35,7 +35,7 @@ public class GameEnvironment : Game
     protected void HandleInput()
     {
         inputHelper.Update();
-        if (inputHelper.KeyPressed(Keys.Escape))
+        /*if (inputHelper.KeyPressed(Keys.Escape))
         {
             Exit();
         }
