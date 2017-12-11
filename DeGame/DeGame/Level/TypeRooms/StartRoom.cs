@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 
 class StartRoom : Room
     {
-    public StartRoom(Vector2 floorPosition, int roomListIndex, int layer = 0, string id = "") : base(layer)
+    int RoomIndexList;
+    public StartRoom(int roomListIndex, int layer = 0, string id = "") : base(layer)
     {
-        
+        RoomIndexList = roomListIndex;
     }
+
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-
+        
     }
     public virtual void Update(GameTime gameTime)
     {
