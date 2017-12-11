@@ -14,7 +14,6 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 position;
 
     public Enemy(int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
@@ -59,6 +58,13 @@ public class ChasingEnemy : Enemy
     public override void Update(GameTime gameTime)
     {
         Chase();
+        if(CollidesWith(PlayingState.player))
+        {
+            System.Console.WriteLine("Hit player!");
+        } else
+        {
+            System.Console.WriteLine("Not hit player!");
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
