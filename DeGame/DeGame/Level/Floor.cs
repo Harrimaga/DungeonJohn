@@ -39,9 +39,9 @@ public class Floor
     {
         int p = random.Next(9);
         int q = random.Next(9);
-        floor[0, 0] = new Room(1, 0, ""); //StartRoom(1, 0, "");
+        //floor[0, 0] = new Room(1, 0, ""); //StartRoom(1, 0, "");
         int RoomAmount = random.Next(maxRooms - minRooms) + minRooms;
-        FloorGeneratorRecursive(0, 0, RoomAmount);
+        //FloorGeneratorRecursive(0, 0, RoomAmount);
     }
 
     void FloorGeneratorRecursive(int x,int y, int RoomAmount)

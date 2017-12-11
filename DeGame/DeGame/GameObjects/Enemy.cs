@@ -16,11 +16,10 @@ public class Enemy : SpriteGameObject
     protected float range;
     protected Vector2 position;
 
-    public Enemy(int layer = 0, string id = "Enemy")
+    public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
-       
-        
+        position = startPosition;
     }
 
     public override void Update(GameTime gameTime)
@@ -54,19 +53,8 @@ public class Enemy : SpriteGameObject
     }
 }
 
-public class ChasingEnemy : Enemy
-{
-    public override void Update(GameTime gameTime)
-    {
-        Chase();
-    }
 
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
-    }
 
-}
 
 
 
