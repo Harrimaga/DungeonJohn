@@ -13,7 +13,7 @@ public class SpriteGameObject : GameObject
     public bool PerPixelCollisionDetection = true;
     //public float UsesCameraX = 1;
     //public float UsesCameraY = 1;
-    public bool Die = false;
+    public bool Die;
     protected Texture2D sprite;
 
     public SpriteGameObject(string assetName, int layer = 0, string id = "")
@@ -80,11 +80,9 @@ public class SpriteGameObject : GameObject
     public bool CollidesWith(SpriteGameObject obj)
     {
         if (BoundingBox.Intersects(obj.BoundingBox))
-        {
-            System.Console.WriteLine("Colission!");
+        { 
             return true;
         }
-        System.Console.WriteLine("No Colission!");
         return false;
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 public class PlayingState : IGameObject
 {
     public static Player player;
-    Enemy enemy;
+    public static Enemy enemy;
     Floor floor;
 
 

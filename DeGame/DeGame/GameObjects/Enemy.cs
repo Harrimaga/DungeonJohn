@@ -14,7 +14,6 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-
     public Enemy(int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
@@ -35,58 +34,79 @@ public class Enemy : SpriteGameObject
 
     public void Chase()
     {
-        if (position.Y > PlayingState.player.position.Y)
+        if (position.Y + sprite.Height > PlayingState.player.position.Y)
         {
             position.Y--;
         }
-        if (position.Y < PlayingState.player.position.Y)
+        if (position.Y - sprite.Height < PlayingState.player.position.Y)
         {
             position.Y++;
         }
-        if (position.X > PlayingState.player.position.X)
+        if (position.X + sprite.Width > PlayingState.player.position.X)
         {
             position.X--;
         }
-        if (position.X < PlayingState.player.position.X)
+        if (position.X - sprite.Width < PlayingState.player.position.X)
         {
             position.X++;
         }
     }
 
+
     public void checkPlayerDetection()
     {
-        if (BoundingBox.Intersects(PlayingState.player.BoundingBox))
+        if (CollidesWith(PlayingState.player))
         {
-            Die = false;
+            Die = true;
         }
         // Omdate player static is zou je dit hier zonder Find kunnen doen
     }
 
     public void CheckBulletCollision()
     {
-        GameObjectList bullets = Floor.currentRoom.Find("bullet") as GameObjectList;
-        foreach (SpriteGameObject bullet in bullets.Children)
-        {
-            if (CollidesWith(bullet))
-            {
-                Die = true;
-            }
-        }
+        //if (CollidesWith(bullet))
+        //    {
+        //        Die = true;
+        //    }
+        
     }
+    public void Slash(SpriteBatch spriteBatch)
+    {
+        //Creëerd MemomryException
+        while(position.Y - sprite.Height == PlayingState.player.position.Y)
+        {
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Standardtile"), position);
+        }
+        while(position.Y + sprite.Height == PlayingState.player.position.Y)
+        {
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Standardtile"), position);
+        }
+        while(position.X - sprite.Width == PlayingState.player.position.X) 
+        {
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Standardtile"), position);
+        }
+        while(position.X + sprite.Width == PlayingState.player.position.X) 
+        {
+            //spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Standardtile"), position);
+        }
+    
+        }
 }
 
 public class ChasingEnemy : Enemy
 {
     public override void Update(GameTime gameTime)
     {
+        checkPlayerDetection();
+        CheckBulletCollision();
         Chase();
-        if(CollidesWith(PlayingState.player))
-        {
-            System.Console.WriteLine("Hit player!");
-        } else
-        {
-            System.Console.WriteLine("Not hit player!");
-        }
+        //if(CollidesWith(PlayingState.player))
+        //{
+        //    System.Console.WriteLine("Hit player!");
+        //} else
+        //{
+        //    System.Console.WriteLine("Not hit player!");
+        //}
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -95,6 +115,7 @@ public class ChasingEnemy : Enemy
         {
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
         }
+        //Slash(spriteBatch);
     }
 
 }

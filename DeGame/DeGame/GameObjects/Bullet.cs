@@ -27,23 +27,15 @@ class Bullet : SpriteGameObject
     {
         base.Update(gameTime);
         position += velocity;
-        CheckCollisionEnemies();
+        CheckCollisionEnemies(); // Laat de game laggen als de tering
     }
 
     public void CheckCollisionEnemies()
     {
-        // Als enemies in de room class zitten, en ze hebben op een of andere manier t goede ID, zou dit moeten werken
-        GameObjectList enemies = Floor.currentRoom.Find("enemies") as GameObjectList;
-
-        if (enemies != null)
+        if (CollidesWith(PlayingState.enemy))
         {
-            foreach (SpriteGameObject enemy in enemies.Children)
-            {
-                if (CollidesWith(enemy) == true)
-                {
-                    enemy.Die = false;
-                }
-            }
+            PlayingState.enemy.Die = true;
         }
+        // Als enemies in de room class zitten, en ze hebben op een of andere manier t goede ID, zou dit moeten werken
     }
 }
