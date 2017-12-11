@@ -14,7 +14,6 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 position;
 
     public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
