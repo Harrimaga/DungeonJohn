@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 public class InputHelper
     {
-    protected MouseState currentMouseState, previousMouseState;
-    protected KeyboardState currentKeyboardState, previousKeyboardState;
+    public MouseState currentMouseState, previousMouseState;
+    public KeyboardState currentKeyboardState, previousKeyboardState;
     protected Vector2 scale, offset;
 
     public InputHelper()

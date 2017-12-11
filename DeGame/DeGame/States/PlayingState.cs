@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,10 @@ public class PlayingState : IGameObject
     public virtual void HandleInput(InputHelper inputHelper)
     {
         player.HandleInput(inputHelper);
+        if (inputHelper.currentKeyboardState.IsKeyDown(Keys.P) && inputHelper.previousKeyboardState.IsKeyUp(Keys.P))
+        {
+            GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
+        }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
