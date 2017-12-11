@@ -15,11 +15,10 @@ public class Enemy : SpriteGameObject
     protected float attackspeed;
     protected float range;
 
-    public Enemy(int layer = 0, string id = "Enemy")
+    public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
-       
-        
+        position = startPosition;
     }
 
     public override void Update(GameTime gameTime)
@@ -53,26 +52,8 @@ public class Enemy : SpriteGameObject
     }
 }
 
-public class ChasingEnemy : Enemy
-{
-    public override void Update(GameTime gameTime)
-    {
-        Chase();
-        if(CollidesWith(PlayingState.player))
-        {
-            System.Console.WriteLine("Hit player!");
-        } else
-        {
-            System.Console.WriteLine("Not hit player!");
-        }
-    }
 
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
-    }
 
-}
 
 
 
