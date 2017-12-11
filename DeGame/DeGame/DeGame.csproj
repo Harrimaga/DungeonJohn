@@ -84,6 +84,7 @@
     </Content>
     <Content Include="Content\Levels\Start.txt" />
     <Content Include="Content\Sprites\BearEnemy.png" />
+    <Content Include="Content\Sprites\bteam.png" />
     <Content Include="Content\Sprites\Random.png" />
     <Content Include="Content\Sprites\Standardtile.png" />
     <Content Include="Icon.ico" />
