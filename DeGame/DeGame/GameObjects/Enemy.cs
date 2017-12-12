@@ -9,22 +9,25 @@ using System.Threading.Tasks;
 
 public class Enemy : SpriteGameObject
 {
-    protected float health;
-    protected float maxhealth;
+    protected float health = 100;
+    protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
     protected float range;
     protected Vector2 basevelocity = new Vector2(1, 1);
+    HealthBar healthbar;
 
     public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
+        healthbar = new HealthBar(health, maxhealth, position);
         position = startPosition;
         velocity = basevelocity;
     }
 
     public override void Update(GameTime gameTime)
     {
+        healthbar.Update(gameTime, health, maxhealth, position);
         base.Update(gameTime);
         if (CollidesWith(PlayingState.player))
         {
@@ -35,10 +38,16 @@ public class Enemy : SpriteGameObject
         {
             velocity = basevelocity;
         }
+        foreach(Bullet bullet in PlayingState.player.bullets.Children)
+        if (CollidesWith(bullet))
+        {
+                health--;  
+        }
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        healthbar.Draw(spriteBatch, position);
     }
 
     public virtual void Chase()

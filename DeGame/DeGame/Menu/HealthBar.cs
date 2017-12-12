@@ -13,31 +13,30 @@ class HealthBar
     float newhealth;
     int healthbarwidth = 200;
     Rectangle healthbar;
-    public HealthBar(float healthObject, float maxhealthObject)
+    public HealthBar(float healthObject, float maxhealthObject, Vector2 position)
     {
        health = healthObject;
        maxhealth = maxhealthObject;
        newhealth = health;
-       healthbar = new Rectangle(20, 10, healthbarwidth, 20);
+       healthbar = new Rectangle((int)position.X -30, (int)position.Y- 30, healthbarwidth, 20);
     }
-    public void Update(GameTime gameTime, float healthUpdate, float maxhealthUpdate)
+    public void Update(GameTime gameTime, float healthUpdate, float maxhealthUpdate, Vector2 positionNow)
     {
         newhealth = healthUpdate;
 
         if (newhealth > health)
         {
             health++;
-            healthbar = new Rectangle(20, 10, healthbarwidth, 20);
         }
 
         if (newhealth < health)
         {
             health--;
-            healthbar = new Rectangle(20, 10, healthbarwidth, 20);
         }
         healthbarwidth = (int)(((float)health / maxhealth) * 200);
+        healthbar = new Rectangle((int)positionNow.X - 30, (int)positionNow.Y - 30, healthbarwidth, 20);
     }
-    public void Draw(SpriteBatch spriteBatch/*, Vector2 position*/)
+    public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/healthbar"), healthbar, Color.White);
     }
