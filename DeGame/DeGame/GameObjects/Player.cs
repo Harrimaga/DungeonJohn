@@ -17,7 +17,7 @@ public class Player : SpriteGameObject
     protected float range;
     bool next = false;
 
-    GameObjectList bullets;
+    public GameObjectList bullets;
     HealthBar healthbar;
 
     public Player(int layer = 0, string id = "Player")
@@ -25,12 +25,12 @@ public class Player : SpriteGameObject
     {
         bullets = new GameObjectList();
         position = new Vector2(100, 100);
-        healthbar = new HealthBar(health, maxhealth);
+        healthbar = new HealthBar(health, maxhealth, position);
     }
 
     public override void Update(GameTime gameTime)
     {
-        healthbar.Update(gameTime, health, maxhealth);
+        healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
         Console.WriteLine(position);
         base.Update(gameTime);
@@ -43,7 +43,7 @@ public class Player : SpriteGameObject
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
         bullets.Draw(gameTime, spriteBatch);
-        healthbar.Draw(spriteBatch);
+        healthbar.Draw(spriteBatch, Vector2.Zero);
     }
 
     public override void HandleInput(InputHelper inputHelper)
