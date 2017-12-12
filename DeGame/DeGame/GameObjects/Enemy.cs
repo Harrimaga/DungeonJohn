@@ -41,29 +41,26 @@ public class Enemy : SpriteGameObject
     {
     }
 
-    public void Chase()
+    public virtual void Chase()
     {
-        if (position.Y > PlayingState.player.position.Y)
+        if (position.Y + sprite.Height > PlayingState.player.position.Y)
         {
             position.Y -= velocity.Y;
         }
-        if (position.Y < PlayingState.player.position.Y)
+        if (position.Y - sprite.Height < PlayingState.player.position.Y)
         {
             position.Y += velocity.Y;
         }
-        if (position.X > PlayingState.player.position.X)
+        if (position.X + sprite.Width > PlayingState.player.position.X)
         {
             position.X -= velocity.X;
         }
-        if (position.X < PlayingState.player.position.X)
+        if (position.X - sprite.Width < PlayingState.player.position.X)
         {
             position.X += velocity.X;
         }
     }
 }
-
-
-
 
 
 

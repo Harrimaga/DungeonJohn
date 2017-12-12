@@ -10,16 +10,15 @@ using System.Threading.Tasks;
 public class PlayingState : IGameObject
 {
     public static Player player;
-    Enemy enemy;
+    public static Enemy enemy;
     Floor floor;
 
 
     public PlayingState()
     {
         player = new Player();
-        enemy = new ChasingEnemy(Vector2.Zero,0,"Enemy");
+        enemy = new RangedEnemy(Vector2.Zero,0,"Enemy");
         floor = new Floor();
-
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {

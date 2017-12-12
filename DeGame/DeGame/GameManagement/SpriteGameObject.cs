@@ -13,6 +13,7 @@ public class SpriteGameObject : GameObject
     public bool PerPixelCollisionDetection = true;
     //public float UsesCameraX = 1;
     //public float UsesCameraY = 1;
+    public bool Die;
     protected Texture2D sprite;
 
     public SpriteGameObject(string assetName, int layer = 0, string id = "")

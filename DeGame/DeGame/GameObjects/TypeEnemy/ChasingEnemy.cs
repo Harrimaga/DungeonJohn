@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if(Die == false)
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
         }
     }

@@ -17,5 +17,13 @@ public class AssetManager
         }
         return contentManager.Load<Texture2D>(assetName);
     }
+    public SpriteFont GetFont(string assetName)
+    {
+        if (assetName == "")
+        {
+            return null;
+        }
+        return contentManager.Load<SpriteFont>(assetName);
+    }
 }
 
