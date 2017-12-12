@@ -15,7 +15,8 @@ using System.Threading.Tasks;
         }
         public override void Update(GameTime gameTime)
         {
-            Chase();
+        base.Update(gameTime);
+        Chase();
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -57,8 +57,8 @@ public class Room : GameObjectList
                 return "Rock";
             case '+':
                 return "Wall";
-            case '-':
 
+            case '-':
                 return "UpDoor";
             case '=':
                 return "DownDoor";
@@ -66,10 +66,10 @@ public class Room : GameObjectList
                 return "RightDoor";
             case '<':
                 return "LeftDoor";
-            case 'X':
 
-                return "Enemy";
-            case 'E':
+            case 'C':
+                return "ChasingEnemy";
+            case 'X':
                 return "Exit";
             case 'S':
                 return "Start";
@@ -82,7 +82,6 @@ public class Room : GameObjectList
     public override void Update(GameTime gameTime)
     {
         enemies.Update(gameTime);
-        //base.Update(gameTime);
         for (int x = 0; x < 10; x++)
             for (int y = 0; y < 8; y++)
             {
@@ -151,10 +150,9 @@ public class Room : GameObjectList
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.RosyBrown);
                             break;
 
-                        case "Enemy":
-                            //draw Background
-                            Enemy enemy = new Enemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight),0,"ChasingEnemy");
-                            enemies.Add(enemy);
+                        case "ChasingEnemy":
+                            Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight),0 ,"ChasingEnemy");
+                            //enemies.Add(enemy);
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
                             break;
                         case "Exit":

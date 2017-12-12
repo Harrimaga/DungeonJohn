@@ -80,7 +80,7 @@ public class SpriteGameObject : GameObject
     public bool CollidesWith(SpriteGameObject obj)
     {
         if (BoundingBox.Intersects(obj.BoundingBox))
-        { 
+        {
             return true;
         }
         return false;

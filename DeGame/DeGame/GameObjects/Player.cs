@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 
 public class Player : SpriteGameObject
 {
-    protected float health;
-    protected float maxhealth;
+    public float health = 100;
+    protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
     protected float range;
+    bool next = false;
     protected float ammo = 5;
 
     GameObjectList bullets;
@@ -22,19 +23,25 @@ public class Player : SpriteGameObject
 //TODO: Ammo;
 //TODO: Weapons;
 //TODO: 
+    HealthBar healthbar;
+
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Random", 0, "Player")
     {
         bullets = new GameObjectList();
         position = new Vector2(100, 100);
+        healthbar = new HealthBar(health, maxhealth);
     }
 
     public override void Update(GameTime gameTime)
     {
+        healthbar.Update(gameTime, health, maxhealth);
         bullets.Update(gameTime);
         Console.WriteLine(position);
         base.Update(gameTime);
-        
+        //if (health <= 0)
+            //GameEnvironment.gameStateManager.SwitchTo("GameOver");
+
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -43,6 +50,7 @@ public class Player : SpriteGameObject
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Ammo, position, Color.White);
         bullets.Draw(gameTime, spriteBatch);
+        healthbar.Draw(spriteBatch);
     }
 
     public override void HandleInput(InputHelper inputHelper)
