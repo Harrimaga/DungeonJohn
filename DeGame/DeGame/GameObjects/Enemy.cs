@@ -19,20 +19,18 @@ public class Enemy : SpriteGameObject
     public Enemy(int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
-       
-        
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
     }
 
+    // Method to make an enemy chase the player
     public void Chase()
     {
         if (position.Y > PlayingState.player.position.Y)

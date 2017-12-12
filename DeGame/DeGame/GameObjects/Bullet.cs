@@ -8,6 +8,7 @@ class Bullet : SpriteGameObject
     {
         position = Startposition;
 
+        // Determine the direction of the bullets
         if (Direction == 0)
             velocity.Y = 10;
         else if (Direction == 1)
@@ -18,12 +19,14 @@ class Bullet : SpriteGameObject
             velocity.X = 10;
     }
 
+    // Update the bullets
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         position += velocity;
     }
 
+    // Draw the bullets
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);

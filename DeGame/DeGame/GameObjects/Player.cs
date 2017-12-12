@@ -26,13 +26,14 @@ public class Player : SpriteGameObject
         position = new Vector2(100, 100);
     }
 
+    // Update player and bullets
     public override void Update(GameTime gameTime)
     {
         bullets.Update(gameTime);
-        base.Update(gameTime);
-        
+        base.Update(gameTime);    
     }
 
+    // Draw player and bullets
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
@@ -41,6 +42,7 @@ public class Player : SpriteGameObject
 
     public override void HandleInput(InputHelper inputHelper)
     {
+        // Player movement
         if (inputHelper.IsKeyDown(Keys.W))
             position.Y = position.Y - 5;
         if (inputHelper.IsKeyDown(Keys.S))
@@ -50,26 +52,22 @@ public class Player : SpriteGameObject
         if (inputHelper.IsKeyDown(Keys.A))
             position.X = position.X - 5;
 
+        // Player shooting
         if (inputHelper.KeyPressed(Keys.Down))
-        {
-            Bullet bullet = new Bullet(position, 0);
-            bullets.Add(bullet);
-        }     
+            Shoot(0);    
         if (inputHelper.KeyPressed(Keys.Left))
-        {
-            Bullet bullet = new Bullet(position, 1);
-            bullets.Add(bullet);
-        }
+            Shoot(1);
         if (inputHelper.KeyPressed(Keys.Up))
-        {
-            Bullet bullet = new Bullet(position, 2);
-            bullets.Add(bullet);
-        }
+            Shoot(2);
         if (inputHelper.KeyPressed(Keys.Right))
-        {
-            Bullet bullet = new Bullet(position, 3);
-            bullets.Add(bullet);
-        }
+            Shoot(3);
+    }
+
+    // Shoot a bullet
+    public void Shoot(int direction)
+    {
+        Bullet bullet = new Bullet(position, direction);
+        bullets.Add(bullet);
     }
 }
 
