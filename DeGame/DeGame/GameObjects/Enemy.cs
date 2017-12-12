@@ -32,7 +32,7 @@ public class Enemy : SpriteGameObject
     {
     }
 
-    public void Chase()
+    public virtual void Chase()
     {
         if (position.Y + sprite.Height > PlayingState.player.position.Y)
         {

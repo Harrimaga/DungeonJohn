@@ -57,6 +57,7 @@
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\CheckCurrentTile.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
+    <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
     <Compile Include="Level\Floor.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
@@ -94,6 +95,7 @@
     <None Include="app.manifest" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
+    <None Include="Content\Sprites\SpelFont.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roomlist\" />
