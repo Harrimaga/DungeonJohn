@@ -29,10 +29,10 @@ class Bullet : SpriteGameObject
 
     public void CheckCollisionEnemies()
     {
-        if (CollidesWith(PlayingState.enemy))
+        /*if (CollidesWith(PlayingState.enemy))
         {
             PlayingState.enemy.Die = true;
-        }
+        }*/
         // Als enemies in de room class zitten, en ze hebben op een of andere manier t goede ID, zou dit moeten werken
     }
 
