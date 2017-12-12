@@ -12,31 +12,34 @@ using Microsoft.Xna.Framework.Graphics;
 //TODO: Sprite;
 //TODO: Damage
 //TODO: Health
-class RangedEnemy : Enemy
+public class RangedEnemy : Enemy
 {
     public RangedEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
     {
 
     }
 
-    public override void Chase()
+    //veel handiger om niet een nieuwe collision te maken en gewoon die in enemy gebruiken
+    /*public override void Chase()
     {        
-        if(PlayingState.player.position.X + 100 < position.X || PlayingState.player.position.X - 100 > position.X ||
+        /*if(PlayingState.player.position.X + 100 < position.X || PlayingState.player.position.X - 100 > position.X ||
             PlayingState.player.position.Y + 100 < position.Y || PlayingState.player.position.Y - 100 > position.Y)
             {
                 base.Chase();
             }
+    }*/
+    public override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+        Chase();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        base.Draw(gameTime, spriteBatch);
         if (Die == false)
         {
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
         }
     }
-    public override void Update(GameTime gameTime)
-    {
-        Chase();
-        base.Update(gameTime);
-    }
+
 }

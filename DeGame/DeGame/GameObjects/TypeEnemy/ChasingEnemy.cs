@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-    public class ChasingEnemy : Enemy
+ public class ChasingEnemy : Enemy
     {
         public ChasingEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
         {
@@ -31,3 +31,4 @@ using System.Threading.Tasks;
         }
     }
 
+   
