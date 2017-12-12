@@ -68,44 +68,16 @@ public class Player : SpriteGameObject
             position.X -= 5;
         if (ammo > 0)
         {
+            // Player shooting
             if (inputHelper.KeyPressed(Keys.Down))
-            {
-                Bullet bullet = new Bullet(position, 0);
-                bullets.Add(bullet);
-                ammo--;
-            }
+                Shoot(0);
             if (inputHelper.KeyPressed(Keys.Left))
-            {
-                Bullet bullet = new Bullet(position, 1);
-                bullets.Add(bullet);
-                ammo--;
-            }
+                Shoot(1);
             if (inputHelper.KeyPressed(Keys.Up))
-            {
-                Bullet bullet = new Bullet(position, 2);
-                bullets.Add(bullet);
-                ammo--;
-            }
+                Shoot(2);
             if (inputHelper.KeyPressed(Keys.Right))
-            {
-                Bullet bullet = new Bullet(position, 3);
-                bullets.Add(bullet);
-                ammo--;
-            }
+                Shoot(3);
         }
-    }
-}
-            position.X = position.X - 5;
-
-        // Player shooting
-        if (inputHelper.KeyPressed(Keys.Down))
-            Shoot(0);    
-        if (inputHelper.KeyPressed(Keys.Left))
-            Shoot(1);
-        if (inputHelper.KeyPressed(Keys.Up))
-            Shoot(2);
-        if (inputHelper.KeyPressed(Keys.Right))
-            Shoot(3);
     }
 
     // Shoot a bullet
@@ -113,6 +85,7 @@ public class Player : SpriteGameObject
     {
         Bullet bullet = new Bullet(position, direction);
         bullets.Add(bullet);
+        ammo--;
     }
 }
 
