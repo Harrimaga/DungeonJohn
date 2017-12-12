@@ -17,7 +17,7 @@ public class PlayingState : IGameObject
     public PlayingState()
     {
         player = new Player();
-        enemy = new ChasingEnemy();
+        enemy = new ChasingEnemy(Vector2.Zero,0,"Enemy");
         floor = new Floor();
 
     }

@@ -14,11 +14,11 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    public Enemy(int layer = 0, string id = "Enemy")
+
+    public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
-       
-        
+        position = startPosition;
     }
 
     public override void Update(GameTime gameTime)
@@ -51,74 +51,27 @@ public class Enemy : SpriteGameObject
             position.X++;
         }
     }
-
-
-    public void checkPlayerDetection()
-    {
-        if (CollidesWith(PlayingState.player))
-        {
-            Die = true;
-        }
-        // Omdate player static is zou je dit hier zonder Find kunnen doen
-    }
-
-    public void CheckBulletCollision()
-    {
-        //if (CollidesWith(bullet))
-        //    {
-        //        Die = true;
-        //    }
-        
-    }
-    public void Slash(SpriteBatch spriteBatch)
-    {
-        //Creëerd MemomryException
-        while(position.Y - sprite.Height == PlayingState.player.position.Y)
-        {
-                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Standardtile"), position);
-        }
-        while(position.Y + sprite.Height == PlayingState.player.position.Y)
-        {
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Standardtile"), position);
-        }
-        while(position.X - sprite.Width == PlayingState.player.position.X) 
-        {
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Standardtile"), position);
-        }
-        while(position.X + sprite.Width == PlayingState.player.position.X) 
-        {
-            //spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Standardtile"), position);
-        }
-    
-        }
 }
 
 public class ChasingEnemy : Enemy
 {
     public override void Update(GameTime gameTime)
     {
-        checkPlayerDetection();
-        CheckBulletCollision();
         Chase();
-        //if(CollidesWith(PlayingState.player))
-        //{
-        //    System.Console.WriteLine("Hit player!");
-        //} else
-        //{
-        //    System.Console.WriteLine("Not hit player!");
-        //}
+        if(CollidesWith(PlayingState.player))
+        {
+            System.Console.WriteLine("Hit player!");
+        } else
+        {
+            System.Console.WriteLine("Not hit player!");
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        if (Die == false)
-        {
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
-        }
-        //Slash(spriteBatch);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
 
-}
 
 
 
