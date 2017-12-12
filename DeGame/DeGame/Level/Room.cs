@@ -152,7 +152,7 @@ public class Room : GameObjectList
 
                         case "ChasingEnemy":
                             Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight),0 ,"ChasingEnemy");
-                            enemies.Add(enemy);
+                            //enemies.Add(enemy);
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
                             break;
                         case "Exit":
