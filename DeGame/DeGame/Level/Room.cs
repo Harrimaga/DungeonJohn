@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 public class Room : GameObjectList
 {
-    int RoomListIndex;
+    public int RoomListIndex;
     public bool up = false, down = false, left = false, right = false;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight;

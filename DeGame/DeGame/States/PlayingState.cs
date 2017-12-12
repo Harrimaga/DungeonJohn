@@ -23,6 +23,7 @@ class PlayingState : IGameObject
     public virtual void HandleInput(InputHelper inputHelper)
     {
         player.HandleInput(inputHelper);
+        floor.HandleInput(inputHelper);
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
