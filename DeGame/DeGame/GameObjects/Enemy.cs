@@ -25,7 +25,7 @@ public class Enemy : SpriteGameObject
     {
         base.Update(gameTime);
         //CheckBulletCollision();
-        checkPlayerDetection();
+        //checkPlayerDetection();
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -52,26 +52,6 @@ public class Enemy : SpriteGameObject
         }
     }
 }
-
-public class ChasingEnemy : Enemy
-{
-    public override void Update(GameTime gameTime)
-    {
-        Chase();
-        if(CollidesWith(PlayingState.player))
-        {
-            System.Console.WriteLine("Hit player!");
-        } else
-        {
-            System.Console.WriteLine("Not hit player!");
-        }
-    }
-
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
-    }
-
 
 
 
