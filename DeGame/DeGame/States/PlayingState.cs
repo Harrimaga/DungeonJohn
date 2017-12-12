@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,23 @@ using System.Threading.Tasks;
 public class PlayingState : IGameObject
 {
     public static Player player;
-    Enemy enemy;
+    public static Enemy enemy;
     Floor floor;
 
 
     public PlayingState()
     {
         player = new Player();
-        enemy = new ChasingEnemy();
+        enemy = new RangedEnemy(Vector2.Zero,0,"Enemy");
         floor = new Floor();
-
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {
         player.HandleInput(inputHelper);
+        if (inputHelper.currentKeyboardState.IsKeyDown(Keys.P) && inputHelper.previousKeyboardState.IsKeyUp(Keys.P))
+        {
+            GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
+        }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
