@@ -111,26 +111,25 @@ public class Floor
             for (int y = 0; y < floorHeight; y++)
             {
                 CheckAdjacent(x, y);
-                if (AdjacentRooms[x, y] == 1)
+                if (AdjacentRooms[x, y] == 1 && CanSpawnSpecialRoom(x,y) == true)
                 {
-                    if (floor[x, y] != null && floor[x,y].RoomListIndex != 1 && floor[x,y].RoomListIndex != 2 && floor[x,y].RoomListIndex != 3)
+                    if (floor[x, y] == null)
+                    {
+                        backupchoice[b, 0] = x;
+                        backupchoice[b, 1] = y;
+                        b++;
+                    }
+                    else if (floor[x, y].RoomListIndex >= 4)
                     {
                         possiblechoice[a, 0] = x;
                         possiblechoice[a, 1] = y;
                         a++;                        
-                    }
-                    else if (floor[x,y] == null)
-                    {
-                        backupchoice[b, 0] = x;
-                        backupchoice[b, 1] = y;
-                        b++;                        
                     }
                 }
             }
         if (a > 0)
         {
             int p = random.Next(a - 1);
-            floor[possiblechoice[p, 0], possiblechoice[p, 1]] = null;
             floor[possiblechoice[p, 0], possiblechoice[p, 1]] = new Room(Index);
         }
         else
@@ -138,6 +137,30 @@ public class Floor
             int q = random.Next(b - 1);
             floor[backupchoice[q, 0], backupchoice[q, 1]] = new Room(Index);
         }
+    }
+
+    bool CanSpawnSpecialRoom(int x, int y)
+    {
+        int counter = 0;
+        if (x + 1 >= floorWidth)
+            counter++;
+        else if (floor[x + 1, y] == null || floor[x + 1, y].RoomListIndex >= 4)
+            counter++;
+        if (x - 1 < 0)
+            counter++;
+        else if (floor[x - 1, y] == null || floor[x - 1, y].RoomListIndex >= 4)
+            counter++;
+        if (y + 1 > -floorHeight)
+            counter++;
+        else if (floor[x, y + 1] == null || floor[x, y + 1].RoomListIndex >= 4)
+            counter++;
+        if (y - 1 < 0)
+            counter++;
+        else if (floor[x, y - 1] == null || floor[x, y - 1].RoomListIndex >= 4)
+            counter++;
+        if (counter == 4)
+            return true;
+        return false;
     }
 
     int CheckAdjacent(int x, int y)
@@ -233,6 +256,15 @@ public class Floor
             NextFloor();
     }
 
+    void DrawMinimap(SpriteBatch spriteBatch)
+    {
+        for (int x = 0; x < floorWidth; x++)
+            for (int y = 0; y < floorHeight; y++)
+                if (floor[x, y] != null)
+                    spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(700 + x * (5 + 2), y * (5 + 2)), Color.Red);
+        //TODO alleen kamer tekenen op minimap als de speler er is geweest
+    }
+
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         for (int a = 0; a < floorWidth; a++)
@@ -246,6 +278,7 @@ public class Floor
                     floor[a, b].Draw(gameTime, spriteBatch, a, b);
                 }
         FloorGenerated = false;
+        DrawMinimap(spriteBatch);
     }
 }
 

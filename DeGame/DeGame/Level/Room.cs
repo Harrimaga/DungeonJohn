@@ -71,8 +71,6 @@ public class Room : GameObjectList
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch, int a, int b)
     {
-        //spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(a * (50 + 10), b * (50 + 10) + 200), Color.Red);
-        //TODO bovenstaande kan worden verwerkt tot minimap
         for (int x = 0; x < roomarraywidth; x++)
             for (int y = 0; y < roomarrayheight; y++)            
                 switch (roomarray[x, y])
