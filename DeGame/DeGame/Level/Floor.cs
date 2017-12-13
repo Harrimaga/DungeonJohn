@@ -130,9 +130,6 @@ public class Floor
                         }
                     }
                 }
-        }
-        if (a == 0)
-        {
             int q = random.Next(b - 1);
             floor[backupchoice[q, 0], backupchoice[q, 1]] = new Room(Index);
         }
