@@ -15,6 +15,7 @@ public class Enemy : SpriteGameObject
     protected float attackspeed;
     protected float range;
     protected Vector2 basevelocity = new Vector2(1, 1);
+    public Room room;
     HealthBar healthbar;
 
     public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
@@ -27,9 +28,6 @@ public class Enemy : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        healthbar.Update(gameTime, health, maxhealth, position);
-        if(health <= 0) {Die = true;}
-
         base.Update(gameTime);
         if (CollidesWith(PlayingState.player))
         {
@@ -40,10 +38,29 @@ public class Enemy : SpriteGameObject
         {
             velocity = basevelocity;
         }
-        foreach(Bullet bullet in PlayingState.player.bullets.Children)
-        if (CollidesWith(bullet))
+
+        List<GameObject> RemoveBullets = new List<GameObject>();
+
+        foreach (Bullet bullet in PlayingState.player.bullets.Children)
         {
-                health--;  
+            if (CollidesWith(bullet))
+            {
+                health -= 20;
+                RemoveBullets.Add(bullet);
+            }
+        }
+
+        foreach (Bullet bullet in RemoveBullets)
+        {
+            PlayingState.player.bullets.Remove(bullet);
+        }
+
+        RemoveBullets.Clear();
+
+        healthbar.Update(gameTime, health, maxhealth, position);
+        if (health <= 0)
+        {
+            GameObjectList.RemovedObjects.Add(this);
         }
     }
 
