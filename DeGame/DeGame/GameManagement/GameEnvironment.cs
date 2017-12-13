@@ -37,7 +37,7 @@ public class GameEnvironment : Game
 
         startup = true;
 
-        ApplyResolutionSettings();
+        //ApplyResolutionSettings();
     }
     
     protected override void LoadContent()
@@ -47,6 +47,8 @@ public class GameEnvironment : Game
 
         System.Console.WriteLine(graphics.PreferredBackBufferHeight);
         System.Console.WriteLine(graphics.PreferredBackBufferWidth);
+        System.Console.WriteLine(Dimensions.ToString());
+        System.Console.WriteLine(GraphicsDevice.Viewport.ToString());
     }
     protected void HandleInput()
     {
@@ -71,6 +73,15 @@ public class GameEnvironment : Game
         gameStateManager.HandleInput(inputHelper);
     }
 
+    public bool FullScreen
+    {
+        get { return graphics.IsFullScreen; }
+        set
+        {
+            ApplyResolutionSettings(value);
+        }
+    }
+
     public void ApplyResolutionSettings(bool fullscreen = false)
     {
         if (!fullscreen)
@@ -88,7 +99,7 @@ public class GameEnvironment : Game
             graphics.ApplyChanges();
         }
 
-        float targetAspectRatio = Dimensions.X / Dimensions.Y;
+        float targetAspectRatio = (float) Dimensions.X / (float) Dimensions.Y;
         int width = graphics.PreferredBackBufferWidth;
         int height = (int)(width / targetAspectRatio);
         if (height > graphics.PreferredBackBufferHeight)
@@ -110,13 +121,15 @@ public class GameEnvironment : Game
         spriteScale = Matrix.CreateScale(inputHelper.Scale.X, inputHelper.Scale.Y, 1);
 
         cam = new Camera(GraphicsDevice.Viewport);
-        cam.Zoom = 8f;
+        cam.Zoom = 1f;
         cam.Rotation = 0;
 
         if (startup)
         {
             Camera.Position = new Vector2(Dimensions.X / 2, Dimensions.Y / 2);
             startup = false;
+
+            System.Console.WriteLine(width + " * " + height);
         }
     }
 
