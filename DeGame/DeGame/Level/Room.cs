@@ -10,7 +10,7 @@ public class Room : GameObjectList
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight;
 
-    public Room(int roomListIndex, int layer = 0, string id = "") : base(layer)
+    public Room(int roomListIndex, int p, int q, int layer = 0, string id = "") : base(layer)
     {
         RoomListIndex = roomListIndex;
     }
