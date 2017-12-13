@@ -8,6 +8,8 @@ public class Room : GameObjectList
     int RoomListIndex;
     public bool up = false, down = false, left = false, right = false;
     GameObjectList enemies;
+    public bool start;
+    int c, d;
     public Room(int roomListIndex, int layer = 0, string id = "") : base(layer)
     {
         enemies = new GameObjectList();
@@ -79,8 +81,26 @@ public class Room : GameObjectList
                 return "N/A";
         }
     }
+    void OnLoad()
+    {
+        CreateEnemy();
+    }
+    void CreateEnemy()
+    {
+        for (int x = 0; x < 10; x++)
+            for (int y = 0; y < 8; y++)
+            { 
+            if(roomarray[x, y] == "ChasingEnemy")
+            {
+                Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth /*+ c * roomwidth*/, y * CellHeight /*+ d * roomheight*/), 0, "ChasingEnemy");
+                enemies.Add(enemy);
+          }
+        }
+      }
+ 
     public override void Update(GameTime gameTime)
     {
+        if (start) {OnLoad();}
         enemies.Update(gameTime);
         for (int x = 0; x < 10; x++)
             for (int y = 0; y < 8; y++)
@@ -106,7 +126,6 @@ public class Room : GameObjectList
     }
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch, int a, int b)
     {
-        enemies.Draw(gameTime, spriteBatch);
         for (int x = 0; x < 10; x++)
             for (int y = 0; y < 8; y++)
             {
@@ -151,8 +170,7 @@ public class Room : GameObjectList
                             break;
 
                         case "ChasingEnemy":
-                            Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight),0 ,"ChasingEnemy");
-                            //enemies.Add(enemy);
+                            //CreateEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight));
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
                             break;
                         case "Exit":
@@ -170,5 +188,6 @@ public class Room : GameObjectList
                     }
                 }
             }
+        enemies.Draw(gameTime, spriteBatch);
     }
 }
