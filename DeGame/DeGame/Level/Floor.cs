@@ -268,21 +268,20 @@ public class Floor
             for (int y = 0; y < floorHeight; y++)
                 if (floor[x, y] != null)
                 {
-                    if (floor[x, y].RoomListIndex == 1)
+                    switch (floor[x, y].RoomListIndex)
                     {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Lime);
-                    }
-                    else if (floor[x, y].RoomListIndex == 2)
-                    {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Blue);
-                    }
-                    else if (floor[x, y].RoomListIndex == 3)
-                    {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Yellow);
-                    }
-                    else
-                    {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Red);
+                        case 1:
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Lime);
+                            break;
+                        case 2:
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Blue);
+                            break;
+                        case 3:
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Yellow);
+                            break;
+                        case 4:
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Red);
+                            break;
                     }
                 }
         //TODO alleen kamer tekenen op minimap als de speler er is geweest
