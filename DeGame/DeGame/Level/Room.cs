@@ -5,8 +5,11 @@ using Microsoft.Xna.Framework;
 
 public class Room : GameObjectList
 {
-    int RoomListIndex;
+    public int RoomListIndex;
     public bool up = false, down = false, left = false, right = false;
+    public string[,] roomarray;
+    int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight;
+
     public GameObjectList enemies;
     public bool start = true;
     int c, d;
@@ -16,37 +19,35 @@ public class Room : GameObjectList
         RoomListIndex = roomListIndex;
     }
 
-    public string[,] roomarray;
-    int CellWidth, CellHeight, roomwidth, roomheight;
+
 
     public void LoadTiles()
     {
         List<string> textLines = new List<string>();
         StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
         string line = fileReader.ReadLine();
-        roomarray = new string[16, 10];
 
-        CellWidth = 50;
-        CellHeight = 50;
-        roomwidth = line.Length * CellWidth;
-        roomheight = textLines.Count * CellHeight;
+        CellWidth = 5;
+        CellHeight = 5;
 
         while (line != null)
         {
             textLines.Add(line);
             line = fileReader.ReadLine();
         }
-
         line = textLines[0];
+        roomarraywidth = line.Length;
+        roomarrayheight = textLines.Count;
+        roomwidth = line.Length * CellWidth;
+        roomheight = textLines.Count * CellHeight;
+        roomarray = new string[line.Length, textLines.Count];
 
-        for (int x = 0; x < line.Length; ++x)
-        {
+        for (int x = 0; x < line.Length; ++x)        
             for (int y = 0; y < textLines.Count; ++y)
             {
                 roomarray[x, y] = AssignType(textLines[y][x]);
                 System.Console.WriteLine(roomarray[x, y]);
-            }
-        }
+            }        
     }
 
     private string AssignType(char filetext)
@@ -71,12 +72,14 @@ public class Room : GameObjectList
 
             case 'C':
                 return "ChasingEnemy";
+            case 'O':
+                return "Pit";
+            case 'I':
+                return "Item";
             case 'X':
                 return "Exit";
             case 'S':
                 return "Start";
-            case '?':
-                return "Unknown";
             default:
                 return "N/A";
         }
@@ -179,6 +182,12 @@ public class Room : GameObjectList
                             break;
                         case "Start":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Yellow);
+                            break;
+                        case "Pit":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.DarkBlue);
+                            break;
+                        case "Item":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Purple);
                             break;
                         case "Unkown":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.DarkBlue);

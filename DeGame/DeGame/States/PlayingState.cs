@@ -28,6 +28,7 @@ public class PlayingState : IGameObject
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
         }
+        floor.HandleInput(inputHelper);
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
