@@ -50,7 +50,7 @@ public class Player : SpriteGameObject
         bullets.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch, Vector2.Zero);
     }
-
+    //TODO: ammo kan naar -1;
     public override void HandleInput(InputHelper inputHelper)
     {
         // Player movement
