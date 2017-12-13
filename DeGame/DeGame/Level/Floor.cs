@@ -8,7 +8,9 @@ public class Floor
     Room[,] floor;
     bool[,] Checked;
     int[,] AdjacentRooms;
-    int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms;
+    int[,] possiblechoice;
+    int[,] backupchoice;
+    int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, a = 0, b = 0;
     Random random = new Random();
     bool FloorGenerated = false;
 
@@ -17,6 +19,8 @@ public class Floor
         floor = new Room[floorWidth, floorHeight];
         Checked = new bool[floorWidth, floorHeight];
         AdjacentRooms = new int[floorWidth, floorHeight];
+        possiblechoice = new int[floorWidth * floorHeight / 2, 2];
+        backupchoice = new int[floorWidth * floorHeight / 2, 2];
         FloorGenerator();
     }
 
@@ -104,38 +108,48 @@ public class Floor
 
     void ChooseSpecialRoom(int Index)
     {
-        int[,] possiblechoice = new int[floorWidth * floorHeight / 2, 2];
-        int[,] backupchoice = new int[floorWidth * floorHeight / 2, 2];
-        int a = 0, b = 0;
-        for (int x = 0; x < floorWidth; x++)
-            for (int y = 0; y < floorHeight; y++)
-            {
-                CheckAdjacent(x, y);
-                if (AdjacentRooms[x, y] == 1 && CanSpawnSpecialRoom(x,y) == true)
+        if (a == 0 && b == 0)
+        {
+            for (int x = 0; x < floorWidth; x++)
+                for (int y = 0; y < floorHeight; y++)
                 {
-                    if (floor[x, y] == null)
+                    CheckAdjacent(x, y);
+                    if (AdjacentRooms[x, y] == 1 && CanSpawnSpecialRoom(x, y) == true)
                     {
-                        backupchoice[b, 0] = x;
-                        backupchoice[b, 1] = y;
-                        b++;
-                    }
-                    else if (floor[x, y].RoomListIndex >= 4)
-                    {
-                        possiblechoice[a, 0] = x;
-                        possiblechoice[a, 1] = y;
-                        a++;                        
+                        if (floor[x, y] == null && a == 0)
+                        {
+                            backupchoice[b, 0] = x;
+                            backupchoice[b, 1] = y;
+                            b++;
+                        }
+                        else if (floor[x, y] != null && floor[x, y].RoomListIndex >= 4)
+                        {
+                            possiblechoice[a, 0] = x;
+                            possiblechoice[a, 1] = y;
+                            a++;
+                        }
                     }
                 }
-            }
-        if (a > 0)
-        {
-            int p = random.Next(a - 1);
-            floor[possiblechoice[p, 0], possiblechoice[p, 1]] = new Room(Index);
         }
-        else
+        if (a == 0)
         {
             int q = random.Next(b - 1);
             floor[backupchoice[q, 0], backupchoice[q, 1]] = new Room(Index);
+        }
+        else
+        {
+            int p = random.Next(a - 1);
+            floor[possiblechoice[p, 0], possiblechoice[p, 1]] = new Room(Index);
+            if (p != 0)
+            {
+                possiblechoice[p, 0] = possiblechoice[p - 1, 0];
+                possiblechoice[p, 1] = possiblechoice[p - 1, 1];
+            }
+            else
+            {
+                possiblechoice[p, 0] = possiblechoice[p + 1, 0];
+                possiblechoice[p, 1] = possiblechoice[p + 1, 1];
+            }
         }
     }
 
@@ -200,6 +214,8 @@ public class Floor
                 Checked[x, y] = false;
                 AdjacentRooms[x, y] = 0;
             }
+        a = 0;
+        b = 0;
         CurrentRooms = 1;
     }
 
