@@ -271,13 +271,32 @@ public class Floor
         if (inputHelper.KeyPressed(Keys.R))
             NextFloor();
     }
-
+    
     void DrawMinimap(SpriteBatch spriteBatch)
     {
+        int FloorCellWidth = 5;
+        int FloorCellHeight = 5;
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
                 if (floor[x, y] != null)
-                    spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(700 + x * (5 + 2), y * (5 + 2)), Color.Red);
+                {
+                    if (floor[x, y].RoomListIndex == 1)
+                    {
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(700 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Lime);
+                    }
+                    else if (floor[x, y].RoomListIndex == 2)
+                    {
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(700 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Blue);
+                    }
+                    else if (floor[x, y].RoomListIndex == 3)
+                    {
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(700 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Yellow);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(700 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Red);
+                    }
+                }
         //TODO alleen kamer tekenen op minimap als de speler er is geweest
     }
 
