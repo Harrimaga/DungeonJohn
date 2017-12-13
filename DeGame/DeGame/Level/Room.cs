@@ -7,8 +7,8 @@ public class Room : GameObjectList
 {
     int RoomListIndex;
     public bool up = false, down = false, left = false, right = false;
-    GameObjectList enemies;
-    public bool start;
+    public GameObjectList enemies;
+    public bool start = true;
     int c, d;
     public Room(int roomListIndex, int layer = 0, string id = "") : base(layer)
     {
@@ -123,6 +123,7 @@ public class Room : GameObjectList
                 }
 
             }
+        start = false;
     }
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch, int a, int b)
     {
@@ -188,6 +189,10 @@ public class Room : GameObjectList
                     }
                 }
             }
-        enemies.Draw(gameTime, spriteBatch);
+        foreach (Enemy enemy in enemies.Children)
+        {
+            enemy.Draw(gameTime, spriteBatch);
+        }
+        //enemies.Draw(gameTime, spriteBatch);
     }
 }

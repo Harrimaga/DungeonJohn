@@ -13,6 +13,7 @@ public class Floor
     int floorHeight = 9;
     Random random = new Random();
     int CurrentRooms = 0;
+    public Room currentRoom;
 
     public Floor()
     {
@@ -29,6 +30,8 @@ public class Floor
         }
 
         FloorGenerator();
+
+        currentRoom = floor[0, 0];
         //hele simpele layout voor testen
         //floor[5, 5] = new StartRoom(new Vector2(5,5));
         //floor[6, 5] = new Room();
