@@ -13,6 +13,7 @@ public class Floor
     int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
     Random random = new Random();
     public Room currentRoom;
+    bool FloorGenerated = false;
 
     public Floor()
     {
