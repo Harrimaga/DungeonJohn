@@ -36,9 +36,7 @@ public class Player : SpriteGameObject
         bullets.Update(gameTime);
         Console.WriteLine(position);
         base.Update(gameTime);
-        int roomwidth = (parent as Room).roomwidth;
-        int roomheight = (parent as Room).roomheight;
-        Camera.CameraPlacement(gameTime, this, roomwidth, roomheight);
+        //Camera.CameraPlacement(gameTime, this, roomwidth, roomheight);
 
 
         //if (health <= 0)

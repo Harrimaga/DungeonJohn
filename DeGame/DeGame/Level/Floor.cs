@@ -140,8 +140,14 @@ public class Floor
     {
         for (int a = 0; a < floorWidth; a++)
             for (int b = 0; b < floorHeight; b++)
-                if (floor[a, b] != null)                
+            {
+                if (floor[a, b] != null)
                     floor[a, b].Draw(gameTime, spriteBatch, a, b);
+                //if (playerhitbox.position == rechterdeurhitbox)
+                //{
+                //    floor[a, b] = floor[a-1, b];
+                //}
+            }
     }
 
 }

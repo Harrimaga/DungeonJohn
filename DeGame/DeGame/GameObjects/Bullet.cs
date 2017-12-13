@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 class Bullet : SpriteGameObject
 {
     public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
-    : base("Sprites/Random", layer, id)
+    : base("Sprites/bullet1", layer, id)
     {
         position = Startposition;
 
@@ -39,6 +39,6 @@ class Bullet : SpriteGameObject
     // Draw the bullets
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/bullet1"), position);
     }
 }

@@ -5,10 +5,10 @@ public class Camera
 {
     static public Vector2 CameraPosition = new Vector2(0, 0);
 
-    static public void CameraPlacement(GameTime gameTime, Player player, int roomwidth, int roomheight)
+    static public void CameraPlacement(GameTime gameTime, int roomwidth, int roomheight)
     {
-        CameraPosition.X = MathHelper.Clamp(player.position.X - GameEnvironment.graphics.PreferredBackBufferWidth / 2, 0, roomwidth/* - GameEnvironment.graphics.PreferredBackBufferWidth*/);
-        CameraPosition.Y = MathHelper.Clamp(player.position.Y /*- GameEnvironment.graphics.PreferredBackBufferHeight / 2*/, 0, roomheight/* - GameEnvironment.graphics.PreferredBackBufferHeight*/);
+        CameraPosition.X = MathHelper.Clamp(PlayingState.player.position.X - 800, 0, 500 - 800);
+        CameraPosition.Y = MathHelper.Clamp(PlayingState.player.position.Y - 480 / 2, 0, 400 - 480);
     }
 
     static public void Reset()
