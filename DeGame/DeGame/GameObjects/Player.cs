@@ -30,9 +30,9 @@ public class Player : SpriteGameObject
     {
         bullets.Update(gameTime);
         base.Update(gameTime);
-        //int roomwidth = (parent as Room).roomwidth;
-        //int roomheight = (parent as Room).roomheight;
-        Camera.CameraPlacement(gameTime, this, 100, 100);
+        int roomwidth = (parent as Room).roomwidth;
+        int roomheight = (parent as Room).roomheight;
+        Camera.CameraPlacement(gameTime, this, roomwidth, roomheight);
 
 
     }
