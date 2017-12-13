@@ -35,7 +35,6 @@ public class PlayingState : IGameObject
     {
         floor.Draw(gameTime, spriteBatch);
         player.Draw(gameTime, spriteBatch);
-        enemy.Draw(gameTime, spriteBatch);
     }
     public virtual void Update(GameTime gameTime)
     {
