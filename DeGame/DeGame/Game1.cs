@@ -34,6 +34,9 @@ namespace DeGame
         protected override void LoadContent()
         {
             base.LoadContent();
+
+            windowSize = new Point(800, 480);
+
             gameStateManager.AddGameState("MainMenu", new MainMenuState());
             gameStateManager.AddGameState("Playing", new PlayingState());
             gameStateManager.AddGameState("GameOver", new GameOverState());
