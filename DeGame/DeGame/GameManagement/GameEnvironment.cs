@@ -119,7 +119,7 @@ public class GameEnvironment : Game
         spriteScale = Matrix.CreateScale(inputHelper.Scale.X, inputHelper.Scale.Y, 1);
 
         cam = new Camera(GraphicsDevice.Viewport);
-        cam.Zoom = 8f;
+        cam.Zoom = 1f;
         cam.Rotation = 0;
 
         if (startup)
