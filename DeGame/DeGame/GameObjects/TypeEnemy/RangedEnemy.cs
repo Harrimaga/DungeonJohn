@@ -19,15 +19,14 @@ public class RangedEnemy : Enemy
 
     }
 
-    //veel handiger om niet een nieuwe collision te maken en gewoon die in enemy gebruiken
-    /*public override void Chase()
+    public override void Chase()
     {        
-        /*if(PlayingState.player.position.X + 100 < position.X || PlayingState.player.position.X - 100 > position.X ||
-            PlayingState.player.position.Y + 100 < position.Y || PlayingState.player.position.Y - 100 > position.Y)
+        if(PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
+            PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
             {
                 base.Chase();
             }
-    }*/
+    }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);

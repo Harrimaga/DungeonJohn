@@ -27,9 +27,13 @@ public class Enemy : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth, position);
-        if(health <= 0) {Die = true;}
+        if(health <= 0)
+        {
+            Die = true;
+        }
+
+        base.Update(gameTime);
         if (CollidesWith(PlayingState.player))
         {
             velocity = Vector2.Zero;
