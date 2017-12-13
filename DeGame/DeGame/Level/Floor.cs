@@ -12,7 +12,6 @@ public class Floor
     int[,] backupchoice;
     int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
     Random random = new Random();
-    int CurrentRooms = 0;
     public Room currentRoom;
     bool FloorGenerated = false;
 
