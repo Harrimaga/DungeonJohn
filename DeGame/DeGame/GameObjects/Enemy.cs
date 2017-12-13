@@ -43,11 +43,24 @@ public class Enemy : SpriteGameObject
         {
             velocity = basevelocity;
         }
-        foreach(Bullet bullet in PlayingState.player.bullets.Children)
-        if (CollidesWith(bullet))
+
+        List<GameObject> RemoveBullets = new List<GameObject>();
+
+        foreach (Bullet bullet in PlayingState.player.bullets.Children)
         {
-                health--;  
+            if (CollidesWith(bullet))
+            {
+                health--;
+                RemoveBullets.Add(bullet);
+            }
         }
+
+        foreach (Bullet bullet in RemoveBullets)
+        {
+            PlayingState.player.bullets.Remove(bullet);
+        }
+
+        RemoveBullets.Clear();
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
