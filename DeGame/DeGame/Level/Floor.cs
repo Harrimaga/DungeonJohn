@@ -108,44 +108,33 @@ public class Floor
 
     void ChooseSpecialRoom(int Index)
     {
-        if (a == 0 && b == 0)
+        if (b == 0)
         {
             for (int x = 0; x < floorWidth; x++)
                 for (int y = 0; y < floorHeight; y++)
                 {
                     CheckAdjacent(x, y);
-                    if (AdjacentRooms[x, y] == 1 && CanSpawnSpecialRoom(x, y) == true)
-                    {
-                        if (floor[x, y] == null && a == 0)
+                    if (AdjacentRooms[x, y] == 1 && CanSpawnSpecialRoom(x, y) == true)                    
+                        if (floor[x, y] == null)
                         {
                             backupchoice[b, 0] = x;
                             backupchoice[b, 1] = y;
                             b++;
-                        }
-                        else if (floor[x, y] != null && floor[x, y].RoomListIndex >= 4)
-                        {
-                            possiblechoice[a, 0] = x;
-                            possiblechoice[a, 1] = y;
-                            a++;
-                        }
-                    }
+                        }                    
                 }
-        }
-        if (a > 0)
-        {
-            int p = random.Next(a - 1);
-            floor[possiblechoice[p, 0], possiblechoice[p, 1]] = new Room(Index);
-            if (p != 0)
+        }    
+            int q = random.Next(b - 1);
+            floor[backupchoice[q, 0], backupchoice[q, 1]] = new Room(Index);
+            if (q != 0)
             {
-                possiblechoice[p, 0] = possiblechoice[p - 1, 0];
-                possiblechoice[p, 1] = possiblechoice[p - 1, 1];
+                backupchoice[q, 0] = backupchoice[q - 1, 0];
+                backupchoice[q, 1] = backupchoice[q - 1, 1];
             }
             else
             {
-                possiblechoice[p, 0] = possiblechoice[p + 1, 0];
-                possiblechoice[p, 1] = possiblechoice[p + 1, 1];
-            }
-        }
+                backupchoice[q, 0] = backupchoice[q + 1, 0];
+                backupchoice[q, 1] = backupchoice[q + 1, 1];
+            }        
     }
 
     bool CanSpawnSpecialRoom(int x, int y)
