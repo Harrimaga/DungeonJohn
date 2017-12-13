@@ -27,7 +27,6 @@ namespace DeGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -36,6 +35,7 @@ namespace DeGame
             base.LoadContent();
 
             windowSize = new Point(800, 480);
+            FullScreen = false;
 
             gameStateManager.AddGameState("MainMenu", new MainMenuState());
             gameStateManager.AddGameState("Playing", new PlayingState());

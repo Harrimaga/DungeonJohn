@@ -37,7 +37,7 @@ public class GameEnvironment : Game
 
         startup = true;
 
-        ApplyResolutionSettings();
+        //ApplyResolutionSettings();
     }
     
     protected override void LoadContent()
@@ -69,6 +69,15 @@ public class GameEnvironment : Game
         }
 
         gameStateManager.HandleInput(inputHelper);
+    }
+
+    public bool FullScreen
+    {
+        get { return graphics.IsFullScreen; }
+        set
+        {
+            ApplyResolutionSettings(value);
+        }
     }
 
     public void ApplyResolutionSettings(bool fullscreen = false)
@@ -110,7 +119,7 @@ public class GameEnvironment : Game
         spriteScale = Matrix.CreateScale(inputHelper.Scale.X, inputHelper.Scale.Y, 1);
 
         cam = new Camera(GraphicsDevice.Viewport);
-        cam.Zoom = 8f;
+        cam.Zoom = 1f;
         cam.Rotation = 0;
 
         if (startup)
