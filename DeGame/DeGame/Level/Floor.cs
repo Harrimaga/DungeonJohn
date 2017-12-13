@@ -10,7 +10,7 @@ public class Floor
     int[,] AdjacentRooms;
     int[,] possiblechoice;
     int[,] backupchoice;
-    int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, a = 0, b = 0;
+    int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
     Random random = new Random();
     bool FloorGenerated = false;
 
@@ -122,8 +122,8 @@ public class Floor
                             b++;
                         }                    
                 }
-        }    
-            int q = random.Next(b - 1);
+        }  
+            q = random.Next(b - 1);
             floor[backupchoice[q, 0], backupchoice[q, 1]] = new Room(Index);
             if (q != 0)
             {
@@ -198,7 +198,6 @@ public class Floor
                 Checked[x, y] = false;
                 AdjacentRooms[x, y] = 0;
             }
-        a = 0;
         b = 0;
         CurrentRooms = 1;
     }
