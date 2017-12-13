@@ -24,7 +24,7 @@ class Bullet : SpriteGameObject
     {
         base.Update(gameTime);
         position += velocity;
-        CheckCollisionEnemies(); // Laat de game laggen als de tering
+        //CheckCollisionEnemies(); // Laat de game laggen als de tering
     }
 
     public void CheckCollisionEnemies()

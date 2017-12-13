@@ -16,7 +16,7 @@ public class Player : SpriteGameObject
     protected float attackspeed;
     protected float range;
     bool next = false;
-    protected float ammo = 20;
+    protected float ammo = 200000000;
 
     public GameObjectList bullets;
     HealthBar healthbar;

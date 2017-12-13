@@ -8,7 +8,7 @@ public class Room : GameObjectList
     int RoomListIndex;
     public bool up = false, down = false, left = false, right = false;
     GameObjectList enemies;
-    public bool start;
+    public bool start = true;
     int c, d;
     public Room(int roomListIndex, int layer = 0, string id = "") : base(layer)
     {
@@ -100,7 +100,7 @@ public class Room : GameObjectList
  
     public override void Update(GameTime gameTime)
     {
-        if (start) {OnLoad();}
+        if (start) { OnLoad();}
         enemies.Update(gameTime);
         for (int x = 0; x < 10; x++)
             for (int y = 0; y < 8; y++)
