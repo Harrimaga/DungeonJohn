@@ -130,10 +130,8 @@ public class Floor
                         }
                     }
                 }
-            int q = random.Next(b - 1);
-            floor[backupchoice[q, 0], backupchoice[q, 1]] = new Room(Index);
         }
-        else
+        if (a > 0)
         {
             int p = random.Next(a - 1);
             floor[possiblechoice[p, 0], possiblechoice[p, 1]] = new Room(Index);
@@ -279,19 +277,19 @@ public class Floor
                 {
                     if (floor[x, y].RoomListIndex == 1)
                     {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(650 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Lime);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Lime);
                     }
                     else if (floor[x, y].RoomListIndex == 2)
                     {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(650 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Blue);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Blue);
                     }
                     else if (floor[x, y].RoomListIndex == 3)
                     {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(650 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Yellow);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Yellow);
                     }
                     else
                     {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(650 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Red);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Red);
                     }
                 }
         //TODO alleen kamer tekenen op minimap als de speler er is geweest
