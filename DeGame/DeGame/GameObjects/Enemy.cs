@@ -50,7 +50,7 @@ public class Enemy : SpriteGameObject
         {
             if (CollidesWith(bullet))
             {
-                health--;
+                health -= 20;
                 RemoveBullets.Add(bullet);
             }
         }
