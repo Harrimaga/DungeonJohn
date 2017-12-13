@@ -29,7 +29,7 @@ public class PlayingState : IGameObject
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
         }
     }
-    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch, )
     {
         floor.Draw(gameTime, spriteBatch);
         player.Draw(gameTime, spriteBatch);

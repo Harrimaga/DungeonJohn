@@ -12,7 +12,7 @@ public class Room : GameObjectList
     }
 
     public string[,] roomarray;
-    int CellWidth, CellHeight, roomwidth, roomheight;
+    public int CellWidth, CellHeight, roomwidth, roomheight;
 
     public void LoadTiles()
     {
@@ -23,8 +23,7 @@ public class Room : GameObjectList
 
         CellWidth = 50;
         CellHeight = 50;
-        roomwidth = line.Length * CellWidth;
-        roomheight = textLines.Count * CellHeight;
+
 
         while (line != null)
         {
@@ -42,6 +41,8 @@ public class Room : GameObjectList
                 System.Console.WriteLine(roomarray[x, y]);
             }
         }
+        roomwidth = line.Length * CellWidth;
+        roomheight = textLines.Count * CellHeight;
     }
 
     private string AssignType(char filetext)

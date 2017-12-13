@@ -1,12 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
-public class Camera : GameObject
+public class Camera
 {
-    public Vector2 Positie;
+    static public Vector2 CameraPosition = new Vector2(0, 0);
+
+    static public void CameraPlacement(GameTime gameTime, Player player, int roomwidth, int roomheight)
+    {
+        CameraPosition.X = MathHelper.Clamp(player.position.X - GameEnvironment.graphics.PreferredBackBufferWidth / 2, 0, roomwidth - GameEnvironment.graphics.PreferredBackBufferWidth);
+        CameraPosition.Y = MathHelper.Clamp(player.position.Y - GameEnvironment.graphics.PreferredBackBufferHeight / 2, 0, roomheight - GameEnvironment.graphics.PreferredBackBufferHeight);
+    }
+
+    static public void Reset()
+    {
+        CameraPosition = Vector2.Zero;
+    }
 }
+
 
