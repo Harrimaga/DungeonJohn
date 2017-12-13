@@ -7,6 +7,9 @@ public class Room : GameObjectList
 {
     public int RoomListIndex;
     public bool up = false, down = false, left = false, right = false;
+    public GameObjectList enemies;
+    public bool start = true;
+    int c, d;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight;
 
@@ -81,8 +84,26 @@ public class Room : GameObjectList
                 return "N/A";
         }
     }
+    void OnLoad()
+    {
+        CreateEnemy();
+    }
+    void CreateEnemy()
+    {
+        for (int x = 0; x < 10; x++)
+            for (int y = 0; y < 8; y++)
+            { 
+            if(roomarray[x, y] == "ChasingEnemy")
+            {
+                Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth /*+ c * roomwidth*/, y * CellHeight /*+ d * roomheight*/), 0, "ChasingEnemy");
+                enemies.Add(enemy);
+          }
+        }
+      }
+ 
     public override void Update(GameTime gameTime)
     {
+        if (start) {OnLoad();}
         enemies.Update(gameTime);
         for (int x = 0; x < 10; x++)
             for (int y = 0; y < 8; y++)
@@ -105,17 +126,10 @@ public class Room : GameObjectList
                 }
 
             }
+        start = false;
     }
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch, int a, int b)
     {
-        for (int x = 0; x < roomarraywidth; x++)
-            for (int y = 0; y < roomarrayheight; y++)
-                switch (roomarray[x, y])
-                {
-
-                }
-    
-
         enemies.Draw(gameTime, spriteBatch);
         for (int x = 0; x < 10; x++)
             for (int y = 0; y < 8; y++)
@@ -172,8 +186,7 @@ public class Room : GameObjectList
                             break;
 
                         case "ChasingEnemy":
-                            Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight),0 ,"ChasingEnemy");
-                            //enemies.Add(enemy);
+                            //CreateEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight));
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
                             break;
                         default:
@@ -182,5 +195,9 @@ public class Room : GameObjectList
                     }
                 }
             }
+        foreach (Enemy enemy in enemies.Children)
+        {
+            enemy.Draw(gameTime, spriteBatch);
+        }
     }
 }

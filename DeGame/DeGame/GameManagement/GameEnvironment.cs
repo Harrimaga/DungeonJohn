@@ -30,6 +30,9 @@ public class GameEnvironment : Game
     {
         //DrawingHelper.Initialize(this.GraphicsDevice);
         spriteBatch = new SpriteBatch(GraphicsDevice);
+
+        System.Console.WriteLine(graphics.PreferredBackBufferHeight);
+        System.Console.WriteLine(graphics.PreferredBackBufferWidth);
     }
     protected void HandleInput()
     {

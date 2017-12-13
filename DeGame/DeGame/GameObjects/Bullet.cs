@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 class Bullet : SpriteGameObject
 {
@@ -24,16 +25,6 @@ class Bullet : SpriteGameObject
     {
         base.Update(gameTime);
         position += velocity;
-        CheckCollisionEnemies(); // Laat de game laggen als de tering
-    }
-
-    public void CheckCollisionEnemies()
-    {
-        /*if (CollidesWith(PlayingState.enemy))
-        {
-            PlayingState.enemy.Die = true;
-        }*/
-        // Als enemies in de room class zitten, en ze hebben op een of andere manier t goede ID, zou dit moeten werken
     }
 
     // Draw the bullets
