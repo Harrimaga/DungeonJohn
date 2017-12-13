@@ -13,8 +13,16 @@ public class GameEnvironment : Game
     public static GameStateManager gameStateManager;
     protected static Random random;
 
+    public Matrix spriteScale;
+
+    protected Point windowSize = new Point(800, 480);
+
     public static AssetManager assetManager;
     protected static Camera cam;
+
+    public static Point Dimensions;
+
+    bool startup;
 
 
     public GameEnvironment()
@@ -24,6 +32,12 @@ public class GameEnvironment : Game
         gameStateManager = new GameStateManager();
         random = new Random();
         assetManager = new AssetManager(Content);
+
+        Dimensions = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
+        startup = true;
+
+        ApplyResolutionSettings();
     }
     
     protected override void LoadContent()
@@ -46,7 +60,61 @@ public class GameEnvironment : Game
         }
         */
 
+        if (inputHelper.IsKeyDown(Keys.Right))
+        {
+            Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
+        }
+
         gameStateManager.HandleInput(inputHelper);
+    }
+
+    public void ApplyResolutionSettings(bool fullscreen = false)
+    {
+        if (!fullscreen)
+        {
+            graphics.PreferredBackBufferWidth = windowSize.X;
+            graphics.PreferredBackBufferHeight = windowSize.Y;
+            graphics.IsFullScreen = false;
+            graphics.ApplyChanges();
+        }
+        else
+        {
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
+        }
+
+        float targetAspectRatio = Dimensions.X / Dimensions.Y;
+        int width = graphics.PreferredBackBufferWidth;
+        int height = (int)(width / targetAspectRatio);
+        if (height > graphics.PreferredBackBufferHeight)
+        {
+            height = graphics.PreferredBackBufferHeight;
+            width = (int)(height * targetAspectRatio);
+        }
+
+        Viewport viewport = new Viewport();
+        viewport.X = (graphics.PreferredBackBufferWidth / 2) - (width / 2);
+        viewport.Y = (graphics.PreferredBackBufferHeight / 2) - (height / 2);
+        viewport.Width = width;
+        viewport.Height = height;
+        GraphicsDevice.Viewport = viewport;
+
+        inputHelper.Scale = new Vector2((float) GraphicsDevice.Viewport.Width / Dimensions.X,
+                                        (float) GraphicsDevice.Viewport.Height / Dimensions.Y);
+        inputHelper.Offset = new Vector2(viewport.X, viewport.Y);
+        spriteScale = Matrix.CreateScale(inputHelper.Scale.X, inputHelper.Scale.Y, 1);
+
+        cam = new Camera(GraphicsDevice.Viewport);
+        cam.Zoom = 1f;
+        cam.Rotation = 0;
+
+        if (startup)
+        {
+            Camera.Position = new Vector2(Dimensions.X / 2, Dimensions.Y / 2);
+            startup = false;
+        }
     }
 
     protected override void Update(GameTime gameTime)
@@ -58,7 +126,7 @@ public class GameEnvironment : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.Black);
-        spriteBatch.Begin();
+        spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Camera.TransformMatrix);
         gameStateManager.Draw(gameTime, spriteBatch);
         spriteBatch.End();
     }
