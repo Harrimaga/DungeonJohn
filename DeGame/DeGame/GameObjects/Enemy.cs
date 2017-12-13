@@ -9,63 +9,68 @@ using System.Threading.Tasks;
 
 public class Enemy : SpriteGameObject
 {
-    protected float health;
-    protected float maxhealth;
+    protected float health = 100;
+    protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 position;
+    protected Vector2 basevelocity = new Vector2(1, 1);
+    HealthBar healthbar;
 
-    public Enemy(int layer = 0, string id = "Enemy")
+    public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
-       
-        
+        healthbar = new HealthBar(health, maxhealth, position);
+        position = startPosition;
+        velocity = basevelocity;
     }
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
+        healthbar.Update(gameTime, health, maxhealth, position);
+        if(health <= 0) {Die = true;}
 
+        base.Update(gameTime);
+        if (CollidesWith(PlayingState.player))
+        {
+            velocity = Vector2.Zero;
+            PlayingState.player.health -= 1;
+        }
+        if (!CollidesWith(PlayingState.player))
+        {
+            velocity = basevelocity;
+        }
+        foreach(Bullet bullet in PlayingState.player.bullets.Children)
+        if (CollidesWith(bullet))
+        {
+                health--;  
+        }
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        healthbar.Draw(spriteBatch, position);
     }
 
-    public void Chase()
+    public virtual void Chase()
     {
-        if (position.Y > PlayingState.player.position.Y)
+        if (position.Y + sprite.Height > PlayingState.player.position.Y)
         {
-            position.Y--;
+            position.Y -= velocity.Y;
         }
-        if (position.Y < PlayingState.player.position.Y)
+        if (position.Y - sprite.Height < PlayingState.player.position.Y)
         {
-            position.Y++;
+            position.Y += velocity.Y;
         }
-        if (position.X > PlayingState.player.position.X)
+        if (position.X + sprite.Width > PlayingState.player.position.X)
         {
-            position.X--;
+            position.X -= velocity.X;
         }
-        if (position.X < PlayingState.player.position.X)
+        if (position.X - sprite.Width < PlayingState.player.position.X)
         {
-            position.X++;
+            position.X += velocity.X;
         }
     }
-}
-
-public class ChasingEnemy : Enemy
-{
-    public override void Update(GameTime gameTime)
-    {
-        Chase();
-    }
-
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
-    }
-
 }
 
 
