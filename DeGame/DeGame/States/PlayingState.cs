@@ -18,7 +18,6 @@ public class PlayingState : IGameObject
     public PlayingState()
     {
         player = new Player();
-        //enemy = new RangedEnemy(Vector2.Zero,0,"Enemy");
         floor = new Floor();
         currentFloor = floor;
     }
@@ -34,14 +33,12 @@ public class PlayingState : IGameObject
     {
         floor.Draw(gameTime, spriteBatch);
         player.Draw(gameTime, spriteBatch);
-       // enemy.Draw(gameTime, spriteBatch); 
 
     }
     public virtual void Update(GameTime gameTime)
     {
         player.Update(gameTime);
         floor.Update(gameTime);
-        //enemy.Update(gameTime);
     }
     public virtual void Reset()
     {

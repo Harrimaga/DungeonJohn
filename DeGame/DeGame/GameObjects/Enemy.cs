@@ -61,7 +61,6 @@ public class Enemy : SpriteGameObject
         if (health <= 0)
         {
             GameObjectList.RemovedObjects.Add(this);
-            //PlayingState.currentFloor.currentRoom.enemies.Children.Remove(this);
         }
     }
 

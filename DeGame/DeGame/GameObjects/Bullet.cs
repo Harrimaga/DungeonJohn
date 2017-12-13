@@ -25,28 +25,6 @@ class Bullet : SpriteGameObject
     {
         base.Update(gameTime);
         position += velocity;
-        CheckCollisionEnemies(); // Laat de game laggen als de tering
-    }
-
-    public void CheckCollisionEnemies()
-    {
-        //List<GameObject> RemovedEnemies = new List<GameObject>;
-
-        //foreach (Enemy enemy in PlayingState.currentFloor.currentRoom.enemies.Children)
-        //{
-        //    if(CollidesWith(enemy))
-        //    {
-        //        RemovedEnemies.Add(enemy);
-        //    }
-        //}
-
-
-
-        //if (CollidesWith(PlayingState.enemy))
-        //{
-        //    PlayingState.enemy.Die = true;
-        //}
-        // Als enemies in de room class zitten, en ze hebben op een of andere manier t goede ID, zou dit moeten werken
     }
 
     // Draw the bullets

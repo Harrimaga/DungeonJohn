@@ -193,6 +193,5 @@ public class Room : GameObjectList
         {
             enemy.Draw(gameTime, spriteBatch);
         }
-        //enemies.Draw(gameTime, spriteBatch);
     }
 }
