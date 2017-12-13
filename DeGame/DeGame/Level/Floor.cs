@@ -1,148 +1,302 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Microsoft.Xna.Framework.Input;
 
 public class Floor
 {
     Room[,] floor;
     bool[,] Checked;
-    int RoomListIndex = 1;
-    int maxRooms = 20;
-    int minRooms = 15;
-    int floorWidth = 9;
-    int floorHeight = 9;
+    int[,] AdjacentRooms;
+    int[,] possiblechoice;
+    int[,] backupchoice;
+    int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
     Random random = new Random();
-    int CurrentRooms = 0;
+    bool FloorGenerated = false;
 
     public Floor()
     {
-        
         floor = new Room[floorWidth, floorHeight];
-        floor[0, 0] = new Room(1);
-        floor[1, 0] = new Room(2);
-        Checked = new bool[floor.GetLength(0), floor.GetLength(1)];
-
-        foreach (Room room in floor)
-        {
-            if (room != null)
-                room.LoadTiles();
-        }
-
+        Checked = new bool[floorWidth, floorHeight];
+        AdjacentRooms = new int[floorWidth, floorHeight];
+        possiblechoice = new int[floorWidth * floorHeight / 2, 2];
+        backupchoice = new int[floorWidth * floorHeight / 2, 2];
         FloorGenerator();
-        //hele simpele layout voor testen
-        //floor[5, 5] = new StartRoom(new Vector2(5,5));
-        //floor[6, 5] = new Room();
-        //floor[7, 5] = new EndRoom(new Vector2(7,5));
     }
 
     void FloorGenerator()
     {
-        int p = random.Next(9);
-        int q = random.Next(9);
-        //floor[0, 0] = new Room(1, 0, ""); //StartRoom(1, 0, "");
-        int RoomAmount = random.Next(maxRooms - minRooms) + minRooms;
-        //FloorGeneratorRecursive(0, 0, RoomAmount);
+        ClearFloor();
+        int RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
+        int x = random.Next(floorWidth - 2) + 2;
+        int y = random.Next(floorHeight - 2) + 2;
+        floor[x, y] = new Room(1);
+        FloorGeneratorRecursive(x, y, RoomAmount);
+        ChooseSpecialRoom(2);
+        ChooseSpecialRoom(3);
+        FloorGenerated = true;
     }
 
-    void FloorGeneratorRecursive(int x,int y, int RoomAmount)
+    void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
-        Checked[x, y] = true;
-        if (CurrentRooms < RoomAmount && x + 1 < floor.GetLength(0) && floor[x + 1, y] == null)
+        if (y + 1 < floorHeight)
         {
-            if (random.Next(100) < 30)
+            if (CurrentRooms < RoomAmount && floor[x, y + 1] == null && random.Next(100) <= CheckAdjacent(x, y + 1))
             {
                 CurrentRooms++;
-                floor[x + 1, y] = new Room(random.Next(2) + 1, 0, "");
-            }
-            else
-                Checked[x + 1, y] = true;
-        }
-        if (CurrentRooms < RoomAmount && x - 1 >= 0 && floor[x - 1, y] == null)
-        {
-            if (random.Next(100) < 30)
-            {
-                CurrentRooms++;
-                floor[x - 1, y] = new Room(random.Next(2) + 1, 0, "");
-            }
-            Checked[x - 1, y] = true;
-        }
-        if (CurrentRooms < RoomAmount && y + 1 < floor.GetLength(1) && floor[x, y + 1] == null)
-        {
-            if (random.Next(100) < 30)
-            {
-                CurrentRooms++;
-                floor[x, y + 1] = new Room(random.Next(2) + 1, 0, "");
+                floor[x, y + 1] = new Room(4);
             }
             else
                 Checked[x, y + 1] = true;
         }
-        if (CurrentRooms < RoomAmount && y - 1 >= 0 && floor[x, y - 1] == null)
+
+        if (y - 1 >= 0)
         {
-            if (random.Next(100) < 30)
+            if (CurrentRooms < RoomAmount && floor[x, y - 1] == null && random.Next(100) <= CheckAdjacent(x, y - 1))
             {
                 CurrentRooms++;
-                floor[x, y - 1] = new Room(random.Next(2) + 1, 0, "");
+                floor[x, y - 1] = new Room(4);
             }
             else
                 Checked[x, y - 1] = true;
         }
+
+        if (x + 1 < floorWidth)
+        {
+            if (CurrentRooms < RoomAmount && floor[x + 1, y] == null && random.Next(100) <= CheckAdjacent(x + 1, y))
+            {
+                CurrentRooms++;
+                floor[x + 1, y] = new Room(4);
+            }
+            else
+                Checked[x + 1, y] = true;
+        }
+
+        if (x - 1 >= 0)
+        {
+            if (CurrentRooms < RoomAmount && floor[x - 1, y] == null && random.Next(100) <= CheckAdjacent(x - 1, y))
+            {
+                CurrentRooms++;
+                floor[x - 1, y] = new Room(4);
+            }
+            else
+                Checked[x - 1, y] = true;
+        }
+
+        Checked[x, y] = true;
+        int counter = 0;
         if (CurrentRooms < RoomAmount)
-            for (int m = 0; m < floor.GetLength(0); m++)
-                for (int n = 0; n < floor.GetLength(1); n++)
-                {
+        {
+            for (int m = 0; m < floorWidth; m++)
+                for (int n = 0; n < floorHeight; n++)
                     if (floor[m, n] != null && Checked[m, n] == false)
+                    {
                         FloorGeneratorRecursive(m, n, RoomAmount);
-                }
+                        counter++;
+                    }
+            if (counter == 0)
+            {
+                ClearFloor();
+                RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
+                x = random.Next(floorWidth - 2) + 2;
+                y = random.Next(floorHeight - 2) + 2;
+                floor[x, y] = new Room(1);
+                FloorGeneratorRecursive(x, y, RoomAmount);
+            }                       
+        }
     }
 
+    void ChooseSpecialRoom(int Index)
+    {
+        if (b == 0)
+        {
+            for (int x = 0; x < floorWidth; x++)
+                for (int y = 0; y < floorHeight; y++)
+                {
+                    CheckAdjacent(x, y);
+                    if (AdjacentRooms[x, y] == 1 && CanSpawnSpecialRoom(x, y) == true)                    
+                        if (floor[x, y] == null)
+                        {
+                            backupchoice[b, 0] = x;
+                            backupchoice[b, 1] = y;
+                            b++;
+                        }                    
+                }
+        }  
+            q = random.Next(b - 1);
+            floor[backupchoice[q, 0], backupchoice[q, 1]] = new Room(Index);
+            if (q != 0)
+            {
+                backupchoice[q, 0] = backupchoice[q - 1, 0];
+                backupchoice[q, 1] = backupchoice[q - 1, 1];
+            }
+            else
+            {
+                backupchoice[q, 0] = backupchoice[q + 1, 0];
+                backupchoice[q, 1] = backupchoice[q + 1, 1];
+            }        
+    }
+
+    bool CanSpawnSpecialRoom(int x, int y)
+    {
+        int counter = 0;
+        if (x + 1 >= floorWidth)
+            counter++;
+        else if (floor[x + 1, y] == null || floor[x + 1, y].RoomListIndex >= 4)
+            counter++;
+        if (x - 1 < 0)
+            counter++;
+        else if (floor[x - 1, y] == null || floor[x - 1, y].RoomListIndex >= 4)
+            counter++;
+        if (y + 1 > -floorHeight)
+            counter++;
+        else if (floor[x, y + 1] == null || floor[x, y + 1].RoomListIndex >= 4)
+            counter++;
+        if (y - 1 < 0)
+            counter++;
+        else if (floor[x, y - 1] == null || floor[x, y - 1].RoomListIndex >= 4)
+            counter++;
+        if (counter == 4)
+            return true;
+        return false;
+    }
+
+    int CheckAdjacent(int x, int y)
+    {
+        int RoomSpawnChance = 30;
+        int neighbours = 0;
+        if (y + 1 < floorHeight && floor[x, y + 1] != null)
+        {
+            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            neighbours++;
+        }
+        if (y - 1 >= 0 && floor[x, y - 1] != null)
+        {
+            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            neighbours++;
+        }
+        if (x + 1 < floorWidth && floor[x + 1, y] != null)
+        {
+            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            neighbours++;
+        }
+        if (x - 1 >= 0 && floor[x - 1, y] != null)
+        {
+            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            neighbours++;
+        }
+        AdjacentRooms[x, y] = neighbours;
+        return RoomSpawnChance * 12 / 10;
+    }
+    
     void ClearFloor()
     {
-        floor = new Room[floorWidth + 2, floorHeight + 2];
+        for (int x = 0; x < floorWidth; x++)
+            for (int y = 0; y < floorHeight; y++)
+            {
+                floor[x, y] = null;
+                Checked[x, y] = false;
+                AdjacentRooms[x, y] = 0;
+            }
+        b = 0;
+        CurrentRooms = 1;
     }
+
     void NextFloor()
     {
-        maxRooms += 5;
-        minRooms += 5;
         ClearFloor();
+        floor = new Room[floorWidth, floorHeight];
+        Checked = new bool[floorWidth, floorHeight];
+        AdjacentRooms = new int[floorWidth, floorHeight];
+        //floorWidth = floor.GetLength(0);
+        //floorHeight = floor.GetLength(1);
+        maxRooms += 3;
+        minRooms += 3;
         FloorGenerator();
-        //TODO dus new floor maken (FloorGenerator aanroepen) en oude weg halen
+        CurrentLevel++;
     }
-    void DoorCheck()
-    {
-        for (int x = 0; x < 9; x++)
-            for (int y = 0; y < 9; y++)
-                if (floor[x, y] != null)
-                {
-                    if (x + 1 < 9 && floor[x + 1, y] != null)                    
-                        floor[x, y].right = true;
-                    if (x - 1 >= 0 && floor[x - 1, y] != null)                    
-                        floor[x, y].left = true;                    
-                    if (y + 1 < 9 && floor[x, y + 1] != null)                    
-                        floor[x, y].down = true;                    
-                    if (y - 1 >= 0 && floor[x, y - 1] != null)                    
-                        floor[x, y].up = true;                    
-                }
-    }
+
+    //void DoorCheck()
+    //{
+    //    if (FloorGenerated == true)
+    //    {
+    //        for (int x = 0; x < 9; x++)
+    //            for (int y = 0; y < 9; y++)
+    //                if (floor[x, y] != null)
+    //                {
+    //                    if (x + 1 < 9 && floor[x + 1, y] != null)
+    //                        floor[x, y].right = true;
+    //                    if (x - 1 >= 0 && floor[x - 1, y] != null)
+    //                        floor[x, y].left = true;
+    //                    if (y + 1 < 9 && floor[x, y + 1] != null)
+    //                        floor[x, y].down = true;
+    //                    if (y - 1 >= 0 && floor[x, y - 1] != null)
+    //                        floor[x, y].up = true;
+    //                    FloorGenerated = false;
+    //                }
+    //    }
+    //}
 
     public virtual void Update(GameTime gameTime)
     {
-        foreach (Room room in floor)
-        {
-            if (room != null)
-            {
-                room.Update(gameTime);
-            }
-        }
-        //TODO als nextFloor true is voer dan NextFloor() uit
+        //foreach (Room room in floor)
+        //{
+        //    if (room != null)
+        //    {
+        //        room.Update(gameTime);
+        //    }
+        //}
+        ////TODO als nextFloor true is voer dan NextFloor() uit
+    }
+
+    public void HandleInput(InputHelper inputHelper)
+    {
+        if (inputHelper.KeyPressed(Keys.R))
+            NextFloor();
+    }
+    
+    void DrawMinimap(SpriteBatch spriteBatch)
+    {
+        int FloorCellWidth = 15;
+        int FloorCellHeight = 15;
+        for (int x = 0; x < floorWidth; x++)
+            for (int y = 0; y < floorHeight; y++)
+                if (floor[x, y] != null)
+                {
+                    if (floor[x, y].RoomListIndex == 1)
+                    {
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Lime);
+                    }
+                    else if (floor[x, y].RoomListIndex == 2)
+                    {
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Blue);
+                    }
+                    else if (floor[x, y].RoomListIndex == 3)
+                    {
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Yellow);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(600 + x * (FloorCellWidth + 2), y * (FloorCellHeight + 2)), Color.Red);
+                    }
+                }
+        //TODO alleen kamer tekenen op minimap als de speler er is geweest
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         for (int a = 0; a < floorWidth; a++)
             for (int b = 0; b < floorHeight; b++)
-                if (floor[a, b] != null)                
+                if (floor[a, b] != null)
+                {
+                    if (FloorGenerated == true)
+                    {
+                        floor[a, b].LoadTiles();
+                    }
                     floor[a, b].Draw(gameTime, spriteBatch, a, b);
+                }
+        FloorGenerated = false;
+        DrawMinimap(spriteBatch);
     }
-
 }
 
