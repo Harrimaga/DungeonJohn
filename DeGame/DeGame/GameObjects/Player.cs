@@ -36,6 +36,9 @@ public class Player : SpriteGameObject
         bullets.Update(gameTime);
         Console.WriteLine(position);
         base.Update(gameTime);
+        //Camera.CameraPlacement(gameTime, this, roomwidth, roomheight);
+
+
         //if (health <= 0)
             //GameEnvironment.gameStateManager.SwitchTo("GameOver");
 
