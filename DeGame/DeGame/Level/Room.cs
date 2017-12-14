@@ -25,8 +25,8 @@ public class Room : GameObjectList
         StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
         string line = fileReader.ReadLine();
 
-        CellWidth = 5;
-        CellHeight = 5;
+        CellWidth = 50;
+        CellHeight = 50;
 
         while (line != null)
         {
@@ -88,8 +88,8 @@ public class Room : GameObjectList
     }
     void CreateEnemy()
     {
-        for (int x = 0; x < 10; x++)
-            for (int y = 0; y < 8; y++)
+        for (int x = 0; x < 11; x++)
+            for (int y = 0; y < 9; y++)
             { 
             if(roomarray[x, y] == "ChasingEnemy")
             {
@@ -103,8 +103,8 @@ public class Room : GameObjectList
     {
         if (start) {OnLoad();}
         enemies.Update(gameTime);
-        for (int x = 0; x < 10; x++)
-            for (int y = 0; y < 8; y++)
+        for (int x = 0; x < 11; x++)
+            for (int y = 0; y < 9; y++)
             {
                 if (roomarray[x, y] == "UpDoor")
                 {
@@ -128,39 +128,37 @@ public class Room : GameObjectList
     }
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch, int a, int b)
     {
-        for (int x = 0; x < 10; x++)
-            for (int y = 0; y < 8; y++)
-            {
+        for (int x = 0; x < 11; x++)
+            for(int y = 0; y < 9; y++)            
                 if (roomarray != null)
-                {
                     switch (roomarray[x, y])
                     {
                         case "Background":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
                             break;
                         case "Rock":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.LightGray);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.LightGray);
                             break;
                         case "Wall":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Brown);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Brown);
                             break;
                         case "Pit":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.DarkBlue);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.DarkBlue);
                             break;
                         case "Item":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Purple);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Purple);
                             break;
                         case "Exit":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Orange);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Orange);
                             break;
                         case "Start":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Yellow);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Yellow);
                             break;
 
                         case "UpDoor":
                             if (up)
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.SaddleBrown);
-                            else 
+                            else
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.RosyBrown);
                             break;
                         case "DownDoor":
@@ -187,14 +185,12 @@ public class Room : GameObjectList
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
                             break;
                         default:
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtilemini")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Red);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Red);
                             break;
-                    }
-                }
-            }
+                    }            
         foreach (Enemy enemy in enemies.Children)
         {
             enemy.Draw(gameTime, spriteBatch);
         }
-    }
+    }    
 }
