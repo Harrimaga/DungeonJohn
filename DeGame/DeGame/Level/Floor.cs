@@ -31,9 +31,9 @@ public class Floor
         int RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
         int x = random.Next(floorWidth - 2) + 2;
         int y = random.Next(floorHeight - 2) + 2;
-        floor[1, 1] = new Room(1);
+        floor[x, y] = new Room(1);
         currentRoom = floor[x, y];
-        FloorGeneratorRecursive(1, 1, RoomAmount);
+        FloorGeneratorRecursive(x, y, RoomAmount);
         ChooseSpecialRoom(2);
         ChooseSpecialRoom(3);
         FloorGenerated = true;

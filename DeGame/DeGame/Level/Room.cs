@@ -44,7 +44,7 @@ public class Room : GameObjectList
             for (int y = 0; y < textLines.Count; ++y)
             {
                 roomarray[x, y] = AssignType(textLines[y][x]);
-                System.Console.WriteLine(roomarray[x, y]);
+                //System.Console.WriteLine(roomarray[x, y]);
             }        
     }
 
@@ -128,6 +128,7 @@ public class Room : GameObjectList
     }
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch, int a, int b)
     {
+        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(10, 10), Color.Red);
         for (int x = 0; x < 11; x++)
             for(int y = 0; y < 9; y++)            
                 if (roomarray != null)
