@@ -69,6 +69,18 @@ public class GameEnvironment : Game
         {
             Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
         }
+        if (inputHelper.IsKeyDown(Keys.Left))
+        {
+            Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
+        }
+        if (inputHelper.IsKeyDown(Keys.Up))
+        {
+            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
+        }
+        if (inputHelper.IsKeyDown(Keys.Down))
+        {
+            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
+        }
 
         gameStateManager.HandleInput(inputHelper);
     }
