@@ -33,7 +33,7 @@ public class Floor
         int y = random.Next(floorHeight - 2) + 2;
         floor[1, 1] = new Room(1);
         currentRoom = floor[x, y];
-        System.Console.WriteLine(currentRoom.position.ToString());
+        //System.Console.WriteLine(currentRoom.position.ToString());
         FloorGeneratorRecursive(x, y, RoomAmount);
         ChooseSpecialRoom(2);
         ChooseSpecialRoom(3);
