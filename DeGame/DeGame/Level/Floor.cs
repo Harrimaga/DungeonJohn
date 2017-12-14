@@ -9,10 +9,9 @@ public class Floor
     bool[,] Checked;
     int[,] AdjacentRooms;
     int[,] possiblechoice;
-    int[,] backupchoice;
+    int[,] possiblespecial;
     int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
     Random random = new Random();
-    public Room currentRoom;
     bool FloorGenerated = false;
 
     public Floor()
@@ -21,7 +20,7 @@ public class Floor
         Checked = new bool[floorWidth, floorHeight];
         AdjacentRooms = new int[floorWidth, floorHeight];
         possiblechoice = new int[floorWidth * floorHeight / 2, 2];
-        backupchoice = new int[floorWidth * floorHeight / 2, 2];
+        possiblespecial = new int[floorWidth * floorHeight / 2, 2];
         FloorGenerator();
     }
 
@@ -31,11 +30,12 @@ public class Floor
         int RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
         int x = random.Next(floorWidth - 2) + 2;
         int y = random.Next(floorHeight - 2) + 2;
-        floor[x, y] = new Room(1);
-        currentRoom = floor[x, y];
+        floor[x, y] = new Room(1, x, y);
         FloorGeneratorRecursive(x, y, RoomAmount);
         ChooseSpecialRoom(2);
         ChooseSpecialRoom(3);
+        if (CurrentLevel >= 7)
+            ChooseSpecialRoom(3);
         FloorGenerated = true;
     }
 
@@ -46,7 +46,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x, y + 1] == null && random.Next(100) <= CheckAdjacent(x, y + 1))
             {
                 CurrentRooms++;
-                floor[x, y + 1] = new Room(4);
+                floor[x, y + 1] = new Room(4, x, y + 1);
             }
             else
                 Checked[x, y + 1] = true;
@@ -57,7 +57,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x, y - 1] == null && random.Next(100) <= CheckAdjacent(x, y - 1))
             {
                 CurrentRooms++;
-                floor[x, y - 1] = new Room(4);
+                floor[x, y - 1] = new Room(4, x, y - 1);
             }
             else
                 Checked[x, y - 1] = true;
@@ -68,7 +68,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x + 1, y] == null && random.Next(100) <= CheckAdjacent(x + 1, y))
             {
                 CurrentRooms++;
-                floor[x + 1, y] = new Room(4);
+                floor[x + 1, y] = new Room(4, x + 1, y);
             }
             else
                 Checked[x + 1, y] = true;
@@ -79,7 +79,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x - 1, y] == null && random.Next(100) <= CheckAdjacent(x - 1, y))
             {
                 CurrentRooms++;
-                floor[x - 1, y] = new Room(4);
+                floor[x - 1, y] = new Room(4, x - 1,y);
             }
             else
                 Checked[x - 1, y] = true;
@@ -89,8 +89,8 @@ public class Floor
         int counter = 0;
         if (CurrentRooms < RoomAmount)
         {
-            for (int m = 0; m < floorWidth; m++)
-                for (int n = 0; n < floorHeight; n++)
+            for (int m = floorWidth - 1; m >= 0; m--)
+                for (int n = floorHeight - 1; n >= 0; n--)
                     if (floor[m, n] != null && Checked[m, n] == false)
                     {
                         FloorGeneratorRecursive(m, n, RoomAmount);
@@ -102,7 +102,7 @@ public class Floor
                 RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
                 x = random.Next(floorWidth - 2) + 2;
                 y = random.Next(floorHeight - 2) + 2;
-                floor[x, y] = new Room(1);
+                floor[x, y] = new Room(1, x, y);
                 FloorGeneratorRecursive(x, y, RoomAmount);
             }                       
         }
@@ -110,6 +110,7 @@ public class Floor
 
     void ChooseSpecialRoom(int Index)
     {
+        bool secondtime = false;
         if (b == 0)
         {
             for (int x = 0; x < floorWidth; x++)
@@ -119,23 +120,34 @@ public class Floor
                     if (AdjacentRooms[x, y] == 1 && CanSpawnSpecialRoom(x, y) == true)                    
                         if (floor[x, y] == null)
                         {
-                            backupchoice[b, 0] = x;
-                            backupchoice[b, 1] = y;
+                            possiblespecial[b, 0] = x;
+                            possiblespecial[b, 1] = y;
                             b++;
                         }                    
                 }
         }  
-            q = random.Next(b - 1);
-            floor[backupchoice[q, 0], backupchoice[q, 1]] = new Room(Index);
+        else
+            secondtime = true;
+        q = random.Next(b - 1);
+        if (secondtime == true)
+        {
+            CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
+            while (AdjacentRooms[possiblespecial[q, 0], possiblespecial[q, 1]] != 1)
+            {
+                q = random.Next(b - 1);
+                CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
+            }
+        }
+            floor[possiblespecial[q, 0], possiblespecial[q, 1]] = new Room(Index, possiblespecial[q, 0], possiblespecial[q, 1]);
             if (q != 0)
             {
-                backupchoice[q, 0] = backupchoice[q - 1, 0];
-                backupchoice[q, 1] = backupchoice[q - 1, 1];
+                possiblespecial[q, 0] = possiblespecial[q - 1, 0];
+                possiblespecial[q, 1] = possiblespecial[q - 1, 1];
             }
             else
             {
-                backupchoice[q, 0] = backupchoice[q + 1, 0];
-                backupchoice[q, 1] = backupchoice[q + 1, 1];
+                possiblespecial[q, 0] = possiblespecial[q + 1, 0];
+                possiblespecial[q, 1] = possiblespecial[q + 1, 1];
             }        
     }
 
@@ -165,30 +177,31 @@ public class Floor
 
     int CheckAdjacent(int x, int y)
     {
-        int RoomSpawnChance = 30;
+        int RoomSpawnChance = 70;
+        int SpawnChanceReduction = 20;
         int neighbours = 0;
         if (y + 1 < floorHeight && floor[x, y + 1] != null)
         {
-            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
         if (y - 1 >= 0 && floor[x, y - 1] != null)
         {
-            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
         if (x + 1 < floorWidth && floor[x + 1, y] != null)
         {
-            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
         if (x - 1 >= 0 && floor[x - 1, y] != null)
         {
-            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
         AdjacentRooms[x, y] = neighbours;
-        return RoomSpawnChance * 12 / 10;
+        return RoomSpawnChance * SpawnChanceReduction / 10;
     }
     
     void ClearFloor()
@@ -210,10 +223,11 @@ public class Floor
         floor = new Room[floorWidth, floorHeight];
         Checked = new bool[floorWidth, floorHeight];
         AdjacentRooms = new int[floorWidth, floorHeight];
-        //floorWidth = floor.GetLength(0);
-        //floorHeight = floor.GetLength(1);
-        maxRooms += 3;
-        minRooms += 3;
+        if (CurrentLevel <= 10)
+        {
+            maxRooms += 3;
+            minRooms += 3;
+        }
         FloorGenerator();
         CurrentLevel++;
     }
@@ -249,9 +263,6 @@ public class Floor
         //    }
         //}
         ////TODO als nextFloor true is voer dan NextFloor() uit
-
-
-        //Camera.Position = new Vector2(currentRoom.Position.X / 2, currentRoom.position.Y / 2);
     }
 
     public void HandleInput(InputHelper inputHelper)
@@ -290,18 +301,20 @@ public class Floor
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        if (FloorGenerated == true)
-        {
-            for (int a = 0; a < floorWidth; a++)
-                for (int b = 0; b < floorHeight; b++)
-                    if (floor[a, b] != null)
+        string Level = "Level " + CurrentLevel;
+        for (int a = 0; a < floorWidth; a++)
+            for (int b = 0; b < floorHeight; b++)
+                if (floor[a, b] != null)
+                {
+                    if (FloorGenerated == true)
                     {
                         floor[a, b].LoadTiles();
-                        floor[a, b].Draw(gameTime, spriteBatch, a, b);
                     }
-            FloorGenerated = false;
-        }
+                    floor[a, b].Draw(gameTime, spriteBatch, a, b);
+                }
+        FloorGenerated = false;
         DrawMinimap(spriteBatch);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(650, 175), Color.White);
     }
 }
 
