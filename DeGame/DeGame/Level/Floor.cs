@@ -32,7 +32,7 @@ public class Floor
         int RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
         int x = random.Next(floorWidth - 2) + 2;
         int y = random.Next(floorHeight - 2) + 2;
-        floor[x, y] = new Room(1);
+        floor[x, y] = new Room(1, x, y);
         currentRoom = floor[x, y];
         //System.Console.WriteLine(currentRoom.position.ToString());
         FloorGeneratorRecursive(x, y, RoomAmount);
@@ -337,7 +337,7 @@ public class Floor
                     if (floor[a, b] != null)
                     {
                         floor[a, b].LoadTiles();
-                        floor[a, b].Draw(gameTime, spriteBatch, a, b);
+                        floor[a, b].Draw(gameTime, spriteBatch);
                     }
         //FloorGenerated = false;
 

@@ -9,14 +9,16 @@ public class Room : GameObjectList
     public bool up = false, down = false, left = false, right = false;
     public GameObjectList enemies;
     public bool start = true;
-    int c, d;
+    int a, b;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight;
 
-    public Room(int roomListIndex, int layer = 0, string id = "") : base(layer)
+    public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
         enemies = new GameObjectList();
         RoomListIndex = roomListIndex;
+        a = A;
+        b = B;
     }
 
     public void LoadTiles()
@@ -93,7 +95,7 @@ public class Room : GameObjectList
             { 
             if(roomarray[x, y] == "ChasingEnemy")
             {
-                Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth /*+ c * roomwidth*/, y * CellHeight /*+ d * roomheight*/), 0, "ChasingEnemy");
+                Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth /*+ a * roomwidth*/, y * CellHeight /*+ b * roomheight*/), 0, "ChasingEnemy");
                 enemies.Add(enemy);
           }
         }
@@ -126,7 +128,7 @@ public class Room : GameObjectList
             }
         start = false;
     }
-    public void Draw(GameTime gameTime, SpriteBatch spriteBatch, int a, int b)
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
 
          spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), Vector2.One, Color.White);
