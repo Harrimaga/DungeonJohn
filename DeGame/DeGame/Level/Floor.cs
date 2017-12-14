@@ -302,16 +302,17 @@ public class Floor
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         string Level = "Level " + CurrentLevel;
-        for (int a = 0; a < floorWidth; a++)
-            for (int b = 0; b < floorHeight; b++)
-                if (floor[a, b] != null)
+        foreach (Room room in floor)
+        {
+            if (room != null)
+            {
+                if (FloorGenerated == true)
                 {
-                    if (FloorGenerated == true)
-                    {
-                        floor[a, b].LoadTiles();
-                    }
-                    floor[a, b].Draw(gameTime, spriteBatch, a, b);
+                    room.LoadTiles();
                 }
+                room.Draw(gameTime, spriteBatch, (int)room.Position.X, (int)room.Position.X);
+            }
+        }
         FloorGenerated = false;
         DrawMinimap(spriteBatch);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(650, 175), Color.White);

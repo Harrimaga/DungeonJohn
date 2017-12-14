@@ -15,8 +15,6 @@ public class Room : GameObjectList
         RoomListIndex = roomListIndex;
     }
 
-
-
     public void LoadTiles()
     {
         List<string> textLines = new List<string>();
