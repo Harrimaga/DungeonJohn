@@ -301,8 +301,7 @@ public class Floor
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        string Level = "5";
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(500,600), Color.Black);
+        string Level = "Level " + CurrentLevel;
         for (int a = 0; a < floorWidth; a++)
             for (int b = 0; b < floorHeight; b++)
                 if (floor[a, b] != null)
@@ -315,6 +314,7 @@ public class Floor
                 }
         FloorGenerated = false;
         DrawMinimap(spriteBatch);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(650, 175), Color.White);
     }
 }
 
