@@ -9,7 +9,7 @@ public class Floor
     bool[,] Checked;
     int[,] AdjacentRooms;
     int[,] possiblechoice;
-    int[,] backupchoice;
+    int[,] possiblespecial;
     int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
     Random random = new Random();
     bool FloorGenerated = false;
@@ -20,7 +20,7 @@ public class Floor
         Checked = new bool[floorWidth, floorHeight];
         AdjacentRooms = new int[floorWidth, floorHeight];
         possiblechoice = new int[floorWidth * floorHeight / 2, 2];
-        backupchoice = new int[floorWidth * floorHeight / 2, 2];
+        possiblespecial = new int[floorWidth * floorHeight / 2, 2];
         FloorGenerator();
     }
 
@@ -34,6 +34,8 @@ public class Floor
         FloorGeneratorRecursive(x, y, RoomAmount);
         ChooseSpecialRoom(2);
         ChooseSpecialRoom(3);
+        if (CurrentLevel >= 7)
+            ChooseSpecialRoom(3);
         FloorGenerated = true;
     }
 
@@ -111,7 +113,6 @@ public class Floor
         bool secondtime = false;
         if (b == 0)
         {
-            secondtime = true;
             for (int x = 0; x < floorWidth; x++)
                 for (int y = 0; y < floorHeight; y++)
                 {
@@ -119,29 +120,34 @@ public class Floor
                     if (AdjacentRooms[x, y] == 1 && CanSpawnSpecialRoom(x, y) == true)                    
                         if (floor[x, y] == null)
                         {
-                            backupchoice[b, 0] = x;
-                            backupchoice[b, 1] = y;
+                            possiblespecial[b, 0] = x;
+                            possiblespecial[b, 1] = y;
                             b++;
                         }                    
                 }
         }  
-            q = random.Next(b - 1);
+        else
+            secondtime = true;
+        q = random.Next(b - 1);
         if (secondtime == true)
         {
-            CheckAdjacent(backupchoice[q, 0], backupchoice[q, 1]);
-            while (AdjacentRooms[backupchoice[q, 0], backupchoice[q, 1]] != 1)
+            CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
+            while (AdjacentRooms[possiblespecial[q, 0], possiblespecial[q, 1]] != 1)
+            {
                 q = random.Next(b - 1);
+                CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
+            }
         }
-            floor[backupchoice[q, 0], backupchoice[q, 1]] = new Room(Index, backupchoice[q, 0], backupchoice[q, 1]);
+            floor[possiblespecial[q, 0], possiblespecial[q, 1]] = new Room(Index, possiblespecial[q, 0], possiblespecial[q, 1]);
             if (q != 0)
             {
-                backupchoice[q, 0] = backupchoice[q - 1, 0];
-                backupchoice[q, 1] = backupchoice[q - 1, 1];
+                possiblespecial[q, 0] = possiblespecial[q - 1, 0];
+                possiblespecial[q, 1] = possiblespecial[q - 1, 1];
             }
             else
             {
-                backupchoice[q, 0] = backupchoice[q + 1, 0];
-                backupchoice[q, 1] = backupchoice[q + 1, 1];
+                possiblespecial[q, 0] = possiblespecial[q + 1, 0];
+                possiblespecial[q, 1] = possiblespecial[q + 1, 1];
             }        
     }
 
