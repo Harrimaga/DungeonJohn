@@ -218,6 +218,7 @@ public class Floor
         minRooms += 3;
         FloorGenerator();
         CurrentLevel++;
+        FloorGenerated = false;
         //Camera.Position = currentRoom.position /* + new Vector2(25, 25)*/;
     }
 
