@@ -34,10 +34,10 @@ public class Floor
         currentRoom = floor[x, y];
         //System.Console.WriteLine(currentRoom.position.ToString());
         FloorGeneratorRecursive(x, y, RoomAmount);
-        ChooseSpecialRoom(2);
-        ChooseSpecialRoom(3);
+        SpawnBossRoom(x, y);
+        SpawnItemRoom();
         if (CurrentLevel >= 7)
-            ChooseSpecialRoom(3);
+            SpawnItemRoom();
         //FloorGenerated = true;
     }
 
@@ -110,23 +110,19 @@ public class Floor
         }
     }
 
-    void ChooseSpecialRoom(int Index)
+    void SpawnItemRoom()
     {
         bool secondtime = false;
         if (b == 0)
         {
             for (int x = 0; x < floorWidth; x++)
                 for (int y = 0; y < floorHeight; y++)
-                {
-                    CheckAdjacent(x, y);
-                    if (AdjacentRooms[x, y] == 1 && CanSpawnSpecialRoom(x, y) == true)                    
-                        if (floor[x, y] == null)
+                    if (floor[x, y] == null && CanSpawnSpecialRoom(x, y) == true)                        
                         {
                             possiblespecial[b, 0] = x;
                             possiblespecial[b, 1] = y;
                             b++;
-                        }                    
-                }
+                        }                           
         }  
         else
             secondtime = true;
@@ -140,7 +136,7 @@ public class Floor
                 CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
             }
         }
-            floor[possiblespecial[q, 0], possiblespecial[q, 1]] = new Room(Index, possiblespecial[q, 0], possiblespecial[q, 1]);
+            floor[possiblespecial[q, 0], possiblespecial[q, 1]] = new Room(3, possiblespecial[q, 0], possiblespecial[q, 1]);
             if (q != 0)
             {
                 possiblespecial[q, 0] = possiblespecial[q - 1, 0];
@@ -155,26 +151,44 @@ public class Floor
 
     bool CanSpawnSpecialRoom(int x, int y)
     {
-        int counter = 0;
-        if (x + 1 >= floorWidth)
-            counter++;
-        else if (floor[x + 1, y] == null || floor[x + 1, y].RoomListIndex >= 4)
-            counter++;
-        if (x - 1 < 0)
-            counter++;
-        else if (floor[x - 1, y] == null || floor[x - 1, y].RoomListIndex >= 4)
-            counter++;
-        if (y + 1 > -floorHeight)
-            counter++;
-        else if (floor[x, y + 1] == null || floor[x, y + 1].RoomListIndex >= 4)
-            counter++;
-        if (y - 1 < 0)
-            counter++;
-        else if (floor[x, y - 1] == null || floor[x, y - 1].RoomListIndex >= 4)
-            counter++;
-        if (counter == 4)
-            return true;
+        CheckAdjacent(x, y);
+        if (AdjacentRooms[x, y] == 1)
+        {
+            int counter = 0;
+            if (x + 1 >= floorWidth)
+                counter++;
+            else if (floor[x + 1, y] == null || floor[x + 1, y].RoomListIndex >= 4)
+                counter++;
+            if (x - 1 < 0)
+                counter++;
+            else if (floor[x - 1, y] == null || floor[x - 1, y].RoomListIndex >= 4)
+                counter++;
+            if (y + 1 > -floorHeight)
+                counter++;
+            else if (floor[x, y + 1] == null || floor[x, y + 1].RoomListIndex >= 4)
+                counter++;
+            if (y - 1 < 0)
+                counter++;
+            else if (floor[x, y - 1] == null || floor[x, y - 1].RoomListIndex >= 4)
+                counter++;
+            if (counter == 4)
+                return true;
+        }
         return false;
+    }
+
+    void SpawnBossRoom(int x, int y)
+    {
+        int DistancefromStart = 0;
+        int bossx = 4, bossy = 4;
+        for (int a = 0; a < floorWidth; a++)
+            for (int b = 0; b < floorHeight; b++)
+                if (floor[a, b] == null && CanSpawnSpecialRoom(a, b) == true && Math.Abs(x - a) + Math.Abs(y - b) > DistancefromStart)
+                {
+                    bossx = a;
+                    bossy = b;
+                }         
+        floor[bossx, bossy] = new Room(2, bossx, bossy);
     }
 
     int CheckAdjacent(int x, int y)
@@ -299,7 +313,7 @@ public class Floor
     {
         int FloorCellWidth = 15;
         int FloorCellHeight = 15;
-        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Minimap HUD")), new Vector2(GameEnvironment.WindowSize.X - 200 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.White);
+        //spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Minimap HUD")), new Vector2(GameEnvironment.WindowSize.X - 200 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.White);
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
                 if (floor[x, y] != null)
