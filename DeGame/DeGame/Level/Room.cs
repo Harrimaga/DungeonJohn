@@ -129,6 +129,7 @@ public class Room : GameObjectList
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch, int a, int b)
     {
         for (int x = 0; x < 10; x++)
+        {
             for (int y = 0; y < 8; y++)
             {
                 if (roomarray != null)
@@ -149,7 +150,7 @@ public class Room : GameObjectList
                         case "UpDoor":
                             if (up)
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.SaddleBrown);
-                            else 
+                            else
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.RosyBrown);
                             break;
                         case "DownDoor":
@@ -196,6 +197,7 @@ public class Room : GameObjectList
                     }
                 }
             }
+        }
         foreach (Enemy enemy in enemies.Children)
         {
             enemy.Draw(gameTime, spriteBatch);
