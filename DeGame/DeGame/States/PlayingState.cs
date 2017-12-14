@@ -24,6 +24,7 @@ public class PlayingState : IGameObject
     public virtual void HandleInput(InputHelper inputHelper)
     {
         player.HandleInput(inputHelper);
+        floor.HandleInput(inputHelper);
         if (inputHelper.currentKeyboardState.IsKeyDown(Keys.P) && inputHelper.previousKeyboardState.IsKeyUp(Keys.P))
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
@@ -34,7 +35,6 @@ public class PlayingState : IGameObject
     {
         floor.Draw(gameTime, spriteBatch);
         player.Draw(gameTime, spriteBatch);
-
     }
     public virtual void Update(GameTime gameTime)
     {
