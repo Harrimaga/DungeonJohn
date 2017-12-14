@@ -331,7 +331,7 @@ public class Floor
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        
+        //new Vector2(GameEnvironment.WindowSize.X - 200 + x * (FloorCellWidth + 2) + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), y * (FloorCellHeight + 2) + (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2))
             for (int a = 0; a < floorWidth; a++)
                 for (int b = 0; b < floorHeight; b++)
                     if (floor[a, b] != null)

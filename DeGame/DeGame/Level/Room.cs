@@ -9,7 +9,7 @@ public class Room : GameObjectList
     public bool up = false, down = false, left = false, right = false;
     public GameObjectList enemies;
     public bool start = true;
-    int a, b;
+    public int a, b;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight;
 
