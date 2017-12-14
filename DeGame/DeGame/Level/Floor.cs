@@ -302,7 +302,7 @@ public class Floor
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         string Level = "5";
-        spriteBatch.DrawString((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), Level, new Vector2(500,600), Color.Black);
+        spriteBatch.DrawString(Content.Load<SpriteFont>("SpelFont"), Level, new Vector2(500,600), Color.Black);
         for (int a = 0; a < floorWidth; a++)
             for (int b = 0; b < floorHeight; b++)
                 if (floor[a, b] != null)

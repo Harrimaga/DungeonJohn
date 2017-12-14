@@ -73,3 +73,9 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Standardtilemini.png
 
+#begin Sprites/SpelFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Sprites/SpelFont.spritefont
+
