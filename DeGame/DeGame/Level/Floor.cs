@@ -31,9 +31,9 @@ public class Floor
         int RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
         int x = random.Next(floorWidth - 2) + 2;
         int y = random.Next(floorHeight - 2) + 2;
-        floor[x, y] = new Room(1);
+        floor[0, 0] = new Room(1);
         currentRoom = floor[x, y];
-        FloorGeneratorRecursive(x, y, RoomAmount);
+        FloorGeneratorRecursive(0, 0, RoomAmount);
         ChooseSpecialRoom(2);
         ChooseSpecialRoom(3);
         FloorGenerated = true;
@@ -251,7 +251,7 @@ public class Floor
         ////TODO als nextFloor true is voer dan NextFloor() uit
 
 
-        Camera.Position = new Vector2(currentRoom.Position.X / 2, currentRoom.position.Y / 2);
+       // Camera.Position = new Vector2(currentRoom.Position.X / 2, currentRoom.position.Y / 2);
     }
 
     public void HandleInput(InputHelper inputHelper)

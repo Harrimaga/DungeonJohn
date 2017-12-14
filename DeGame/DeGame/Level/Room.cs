@@ -25,8 +25,8 @@ public class Room : GameObjectList
         StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
         string line = fileReader.ReadLine();
 
-        CellWidth = 5;
-        CellHeight = 5;
+        CellWidth = 50;
+        CellHeight = 50;
 
         while (line != null)
         {

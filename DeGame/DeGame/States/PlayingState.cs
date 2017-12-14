@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 public class PlayingState : IGameObject
 {
     public static Player player;
-    //public static Enemy enemy;
+    public static Enemy enemy;
     public static Floor currentFloor;
     Floor floor;
 
@@ -20,6 +20,7 @@ public class PlayingState : IGameObject
         player = new Player();
         floor = new Floor();
         currentFloor = floor;
+        enemy = new RangedEnemy(Vector2.Zero, 0, "Enemy");
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {
@@ -34,12 +35,14 @@ public class PlayingState : IGameObject
     {
         floor.Draw(gameTime, spriteBatch);
         player.Draw(gameTime, spriteBatch);
+        enemy.Draw(gameTime, spriteBatch);
 
     }
     public virtual void Update(GameTime gameTime)
     {
         player.Update(gameTime);
         floor.Update(gameTime);
+        enemy.Update(gameTime);
     }
     public virtual void Reset()
     {
