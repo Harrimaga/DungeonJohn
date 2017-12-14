@@ -24,7 +24,6 @@ public class PlayingState : IGameObject
     public virtual void HandleInput(InputHelper inputHelper)
     {
         player.HandleInput(inputHelper);
-        floor.HandleInput(inputHelper);
         if (inputHelper.currentKeyboardState.IsKeyDown(Keys.P) && inputHelper.previousKeyboardState.IsKeyUp(Keys.P))
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
