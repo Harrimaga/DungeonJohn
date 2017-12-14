@@ -33,7 +33,8 @@ public class Floor
         int y = random.Next(floorHeight - 2) + 2;
         floor[1, 1] = new Room(1);
         currentRoom = floor[x, y];
-        FloorGeneratorRecursive(1, 1, RoomAmount);
+        System.Console.WriteLine(currentRoom.position.ToString());
+        FloorGeneratorRecursive(x, y, RoomAmount);
         ChooseSpecialRoom(2);
         ChooseSpecialRoom(3);
         FloorGenerated = true;
@@ -251,13 +252,30 @@ public class Floor
         ////TODO als nextFloor true is voer dan NextFloor() uit
 
 
-        //Camera.Position = new Vector2(currentRoom.Position.X / 2, currentRoom.position.Y / 2);
+        //Camera.Position = new Vector2(currentRoom.Position.X, currentRoom.position.Y);
     }
 
     public void HandleInput(InputHelper inputHelper)
     {
         if (inputHelper.KeyPressed(Keys.R))
             NextFloor();
+
+        if(inputHelper.IsKeyDown(Keys.Right))
+        {
+            Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
+        }
+        if (inputHelper.IsKeyDown(Keys.Left))
+        {
+            Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
+        }
+        if (inputHelper.IsKeyDown(Keys.Up))
+        {
+            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
+        }
+        if (inputHelper.IsKeyDown(Keys.Down))
+        {
+            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
+        }
     }
     
     void DrawMinimap(SpriteBatch spriteBatch)

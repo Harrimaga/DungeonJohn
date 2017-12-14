@@ -34,7 +34,7 @@ public class Player : SpriteGameObject
     {
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
-        Console.WriteLine(position);
+        //Console.WriteLine(position);
         base.Update(gameTime);
         //Camera.CameraPlacement(gameTime, this, roomwidth, roomheight);
 
