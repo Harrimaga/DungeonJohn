@@ -166,7 +166,7 @@ public class Floor
 
     int CheckAdjacent(int x, int y)
     {
-        int RoomSpawnChance = 70;
+        int RoomSpawnChance = 30;
         int neighbours = 0;
         if (y + 1 < floorHeight && floor[x, y + 1] != null)
         {
