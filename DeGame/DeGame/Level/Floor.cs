@@ -291,22 +291,22 @@ public class Floor
         if (inputHelper.KeyPressed(Keys.R))
             NextFloor();
 
-        if (inputHelper.IsKeyDown(Keys.Right))
-        {
-            Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
-        }
-        if (inputHelper.IsKeyDown(Keys.Left))
-        {
-            Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
-        }
-        if (inputHelper.IsKeyDown(Keys.Up))
-        {
-            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
-        }
-        if (inputHelper.IsKeyDown(Keys.Down))
-        {
-            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
-        }
+        //if (inputHelper.IsKeyDown(Keys.Right))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
+        //}
+        //if (inputHelper.IsKeyDown(Keys.Left))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
+        //}
+        //if (inputHelper.IsKeyDown(Keys.Up))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
+        //}
+        //if (inputHelper.IsKeyDown(Keys.Down))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
+        //}
     }
     
     void DrawMinimap(SpriteBatch spriteBatch)

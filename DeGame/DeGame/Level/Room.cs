@@ -103,6 +103,8 @@ public class Room : GameObjectList
  
     public override void Update(GameTime gameTime)
     {
+        
+
         if (start) {OnLoad();}
         enemies.Update(gameTime);
         for (int x = 0; x < 11; x++)
@@ -110,24 +112,25 @@ public class Room : GameObjectList
             {
                 if (roomarray[x, y] == "UpDoor")
                 {
-                    //move camera up
+                    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
                 }
                 else if (roomarray[x, y] == "DownDoor")
                 {
-                    //move camera down
+                    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
                 }
                 else if (roomarray[x, y] == "RightDoor")
                 {
-                    //move camera right
+                    Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
                 }
                 else if (roomarray[x, y] == "LeftDoor")
                 {
-                    //move camera left
+                    Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
                 }
 
             }
         start = false;
     }
+
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
 
