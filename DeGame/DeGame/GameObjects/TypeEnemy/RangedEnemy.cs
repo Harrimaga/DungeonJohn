@@ -30,13 +30,13 @@ public class RangedEnemy : Enemy
             }
         else
         {
-            Shoot(0);
+            Shoot();
         }
     }
 
-    public void Shoot(int direction)
+    public void Shoot()
     {
-        Bullet bullet = new Bullet(position, direction);
+        EnemyBullet bullet = new EnemyBullet();
         bullets.Add(bullet);
     }
     public override void Update(GameTime gameTime)
