@@ -54,13 +54,17 @@
     <Compile Include="GameManagement\SpriteGameObject.cs" />
     <Compile Include="GameObjects\Bullet.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
+    <Compile Include="GameObjects\EnemyBullet.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\CheckCurrentTile.cs" />
+    <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
+    <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
     <Compile Include="Level\Floor.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
     <Compile Include="Level\TypeRooms\StartRoom.cs" />
     <Compile Include="Menu\Button.cs" />
+    <Compile Include="Menu\HealthBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\GameOverState.cs" />
     <Compile Include="States\MainMenuState.cs" />
@@ -87,9 +91,18 @@
     <Content Include="Content\Levels\4.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Background Sprite.png" />
     <Content Include="Content\Sprites\BearEnemy.png" />
+    <Content Include="Content\Sprites\bteam.png" />
+    <Content Include="Content\Sprites\bullet1.png" />
+    <Content Include="Content\Sprites\Eind Sprite.png" />
+    <Content Include="Content\Sprites\Eind Sprite2.png" />
+    <Content Include="Content\Sprites\healthbar.png" />
+    <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\Random.png" />
+    <Content Include="Content\Sprites\Rock Sprite.png" />
     <Content Include="Content\Sprites\Standardtile.png" />
+    <Content Include="Content\Sprites\Wall Sprite.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +110,7 @@
     <None Include="app.manifest" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
+    <None Include="Content\Sprites\SpelFont.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roomlist\" />

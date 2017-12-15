@@ -13,6 +13,7 @@ public class SpriteGameObject : GameObject
     public bool PerPixelCollisionDetection = true;
     //public float UsesCameraX = 1;
     //public float UsesCameraY = 1;
+    public bool Die;
     protected Texture2D sprite;
 
     public SpriteGameObject(string assetName, int layer = 0, string id = "")
@@ -26,6 +27,7 @@ public class SpriteGameObject : GameObject
     
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        //spriteBatch.Draw(spriteBatch, GlobalPosition * Camera.CameraPosition, origin);
     }
 
     public override void HandleInput(InputHelper inputHelper)
@@ -70,15 +72,18 @@ public class SpriteGameObject : GameObject
     {
         get
         {
-            int left = (int)(GlobalPosition.X - origin.X);
-            int top = (int)(GlobalPosition.Y - origin.Y);
+            int left = (int)(position.X - origin.X);
+            int top = (int)(position.Y - origin.Y);
             return new Rectangle(left, top, Width, Height);
         }
     }
 
     public bool CollidesWith(SpriteGameObject obj)
     {
-        return true; //placeholder
+        if (BoundingBox.Intersects(obj.BoundingBox))
+        {
+            return true;
+        }
+        return false;
     }
 }
-

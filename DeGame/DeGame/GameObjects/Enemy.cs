@@ -9,47 +9,84 @@ using System.Threading.Tasks;
 
 public class Enemy : SpriteGameObject
 {
-    Player player;
-    protected float health;
-    protected float maxhealth;
+    protected float health = 100;
+    protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 position, Startposition;
+    protected Vector2 basevelocity = new Vector2(1, 1);
+    public Room room;
+    HealthBar healthbar;
 
-    public Enemy(int layer = 0, string id = "bullet")
+    public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
-        this.position = Startposition;
-        player = new Player();
+        healthbar = new HealthBar(health, maxhealth, position);
+        position = startPosition;
+        velocity = basevelocity;
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if(position.Y > player.position.Y)
+        if (CollidesWith(PlayingState.player))
         {
-            position.Y--;
+            velocity = Vector2.Zero;
+            PlayingState.player.health -= 1;
         }
-        if (position.Y < player.Position.Y)
+        if (!CollidesWith(PlayingState.player))
         {
-            position.Y++;
+            velocity = basevelocity;
         }
-        if (position.X > player.position.X)
-        {
-            position.X--;
-        }
-        if (position.X < player.position.X)
-        {
-            position.X++;
-        }
-        player.Update(gameTime);
-    }
-    
 
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        List<GameObject> RemoveBullets = new List<GameObject>();
+
+        foreach (Bullet bullet in PlayingState.player.bullets.Children)
+        {
+            if (CollidesWith(bullet))
+            {
+                health -= 20;
+                RemoveBullets.Add(bullet);
+            }
+        }
+
+        foreach (Bullet bullet in RemoveBullets)
+        {
+            PlayingState.player.bullets.Remove(bullet);
+        }
+
+        RemoveBullets.Clear();
+
+        healthbar.Update(gameTime, health, maxhealth, position);
+        if (health <= 0)
+        {
+            GameObjectList.RemovedObjects.Add(this);
+        }
+    }
+
+    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
+        healthbar.Draw(spriteBatch, position);
+    }
+
+    public virtual void Chase()
+    {
+        if (position.Y + sprite.Height > PlayingState.player.position.Y)
+        {
+            position.Y -= velocity.Y;
+        }
+        if (position.Y - sprite.Height < PlayingState.player.position.Y)
+        {
+            position.Y += velocity.Y;
+        }
+        if (position.X + sprite.Width > PlayingState.player.position.X)
+        {
+            position.X -= velocity.X;
+        }
+        if (position.X - sprite.Width < PlayingState.player.position.X)
+        {
+            position.X += velocity.X;
+        }
     }
 }
 

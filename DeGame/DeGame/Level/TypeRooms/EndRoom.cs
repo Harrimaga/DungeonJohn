@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 class EndRoom : Room
 {
     bool nextFloor = false;
-    public EndRoom(int roomListIndex, int p, int q, int layer = 0, string id = "") : base(p, q, layer)
+    public EndRoom(int roomListIndex, int a, int b, int layer = 0, string id = "") : base(a, b, layer)
     {
 
     }
