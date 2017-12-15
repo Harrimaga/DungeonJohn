@@ -95,10 +95,14 @@
     <Content Include="Content\Sprites\BearEnemy.png" />
     <Content Include="Content\Sprites\bteam.png" />
     <Content Include="Content\Sprites\bullet1.png" />
+    <Content Include="Content\Sprites\Eind Sprite.png" />
+    <Content Include="Content\Sprites\Eind Sprite2.png" />
     <Content Include="Content\Sprites\healthbar.png" />
+    <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\Random.png" />
     <Content Include="Content\Sprites\Rock Sprite.png" />
     <Content Include="Content\Sprites\Standardtile.png" />
+    <Content Include="Content\Sprites\Start Sprite1.png" />
     <Content Include="Content\Sprites\Wall Sprite.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
