@@ -34,11 +34,11 @@ public class PlayingState : IGameObject
     {
         floor.Draw(gameTime, spriteBatch);
         player.Draw(gameTime, spriteBatch);
-
     }
     public virtual void Update(GameTime gameTime)
     {
         player.Update(gameTime);
+        Console.WriteLine(player.position.ToString());
         floor.Update(gameTime);
     }
     public virtual void Reset()

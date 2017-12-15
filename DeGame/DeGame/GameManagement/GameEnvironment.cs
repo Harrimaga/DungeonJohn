@@ -15,7 +15,7 @@ public class GameEnvironment : Game
 
     public Matrix spriteScale;
 
-    protected Point windowSize = new Point(800, 480);
+    public static Point WindowSize;
 
     public static AssetManager assetManager;
     protected static Camera cam;
@@ -47,6 +47,8 @@ public class GameEnvironment : Game
 
         System.Console.WriteLine(graphics.PreferredBackBufferHeight);
         System.Console.WriteLine(graphics.PreferredBackBufferWidth);
+        System.Console.WriteLine(Dimensions.ToString());
+        System.Console.WriteLine(GraphicsDevice.Viewport.ToString());
     }
     protected void HandleInput()
     {
@@ -63,10 +65,22 @@ public class GameEnvironment : Game
         }
         */
 
-        if (inputHelper.IsKeyDown(Keys.Right))
-        {
-            Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
-        }
+        //if (inputHelper.IsKeyDown(Keys.Right))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
+        //}
+        //if (inputHelper.IsKeyDown(Keys.Left))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
+        //}
+        //if (inputHelper.IsKeyDown(Keys.Up))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
+        //}
+        //if (inputHelper.IsKeyDown(Keys.Down))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
+        //}
 
         gameStateManager.HandleInput(inputHelper);
     }
@@ -84,8 +98,8 @@ public class GameEnvironment : Game
     {
         if (!fullscreen)
         {
-            graphics.PreferredBackBufferWidth = windowSize.X;
-            graphics.PreferredBackBufferHeight = windowSize.Y;
+            graphics.PreferredBackBufferWidth = WindowSize.X;
+            graphics.PreferredBackBufferHeight = WindowSize.Y;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
         }
@@ -97,7 +111,7 @@ public class GameEnvironment : Game
             graphics.ApplyChanges();
         }
 
-        float targetAspectRatio = Dimensions.X / Dimensions.Y;
+        float targetAspectRatio = (float) WindowSize.X / (float) WindowSize.Y;
         int width = graphics.PreferredBackBufferWidth;
         int height = (int)(width / targetAspectRatio);
         if (height > graphics.PreferredBackBufferHeight)
@@ -126,6 +140,8 @@ public class GameEnvironment : Game
         {
             Camera.Position = new Vector2(Dimensions.X / 2, Dimensions.Y / 2);
             startup = false;
+
+            System.Console.WriteLine(width + " * " + height);
         }
     }
 
