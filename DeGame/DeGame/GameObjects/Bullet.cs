@@ -30,6 +30,6 @@ class Bullet : SpriteGameObject
     // Draw the bullets
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/bullet1"), position);
     }
 }

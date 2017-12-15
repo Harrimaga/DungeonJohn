@@ -27,8 +27,8 @@ public class Room : GameObjectList
         StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
         string line = fileReader.ReadLine();
 
-        CellWidth = 50;
-        CellHeight = 50;
+        CellWidth = 60;
+        CellHeight = 60;
 
         while (line != null)
         {
@@ -40,7 +40,7 @@ public class Room : GameObjectList
         roomarrayheight = textLines.Count;
         roomwidth = line.Length * CellWidth;
         roomheight = textLines.Count * CellHeight;
-        roomarray = new string[line.Length, textLines.Count];
+        roomarray = new string[roomarraywidth, roomarrayheight];
 
         for (int x = 0; x < line.Length; ++x)        
             for (int y = 0; y < textLines.Count; ++y)
@@ -90,8 +90,8 @@ public class Room : GameObjectList
     }
     void CreateEnemy()
     {
-        for (int x = 0; x < 11; x++)
-            for (int y = 0; y < 9; y++)
+        for (int x = 0; x < roomarraywidth; x++)
+            for (int y = 0; y < roomarrayheight; y++)
             { 
             if(roomarray[x, y] == "ChasingEnemy")
             {
@@ -105,8 +105,8 @@ public class Room : GameObjectList
     {
         if (start) {OnLoad();}
         enemies.Update(gameTime);
-        for (int x = 0; x < 11; x++)
-            for (int y = 0; y < 9; y++)
+        for (int x = 0; x < roomarraywidth; x++)
+            for (int y = 0; y < roomarrayheight; y++)
             {
                 if (roomarray[x, y] == "UpDoor")
                 {
@@ -130,11 +130,8 @@ public class Room : GameObjectList
     }
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-
-         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), Vector2.One, Color.White);
-
-        for (int x = 0; x < 11; x++)
-            for(int y = 0; y < 9; y++)            
+        for (int x = 0; x < roomarray.GetLength(0); x++)
+            for (int y = 0; y < roomarray.GetLength(1); y++)
                 if (roomarray != null)
                     switch (roomarray[x, y])
                     {
@@ -148,16 +145,16 @@ public class Room : GameObjectList
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "Pit":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.DarkBlue, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Eind Sprite2")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "Item":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Purple, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Item1")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "Exit":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Purple, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "Start":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Yellow, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/StartTile4")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight - 100), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             //System.Console.WriteLine(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight).ToString());
                             PlayingState.currentFloor.startPlayerPosition = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
                             //Camera.Position = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
