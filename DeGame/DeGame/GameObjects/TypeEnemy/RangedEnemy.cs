@@ -16,10 +16,12 @@ public class RangedEnemy : Enemy
     
 {
     GameObjectList bullets;
+    int counter = 60;
 
     public RangedEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
     {
         bullets = new GameObjectList();
+        
     }
 
     public override void Chase()
@@ -29,7 +31,7 @@ public class RangedEnemy : Enemy
             {
                 base.Chase();
             }
-        else
+        else if(counter == 0)
         {
             Shoot();
         }
@@ -38,6 +40,10 @@ public class RangedEnemy : Enemy
     {
         base.Update(gameTime);
         Chase();
+        bullets.Update(gameTime);
+        counter--;
+        if (counter < 0)
+            counter = 60;
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
@@ -50,7 +56,7 @@ public class RangedEnemy : Enemy
     }
     public void Shoot()
     {
-        EnemyBullet bullet = new EnemyBullet();
+        EnemyBullet bullet = new EnemyBullet(position);
         bullets.Add(bullet);
     }
 }
