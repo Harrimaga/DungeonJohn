@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 class EnemyBullet : SpriteGameObject
     //Niewe Code hier en in RangedEnemy;
+    //0:30 min;
+
 {
     public EnemyBullet(Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") :  base("Sprites/Random", layer, id)
     {
@@ -17,7 +19,6 @@ class EnemyBullet : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         position += velocity;
-        base.Update(gameTime);
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
