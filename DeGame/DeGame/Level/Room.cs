@@ -157,7 +157,7 @@ public class Room : GameObjectList
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Orange, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "Start":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Yellow, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/StartTile4")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight - 100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             //System.Console.WriteLine(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight).ToString());
                             PlayingState.currentFloor.startPlayerPosition = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
                             //Camera.Position = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
