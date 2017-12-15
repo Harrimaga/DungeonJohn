@@ -20,6 +20,7 @@ public class PlayingState : IGameObject
         player = new Player();
         floor = new Floor();
         currentFloor = floor;
+        //enemy = new RangedEnemy(Vector2.Zero, 0, "Enemy");
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {
@@ -40,6 +41,7 @@ public class PlayingState : IGameObject
         player.Update(gameTime);
         Console.WriteLine(player.position.ToString());
         floor.Update(gameTime);
+        //enemy.Update(gameTime);
     }
     public virtual void Reset()
     {

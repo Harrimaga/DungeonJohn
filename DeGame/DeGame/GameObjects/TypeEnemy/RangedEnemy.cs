@@ -14,9 +14,11 @@ using Microsoft.Xna.Framework.Graphics;
 //TODO: Health
 public class RangedEnemy : Enemy
 {
+    public GameObjectList bullets;
+
     public RangedEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
     {
-
+        bullets = new GameObjectList();
     }
 
     public override void Chase()
@@ -26,14 +28,26 @@ public class RangedEnemy : Enemy
             {
                 base.Chase();
             }
+        else
+        {
+            Shoot(0);
+        }
+    }
+
+    public void Shoot(int direction)
+    {
+        Bullet bullet = new Bullet(position, direction);
+        bullets.Add(bullet);
     }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        bullets.Update(gameTime);
         Chase();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        bullets.Draw(gameTime, spriteBatch);
         base.Draw(gameTime, spriteBatch);
         if (Die == false)
         {
