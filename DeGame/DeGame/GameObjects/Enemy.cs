@@ -33,6 +33,7 @@ public class Enemy : SpriteGameObject
             Die = true;
         }
 
+
         base.Update(gameTime);
         if (CollidesWith(PlayingState.player))
         {

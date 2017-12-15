@@ -14,7 +14,7 @@ class EnemyBullet : SpriteGameObject
     public EnemyBullet(Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") :  base("Sprites/Random", layer, id)
     {
         position = Startpositon;
-        velocity = (PlayingState.player.position - position)/100;
+        velocity = (PlayingState.player.position - position)/50;
     }
     public override void Update(GameTime gameTime)
     {
