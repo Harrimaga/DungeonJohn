@@ -102,7 +102,6 @@
     <Content Include="Content\Sprites\Random.png" />
     <Content Include="Content\Sprites\Rock Sprite.png" />
     <Content Include="Content\Sprites\Standardtile.png" />
-    <Content Include="Content\Sprites\Start Sprite1.png" />
     <Content Include="Content\Sprites\Wall Sprite.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
