@@ -34,7 +34,7 @@ namespace DeGame
         {
             base.LoadContent();
 
-            WindowSize = new Point(550, 450);
+            WindowSize = new Point(1760, 990);
             FullScreen = false;
 
             gameStateManager.AddGameState("MainMenu", new MainMenuState());
