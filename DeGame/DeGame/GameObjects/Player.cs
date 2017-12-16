@@ -16,6 +16,7 @@ public class Player : SpriteGameObject
     protected float attackspeed;
     protected float range;
     bool next = false;
+    public Vector2 basevector;
     protected float ammo = 20;
 
     public GameObjectList bullets;
@@ -27,6 +28,8 @@ public class Player : SpriteGameObject
         bullets = new GameObjectList();
         //position = new Vector2(100, 100);
         healthbar = new HealthBar(health, maxhealth, position);
+        velocity = new Vector2(5, 5);
+        basevector = new Vector2(5, 5);
     }
 
     // Update player and bullets
@@ -58,19 +61,19 @@ public class Player : SpriteGameObject
         // Player movement
         if (inputHelper.IsKeyDown(Keys.W))
         {
-            position.Y = position.Y - 5;
+            position.Y -= velocity.Y;
         }
         if (inputHelper.IsKeyDown(Keys.S))
         {
-            position.Y += 5;
+            position.Y += velocity.Y;
         }
         if (inputHelper.IsKeyDown(Keys.D))
         {
-            position.X = position.X + 5;
+            position.X += velocity.X;
         }
         if (inputHelper.IsKeyDown(Keys.A))
         {
-            position.X -= 5;
+            position.X -= velocity.X;
         }
         if (ammo > 0)
         {
