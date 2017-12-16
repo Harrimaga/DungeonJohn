@@ -315,12 +315,24 @@ public class Floor
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        
+
+        if (FloorGenerated == false)
+        {
             for (int a = 0; a < floorWidth; a++)
                 for (int b = 0; b < floorHeight; b++)
                     if (floor[a, b] != null)
                     {
+
                         floor[a, b].LoadTiles();
+                    }
+            
+        }
+
+        for (int a = 0; a < floorWidth; a++)
+                for (int b = 0; b < floorHeight; b++)
+                    if (floor[a, b] != null)
+                    {
+                        
                         floor[a, b].Draw(gameTime, spriteBatch, a, b);
                     }
         //FloorGenerated = false;
@@ -331,7 +343,7 @@ public class Floor
             Camera.Position = startPlayerPosition;
             FloorGenerated = true;
         }
-
+       
             DrawMinimap(spriteBatch);
     }
 }
