@@ -121,12 +121,15 @@ public class Room : GameObjectList
         if (PlayingState.player.position.X >= Up.X && PlayingState.player.position.X <= Up.X + CellWidth)
             if (PlayingState.player.position.X >= Up.Y && PlayingState.player.position.Y <= Up.Y + CellHeight)
                 Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - roomheight);
+
         if (PlayingState.player.position.X >= Down.X && PlayingState.player.position.X <= Down.X + CellWidth)
             if (PlayingState.player.position.X >= Down.Y && PlayingState.player.position.Y <= Down.Y + CellHeight)
                 Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + roomheight);
+
         if (PlayingState.player.position.X >= Left.X && PlayingState.player.position.X <= Left.X + CellWidth)
             if (PlayingState.player.position.X >= Left.Y && PlayingState.player.position.Y <= Left.Y + CellHeight)
                 Camera.Position = new Vector2(Camera.Position.X - roomwidth, Camera.Position.Y);
+
         if (PlayingState.player.position.X >= Right.X && PlayingState.player.position.X <= Right.X + CellWidth)
             if (PlayingState.player.position.X >= Right.Y && PlayingState.player.position.Y <= Right.Y + CellHeight)
                 Camera.Position = new Vector2(Camera.Position.X + roomwidth, Camera.Position.Y + roomheight);
