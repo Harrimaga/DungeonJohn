@@ -73,15 +73,15 @@ public class Enemy : SpriteGameObject
         healthbar.Draw(spriteBatch, position);
     }
 
-    public bool CheckSurround(int x, int y)
-    {
-        position.X = x;
-        position.Y = y;
-        if (room.roomarray[x, y] == "Wall");
-        {
-            return true;
-        }
-    }
+    //public bool CheckSurround(int x, int y)
+    //{
+    //    position.X = x;
+    //    position.Y = y;
+    //    if (room.roomarray[x, y] == "Wall");
+    //    {
+    //        return true;
+    //    }
+    //}
     public virtual void Chase()
     {
             if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
