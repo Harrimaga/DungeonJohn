@@ -128,6 +128,7 @@ public class Room : GameObjectList
             }
         start = false;
     }
+
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         for (int x = 0; x < roomarray.GetLength(0); x++)

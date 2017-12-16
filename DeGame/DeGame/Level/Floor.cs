@@ -291,22 +291,22 @@ public class Floor
         if (inputHelper.KeyPressed(Keys.R))
             NextFloor();
 
-        if (inputHelper.IsKeyDown(Keys.Right))
-        {
-            Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
-        }
-        if (inputHelper.IsKeyDown(Keys.Left))
-        {
-            Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
-        }
-        if (inputHelper.IsKeyDown(Keys.Up))
-        {
-            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
-        }
-        if (inputHelper.IsKeyDown(Keys.Down))
-        {
-            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
-        }
+        //if (inputHelper.IsKeyDown(Keys.Right))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
+        //}
+        //if (inputHelper.IsKeyDown(Keys.Left))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
+        //}
+        //if (inputHelper.IsKeyDown(Keys.Up))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
+        //}
+        //if (inputHelper.IsKeyDown(Keys.Down))
+        //{
+        //    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
+        //}
     }
     
     void DrawMinimap(SpriteBatch spriteBatch)
@@ -336,11 +336,24 @@ public class Floor
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         string Level = "Level " + CurrentLevel;
+
+        if (FloorGenerated == false)
+        {
             for (int a = 0; a < floorWidth; a++)
                 for (int b = 0; b < floorHeight; b++)
                     if (floor[a, b] != null)
                     {
+
                         floor[a, b].LoadTiles();
+                    }
+            
+        }
+
+        for (int a = 0; a < floorWidth; a++)
+                for (int b = 0; b < floorHeight; b++)
+                    if (floor[a, b] != null)
+                    {
+                        
                         floor[a, b].Draw(gameTime, spriteBatch);
                     }
         //FloorGenerated = false;
@@ -348,10 +361,10 @@ public class Floor
         if (FloorGenerated == false)
         {
             PlayingState.player.position = startPlayerPosition - new Vector2(23, 22);
-            Camera.Position = startPlayerPosition;
+            Camera.Position = startPlayerPosition + new Vector2(175, 60) ;
             FloorGenerated = true;
         }
-
+       
             DrawMinimap(spriteBatch);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(GameEnvironment.WindowSize.X - 200 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2),(Camera.Position.Y - GameEnvironment.WindowSize.Y / 2))
 , Color.White);
