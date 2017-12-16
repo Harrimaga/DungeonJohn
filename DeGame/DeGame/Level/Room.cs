@@ -12,6 +12,7 @@ public class Room : GameObjectList
     public int a, b;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight;
+    Vector2 Up, Down, Left, Right;
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
@@ -23,9 +24,9 @@ public class Room : GameObjectList
 
     public void LoadTiles()
     {
-        List<string> textLines = new List<string>();
         StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
         string line = fileReader.ReadLine();
+        List<string> textLines = new List<string>();
 
         CellWidth = GameEnvironment.assetManager.GetSprite("Sprites/Standardtile").Width;
         CellHeight = GameEnvironment.assetManager.GetSprite("Sprites/Standardtile").Height;
@@ -41,93 +42,97 @@ public class Room : GameObjectList
         roomwidth = line.Length * CellWidth;
         roomheight = textLines.Count * CellHeight;
         roomarray = new string[roomarraywidth, roomarrayheight];
+        for (int x = 0; x < roomarraywidth; ++x)
+            for (int y = 0; y < roomarrayheight; ++y)
+                AssignType(textLines[y][x], x, y);
+        //System.Console.WriteLine(roomarray[x, y]);
+    }       
+    
 
-        for (int x = 0; x < line.Length; ++x)        
-            for (int y = 0; y < textLines.Count; ++y)
-            {
-                roomarray[x, y] = AssignType(textLines[y][x]);
-                //System.Console.WriteLine(roomarray[x, y]);
-            }        
-    }
-
-    private string AssignType(char filetext)
+    private void AssignType(char textlines,int x, int y)
     {
-        switch (filetext)
-        {
-            case '.':
-                return "Background";
-            case '!':
-                return "Rock";
-            case '+':
-                return "Wall";
-
-            case '-':
-                return "UpDoor";
-            case '=':
-                return "DownDoor";
-            case '>':
-                return "RightDoor";
-            case '<':
-                return "LeftDoor";
-
-            case 'C':
-                return "ChasingEnemy";
-            case 'O':
-                return "Pit";
-            case 'I':
-                return "Item";
-            case 'E':
-                return "Exit";
-            case 'S':
-                return "Start";
-            default:
-                return "N/A";
-        }
+                switch (textlines)
+                {
+                    case '.':
+                        roomarray[x,y] = "Background";
+                        break;
+                    case '!':
+                        roomarray[x, y] = "Rock";
+                        break;
+                    case '+':
+                        roomarray[x, y] = "Wall";
+                        break;
+                    case '-':
+                        roomarray[x, y] = "UpDoor";
+                        Up = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                        break;
+                    case '=':
+                        roomarray[x, y] = "DownDoor";
+                        Down = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                        break;
+                    case '<':
+                        roomarray[x, y] = "LeftDoor";
+                        Left = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                        break;
+                    case '>':
+                        roomarray[x, y] = "RightDoor";
+                        Right = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                        break;
+                    case 'C':
+                        roomarray[x, y] = "ChasingEnemy";
+                        break;
+                    case 'O':
+                        roomarray[x, y] = "Pit";
+                        break;
+                    case 'I':
+                        roomarray[x, y] = "Item";
+                        break;
+                    case 'E':
+                        roomarray[x, y] = "Exit";
+                        break;
+                    case 'S':
+                        roomarray[x, y] = "Start";
+                        break;
+                    default:
+                        roomarray[x, y] = "N/A";
+                        break;
+                }
     }
     void OnLoad()
     {
         CreateEnemy();
     }
+
     void CreateEnemy()
     {
         for (int x = 0; x < roomarraywidth; x++)
             for (int y = 0; y < roomarrayheight; y++)
-            { 
-            if(roomarray[x, y] == "ChasingEnemy")
-            {
-                Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth /*+ a * roomwidth*/, y * CellHeight /*+ b * roomheight*/), 0, "ChasingEnemy");
-                enemies.Add(enemy);
-          }
-        }
+                if (roomarray[x, y] == "ChasingEnemy")
+                {
+                    Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth /*+ a * roomwidth*/, y * CellHeight /*+ b * roomheight*/), 0, "ChasingEnemy");
+                    enemies.Add(enemy);
+                }        
       }
  
-    public override void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
         if (start) {OnLoad();}
         enemies.Update(gameTime);
-        for (int x = 0; x < roomarraywidth; x++)
-            for (int y = 0; y < roomarrayheight; y++)
-            {
-                if (roomarray[x, y] == "UpDoor")
-                {
-                    //move camera up
-                }
-                else if (roomarray[x, y] == "DownDoor")
-                {
-                    //move camera down
-                }
-                else if (roomarray[x, y] == "RightDoor")
-                {
-                    //move camera right
-                }
-                else if (roomarray[x, y] == "LeftDoor")
-                {
-                    //move camera left
-                }
-
-            }
+        if (PlayingState.player.position.X >= Up.X && PlayingState.player.position.X <= Up.X + CellWidth)
+            if (PlayingState.player.position.X >= Up.Y && PlayingState.player.position.Y <= Up.Y + CellHeight)
+                Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - roomheight);
+        if (PlayingState.player.position.X >= Down.X && PlayingState.player.position.X <= Down.X + CellWidth)
+            if (PlayingState.player.position.X >= Down.Y && PlayingState.player.position.Y <= Down.Y + CellHeight)
+                Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + roomheight);
+        if (PlayingState.player.position.X >= Left.X && PlayingState.player.position.X <= Left.X + CellWidth)
+            if (PlayingState.player.position.X >= Left.Y && PlayingState.player.position.Y <= Left.Y + CellHeight)
+                Camera.Position = new Vector2(Camera.Position.X - roomwidth, Camera.Position.Y);
+        if (PlayingState.player.position.X >= Right.X && PlayingState.player.position.X <= Right.X + CellWidth)
+            if (PlayingState.player.position.X >= Right.Y && PlayingState.player.position.Y <= Right.Y + CellHeight)
+                Camera.Position = new Vector2(Camera.Position.X + roomwidth, Camera.Position.Y + roomheight);
         start = false;
     }
+
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         for (int x = 0; x < roomarray.GetLength(0); x++)
