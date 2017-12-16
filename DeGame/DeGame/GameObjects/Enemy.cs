@@ -82,8 +82,8 @@ public class Enemy : SpriteGameObject
     }
     public virtual void Chase()
     {
-        if (CheckSurround(b + 1, a) == false)
-        {
+        //if (CheckSurround(b + 1, a) == false)
+        //{
             if (position.Y + sprite.Height > PlayingState.player.position.Y)
             {
                 position.Y -= velocity.Y;
@@ -100,7 +100,7 @@ public class Enemy : SpriteGameObject
             {
                 position.X += velocity.X;
             }
-        }
+        //}
     }
 }
 

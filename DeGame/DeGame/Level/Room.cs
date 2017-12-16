@@ -9,7 +9,6 @@ public class Room : GameObjectList
     public bool up = false, down = false, left = false, right = false;
     public GameObjectList enemies;
     public bool start = true;
-    public bool newEnemy = true;
     public int a, b;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight;
@@ -47,7 +46,6 @@ public class Room : GameObjectList
             for (int y = 0; y < textLines.Count; ++y)
             {
                 roomarray[x, y] = AssignType(textLines[y][x], x , y);
-                //System.Console.WriteLine(roomarray[x, y]);
             }        
     }
 
@@ -73,11 +71,9 @@ public class Room : GameObjectList
 
             case 'R':
                 CreateEnemy(x, y, "R");
-                newEnemy = true;
                 return "RangedEnemy";
             case 'C':
                 CreateEnemy(x,y,"C");
-                //newEnemy = true;
                 return "ChasingEnemy";
             case 'O':
                 return "Pit";
@@ -97,8 +93,6 @@ public class Room : GameObjectList
     }
     void CreateEnemy(int x,int y, string TypeEnemy)
     {
-        if (newEnemy)
-        {
             if (TypeEnemy == "C")
             {
                 Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
@@ -110,8 +104,6 @@ public class Room : GameObjectList
                 Enemy enemy = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
                 enemies.Add(enemy);
             }
-        }
-        newEnemy = false;
     }
  
     public override void Update(GameTime gameTime)
@@ -205,10 +197,10 @@ public class Room : GameObjectList
                             break;
 
                         case "RangedEnemy":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
                             break;
                         case "ChasingEnemy":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
                             break;
                         default:
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Red);
