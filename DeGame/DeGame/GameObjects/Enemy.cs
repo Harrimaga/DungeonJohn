@@ -17,6 +17,7 @@ public class Enemy : SpriteGameObject
     int roomlistIndex, A, B, b, a;
     protected Vector2 basevelocity = new Vector2(1, 1);
     public Room room; //?
+    Texture2D playersprite;
     HealthBar healthbar;
 
     public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
@@ -24,6 +25,7 @@ public class Enemy : SpriteGameObject
     {
         healthbar = new HealthBar(health, maxhealth, position);
         room = new Room(roomlistIndex, A, B, 0, "Room");
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
         position = startPosition;
         velocity = basevelocity;
     }
@@ -82,25 +84,22 @@ public class Enemy : SpriteGameObject
     }
     public virtual void Chase()
     {
-        //if (CheckSurround(b + 1, a) == false)
-        //{
-            if (position.Y + sprite.Height > PlayingState.player.position.Y)
+            if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
             {
                 position.Y -= velocity.Y;
             }
-            if (position.Y - sprite.Height < PlayingState.player.position.Y)
+            if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
             {
                 position.Y += velocity.Y;
             }
-            if (position.X + sprite.Width > PlayingState.player.position.X)
+            if (position.X + playersprite.Width > PlayingState.player.position.X + 1)
             {
                 position.X -= velocity.X;
             }
-            if (position.X - sprite.Width < PlayingState.player.position.X)
+            if (position.X - playersprite.Width < PlayingState.player.position.X - 1)
             {
                 position.X += velocity.X;
             }
-        //}
     }
 }
 

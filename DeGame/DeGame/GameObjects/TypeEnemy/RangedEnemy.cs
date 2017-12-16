@@ -27,7 +27,7 @@ public class RangedEnemy : Enemy
         if(PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
             PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
             {
-                base.Chase();
+                Chase();
             }
         else if (counter == 0)
         {
