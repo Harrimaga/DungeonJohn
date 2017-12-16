@@ -348,12 +348,12 @@ public class Floor
         if (FloorGenerated == false)
         {
             PlayingState.player.position = startPlayerPosition - new Vector2(23, 22);
-            Camera.Position = startPlayerPosition;
+            Camera.Position = startPlayerPosition + new Vector2(170,0);
             FloorGenerated = true;
         }
-
-            DrawMinimap(spriteBatch);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(GameEnvironment.WindowSize.X - 200 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2),(Camera.Position.Y - GameEnvironment.WindowSize.Y / 2))
+        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUDbackground")), new Vector2(GameEnvironment.WindowSize.X - 340 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2),(Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.White);
+        DrawMinimap(spriteBatch);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(GameEnvironment.WindowSize.X - 275 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2),(Camera.Position.Y - GameEnvironment.WindowSize.Y / 2) + 50)
 , Color.White);
     }
 }

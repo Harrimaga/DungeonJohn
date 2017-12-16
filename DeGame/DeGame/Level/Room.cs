@@ -27,8 +27,8 @@ public class Room : GameObjectList
         StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
         string line = fileReader.ReadLine();
 
-        CellWidth = 60;
-        CellHeight = 60;
+        CellWidth = GameEnvironment.assetManager.GetSprite("Sprites/Standardtile").Width;
+        CellHeight = GameEnvironment.assetManager.GetSprite("Sprites/Standardtile").Height;
 
         while (line != null)
         {
