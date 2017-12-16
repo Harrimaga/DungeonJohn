@@ -6,12 +6,12 @@ using Microsoft.Xna.Framework;
 public class Room : GameObjectList
 {
     public int RoomListIndex;
-    public bool up = false, down = false, left = false, right = false;
+    public bool up = false, down = false, left = false, right = false, onup = false, ondown = false, onleft = false, onright = false;
     public GameObjectList enemies;
     public bool start = true;
     public int a, b;
     public string[,] roomarray;
-    int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight;
+    int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
     Vector2 Up, Down, Left, Right;
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
@@ -62,6 +62,7 @@ public class Room : GameObjectList
                     case '+':
                         roomarray[x, y] = "Wall";
                         break;
+
                     case '-':
                         roomarray[x, y] = "UpDoor";
                         Up = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
@@ -78,6 +79,7 @@ public class Room : GameObjectList
                         roomarray[x, y] = "RightDoor";
                         Right = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
                         break;
+
                     case 'C':
                         roomarray[x, y] = "ChasingEnemy";
                         break;
@@ -117,33 +119,82 @@ public class Room : GameObjectList
             }
     }
 
+    void ControlCamera()
+    {
+        Vector2 Cam = Camera.Position;
+
+        if (PlayingState.player.position.X >= Up.X && PlayingState.player.position.X <= Up.X + CellWidth)
+            if (PlayingState.player.position.Y >= Up.Y && PlayingState.player.position.Y <= Up.Y + CellHeight)
+            {
+                counter = 0;
+                onup = true;
+                PlayingState.player.position -= new Vector2(0, 2 * CellHeight);
+            }
+
+        if (PlayingState.player.position.X >= Down.X && PlayingState.player.position.X <= Down.X + CellWidth)
+            if (PlayingState.player.position.Y >= Down.Y && PlayingState.player.position.Y <= Down.Y + CellHeight)
+            {
+                counter = 0;
+                ondown = true;
+                PlayingState.player.position += new Vector2(0, 2 * CellHeight);
+            }
+
+        if (PlayingState.player.position.X >= Left.X && PlayingState.player.position.X <= Left.X + CellWidth)
+            if (PlayingState.player.position.Y >= Left.Y && PlayingState.player.position.Y <= Left.Y + CellHeight)
+            {
+                counter = 0;        //ligt aan deze
+                onleft = true;      //ligt aan deze
+                PlayingState.player.position -= new Vector2(2 * CellHeight, 0);
+            }
+
+        if (PlayingState.player.position.X >= Right.X && PlayingState.player.position.X <= Right.X + CellWidth)
+            if (PlayingState.player.position.Y >= Right.Y && PlayingState.player.position.Y <= Right.Y + CellHeight)
+            {
+                counter = 0;        //ligt aan deze
+                onright = true;     //ligt aan deze
+                PlayingState.player.position += new Vector2(2 * CellHeight, 0);
+            }
+        start = false;
+
+        if (Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
+        {
+            Camera.Position -= new Vector2(0, roomheight / 30);
+            counter++;
+        }
+        if (Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 30)
+        {
+            Camera.Position += new Vector2(0, roomheight / 30);
+            counter++;
+        }
+        if (Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 30)
+        {
+            Camera.Position -= new Vector2(roomwidth / 30, 0);
+            counter++;
+        }
+        if (Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 30)
+        {
+            Camera.Position += new Vector2(roomwidth / 30, 0);
+            counter++;
+        }
+
+        if (counter >= 30)
+        {
+            onup = false;
+            ondown = false;
+            onleft = false;
+            onright = false;
+        }
+    }
+
     public void Update(GameTime gameTime)
     {
-        //if (start) {OnLoad();}
         if (enemies.Children != null)
             foreach (Enemy enemy in enemies.Children)
                 enemies.Update(gameTime);
 
         if (start) { OnLoad(); }
         enemies.Update(gameTime);
-
-        if (PlayingState.player.position.X >= Up.X && PlayingState.player.position.X <= Up.X + CellWidth)
-            if (PlayingState.player.position.X >= Up.Y && PlayingState.player.position.Y <= Up.Y + CellHeight)
-                Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - roomheight);
-
-        if (PlayingState.player.position.X >= Down.X && PlayingState.player.position.X <= Down.X + CellWidth)
-            if (PlayingState.player.position.X >= Down.Y && PlayingState.player.position.Y <= Down.Y + CellHeight)
-                Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + roomheight);
-
-        if (PlayingState.player.position.X >= Left.X && PlayingState.player.position.X <= Left.X + CellWidth)
-            if (PlayingState.player.position.X >= Left.Y && PlayingState.player.position.Y <= Left.Y + CellHeight)
-                Camera.Position = new Vector2(Camera.Position.X - roomwidth, Camera.Position.Y);
-
-        if (PlayingState.player.position.X >= Right.X && PlayingState.player.position.X <= Right.X + CellWidth)
-            if (PlayingState.player.position.X >= Right.Y && PlayingState.player.position.Y <= Right.Y + CellHeight)
-                Camera.Position = new Vector2(Camera.Position.X + roomwidth, Camera.Position.Y + roomheight);
-            start = false;
-        
+        ControlCamera();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

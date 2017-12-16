@@ -360,7 +360,7 @@ public class Floor
         if (FloorGenerated == false)
         {
             PlayingState.player.position = startPlayerPosition - new Vector2(23, 22);
-            Camera.Position = startPlayerPosition + new Vector2(170, 0) ;
+            Camera.Position = startPlayerPosition + new Vector2(170, 0);
             FloorGenerated = true;
         }
         DrawMinimap(spriteBatch);
