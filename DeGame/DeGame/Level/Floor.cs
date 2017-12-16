@@ -8,8 +8,7 @@ public class Floor
     Room[,] floor;
     bool[,] Checked;
     int[,] AdjacentRooms;
-    int[,] possiblechoice;
-    int[,] backupchoice;
+    int[,] possiblespecial;
     int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
     Random random = new Random();
     public Vector2 startPlayerPosition;
@@ -21,8 +20,7 @@ public class Floor
         floor = new Room[floorWidth, floorHeight];
         Checked = new bool[floorWidth, floorHeight];
         AdjacentRooms = new int[floorWidth, floorHeight];
-        possiblechoice = new int[floorWidth * floorHeight / 2, 2];
-        backupchoice = new int[floorWidth * floorHeight / 2, 2];
+        possiblespecial = new int[floorWidth * floorHeight / 2, 2];
         FloorGenerator();
     }
 
@@ -32,12 +30,14 @@ public class Floor
         int RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
         int x = random.Next(floorWidth - 2) + 2;
         int y = random.Next(floorHeight - 2) + 2;
-        floor[x, y] = new Room(1);
+        floor[x, y] = new Room(1, x, y);
         currentRoom = floor[x, y];
         //System.Console.WriteLine(currentRoom.position.ToString());
         FloorGeneratorRecursive(x, y, RoomAmount);
-        ChooseSpecialRoom(2);
-        ChooseSpecialRoom(3);
+        SpawnBossRoom(x, y);
+        SpawnItemRoom();
+        if (CurrentLevel >= 7)
+            SpawnItemRoom();
         //FloorGenerated = true;
     }
 
@@ -48,7 +48,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x, y + 1] == null && random.Next(100) <= CheckAdjacent(x, y + 1))
             {
                 CurrentRooms++;
-                floor[x, y + 1] = new Room(4);
+                floor[x, y + 1] = new Room(4, x, y + 1);
             }
             else
                 Checked[x, y + 1] = true;
@@ -59,7 +59,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x, y - 1] == null && random.Next(100) <= CheckAdjacent(x, y - 1))
             {
                 CurrentRooms++;
-                floor[x, y - 1] = new Room(4);
+                floor[x, y - 1] = new Room(4, x, y - 1);
             }
             else
                 Checked[x, y - 1] = true;
@@ -70,7 +70,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x + 1, y] == null && random.Next(100) <= CheckAdjacent(x + 1, y))
             {
                 CurrentRooms++;
-                floor[x + 1, y] = new Room(4);
+                floor[x + 1, y] = new Room(4, x + 1, y);
             }
             else
                 Checked[x + 1, y] = true;
@@ -81,7 +81,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x - 1, y] == null && random.Next(100) <= CheckAdjacent(x - 1, y))
             {
                 CurrentRooms++;
-                floor[x - 1, y] = new Room(4);
+                floor[x - 1, y] = new Room(4, x - 1,y);
             }
             else
                 Checked[x - 1, y] = true;
@@ -91,8 +91,8 @@ public class Floor
         int counter = 0;
         if (CurrentRooms < RoomAmount)
         {
-            for (int m = 0; m < floorWidth; m++)
-                for (int n = 0; n < floorHeight; n++)
+            for (int m = floorWidth - 1; m >= 0; m--)
+                for (int n = floorHeight - 1; n >= 0; n--)
                     if (floor[m, n] != null && Checked[m, n] == false)
                     {
                         FloorGeneratorRecursive(m, n, RoomAmount);
@@ -104,93 +104,120 @@ public class Floor
                 RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
                 x = random.Next(floorWidth - 2) + 2;
                 y = random.Next(floorHeight - 2) + 2;
-                floor[x, y] = new Room(1);
+                floor[x, y] = new Room(1, x, y);
                 FloorGeneratorRecursive(x, y, RoomAmount);
             }                       
         }
     }
 
-    void ChooseSpecialRoom(int Index)
+    void SpawnItemRoom()
     {
+        bool secondtime = false;
         if (b == 0)
         {
             for (int x = 0; x < floorWidth; x++)
                 for (int y = 0; y < floorHeight; y++)
-                {
-                    CheckAdjacent(x, y);
-                    if (AdjacentRooms[x, y] == 1 && CanSpawnSpecialRoom(x, y) == true)                    
-                        if (floor[x, y] == null)
+                    if (floor[x, y] == null && CanSpawnSpecialRoom(x, y) == true)                        
                         {
-                            backupchoice[b, 0] = x;
-                            backupchoice[b, 1] = y;
+                            possiblespecial[b, 0] = x;
+                            possiblespecial[b, 1] = y;
                             b++;
-                        }                    
-                }
+                        }                           
         }  
-            q = random.Next(b - 1);
-            floor[backupchoice[q, 0], backupchoice[q, 1]] = new Room(Index);
+        else
+            secondtime = true;
+        q = random.Next(b - 1);
+        if (secondtime == true)
+        {
+            CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
+            while (AdjacentRooms[possiblespecial[q, 0], possiblespecial[q, 1]] != 1)
+            {
+                q = random.Next(b - 1);
+                CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
+            }
+        }
+            floor[possiblespecial[q, 0], possiblespecial[q, 1]] = new Room(3, possiblespecial[q, 0], possiblespecial[q, 1]);
             if (q != 0)
             {
-                backupchoice[q, 0] = backupchoice[q - 1, 0];
-                backupchoice[q, 1] = backupchoice[q - 1, 1];
+                possiblespecial[q, 0] = possiblespecial[q - 1, 0];
+                possiblespecial[q, 1] = possiblespecial[q - 1, 1];
             }
             else
             {
-                backupchoice[q, 0] = backupchoice[q + 1, 0];
-                backupchoice[q, 1] = backupchoice[q + 1, 1];
+                possiblespecial[q, 0] = possiblespecial[q + 1, 0];
+                possiblespecial[q, 1] = possiblespecial[q + 1, 1];
             }        
     }
 
     bool CanSpawnSpecialRoom(int x, int y)
     {
-        int counter = 0;
-        if (x + 1 >= floorWidth)
-            counter++;
-        else if (floor[x + 1, y] == null || floor[x + 1, y].RoomListIndex >= 4)
-            counter++;
-        if (x - 1 < 0)
-            counter++;
-        else if (floor[x - 1, y] == null || floor[x - 1, y].RoomListIndex >= 4)
-            counter++;
-        if (y + 1 > -floorHeight)
-            counter++;
-        else if (floor[x, y + 1] == null || floor[x, y + 1].RoomListIndex >= 4)
-            counter++;
-        if (y - 1 < 0)
-            counter++;
-        else if (floor[x, y - 1] == null || floor[x, y - 1].RoomListIndex >= 4)
-            counter++;
-        if (counter == 4)
-            return true;
+        CheckAdjacent(x, y);
+        if (AdjacentRooms[x, y] == 1)
+        {
+            int counter = 0;
+            if (x + 1 >= floorWidth)
+                counter++;
+            else if (floor[x + 1, y] == null || floor[x + 1, y].RoomListIndex >= 4)
+                counter++;
+            if (x - 1 < 0)
+                counter++;
+            else if (floor[x - 1, y] == null || floor[x - 1, y].RoomListIndex >= 4)
+                counter++;
+            if (y + 1 > -floorHeight)
+                counter++;
+            else if (floor[x, y + 1] == null || floor[x, y + 1].RoomListIndex >= 4)
+                counter++;
+            if (y - 1 < 0)
+                counter++;
+            else if (floor[x, y - 1] == null || floor[x, y - 1].RoomListIndex >= 4)
+                counter++;
+            if (counter == 4)
+                return true;
+        }
         return false;
+    }
+
+    void SpawnBossRoom(int x, int y)
+    {
+        int DistancefromStart = 0;
+        int bossx = 4, bossy = 4;
+        for (int a = 0; a < floorWidth; a++)
+            for (int b = 0; b < floorHeight; b++)
+                if (floor[a, b] == null && CanSpawnSpecialRoom(a, b) == true && Math.Abs(x - a) + Math.Abs(y - b) > DistancefromStart)
+                {
+                    bossx = a;
+                    bossy = b;
+                }         
+        floor[bossx, bossy] = new Room(2, bossx, bossy);
     }
 
     int CheckAdjacent(int x, int y)
     {
-        int RoomSpawnChance = 30;
+        int RoomSpawnChance = 70;
+        int SpawnChanceReduction = 20;
         int neighbours = 0;
         if (y + 1 < floorHeight && floor[x, y + 1] != null)
         {
-            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
         if (y - 1 >= 0 && floor[x, y - 1] != null)
         {
-            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
         if (x + 1 < floorWidth && floor[x + 1, y] != null)
         {
-            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
         if (x - 1 >= 0 && floor[x - 1, y] != null)
         {
-            RoomSpawnChance = RoomSpawnChance / 12 * 10;
+            RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
         AdjacentRooms[x, y] = neighbours;
-        return RoomSpawnChance * 12 / 10;
+        return RoomSpawnChance * SpawnChanceReduction / 10;
     }
     
     void ClearFloor()
@@ -212,10 +239,11 @@ public class Floor
         floor = new Room[floorWidth, floorHeight];
         Checked = new bool[floorWidth, floorHeight];
         AdjacentRooms = new int[floorWidth, floorHeight];
-        //floorWidth = floor.GetLength(0);
-        //floorHeight = floor.GetLength(1);
-        maxRooms += 3;
-        minRooms += 3;
+        if (CurrentLevel <= 10)
+        {
+            maxRooms += 3;
+            minRooms += 3;
+        }
         FloorGenerator();
         CurrentLevel++;
         FloorGenerated = false;
@@ -263,58 +291,51 @@ public class Floor
         if (inputHelper.KeyPressed(Keys.R))
             NextFloor();
 
-        //if(inputHelper.IsKeyDown(Keys.Right))
-        //{
-        //    Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
-        //}
-        //if (inputHelper.IsKeyDown(Keys.Left))
-        //{
-        //    Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
-        //}
-        //if (inputHelper.IsKeyDown(Keys.Up))
-        //{
-        //    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
-        //}
-        //if (inputHelper.IsKeyDown(Keys.Down))
-        //{
-        //    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
-        //}
+        if (inputHelper.IsKeyDown(Keys.Right))
+        {
+            Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
+        }
+        if (inputHelper.IsKeyDown(Keys.Left))
+        {
+            Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
+        }
+        if (inputHelper.IsKeyDown(Keys.Up))
+        {
+            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
+        }
+        if (inputHelper.IsKeyDown(Keys.Down))
+        {
+            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
+        }
     }
     
     void DrawMinimap(SpriteBatch spriteBatch)
     {
-
-        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), Vector2.Zero, Color.White);
-
         int FloorCellWidth = 15;
         int FloorCellHeight = 15;
+        //spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Minimap HUD")), new Vector2(GameEnvironment.WindowSize.X - 200 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.White);
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
                 if (floor[x, y] != null)
                 {
                     if (floor[x, y].RoomListIndex == 1)
                     {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(GameEnvironment.WindowSize.X - 200 + x * (FloorCellWidth + 2) + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), y * (FloorCellHeight + 2) + (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.Lime);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(GameEnvironment.WindowSize.X - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.Lime);
                         //Console.WriteLine(new Vector2(600 + x * (FloorCellWidth + 2) + Camera.Position.X, y * (FloorCellHeight + 2) + Camera.Position.Y).ToString());
                     }
-                    else if (floor[x, y].RoomListIndex == 2)
-                    {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(GameEnvironment.WindowSize.X - 200 + x * (FloorCellWidth + 2) + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), y * (FloorCellHeight + 2) + (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.Blue);
-                    }
-                    else if (floor[x, y].RoomListIndex == 3)
-                    {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(GameEnvironment.WindowSize.X - 200 + x * (FloorCellWidth + 2) + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), y * (FloorCellHeight + 2) + (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.Yellow);
-                    }
-                    else
-                    {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(GameEnvironment.WindowSize.X - 200 + x * (FloorCellWidth + 2) + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), y * (FloorCellHeight + 2) + (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.Red);
-                    }
+                    else if (floor[x, y].RoomListIndex == 2)                    
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(GameEnvironment.WindowSize.X - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.Blue);
+                    else if (floor[x, y].RoomListIndex == 3)                    
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(GameEnvironment.WindowSize.X - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.Yellow);                    
+                    else                    
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(GameEnvironment.WindowSize.X - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.Red);                    
                 }
         //TODO alleen kamer tekenen op minimap als de speler er is geweest
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        string Level = "Level " + CurrentLevel;
 
         if (FloorGenerated == false)
         {
@@ -345,6 +366,8 @@ public class Floor
         }
        
             DrawMinimap(spriteBatch);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(GameEnvironment.WindowSize.X - 200 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2),(Camera.Position.Y - GameEnvironment.WindowSize.Y / 2))
+, Color.White);
     }
 }
 
