@@ -291,29 +291,29 @@ public class Floor
         if (inputHelper.KeyPressed(Keys.R))
             NextFloor();
 
-        //if (inputHelper.IsKeyDown(Keys.Right))
-        //{
-        //    Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
-        //}
-        //if (inputHelper.IsKeyDown(Keys.Left))
-        //{
-        //    Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
-        //}
-        //if (inputHelper.IsKeyDown(Keys.Up))
-        //{
-        //    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
-        //}
-        //if (inputHelper.IsKeyDown(Keys.Down))
-        //{
-        //    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
-        //}
-    }
+        if (inputHelper.IsKeyDown(Keys.Right))
+        {
+            Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
+        }
+        if (inputHelper.IsKeyDown(Keys.Left))
+        {
+            Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
+        }
+        if (inputHelper.IsKeyDown(Keys.Up))
+        {
+            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
+        }
+        if (inputHelper.IsKeyDown(Keys.Down))
+        {
+            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
+            }
+        }
     
     void DrawMinimap(SpriteBatch spriteBatch)
     {
+        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUDbackground")), new Vector2(GameEnvironment.WindowSize.X - 340 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.White);
         int FloorCellWidth = 15;
         int FloorCellHeight = 15;
-        //spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Minimap HUD")), new Vector2(GameEnvironment.WindowSize.X - 200 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.White);
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
                 if (floor[x, y] != null)
@@ -345,8 +345,7 @@ public class Floor
                     {
 
                         floor[a, b].LoadTiles();
-                    }
-            
+                    }            
         }
 
         for (int a = 0; a < floorWidth; a++)
@@ -361,10 +360,9 @@ public class Floor
         if (FloorGenerated == false)
         {
             PlayingState.player.position = startPlayerPosition - new Vector2(23, 22);
-            Camera.Position = startPlayerPosition + new Vector2(175, 60) ;
+            Camera.Position = startPlayerPosition + new Vector2(170, 0) ;
             FloorGenerated = true;
         }
-        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUDbackground")), new Vector2(GameEnvironment.WindowSize.X - 340 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2),(Camera.Position.Y - GameEnvironment.WindowSize.Y / 2)), Color.White);
         DrawMinimap(spriteBatch);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(GameEnvironment.WindowSize.X - 275 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2),(Camera.Position.Y - GameEnvironment.WindowSize.Y / 2) + 50)
 , Color.White);
