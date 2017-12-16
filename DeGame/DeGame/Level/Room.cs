@@ -102,7 +102,7 @@ public class Room : GameObjectList
     {
         //CreateEnemy();
     }
-    void CreateEnemy(int x,int y, string TypeEnemy)
+    void CreateEnemy(int x, int y, string TypeEnemy)
     {
             if (TypeEnemy == "C")
             {
@@ -121,49 +121,29 @@ public class Room : GameObjectList
     {
         //if (start) {OnLoad();}
         if (enemies.Children != null)
-        {
             foreach (Enemy enemy in enemies.Children)
-            {
                 enemies.Update(gameTime);
-            }
-            /*for (int x = 0; x < roomarraywidth; x++)
-                for (int y = 0; y < roomarrayheight; y++)
-                {
-                    if (roomarray[x, y] == "UpDoor")
-                    {
-                        //move camera up
-                    }
-                    else if (roomarray[x, y] == "DownDoor")
-                    {
-                        //move camera down
-                    }
-                    else if (roomarray[x, y] == "RightDoor")
-                    {
-                        //move camera right
-                    }
-                    else if (roomarray[x, y] == "LeftDoor")
-                    {
-                        //move camera left
-                    }*/
-            if (start) { OnLoad(); }
-            enemies.Update(gameTime);
-            if (PlayingState.player.position.X >= Up.X && PlayingState.player.position.X <= Up.X + CellWidth)
-                if (PlayingState.player.position.X >= Up.Y && PlayingState.player.position.Y <= Up.Y + CellHeight)
-                    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - roomheight);
 
-            if (PlayingState.player.position.X >= Down.X && PlayingState.player.position.X <= Down.X + CellWidth)
-                if (PlayingState.player.position.X >= Down.Y && PlayingState.player.position.Y <= Down.Y + CellHeight)
-                    Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + roomheight);
+        if (start) { OnLoad(); }
+        enemies.Update(gameTime);
 
-            if (PlayingState.player.position.X >= Left.X && PlayingState.player.position.X <= Left.X + CellWidth)
-                if (PlayingState.player.position.X >= Left.Y && PlayingState.player.position.Y <= Left.Y + CellHeight)
-                    Camera.Position = new Vector2(Camera.Position.X - roomwidth, Camera.Position.Y);
+        if (PlayingState.player.position.X >= Up.X && PlayingState.player.position.X <= Up.X + CellWidth)
+            if (PlayingState.player.position.X >= Up.Y && PlayingState.player.position.Y <= Up.Y + CellHeight)
+                Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - roomheight);
 
-            if (PlayingState.player.position.X >= Right.X && PlayingState.player.position.X <= Right.X + CellWidth)
-                if (PlayingState.player.position.X >= Right.Y && PlayingState.player.position.Y <= Right.Y + CellHeight)
-                    Camera.Position = new Vector2(Camera.Position.X + roomwidth, Camera.Position.Y + roomheight);
+        if (PlayingState.player.position.X >= Down.X && PlayingState.player.position.X <= Down.X + CellWidth)
+            if (PlayingState.player.position.X >= Down.Y && PlayingState.player.position.Y <= Down.Y + CellHeight)
+                Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + roomheight);
+
+        if (PlayingState.player.position.X >= Left.X && PlayingState.player.position.X <= Left.X + CellWidth)
+            if (PlayingState.player.position.X >= Left.Y && PlayingState.player.position.Y <= Left.Y + CellHeight)
+                Camera.Position = new Vector2(Camera.Position.X - roomwidth, Camera.Position.Y);
+
+        if (PlayingState.player.position.X >= Right.X && PlayingState.player.position.X <= Right.X + CellWidth)
+            if (PlayingState.player.position.X >= Right.Y && PlayingState.player.position.Y <= Right.Y + CellHeight)
+                Camera.Position = new Vector2(Camera.Position.X + roomwidth, Camera.Position.Y + roomheight);
             start = false;
-        }
+        
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -232,7 +212,7 @@ public class Room : GameObjectList
                         default:
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Red);
                             break;
-                    }            
+                    }
         foreach (Enemy enemy in enemies.Children)
         {
             enemy.Draw(gameTime, spriteBatch);
