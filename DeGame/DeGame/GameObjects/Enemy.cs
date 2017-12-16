@@ -14,14 +14,16 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
+    int roomlistIndex, A, B, b, a;
     protected Vector2 basevelocity = new Vector2(1, 1);
-    public Room room;
+    public Room room; //?
     HealthBar healthbar;
 
     public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
+        room = new Room(roomlistIndex, A, B, 0, "Room");
         position = startPosition;
         velocity = basevelocity;
     }
@@ -69,23 +71,35 @@ public class Enemy : SpriteGameObject
         healthbar.Draw(spriteBatch, position);
     }
 
+    public bool CheckSurround(int x, int y)
+    {
+        position.X = x;
+        position.Y = y;
+        if (room.roomarray[x, y] == "Wall");
+        {
+            return true;
+        }
+    }
     public virtual void Chase()
     {
-        if (position.Y + sprite.Height > PlayingState.player.position.Y)
+        if (CheckSurround(b + 1, a) == false)
         {
-            position.Y -= velocity.Y;
-        }
-        if (position.Y - sprite.Height < PlayingState.player.position.Y)
-        {
-            position.Y += velocity.Y;
-        }
-        if (position.X + sprite.Width > PlayingState.player.position.X)
-        {
-            position.X -= velocity.X;
-        }
-        if (position.X - sprite.Width < PlayingState.player.position.X)
-        {
-            position.X += velocity.X;
+            if (position.Y + sprite.Height > PlayingState.player.position.Y)
+            {
+                position.Y -= velocity.Y;
+            }
+            if (position.Y - sprite.Height < PlayingState.player.position.Y)
+            {
+                position.Y += velocity.Y;
+            }
+            if (position.X + sprite.Width > PlayingState.player.position.X)
+            {
+                position.X -= velocity.X;
+            }
+            if (position.X - sprite.Width < PlayingState.player.position.X)
+            {
+                position.X += velocity.X;
+            }
         }
     }
 }
