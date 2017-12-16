@@ -9,6 +9,7 @@ public class Room : GameObjectList
     public bool up = false, down = false, left = false, right = false;
     public GameObjectList enemies;
     public bool start = true;
+    public bool newEnemy = true;
     public int a, b;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight;
@@ -45,12 +46,12 @@ public class Room : GameObjectList
         for (int x = 0; x < line.Length; ++x)        
             for (int y = 0; y < textLines.Count; ++y)
             {
-                roomarray[x, y] = AssignType(textLines[y][x]);
+                roomarray[x, y] = AssignType(textLines[y][x], x , y);
                 //System.Console.WriteLine(roomarray[x, y]);
             }        
     }
 
-    private string AssignType(char filetext)
+    private string AssignType(char filetext, int x, int y)
     {
         switch (filetext)
         {
@@ -70,7 +71,13 @@ public class Room : GameObjectList
             case '<':
                 return "LeftDoor";
 
+            case 'R':
+                CreateEnemy(x, y, "R");
+                newEnemy = true;
+                return "RangedEnemy";
             case 'C':
+                CreateEnemy(x,y,"C");
+                //newEnemy = true;
                 return "ChasingEnemy";
             case 'O':
                 return "Pit";
@@ -86,26 +93,38 @@ public class Room : GameObjectList
     }
     void OnLoad()
     {
-        CreateEnemy();
+        //CreateEnemy();
     }
-    void CreateEnemy()
+    void CreateEnemy(int x,int y, string TypeEnemy)
     {
-        for (int x = 0; x < roomarraywidth; x++)
-            for (int y = 0; y < roomarrayheight; y++)
-            { 
-            if(roomarray[x, y] == "ChasingEnemy")
+        if (newEnemy)
+        {
+            if (TypeEnemy == "C")
             {
-                Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth /*+ a * roomwidth*/, y * CellHeight /*+ b * roomheight*/), 0, "ChasingEnemy");
+                Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
                 enemies.Add(enemy);
-          }
+            }
+
+            if (TypeEnemy == "R")
+            {
+                Enemy enemy = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
+                enemies.Add(enemy);
+            }
         }
-      }
+        newEnemy = false;
+    }
  
     public override void Update(GameTime gameTime)
     {
-        if (start) {OnLoad();}
-        enemies.Update(gameTime);
-        for (int x = 0; x < roomarraywidth; x++)
+        //if (start) {OnLoad();}
+        if (enemies.Children != null)
+        {
+            foreach (Enemy enemy in enemies.Children)
+            {
+                enemies.Update(gameTime);
+            }
+        }
+        /*for (int x = 0; x < roomarraywidth; x++)
             for (int y = 0; y < roomarrayheight; y++)
             {
                 if (roomarray[x, y] == "UpDoor")
@@ -126,9 +145,9 @@ public class Room : GameObjectList
                 }
 
             }
-        start = false;
+        start = false;*/
     }
-    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         for (int x = 0; x < roomarray.GetLength(0); x++)
             for (int y = 0; y < roomarray.GetLength(1); y++)
@@ -185,8 +204,10 @@ public class Room : GameObjectList
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.RosyBrown, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
 
+                        case "RangedEnemy":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
+                            break;
                         case "ChasingEnemy":
-                            //CreateEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight));
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Green);
                             break;
                         default:

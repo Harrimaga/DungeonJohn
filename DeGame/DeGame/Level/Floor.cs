@@ -273,13 +273,13 @@ public class Floor
 
     public virtual void Update(GameTime gameTime)
     {
-        //foreach (Room room in floor)
-        //{
-        //    if (room != null)
-        //    {
-        //        room.Update(gameTime);
-        //    }
-        //}
+        foreach (Room room in floor)
+        {
+            if (room != null)
+            {
+                room.Update(gameTime);
+            }
+        }
         ////TODO als nextFloor true is voer dan NextFloor() uit
 
 
