@@ -12,7 +12,7 @@ public class Room : GameObjectList
     public int a, b;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
-    Vector2 Up, Down, Left, Right;
+    Vector2 Up, Down, Left, Right, Exit;
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
@@ -98,6 +98,7 @@ public class Room : GameObjectList
                         break;
                     case 'E':
                         roomarray[x, y] = "Exit";
+                        Exit = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
                         break;
                     case 'S':
                         roomarray[x, y] = "Start";
@@ -131,6 +132,8 @@ public class Room : GameObjectList
                 rocks.Add(rock);
             }
     }
+
+    //Vector2 MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
 
     void ControlCamera()
     {
@@ -168,6 +171,15 @@ public class Room : GameObjectList
                 onright = true;
                 PlayingState.player.position += new Vector2(2 * CellHeight, 0);
             }
+
+        if (rightdoor && MiddelofPlayer.X >= Right.X && MiddelofPlayer.X <= Right.X + CellWidth)
+            if (MiddelofPlayer.Y >= Right.Y && MiddelofPlayer.Y <= Right.Y + CellHeight)
+            {
+                counter = 0;
+                onright = true;
+                PlayingState.player.position += new Vector2(2 * CellHeight, 0);
+            }
+
         start = false;
 
         if (Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
@@ -200,7 +212,17 @@ public class Room : GameObjectList
         }
     }
 
-    public void Update(GameTime gameTime)
+    void CheckExit()
+    {
+        Vector2 MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+        if (MiddelofPlayer.X >= Exit.X && MiddelofPlayer.X <= Exit.X + CellWidth)
+            if (MiddelofPlayer.Y >= Exit.Y && MiddelofPlayer.Y <= Exit.Y + CellHeight)
+            {
+                PlayingState.currentFloor.NextFloor();
+            }
+    }
+
+    public override void Update(GameTime gameTime)
     {
 
         if (enemies.Children != null)
@@ -218,6 +240,7 @@ public class Room : GameObjectList
         if (start) { OnLoad(); }
         enemies.Update(gameTime);
         ControlCamera();
+        CheckExit();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
