@@ -9,9 +9,6 @@ public class Room : GameObjectList
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true;
     bool onup = false, ondown = false, onleft = false, onright = false;
     public GameObjectList enemies;
-    public GameObjectList rocks;
-    public List<GameObject> RemovedGameObjects;
-    public bool start = true;
     public int a, b;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
@@ -20,8 +17,6 @@ public class Room : GameObjectList
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
         enemies = new GameObjectList();
-        rocks = new GameObjectList();
-        RemovedGameObjects = new List<GameObject>();
         RoomListIndex = roomListIndex;
         a = A;
         b = B;
@@ -56,65 +51,71 @@ public class Room : GameObjectList
 
     private void AssignType(char textlines,int x, int y)
     {
-        switch (filetext)
-        {
-            case '.':
-                return "Background";
-            case '!':
-                CreateGameObject(x, y, "!");
-                return "Rock";
-            case '+':
-                return "Wall";
+                switch (textlines)
+                {
+                    case '.':
+                        roomarray[x,y] = "Background";
+                        break;
+                    case '!':
+                        roomarray[x, y] = "Rock";
+                        break;
+                    case '+':
+                        roomarray[x, y] = "Wall";
+                        break;
 
-            case '-':
-                return "UpDoor";
-            case '=':
-                return "DownDoor";
-            case '>':
-                return "RightDoor";
-            case '<':
-                return "LeftDoor";
+                    case '-':
+                        roomarray[x, y] = "UpDoor";
+                        Up = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                        break;
+                    case '=':
+                        roomarray[x, y] = "DownDoor";
+                        Down = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                        break;
+                    case '<':
+                        roomarray[x, y] = "LeftDoor";
+                        Left = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                        break;
+                    case '>':
+                        roomarray[x, y] = "RightDoor";
+                        Right = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                        break;
 
-            case 'R':
-                CreateGameObject(x, y, "R");
-                return "RangedEnemy";
-            case 'C':
-                CreateGameObject(x,y,"C");
-                return "ChasingEnemy";
-            case 'O':
-                return "Pit";
-            case 'I':
-                return "Item";
-            case 'E':
-                return "Exit";
-            case 'S':
-                return "Start";
-            default:
-                return "N/A";
-        }
+                    case 'C':
+                        roomarray[x, y] = "ChasingEnemy";
+                        break;
+                    case 'O':
+                        roomarray[x, y] = "Pit";
+                        break;
+                    case 'I':
+                        roomarray[x, y] = "Item";
+                        break;
+                    case 'E':
+                        roomarray[x, y] = "Exit";
+                        break;
+                    case 'S':
+                        roomarray[x, y] = "Start";
+                        break;
+                    default:
+                        roomarray[x, y] = "N/A";
+                        break;
+                }
     }
     void OnLoad()
     {
         //CreateEnemy();
     }
-    void CreateGameObject(int x,int y, string Type)
+    void CreateEnemy(int x, int y, string TypeEnemy)
     {
-            if (Type == "C")
+            if (TypeEnemy == "C")
             {
                 Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
                 enemies.Add(enemy);
             }
 
-            if (Type == "R")
+            if (TypeEnemy == "R")
             {
                 Enemy enemy = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
                 enemies.Add(enemy);
-            }
-
-            if (Type == "!")
-            {
-                Rock rock = new Rock(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Rock");
-                rocks.Add(rock);
             }
     }
 
@@ -130,31 +131,9 @@ public class Room : GameObjectList
                 onup = true;
                 PlayingState.player.position -= new Vector2(0, 2 * CellHeight);
             }
-        }
 
-        if (rocks.Children != null)
-        {
-            foreach (Rock rock in rocks.Children)
-            {
-                rock.Update(gameTime);
-            }
-        }
-
-        foreach (GameObject g in RemovedGameObjects)
-        {
-            if (g is Enemy)
-            {
-                enemies.Remove(g);
-            }
-            else if (g is Rock)
-            {
-                rocks.Remove(g);
-            }
-        }
-
-
-        /*for (int x = 0; x < roomarraywidth; x++)
-            for (int y = 0; y < roomarrayheight; y++)
+        if (downdoor && MiddelofPlayer.X >= Down.X && MiddelofPlayer.X <= Down.X + CellWidth)
+            if (MiddelofPlayer.Y >= Down.Y && MiddelofPlayer.Y <= Down.Y + CellHeight)
             {
                 counter = 0;
                 ondown = true;
@@ -230,7 +209,7 @@ public class Room : GameObjectList
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "Rock":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Rock Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "Wall":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
@@ -289,10 +268,6 @@ public class Room : GameObjectList
         foreach (Enemy enemy in enemies.Children)
         {
             enemy.Draw(gameTime, spriteBatch);
-        }
-        foreach (Rock rock in rocks.Children)
-        {
-            rock.Draw(gameTime, spriteBatch);
         }
     }    
 }
