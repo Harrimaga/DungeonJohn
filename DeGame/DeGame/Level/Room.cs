@@ -59,6 +59,7 @@ public class Room : GameObjectList
                         break;
                     case '!':
                         roomarray[x, y] = "Rock";
+                        CreateObject(x, y, "!");
                         break;
                     case '+':
                         roomarray[x, y] = "Wall";
@@ -87,7 +88,7 @@ public class Room : GameObjectList
                         break;
                     case 'R':
                         roomarray[x, y] = "RangedEnemy";
-                        CreateObject(x, y, "R");
+                        //CreateObject(x, y, "R");
                         break;
                     case 'O':
                         roomarray[x, y] = "Pit";
@@ -124,7 +125,11 @@ public class Room : GameObjectList
                 enemies.Add(enemy);
             }
 
-
+            if (Type == "!")
+            {
+                Rock rock = new Rock(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Rock");
+                rocks.Add(rock);
+            }
     }
 
     void ControlCamera()

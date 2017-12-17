@@ -19,7 +19,7 @@ class Rock : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        //right of rock
+        //left side of rock player stop
         if (CollidesWith(PlayingState.player) && BoundingBox.Left >= PlayingState.player.position.X)
         {
             PlayingState.player.velocityRightDown.X = Vector2.Zero.X;
