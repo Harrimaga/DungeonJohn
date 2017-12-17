@@ -65,7 +65,7 @@ public class Enemy : SpriteGameObject
         }
     }
 
-    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         healthbar.Draw(spriteBatch, position);
     }
