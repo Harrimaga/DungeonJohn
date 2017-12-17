@@ -22,19 +22,19 @@ class Rock : SpriteGameObject
         //left side of rock player stop
         if (CollidesWith(PlayingState.player) && BoundingBox.Left >= PlayingState.player.position.X)
         {
-            PlayingState.player.velocityRightDown.X = Vector2.Zero.X;
+            PlayingState.player.velocityRightDown.X = 0;
         }
         else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Left >= PlayingState.player.position.X))
         {
             PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
         }
 
-        /*
-        if (CollidesWith(PlayingState.player) && BoundingBox.Right <= PlayingState.player.position.X) - PlayingState.player.Width)
+        
+        if (CollidesWith(PlayingState.player) && BoundingBox.Right <= PlayingState.player.position.X + PlayingState.player.Width)
         {
-            PlayingState.player.velocityLeftUp.X = Vector2.Zero.X;
+            PlayingState.player.velocityLeftUp.X = 0;
         }
-        /*else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Right <= PlayingState.player.position.X - PlayingState.player.Width))
+        else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Right <= PlayingState.player.position.X + PlayingState.player.Width))
         {
             PlayingState.player.velocityLeftUp.X = PlayingState.player.velocitybase.X;
         }
@@ -42,7 +42,7 @@ class Rock : SpriteGameObject
         /*
         if (CollidesWith(PlayingState.player) && position.X >= PlayingState.player.position.X)
         {
-            PlayingState.player.velocityRightDown.X = Vector2.Zero.X;
+            PlayingState.player.velocityRightDown.X = 0;
         }
         else if (!CollidesWith(PlayingState.player) && !(position.X >= PlayingState.player.position.X))
         {
@@ -52,7 +52,7 @@ class Rock : SpriteGameObject
         /*
         if (CollidesWith(PlayingState.player) && position.X >= PlayingState.player.position.X)
         {
-            PlayingState.player.velocityRightDown.X = Vector2.Zero.X;
+            PlayingState.player.velocityRightDown.X = 0;
         }
         else if (!CollidesWith(PlayingState.player) && !(position.X >= PlayingState.player.position.X))
         {
