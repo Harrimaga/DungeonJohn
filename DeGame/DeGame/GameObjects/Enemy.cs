@@ -14,7 +14,7 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    int roomlistIndex, A, B, b, a;
+    int roomlistIndex, A, B, b, a, o;
     protected Vector2 basevelocity = new Vector2(1, 1);
     public Room room; //?
     Texture2D playersprite;
@@ -33,6 +33,7 @@ public class Enemy : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        CheckSurround();
         if (CollidesWith(PlayingState.player))
         {
             velocity = Vector2.Zero;
@@ -73,17 +74,23 @@ public class Enemy : SpriteGameObject
         healthbar.Draw(spriteBatch, position);
     }
 
-    //public bool CheckSurround(int x, int y)
-    //{
-    //    position.X = x;
-    //    position.Y = y;
-    //    if (room.roomarray[x, y] == "Wall");
-    //    {
-    //        return true;
-    //    }
-    //}
+    public void  CheckSurround()
+    {
+        foreach (Rock rock in Room.rocks.Children)
+            if (CollidesWith(rock))
+            {
+               // Die = true;
+                velocity = new Vector2(0, 0);
+            }
+           
+       
+
+   
+    }
+
     public virtual void Chase()
     {
+       
             if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
             {
                 position.Y -= velocity.Y;

@@ -29,6 +29,7 @@ class Rock : SpriteGameObject
             PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
         }
 
+      //  if (CollidesWith(roo))
         /*
         if (CollidesWith(PlayingState.player) && BoundingBox.Right <= PlayingState.player.position.X) - PlayingState.player.Width)
         {
