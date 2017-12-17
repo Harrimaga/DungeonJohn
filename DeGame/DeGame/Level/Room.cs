@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 public class Room : GameObjectList
 {
     public int RoomListIndex;
-    public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true;
+    public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false, CameraIsMoving = false;
     bool onup = false, ondown = false, onleft = false, onright = false;
     public GameObjectList enemies, rocks;
     public int a, b;
@@ -112,12 +112,13 @@ public class Room : GameObjectList
     public void Update(GameTime gameTime, Room CurrentRoom)
     {
         if (CurrentRoom.position == new Vector2(a, b))
-            //Fabians code
+            Visited = true;
         if (enemies.Children != null)
             foreach (Enemy enemy in enemies.Children)
                 enemies.Update(gameTime);
 
         if (start) { OnLoad(); }
+        start = false;
         enemies.Update(gameTime);
         ControlCamera();
         //PlayerTerrainCollision();
@@ -157,7 +158,6 @@ public class Room : GameObjectList
         if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
             if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
             {
-                counter = 0;
                 onup = true;
                 PlayingState.player.position -= new Vector2(0, 2 * CellHeight);
             }
@@ -165,7 +165,6 @@ public class Room : GameObjectList
         if (downdoor && MiddelofPlayer.X >= Down.X && MiddelofPlayer.X <= Down.X + CellWidth)
             if (MiddelofPlayer.Y >= Down.Y && MiddelofPlayer.Y <= Down.Y + CellHeight)
             {
-                counter = 0;
                 ondown = true;
                 PlayingState.player.position += new Vector2(0, 2 * CellHeight);
             }
@@ -173,7 +172,6 @@ public class Room : GameObjectList
         if (leftdoor && MiddelofPlayer.X >= Left.X && MiddelofPlayer.X <= Left.X + CellWidth)
             if (MiddelofPlayer.Y >= Left.Y && MiddelofPlayer.Y <= Left.Y + CellHeight)
             {
-                counter = 0;
                 onleft = true;
                 PlayingState.player.position -= new Vector2(2 * CellHeight, 0);
             }
@@ -181,48 +179,34 @@ public class Room : GameObjectList
         if (rightdoor && MiddelofPlayer.X >= Right.X && MiddelofPlayer.X <= Right.X + CellWidth)
             if (MiddelofPlayer.Y >= Right.Y && MiddelofPlayer.Y <= Right.Y + CellHeight)
             {
-                counter = 0;
                 onright = true;
                 PlayingState.player.position += new Vector2(2 * CellHeight, 0);
             }
 
-        if (rightdoor && MiddelofPlayer.X >= Right.X && MiddelofPlayer.X <= Right.X + CellWidth)
-            if (MiddelofPlayer.Y >= Right.Y && MiddelofPlayer.Y <= Right.Y + CellHeight)
-            {
-                counter = 0;
-                onright = true;
-                PlayingState.player.position += new Vector2(2 * CellHeight, 0);
-            }
+        Vector2 CameraVelocity = new Vector2(0, 0);
 
-        start = false;
-
-        if (Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
+        if (Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)        
+            CameraVelocity = new Vector2(0, -roomheight / 30);        
+        if (Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 30)        
+            CameraVelocity = new Vector2(0, roomheight / 30);        
+        if (Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 30)        
+            CameraVelocity = new Vector2(-roomwidth / 30, 0);        
+        if (Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 30)        
+            CameraVelocity = new Vector2(roomwidth / 30, 0);
+        if (onup || ondown || onleft || onright && counter < 30)
         {
-            Camera.Position -= new Vector2(0, roomheight / 30);
+            Camera.Position += CameraVelocity;
             counter++;
+            CameraIsMoving = true;
         }
-        if (Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 30)
-        {
-            Camera.Position += new Vector2(0, roomheight / 30);
-            counter++;
-        }
-        if (Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 30)
-        {
-            Camera.Position -= new Vector2(roomwidth / 30, 0);
-            counter++;
-        }
-        if (Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 30)
-        {
-            Camera.Position += new Vector2(roomwidth / 30, 0);
-            counter++;
-        }
-
         if (counter >= 30)
         {
             onup = false;
             ondown = false;
             onleft = false;
             onright = false;
+            counter = 0;
+            CameraIsMoving = false;
         }
     }
 
