@@ -27,6 +27,7 @@ namespace DeGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            this.IsMouseVisible = true;
             base.Initialize();
         }
 
@@ -34,7 +35,7 @@ namespace DeGame
         {
             base.LoadContent();
 
-            WindowSize = new Point(1600, 900);
+            WindowSize = new Point(800, 480);
             FullScreen = false;
 
             gameStateManager.AddGameState("MainMenu", new MainMenuState());

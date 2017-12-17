@@ -25,7 +25,6 @@ public class Player : SpriteGameObject
     : base("Sprites/Random", 0, "Player")
     {
         bullets = new GameObjectList();
-        //position = new Vector2(100, 100);
         healthbar = new HealthBar(health, maxhealth, position);
     }
 
