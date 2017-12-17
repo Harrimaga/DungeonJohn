@@ -27,7 +27,7 @@ public class SpriteGameObject : GameObject
     
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        //spriteBatch.Draw(spriteBatch, GlobalPosition * Camera.CameraPosition, origin);
+
     }
 
     public override void HandleInput(InputHelper inputHelper)
