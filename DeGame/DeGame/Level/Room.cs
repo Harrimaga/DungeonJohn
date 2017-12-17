@@ -100,10 +100,24 @@ public class Room : GameObjectList
                         break;
                 }
     }
+
+    public void Update(GameTime gameTime)
+    {
+        if (enemies.Children != null)
+            foreach (Enemy enemy in enemies.Children)
+                enemies.Update(gameTime);
+
+        if (start) { OnLoad(); }
+        enemies.Update(gameTime);
+        ControlCamera();
+        PlayerTerrainCollision();
+    }
+
     void OnLoad()
     {
         //CreateEnemy();
     }
+
     void CreateEnemy(int x, int y, string TypeEnemy)
     {
             if (TypeEnemy == "C")
@@ -187,15 +201,15 @@ public class Room : GameObjectList
         }
     }
 
-    public void Update(GameTime gameTime)
+    void PlayerTerrainCollision()
     {
-        if (enemies.Children != null)
-            foreach (Enemy enemy in enemies.Children)
-                enemies.Update(gameTime);
-
-        if (start) { OnLoad(); }
-        enemies.Update(gameTime);
-        ControlCamera();
+        //if(Floor.currentRoom.position == new Vector2(a,b))
+        //{
+        //    float x = (PlayingState.player.position.X % roomwidth) / CellWidth;
+        //    float y = (PlayingState.player.position.Y % roomheight) / CellHeight;
+        //    if (roomarray[(int)x, (int)y] == "Wall")
+        //        PlayingState.player.position -= new Vector2(0, CellHeight);
+        //}
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
