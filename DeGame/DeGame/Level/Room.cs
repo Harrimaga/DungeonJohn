@@ -8,7 +8,7 @@ public class Room : GameObjectList
     public int RoomListIndex;
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true;
     bool onup = false, ondown = false, onleft = false, onright = false;
-    public GameObjectList enemies;
+    public GameObjectList enemies, rocks;
     public int a, b;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
@@ -17,6 +17,7 @@ public class Room : GameObjectList
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
         enemies = new GameObjectList();
+        rocks = new GameObjectList();
         RoomListIndex = roomListIndex;
         a = A;
         b = B;
@@ -210,7 +211,7 @@ public class Room : GameObjectList
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "Rock":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Rock Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "Wall":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
