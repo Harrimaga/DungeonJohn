@@ -14,9 +14,7 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    int roomlistIndex, A, B, b, a, o;
     protected Vector2 basevelocity = new Vector2(1, 1);
-    public Room room; //?
     Texture2D playersprite;
     HealthBar healthbar;
 
@@ -24,7 +22,6 @@ public class Enemy : SpriteGameObject
     : base("Sprites/BearEnemy", layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
-        room = new Room(roomlistIndex, A, B, 0, "Room");
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
         position = startPosition;
         velocity = basevelocity;
@@ -33,12 +30,6 @@ public class Enemy : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        //CheckSurround();
-        CheckDown();
-        if (CheckDown())
-        {
-            Die = true;
-        }
         if (CollidesWith(PlayingState.player))
         {
             velocity = Vector2.Zero;
@@ -91,7 +82,7 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckUp()
     {
-        Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height - 120);
+        Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height - 10);
         foreach (Rock rock in Room.rocks.Children)
             if (CheckUp.Intersects(rock.BoundingBox))
             {
@@ -101,7 +92,7 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckLeft()
     {
-        Rectangle CheckLeft = new Rectangle((int)position.X, (int)position.Y, sprite.Width - 120, sprite.Height);
+        Rectangle CheckLeft = new Rectangle((int)position.X, (int)position.Y, sprite.Width - 10, sprite.Height);
         foreach (Rock rock in Room.rocks.Children)
             if (CheckLeft.Intersects(rock.BoundingBox))
             {
@@ -111,7 +102,7 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckRight()
     {
-        Rectangle CheckRight = new Rectangle((int)position.X, (int)position.Y, sprite.Width + 120, sprite.Height);
+        Rectangle CheckRight = new Rectangle((int)position.X, (int)position.Y, sprite.Width + 10, sprite.Height);
         foreach (Rock rock in Room.rocks.Children)
             if (CheckRight.Intersects(rock.BoundingBox))
             {
@@ -123,19 +114,19 @@ public class Enemy : SpriteGameObject
     public virtual void Chase()
     {
             
-            if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
+            if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
             {
                 position.Y -= velocity.Y;
             }
-            if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
+            if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
             {
                 position.Y += velocity.Y;
             }
-            if (position.X + playersprite.Width > PlayingState.player.position.X + 1)
+            if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
             {
                 position.X -= velocity.X;
             }
-            if (position.X - playersprite.Width < PlayingState.player.position.X - 1)
+            if (position.X - playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
             {
                 position.X += velocity.X;
             }
