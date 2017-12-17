@@ -113,13 +113,17 @@ public class Room : GameObjectList
     {
         if (CurrentRoom.position == new Vector2(a, b))
             //Fabians code
-        if (enemies.Children != null)
-            foreach (Enemy enemy in enemies.Children)
-                enemies.Update(gameTime);
+
+        //~Yoran~ Uitgecommentarieerd want geeft exeption. En is nu onnodig, dubbele enemy update
+        //if (enemies.Children != null)
+        //    foreach (Enemy enemy in enemies.Children)
+        //        enemies.Update(gameTime);               
+        //}           
 
         if (start) { OnLoad(); }
         enemies.Update(gameTime);
         ControlCamera();
+        CheckExit();
         //PlayerTerrainCollision();
     }
 
@@ -234,27 +238,6 @@ public class Room : GameObjectList
             {
                 PlayingState.currentFloor.NextFloor();
             }
-    }
-
-    public override void Update(GameTime gameTime)
-    {
-
-    //    if (enemies.Children != null)
-    //        foreach (Enemy enemy in enemies.Children)
-    //            enemies.Update(gameTime);
-
-    //    if (rocks.Children != null)
-    //    {
-    //        foreach (Rock rock in rocks.Children)
-    //        {
-    //            rock.Update(gameTime);
-    //        }
-    //    }
-
-        if (start) { OnLoad(); }
-        enemies.Update(gameTime);
-        ControlCamera();
-        CheckExit();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
