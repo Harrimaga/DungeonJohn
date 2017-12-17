@@ -19,16 +19,44 @@ class Rock : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (CollidesWith(PlayingState.player) && position.X > PlayingState.player.position.X)
+        //right of rock
+        if (CollidesWith(PlayingState.player) && BoundingBox.Left >= PlayingState.player.position.X)
         {
-            PlayingState.player.velocity.X = Vector2.Zero.X;
+            PlayingState.player.velocityRightDown.X = Vector2.Zero.X;
         }
-        /*foreach (Bullet bullet in PlayingState.player.bullets.Children)
+        else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Left >= PlayingState.player.position.X))
         {
-            if (CollidesWith(bullet))
-            {
-                RemoveBullets.Add(bullet);
-            }
+            PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
+        }
+
+        /*
+        if (CollidesWith(PlayingState.player) && BoundingBox.Right <= PlayingState.player.position.X) - PlayingState.player.Width)
+        {
+            PlayingState.player.velocityLeftUp.X = Vector2.Zero.X;
+        }
+        /*else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Right <= PlayingState.player.position.X - PlayingState.player.Width))
+        {
+            PlayingState.player.velocityLeftUp.X = PlayingState.player.velocitybase.X;
+        }
+
+        /*
+        if (CollidesWith(PlayingState.player) && position.X >= PlayingState.player.position.X)
+        {
+            PlayingState.player.velocityRightDown.X = Vector2.Zero.X;
+        }
+        else if (!CollidesWith(PlayingState.player) && !(position.X >= PlayingState.player.position.X))
+        {
+            PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
+        }
+
+        /*
+        if (CollidesWith(PlayingState.player) && position.X >= PlayingState.player.position.X)
+        {
+            PlayingState.player.velocityRightDown.X = Vector2.Zero.X;
+        }
+        else if (!CollidesWith(PlayingState.player) && !(position.X >= PlayingState.player.position.X))
+        {
+            PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
         }*/
     }
 

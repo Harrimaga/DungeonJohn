@@ -94,21 +94,21 @@ public class Room : GameObjectList
     {
         //CreateEnemy();
     }
-    void CreateGameObject(int x,int y, string TypeEnemy)
+    void CreateGameObject(int x,int y, string Type)
     {
-            if (TypeEnemy == "C")
+            if (Type == "C")
             {
                 Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
                 enemies.Add(enemy);
             }
 
-            if (TypeEnemy == "R")
+            if (Type == "R")
             {
                 Enemy enemy = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
                 enemies.Add(enemy);
             }
 
-            if (TypeEnemy == "!")
+            if (Type == "!")
             {
                 Rock rock = new Rock(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Rock");
                 rocks.Add(rock);
