@@ -9,6 +9,7 @@ public class Room : GameObjectList
     public bool up = false, down = false, left = false, right = false;
     public GameObjectList enemies;
     public GameObjectList rocks;
+    public List<GameObject> RemovedGameObjects;
     public bool start = true;
     public int a, b;
     public string[,] roomarray;
@@ -18,6 +19,7 @@ public class Room : GameObjectList
     {
         enemies = new GameObjectList();
         rocks = new GameObjectList();
+        RemovedGameObjects = new List<GameObject>();
         RoomListIndex = roomListIndex;
         a = A;
         b = B;
@@ -133,6 +135,20 @@ public class Room : GameObjectList
                 rock.Update(gameTime);
             }
         }
+
+        foreach (GameObject g in RemovedGameObjects)
+        {
+            if (g is Enemy)
+            {
+                enemies.Remove(g);
+            }
+            else if (g is Rock)
+            {
+                rocks.Remove(g);
+            }
+        }
+
+
         /*for (int x = 0; x < roomarraywidth; x++)
             for (int y = 0; y < roomarrayheight; y++)
             {
