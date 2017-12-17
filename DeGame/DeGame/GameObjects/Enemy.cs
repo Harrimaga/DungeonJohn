@@ -33,7 +33,12 @@ public class Enemy : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        CheckSurround();
+        //CheckSurround();
+        CheckDown();
+        if (CheckDown())
+        {
+            Die = true;
+        }
         if (CollidesWith(PlayingState.player))
         {
             velocity = Vector2.Zero;
@@ -74,23 +79,50 @@ public class Enemy : SpriteGameObject
         healthbar.Draw(spriteBatch, position);
     }
 
-    public void  CheckSurround()
+    public bool CheckDown()
     {
+        Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height + 120);
         foreach (Rock rock in Room.rocks.Children)
-            if (CollidesWith(rock))
+        if (CheckDown.Intersects(rock.BoundingBox))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool CheckUp()
+    {
+        Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height - 120);
+        foreach (Rock rock in Room.rocks.Children)
+            if (CheckUp.Intersects(rock.BoundingBox))
             {
-               // Die = true;
-                velocity = new Vector2(0, 0);
+                return true;
             }
-           
-       
-
-   
+        return false;
+    }
+    public bool CheckLeft()
+    {
+        Rectangle CheckLeft = new Rectangle((int)position.X, (int)position.Y, sprite.Width - 120, sprite.Height);
+        foreach (Rock rock in Room.rocks.Children)
+            if (CheckLeft.Intersects(rock.BoundingBox))
+            {
+                return true;
+            }
+        return false;
+    }
+    public bool CheckRight()
+    {
+        Rectangle CheckRight = new Rectangle((int)position.X, (int)position.Y, sprite.Width + 120, sprite.Height);
+        foreach (Rock rock in Room.rocks.Children)
+            if (CheckRight.Intersects(rock.BoundingBox))
+            {
+                return true;
+            }
+        return false;
     }
 
     public virtual void Chase()
     {
-       
+            
             if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
             {
                 position.Y -= velocity.Y;
