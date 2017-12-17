@@ -14,7 +14,7 @@ public class Floor
     public Vector2 startPlayerPosition;
     public Room currentRoom;
     bool FloorGenerated = false;
-    int screenwidth, screenheight;
+    public int screenwidth, screenheight;
 
     public Floor()
     {
@@ -237,7 +237,7 @@ public class Floor
         CurrentRooms = 1;
     }
 
-    void NextFloor()
+    public void NextFloor()
     {
         ClearFloor();
         floor = new Room[floorWidth, floorHeight];
@@ -277,7 +277,7 @@ public class Floor
         {
             if (room != null)
             {
-                room.Update(gameTime);
+                room.Update(gameTime, currentRoom);
             }
         }
         ////TODO als nextFloor true is voer dan NextFloor() uit
@@ -290,24 +290,7 @@ public class Floor
     {
         if (inputHelper.KeyPressed(Keys.R))
             NextFloor();
-
-        if (inputHelper.IsKeyDown(Keys.Right))
-        {
-            Camera.Position = new Vector2(Camera.Position.X + 10, Camera.Position.Y);
-        }
-        if (inputHelper.IsKeyDown(Keys.Left))
-        {
-            Camera.Position = new Vector2(Camera.Position.X - 10, Camera.Position.Y);
-        }
-        if (inputHelper.IsKeyDown(Keys.Up))
-        {
-            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y - 10);
-        }
-        if (inputHelper.IsKeyDown(Keys.Down))
-        {
-            Camera.Position = new Vector2(Camera.Position.X, Camera.Position.Y + 10);
-            }
-        }
+    }
     
     void DrawMinimap(SpriteBatch spriteBatch)
     {
@@ -357,7 +340,6 @@ public class Floor
                 for (int b = 0; b < floorHeight; b++)
                     if (floor[a, b] != null)
                     {
-
                         floor[a, b].LoadTiles();
                     }            
         }
