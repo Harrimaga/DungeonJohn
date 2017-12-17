@@ -83,6 +83,11 @@ public class Room : GameObjectList
 
                     case 'C':
                         roomarray[x, y] = "ChasingEnemy";
+                        CreateObject(x,y,"C");
+                        break;
+                    case 'R':
+                        roomarray[x, y] = "RangedEnemy";
+                        CreateObject(x, y, "R");
                         break;
                     case 'O':
                         roomarray[x, y] = "Pit";
@@ -105,19 +110,21 @@ public class Room : GameObjectList
     {
         //CreateEnemy();
     }
-    void CreateEnemy(int x, int y, string TypeEnemy)
+    void CreateObject(int x, int y, string Type)
     {
-            if (TypeEnemy == "C")
+            if (Type == "C")
             {
                 Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
                 enemies.Add(enemy);
             }
 
-            if (TypeEnemy == "R")
+            if (Type == "R")
             {
                 Enemy enemy = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
                 enemies.Add(enemy);
             }
+
+
     }
 
     void ControlCamera()
@@ -195,6 +202,14 @@ public class Room : GameObjectList
             foreach (Enemy enemy in enemies.Children)
                 enemies.Update(gameTime);
 
+        if (rocks.Children != null)
+        {
+            foreach (Rock rock in rocks.Children)
+            {
+                rock.Update(gameTime);
+            }
+        }
+
         if (start) { OnLoad(); }
         enemies.Update(gameTime);
         ControlCamera();
@@ -270,6 +285,11 @@ public class Room : GameObjectList
         foreach (Enemy enemy in enemies.Children)
         {
             enemy.Draw(gameTime, spriteBatch);
+        }
+
+        foreach (Rock rock in rocks.Children)
+        {
+            rock.Draw(gameTime, spriteBatch);
         }
     }    
 }
