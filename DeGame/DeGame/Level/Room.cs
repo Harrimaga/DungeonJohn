@@ -108,8 +108,10 @@ public class Room : GameObjectList
                 }
     }
 
-    public void Update(GameTime gameTime)
+    public void Update(GameTime gameTime, Room CurrentRoom)
     {
+        if (CurrentRoom.position == new Vector2(a, b))
+            //Fabians code
         if (enemies.Children != null)
             foreach (Enemy enemy in enemies.Children)
                 enemies.Update(gameTime);
@@ -117,7 +119,7 @@ public class Room : GameObjectList
         if (start) { OnLoad(); }
         enemies.Update(gameTime);
         ControlCamera();
-        PlayerTerrainCollision();
+        //PlayerTerrainCollision();
     }
 
     void OnLoad()
@@ -213,25 +215,25 @@ public class Room : GameObjectList
         }
     }
 
-    void PlayerTerrainCollision()
-    {
+    //void PlayerTerrainCollision()
+    //{
 
-        if (enemies.Children != null)
-            foreach (Enemy enemy in enemies.Children)
-                enemies.Update(gameTime);
+    //    if (enemies.Children != null)
+    //        foreach (Enemy enemy in enemies.Children)
+    //            enemies.Update(gameTime);
 
-        if (rocks.Children != null)
-        {
-            foreach (Rock rock in rocks.Children)
-            {
-                rock.Update(gameTime);
-            }
-        }
+    //    if (rocks.Children != null)
+    //    {
+    //        foreach (Rock rock in rocks.Children)
+    //        {
+    //            rock.Update(gameTime);
+    //        }
+    //    }
 
-        if (start) { OnLoad(); }
-        enemies.Update(gameTime);
-        ControlCamera();
-    }
+    //    if (start) { OnLoad(); }
+    //    enemies.Update(gameTime);
+    //    ControlCamera();
+    //}
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
