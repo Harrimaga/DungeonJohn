@@ -189,6 +189,7 @@ public class Room : GameObjectList
 
     public void Update(GameTime gameTime)
     {
+
         if (enemies.Children != null)
             foreach (Enemy enemy in enemies.Children)
                 enemies.Update(gameTime);
