@@ -104,6 +104,9 @@
     <Content Include="Content\Sprites\Eind Sprite2.png" />
     <Content Include="Content\Sprites\healthbar.png" />
     <Content Include="Content\Sprites\Item1.png" />
+    <Content Include="Content\Sprites\MinimapBossTile.png" />
+    <Content Include="Content\Sprites\MinimapItemTile.png" />
+    <Content Include="Content\Sprites\MinimapStartTile.png" />
     <Content Include="Content\Sprites\Random.png" />
     <Content Include="Content\Sprites\OldRock.png" />
     <Content Include="Content\Sprites\Rock Sprite.png" />
