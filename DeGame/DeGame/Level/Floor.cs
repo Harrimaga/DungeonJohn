@@ -14,7 +14,7 @@ public class Floor
     public Vector2 startPlayerPosition;
     public Room currentRoom;
     bool FloorGenerated = false;
-    int screenwidth, screenheight;
+    public int screenwidth, screenheight;
 
     public Floor()
     {
@@ -237,7 +237,7 @@ public class Floor
         CurrentRooms = 1;
     }
 
-    void NextFloor()
+    public void NextFloor()
     {
         ClearFloor();
         floor = new Room[floorWidth, floorHeight];
