@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 
 public class AssetManager
-{ 
+{
     protected ContentManager contentManager;
     public AssetManager(ContentManager content)
     {

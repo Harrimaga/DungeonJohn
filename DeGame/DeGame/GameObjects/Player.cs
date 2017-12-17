@@ -15,8 +15,9 @@ public class Player : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    bool next = false;
     protected float ammo = 20;
+    bool next = false;
+    public SpriteEffects Effect;
 
     public GameObjectList bullets;
     HealthBar healthbar;
@@ -47,7 +48,7 @@ public class Player : SpriteGameObject
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         string Ammo = Convert.ToString(ammo);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Ammo, position, Color.White);
         bullets.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch, Vector2.Zero);
@@ -67,10 +68,12 @@ public class Player : SpriteGameObject
         if (inputHelper.IsKeyDown(Keys.D))
         {
             position.X = position.X + 5;
+            Effect = SpriteEffects.None;
         }
         if (inputHelper.IsKeyDown(Keys.A))
         {
             position.X -= 5;
+            Effect = SpriteEffects.FlipHorizontally;
         }
         if (ammo > 0)
         {

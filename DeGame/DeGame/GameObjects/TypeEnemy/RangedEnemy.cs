@@ -15,6 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class RangedEnemy : Enemy
 {
     public GameObjectList bullets;
+    int counter = 60;
 
     public RangedEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
     {
@@ -26,17 +27,17 @@ public class RangedEnemy : Enemy
         if(PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
             PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
             {
-                base.Chase();
+                Chase();
             }
-        else
+        else if (counter == 0)
         {
-            Shoot(0);
+            Shoot();
         }
     }
 
-    public void Shoot(int direction)
+    public void Shoot()
     {
-        Bullet bullet = new Bullet(position, direction);
+        EnemyBullet bullet = new EnemyBullet(position);
         bullets.Add(bullet);
     }
     public override void Update(GameTime gameTime)
@@ -44,6 +45,9 @@ public class RangedEnemy : Enemy
         base.Update(gameTime);
         bullets.Update(gameTime);
         Chase();
+        counter--;
+        if (counter < 0)
+            counter = 60;
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
