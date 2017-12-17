@@ -45,7 +45,6 @@ public class Room : GameObjectList
         for (int x = 0; x < roomarraywidth; ++x)
             for (int y = 0; y < roomarrayheight; ++y)
                 AssignType(textLines[y][x], x, y);
-        //System.Console.WriteLine(roomarray[x, y]);
     }       
     
 
@@ -124,39 +123,42 @@ public class Room : GameObjectList
         Vector2 Cam = Camera.Position;
         Vector2 MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
 
-        if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
-            if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
-            {
-                counter = 0;
-                onup = true;
-                PlayingState.player.position -= new Vector2(0, 2 * CellHeight);
-            }
+        if(enemies.Count == 0)
+        {
+            if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
+                if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
+                {
+                    counter = 0;
+                    onup = true;
+                    PlayingState.player.position -= new Vector2(0, 2 * CellHeight);
+                }
 
-        if (downdoor && MiddelofPlayer.X >= Down.X && MiddelofPlayer.X <= Down.X + CellWidth)
-            if (MiddelofPlayer.Y >= Down.Y && MiddelofPlayer.Y <= Down.Y + CellHeight)
-            {
-                counter = 0;
-                ondown = true;
-                PlayingState.player.position += new Vector2(0, 2 * CellHeight);
-            }
+            if (downdoor && MiddelofPlayer.X >= Down.X && MiddelofPlayer.X <= Down.X + CellWidth)
+                if (MiddelofPlayer.Y >= Down.Y && MiddelofPlayer.Y <= Down.Y + CellHeight)
+                {
+                    counter = 0;
+                    ondown = true;
+                    PlayingState.player.position += new Vector2(0, 2 * CellHeight);
+                }
 
-        if (leftdoor && MiddelofPlayer.X >= Left.X && MiddelofPlayer.X <= Left.X + CellWidth)
-            if (MiddelofPlayer.Y >= Left.Y && MiddelofPlayer.Y <= Left.Y + CellHeight)
-            {
-                counter = 0;
-                onleft = true;
-                PlayingState.player.position -= new Vector2(2 * CellHeight, 0);
-            }
+            if (leftdoor && MiddelofPlayer.X >= Left.X && MiddelofPlayer.X <= Left.X + CellWidth)
+                if (MiddelofPlayer.Y >= Left.Y && MiddelofPlayer.Y <= Left.Y + CellHeight)
+                {
+                    counter = 0;
+                    onleft = true;
+                    PlayingState.player.position -= new Vector2(2 * CellHeight, 0);
+                }
 
-        if (rightdoor && MiddelofPlayer.X >= Right.X && MiddelofPlayer.X <= Right.X + CellWidth)
-            if (MiddelofPlayer.Y >= Right.Y && MiddelofPlayer.Y <= Right.Y + CellHeight)
-            {
-                counter = 0;
-                onright = true;
-                PlayingState.player.position += new Vector2(2 * CellHeight, 0);
-            }
-        start = false;
-
+            if (rightdoor && MiddelofPlayer.X >= Right.X && MiddelofPlayer.X <= Right.X + CellWidth)
+                if (MiddelofPlayer.Y >= Right.Y && MiddelofPlayer.Y <= Right.Y + CellHeight)
+                {
+                    counter = 0;
+                    onright = true;
+                    PlayingState.player.position += new Vector2(2 * CellHeight, 0);
+                }
+            start = false;
+        }
+            
         if (Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
         {
             Camera.Position -= new Vector2(0, roomheight / 30);
