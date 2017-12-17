@@ -15,9 +15,12 @@ public class Player : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
+    bool next = false;
+    public Vector2 velocitybase, velocityLeftUp, velocityRightDown;
     protected float ammo = 20;
     bool next = false;
     public SpriteEffects Effect;
+
 
     public GameObjectList bullets;
     HealthBar healthbar;
@@ -28,6 +31,10 @@ public class Player : SpriteGameObject
         bullets = new GameObjectList();
         //position = new Vector2(100, 100);
         healthbar = new HealthBar(health, maxhealth, position);
+        velocity = new Vector2(5, 5);
+        velocityLeftUp = new Vector2(5, 5);
+        velocityRightDown = new Vector2(5, 5);
+        velocitybase = new Vector2(5, 5);
     }
 
     // Update player and bullets
@@ -59,21 +66,19 @@ public class Player : SpriteGameObject
         // Player movement
         if (inputHelper.IsKeyDown(Keys.W))
         {
-            position.Y = position.Y - 5;
+            position.Y -= velocityLeftUp.Y;
         }
         if (inputHelper.IsKeyDown(Keys.S))
         {
-            position.Y += 5;
+            position.Y += velocityRightDown.Y;
         }
         if (inputHelper.IsKeyDown(Keys.D))
         {
-            position.X = position.X + 5;
-            Effect = SpriteEffects.None;
+            position.X += velocityRightDown.X;
         }
         if (inputHelper.IsKeyDown(Keys.A))
         {
-            position.X -= 5;
-            Effect = SpriteEffects.FlipHorizontally;
+            position.X -= velocityLeftUp.X;
         }
         if (ammo > 0)
         {

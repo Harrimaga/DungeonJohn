@@ -64,7 +64,7 @@ public class Enemy : SpriteGameObject
         healthbar.Update(gameTime, health, maxhealth, position);
         if (health <= 0)
         {
-            GameObjectList.RemovedObjects.Add(this);
+            PlayingState.currentFloor.currentRoom.RemovedGameObjects.Add(this);
         }
     }
 
