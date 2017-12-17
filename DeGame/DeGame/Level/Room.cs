@@ -108,6 +108,21 @@ public class Room : GameObjectList
                         break;
                 }
     }
+
+    public void Update(GameTime gameTime, Room CurrentRoom)
+    {
+        if (CurrentRoom.position == new Vector2(a, b))
+            //Fabians code
+        if (enemies.Children != null)
+            foreach (Enemy enemy in enemies.Children)
+                enemies.Update(gameTime);
+
+        if (start) { OnLoad(); }
+        enemies.Update(gameTime);
+        ControlCamera();
+        //PlayerTerrainCollision();
+    }
+
     void OnLoad()
     {
         //CreateEnemy();
@@ -139,7 +154,6 @@ public class Room : GameObjectList
     {
         Vector2 Cam = Camera.Position;
         Vector2 MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
-
         if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
             if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
             {
@@ -225,17 +239,17 @@ public class Room : GameObjectList
     public override void Update(GameTime gameTime)
     {
 
-        if (enemies.Children != null)
-            foreach (Enemy enemy in enemies.Children)
-                enemies.Update(gameTime);
+    //    if (enemies.Children != null)
+    //        foreach (Enemy enemy in enemies.Children)
+    //            enemies.Update(gameTime);
 
-        if (rocks.Children != null)
-        {
-            foreach (Rock rock in rocks.Children)
-            {
-                rock.Update(gameTime);
-            }
-        }
+    //    if (rocks.Children != null)
+    //    {
+    //        foreach (Rock rock in rocks.Children)
+    //        {
+    //            rock.Update(gameTime);
+    //        }
+    //    }
 
         if (start) { OnLoad(); }
         enemies.Update(gameTime);
@@ -276,28 +290,24 @@ public class Room : GameObjectList
                             break;
 
                         case "UpDoor":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             if (updoor)
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/doorup")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-                            else
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "DownDoor":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             if (downdoor)
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/doordown")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-                            else
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "RightDoor":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             if (rightdoor)
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/doorright")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-                            else
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "LeftDoor":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             if (leftdoor)
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/doorleft")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-                            else
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
 
                         case "RangedEnemy":

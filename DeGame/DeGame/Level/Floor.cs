@@ -277,7 +277,7 @@ public class Floor
         {
             if (room != null)
             {
-                room.Update(gameTime);
+                room.Update(gameTime, currentRoom);
             }
         }
         ////TODO als nextFloor true is voer dan NextFloor() uit
@@ -340,7 +340,6 @@ public class Floor
                 for (int b = 0; b < floorHeight; b++)
                     if (floor[a, b] != null)
                     {
-
                         floor[a, b].LoadTiles();
                     }            
         }
