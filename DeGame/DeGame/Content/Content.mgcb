@@ -343,7 +343,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/MinimapStartTile.png
 
-#begin Sprites/pauze.png
+#begin Sprites/Button Sprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -353,7 +353,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/pauze.png
+/build:Sprites/Button Sprite.png
+
+#begin Sprites/Button2 Sprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Button2 Sprite.png
 
 #begin Sprites/GameOver.png
 /importer:TextureImporter
