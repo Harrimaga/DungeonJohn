@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 class MainMenuState : IGameObject
 {
-    public static bool reset = false;
+    //public static bool reset = false;
     public virtual void HandleInput(InputHelper inputHelper)
     {
-        if (inputHelper.currentKeyboardState.IsKeyDown(Keys.Space) && inputHelper.previousKeyboardState.IsKeyUp(Keys.Space))
+        if (inputHelper.KeyPressed(Keys.Space))
         {
             GameEnvironment.gameStateManager.SwitchTo("Playing");
         }
@@ -23,14 +23,12 @@ class MainMenuState : IGameObject
     }
     public virtual void Update(GameTime gameTime)
     {
-        if (reset)
-        Reset();
-        reset = false;
+        //if (reset)
+        //Reset();
+        //reset = false;
     }
     public virtual void Reset()
     {
-        PlayingState.player.health = 100;
-        PlayingState.player.position = new Vector2(100, 100);
     }
 
 }
