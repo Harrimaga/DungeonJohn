@@ -44,7 +44,7 @@ public class Player : SpriteGameObject
 
 
         //if (health <= 0)
-            //GameEnvironment.gameStateManager.SwitchTo("GameOver");
+        //    GameEnvironment.gameStateManager.SwitchTo("GameOver");
 
     }
 

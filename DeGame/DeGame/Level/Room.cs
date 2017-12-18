@@ -112,13 +112,7 @@ public class Room : GameObjectList
     public void Update(GameTime gameTime, Room CurrentRoom)
     {
         if (CurrentRoom.position == new Vector2(a, b))
-            //Fabians code
-
-        //~Yoran~ Uitgecommentarieerd want geeft exeption. En is nu onnodig, dubbele enemy update
-        //if (enemies.Children != null)
-        //    foreach (Enemy enemy in enemies.Children)
-        //        enemies.Update(gameTime);               
-        //}           
+            //Fabians code         
 
         if (start) { OnLoad(); }
         enemies.Update(gameTime);
