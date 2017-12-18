@@ -8,7 +8,7 @@ public class Room : GameObjectList
     public int RoomListIndex;
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false, CameraIsMoving = false;
     bool onup = false, ondown = false, onleft = false, onright = false;
-    public GameObjectList enemies, rocks;
+    public static GameObjectList enemies, rocks;
     public int a, b;
     public string[,] roomarray;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
