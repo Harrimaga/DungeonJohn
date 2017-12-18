@@ -73,9 +73,9 @@ public class Enemy : SpriteGameObject
 
     public bool CheckDown()
     {
-        Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y + sprite.Height, sprite.Width, 60);
-        foreach (Rock rock in Room.rocks.Children)
-        if (CheckDown.Intersects(rock.BoundingBox))
+        Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height + 120);
+        foreach (Solid solid in Room.solid.Children)
+        if (CheckDown.Intersects(solid.BoundingBox))
         {
             return true;
         }
@@ -83,9 +83,9 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckUp()
     {
-        Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y - 60, sprite.Width, 60);
-        foreach (Rock rock in Room.rocks.Children)
-            if (CheckUp.Intersects(rock.BoundingBox))
+        Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height - 10);
+        foreach (Solid solid in Room.solid.Children)
+            if (CheckUp.Intersects(solid.BoundingBox))
             {
                 return true;
             }
@@ -93,9 +93,9 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckLeft()
     {
-        Rectangle CheckLeft = new Rectangle((int)position.X - 60, (int)position.Y, 60, sprite.Height);
-        foreach (Rock rock in Room.rocks.Children)
-            if (CheckLeft.Intersects(rock.BoundingBox))
+        Rectangle CheckLeft = new Rectangle((int)position.X, (int)position.Y, sprite.Width - 10, sprite.Height);
+        foreach (Solid solid in Room.solid.Children)
+            if (CheckLeft.Intersects(solid.BoundingBox))
             {
                 return true;
             }
@@ -103,9 +103,9 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckRight()
     {
-        Rectangle CheckRight = new Rectangle((int)position.X + sprite.Width, (int)position.Y, sprite.Width, 60);
-        foreach (Rock rock in Room.rocks.Children)
-            if (CheckRight.Intersects(rock.BoundingBox))
+        Rectangle CheckRight = new Rectangle((int)position.X, (int)position.Y, sprite.Width + 10, sprite.Height);
+        foreach (Solid solid in Room.solid.Children)
+            if (CheckRight.Intersects(solid.BoundingBox))
             {
                 return true;
             }
