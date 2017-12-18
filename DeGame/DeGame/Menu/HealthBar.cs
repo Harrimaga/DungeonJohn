@@ -58,7 +58,7 @@ class HealthBar
     }
     public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/damagehealthbar"), healthbar, Color.WhiteSmoke);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/damagehealthbar"), healthbar, Color.White);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/healthbar"), healthbar2, Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), HP, new Vector2(healthbar.X + 40, healthbar.Y), Color.White);
     }
