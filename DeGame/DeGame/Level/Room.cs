@@ -122,7 +122,7 @@ public class Room : GameObjectList
         if (start) { OnLoad(); }
         start = false;
         enemies.Update(gameTime);
-        ControlCamera(CurrentRoom);
+        ControlCamera();
         CheckExit();
     }
 
