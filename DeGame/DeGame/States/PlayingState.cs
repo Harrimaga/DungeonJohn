@@ -47,6 +47,10 @@ public class PlayingState : IGameObject
         floor.Update(gameTime);
         //button.Update(gameTime);
         //enemy.Update(gameTime);
+        if (player.health <= 0)
+        {
+            GameEnvironment.gameStateManager.SwitchTo("GameOver");
+        }
     }
     public virtual void Reset()
     {
