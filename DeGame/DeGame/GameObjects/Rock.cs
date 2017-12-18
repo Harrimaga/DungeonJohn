@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 class Rock : SpriteGameObject
 {
+    Vector2 positionOld;
 
     public Rock(Vector2 startPosition, int layer = 0, string id = "Rock")
     : base("Sprites/Rock Sprite", layer, id)
@@ -20,46 +21,14 @@ class Rock : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        //left side of rock player stop
-
-        if (CollidesWith(PlayingState.player) && BoundingBox.Right >= PlayingState.player.position.X + PlayingState.player.Width)
+        if (CollidesWith(PlayingState.player))
         {
-            PlayingState.player.velocityRightDown.X = 0;
+            PlayingState.player.position = positionOld;
         }
-        else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Right >= PlayingState.player.position.X + PlayingState.player.Width))
+        else
         {
-            PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
+            positionOld = PlayingState.player.position;
         }
-
-        
-        /*if (CollidesWith(PlayingState.player) && BoundingBox.Right <= PlayingState.player.position.X + PlayingState.player.Width)
-        {
-            PlayingState.player.velocityLeftUp.X = 0;
-        }
-        else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Right <= PlayingState.player.position.X + PlayingState.player.Width))
-        {
-            PlayingState.player.velocityLeftUp.X = PlayingState.player.velocitybase.X;
-        }
-
-        /*
-        if (CollidesWith(PlayingState.player) && position.X >= PlayingState.player.position.X)
-        {
-            PlayingState.player.velocityRightDown.X = 0;
-        }
-        else if (!CollidesWith(PlayingState.player) && !(position.X >= PlayingState.player.position.X))
-        {
-            PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
-        }
-
-        /*
-        if (CollidesWith(PlayingState.player) && position.X >= PlayingState.player.position.X)
-        {
-            PlayingState.player.velocityRightDown.X = 0;
-        }
-        else if (!CollidesWith(PlayingState.player) && !(position.X >= PlayingState.player.position.X))
-        {
-            PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
-        }*/
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
