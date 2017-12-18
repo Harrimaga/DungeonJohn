@@ -27,6 +27,7 @@ namespace DeGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            this.IsMouseVisible = true;
             base.Initialize();
         }
 

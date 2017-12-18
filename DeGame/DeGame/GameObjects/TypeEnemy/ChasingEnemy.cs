@@ -7,28 +7,25 @@ using System.Text;
 using System.Threading.Tasks;
 
 
- public class ChasingEnemy : Enemy
+public class ChasingEnemy : Enemy
+{
+    public ChasingEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
     {
-        public ChasingEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
-        {
+    }
 
-        }
-        public override void Update(GameTime gameTime)
-        {
+    public override void Update(GameTime gameTime)
+    {
         base.Update(gameTime);
         Chase();
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-
-        base.Draw(gameTime, spriteBatch);
-
-
-            if(Die == false)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
-
-        }
     }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        base.Draw(gameTime, spriteBatch);
+        if (Die == false)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+    }
+}
+
 
    
