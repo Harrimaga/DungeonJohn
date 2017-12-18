@@ -131,6 +131,7 @@ public class Room : GameObjectList
     {
         //CreateEnemy();
     }
+
     void CreateObject(int x, int y, string Type)
     {
         Enemy enemy;

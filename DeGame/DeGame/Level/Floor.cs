@@ -264,6 +264,8 @@ public class Floor
         FloorGenerator();
         CurrentLevel = 1;
         FloorGenerated = false;
+        PlayingState.player.health = PlayingState.player.maxhealth;
+        PlayingState.player.ammo = 20;
     }
 
     void DoorCheck()
@@ -304,7 +306,6 @@ public class Floor
             NextFloor();
         if (inputHelper.KeyPressed(Keys.R))
             ResetFloor();
-        //hp + ammo reset
     }
     
     void DrawMinimap(SpriteBatch spriteBatch)
