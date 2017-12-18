@@ -46,7 +46,6 @@ public class Room : GameObjectList
         for (int x = 0; x < roomarraywidth; ++x)
             for (int y = 0; y < roomarrayheight; ++y)
                 AssignType(textLines[y][x], x, y);
-        //System.Console.WriteLine(roomarray[x, y]);
     }       
     
     private void AssignType(char textlines,int x, int y)
@@ -164,6 +163,16 @@ public class Room : GameObjectList
     {
         Vector2 Cam = Camera.Position;
         Vector2 MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+
+        if(enemies.Count == 0)
+        {
+            if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
+                if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
+                {
+                    counter = 0;
+                    onup = true;
+                    PlayingState.player.position -= new Vector2(0, 2 * CellHeight);
+                }
         if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
             if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
             {
