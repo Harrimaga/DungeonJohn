@@ -13,15 +13,12 @@ public class PlayingState : IGameObject
     //public static Enemy enemy;
     public static Floor currentFloor;
     Floor floor;
-    Button button;
-
 
     public PlayingState()
     {
         player = new Player();
         floor = new Floor();
         currentFloor = floor;
-        //button = new Button(new Vector2(100, 100), "Klik me!", "Sprites/Button Sprite", 0, "button");
         //enemy = new RangedEnemy(Vector2.Zero, 0, "Enemy");
     }
     public virtual void HandleInput(InputHelper inputHelper)
@@ -32,20 +29,17 @@ public class PlayingState : IGameObject
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
         }
         floor.HandleInput(inputHelper);
-        //button.HandleInput(inputHelper);
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         floor.Draw(gameTime, spriteBatch);
         player.Draw(gameTime, spriteBatch);
-        //button.Draw(gameTime, spriteBatch);
     }
     public virtual void Update(GameTime gameTime)
     {
         player.Update(gameTime);
         Console.WriteLine(player.position.ToString());
         floor.Update(gameTime);
-        //button.Update(gameTime);
         //enemy.Update(gameTime);
     }
     public virtual void Reset()
