@@ -196,7 +196,8 @@ public class Room : GameObjectList
             CameraVelocity = new Vector2(-roomwidth / 30, 0);        
         if (Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 30)        
             CameraVelocity = new Vector2(roomwidth / 30, 0);
-        if (onup || ondown || onleft || onright && counter < 30)
+
+        if ((onup || ondown || onleft || onright) && counter < 30)
         {
             Camera.Position += CameraVelocity;
             counter++;

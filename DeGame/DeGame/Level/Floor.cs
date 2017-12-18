@@ -9,7 +9,7 @@ public class Floor
     bool[,] Checked;
     int[,] AdjacentRooms;
     int[,] possiblespecial;
-    int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
+    int maxRooms = 6, minRooms = 4, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
     Random random = new Random();
     public Vector2 startPlayerPosition;
     public Room currentRoom;
@@ -245,11 +245,24 @@ public class Floor
         AdjacentRooms = new int[floorWidth, floorHeight];
         if (CurrentLevel <= 10)
         {
-            maxRooms += 3;
+            maxRooms += 4;
             minRooms += 3;
         }
         FloorGenerator();
         CurrentLevel++;
+        FloorGenerated = false;
+    }
+
+    public void ResetFloor()
+    {
+        ClearFloor();
+        floor = new Room[floorWidth, floorHeight];
+        Checked = new bool[floorWidth, floorHeight];
+        AdjacentRooms = new int[floorWidth, floorHeight];
+        maxRooms = 6;
+        minRooms = 4;
+        FloorGenerator();
+        CurrentLevel = 1;
         FloorGenerated = false;
     }
 
@@ -287,8 +300,11 @@ public class Floor
 
     public void HandleInput(InputHelper inputHelper)
     {
-        if (inputHelper.KeyPressed(Keys.R))
+        if (inputHelper.KeyPressed(Keys.T))
             NextFloor();
+        if (inputHelper.KeyPressed(Keys.R))
+            ResetFloor();
+        //hp + ammo reset
     }
     
     void DrawMinimap(SpriteBatch spriteBatch)
