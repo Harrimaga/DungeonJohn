@@ -133,7 +133,7 @@ public class Floor
         }  
         else
             secondtime = true;
-        q = random.Next(b - 1);
+        q = random.Next(b - 1); //error
         if (secondtime == true)
         {
             CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
