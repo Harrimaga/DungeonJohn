@@ -170,13 +170,6 @@ public class Room : GameObjectList
             if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
                 if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
                 {
-                    counter = 0;
-                    onup = true;
-                    PlayingState.player.position -= new Vector2(0, 2 * CellHeight);
-                }
-            if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
-                if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
-                {
                     onup = true;
                     PlayingState.player.position -= new Vector2(0, 2 * CellHeight);
                 }
