@@ -15,6 +15,7 @@ public class Enemy : SpriteGameObject
     protected float attackspeed;
     protected float range;
     protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
+    public SpriteEffects Effects;
     Texture2D playersprite;
     HealthBar healthbar;
 
