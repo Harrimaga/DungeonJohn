@@ -34,7 +34,7 @@ public class Enemy : SpriteGameObject
         if (CollidesWith(PlayingState.player))
         {
             velocity = Vector2.Zero;
-            PlayingState.player.health -= 1;
+            PlayingState.player.health -= 0.5f;
         }
         if (!CollidesWith(PlayingState.player))
         {
