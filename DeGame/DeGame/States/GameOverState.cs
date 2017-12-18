@@ -22,7 +22,7 @@ class GameOverState : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        playingState.Draw(gameTime, spriteBatch);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/GameOver"), Vector2.Zero);
     }
     public virtual void Update(GameTime gameTime)
     {
