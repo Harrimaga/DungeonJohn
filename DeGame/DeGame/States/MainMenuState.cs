@@ -20,10 +20,11 @@ class MainMenuState : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/bteam"), new Vector2(200,70));
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/bteam"), new Vector2(-200, -200));
     }
     public virtual void Update(GameTime gameTime)
     {
+        Camera.Position = new Vector2(0,0);
     }
     public virtual void Reset()
     {
