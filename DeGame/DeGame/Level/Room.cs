@@ -123,7 +123,6 @@ public class Room : GameObjectList
         if (start) { OnLoad(); }
         enemies.Update(gameTime);
         ControlCamera(CurrentRoom);
-        ControlCamera();
         CheckExit();
         //PlayerTerrainCollision();
     }
@@ -158,7 +157,7 @@ public class Room : GameObjectList
         Vector2 Cam = Camera.Position;
         Vector2 MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
 
-        if (CurrentRoom.enemies.Count == 0)
+        if (enemies.Count == 0)
         {
             if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
                 if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
