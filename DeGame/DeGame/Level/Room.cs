@@ -6,11 +6,12 @@ using Microsoft.Xna.Framework;
 public class Room : GameObjectList
 {
     public int RoomListIndex;
-    public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true;
+    public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false, CameraIsMoving = false;
     bool onup = false, ondown = false, onleft = false, onright = false;
     public static GameObjectList enemies, rocks;
     public int a, b;
     public string[,] roomarray;
+    Vector2 MiddelofPlayer;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
     Vector2 Up, Down, Left, Right, Exit;
 
@@ -46,73 +47,71 @@ public class Room : GameObjectList
         for (int x = 0; x < roomarraywidth; ++x)
             for (int y = 0; y < roomarrayheight; ++y)
                 AssignType(textLines[y][x], x, y);
-    }       
-    
+    }
 
-    private void AssignType(char textlines,int x, int y)
+    private void AssignType(char textlines, int x, int y)
     {
-                switch (textlines)
-                {
-                    case '.':
-                        roomarray[x,y] = "Background";
-                        break;
-                    case '!':
-                        roomarray[x, y] = "Rock";
-                        CreateObject(x, y, "!");
-                        break;
-                    case '+':
-                        roomarray[x, y] = "Wall";
-                        break;
+        switch (textlines)
+        {
+            case '.':
+                roomarray[x, y] = "Background";
+                break;
+            case '!':
+                roomarray[x, y] = "Rock";
+                CreateObject(x, y, "!");
+                break;
+            case '+':
+                roomarray[x, y] = "Wall";
+                break;
 
-                    case '-':
-                        roomarray[x, y] = "UpDoor";
-                        Up = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
-                        break;
-                    case '=':
-                        roomarray[x, y] = "DownDoor";
-                        Down = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
-                        break;
-                    case '<':
-                        roomarray[x, y] = "LeftDoor";
-                        Left = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
-                        break;
-                    case '>':
-                        roomarray[x, y] = "RightDoor";
-                        Right = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
-                        break;
+            case '-':
+                roomarray[x, y] = "UpDoor";
+                Up = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                break;
+            case '=':
+                roomarray[x, y] = "DownDoor";
+                Down = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                break;
+            case '<':
+                roomarray[x, y] = "LeftDoor";
+                Left = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                break;
+            case '>':
+                roomarray[x, y] = "RightDoor";
+                Right = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                break;
 
-                    case 'C':
-                        roomarray[x, y] = "ChasingEnemy";
-                        CreateObject(x,y,"C");
-                        break;
-                    case 'R':
-                        roomarray[x, y] = "RangedEnemy";
-                        //CreateObject(x, y, "R");
-                        break;
-                    case 'O':
-                        roomarray[x, y] = "Pit";
-                        break;
-                    case 'I':
-                        roomarray[x, y] = "Item";
-                        break;
-                    case 'E':
-                        roomarray[x, y] = "Exit";
-                        Exit = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
-                        break;
-                    case 'S':
-                        roomarray[x, y] = "Start";
-                        break;
-                    default:
-                        roomarray[x, y] = "N/A";
-                        break;
-                }
+            case 'C':
+                roomarray[x, y] = "ChasingEnemy";
+                CreateObject(x, y, "C");
+                break;
+            case 'R':
+                roomarray[x, y] = "RangedEnemy";
+                //CreateObject(x, y, "R");
+                break;
+            case 'O':
+                roomarray[x, y] = "Pit";
+                break;
+            case 'I':
+                roomarray[x, y] = "Item";
+                break;
+            case 'E':
+                roomarray[x, y] = "Exit";
+                Exit = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                break;
+            case 'S':
+                roomarray[x, y] = "Start";
+                break;
+            default:
+                roomarray[x, y] = "N/A";
+                break;
+        }
     }
 
     public void Update(GameTime gameTime, Room CurrentRoom)
-    { 
-        if (enemies.Children != null)
-            foreach (Enemy enemy in enemies.Children)
-                enemies.Update(gameTime);
+    {
+        if (CurrentRoom.position == new Vector2(a, b))
+            Visited = true;
 
         //~Yoran~ Uitgecommentarieerd want geeft exeption. En is nu onnodig, dubbele enemy update
         //if (enemies.Children != null)
@@ -121,48 +120,56 @@ public class Room : GameObjectList
         //}           
 
         if (start) { OnLoad(); }
+        start = false;
         enemies.Update(gameTime);
         ControlCamera(CurrentRoom);
         CheckExit();
-        //PlayerTerrainCollision();
     }
+
+    void PlayerCollision()
+    {
+        //lkdjg;ajw;
+    }
+
 
     void OnLoad()
     {
         //CreateEnemy();
     }
+
     void CreateObject(int x, int y, string Type)
     {
-            if (Type == "C")
-            {
-                Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
+        Enemy enemy;
+        switch (Type)
+        {
+            case ("C"):
+                enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
                 enemies.Add(enemy);
-            }
+                break;
 
-            if (Type == "R")
-            {
-                Enemy enemy = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
+            case ("R"):
+                enemy = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
                 enemies.Add(enemy);
-            }
+                break;
 
-            if (Type == "!")
-            {
+            case ("!"):
                 Rock rock = new Rock(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Rock");
                 rocks.Add(rock);
-            }
+                break;
+
+        }
     }
 
-    void ControlCamera(Room CurrentRoom)
+    void ControlCamera()
     {
         Vector2 Cam = Camera.Position;
-        Vector2 MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+        MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
 
         if (enemies.Count == 0)
         {
             if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
                 if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
                 {
-                    counter = 0;
                     onup = true;
                     PlayingState.player.position -= new Vector2(0, 2 * CellHeight);
                 }
@@ -170,7 +177,6 @@ public class Room : GameObjectList
             if (downdoor && MiddelofPlayer.X >= Down.X && MiddelofPlayer.X <= Down.X + CellWidth)
                 if (MiddelofPlayer.Y >= Down.Y && MiddelofPlayer.Y <= Down.Y + CellHeight)
                 {
-                    counter = 0;
                     ondown = true;
                     PlayingState.player.position += new Vector2(0, 2 * CellHeight);
                 }
@@ -178,7 +184,6 @@ public class Room : GameObjectList
             if (leftdoor && MiddelofPlayer.X >= Left.X && MiddelofPlayer.X <= Left.X + CellWidth)
                 if (MiddelofPlayer.Y >= Left.Y && MiddelofPlayer.Y <= Left.Y + CellHeight)
                 {
-                    counter = 0;
                     onleft = true;
                     PlayingState.player.position -= new Vector2(2 * CellHeight, 0);
                 }
@@ -186,52 +191,48 @@ public class Room : GameObjectList
             if (rightdoor && MiddelofPlayer.X >= Right.X && MiddelofPlayer.X <= Right.X + CellWidth)
                 if (MiddelofPlayer.Y >= Right.Y && MiddelofPlayer.Y <= Right.Y + CellHeight)
                 {
-                    counter = 0;
                     onright = true;
                     PlayingState.player.position += new Vector2(2 * CellHeight, 0);
                 }
-            start = false;
-        }
-            
-        if (Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
-        {
-            Camera.Position -= new Vector2(0, roomheight / 30);
-            counter++;
-        }
-        if (Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 30)
-        {
-            Camera.Position += new Vector2(0, roomheight / 30);
-            counter++;
-        }
-        if (Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 30)
-        {
-            Camera.Position -= new Vector2(roomwidth / 30, 0);
-            counter++;
-        }
-        if (Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 30)
-        {
-            Camera.Position += new Vector2(roomwidth / 30, 0);
-            counter++;
-        }
 
-        if (counter >= 30)
-        {
-            onup = false;
-            ondown = false;
-            onleft = false;
-            onright = false;
+            Vector2 CameraVelocity = new Vector2(0, 0);
+
+            if (Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
+                CameraVelocity = new Vector2(0, -roomheight / 30);
+            if (Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 30)
+                CameraVelocity = new Vector2(0, roomheight / 30);
+            if (Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 30)
+                CameraVelocity = new Vector2(-roomwidth / 30, 0);
+            if (Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 30)
+                CameraVelocity = new Vector2(roomwidth / 30, 0);
+
+            if ((onup || ondown || onleft || onright) && counter < 30)
+            {
+                Camera.Position += CameraVelocity;
+                counter++;
+                CameraIsMoving = true;
+            }
+            if (counter >= 30)
+            {
+                onup = false;
+                ondown = false;
+                onleft = false;
+                onright = false;
+                counter = 0;
+                CameraIsMoving = false;
+            }
         }
     }
 
-    void CheckExit()
+    public void CheckExit()
     {
-        Vector2 MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+        MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
         if (MiddelofPlayer.X >= Exit.X && MiddelofPlayer.X <= Exit.X + CellWidth)
             if (MiddelofPlayer.Y >= Exit.Y && MiddelofPlayer.Y <= Exit.Y + CellHeight)
-            {
+
                 PlayingState.currentFloor.NextFloor();
-            }
-    }
+    }    
+        
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
