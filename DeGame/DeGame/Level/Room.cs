@@ -110,8 +110,9 @@ public class Room : GameObjectList
 
     public void Update(GameTime gameTime, Room CurrentRoom)
     {
-        if (CurrentRoom.position == new Vector2(a, b))
+        if (CurrentRoom.position == new Vector2(a, b))        
             Visited = true;
+        
 
         //~Yoran~ Uitgecommentarieerd want geeft exeption. En is nu onnodig, dubbele enemy update
         //if (enemies.Children != null)
@@ -125,12 +126,6 @@ public class Room : GameObjectList
         ControlCamera();
         CheckExit();
     }
-
-    void PlayerCollision()
-    {
-        //lkdjg;ajw;
-    }
-
 
     void OnLoad()
     {
@@ -231,8 +226,7 @@ public class Room : GameObjectList
             if (MiddelofPlayer.Y >= Exit.Y && MiddelofPlayer.Y <= Exit.Y + CellHeight)
 
                 PlayingState.currentFloor.NextFloor();
-    }    
-        
+    }            
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

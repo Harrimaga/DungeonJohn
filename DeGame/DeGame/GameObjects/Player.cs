@@ -31,7 +31,7 @@ public class Player : SpriteGameObject
         velocityRightDown = new Vector2(5, 5);
         velocityLeftUp = new Vector2(5, 5);
         velocitybase = new Vector2(5, 5);
-        healthbar = new HealthBar(health, maxhealth, position);
+        healthbar = new HealthBar(health, maxhealth, position, true);
     }
 
     // Update player and bullets
