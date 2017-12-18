@@ -14,8 +14,8 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
+    protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
     public SpriteEffects Effects;
-    protected Vector2 basevelocity = new Vector2(1, 1);
     Texture2D playersprite;
     HealthBar healthbar;
 
@@ -133,6 +133,8 @@ public class Enemy : SpriteGameObject
                 position.X += velocity.X;
                 Effects = SpriteEffects.FlipHorizontally;
             }
+
+            //if()
     }
 }
 
