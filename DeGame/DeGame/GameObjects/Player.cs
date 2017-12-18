@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 public class Player : SpriteGameObject
 {
     public float health = 100;
-    protected float maxhealth = 100;
+    public float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected float ammo = 20;
+    public float ammo = 20;
     bool next = false;
     public SpriteEffects Effect;
-    public Vector2 velocityRightDown, velocityLeftUp, velocitybase, healthbarPosition;
+    public Vector2 velocitybase;
 
     public GameObjectList bullets;
     HealthBar healthbar;
@@ -27,33 +27,27 @@ public class Player : SpriteGameObject
     : base("Sprites/Random", 0, "Player")
     {
         bullets = new GameObjectList();
-        //position = new Vector2(100, 100);
-        velocityRightDown = new Vector2(5, 5);
-        velocityLeftUp = new Vector2(5, 5);
         velocitybase = new Vector2(5, 5);
-        //healthbarPosition = new Vector2(800, 800);
         healthbar = new HealthBar(health, maxhealth, position);
+        velocity = velocitybase;
     }
 
-    // Update player and bullets
+
     public override void Update(GameTime gameTime)
     {
-        healthbar.Update(gameTime, health, maxhealth, position);
+        healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
-        //Console.WriteLine(position);
         base.Update(gameTime);
-
-        if (health <= 0)
-            GameEnvironment.gameStateManager.SwitchTo("GameOver");
+        //if (health <= 0)
+            //GameEnvironment.gameStateManager.SwitchTo("GameOver");
 
     }
 
-    // Draw player and bullets
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         string Ammo = Convert.ToString(ammo);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: " + Ammo, new Vector2(PlayingState.currentFloor.screenwidth - 300 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: " + Ammo, new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
         bullets.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch, Vector2.Zero);
     }
@@ -63,20 +57,20 @@ public class Player : SpriteGameObject
         // Player movement
         if (inputHelper.IsKeyDown(Keys.W))
         {
-            position.Y -= velocityLeftUp.Y;
+            position.Y -= velocity.Y;
         }
         if (inputHelper.IsKeyDown(Keys.S))
         {
-            position.Y += velocityRightDown.Y;
+            position.Y += velocity.Y;
         }
         if (inputHelper.IsKeyDown(Keys.D))
         {
-            position.X += velocityRightDown.X;
+            position.X += velocity.X;
             Effect = SpriteEffects.None;
         }
         if (inputHelper.IsKeyDown(Keys.A))
         {
-            position.X -= velocityLeftUp.X;
+            position.X -= velocity.X;
             Effect = SpriteEffects.FlipHorizontally;
         }
         if (ammo > 0)
