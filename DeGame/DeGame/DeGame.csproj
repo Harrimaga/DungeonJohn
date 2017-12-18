@@ -100,6 +100,8 @@
     <Content Include="Content\Sprites\doorleft.png" />
     <Content Include="Content\Sprites\doorright.png" />
     <Content Include="Content\Sprites\doorup.png" />
+    <Content Include="Content\Sprites\Button Sprite.png" />
+    <Content Include="Content\Sprites\Button2 Sprite.png" />
     <Content Include="Content\Sprites\Eind Sprite.png" />
     <Content Include="Content\Sprites\Eind Sprite2.png" />
     <Content Include="Content\Sprites\healthbar.png" />

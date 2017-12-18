@@ -39,6 +39,11 @@ public class GameObjectList : GameObject
         obj.Parent = null;
     }
 
+    public virtual int Count
+    {
+        get { return children.Count; }
+    }
+
     public GameObject Find(string id)
     {
         foreach (GameObject obj in children)
