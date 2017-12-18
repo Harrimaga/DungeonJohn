@@ -42,11 +42,23 @@ class Bullet : SpriteGameObject
     {
         base.Update(gameTime);
         position += velocity;
+        CheckCollision();
     }
 
     // Draw the bullets
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(Bulletsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
+    }
+
+    public void CheckCollision()
+    {
+        foreach( Rock rock in Room.rocks.Children)
+        {
+            if (CollidesWith(rock))
+            {
+                GameObjectList.RemovedObjects.Add(this);
+            }
+        }
     }
 }
