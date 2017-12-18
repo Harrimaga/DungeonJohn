@@ -58,8 +58,10 @@
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\CheckCurrentTile.cs" />
     <Compile Include="GameObjects\Rock.cs" />
+    <Compile Include="GameObjects\Solid.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
+    <Compile Include="GameObjects\Wall.cs" />
     <Compile Include="Level\Floor.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
@@ -90,6 +92,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Levels\4.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\5.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Background Sprite.png" />
