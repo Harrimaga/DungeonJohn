@@ -16,21 +16,23 @@ class Rock : SpriteGameObject
         position = startPosition;
     }
 
+
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         //left side of rock player stop
-        if (CollidesWith(PlayingState.player) && BoundingBox.Left >= PlayingState.player.position.X)
+
+        if (CollidesWith(PlayingState.player) && BoundingBox.Right >= PlayingState.player.position.X + PlayingState.player.Width)
         {
             PlayingState.player.velocityRightDown.X = 0;
         }
-        else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Left >= PlayingState.player.position.X))
+        else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Right >= PlayingState.player.position.X + PlayingState.player.Width))
         {
             PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
         }
 
         
-        if (CollidesWith(PlayingState.player) && BoundingBox.Right <= PlayingState.player.position.X + PlayingState.player.Width)
+        /*if (CollidesWith(PlayingState.player) && BoundingBox.Right <= PlayingState.player.position.X + PlayingState.player.Width)
         {
             PlayingState.player.velocityLeftUp.X = 0;
         }

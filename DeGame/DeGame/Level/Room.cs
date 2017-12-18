@@ -122,6 +122,7 @@ public class Room : GameObjectList
 
         if (start) { OnLoad(); }
         enemies.Update(gameTime);
+        rocks.Update(gameTime);
         ControlCamera();
         CheckExit();
         //PlayerTerrainCollision();
