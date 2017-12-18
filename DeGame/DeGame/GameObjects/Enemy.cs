@@ -14,7 +14,8 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected Vector2 basevelocity = new Vector2(1, 1);
+    protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
+    public SpriteEffects Effects;
     Texture2D playersprite;
     HealthBar healthbar;
 
@@ -72,7 +73,7 @@ public class Enemy : SpriteGameObject
 
     public bool CheckDown()
     {
-        Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height + 120);
+        Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y + sprite.Height, sprite.Width, 60);
         foreach (Rock rock in Room.rocks.Children)
         if (CheckDown.Intersects(rock.BoundingBox))
         {
@@ -82,7 +83,7 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckUp()
     {
-        Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height - 10);
+        Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y - 60, sprite.Width, 60);
         foreach (Rock rock in Room.rocks.Children)
             if (CheckUp.Intersects(rock.BoundingBox))
             {
@@ -92,7 +93,7 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckLeft()
     {
-        Rectangle CheckLeft = new Rectangle((int)position.X, (int)position.Y, sprite.Width - 10, sprite.Height);
+        Rectangle CheckLeft = new Rectangle((int)position.X - 60, (int)position.Y, 60, sprite.Height);
         foreach (Rock rock in Room.rocks.Children)
             if (CheckLeft.Intersects(rock.BoundingBox))
             {
@@ -102,7 +103,7 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckRight()
     {
-        Rectangle CheckRight = new Rectangle((int)position.X, (int)position.Y, sprite.Width + 10, sprite.Height);
+        Rectangle CheckRight = new Rectangle((int)position.X + sprite.Width, (int)position.Y, sprite.Width, 60);
         foreach (Rock rock in Room.rocks.Children)
             if (CheckRight.Intersects(rock.BoundingBox))
             {
@@ -125,11 +126,15 @@ public class Enemy : SpriteGameObject
             if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
             {
                 position.X -= velocity.X;
+                Effects = SpriteEffects.None;
             }
-            if (position.X - playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
+            if (position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
             {
                 position.X += velocity.X;
+                Effects = SpriteEffects.FlipHorizontally;
             }
+
+            //if()
     }
 }
 

@@ -115,14 +115,10 @@ public class Room : GameObjectList
         
 
         //~Yoran~ Uitgecommentarieerd want geeft exeption. En is nu onnodig, dubbele enemy update
-        //if (enemies.Children != null)
-        //    foreach (Enemy enemy in enemies.Children)
-        //        enemies.Update(gameTime);               
-        //}           
-
         if (start) { OnLoad(); }
         start = false;
         enemies.Update(gameTime);
+        rocks.Update(gameTime);
         ControlCamera();
         CheckExit();
     }

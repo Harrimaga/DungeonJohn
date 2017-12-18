@@ -23,7 +23,7 @@ public class ChasingEnemy : Enemy
     {
         base.Draw(gameTime, spriteBatch);
         if (Die == false)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }
 
