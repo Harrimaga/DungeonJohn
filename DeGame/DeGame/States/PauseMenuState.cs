@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 class PauseMenuState : IGameObject
 {
-    Vector2 pauzePosition;
+    Vector2 BasisPosition;
     protected IGameObject playingState;
     public PauseMenuState()
     {
@@ -25,11 +25,11 @@ class PauseMenuState : IGameObject
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         playingState.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/pauze"), pauzePosition);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/pauze"), BasisPosition);
     }
     public virtual void Update(GameTime gameTime)
     {
-        pauzePosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
+        BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
     }
     public virtual void Reset()
     {
