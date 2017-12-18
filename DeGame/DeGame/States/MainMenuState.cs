@@ -15,6 +15,7 @@ class MainMenuState : IGameObject
         if (inputHelper.KeyPressed(Keys.Space))
         {
             GameEnvironment.gameStateManager.SwitchTo("Playing");
+            Reset();
         }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -23,12 +24,12 @@ class MainMenuState : IGameObject
     }
     public virtual void Update(GameTime gameTime)
     {
-        //if (reset)
-        //Reset();
-        //reset = false;
     }
     public virtual void Reset()
     {
+        PlayingState.player.health = 100;
+        PlayingState.currentFloor.ResetFloor();
+        PlayingState.player.position = PlayingState.currentFloor.startPlayerPosition;
     }
 
 }
