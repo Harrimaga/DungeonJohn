@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-class Rock : Solid
+class Wall : Solid
 {
-    public Rock(Vector2 startPosition, int layer = 0, string id = "Rock")
+    public Wall(Vector2 startPosition, int layer = 0, string id = "Wall")
     : base(startPosition, layer, id)
     {
         position = startPosition;
@@ -23,6 +23,6 @@ class Rock : Solid
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Rock Sprite"), position);
+        //spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Rock Sprite"), position);
     }
 }

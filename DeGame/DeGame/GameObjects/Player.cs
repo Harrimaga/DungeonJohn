@@ -28,18 +28,18 @@ public class Player : SpriteGameObject
     {
         bullets = new GameObjectList();
         velocitybase = new Vector2(5, 5);
-        healthbar = new HealthBar(health, maxhealth, position, true);
+        healthbar = new HealthBar(health, maxhealth, position);
         velocity = velocitybase;
     }
 
 
     public override void Update(GameTime gameTime)
     {
-        healthbar.Update(gameTime, health, maxhealth, position);
+        healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
         base.Update(gameTime);
-        //if (health <= 0)
-        //GameEnvironment.gameStateManager.SwitchTo("GameOver");
+        if (health <= 0)
+            GameEnvironment.gameStateManager.SwitchTo("GameOver");
 
     }
 
