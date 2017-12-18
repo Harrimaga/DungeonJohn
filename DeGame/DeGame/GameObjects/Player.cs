@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 public class Player : SpriteGameObject
 {
     public float health = 100;
-    protected float maxhealth = 100;
+    public float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected float ammo = 20;
+    public float ammo = 20;
     bool next = false;
     public SpriteEffects Effect;
     public Vector2 velocitybase;

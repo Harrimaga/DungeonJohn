@@ -9,7 +9,7 @@ public class Floor
     bool[,] Checked;
     int[,] AdjacentRooms;
     int[,] possiblespecial;
-    int maxRooms = 5, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
+    int maxRooms = 6, minRooms = 4, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
     Random random = new Random();
     public Vector2 startPlayerPosition;
     public Room currentRoom;
@@ -245,13 +245,27 @@ public class Floor
         AdjacentRooms = new int[floorWidth, floorHeight];
         if (CurrentLevel <= 10)
         {
-            maxRooms += 3;
+            maxRooms += 4;
             minRooms += 3;
         }
         FloorGenerator();
         CurrentLevel++;
         FloorGenerated = false;
-        //Camera.Position = currentRoom.position /* + new Vector2(25, 25)*/;
+    }
+
+    public void ResetFloor()
+    {
+        ClearFloor();
+        floor = new Room[floorWidth, floorHeight];
+        Checked = new bool[floorWidth, floorHeight];
+        AdjacentRooms = new int[floorWidth, floorHeight];
+        maxRooms = 6;
+        minRooms = 4;
+        FloorGenerator();
+        CurrentLevel = 1;
+        FloorGenerated = false;
+        PlayingState.player.health = PlayingState.player.maxhealth;
+        PlayingState.player.ammo = 20;
     }
 
     void DoorCheck()
@@ -288,8 +302,10 @@ public class Floor
 
     public void HandleInput(InputHelper inputHelper)
     {
-        if (inputHelper.KeyPressed(Keys.R))
+        if (inputHelper.KeyPressed(Keys.T))
             NextFloor();
+        if (inputHelper.KeyPressed(Keys.R))
+            ResetFloor();
     }
     
     void DrawMinimap(SpriteBatch spriteBatch)
@@ -300,19 +316,19 @@ public class Floor
         RoomWithPlayer();
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
-                if (floor[x, y] != null)
+                if (floor[x, y] != null && floor[x,y].Visited == true)
                 {
                     if (floor[x, y].RoomListIndex == 1)
                     {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.Lime);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapStartTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                         //Console.WriteLine(new Vector2(600 + x * (FloorCellWidth + 2) + Camera.Position.X, y * (FloorCellHeight + 2) + Camera.Position.Y).ToString());
                     }
                     else if (floor[x, y].RoomListIndex == 2)                    
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.Blue);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapBossTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                     else if (floor[x, y].RoomListIndex == 3)                    
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.Yellow);                    
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapItemTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);                    
                     else                    
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.Red);
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                     if (new Vector2(x, y) == currentRoom.position)
                     {
                         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/CurrentMinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
