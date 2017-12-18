@@ -25,6 +25,7 @@ public class InputHelper
         previousKeyboardState = currentKeyboardState;
         currentMouseState = Mouse.GetState();
         currentKeyboardState = Keyboard.GetState();
+        offset = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
     }
 
     public Vector2 Scale
@@ -41,7 +42,7 @@ public class InputHelper
 
     public Vector2 MousePosition
     {
-        get { return (new Vector2(currentMouseState.X, currentMouseState.Y) - offset) / scale; }
+        get { return (new Vector2(currentMouseState.X, currentMouseState.Y) + offset); }
     }
 
     public bool MouseLeftButtonPressed()
