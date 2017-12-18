@@ -20,15 +20,16 @@ class Rock : SpriteGameObject
     {
         base.Update(gameTime);
         //left side of rock player stop
-        if (CollidesWith(PlayingState.player) && BoundingBox.Left >= PlayingState.player.position.X)
-        {
-            PlayingState.player.velocityRightDown.X = Vector2.Zero.X;
-        }
-        else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Left >= PlayingState.player.position.X))
-        {
-            PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
-        }
+        //if (CollidesWith(PlayingState.player) && BoundingBox.Left >= PlayingState.player.position.X)
+        //{
+        //    PlayingState.player.velocityRightDown.X = Vector2.Zero.X;
+        //}
+        //else if (!CollidesWith(PlayingState.player) && !(BoundingBox.Left >= PlayingState.player.position.X))
+        //{
+        //    PlayingState.player.velocityRightDown.X = PlayingState.player.velocitybase.X;
+        //}
 
+      //  if (CollidesWith(roo))
         /*
         if (CollidesWith(PlayingState.player) && BoundingBox.Right <= PlayingState.player.position.X) - PlayingState.player.Width)
         {
