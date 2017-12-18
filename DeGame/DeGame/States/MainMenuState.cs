@@ -15,20 +15,22 @@ class MainMenuState : IGameObject
         if (inputHelper.KeyPressed(Keys.Space))
         {
             GameEnvironment.gameStateManager.SwitchTo("Playing");
+            Reset();
         }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/bteam"), new Vector2(200,70));
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/bteam"), new Vector2(-200, -200));
     }
     public virtual void Update(GameTime gameTime)
     {
-        //if (reset)
-        //Reset();
-        //reset = false;
+        Camera.Position = new Vector2(0,0);
     }
     public virtual void Reset()
     {
+        PlayingState.player.health = 100;
+        PlayingState.currentFloor.ResetFloor();
+        PlayingState.player.position = PlayingState.currentFloor.startPlayerPosition;
     }
 
 }
