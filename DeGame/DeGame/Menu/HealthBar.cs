@@ -38,7 +38,7 @@ class HealthBar
 
         if (newhealth < health)
         {
-            health-= 0.4f;
+            health -= 0.4f;
             health2 = newhealth;
         }
         healthbarwidth = (int)((health / maxhealth) * 200);
@@ -52,13 +52,13 @@ class HealthBar
         }
         else
         {
-            healthbar = new Rectangle((int)positionNow.X - 30, (int)positionNow.Y - 30, healthbarwidth, 20); 
+            healthbar = new Rectangle((int)positionNow.X - 30, (int)positionNow.Y - 30, healthbarwidth, 20);
         }
         HP = "HP " + newhealth;
     }
     public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/damagehealthbar"), healthbar, Color.WhiteSmoke);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/damagehealthbar"), healthbar, Color.White);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/healthbar"), healthbar2, Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), HP, new Vector2(healthbar.X + 40, healthbar.Y), Color.White);
     }
