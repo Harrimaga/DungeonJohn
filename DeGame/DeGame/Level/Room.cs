@@ -124,8 +124,13 @@ public class Room : GameObjectList
         enemies.Update(gameTime);
         ControlCamera();
         CheckExit();
-        //PlayerTerrainCollision();
     }
+
+    void PlayerCollision()
+    {
+
+    }
+
 
     void OnLoad()
     {
