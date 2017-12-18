@@ -108,16 +108,14 @@ public class Room : GameObjectList
     }
 
     public void Update(GameTime gameTime, Room CurrentRoom)
-    {
-        if (CurrentRoom.position == new Vector2(a, b))
-            //Fabians code
+    { 
         if (enemies.Children != null)
             foreach (Enemy enemy in enemies.Children)
                 enemies.Update(gameTime);
 
         if (start) { OnLoad(); }
         enemies.Update(gameTime);
-        ControlCamera();
+        ControlCamera(CurrentRoom);
         //PlayerTerrainCollision();
     }
 
@@ -146,12 +144,12 @@ public class Room : GameObjectList
             }
     }
 
-    void ControlCamera()
+    void ControlCamera(Room CurrentRoom)
     {
         Vector2 Cam = Camera.Position;
         Vector2 MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
 
-        if(enemies.Count == 0)
+        if (CurrentRoom.enemies.Count == 0)
         {
             if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
                 if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
