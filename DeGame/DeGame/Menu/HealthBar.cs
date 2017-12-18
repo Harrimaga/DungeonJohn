@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 class HealthBar
 {
     float health;
+    public float damagehealth;
     float maxhealth;
     float newhealth;
-    int healthbarwidth = 200;
+    int healthbarwidth = 200, damagehealthbarwidth = 200;
     bool isPlayer;
     string HP = "N/A";
-    Rectangle healthbar;
+    Rectangle healthbar, damagehealthbar;
 
     public HealthBar(float healthObject, float maxhealthObject, Vector2 position, bool IsPlayer = false)
     {
         health = healthObject;
         maxhealth = maxhealthObject;
         newhealth = health;
-        healthbar = new Rectangle((int)position.X - 30, (int)position.Y - 30, healthbarwidth, 20);
         isPlayer = IsPlayer;
     }
     public void Update(GameTime gameTime, float healthUpdate, float maxhealthUpdate, Vector2 positionNow)
@@ -38,17 +38,25 @@ class HealthBar
 
         if (newhealth < health)
         {
-            health--;
+            health = newhealth;
         }
-        healthbarwidth = (int)((health / maxhealth) * 200);
+        damagehealthbarwidth = (int)((health / maxhealth) * 200);
+        healthbarwidth = (int)((newhealth / maxhealth) * 200);
+
         if (isPlayer)
+        {
             healthbar = new Rectangle(GameEnvironment.WindowSize.X + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - GameEnvironment.WindowSize.Y / 2 + 300, healthbarwidth, 20);
+            damagehealthbar = new Rectangle(GameEnvironment.WindowSize.X + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - GameEnvironment.WindowSize.Y / 2 + 300, healthbarwidth, 20);
+        }
         else
-            healthbar = new Rectangle((int)positionNow.X - 30, (int)positionNow.Y - 30, healthbarwidth, 20);
+        {
+            healthbar = new Rectangle((int)positionNow.X - 30, (int)positionNow.Y - 30, healthbarwidth, 20); 
+        }
         HP = "HP " + newhealth;
     }
     public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/damagehealthbar"), damagehealthbar, Color.White);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/healthbar"), healthbar, Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), HP, new Vector2(healthbar.X + 40, healthbar.Y), Color.White);
     }
