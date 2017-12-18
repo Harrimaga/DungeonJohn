@@ -125,10 +125,12 @@ public class Enemy : SpriteGameObject
             if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
             {
                 position.X -= velocity.X;
+                Effects = SpriteEffects.None;
             }
-            if (position.X - playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
+            if (position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
             {
                 position.X += velocity.X;
+                Effects = SpriteEffects.FlipHorizontally;
             }
 
             //if()
