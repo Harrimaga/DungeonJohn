@@ -49,7 +49,6 @@ public class Room : GameObjectList
         //System.Console.WriteLine(roomarray[x, y]);
     }       
     
-
     private void AssignType(char textlines,int x, int y)
     {
                 switch (textlines)
@@ -113,9 +112,6 @@ public class Room : GameObjectList
     {
         if (CurrentRoom.position == new Vector2(a, b))
             Visited = true;
-        if (enemies.Children != null)
-            foreach (Enemy enemy in enemies.Children)
-                enemies.Update(gameTime);
 
         //~Yoran~ Uitgecommentarieerd want geeft exeption. En is nu onnodig, dubbele enemy update
         //if (enemies.Children != null)
@@ -137,26 +133,26 @@ public class Room : GameObjectList
     }
     void CreateObject(int x, int y, string Type)
     {
-            if (Type == "C")
-            {
-                Enemy enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
+        Enemy enemy;
+        switch (Type)
+        {
+            case ("C"):
+                enemy = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
                 enemies.Add(enemy);
-            }
+                break;
 
-            if (Type == "R")
-            {
-                Enemy enemy = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
+            case ("R"):
+                enemy = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
                 enemies.Add(enemy);
-            }
+                break;
 
-            if (Type == "!")
-            {
+            case ("!"):
                 Rock rock = new Rock(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Rock");
                 rocks.Add(rock);
-            }
+                break;
+                
+        }
     }
-
-    //Vector2 MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
 
     void ControlCamera()
     {
