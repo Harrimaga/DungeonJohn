@@ -34,7 +34,7 @@ public class Enemy : SpriteGameObject
         if (CollidesWith(PlayingState.player))
         {
             velocity = Vector2.Zero;
-            PlayingState.player.health -= 0.5f;
+            PlayingState.player.health -= 0;
         }
         if (!CollidesWith(PlayingState.player))
         {
@@ -73,7 +73,7 @@ public class Enemy : SpriteGameObject
 
     public bool CheckDown()
     {
-        Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height + 120);
+        Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y + sprite.Height, 60, 60);
         foreach (Solid solid in Room.solid.Children)
         if (CheckDown.Intersects(solid.BoundingBox))
         {
@@ -83,7 +83,7 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckUp()
     {
-        Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height - 10);
+        Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y - 60, 60, 60);
         foreach (Solid solid in Room.solid.Children)
             if (CheckUp.Intersects(solid.BoundingBox))
             {
@@ -93,7 +93,7 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckLeft()
     {
-        Rectangle CheckLeft = new Rectangle((int)position.X, (int)position.Y, sprite.Width - 10, sprite.Height);
+        Rectangle CheckLeft = new Rectangle((int)position.X - 60, (int)position.Y, 60, 60);
         foreach (Solid solid in Room.solid.Children)
             if (CheckLeft.Intersects(solid.BoundingBox))
             {
@@ -103,7 +103,7 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckRight()
     {
-        Rectangle CheckRight = new Rectangle((int)position.X, (int)position.Y, sprite.Width + 10, sprite.Height);
+        Rectangle CheckRight = new Rectangle((int)position.X + sprite.Width, (int)position.Y, 60, 60);
         foreach (Solid solid in Room.solid.Children)
             if (CheckRight.Intersects(solid.BoundingBox))
             {
@@ -134,7 +134,14 @@ public class Enemy : SpriteGameObject
                 Effects = SpriteEffects.FlipHorizontally;
             }
 
-            //if()
+            if(CheckUp() == true && CheckLeft() == false)
+            {
+                position.X -= velocity.X;
+            }
+        if (CheckUp() == true && CheckRight() == false)
+        {
+            position.X -= velocity.X;
+        }
     }
 }
 
