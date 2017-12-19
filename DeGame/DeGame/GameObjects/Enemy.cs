@@ -34,7 +34,7 @@ public class Enemy : SpriteGameObject
         if (CollidesWith(PlayingState.player))
         {
             velocity = Vector2.Zero;
-            PlayingState.player.health -= 0.5f;
+            PlayingState.player.health -= 0;
         }
         if (!CollidesWith(PlayingState.player))
         {
@@ -134,7 +134,14 @@ public class Enemy : SpriteGameObject
                 Effects = SpriteEffects.FlipHorizontally;
             }
 
-            //if()
+            if(CheckUp() == true && CheckLeft() == false)
+            {
+                position.X -= velocity.X;
+            }
+        if (CheckUp() == true && CheckRight() == false)
+        {
+            position.X -= velocity.X;
+        }
     }
 }
 
