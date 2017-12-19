@@ -2,6 +2,7 @@
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using System;
 
 public class Room : GameObjectList
 {
@@ -9,9 +10,9 @@ public class Room : GameObjectList
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false, CameraIsMoving = false;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
     bool onup = false, ondown = false, onleft = false, onright = false;
-    Vector2 MiddelofPlayer, Up, Down, Left, Right, Exit;
     public static GameObjectList enemies, solid, door;
-    public int RoomListIndex, a, b;
+    Vector2 MiddelofPlayer, Up, Down, Left, Right, Exit;
+    public int RoomListIndex, a, b, deadenemies = 0;
     public string[,] roomarray;
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
@@ -243,8 +244,7 @@ public class Room : GameObjectList
     }
 
     public void CheckExit()
-    {
-        MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+    {        
         if (MiddelofPlayer.X >= Exit.X && MiddelofPlayer.X <= Exit.X + CellWidth)
             if (MiddelofPlayer.Y >= Exit.Y && MiddelofPlayer.Y <= Exit.Y + CellHeight)
                 PlayingState.currentFloor.NextFloor();

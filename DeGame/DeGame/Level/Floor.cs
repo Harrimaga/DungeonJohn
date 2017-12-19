@@ -15,6 +15,7 @@ public class Floor
     public Room currentRoom;
     bool FloorGenerated = false;
     public int screenwidth, screenheight;
+    GameObjectList goldpiece;
 
     public Floor()
     {
@@ -25,6 +26,7 @@ public class Floor
         FloorGenerator();
         screenwidth = GameEnvironment.WindowSize.X;
         screenheight = GameEnvironment.WindowSize.Y;
+        goldpiece = new GameObjectList();
     }
 
     void FloorGenerator()
@@ -267,8 +269,7 @@ public class Floor
         FloorGenerator();
         CurrentLevel = 1;
         FloorGenerated = false;
-        PlayingState.player.health = PlayingState.player.maxhealth;
-        PlayingState.player.ammo = 20;
+        PlayingState.player.Reset();
     }
 
     void DoorCheck()
@@ -288,19 +289,24 @@ public class Floor
                     }        
     }
 
-    public virtual void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
-        foreach (Room room in floor)
-        {
-            if (room != null)
-            {
+        foreach (Room room in floor)        
+            if (room != null)            
                 room.Update(gameTime, currentRoom);
-            }
+        foreach (Goldpiece gold in goldpiece.Children)
+            if (goldpiece != null)
+                goldpiece.Update(gameTime);
+    }
+
+    public void DropConsumable(Vector2 position)
+    {
+        int r = random.Next(100);
+        if (r > 0)
+        {
+            Goldpiece drop = new Goldpiece(position, 0, "goldpiece");
+            goldpiece.Add(drop);
         }
-        ////TODO als nextFloor true is voer dan NextFloor() uit
-
-
-        //Camera.Position = new Vector2(currentRoom.Position.X, currentRoom.position.Y);
     }
 
     public void HandleInput(InputHelper inputHelper)
@@ -352,6 +358,7 @@ public class Floor
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         string Level = "Level " + CurrentLevel;
+        string Gold = "Gold: " + PlayingState.player.gold;
 
         if (FloorGenerated == false)
         {
@@ -378,8 +385,11 @@ public class Floor
             Camera.Position = startPlayerPosition + new Vector2(170, 0);
             FloorGenerated = true;
         }
+        foreach (Goldpiece gold in goldpiece.Children)
+            gold.Draw(gameTime, spriteBatch);
         DrawMinimap(spriteBatch);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2),(Camera.Position.Y - screenheight / 2) + 50), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.White);
     }
 }
 

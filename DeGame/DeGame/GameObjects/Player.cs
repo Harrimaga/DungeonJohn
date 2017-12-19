@@ -10,18 +10,12 @@ using System.Threading.Tasks;
 
 public class Player : SpriteGameObject
 {
-    public float health = 100;
-    public float maxhealth = 100;
-    protected float attack;
-    protected float attackspeed;
-    protected float range;
-    public float ammo = 20;
-    bool next = false;
+    public float maxhealth = 100, health = 100, ammo = 20, attack, attackspeed, range;
+    public GameObjectList bullets;
     public SpriteEffects Effect;
     public Vector2 velocitybase;
-
-    public GameObjectList bullets;
     HealthBar healthbar;
+    public int gold = 0;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Random", 0, "Player")
@@ -32,6 +26,19 @@ public class Player : SpriteGameObject
         velocity = velocitybase;
     }
 
+    public override void Reset()
+    {
+        List<GameObject> RemoveBullets = new List<GameObject>();
+        maxhealth = 100;
+        health = 100;
+        ammo = 20;
+        gold = 0;
+
+        foreach (Bullet bullet in PlayingState.player.bullets.Children)
+            RemoveBullets.Add(bullet);        
+        foreach (Bullet bullet in RemoveBullets)        
+            PlayingState.player.bullets.Remove(bullet);
+    }
 
     public override void Update(GameTime gameTime)
     {
