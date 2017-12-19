@@ -38,7 +38,7 @@ class HealthBar
 
         if (newhealth < health)
         {
-            health-= 0.4f;
+            health -= 0.4f;
             health2 = newhealth;
         }
         healthbarwidth = (int)((health / maxhealth) * 200);
@@ -52,7 +52,7 @@ class HealthBar
         }
         else
         {
-            healthbar = new Rectangle((int)positionNow.X - 30, (int)positionNow.Y - 30, healthbarwidth, 20); 
+            healthbar = new Rectangle((int)positionNow.X - 30, (int)positionNow.Y - 30, healthbarwidth, 20);
         }
         HP = "HP " + newhealth;
     }

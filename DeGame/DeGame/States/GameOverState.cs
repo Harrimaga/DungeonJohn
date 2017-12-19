@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 class GameOverState : IGameObject
 {
+    Vector2 BasisPosition;
     protected IGameObject playingState;
     public GameOverState()
     {
@@ -16,16 +17,17 @@ class GameOverState : IGameObject
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {
-        if (inputHelper.currentKeyboardState.IsKeyDown(Keys.Z) && inputHelper.previousKeyboardState.IsKeyUp(Keys.Z))
-            MainMenuState.reset = true;
+        if (inputHelper.KeyPressed(Keys.Z))
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        playingState.Draw(gameTime, spriteBatch);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/GameOver"), BasisPosition);
     }
+
     public virtual void Update(GameTime gameTime)
     {
+        BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
     }
     public virtual void Reset()
     {

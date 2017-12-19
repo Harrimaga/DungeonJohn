@@ -44,7 +44,10 @@ public class Floor
         DoorCheck();
         //FloorGenerated = true;
     }
-
+    int RandomRoom()
+    {
+        return random.Next(2) + 4 ;
+    }
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
         if (y + 1 < floorHeight)
@@ -52,7 +55,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x, y + 1] == null && random.Next(100) <= CheckAdjacent(x, y + 1))
             {
                 CurrentRooms++;
-                floor[x, y + 1] = new Room(4, x, y + 1);
+                floor[x, y + 1] = new Room(RandomRoom(), x, y + 1);
             }
             else
                 Checked[x, y + 1] = true;
@@ -63,7 +66,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x, y - 1] == null && random.Next(100) <= CheckAdjacent(x, y - 1))
             {
                 CurrentRooms++;
-                floor[x, y - 1] = new Room(4, x, y - 1);
+                floor[x, y - 1] = new Room(RandomRoom(), x, y - 1);
             }
             else
                 Checked[x, y - 1] = true;
@@ -74,7 +77,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x + 1, y] == null && random.Next(100) <= CheckAdjacent(x + 1, y))
             {
                 CurrentRooms++;
-                floor[x + 1, y] = new Room(4, x + 1, y);
+                floor[x + 1, y] = new Room(RandomRoom(), x + 1, y);
             }
             else
                 Checked[x + 1, y] = true;
@@ -85,7 +88,7 @@ public class Floor
             if (CurrentRooms < RoomAmount && floor[x - 1, y] == null && random.Next(100) <= CheckAdjacent(x - 1, y))
             {
                 CurrentRooms++;
-                floor[x - 1, y] = new Room(4, x - 1,y);
+                floor[x - 1, y] = new Room(RandomRoom(), x - 1,y);
             }
             else
                 Checked[x - 1, y] = true;
@@ -130,7 +133,7 @@ public class Floor
         }  
         else
             secondtime = true;
-        q = random.Next(b - 1);
+        q = random.Next(b - 1); //error
         if (secondtime == true)
         {
             CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
@@ -316,7 +319,7 @@ public class Floor
         RoomWithPlayer();
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
-                if (floor[x, y] != null && floor[x,y].Visited == true)
+                if (floor[x, y] != null && floor[x,y].Visited)
                 {
                     if (floor[x, y].RoomListIndex == 1)
                     {
