@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 class Solid : SpriteGameObject
      
 {
-    Vector2 positionOld;
     public Solid(Vector2 startPosition, int layer = 0, string id = "Rock")
     : base("Sprites/Rock Sprite", layer, id)
     {
@@ -20,13 +19,28 @@ class Solid : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (CollidesWith(PlayingState.player))
+        if (CollidesWith(PlayingState.player) && BoundingBox.Left <= PlayingState.player.position.X + PlayingState.player.Width && BoundingBox.Left + (PlayingState.player.Width/2) >= PlayingState.player.position.X + PlayingState.player.Width)
         {
-            PlayingState.player.position = positionOld;
+            while (CollidesWith(PlayingState.player))
+                PlayingState.player.position.X--;
         }
-        else
+
+        if (CollidesWith(PlayingState.player) && BoundingBox.Right >= PlayingState.player.position.X && BoundingBox.Right - (PlayingState.player.Width / 2) <= PlayingState.player.position.X)
         {
-            positionOld = PlayingState.player.position;
+            while (CollidesWith(PlayingState.player))
+                PlayingState.player.position.X++;
+        }
+
+        if (CollidesWith(PlayingState.player) && BoundingBox.Top <= PlayingState.player.position.Y + PlayingState.player.Height && BoundingBox.Top + (PlayingState.player.Height / 2) >= PlayingState.player.position.Y + PlayingState.player.Height)
+        {
+            while (CollidesWith(PlayingState.player))
+                PlayingState.player.position.Y--;
+        }
+
+        if (CollidesWith(PlayingState.player) && BoundingBox.Bottom >= PlayingState.player.position.Y && BoundingBox.Bottom - (PlayingState.player.Height / 2) <= PlayingState.player.position.Y)
+        {
+            while (CollidesWith(PlayingState.player))
+                PlayingState.player.position.Y++;
         }
     }
 
