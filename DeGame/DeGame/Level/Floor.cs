@@ -319,7 +319,7 @@ public class Floor
         RoomWithPlayer();
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
-                if (floor[x, y] != null && floor[x,y].Visited == true)
+                if (floor[x, y] != null && floor[x,y].Visited)
                 {
                     if (floor[x, y].RoomListIndex == 1)
                     {

@@ -40,7 +40,6 @@ public class Player : SpriteGameObject
         base.Update(gameTime);
         if (health <= 0)
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
-
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

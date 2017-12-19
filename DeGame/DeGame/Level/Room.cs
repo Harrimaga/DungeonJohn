@@ -5,11 +5,10 @@ using Microsoft.Xna.Framework;
 
 public class Room : GameObjectList
 {
-    public int RoomListIndex;
+    public int RoomListIndex, a, b;
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false, CameraIsMoving = false;
     bool onup = false, ondown = false, onleft = false, onright = false;
     public static GameObjectList enemies, solid;
-    public int a, b;
     public string[,] roomarray;
     Vector2 MiddelofPlayer;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
@@ -64,7 +63,6 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Wall";
                 CreateObject(x, y, "+");
                 break;
-
             case '-':
                 roomarray[x, y] = "UpDoor";
                 Up = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
@@ -81,7 +79,6 @@ public class Room : GameObjectList
                 roomarray[x, y] = "RightDoor";
                 Right = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
                 break;
-
             case 'C':
                 roomarray[x, y] = "ChasingEnemy";
                 CreateObject(x, y, "C");
@@ -115,7 +112,7 @@ public class Room : GameObjectList
             Visited = true;
         
 
-        //~Yoran~ Uitgecommentarieerd want geeft exeption. En is nu onnodig, dubbele enemy update
+        //~Yoran~ Uitgecommentaard want geeft exeption. En is nu onnodig, dubbele enemy update
         if (start) { OnLoad(); }
         start = false;
         enemies.Update(gameTime);
