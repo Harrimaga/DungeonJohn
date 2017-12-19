@@ -114,33 +114,41 @@ public class Enemy : SpriteGameObject
 
     public virtual void Chase()
     {
-            
-            if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
-            {
-                position.Y -= velocity.Y;
-            }
-            if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
-            {
-                position.Y += velocity.Y;
-            }
-            if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
-            {
-                position.X -= velocity.X;
-                Effects = SpriteEffects.None;
-            }
-            if (position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
-            {
-                position.X += velocity.X;
-                Effects = SpriteEffects.FlipHorizontally;
-            }
 
-            if(CheckUp() == true && CheckLeft() == false)
-            {
-                position.X -= velocity.X;
-            }
-        if (CheckUp() == true && CheckRight() == false)
+        if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
+        {
+            position.Y -= velocity.Y;
+        }
+        if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
+        {
+            position.Y += velocity.Y;
+        }
+        if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
         {
             position.X -= velocity.X;
+            Effects = SpriteEffects.None;
+        }
+        if (position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
+        {
+            position.X += velocity.X;
+            Effects = SpriteEffects.FlipHorizontally;
+        }
+
+        if (CheckUp() == true && position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
+        {
+            position.X -= velocity.X;
+        }
+        if (CheckUp() == true && position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
+        {
+            position.X += velocity.X;
+        }
+        if (CheckRight() == true && position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
+        {
+            position.Y += velocity.Y;
+        }
+        if (CheckRight() == true && position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
+        {
+            position.Y -= velocity.Y;
         }
     }
 }
