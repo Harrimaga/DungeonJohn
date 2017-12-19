@@ -142,11 +142,27 @@ public class Enemy : SpriteGameObject
         {
             position.X += velocity.X;
         }
+        if (CheckDown() == true && position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
+        {
+            position.X -= velocity.X;
+        }
+        if (CheckDown() == true && position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
+        {
+            position.X += velocity.X;
+        }
         if (CheckRight() == true && position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
         {
             position.Y += velocity.Y;
         }
         if (CheckRight() == true && position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
+        {
+            position.Y -= velocity.Y;
+        }
+        if (CheckLeft() == true && position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
+        {
+            position.Y += velocity.Y;
+        }
+        if (CheckLeft() == true && position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
         {
             position.Y -= velocity.Y;
         }
