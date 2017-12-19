@@ -28,7 +28,7 @@ public class Player : SpriteGameObject
     {
         bullets = new GameObjectList();
         velocitybase = new Vector2(5, 5);
-        healthbar = new HealthBar(health, maxhealth, position);
+        healthbar = new HealthBar(health, maxhealth, position, true);
         velocity = velocitybase;
     }
 
