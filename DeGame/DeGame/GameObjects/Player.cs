@@ -12,7 +12,7 @@ public class Player : SpriteGameObject
 {
     public float health = 100;
     public float maxhealth = 100;
-    protected float attack;
+    public float attack = 20;
     protected float attackspeed;
     protected float range;
     public float ammo = 20;
