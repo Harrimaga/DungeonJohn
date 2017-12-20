@@ -27,7 +27,7 @@ public class RangedEnemy : Enemy
         if(PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
             PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
             {
-                Chase();
+               //Chase();
             }
         else if (counter == 0)
         {
@@ -47,16 +47,13 @@ public class RangedEnemy : Enemy
         Chase();
         counter--;
         if (counter < 0)
-            counter = 60;
+            counter = 600;
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         bullets.Draw(gameTime, spriteBatch);
         base.Draw(gameTime, spriteBatch);
-        if (Die == false)
-        {
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
-        }
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
 
 }
