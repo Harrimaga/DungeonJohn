@@ -42,9 +42,9 @@ public class Player : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
+        base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
-        base.Update(gameTime);
         if (health <= 0)
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
     }

@@ -12,7 +12,7 @@ public class Room : GameObjectList
     bool onup = false, ondown = false, onleft = false, onright = false;
     public static GameObjectList enemies, solid, door;
     Vector2 MiddelofPlayer, Up, Down, Left, Right, Exit;
-    public int RoomListIndex, a, b, deadenemies = 0;
+    public int RoomListIndex, a, b;
     public string[,] roomarray;
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
