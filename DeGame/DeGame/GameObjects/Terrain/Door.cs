@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 class Door : SpriteGameObject
 {
@@ -8,7 +9,7 @@ class Door : SpriteGameObject
     Texture2D doorsprite;
     GameObjectList solid;
     int direction;
-    bool isdoor;
+    bool isdoor, isclosed;
 
     public Door(bool Isdoor, Vector2 Startposition, int Direction, int layer = 0, string id = "door")
     : base("Sprites/doorup", layer, id)
@@ -30,8 +31,8 @@ class Door : SpriteGameObject
         {
             if (direction == 2)
                 Effect = SpriteEffects.FlipVertically;
-            if (Room.enemies.Count > 0)
-                doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorupclosed");
+            if (Room.enemies.Count > 0)            
+                doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorupclosed");            
             else
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorup");
         }
@@ -55,6 +56,11 @@ class Door : SpriteGameObject
             {
                 PlayingState.player.position.X -= 10;
             }
+            List<GameObject> RemoveBullets = new List<GameObject>();
+
+            foreach (Bullet bullet in PlayingState.player.bullets.Children)            
+                if (CollidesWith(bullet))                
+                    RemoveBullets.Add(bullet);           
         }
         if(!isdoor)
             solid.Update(gameTime);
