@@ -15,7 +15,7 @@ public class Floor
     public Room currentRoom;
     bool FloorGenerated = false;
     public int screenwidth, screenheight;
-    GameObjectList goldpiece;
+    GameObjectList goldpiece, heart;
 
     public Floor()
     {
@@ -27,6 +27,7 @@ public class Floor
         screenwidth = GameEnvironment.WindowSize.X;
         screenheight = GameEnvironment.WindowSize.Y;
         goldpiece = new GameObjectList();
+        heart = new GameObjectList();
     }
 
     void FloorGenerator()
@@ -295,15 +296,21 @@ public class Floor
             if (room != null)            
                 room.Update(gameTime, currentRoom);
         goldpiece.Update(gameTime);
+        heart.Update(gameTime);
     }
 
     public void DropConsumable(Vector2 position)
     {
         int r = random.Next(100);
-        if (r > 0)
+        if (r > 50)
         {
-            Goldpiece drop = new Goldpiece(position, 0);
-            goldpiece.Add(drop);
+            Goldpiece golddrop = new Goldpiece(position, 0);
+            goldpiece.Add(golddrop);
+        }
+        else
+        {
+            Heart heartdrop = new Heart(position, 0);
+            heart.Add(heartdrop);
         }
     }
 
@@ -373,6 +380,7 @@ public class Floor
             FloorGenerated = true;
         }
         goldpiece.Draw(gameTime, spriteBatch);
+        heart.Draw(gameTime, spriteBatch);
         DrawMinimap(spriteBatch);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2),(Camera.Position.Y - screenheight / 2) + 50), Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.White);
