@@ -31,7 +31,15 @@ public class Player : SpriteGameObject
         healthbar = new HealthBar(health, maxhealth, position);
         velocity = velocitybase;
     }
-
+    public override Rectangle BoundingBox
+    {
+        get
+        {
+            int left = (int)(position.X - origin.X);
+            int top = (int)(position.Y - origin.Y);
+            return new Rectangle(left , top , Width, Height);
+        }
+    }
 
     public override void Update(GameTime gameTime)
     {
