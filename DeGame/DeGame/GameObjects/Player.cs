@@ -21,6 +21,7 @@ public class Player : SpriteGameObject
     public Vector2 velocitybase;
     HealthBar healthbar;
     public int gold = 0;
+    public GameObjectList bullets;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Random", 0, "Player")
