@@ -10,9 +10,10 @@ public class Room : GameObjectList
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false, CameraIsMoving = false;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
     bool onup = false, ondown = false, onleft = false, onright = false;
-    public static GameObjectList enemies, solid, door;
+    public static GameObjectList enemies, solid, door, consumable;
     Vector2 MiddelofPlayer, Up, Down, Left, Right, Exit;
     public int RoomListIndex, a, b;
+    Random random = new Random();
     public string[,] roomarray;
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
@@ -20,6 +21,7 @@ public class Room : GameObjectList
         enemies = new GameObjectList();
         solid = new GameObjectList();
         door = new GameObjectList();
+        consumable = new GameObjectList();
         RoomListIndex = roomListIndex;
         a = A;
         b = B;
@@ -112,6 +114,21 @@ public class Room : GameObjectList
         }
     }
 
+    public void DropConsumable(Vector2 position)
+    {
+        int r = random.Next(100);
+        if (r > 50)
+        {
+            Consumables golddrop = new Consumables(position, "gold");
+            consumable.Add(golddrop);
+        }
+        else
+        {
+            Consumables healthdrop = new Consumables(position, "heart");
+            consumable.Add(healthdrop);
+        }
+    }
+
     public void Update(GameTime gameTime, Room CurrentRoom)
     {
         if (CurrentRoom.position == new Vector2(a, b))        
@@ -121,6 +138,7 @@ public class Room : GameObjectList
         enemies.Update(gameTime);
         solid.Update(gameTime);
         door.Update(gameTime);
+        consumable.Update(gameTime);
         ControlCamera();
         CheckExit();
     }
@@ -298,5 +316,7 @@ public class Room : GameObjectList
             solid.Draw(gameTime, spriteBatch);       
         foreach (Door door in door.Children)
             door.Draw(gameTime, spriteBatch);
+        foreach (Consumables consumable in consumable.Children)
+            consumable.Draw(gameTime, spriteBatch);
     }    
 }

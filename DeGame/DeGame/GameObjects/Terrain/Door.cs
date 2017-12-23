@@ -9,7 +9,7 @@ class Door : SpriteGameObject
     Texture2D doorsprite;
     GameObjectList solid;
     int direction;
-    bool isdoor, isclosed;
+    bool isdoor;
 
     public Door(bool Isdoor, Vector2 Startposition, int Direction, int layer = 0, string id = "door")
     : base("Sprites/doorup", layer, id)
