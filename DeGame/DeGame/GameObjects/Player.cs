@@ -10,8 +10,13 @@ using System.Threading.Tasks;
 
 public class Player : SpriteGameObject
 {
-    public float maxhealth = 100, health = 100, ammo = 20, attack, attackspeed, range;
-    public GameObjectList bullets;
+    public float health = 100;
+    public float maxhealth = 100;
+    public float attack = 20;
+    protected float attackspeed;
+    protected float range;
+    public float ammo = 20;
+    bool next = false;
     public SpriteEffects Effect;
     public Vector2 velocitybase;
     HealthBar healthbar;
