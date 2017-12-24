@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Graphics;
 //TODO: Health
 public class RangedEnemy : Enemy
 {
-    public GameObjectList bullets;
+    public static GameObjectList bullets;
     int counter = 60;
     HealthBar healthbar;
 
@@ -55,10 +55,7 @@ public class RangedEnemy : Enemy
         counter--;
         if (counter < 0)
         {
-            counter = 600;
-            
-             //   GameObjectList.RemovedObjects.Add(this);
-            
+            counter = 300;
         }
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
