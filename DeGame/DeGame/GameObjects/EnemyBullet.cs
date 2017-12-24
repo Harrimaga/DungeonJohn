@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+//TODO: Damage regulation;
 class EnemyBullet : SpriteGameObject
 {
     public EnemyBullet(Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base("Sprites/Random", layer, id)
@@ -16,12 +17,13 @@ class EnemyBullet : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         position += velocity;
-        foreach(EnemyBullet bullet in RangedEnemy.bullets.Children)
+        foreach (EnemyBullet bullet in RangedEnemy.bullets.Children)
         {
             if (CollidesWith(PlayingState.player))
             {
-                PlayingState.player.health -= 1;
                 GameObjectList.RemovedObjects.Add(this);
+                PlayingState.player.health = PlayingState.player.health - 1;
+
             }
         }
     }

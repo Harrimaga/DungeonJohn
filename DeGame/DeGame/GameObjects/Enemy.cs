@@ -39,7 +39,7 @@ public class Enemy : SpriteGameObject
             if (counter == 0)
             {
                 velocity = Vector2.Zero;
-                PlayingState.player.health -= 10;
+                PlayingState.player.health -= 0;
                 counter = 100;
             }
         }
