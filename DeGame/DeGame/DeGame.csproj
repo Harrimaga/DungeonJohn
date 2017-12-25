@@ -96,6 +96,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="States\GameOverState.cs" />
+    <Compile Include="States\Leveling.cs" />
     <Compile Include="States\MainMenuState.cs" />
     <Compile Include="States\PauseMenuState.cs" />
     <Compile Include="States\PlayingState.cs" />
@@ -149,6 +150,7 @@
     <Content Include="Content\Sprites\Eind Sprite.png" />
     <Content Include="Content\Sprites\Eind Sprite2.png" />
     <Content Include="Content\Sprites\healthbar.png" />
+    <Content Include="Content\Sprites\HealthbarBackground.png" />
     <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\MinimapBossTile.png" />
     <Content Include="Content\Sprites\MinimapItemTile.png" />

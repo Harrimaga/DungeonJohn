@@ -15,6 +15,7 @@ public class Enemy : SpriteGameObject
     protected float attackspeed;
     protected float range;
     protected int counter = 100;
+    protected float expGive = 120;
     protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
     public SpriteEffects Effects;
     Texture2D playersprite;
@@ -54,7 +55,7 @@ public class Enemy : SpriteGameObject
         {
             if (CollidesWith(bullet))
             {
-                health -= 20;
+                health -= PlayingState.player.attack;
                 RemoveBullets.Add(bullet);
             }
         }
@@ -70,6 +71,8 @@ public class Enemy : SpriteGameObject
         if (health <= 0)
         {
             GameObjectList.RemovedObjects.Add(this);
+            PlayingState.player.exp += expGive;
+            PlayingState.player.NextLevel();
         }
     }
 
