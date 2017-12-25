@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 //TODO: Damage regulation;
+//TODO: Friendly Fire?;
 class EnemyBullet : SpriteGameObject
 {
     public EnemyBullet(Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base("Sprites/Random", layer, id)
@@ -17,18 +18,31 @@ class EnemyBullet : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         position += velocity;
+        CheckCollision();
+    }
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
+    }
+
+    public void CheckCollision()
+    {
         foreach (EnemyBullet bullet in RangedEnemy.bullets.Children)
         {
             if (CollidesWith(PlayingState.player))
             {
                 GameObjectList.RemovedObjects.Add(this);
-                PlayingState.player.health = PlayingState.player.health - 1;
+                PlayingState.player.health -= 1;
 
             }
         }
-    }
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
+
+        foreach (Solid solid in Room.solid.Children)
+        {
+            if (CollidesWith(solid))
+            {
+                GameObjectList.RemovedObjects.Add(this);
+            }
+        }
     }
 }
