@@ -90,7 +90,7 @@ public class Room : GameObjectList
                 break;
             case 'R':
                 roomarray[x, y] = "RangedEnemy";
-                //CreateObject(x, y, "R");
+                CreateObject(x, y, "R");
                 break;
             case 'O':
                 roomarray[x, y] = "Pit";
