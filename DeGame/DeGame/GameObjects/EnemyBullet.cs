@@ -27,16 +27,11 @@ class EnemyBullet : SpriteGameObject
 
     public void CheckCollision()
     {
-        foreach (EnemyBullet bullet in RangedEnemy.bullets.Children)
+        if (CollidesWith(PlayingState.player))
         {
-            if (CollidesWith(PlayingState.player))
-            {
-                GameObjectList.RemovedObjects.Add(this);
-                PlayingState.player.health -= 1;
-
-            }
+            GameObjectList.RemovedObjects.Add(this);
+            PlayingState.player.health -= 1;
         }
-
         foreach (Solid solid in Room.solid.Children)
         {
             if (CollidesWith(solid))
