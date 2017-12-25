@@ -41,8 +41,8 @@ class HealthBar
             health -= 0.4f;
             health2 = newhealth;
         }
-        healthbarwidth = (int)((health / maxhealth) * 200);
-        healthbarwidth2 = (int)((health2 / maxhealth) * 200);
+        healthbarwidth = (int)((health / maxhealthUpdate) * 200);
+        healthbarwidth2 = (int)((health2 / maxhealthUpdate) * 200);
         healthbar = new Rectangle((int)positionNow.X - 30, (int)positionNow.Y - 30, healthbarwidth, 20);
 
         if (isPlayer)

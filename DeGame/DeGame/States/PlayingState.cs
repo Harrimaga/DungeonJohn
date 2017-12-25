@@ -13,9 +13,11 @@ public class PlayingState : IGameObject
     //public static Enemy enemy;
     public static Floor currentFloor;
     Floor floor;
+    Button buttontest;
 
     public PlayingState()
     {
+        buttontest = new Button(new Vector2(100,100), "test", "niks",1);
         player = new Player();
         floor = new Floor();
         currentFloor = floor;
@@ -34,12 +36,14 @@ public class PlayingState : IGameObject
     {
         floor.Draw(gameTime, spriteBatch);
         player.Draw(gameTime, spriteBatch);
+        buttontest.Draw(gameTime, spriteBatch);
     }
     public virtual void Update(GameTime gameTime)
     {
         player.Update(gameTime);
         Console.WriteLine(player.position.ToString());
         floor.Update(gameTime);
+        buttontest.Update(gameTime);
         //enemy.Update(gameTime);
         if (player.health <= 0)
         {
