@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+ using RoyT.AStar;
 
 public class Enemy : SpriteGameObject
 {
@@ -14,10 +14,12 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
+    protected int counter = 100;
     protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
     public SpriteEffects Effects;
     Texture2D playersprite;
     HealthBar healthbar;
+
 
     public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
@@ -33,8 +35,13 @@ public class Enemy : SpriteGameObject
         base.Update(gameTime);
         if (CollidesWith(PlayingState.player))
         {
-            velocity = Vector2.Zero;
-            PlayingState.player.health -= 0;
+            counter--;
+            if (counter == 0)
+            {
+                velocity = Vector2.Zero;
+                PlayingState.player.health -= 0;
+                counter = 100;
+            }
         }
         if (!CollidesWith(PlayingState.player))
         {
@@ -114,7 +121,26 @@ public class Enemy : SpriteGameObject
 
     public virtual void Chase()
     {
+         // Create a new grid and let each cell have a default traversal cost of 1.0
+        //var grid = new Grid(100, 100, 1.0f);
 
+        // Block some cells (for example walls)
+        //grid.BlockCell(new Position(5, 5));
+
+        // Make other cells harder to traverse (for example water)
+        //grid.SetCellCost(new Position(6, 5), 3.0f);
+
+        // And finally start the search for the shortest path form start to end
+        // Use one of the built-in ranges of motion
+        //var path = grid.GetPath(new Position(0, 0), new Position(99, 99), MovementPatterns.DiagonalOnly);
+
+        // Or define the movement pattern of an agent yourself
+        // For example, here is an agent that can only move left and up
+        // var movementPattern = new[] { new Offset(-1, 0), new Offset(0, -1) };
+        // var path = grid.GetPath(new Position(0, 0), new Position(99, 99), movementPattern);
+
+
+        //Position[] path = grid.GetPath(new Position(0, 0), new Position(99, 99));
         if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
         {
             position.Y -= velocity.Y;
@@ -142,11 +168,27 @@ public class Enemy : SpriteGameObject
         {
             position.X += velocity.X;
         }
+        if (CheckDown() == true && position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
+        {
+            position.X -= velocity.X;
+        }
+        if (CheckDown() == true && position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
+        {
+            position.X += velocity.X;
+        }
         if (CheckRight() == true && position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
         {
             position.Y += velocity.Y;
         }
         if (CheckRight() == true && position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
+        {
+            position.Y -= velocity.Y;
+        }
+        if (CheckLeft() == true && position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
+        {
+            position.Y += velocity.Y;
+        }
+        if (CheckLeft() == true && position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
         {
             position.Y -= velocity.Y;
         }
