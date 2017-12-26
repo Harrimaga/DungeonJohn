@@ -16,12 +16,10 @@ public class RangedEnemy : Enemy
 {
     public static GameObjectList bullets;
     int counter = 60;
-    HealthBar healthbar;
 
     public RangedEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
     {
         bullets = new GameObjectList();
-        healthbar = new HealthBar(health, maxhealth, position);
     }
 
     public void Range()
@@ -49,20 +47,15 @@ public class RangedEnemy : Enemy
     }
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
         bullets.Update(gameTime);
-        healthbar.Update(gameTime, health, maxhealth, position);
+        base.Update(gameTime);
         Range();
-        if (health <= 0)
-        {
-            GameObjectList.RemovedObjects.Add(this);
-        }
-
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        bullets.Draw(gameTime, spriteBatch);
         base.Draw(gameTime, spriteBatch);
+        bullets.Draw(gameTime, spriteBatch);
+        
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
 
