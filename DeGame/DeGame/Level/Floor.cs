@@ -310,7 +310,7 @@ public class Floor
         if (inputHelper.KeyPressed(Keys.R))
             ResetFloor();
     }
-    
+
     void DrawMinimap(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUDbackground")), new Vector2(screenwidth - 340 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2)), Color.White);
@@ -319,7 +319,7 @@ public class Floor
         RoomWithPlayer();
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
-                if (floor[x, y] != null && floor[x,y].Visited == true)
+                if (floor[x, y] != null) //&& floor[x,y].Visited)
                 {
                     if (floor[x, y].RoomListIndex == 1)
                     {

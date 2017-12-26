@@ -14,21 +14,23 @@ using Microsoft.Xna.Framework.Graphics;
 //TODO: Health
 public class RangedEnemy : Enemy
 {
-    public GameObjectList bullets;
+    public static GameObjectList bullets;
     int counter = 60;
+    HealthBar healthbar;
 
     public RangedEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
     {
         bullets = new GameObjectList();
+        healthbar = new HealthBar(health, maxhealth, position);
     }
 
-    public override void Chase()
-    {        
-        if(PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
+    public void Range()
+    {
+        if (PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
             PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
-            {
-                Chase();
-            }
+        {
+            Chase();
+        }
         else if (counter == 0)
         {
             Shoot();
@@ -44,19 +46,23 @@ public class RangedEnemy : Enemy
     {
         base.Update(gameTime);
         bullets.Update(gameTime);
-        Chase();
+        Range();
+        healthbar.Update(gameTime, health, maxhealth, position);
+        if (health <= 0)
+        {
+            GameObjectList.RemovedObjects.Add(this);
+        }
         counter--;
         if (counter < 0)
-            counter = 60;
+        {
+            counter = 300;
+        }
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         bullets.Draw(gameTime, spriteBatch);
         base.Draw(gameTime, spriteBatch);
-        if (Die == false)
-        {
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
-        }
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
 
 }

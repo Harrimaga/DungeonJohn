@@ -10,12 +10,14 @@ using System.Threading.Tasks;
 
 public class Player : SpriteGameObject
 {
-    public float health = 100;
-    public float maxhealth = 100;
-    protected float attack;
-    protected float attackspeed;
-    protected float range;
+    public float health = 100, maxhealth = 200;
+    public float exp = 0,nextLevelExp = 100;
+    public int level = 0;
+    public float attack = 20;
+    public float attackspeed;
+    public float range;
     public float ammo = 20;
+    bool state = false;
     bool next = false;
     public SpriteEffects Effect;
     public Vector2 velocitybase;
@@ -31,7 +33,15 @@ public class Player : SpriteGameObject
         healthbar = new HealthBar(health, maxhealth, position, true);
         velocity = velocitybase;
     }
-
+    public override Rectangle BoundingBox
+    {
+        get
+        {
+            int left = (int)(position.X - origin.X);
+            int top = (int)(position.Y - origin.Y);
+            return new Rectangle(left , top , Width, Height);
+        }
+    }
 
     public override void Update(GameTime gameTime)
     {
@@ -40,14 +50,14 @@ public class Player : SpriteGameObject
         base.Update(gameTime);
         if (health <= 0)
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
-
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        string Ammo = Convert.ToString(ammo);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: " + Ammo, new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: " + Convert.ToString(ammo), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
         bullets.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch, Vector2.Zero);
     }
@@ -93,9 +103,43 @@ public class Player : SpriteGameObject
                 Shoot(3);
             }
         }
+        if(state==true)
+        {
+            if (inputHelper.currentKeyboardState.IsKeyDown(Keys.N))
+            {
+                StateIncrease(1);
+                state = false;
+            }
+            if (inputHelper.currentKeyboardState.IsKeyDown(Keys.M))
+            {
+                StateIncrease(2);
+                state = false;
+            }
+        }
     }
 
-    // Shoot a bullet
+    public void NextLevel()
+    {
+        if(exp >= nextLevelExp)
+        {
+            exp -= nextLevelExp;
+            nextLevelExp += 20;
+            level++;
+            state = true;
+        }
+    }
+    public void StateIncrease(int type)
+    {
+        if (type == 1)
+        {
+            attack++;
+        }
+        if (type == 2)
+        {
+            maxhealth += 100;
+            health += 100;
+        }
+    }
     public void Shoot(int direction)
     {
         Bullet bullet = new Bullet(position, direction);
