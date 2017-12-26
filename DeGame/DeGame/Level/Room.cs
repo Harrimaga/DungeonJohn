@@ -87,7 +87,7 @@ public class Room : GameObjectList
                 CreateObject(x, y, "!");
                 break;
             case '+':
-                roomarray[x, y] = "Wall";
+                roomarray[x, y] = "WallUp";
                 CreateObject(x, y, "+");
                 break;
 
@@ -343,7 +343,7 @@ public class Room : GameObjectList
                         case "Rock":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Gray);
                             break;
-                        case "Wall":
+                        case "WallUp":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Up2")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                             break;
                         case "WallCornerRU":
