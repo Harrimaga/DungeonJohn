@@ -21,7 +21,8 @@ using System.Threading.Tasks;
         {
             get; set;
         }
-        private Rectangle Bounds
+        private 
+        Bounds
         {
             get; set;
         }

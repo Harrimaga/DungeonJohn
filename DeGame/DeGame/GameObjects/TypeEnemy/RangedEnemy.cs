@@ -29,8 +29,8 @@ public class RangedEnemy : Enemy
         {
             counter = 300;
         }
-        if (PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
-            PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
+        if (PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X + PlayingState.player.Width ||
+            PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y + PlayingState.player.Height)
         {
             Chase();
         }
@@ -39,7 +39,10 @@ public class RangedEnemy : Enemy
             Shoot();
         }
     }
+    public struct Circle
+    {
 
+    }
     public void Shoot()
     {
         EnemyBullet bullet = new EnemyBullet(position);
