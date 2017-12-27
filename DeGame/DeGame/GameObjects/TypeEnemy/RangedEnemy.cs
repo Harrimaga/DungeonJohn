@@ -29,8 +29,7 @@ public class RangedEnemy : Enemy
         {
             counter = 300;
         }
-        if (PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X + PlayingState.player.Width ||
-            PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y + PlayingState.player.Height)
+        if (PlayerCircle.Intersects(BoundingBox) == false)
         {
             Chase();
         }
@@ -39,9 +38,16 @@ public class RangedEnemy : Enemy
             Shoot();
         }
     }
-    public struct Circle
-    {
 
+    public Circle PlayerCircle
+    {
+        get
+        {
+            int radius = 200;
+            int x = (int)PlayingState.player.position.X;
+            int y = (int)PlayingState.player.position.Y;
+            return new Circle(x, y, radius);
+        }        
     }
     public void Shoot()
     {
