@@ -100,17 +100,13 @@
     <Content Include="Content\Sprites\Background Sprite.png" />
     <Content Include="Content\Sprites\BearEnemy.png" />
     <Content Include="Content\Sprites\bteam.png" />
-    <Content Include="Content\Sprites\bullet1.png" />
     <Content Include="Content\Sprites\doordown.png" />
     <Content Include="Content\Sprites\doorleft.png" />
     <Content Include="Content\Sprites\doorright.png" />
     <Content Include="Content\Sprites\doorup.png" />
     <Content Include="Content\Sprites\Button Sprite.png" />
     <Content Include="Content\Sprites\Button2 Sprite.png" />
-    <Content Include="Content\Sprites\Eind Sprite.png" />
-    <Content Include="Content\Sprites\Eind Sprite2.png" />
     <Content Include="Content\Sprites\healthbar.png" />
-    <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\MinimapBossTile.png" />
     <Content Include="Content\Sprites\MinimapItemTile.png" />
     <Content Include="Content\Sprites\MinimapStartTile.png" />
@@ -119,7 +115,6 @@
     <Content Include="Content\Sprites\OldRock.png" />
     <Content Include="Content\Sprites\Rock Sprite.png" />
     <Content Include="Content\Sprites\Standardtile.png" />
-    <Content Include="Content\Sprites\Wall Sprite Corner.png" />
     <Content Include="Content\Sprites\Wall Sprite.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
