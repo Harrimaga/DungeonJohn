@@ -21,6 +21,8 @@ class Leveling : IGameObject
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {
+        attackB.HandleInput(inputHelper);
+        healthB.HandleInput(inputHelper);
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
