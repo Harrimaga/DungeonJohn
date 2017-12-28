@@ -29,7 +29,8 @@ public class RangedEnemy : Enemy
         {
             counter = 300;
         }
-        if (PlayerCircle.Intersects(BoundingBox) == false)
+        if (PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
+            PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
         {
             Chase();
         }
@@ -39,16 +40,16 @@ public class RangedEnemy : Enemy
         }
     }
 
-    public Circle PlayerCircle
-    {
-        get
-        {
-            int radius = 200;
-            int x = (int)PlayingState.player.position.X;
-            int y = (int)PlayingState.player.position.Y;
-            return new Circle(x, y, radius);
-        }        
-    }
+    //public Circle PlayerCircle
+    //{
+    //    get
+    //    {
+    //        int radius = 200;
+    //        int x = (int)PlayingState.player.position.X;
+    //        int y = (int)PlayingState.player.position.Y;
+    //        return new Circle(x, y, radius);
+    //    }        
+    //}
     public void Shoot()
     {
         EnemyBullet bullet = new EnemyBullet(position);
@@ -56,15 +57,14 @@ public class RangedEnemy : Enemy
     }
     public override void Update(GameTime gameTime)
     {
-        bullets.Update(gameTime);
         base.Update(gameTime);
+        bullets.Update(gameTime);
         Range();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
         bullets.Draw(gameTime, spriteBatch);
-        
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
 
