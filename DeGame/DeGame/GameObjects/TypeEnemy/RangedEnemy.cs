@@ -16,12 +16,10 @@ public class RangedEnemy : Enemy
 {
     public static GameObjectList bullets;
     int counter = 60;
-    HealthBar healthbar;
 
     public RangedEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
     {
         bullets = new GameObjectList();
-        healthbar = new HealthBar(health, maxhealth, position);
     }
 
     public void Range()
@@ -31,8 +29,7 @@ public class RangedEnemy : Enemy
         {
             counter = 300;
         }
-        if (PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
-            PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
+        if (PlayerCircle.Intersects(BoundingBox) == false)
         {
             Chase();
         }
@@ -42,6 +39,16 @@ public class RangedEnemy : Enemy
         }
     }
 
+    public Circle PlayerCircle
+    {
+        get
+        {
+            int radius = 200;
+            int x = (int)PlayingState.player.position.X;
+            int y = (int)PlayingState.player.position.Y;
+            return new Circle(x, y, radius);
+        }        
+    }
     public void Shoot()
     {
         EnemyBullet bullet = new EnemyBullet(position);
@@ -49,20 +56,15 @@ public class RangedEnemy : Enemy
     }
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
         bullets.Update(gameTime);
-        healthbar.Update(gameTime, health, maxhealth, position);
+        base.Update(gameTime);
         Range();
-        if (health <= 0)
-        {
-            GameObjectList.RemovedObjects.Add(this);
-        }
-
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        bullets.Draw(gameTime, spriteBatch);
         base.Draw(gameTime, spriteBatch);
+        bullets.Draw(gameTime, spriteBatch);
+        
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
 
