@@ -17,7 +17,7 @@ public class Player : SpriteGameObject
     public float attackspeed;
     public float range;
     public float ammo = 20;
-    bool state = false;
+    public bool state = false;
     bool next = false;
     public SpriteEffects Effect;
     public Vector2 velocitybase;
@@ -105,7 +105,8 @@ public class Player : SpriteGameObject
         }
         if(state==true)
         {
-            if (inputHelper.currentKeyboardState.IsKeyDown(Keys.N))
+            GameEnvironment.gameStateManager.SwitchTo("Leveling");
+            /*if (inputHelper.currentKeyboardState.IsKeyDown(Keys.N))
             {
                 StateIncrease(1);
                 state = false;
@@ -114,7 +115,7 @@ public class Player : SpriteGameObject
             {
                 StateIncrease(2);
                 state = false;
-            }
+            }*/
         }
     }
 

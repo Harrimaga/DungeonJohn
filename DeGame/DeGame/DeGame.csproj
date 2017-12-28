@@ -152,6 +152,7 @@
     <Content Include="Content\Sprites\healthbar.png" />
     <Content Include="Content\Sprites\HealthbarBackground.png" />
     <Content Include="Content\Sprites\Item1.png" />
+    <Content Include="Content\Sprites\LevelUp.png" />
     <Content Include="Content\Sprites\MinimapBossTile.png" />
     <Content Include="Content\Sprites\MinimapItemTile.png" />
     <Content Include="Content\Sprites\MinimapStartTile.png" />

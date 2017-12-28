@@ -29,10 +29,6 @@ public class PlayingState : IGameObject
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
         }
-        if (inputHelper.currentKeyboardState.IsKeyDown(Keys.K) && inputHelper.previousKeyboardState.IsKeyUp(Keys.K))
-        {
-            GameEnvironment.gameStateManager.SwitchTo("Leveling");
-        }
         floor.HandleInput(inputHelper);
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
