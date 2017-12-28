@@ -16,7 +16,7 @@ public class Enemy : SpriteGameObject
     protected float range;
     protected int counter = 100;
     protected float expGive = 120;
-    protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
+    protected Vector2 basevelocity = new Vector2(2, 2);
     public SpriteEffects Effects;
     Texture2D playersprite;
     HealthBar healthbar;
@@ -33,14 +33,9 @@ public class Enemy : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        //base.Update(gameTime);
+        base.Update(gameTime);
+      
         healthbar.Update(gameTime, health, maxhealth, position);
-        if (health <= 0)
-        {
-            GameObjectList.RemovedObjects.Add(this);
-            PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();
-        }
         if (CollidesWith(PlayingState.player))
         {
             counter--;
@@ -70,13 +65,7 @@ public class Enemy : SpriteGameObject
         RemoveBullets.Clear();
 
         healthbar.Update(gameTime, health, maxhealth, position);
-        if (health <= 0)
-        {
-            PlayingState.currentFloor.currentRoom.DropConsumable(position);
-            GameObjectList.RemovedObjects.Add(this);
-            PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();        
-        }
+
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -119,7 +108,7 @@ public class Enemy : SpriteGameObject
 
     public virtual void Chase()
     {
-         // Create a new grid and let each cell have a default traversal cost of 1.0
+        // Create a new grid and let each cell have a default traversal cost of 1.0
         //var grid = new Grid(100, 100, 1.0f);
 
         // Block some cells (for example walls)
@@ -142,10 +131,11 @@ public class Enemy : SpriteGameObject
         if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
         {
             position.Y -= velocity.Y;
-        
-        if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)        
+        }
+        if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
+        {
             position.Y += velocity.Y;
-        
+        }
         if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
         {
             position.X -= velocity.X;
@@ -157,7 +147,8 @@ public class Enemy : SpriteGameObject
             Effects = SpriteEffects.FlipHorizontally;
         }
 
-        if (CheckUp() == true && position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)        
+        if (CheckUp() == true && position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
+        {
             position.X -= velocity.X;
         }
         if (CheckUp() == true && position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
