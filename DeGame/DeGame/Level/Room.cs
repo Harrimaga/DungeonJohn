@@ -245,28 +245,28 @@ public class Room : GameObjectList
                 if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
                 {
                     onup = true;
-                    PlayingState.player.position -= new Vector2(0, 2 * CellHeight);
+                    PlayingState.player.position -= new Vector2(0, 2 * CellHeight + 30);
                 }
 
             if (downdoor && MiddelofPlayer.X >= Down.X && MiddelofPlayer.X <= Down.X + CellWidth)
                 if (MiddelofPlayer.Y >= Down.Y && MiddelofPlayer.Y <= Down.Y + CellHeight)
                 {
                     ondown = true;
-                    PlayingState.player.position += new Vector2(0, 2 * CellHeight);
+                    PlayingState.player.position += new Vector2(0, 2 * CellHeight + 30);
                 }
 
             if (leftdoor && MiddelofPlayer.X >= Left.X && MiddelofPlayer.X <= Left.X + CellWidth)
                 if (MiddelofPlayer.Y >= Left.Y && MiddelofPlayer.Y <= Left.Y + CellHeight)
                 {
                     onleft = true;
-                    PlayingState.player.position -= new Vector2(2 * CellHeight, 0);
+                    PlayingState.player.position -= new Vector2(2 * CellHeight + 30, 0);
                 }
 
             if (rightdoor && MiddelofPlayer.X >= Right.X && MiddelofPlayer.X <= Right.X + CellWidth)
                 if (MiddelofPlayer.Y >= Right.Y && MiddelofPlayer.Y <= Right.Y + CellHeight)
                 {
                     onright = true;
-                    PlayingState.player.position += new Vector2(2 * CellHeight, 0);
+                    PlayingState.player.position += new Vector2(2 * CellHeight + 30, 0);
                 }
 
             Vector2 CameraVelocity = new Vector2(0, 0);
