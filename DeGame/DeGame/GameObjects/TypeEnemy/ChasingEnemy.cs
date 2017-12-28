@@ -16,6 +16,20 @@ public class ChasingEnemy : Enemy
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        if (CollidesWith(PlayingState.player))
+        {
+            counter--;
+            if (counter == 0)
+            {
+                velocity = Vector2.Zero;
+                PlayingState.player.health -= 0;
+                counter = 100;
+            }
+        }
+        if (!CollidesWith(PlayingState.player))
+        {
+            velocity = basevelocity;
+        }
         Chase();
     }
 
