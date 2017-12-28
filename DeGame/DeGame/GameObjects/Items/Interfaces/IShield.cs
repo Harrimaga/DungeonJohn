@@ -4,9 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeGame.GameObjects.Items.Interfaces
+public interface IShield
 {
-    interface IShield
+    bool AddedDefence
     {
+        get; set;
+    }
+
+    bool DefenceMultiplier
+    {
+        get; set;
     }
 }

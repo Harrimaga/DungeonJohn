@@ -6,21 +6,32 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
-public class Item : SpriteGameObject
+public class Item
 {
-    Vector2 position;
+    public string itemName;
 
-    public Item(Vector2 position, int layer = 0, string id = "item") : base("Sprites/OldRock", layer, id)
+    public Item()
     {
-        this.position = position;
+        itemName = "null";
     }
 
-    public override void Update(GameTime gameTime)
+    public string Type
     {
+        get; set;
     }
 
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public virtual void equip()
     {
+        
+    }
+
+    public virtual void unequip()
+    {
+
+    }
+
+    public override string ToString()
+    {
+        return itemName;
     }
 }
-

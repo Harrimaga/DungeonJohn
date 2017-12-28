@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeGame.GameObjects.Items.Interfaces
+public interface IPassive
 {
-    interface IPassive
+    int DamageMultiplier
     {
+        get;
     }
 }
+
