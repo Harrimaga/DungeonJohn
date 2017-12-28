@@ -9,7 +9,7 @@ class Consumables : SpriteGameObject
     public Consumables(Vector2 startPosition, string consumablename, int layer = 0, string id = "consumable")
     : base("Sprites/Coin", layer, id)
     {
-        dropposition = position;
+        dropposition = startPosition;
         type = consumablename;
     }
 
@@ -32,9 +32,14 @@ class Consumables : SpriteGameObject
         }
     }
 
-    void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Coin")), dropposition, Color.White);
+    }
+
+    public override string ToString()
+    {
+        return type;
     }
 }
 

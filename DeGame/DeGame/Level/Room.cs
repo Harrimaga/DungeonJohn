@@ -418,7 +418,9 @@ public class Room : GameObjectList
             solid.Draw(gameTime, spriteBatch);       
         foreach (Door door in door.Children)
             door.Draw(gameTime, spriteBatch);
-        foreach (Consumables consumable in consumable.Children)
-            consumable.Draw(gameTime, spriteBatch);
+        foreach (Consumables c in consumable.Children)
+        {
+            c.Draw(gameTime, spriteBatch);
+        }
     }    
 }
