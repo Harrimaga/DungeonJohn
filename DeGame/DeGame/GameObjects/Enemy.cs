@@ -40,12 +40,12 @@ public class Enemy : SpriteGameObject
             if (counter == 0)
             {
                 velocity = Vector2.Zero;
-                PlayingState.player.health -= 0;
+                //PlayingState.player.health -= 5;
                 counter = 100;
             }
         }
-        if (!CollidesWith(PlayingState.player))       
-            velocity = basevelocity;        
+        else
+            velocity = basevelocity;
 
         List<GameObject> RemoveBullets = new List<GameObject>();
 

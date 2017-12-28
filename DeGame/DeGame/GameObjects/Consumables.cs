@@ -5,12 +5,16 @@ class Consumables : SpriteGameObject
 {
     Vector2 dropposition;
     string type;
-
+    Texture2D consumablesprite;
     public Consumables(Vector2 startPosition, string consumablename, int layer = 0, string id = "consumable")
     : base("Sprites/Coin", layer, id)
     {
-        dropposition = startPosition;
+        dropposition = startPosition + new Vector2(30,30);
         type = consumablename;
+        if (type == "heart")
+            consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Heart");
+        if (type == "gold")
+            consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Coin");
     }
 
     public override void Update(GameTime gameTime)
@@ -27,14 +31,13 @@ class Consumables : SpriteGameObject
                     PlayingState.player.gold += 5;
                     break;
             }
-            PlayingState.player.gold += 5;
             GameObjectList.RemovedObjects.Add(this);
         }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Coin")), dropposition, Color.White);
+        spriteBatch.Draw(consumablesprite, dropposition, Color.White);
     }
 
     public override string ToString()
