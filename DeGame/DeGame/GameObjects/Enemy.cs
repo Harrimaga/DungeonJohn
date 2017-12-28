@@ -33,8 +33,7 @@ public class Enemy : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
-      
+       // base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth, position);
         if (CollidesWith(PlayingState.player))
         {
@@ -65,7 +64,13 @@ public class Enemy : SpriteGameObject
         RemoveBullets.Clear();
 
         healthbar.Update(gameTime, health, maxhealth, position);
-
+        if (health <= 0)
+        {
+            GameObjectList.RemovedObjects.Add(this);
+            //PlayingState.currentFloor.currentRoom.DropConsumable(position);
+            //PlayingState.player.exp += expGive;
+            //PlayingState.player.NextLevel();
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
