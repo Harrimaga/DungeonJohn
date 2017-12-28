@@ -50,7 +50,8 @@ public class Player : SpriteGameObject
         health = 100;
         ammo = 20;
         gold = 0;
-
+        level = 1;
+        exp = 0;
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
             RemoveBullets.Add(bullet);        
         foreach (Bullet bullet in RemoveBullets)        
