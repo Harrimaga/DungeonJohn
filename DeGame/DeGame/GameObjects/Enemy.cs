@@ -67,9 +67,9 @@ public class Enemy : SpriteGameObject
         if (health <= 0)
         {
             GameObjectList.RemovedObjects.Add(this);
-            //PlayingState.currentFloor.currentRoom.DropConsumable(position);
-            //PlayingState.player.exp += expGive;
-            //PlayingState.player.NextLevel();
+            PlayingState.currentFloor.currentRoom.DropConsumable(position);
+            PlayingState.player.exp += expGive;
+            PlayingState.player.NextLevel();
         }
     }
 

@@ -54,8 +54,7 @@ public class RangedEnemy : Enemy
         bullets.Add(bullet);
     }
     public override void Update(GameTime gameTime)
-    {
-        
+    {   
         bullets.Update(gameTime);
         base.Update(gameTime);
         Range();
