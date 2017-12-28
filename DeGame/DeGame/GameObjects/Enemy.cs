@@ -65,10 +65,12 @@ public class Enemy : SpriteGameObject
         RemoveBullets.Clear();
 
         healthbar.Update(gameTime, health, maxhealth, position);
-        if (health <= 0)        
+        if (health <= 0)
+        {
             GameObjectList.RemovedObjects.Add(this);
             PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();        
+            PlayingState.player.NextLevel();
+        } 
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
