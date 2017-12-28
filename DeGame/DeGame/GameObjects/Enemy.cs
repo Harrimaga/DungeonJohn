@@ -44,10 +44,8 @@ public class Enemy : SpriteGameObject
                 counter = 100;
             }
         }
-        if (!CollidesWith(PlayingState.player))
-        {
-            velocity = basevelocity;
-        }
+        if (!CollidesWith(PlayingState.player))       
+            velocity = basevelocity;        
 
         List<GameObject> RemoveBullets = new List<GameObject>();
 
@@ -67,10 +65,11 @@ public class Enemy : SpriteGameObject
         healthbar.Update(gameTime, health, maxhealth, position);
         if (health <= 0)
         {
+            PlayingState.currentFloor.currentRoom.DropConsumable(position);
             GameObjectList.RemovedObjects.Add(this);
             PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();
-        } 
+            PlayingState.player.NextLevel();        
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

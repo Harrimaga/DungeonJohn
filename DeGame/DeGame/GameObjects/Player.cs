@@ -21,9 +21,9 @@ public class Player : SpriteGameObject
     bool next = false;
     public SpriteEffects Effect;
     public Vector2 velocitybase;
-
-    public GameObjectList bullets;
     HealthBar healthbar;
+    public int gold = 0;
+    public GameObjectList bullets;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Random", 0, "Player")
@@ -43,11 +43,26 @@ public class Player : SpriteGameObject
         }
     }
 
+    public override void Reset()
+    {
+        List<GameObject> RemoveBullets = new List<GameObject>();
+        maxhealth = 100;
+        health = 100;
+        ammo = 20;
+        gold = 0;
+        level = 1;
+        exp = 0;
+        foreach (Bullet bullet in PlayingState.player.bullets.Children)
+            RemoveBullets.Add(bullet);        
+        foreach (Bullet bullet in RemoveBullets)        
+            PlayingState.player.bullets.Remove(bullet);
+    }
+
     public override void Update(GameTime gameTime)
     {
+        base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
-        base.Update(gameTime);
         if (health <= 0)
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
     }

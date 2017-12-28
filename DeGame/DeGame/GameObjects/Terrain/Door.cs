@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 class Door : SpriteGameObject
 {
@@ -66,6 +67,11 @@ class Door : SpriteGameObject
             {
                 PlayingState.player.position.X -= 10;
             }
+            List<GameObject> RemoveBullets = new List<GameObject>();
+
+            foreach (Bullet bullet in PlayingState.player.bullets.Children)            
+                if (CollidesWith(bullet))                
+                    RemoveBullets.Add(bullet);           
         }
         if(!isdoor)
             solid.Update(gameTime);

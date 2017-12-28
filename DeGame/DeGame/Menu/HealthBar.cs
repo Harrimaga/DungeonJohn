@@ -54,7 +54,7 @@ class HealthBar
         {
             healthbar = new Rectangle((int)positionNow.X - 30, (int)positionNow.Y - 30, healthbarwidth, 20);
         }
-        HP = "HP " + newhealth;
+        HP = "HP " + (int)newhealth;
     }
     public void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
