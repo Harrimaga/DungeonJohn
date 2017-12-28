@@ -68,8 +68,7 @@ public class Enemy : SpriteGameObject
         if (health <= 0)        
             GameObjectList.RemovedObjects.Add(this);
             PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();
-        }
+            PlayingState.player.NextLevel();        
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
