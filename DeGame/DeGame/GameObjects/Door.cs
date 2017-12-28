@@ -5,7 +5,7 @@ class Door : SpriteGameObject
 {
     Vector2 doorposition, positionOld = PlayingState.player.position;
     SpriteEffects Effect = SpriteEffects.None;
-    Texture2D doorsprite;
+    Texture2D doorsprite, wallsprite;
     GameObjectList solid;
     int direction;
     bool isdoor;
@@ -30,7 +30,12 @@ class Door : SpriteGameObject
         if (direction == 1 || direction == 2)
         {
             if (direction == 2)
+            {
                 Effect = SpriteEffects.FlipVertically;
+                wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Down2");
+            }
+            else
+                wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Up2");
             if (Room.enemies.Count > 0)
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorupclosed");
             else
@@ -39,7 +44,12 @@ class Door : SpriteGameObject
         else
         {
             if (direction == 4)
+            {
                 Effect = SpriteEffects.FlipHorizontally;
+                wallsprite = wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Right2");
+            }
+            else
+                wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Left2");
             if (Room.enemies.Count > 0)
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleftclosed");
             else
@@ -64,7 +74,7 @@ class Door : SpriteGameObject
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         ChooseSprite();
-        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite")), doorposition, Color.Gray);
+        spriteBatch.Draw(wallsprite, doorposition, Color.Gray);
         if (isdoor)
             spriteBatch.Draw(doorsprite, doorposition, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
     }    

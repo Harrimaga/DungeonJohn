@@ -26,6 +26,11 @@ public class RangedEnemy : Enemy
 
     public void Range()
     {
+        counter--;
+        if (counter < 0)
+        {
+            counter = 300;
+        }
         if (PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
             PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
         {
@@ -46,17 +51,13 @@ public class RangedEnemy : Enemy
     {
         base.Update(gameTime);
         bullets.Update(gameTime);
-        Range();
         healthbar.Update(gameTime, health, maxhealth, position);
+        Range();
         if (health <= 0)
         {
             GameObjectList.RemovedObjects.Add(this);
         }
-        counter--;
-        if (counter < 0)
-        {
-            counter = 300;
-        }
+
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
