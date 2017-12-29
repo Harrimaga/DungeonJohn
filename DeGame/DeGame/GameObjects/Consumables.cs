@@ -20,7 +20,7 @@ class Consumables : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (CollidesWith(PlayingState.player))
+        if (CollidesWith(PlayingState.player)) //werkt niet
         {
             switch (type)
             {

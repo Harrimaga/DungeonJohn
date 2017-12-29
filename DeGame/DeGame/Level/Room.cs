@@ -159,16 +159,19 @@ public class Room : GameObjectList
             case ("C"):
                 Enemy enemyChase = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
                 enemies.Add(enemyChase);
+                roomarray[x, y] = "Background";
                 break;
 
             case ("R"):
                 Enemy enemyRanged = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
+                roomarray[x, y] = "Background";
                 break;
 
             case ("!"):
                 Solid rock = new Rock(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Rock");
                 solid.Add(rock);
+                roomarray[x, y] = "Background";
                 break;
 
             case ("+"):

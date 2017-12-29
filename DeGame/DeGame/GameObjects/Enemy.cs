@@ -21,7 +21,6 @@ public class Enemy : SpriteGameObject
     Texture2D playersprite;
     HealthBar healthbar;
 
-
     public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
