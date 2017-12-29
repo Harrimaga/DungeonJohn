@@ -79,6 +79,7 @@ class Door : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        //ad
         ChooseSprite();
         spriteBatch.Draw(wallsprite, doorposition, Color.Gray);
         if (isdoor)
