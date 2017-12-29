@@ -69,11 +69,11 @@ class Door : SpriteGameObject
             }
             List<GameObject> RemoveBullets = new List<GameObject>();
 
-            foreach (Bullet bullet in PlayingState.player.bullets.Children)            
-                if (CollidesWith(bullet))                
-                    RemoveBullets.Add(bullet);           
+            foreach (Bullet bullet in PlayingState.player.bullets.Children)
+                if (CollidesWith(bullet))
+                    RemoveBullets.Add(bullet);
         }
-        if(!isdoor)
+        if (!isdoor)
             solid.Update(gameTime);
     }
 
@@ -84,6 +84,5 @@ class Door : SpriteGameObject
         spriteBatch.Draw(wallsprite, doorposition, Color.Gray);
         if (isdoor)
             spriteBatch.Draw(doorsprite, doorposition, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
-    }    
+    }
 }
-

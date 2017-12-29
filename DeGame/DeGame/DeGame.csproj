@@ -75,6 +75,7 @@
     <Compile Include="GameObjects\Consumables.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\CheckCurrentTile.cs" />
+    <Compile Include="GameObjects\Terrain\Door.cs" />
     <Compile Include="GameObjects\Terrain\Rock.cs" />
     <Compile Include="GameObjects\Terrain\Solid.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
