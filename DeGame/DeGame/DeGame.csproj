@@ -143,6 +143,7 @@
     </Content>
     <Content Include="Content\Sprites\Background Sprite.png" />
     <Content Include="Content\Sprites\BearEnemy.png" />
+    <Content Include="Content\Sprites\Boss.png" />
     <Content Include="Content\Sprites\bteam.png" />
     <Content Include="Content\Sprites\bullet1.png" />
     <Content Include="Content\Sprites\doordown.png" />

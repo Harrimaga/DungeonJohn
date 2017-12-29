@@ -64,12 +64,15 @@ public class Enemy : SpriteGameObject
         RemoveBullets.Clear();
 
         healthbar.Update(gameTime, health, maxhealth, position);
-        if (health <= 0)
+        foreach (Enemy enemy in Room.enemies.Children)
         {
-            GameObjectList.RemovedObjects.Add(this);
-            PlayingState.currentFloor.currentRoom.DropConsumable(position);
-            PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();
+            if (health <= 0)
+            {
+                GameObjectList.RemovedObjects.Add(this);
+                PlayingState.currentFloor.currentRoom.DropConsumable(position);
+                PlayingState.player.exp += expGive;
+                PlayingState.player.NextLevel();
+            }
         }
     }
 

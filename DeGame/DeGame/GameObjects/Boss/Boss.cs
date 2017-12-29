@@ -26,6 +26,26 @@ public class Boss :  SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         healthbar.Update(gameTime, health, maxhealth, position);
+
+        List<GameObject> RemoveBullets = new List<GameObject>();
+
+        foreach (Bullet bullet in PlayingState.player.bullets.Children)
+            if (CollidesWith(bullet))
+            {
+                health -= PlayingState.player.attack;
+                RemoveBullets.Add(bullet);
+            }
+
+
+        foreach (Bullet bullet in RemoveBullets)
+            PlayingState.player.bullets.Remove(bullet);
+
+        if (health <= 0)
+        {
+            GameObjectList.RemovedObjects.Add(this);
+        }
+
+        RemoveBullets.Clear();
         base.Update(gameTime);
     }
 
@@ -33,6 +53,5 @@ public class Boss :  SpriteGameObject
     {
         base.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch, position);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Boss"), position);
     }
 }

@@ -10,7 +10,7 @@ public class Room : GameObjectList
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false, CameraIsMoving = false;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
     bool onup = false, ondown = false, onleft = false, onright = false;
-    public static GameObjectList enemies, solid, door, consumable, boss;
+    public static GameObjectList enemies, solid, door, consumable, bosses;
     Vector2 MiddelofPlayer, Up, Down, Left, Right, Exit;
     public int RoomListIndex, a, b;
     Random random = new Random();
@@ -22,7 +22,7 @@ public class Room : GameObjectList
         solid = new GameObjectList();
         door = new GameObjectList();
         consumable = new GameObjectList();
-        boss = new GameObjectList();
+        bosses = new GameObjectList();
         RoomListIndex = roomListIndex;
         a = A;
         b = B;
@@ -97,6 +97,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "RangedEnemy";
                 CreateObject(x, y, "R");
                 break;
+            case 'B':
+                roomarray[x, y] = "Boss";
+                CreateObject(x, y, "B");
+                break;
             case 'O':
                 roomarray[x, y] = "Pit";
                 break;
@@ -140,6 +144,7 @@ public class Room : GameObjectList
         solid.Update(gameTime);
         door.Update(gameTime);
         consumable.Update(gameTime);
+        bosses.Update(gameTime);
         ControlCamera();
         CheckExit();
     }
@@ -158,15 +163,18 @@ public class Room : GameObjectList
         switch (Type)
         {
             case ("C"):
-                Boss bosss = new Boss(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Boss");
-                boss.Add(bosss);
-                //Enemy enemyChase = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
-                //enemies.Add(enemyChase);
+                Enemy enemyChase = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
+                enemies.Add(enemyChase);
                 break;
 
             case ("R"):
                 Enemy enemyRanged = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
+                break;
+
+            case ("B"):
+                Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Boss");
+                bosses.Add(boss);
                 break;
 
             case ("!"):
@@ -345,7 +353,9 @@ public class Room : GameObjectList
                                 PlayingState.currentFloor.startPlayerPosition = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
                                 //Camera.Position = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
                                 break;
-
+                            case "Boss":
+                                spriteBatch.Draw(( GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Gray);
+                                break;
                             case "RangedEnemy":
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Gray);
                                 break;
@@ -365,6 +375,8 @@ public class Room : GameObjectList
         foreach (Door d in door.Children)
             d.Draw(gameTime, spriteBatch);
         foreach (Consumables c in consumable.Children)        
-            c.Draw(gameTime, spriteBatch);        
+            c.Draw(gameTime, spriteBatch);
+        foreach (Boss b in bosses.Children)
+            b.Draw(gameTime, spriteBatch);
     }
 }
