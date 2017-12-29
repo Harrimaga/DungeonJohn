@@ -20,16 +20,19 @@ public class Boss :  SpriteGameObject
     public Boss(Vector2 startPosition, int layer = 0, string id = "Boss") : base("Sprites/Boss", layer, id)
     {
         position = startPosition;
+        healthbar = new HealthBar(health, maxhealth, position);
     }
 
     public override void Update(GameTime gameTime)
     {
+        healthbar.Update(gameTime, health, maxhealth, position);
         base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
+        healthbar.Draw(spriteBatch, position);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Boss"), position);
     }
 }

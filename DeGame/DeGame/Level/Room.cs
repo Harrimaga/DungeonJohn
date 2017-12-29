@@ -10,7 +10,7 @@ public class Room : GameObjectList
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false, CameraIsMoving = false;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
     bool onup = false, ondown = false, onleft = false, onright = false;
-    public static GameObjectList enemies, solid, door, consumable;
+    public static GameObjectList enemies, solid, door, consumable, boss;
     Vector2 MiddelofPlayer, Up, Down, Left, Right, Exit;
     public int RoomListIndex, a, b;
     Random random = new Random();
@@ -22,6 +22,7 @@ public class Room : GameObjectList
         solid = new GameObjectList();
         door = new GameObjectList();
         consumable = new GameObjectList();
+        boss = new GameObjectList();
         RoomListIndex = roomListIndex;
         a = A;
         b = B;
@@ -157,8 +158,10 @@ public class Room : GameObjectList
         switch (Type)
         {
             case ("C"):
-                Enemy enemyChase = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
-                enemies.Add(enemyChase);
+                Boss bosss = new Boss(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Boss");
+                boss.Add(bosss);
+                //Enemy enemyChase = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
+                //enemies.Add(enemyChase);
                 break;
 
             case ("R"):
