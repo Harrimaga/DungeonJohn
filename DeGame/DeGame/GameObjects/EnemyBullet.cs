@@ -30,7 +30,7 @@ class EnemyBullet : SpriteGameObject
         if (CollidesWith(PlayingState.player))
         {
             GameObjectList.RemovedObjects.Add(this);
-            PlayingState.player.health -= 20;
+            PlayingState.player.health -= 0;
         }
         foreach (Solid solid in Room.solid.Children)
         {

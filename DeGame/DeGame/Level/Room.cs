@@ -252,6 +252,7 @@ public class Room : GameObjectList
                 counter++;
                 CameraIsMoving = true;
             }
+
             if (counter >= 30)
             {
                 onup = false;
@@ -318,6 +319,7 @@ public class Room : GameObjectList
                         else if (roomarray[x, y] == "Background")
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.Gray);
                     }
+
                     else
                         switch (roomarray[x, y])
                         {
@@ -356,13 +358,13 @@ public class Room : GameObjectList
                         }
                 }
 
-        foreach (Enemy enemy in enemies.Children)        
-            enemy.Draw(gameTime, spriteBatch); 
-        foreach (Solid solid in solid.Children)        
-            solid.Draw(gameTime, spriteBatch);       
-        foreach (Door door in door.Children)
-            door.Draw(gameTime, spriteBatch);
-        foreach (Consumables consumable in consumable.Children)
-            consumable.Draw(gameTime, spriteBatch);
-    }    
+        foreach (Enemy e in enemies.Children)        
+            e.Draw(gameTime, spriteBatch); 
+        foreach (Solid s in solid.Children)        
+            s.Draw(gameTime, spriteBatch);       
+        foreach (Door d in door.Children)
+            d.Draw(gameTime, spriteBatch);
+        foreach (Consumables c in consumable.Children)        
+            c.Draw(gameTime, spriteBatch);        
+    }
 }
