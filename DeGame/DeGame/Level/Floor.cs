@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 public class Floor
 {
-    Room[,] floor;
+    public Room[,] floor;
     bool[,] Checked;
     int[,] AdjacentRooms;
     int[,] possiblespecial;
@@ -337,11 +337,15 @@ public class Floor
             for (int y = 0; y < floorHeight; y++)
                 if (PlayingState.player.position.X >= x * 1260 && PlayingState.player.position.X < (x + 1) * 1260)
                     if (PlayingState.player.position.Y >= y * screenheight && PlayingState.player.position.Y < (y + 1) * screenheight)
+                    {
                         currentRoom.position = new Vector2(x, y);
+                        currentRoom = floor[x, y];
+                    }
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        string enemycount = "Count: " + PlayingState.currentFloor.currentRoom.enemycounter;
         string Level = "Level " + CurrentLevel;
         string Gold = "Gold: " + PlayingState.player.gold;
 
@@ -362,6 +366,7 @@ public class Floor
         DrawMinimap(spriteBatch);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2),(Camera.Position.Y - screenheight / 2) + 50), Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), enemycount, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 450), Color.White);
     }
 }
 
