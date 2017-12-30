@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 public class ChasingEnemy : Enemy
 {
-    public ChasingEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
+    public ChasingEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        Chase();
+        if (PlayingState.currentFloor.currentRoom.position == Roomposition)
+            Chase();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -18,7 +18,7 @@ public class RangedEnemy : Enemy
     int counter = 60;
     HealthBar healthbar;
 
-    public RangedEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
+    public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bullets = new GameObjectList();
         healthbar = new HealthBar(health, maxhealth, position);
@@ -52,12 +52,12 @@ public class RangedEnemy : Enemy
         base.Update(gameTime);
         bullets.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth, position);
-        Range();
+        if (PlayingState.currentFloor.currentRoom.position == Roomposition)
+            Range();
         if (health <= 0)
         {
             GameObjectList.RemovedObjects.Add(this);
         }
-
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
@@ -65,5 +65,4 @@ public class RangedEnemy : Enemy
         base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
-
 }

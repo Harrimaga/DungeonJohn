@@ -11,7 +11,6 @@ class Door : SpriteGameObject
     int direction;
     bool isdoor;
 
-
     public Door(bool Isdoor, Vector2 Startposition, int Direction, int layer = 0, string id = "door")
     : base("Sprites/doorup", layer, id)
     {
@@ -37,7 +36,7 @@ class Door : SpriteGameObject
             }
             else
                 wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Up2");
-            if (Room.enemies.Count > 0)
+            if (PlayingState.currentFloor.currentRoom.enemycounter > 0)
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorupclosed");
             else
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorup");
@@ -51,7 +50,7 @@ class Door : SpriteGameObject
             }
             else
                 wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Left2");
-            if (Room.enemies.Count > 0)
+            if (PlayingState.currentFloor.currentRoom.enemycounter > 0)
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleftclosed");
             else
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleft");
@@ -61,7 +60,7 @@ class Door : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (Room.enemies.Count > 0)
+        if (PlayingState.currentFloor.currentRoom.enemycounter > 0)
         {
             if (CollidesWith(PlayingState.player))
             {

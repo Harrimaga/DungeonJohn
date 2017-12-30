@@ -147,12 +147,12 @@ public class Player : SpriteGameObject
     {
         if (type == 1)
         {
-            attack++;
+            attack+= 5;
         }
         if (type == 2)
         {
-            maxhealth += 100;
-            health += 100;
+            maxhealth += 50;
+            health += 50;
         }
     }
     public void Shoot(int direction)

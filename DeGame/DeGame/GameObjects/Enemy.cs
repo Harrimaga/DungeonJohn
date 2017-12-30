@@ -14,20 +14,23 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected int counter = 100;
     protected float expGive = 120;
+    protected bool alive = true;
+    protected int counter = 100;
     protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
     public SpriteEffects Effects;
     Texture2D playersprite;
     HealthBar healthbar;
+    protected Vector2 Roomposition;
 
-    public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
+    public Enemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
         position = startPosition;
         velocity = basevelocity;
+        Roomposition = roomposition;
     }
 
     public override void Update(GameTime gameTime)
@@ -53,21 +56,21 @@ public class Enemy : SpriteGameObject
             {
                 health -= PlayingState.player.attack;
                 RemoveBullets.Add(bullet);
-            }
-        
+            }        
 
         foreach (Bullet bullet in RemoveBullets)        
-            PlayingState.player.bullets.Remove(bullet);        
-
+            PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
 
         healthbar.Update(gameTime, health, maxhealth, position);
-        if (health <= 0)
+        if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
         {
+            alive = false;
             PlayingState.currentFloor.currentRoom.DropConsumable(position);
-            GameObjectList.RemovedObjects.Add(this);
             PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();        
+            PlayingState.player.NextLevel();
+            GameObjectList.RemovedObjects.Add(this);
+            PlayingState.currentFloor.currentRoom.enemycounter--;
         }
     }
 
