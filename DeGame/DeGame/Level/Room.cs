@@ -179,6 +179,7 @@ public class Room : GameObjectList
             case ("B"):
                 Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Boss");
                 bosses.Add(boss);
+                enemycounter++;
                 break;
 
             case ("!"):

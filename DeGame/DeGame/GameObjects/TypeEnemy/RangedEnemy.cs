@@ -57,7 +57,6 @@ public class RangedEnemy : Enemy
     {
         base.Update(gameTime);
         bullets.Update(gameTime);
-        healthbar.Update(gameTime, health, maxhealth, position);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Range();
         if (health <= 0)
