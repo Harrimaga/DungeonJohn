@@ -60,7 +60,14 @@ class Bullet : SpriteGameObject
                 GameObjectList.RemovedObjects.Add(this);
             }
         }
-        
+        foreach (Door door in Room.door.Children)
+        {
+            if (CollidesWith(door))
+            {
+                GameObjectList.RemovedObjects.Add(this);
+            }
+        }
+
         /*foreach (Wall wall in Room.solid.Children)
         {
             if (CollidesWith(wall))

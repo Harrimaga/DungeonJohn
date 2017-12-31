@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-class Door : SpriteGameObject
+class Door : Solid
 {
     Vector2 doorposition, positionOld = PlayingState.player.position;
     SpriteEffects Effect = SpriteEffects.None;
@@ -12,7 +12,7 @@ class Door : SpriteGameObject
 
 
     public Door(bool Isdoor, Vector2 Startposition, int Direction, int layer = 0, string id = "door")
-    : base("Sprites/doorup", layer, id)
+    : base(Startposition, layer, id)
     {
         solid = new GameObjectList();
         doorposition = Startposition;
@@ -59,9 +59,10 @@ class Door : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
+        //base.Update(gameTime);
         if (Room.enemies.Count > 0)
         {
+            base.Update(gameTime);
             if (CollidesWith(PlayingState.player))
             {
                 PlayingState.player.position.X -= 10;
