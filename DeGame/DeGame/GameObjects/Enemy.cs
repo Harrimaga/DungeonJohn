@@ -14,27 +14,28 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected int counter = 100;
     protected float expGive = 120;
-    protected Vector2 basevelocity = new Vector2(2, 2);
+    protected bool alive = true;
+    protected int counter = 100;
+    protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
     public SpriteEffects Effects;
     Texture2D playersprite;
     HealthBar healthbar;
+    protected Vector2 Roomposition;
 
-
-    public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
+    public Enemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
         position = startPosition;
         velocity = basevelocity;
+        Roomposition = roomposition;
     }
 
     public override void Update(GameTime gameTime)
     {
-       // base.Update(gameTime);
-        healthbar.Update(gameTime, health, maxhealth, position);
+        base.Update(gameTime);
         if (CollidesWith(PlayingState.player))
         {
             counter--;
@@ -55,24 +56,26 @@ public class Enemy : SpriteGameObject
             {
                 health -= PlayingState.player.attack;
                 RemoveBullets.Add(bullet);
-            }
-        
+            }        
 
         foreach (Bullet bullet in RemoveBullets)        
-            PlayingState.player.bullets.Remove(bullet);        
-
+            PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
 
         healthbar.Update(gameTime, health, maxhealth, position);
         foreach (Enemy enemy in Room.enemies.Children)
         {
-            if (health <= 0)
-            {
-                GameObjectList.RemovedObjects.Add(this);
-                PlayingState.currentFloor.currentRoom.DropConsumable(position);
-                PlayingState.player.exp += expGive;
-                PlayingState.player.NextLevel();
-            }
+            if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
+        {
+            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
+            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
+            PlayingState.player.exp += expGive;
+            PlayingState.player.NextLevel();
+            alive = false;
+            GameObjectList.RemovedObjects.Add(this);
+        }
+    
+
         }
     }
 

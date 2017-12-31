@@ -17,7 +17,7 @@ public class RangedEnemy : Enemy
     public static GameObjectList bullets;
     int Counter = 300;
 
-    public RangedEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
+    public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bullets = new GameObjectList();
     }
@@ -54,11 +54,16 @@ public class RangedEnemy : Enemy
         bullets.Add(bullet);
     }
     public override void Update(GameTime gameTime)
-    {   
-        bullets.Update(gameTime);
+    {
         base.Update(gameTime);
-        Range();
-
+        bullets.Update(gameTime);
+        healthbar.Update(gameTime, health, maxhealth, position);
+        if (PlayingState.currentFloor.currentRoom.position == Roomposition)
+            Range();
+        if (health <= 0)
+        {
+            GameObjectList.RemovedObjects.Add(this);
+        }
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
@@ -66,5 +71,4 @@ public class RangedEnemy : Enemy
         bullets.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
-
 }

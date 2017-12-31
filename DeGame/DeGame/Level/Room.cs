@@ -7,12 +7,12 @@ using System;
 public class Room : GameObjectList
 {
 
-    public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false, CameraIsMoving = false;
+    public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false;
     int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
     bool onup = false, ondown = false, onleft = false, onright = false;
     public static GameObjectList enemies, solid, door, consumable, bosses;
     Vector2 MiddelofPlayer, Up, Down, Left, Right, Exit;
-    public int RoomListIndex, a, b;
+    public int RoomListIndex, a, b, enemycounter = 0;
     Random random = new Random();
     public string[,] roomarray;
 
@@ -163,13 +163,17 @@ public class Room : GameObjectList
         switch (Type)
         {
             case ("C"):
-                Enemy enemyChase = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "ChasingEnemy");
+                Enemy enemyChase = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a,b), 0, "ChasingEnemy");
                 enemies.Add(enemyChase);
+                roomarray[x, y] = "Background";
+                enemycounter++;
                 break;
 
             case ("R"):
-                Enemy enemyRanged = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "RangedEnemy");
+                Enemy enemyRanged = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
+                roomarray[x, y] = "Background";
+                enemycounter++;
                 break;
 
             case ("B"):
@@ -180,6 +184,7 @@ public class Room : GameObjectList
             case ("!"):
                 Solid rock = new Rock(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Rock");
                 solid.Add(rock);
+                roomarray[x, y] = "Background";
                 break;
 
             case ("+"):
@@ -213,7 +218,7 @@ public class Room : GameObjectList
         Vector2 Cam = Camera.Position;
         MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
 
-        if (enemies.Count == 0)
+        if (enemycounter == 0)
         {
             if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
                 if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
@@ -222,21 +227,21 @@ public class Room : GameObjectList
                     PlayingState.player.position -= new Vector2(0, 2 * CellHeight + 30);
                 }
 
-            if (downdoor && MiddelofPlayer.X >= Down.X && MiddelofPlayer.X <= Down.X + CellWidth)
+            else if (downdoor && MiddelofPlayer.X >= Down.X && MiddelofPlayer.X <= Down.X + CellWidth)
                 if (MiddelofPlayer.Y >= Down.Y && MiddelofPlayer.Y <= Down.Y + CellHeight)
                 {
                     ondown = true;
                     PlayingState.player.position += new Vector2(0, 2 * CellHeight + 30);
                 }
 
-            if (leftdoor && MiddelofPlayer.X >= Left.X && MiddelofPlayer.X <= Left.X + CellWidth)
+            else if (leftdoor && MiddelofPlayer.X >= Left.X && MiddelofPlayer.X <= Left.X + CellWidth)
                 if (MiddelofPlayer.Y >= Left.Y && MiddelofPlayer.Y <= Left.Y + CellHeight)
                 {
                     onleft = true;
                     PlayingState.player.position -= new Vector2(2 * CellHeight + 30, 0);
                 }
 
-            if (rightdoor && MiddelofPlayer.X >= Right.X && MiddelofPlayer.X <= Right.X + CellWidth)
+            else if (rightdoor && MiddelofPlayer.X >= Right.X && MiddelofPlayer.X <= Right.X + CellWidth)
                 if (MiddelofPlayer.Y >= Right.Y && MiddelofPlayer.Y <= Right.Y + CellHeight)
                 {
                     onright = true;
@@ -258,7 +263,6 @@ public class Room : GameObjectList
             {
                 Camera.Position += CameraVelocity;
                 counter++;
-                CameraIsMoving = true;
             }
 
             if (counter >= 30)
@@ -268,7 +272,6 @@ public class Room : GameObjectList
                 onleft = false;
                 onright = false;
                 counter = 0;
-                CameraIsMoving = false;
             }
         }
     }
