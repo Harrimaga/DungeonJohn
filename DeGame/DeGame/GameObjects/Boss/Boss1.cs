@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Boss1 : Boss
 {
-    public Boss1(Vector2 startPosition, int layer = 0, string id = "Boss") : base(startPosition, layer, id)
+    public Boss1(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
     {
     }
 

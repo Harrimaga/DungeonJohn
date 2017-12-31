@@ -49,6 +49,7 @@ public class Player : SpriteGameObject
         maxhealth = 100;
         health = 100;
         ammo = 20;
+        attack = 20;
         gold = 0;
         level = 1;
         exp = 0;

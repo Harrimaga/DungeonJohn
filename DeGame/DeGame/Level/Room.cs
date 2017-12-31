@@ -8,11 +8,11 @@ public class Room : GameObjectList
 {
 
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false;
-    int CellWidth, CellHeight, roomwidth, roomheight, roomarraywidth, roomarrayheight, counter;
-    bool onup = false, ondown = false, onleft = false, onright = false;
+    public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
     public static GameObjectList enemies, solid, door, consumable, bosses;
-    Vector2 MiddelofPlayer, Up, Down, Left, Right, Exit;
-    public int RoomListIndex, a, b, enemycounter = 0;
+    bool onup = false, ondown = false, onleft = false, onright = false;
+    public Vector2 Up, Down, Left, Right, Exit;
+    int roomarraywidth, roomarrayheight, counter;
     Random random = new Random();
     public string[,] roomarray;
 
@@ -145,7 +145,6 @@ public class Room : GameObjectList
         door.Update(gameTime);
         consumable.Update(gameTime);
         bosses.Update(gameTime);
-        ControlCamera();
         CheckExit();
     }
 
@@ -177,7 +176,7 @@ public class Room : GameObjectList
                 break;
 
             case ("B"):
-                Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Boss");
+                Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a,b), 0, "Boss");
                 bosses.Add(boss);
                 enemycounter++;
                 break;
@@ -214,73 +213,11 @@ public class Room : GameObjectList
         }
     }
 
-    void ControlCamera()
-    {
-        Vector2 Cam = Camera.Position;
-        MiddelofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
-
-        if (enemycounter == 0)
-        {
-            if (updoor && MiddelofPlayer.X >= Up.X && MiddelofPlayer.X <= Up.X + CellWidth)
-                if (MiddelofPlayer.Y >= Up.Y && MiddelofPlayer.Y <= Up.Y + CellHeight)
-                {
-                    onup = true;
-                    PlayingState.player.position -= new Vector2(0, 2 * CellHeight + 30);
-                }
-
-            else if (downdoor && MiddelofPlayer.X >= Down.X && MiddelofPlayer.X <= Down.X + CellWidth)
-                if (MiddelofPlayer.Y >= Down.Y && MiddelofPlayer.Y <= Down.Y + CellHeight)
-                {
-                    ondown = true;
-                    PlayingState.player.position += new Vector2(0, 2 * CellHeight + 30);
-                }
-
-            else if (leftdoor && MiddelofPlayer.X >= Left.X && MiddelofPlayer.X <= Left.X + CellWidth)
-                if (MiddelofPlayer.Y >= Left.Y && MiddelofPlayer.Y <= Left.Y + CellHeight)
-                {
-                    onleft = true;
-                    PlayingState.player.position -= new Vector2(2 * CellHeight + 30, 0);
-                }
-
-            else if (rightdoor && MiddelofPlayer.X >= Right.X && MiddelofPlayer.X <= Right.X + CellWidth)
-                if (MiddelofPlayer.Y >= Right.Y && MiddelofPlayer.Y <= Right.Y + CellHeight)
-                {
-                    onright = true;
-                    PlayingState.player.position += new Vector2(2 * CellHeight + 30, 0);
-                }
-
-            Vector2 CameraVelocity = new Vector2(0, 0);
-
-            if (Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
-                CameraVelocity = new Vector2(0, -roomheight / 30);
-            if (Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 30)
-                CameraVelocity = new Vector2(0, roomheight / 30);
-            if (Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 30)
-                CameraVelocity = new Vector2(-roomwidth / 30, 0);
-            if (Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 30)
-                CameraVelocity = new Vector2(roomwidth / 30, 0);
-
-            if ((onup || ondown || onleft || onright) && counter < 30)
-            {
-                Camera.Position += CameraVelocity;
-                counter++;
-            }
-
-            if (counter >= 30)
-            {
-                onup = false;
-                ondown = false;
-                onleft = false;
-                onright = false;
-                counter = 0;
-            }
-        }
-    }
-
     public void CheckExit()
     {        
-        if (MiddelofPlayer.X >= Exit.X && MiddelofPlayer.X <= Exit.X + CellWidth)
-            if (MiddelofPlayer.Y >= Exit.Y && MiddelofPlayer.Y <= Exit.Y + CellHeight)
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+        if (MiddleofPlayer.X >= Exit.X && MiddleofPlayer.X <= Exit.X + CellWidth)
+            if (MiddleofPlayer.Y >= Exit.Y && MiddleofPlayer.Y <= Exit.Y + CellHeight)
                 PlayingState.currentFloor.NextFloor();
     }            
 

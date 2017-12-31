@@ -10,17 +10,20 @@ public class Boss :  SpriteGameObject
 {
     protected float health = 100;
     protected float maxhealth = 100;
+    protected int expGive = 240;
     //protected float attack;
     //protected float attackspeed;
     //protected float range;
     protected Vector2 basevelocity = new Vector2((float)0.5, (float)0.5);
     public SpriteEffects Effects;
     HealthBar healthbar;
+    Vector2 Roomposition;
 
-    public Boss(Vector2 startPosition, int layer = 0, string id = "Boss") : base("Sprites/Boss", layer, id)
+    public Boss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base("Sprites/Boss", layer, id)
     {
         position = startPosition;
         healthbar = new HealthBar(health, maxhealth, position);
+        Roomposition = roomposition;
     }
 
     public override void Update(GameTime gameTime)
@@ -42,6 +45,8 @@ public class Boss :  SpriteGameObject
 
         if (health <= 0)
         {
+            PlayingState.player.exp += expGive;
+            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             GameObjectList.RemovedObjects.Add(this);
         }
 
