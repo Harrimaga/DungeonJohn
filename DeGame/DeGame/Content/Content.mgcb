@@ -559,7 +559,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Background Sprite Left.png
 
-#begin Sprites/Background Sprite LU.png
+#begin Sprites/Rock Sprite2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -569,7 +569,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Background Sprite LU.png
+/build:Sprites/Rock Sprite2.png
+
+#begin Sprites/HealthbarBackground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/HealthbarBackground.png
+
+#begin Sprites/Coin.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Coin.png
 
 #begin Sprites/Background Sprite LD.png
 /importer:TextureImporter
@@ -582,6 +606,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Background Sprite LD.png
+
+#begin Sprites/Background Sprite LU.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Background Sprite LU.png
 
 #begin Sprites/Background Sprite RD.png
 /importer:TextureImporter
@@ -607,7 +643,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Background Sprite RU.png
 
-#begin Sprites/Rock Sprite2.png
+#begin Sprites/Heart.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -617,9 +653,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Rock Sprite2.png
+/build:Sprites/Heart.png
 
-#begin Sprites/HealthbarBackground.png
+#begin Sprites\Boss.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -629,7 +665,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/HealthbarBackground.png
+/build:Sprites\Boss.png
+
+#begin Sprites/Boss.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Boss.png
 
 #begin Sprites/LevelUp.png
 /importer:TextureImporter

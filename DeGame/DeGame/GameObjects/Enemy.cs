@@ -14,21 +14,23 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected int counter = 100;
     protected float expGive = 120;
+    protected bool alive = true;
+    protected int counter = 100;
     protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
     public SpriteEffects Effects;
     Texture2D playersprite;
     HealthBar healthbar;
+    protected Vector2 Roomposition;
 
-
-    public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
+    public Enemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
         position = startPosition;
         velocity = basevelocity;
+        Roomposition = roomposition;
     }
 
     public override void Update(GameTime gameTime)
@@ -40,14 +42,12 @@ public class Enemy : SpriteGameObject
             if (counter == 0)
             {
                 velocity = Vector2.Zero;
-                PlayingState.player.health -= 0;
+                //PlayingState.player.health -= 5;
                 counter = 100;
             }
         }
-        if (!CollidesWith(PlayingState.player))
-        {
+        else
             velocity = basevelocity;
-        }
 
         List<GameObject> RemoveBullets = new List<GameObject>();
 
@@ -56,21 +56,27 @@ public class Enemy : SpriteGameObject
             {
                 health -= PlayingState.player.attack;
                 RemoveBullets.Add(bullet);
-            }
-        
+            }        
 
         foreach (Bullet bullet in RemoveBullets)        
-            PlayingState.player.bullets.Remove(bullet);        
-
+            PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
 
         healthbar.Update(gameTime, health, maxhealth, position);
-        if (health <= 0)
+        foreach (Enemy enemy in Room.enemies.Children)
         {
-            GameObjectList.RemovedObjects.Add(this);
+            if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
+        {
+            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
+            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.player.exp += expGive;
             PlayingState.player.NextLevel();
-        } 
+            alive = false;
+            GameObjectList.RemovedObjects.Add(this);
+        }
+    
+
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -113,7 +119,7 @@ public class Enemy : SpriteGameObject
 
     public virtual void Chase()
     {
-         // Create a new grid and let each cell have a default traversal cost of 1.0
+        // Create a new grid and let each cell have a default traversal cost of 1.0
         //var grid = new Grid(100, 100, 1.0f);
 
         // Block some cells (for example walls)
@@ -136,10 +142,11 @@ public class Enemy : SpriteGameObject
         if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
         {
             position.Y -= velocity.Y;
-        
-        if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)        
+        }
+        if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
+        {
             position.Y += velocity.Y;
-        
+        }
         if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
         {
             position.X -= velocity.X;
@@ -151,7 +158,8 @@ public class Enemy : SpriteGameObject
             Effects = SpriteEffects.FlipHorizontally;
         }
 
-        if (CheckUp() == true && position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)        
+        if (CheckUp() == true && position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
+        {
             position.X -= velocity.X;
         }
         if (CheckUp() == true && position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)

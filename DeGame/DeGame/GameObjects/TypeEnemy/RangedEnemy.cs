@@ -15,33 +15,39 @@ using Microsoft.Xna.Framework.Graphics;
 public class RangedEnemy : Enemy
 {
     public static GameObjectList bullets;
-    int counter = 60;
-    HealthBar healthbar;
+    int Counter = 300;
 
-    public RangedEnemy(Vector2 startPosition, int layer = 0, string id = "Enemy") : base(startPosition, layer, id)
+    public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bullets = new GameObjectList();
-        healthbar = new HealthBar(health, maxhealth, position);
     }
 
     public void Range()
     {
-        counter--;
-        if (counter < 0)
-        {
-            counter = 300;
-        }
+        Counter--;
         if (PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
             PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
         {
             Chase();
         }
-        else if (counter == 0)
+        else if (Counter == 0)
         {
             Shoot();
+            Counter = 300;
         }
+       
     }
 
+    //public Circle PlayerCircle
+    //{
+    //    get
+    //    {
+    //        int radius = 200;
+    //        int x = (int)PlayingState.player.position.X;
+    //        int y = (int)PlayingState.player.position.Y;
+    //        return new Circle(x, y, radius);
+    //    }        
+    //}
     public void Shoot()
     {
         EnemyBullet bullet = new EnemyBullet(position);
@@ -51,19 +57,17 @@ public class RangedEnemy : Enemy
     {
         base.Update(gameTime);
         bullets.Update(gameTime);
-        healthbar.Update(gameTime, health, maxhealth, position);
-        Range();
+        if (PlayingState.currentFloor.currentRoom.position == Roomposition)
+            Range();
         if (health <= 0)
         {
             GameObjectList.RemovedObjects.Add(this);
         }
-
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        bullets.Draw(gameTime, spriteBatch);
         base.Draw(gameTime, spriteBatch);
+        bullets.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
-
 }
