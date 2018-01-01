@@ -78,7 +78,6 @@
     <Compile Include="GameObjects\Items\Item.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
     <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
-    <Compile Include="GameObjects\Terrain\Door.cs" />
     <Compile Include="GameObjects\Boss\Boss.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="GameObjects\EnemyBullet.cs" />
