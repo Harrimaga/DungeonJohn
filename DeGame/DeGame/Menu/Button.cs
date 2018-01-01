@@ -9,10 +9,11 @@ class Button : SpriteGameObject
     string buttontext;
     Vector2 buttonposition;
     string textureNormal, texturePressed;
+    int spriteWidth, spriteHeight;
     bool withouttext;
 
     public Button(Vector2 startposition, string text, string imageAsset, string imageAssetPressed,bool withoutText, int layer = 0, string id = "")
-        : base("Sprites/AttackUp", 0, "button")
+        : base("Sprites/Button Sprite", 0, "button")
     {
         pressed = false;
         withouttext = withoutText;
@@ -20,6 +21,18 @@ class Button : SpriteGameObject
         buttontext = text;
         textureNormal = imageAsset;
         texturePressed  = imageAssetPressed;
+        spriteWidth = GameEnvironment.assetManager.GetSprite("Sprites/" + imageAsset).Width;
+        spriteHeight = GameEnvironment.assetManager.GetSprite("Sprites/" + imageAsset).Height;
+    }
+
+    public override Rectangle BoundingBox
+    {
+        get
+        {
+            int left = (int)(position.X - origin.X);
+            int top = (int)(position.Y - origin.Y);
+            return new Rectangle(left, top, spriteWidth, spriteHeight);
+        }
     }
 
     public override void HandleInput(InputHelper inputHelper)
