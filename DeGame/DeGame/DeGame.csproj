@@ -66,9 +66,19 @@
     <Compile Include="GameManagement\GameStateManager.cs" />
     <Compile Include="GameManagement\IGameObject.cs" />
     <Compile Include="GameManagement\InputHelper.cs" />
+    <Compile Include="GameManagement\InventoryManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
     <Compile Include="GameObjects\Boss\Boss1.cs" />
     <Compile Include="GameObjects\Bullet.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IArmour.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IBoots.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IHelmet.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IPassive.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IShield.cs" />
+    <Compile Include="GameObjects\Items\Item.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
+    <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
+    <Compile Include="GameObjects\Terrain\Door.cs" />
     <Compile Include="GameObjects\Boss\Boss.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="GameObjects\EnemyBullet.cs" />
@@ -183,6 +193,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roomlist\" />
+    <Folder Include="GameObjects\Items\Armour\" />
+    <Folder Include="GameObjects\Items\Boots\" />
+    <Folder Include="GameObjects\Items\Helmets\" />
+    <Folder Include="GameObjects\Items\Passives\" />
+    <Folder Include="GameObjects\Items\Shields\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
