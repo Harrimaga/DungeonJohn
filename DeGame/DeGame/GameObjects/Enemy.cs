@@ -14,21 +14,23 @@ public class Enemy : SpriteGameObject
     protected float attack;
     protected float attackspeed;
     protected float range;
-    protected int counter = 100;
     protected float expGive = 120;
+    protected bool alive = true;
+    protected int counter = 100;
     protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
     public SpriteEffects Effects;
     Texture2D playersprite;
     HealthBar healthbar;
+    protected Vector2 Roomposition;
 
-
-    public Enemy(Vector2 startPosition, int layer = 0, string id = "Enemy")
+    public Enemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
         position = startPosition;
         velocity = basevelocity;
+        Roomposition = roomposition;
     }
 
     public override void Update(GameTime gameTime)
@@ -40,39 +42,40 @@ public class Enemy : SpriteGameObject
             if (counter == 0)
             {
                 velocity = Vector2.Zero;
-                PlayingState.player.health -= 0;
+                //PlayingState.player.health -= 5;
                 counter = 100;
             }
         }
-        if (!CollidesWith(PlayingState.player))
-        {
+        else
             velocity = basevelocity;
-        }
 
         List<GameObject> RemoveBullets = new List<GameObject>();
 
-        foreach (Bullet bullet in PlayingState.player.bullets.Children)
-        {
+        foreach (Bullet bullet in PlayingState.player.bullets.Children)        
             if (CollidesWith(bullet))
             {
                 health -= PlayingState.player.attack;
                 RemoveBullets.Add(bullet);
-            }
-        }
+            }        
 
-        foreach (Bullet bullet in RemoveBullets)
-        {
+        foreach (Bullet bullet in RemoveBullets)        
             PlayingState.player.bullets.Remove(bullet);
-        }
-
         RemoveBullets.Clear();
 
         healthbar.Update(gameTime, health, maxhealth, position);
-        if (health <= 0)
+        foreach (Enemy enemy in Room.enemies.Children)
         {
-            GameObjectList.RemovedObjects.Add(this);
+            if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
+        {
+            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
+            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.player.exp += expGive;
             PlayingState.player.NextLevel();
+            alive = false;
+            GameObjectList.RemovedObjects.Add(this);
+        }
+    
+
         }
     }
 
@@ -85,46 +88,38 @@ public class Enemy : SpriteGameObject
     {
         Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y + sprite.Height, 60, 60);
         foreach (Solid solid in Room.solid.Children)
-        if (CheckDown.Intersects(solid.BoundingBox))
-        {
-            return true;
-        }
+        if (CheckDown.Intersects(solid.BoundingBox))        
+            return true;        
         return false;
     }
     public bool CheckUp()
     {
         Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y - 60, 60, 60);
         foreach (Solid solid in Room.solid.Children)
-            if (CheckUp.Intersects(solid.BoundingBox))
-            {
-                return true;
-            }
+            if (CheckUp.Intersects(solid.BoundingBox))            
+                return true;            
         return false;
     }
     public bool CheckLeft()
     {
         Rectangle CheckLeft = new Rectangle((int)position.X - 60, (int)position.Y, 60, 60);
         foreach (Solid solid in Room.solid.Children)
-            if (CheckLeft.Intersects(solid.BoundingBox))
-            {
-                return true;
-            }
+            if (CheckLeft.Intersects(solid.BoundingBox))            
+                return true;            
         return false;
     }
     public bool CheckRight()
     {
         Rectangle CheckRight = new Rectangle((int)position.X + sprite.Width, (int)position.Y, 60, 60);
         foreach (Solid solid in Room.solid.Children)
-            if (CheckRight.Intersects(solid.BoundingBox))
-            {
-                return true;
-            }
+            if (CheckRight.Intersects(solid.BoundingBox))            
+                return true;            
         return false;
     }
 
     public virtual void Chase()
     {
-         // Create a new grid and let each cell have a default traversal cost of 1.0
+        // Create a new grid and let each cell have a default traversal cost of 1.0
         //var grid = new Grid(100, 100, 1.0f);
 
         // Block some cells (for example walls)

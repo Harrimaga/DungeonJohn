@@ -66,18 +66,30 @@
     <Compile Include="GameManagement\GameStateManager.cs" />
     <Compile Include="GameManagement\IGameObject.cs" />
     <Compile Include="GameManagement\InputHelper.cs" />
+    <Compile Include="GameManagement\InventoryManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
+    <Compile Include="GameObjects\Boss\Boss1.cs" />
     <Compile Include="GameObjects\Bullet.cs" />
-    <Compile Include="GameObjects\Door.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IArmour.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IBoots.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IHelmet.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IPassive.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IShield.cs" />
+    <Compile Include="GameObjects\Items\Item.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
+    <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
+    <Compile Include="GameObjects\Boss\Boss.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="GameObjects\EnemyBullet.cs" />
+    <Compile Include="GameObjects\Consumables.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\CheckCurrentTile.cs" />
-    <Compile Include="GameObjects\Rock.cs" />
-    <Compile Include="GameObjects\Solid.cs" />
+    <Compile Include="GameObjects\Terrain\Door.cs" />
+    <Compile Include="GameObjects\Terrain\Rock.cs" />
+    <Compile Include="GameObjects\Terrain\Solid.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
-    <Compile Include="GameObjects\Wall.cs" />
+    <Compile Include="GameObjects\Terrain\Wall.cs" />
     <Compile Include="Level\Floor.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
@@ -100,6 +112,7 @@
     <Compile Include="States\MainMenuState.cs" />
     <Compile Include="States\PauseMenuState.cs" />
     <Compile Include="States\PlayingState.cs" />
+    <Compile Include="Structs\Circle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -139,6 +152,7 @@
     </Content>
     <Content Include="Content\Sprites\Background Sprite.png" />
     <Content Include="Content\Sprites\BearEnemy.png" />
+    <Content Include="Content\Sprites\Boss.png" />
     <Content Include="Content\Sprites\bteam.png" />
     <Content Include="Content\Sprites\bullet1.png" />
     <Content Include="Content\Sprites\doordown.png" />
@@ -178,6 +192,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roomlist\" />
+    <Folder Include="GameObjects\Items\Armour\" />
+    <Folder Include="GameObjects\Items\Boots\" />
+    <Folder Include="GameObjects\Items\Helmets\" />
+    <Folder Include="GameObjects\Items\Passives\" />
+    <Folder Include="GameObjects\Items\Shields\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
