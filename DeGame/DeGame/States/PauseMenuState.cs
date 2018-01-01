@@ -11,6 +11,8 @@ class PauseMenuState : IGameObject
 {
     Vector2 BasisPosition;
     protected IGameObject playingState;
+    WornItems wornItems;
+
     public PauseMenuState()
     {
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
@@ -26,6 +28,9 @@ class PauseMenuState : IGameObject
     {
         playingState.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/pauze"), BasisPosition);
+        wornItems = PlayingState.currentFloor.wornItems;
+        wornItems.Position = BasisPosition + new Vector2(100, 100);
+        wornItems.Draw(gameTime, spriteBatch);
     }
     public virtual void Update(GameTime gameTime)
     {
