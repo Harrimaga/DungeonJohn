@@ -90,6 +90,13 @@
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
     <Compile Include="GameObjects\Terrain\Wall.cs" />
+    <Compile Include="Inventory\Slots\ArmourSlot.cs" />
+    <Compile Include="Inventory\Slots\BootsSlot.cs" />
+    <Compile Include="Inventory\Slots\HelmetSlot.cs" />
+    <Compile Include="Inventory\Slots\PassiveSlot.cs" />
+    <Compile Include="Inventory\Slots\ShieldSlot.cs" />
+    <Compile Include="Inventory\Slots\WeaponSlot.cs" />
+    <Compile Include="Inventory\WornItems.cs" />
     <Compile Include="Level\Floor.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
@@ -165,6 +172,12 @@
     <Content Include="Content\Sprites\Eind Sprite2.png" />
     <Content Include="Content\Sprites\healthbar.png" />
     <Content Include="Content\Sprites\HealthbarBackground.png" />
+    <Content Include="Content\Sprites\InventorySlots\ArmourSLot.png" />
+    <Content Include="Content\Sprites\InventorySlots\BootsSlot.png" />
+    <Content Include="Content\Sprites\InventorySlots\HelmetSlot.png" />
+    <Content Include="Content\Sprites\InventorySlots\PassiveSlot.png" />
+    <Content Include="Content\Sprites\InventorySlots\ShieldSlot.png" />
+    <Content Include="Content\Sprites\InventorySlots\WeaponSlot.png" />
     <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\MinimapBossTile.png" />
     <Content Include="Content\Sprites\MinimapItemTile.png" />
