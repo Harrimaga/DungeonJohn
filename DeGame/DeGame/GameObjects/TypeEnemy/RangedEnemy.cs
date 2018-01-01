@@ -55,14 +55,15 @@ public class RangedEnemy : Enemy
     }
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
+       
         bullets.Update(gameTime);
+        base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Range();
-        if (health <= 0)
-        {
-            GameObjectList.RemovedObjects.Add(this);
-        }
+        //if (health <= 0)
+        //{
+        //    GameObjectList.RemovedObjects.Add(this);
+        //}
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

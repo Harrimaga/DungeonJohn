@@ -65,12 +65,12 @@ public class Enemy : SpriteGameObject
         healthbar.Update(gameTime, health, maxhealth, position);
         if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
         {
+            GameObjectList.RemovedObjects.Add(this);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.player.exp += expGive;
             PlayingState.player.NextLevel();
             alive = false;
-            GameObjectList.RemovedObjects.Add(this);
         }
     }
 
