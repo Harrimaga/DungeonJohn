@@ -16,8 +16,8 @@ class Leveling : IGameObject
     public Leveling()
     {
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
-        attackB = new Button(new Vector2(240,600), "Attack","n",1);
-        healthB = new Button(new Vector2(420, 600), "Health", "n", 1);
+        attackB = new Button(new Vector2(240,600), "Attack","AttackUp", "AttackUpPressed",true,1);
+        healthB = new Button(new Vector2(620, 600), "Health", "HealthUp","HealthUpPressed",true, 1);
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {

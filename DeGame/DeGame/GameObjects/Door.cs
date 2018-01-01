@@ -18,11 +18,6 @@ class Door : Solid
         doorposition = Startposition;
         direction = Direction;
         isdoor = Isdoor;
-        if (!isdoor)
-        {
-            Solid wall = new Wall(doorposition, 0, "Wall");
-            solid.Add(wall);
-        }
     }
 
     void ChooseSprite()
