@@ -136,7 +136,8 @@ public class Player : SpriteGameObject
         }
         if(state==true)
         {
-            if (inputHelper.currentKeyboardState.IsKeyDown(Keys.N))
+            GameEnvironment.gameStateManager.SwitchTo("Leveling");
+            /*if (inputHelper.currentKeyboardState.IsKeyDown(Keys.N))
             {
                 StateIncrease(1);
                 state = false;
@@ -145,7 +146,7 @@ public class Player : SpriteGameObject
             {
                 StateIncrease(2);
                 state = false;
-            }
+            }*/
         }
     }
 

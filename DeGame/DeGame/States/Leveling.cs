@@ -16,8 +16,8 @@ class Leveling : IGameObject
     public Leveling()
     {
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
-        attackB = new Button(new Vector2(240,600), "Attack","n",1);
-        healthB = new Button(new Vector2(420, 600), "Health", "n", 1);
+        attackB = new Button(new Vector2(240,600), "Attack","AttackUp", "AttackUpPressed",true,1);
+        healthB = new Button(new Vector2(620, 600), "Health", "HealthUp","HealthUpPressed",true, 1);
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {
@@ -29,7 +29,8 @@ class Leveling : IGameObject
         playingState.Draw(gameTime, spriteBatch);
         attackB.Draw(gameTime, spriteBatch);
         healthB.Draw(gameTime, spriteBatch);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Level-Up",BasisPosition + new Vector2(600,240), Color.Black);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/LevelUp"), new Vector2(350,100) + BasisPosition);
+        //spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Level-Up",BasisPosition + new Vector2(600,240), Color.Black);
         //spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/pauze"), BasisPosition);
     }
     public virtual void Update(GameTime gameTime)
@@ -40,6 +41,20 @@ class Leveling : IGameObject
         if (picked)
         {
             GameEnvironment.gameStateManager.SwitchTo("Playing");
+        }
+        if (PlayingState.player.state && attackB.Pressed)
+        {
+            PlayingState.player.StateIncrease(1);
+            PlayingState.player.state = false;
+            //attackB.Pressed = false;
+            picked = true;
+        }
+        if (PlayingState.player.state && healthB.Pressed)
+        {
+            PlayingState.player.StateIncrease(2);
+            PlayingState.player.state = false;
+            //healthB.Pressed = false;
+            picked = true;
         }
     }
     public virtual void Reset()
