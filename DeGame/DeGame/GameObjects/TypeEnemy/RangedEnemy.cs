@@ -30,7 +30,7 @@ public class RangedEnemy : Enemy
         {
             Chase();
         }
-        else if (Counter == 0)
+        else if (Counter <= 0)
         {
             Shoot();
             Counter = 300;
