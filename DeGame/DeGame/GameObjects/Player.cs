@@ -17,7 +17,7 @@ public class Player : SpriteGameObject
     public float attackspeed;
     public float range;
     public int ammo;
-    bool state = false;
+    public bool state = false;
     bool next = false;
     public SpriteEffects Effect;
     public Vector2 velocitybase;
