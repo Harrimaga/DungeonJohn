@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-class Door : SpriteGameObject
+class Door : Solid
 {
     bool isdoor, onup = false, ondown = false, onleft = false, onright = false;
     Vector2 doorposition, positionOld = PlayingState.player.position;
@@ -16,17 +16,12 @@ class Door : SpriteGameObject
     int roomheight = PlayingState.currentFloor.currentRoom.roomheight;
 
     public Door(bool Isdoor, Vector2 Startposition, int Direction, int layer = 0, string id = "door")
-    : base("Sprites/doorup", layer, id)
+    : base(Startposition, layer, id)
     {
         solid = new GameObjectList();
         doorposition = Startposition;
         direction = Direction;
         isdoor = Isdoor;
-        if (!isdoor)
-        {
-            Solid wall = new Wall(doorposition, 0, "Wall");
-            solid.Add(wall);
-        }
     }
 
     void ChooseSprite()
@@ -63,9 +58,9 @@ class Door : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.enemycounter > 0)
         {
+            base.Update(gameTime);
             if (CollidesWith(PlayingState.player))
             {
                 PlayingState.player.position.X -= 10;

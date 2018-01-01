@@ -4,22 +4,41 @@ using Microsoft.Xna.Framework.Input;
 
 class Button : SpriteGameObject
 {
-    protected bool pressed;
+    protected bool pressed,hover;
     Player player;
     string buttontext;
     Vector2 buttonposition;
+    string textureNormal, texturePressed;
+    int spriteWidth, spriteHeight;
+    bool withouttext;
 
-    public Button(Vector2 startposition, string text, string imageAsset, int layer = 0, string id = "")
+    public Button(Vector2 startposition, string text, string imageAsset, string imageAssetPressed,bool withoutText, int layer = 0, string id = "")
         : base("Sprites/Button Sprite", 0, "button")
     {
         pressed = false;
+        withouttext = withoutText;
         buttonposition = startposition;
         buttontext = text;
+        textureNormal = imageAsset;
+        texturePressed  = imageAssetPressed;
+        spriteWidth = GameEnvironment.assetManager.GetSprite("Sprites/" + imageAsset).Width;
+        spriteHeight = GameEnvironment.assetManager.GetSprite("Sprites/" + imageAsset).Height;
+    }
+
+    public override Rectangle BoundingBox
+    {
+        get
+        {
+            int left = (int)(position.X - origin.X);
+            int top = (int)(position.Y - origin.Y);
+            return new Rectangle(left, top, spriteWidth, spriteHeight);
+        }
     }
 
     public override void HandleInput(InputHelper inputHelper)
     {
         pressed = inputHelper.MouseLeftButtonDown() && BoundingBox.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y);
+        hover = BoundingBox.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y);
     }
 
     public override void Update(GameTime gameTime)
@@ -32,11 +51,12 @@ class Button : SpriteGameObject
         if (!visible || sprite == null)
             return;
 
-        if(pressed)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Button2 Sprite"), position, Color.White);
+        if(hover)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/" + texturePressed), position, Color.White);
         else
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Button Sprite"), position, Color.White);
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/" + textureNormal), position, Color.White);
 
+        if(!withouttext)
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), buttontext, position + new Vector2(12, 5), Color.White);
     }
 
