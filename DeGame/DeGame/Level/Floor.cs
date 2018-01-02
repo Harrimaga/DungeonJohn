@@ -10,7 +10,6 @@ public class Floor
     public Vector2 startPlayerPosition;
     Random random = new Random();
     bool FloorGenerated = false;
-    public int screenwidth, screenheight;
     public WornItems wornItems;
     public Room currentRoom;
     int[,] possiblespecial;
