@@ -10,14 +10,18 @@ using Microsoft.Xna.Framework.Graphics;
 //TODO: Friendly Fire?;
 class EnemyBullet : SpriteGameObject
 {
+    Vector2 direction;
+    float speed;
     public EnemyBullet(Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base("Sprites/Random", layer, id)
     {
         position = Startpositon;
-        velocity = ((PlayingState.player.position - position) / 50) / 10;
+        direction = (PlayingState.player.position - position);
+        speed = 0.1f;
+        direction.Normalize();
     }
     public override void Update(GameTime gameTime)
     {
-        position += velocity;
+        position += direction * speed;
         CheckCollision();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
