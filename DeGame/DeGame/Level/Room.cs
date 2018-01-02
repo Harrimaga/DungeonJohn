@@ -9,7 +9,7 @@ public class Room : GameObjectList
 
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, Visited = false;
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
-    public static GameObjectList enemies, solid, door, consumable, bosses;
+    public static GameObjectList enemies, solid, door, consumable, bosses, tiles;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop;
     Vector2 TilePosition;
     int roomarraywidth, roomarrayheight;
@@ -18,6 +18,7 @@ public class Room : GameObjectList
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
+        tiles = new GameObjectList();
         consumable = new GameObjectList();
         enemies = new GameObjectList();
         bosses = new GameObjectList();
@@ -68,6 +69,10 @@ public class Room : GameObjectList
             case '+':
                 roomarray[x, y] = "Wall";
                 CreateObject(x, y, "+");
+                break;
+            case 'H':
+                roomarray[x, y] = "Lava";
+                CreateObject(x, y, "H");
                 break;
             case '-':
                 roomarray[x, y] = "UpDoor";
@@ -151,6 +156,7 @@ public class Room : GameObjectList
         bosses.Update(gameTime);
         CheckExit();
         solid.Update(gameTime);
+        tiles.Update(gameTime);
     }
 
     public void CreateObject(int x, int y, string Type)
@@ -185,6 +191,10 @@ public class Room : GameObjectList
             case ("+"):
                 Solid wall = new Wall(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Wall");
                 solid.Add(wall);
+                break;
+            case ("H"):
+                Lava lava = new Lava(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Wall");
+                tiles.Add(lava);
                 break;
             case ("-"):
                     Door up = new Door(updoor, Up, 1);
@@ -221,7 +231,7 @@ public class Room : GameObjectList
                 if (MiddleofPlayer.Y >= ExitShop.Y && MiddleofPlayer.Y <= ExitShop.Y + CellHeight)
                     PlayingState.currentFloor.NextFloor();
         }
-    }            
+    }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
@@ -315,16 +325,29 @@ public class Room : GameObjectList
                         }
                 }
             }
-                foreach (Enemy e in enemies.Children)
-                    e.Draw(gameTime, spriteBatch);
-                foreach (Solid s in solid.Children)
-                    s.Draw(gameTime, spriteBatch);
-                foreach (Consumables c in consumable.Children)
-                    c.Draw(gameTime, spriteBatch);
-                foreach (Boss b in bosses.Children)
-                    b.Draw(gameTime, spriteBatch);            
-        
+        foreach (Tiles t in tiles.Children)
+        {
+            t.Draw(gameTime, spriteBatch);
+        }
+        foreach (Enemy e in enemies.Children)
+        {
+            e.Draw(gameTime, spriteBatch);
+        }
+        foreach (Solid s in solid.Children)
+        {
+            s.Draw(gameTime, spriteBatch);
+        }
+        foreach (Consumables c in consumable.Children)
+        {
+            c.Draw(gameTime, spriteBatch);
+        }
+        foreach (Boss b in bosses.Children)
+        { 
+            b.Draw(gameTime, spriteBatch);
+        }
         foreach (Door d in door.Children)
+        {
             d.Draw(gameTime, spriteBatch);
+        }
     }
 }
