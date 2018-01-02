@@ -17,7 +17,6 @@ public class ChasingEnemy : Enemy
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        Chase();
         //if (CollidesWith(PlayingState.player))
         //{
         //    counter--;
