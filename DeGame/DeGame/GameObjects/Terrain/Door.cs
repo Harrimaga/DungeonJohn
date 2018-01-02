@@ -110,22 +110,22 @@ class Door : Solid
 
             Vector2 CameraVelocity = new Vector2(0, 0);
 
-            if (direction == 1 && Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 180)
-                CameraVelocity = new Vector2(0, -roomheight / 180);
-            if (direction == 2 && Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 180)
-                CameraVelocity = new Vector2(0, roomheight / 180);
-            if (direction == 3 && Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 180)
-                CameraVelocity = new Vector2(-roomwidth / 180, 0);
-            if (direction == 4 && Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 180)
-                CameraVelocity = new Vector2(roomwidth / 180, 0);
+            if (direction == 1 && Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
+                CameraVelocity = new Vector2(0, -roomheight / 30);
+            if (direction == 2 && Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 30)
+                CameraVelocity = new Vector2(0, roomheight / 30);
+            if (direction == 3 && Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 30)
+                CameraVelocity = new Vector2(-roomwidth / 30, 0);
+            if (direction == 4 && Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 30)
+                CameraVelocity = new Vector2(roomwidth / 30, 0);
 
-            if ((onup || ondown || onleft || onright) && counter < 180)
+            if ((onup || ondown || onleft || onright) && counter < 30)
             {
                 Camera.Position += CameraVelocity;
                 counter++;
             }
 
-            if (counter >= 180)
+            if (counter >= 30)
             {
                 onup = false;
                 ondown = false;
