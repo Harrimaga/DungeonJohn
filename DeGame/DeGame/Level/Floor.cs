@@ -126,7 +126,7 @@ public class Floor
         {
             for (int x = 0; x < floorWidth; x++)
                 for (int y = 0; y < floorHeight; y++)
-                    if (floor[x, y] == null && CanSpawnSpecialRoom(x, y) == true)
+                    if (floor[x, y] == null && CanSpawnSpecialRoom(x, y))
                     {
                         possiblespecial[b, 0] = x;
                         possiblespecial[b, 1] = y;
@@ -162,25 +162,15 @@ public class Floor
         CheckAdjacent(x, y);
         if (AdjacentRooms[x, y] == 1)
         {
-            int counter = 0;
-            if (x + 1 >= floorWidth)
-                counter++;
-            else if (floor[x + 1, y] == null)
-                counter++;
-            if (x - 1 < 0)
-                counter++;
-            else if (floor[x - 1, y] == null)
-                counter++;
-            if (y + 1 > -floorHeight)
-                counter++;
-            else if (floor[x, y + 1] == null)
-                counter++;
-            if (y - 1 < 0)
-                counter++;
-            else if (floor[x, y - 1] == null)
-                counter++;
-            if (counter == 3)
-                return true;
+            if (x + 1 < floorWidth && floor[x + 1, y] != null && floor[x + 1, y].RoomListIndex <= 3)
+                return false;
+            if (x - 1 > 0 && floor[x - 1, y] != null && floor[x - 1, y].RoomListIndex <= 3)
+                return false;
+            if (y + 1 < floorHeight && floor[x, y + 1] != null && (floor[x, y + 1].RoomListIndex <= 3))
+                return false;
+            if (y - 1 > 0 && floor[x, y - 1] != null && floor[x, y - 1].RoomListIndex <= 3)
+                return false;
+            return true;
         }
         return false;
     }

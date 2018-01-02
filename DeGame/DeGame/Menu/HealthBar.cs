@@ -13,22 +13,21 @@ class HealthBar
     float maxhealth;
     float newhealth;
     int healthbarwidth = 200, healthbarwidth2 = 200;
-    bool isPlayer;
+    bool isPlayer, isBoss;
     string HP = "N/A";
     Rectangle healthbar, healthbar2;
 
-    public HealthBar(float healthObject, float maxhealthObject, Vector2 position, bool IsPlayer = false)
+    public HealthBar(float healthObject, float maxhealthObject, Vector2 position, bool IsPlayer = false, bool IsBoss = false)
     {
         health = healthObject;
         maxhealth = maxhealthObject;
         newhealth = health;
         isPlayer = IsPlayer;
+        isBoss = IsBoss;
     }
     public void Update(GameTime gameTime, float healthUpdate, float maxhealthUpdate, Vector2 positionNow)
     {
         newhealth = healthUpdate;
-        /*if (newhealth == 100)
-            health2 = 100;*/
         if (newhealth < 0)
             newhealth = 0;
         if (newhealth > health)
@@ -47,6 +46,13 @@ class HealthBar
 
         if (isPlayer)
         {
+            healthbar = new Rectangle(GameEnvironment.WindowSize.X + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - GameEnvironment.WindowSize.Y / 2 + 300, healthbarwidth, 20);
+            healthbar2 = new Rectangle(GameEnvironment.WindowSize.X + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - GameEnvironment.WindowSize.Y / 2 + 300, healthbarwidth2, 20);
+        }
+        else if (isBoss)
+        {
+            healthbarwidth = (int)((health / maxhealthUpdate) * GameEnvironment.WindowSize.X - 400);
+            healthbarwidth2 = (int)((newhealth / maxhealthUpdate) * GameEnvironment.WindowSize.X - 400);
             healthbar = new Rectangle(GameEnvironment.WindowSize.X + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - GameEnvironment.WindowSize.Y / 2 + 300, healthbarwidth, 20);
             healthbar2 = new Rectangle(GameEnvironment.WindowSize.X + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - GameEnvironment.WindowSize.Y / 2 + 300, healthbarwidth2, 20);
         }
