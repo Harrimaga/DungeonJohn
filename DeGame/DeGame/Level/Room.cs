@@ -140,12 +140,12 @@ public class Room : GameObjectList
         if (PlayingState.currentFloor.currentRoom.position == new Vector2(a, b))
         {
             Visited = true;
-            enemies.Update(gameTime);
-            door.Update(gameTime);
-            consumable.Update(gameTime);
-            bosses.Update(gameTime);
-            CheckExit();
         }
+        enemies.Update(gameTime);
+        door.Update(gameTime);
+        consumable.Update(gameTime);
+        bosses.Update(gameTime);
+        CheckExit();
         solid.Update(gameTime);
     }
 

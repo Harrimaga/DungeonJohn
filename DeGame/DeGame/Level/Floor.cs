@@ -122,7 +122,6 @@ public class Floor
 
     void SpawnItemRoom()
     {
-        bool secondtime = false;
         if (b == 0)
         {
             for (int x = 0; x < floorWidth; x++)
@@ -291,8 +290,9 @@ public class Floor
 
     public void Update(GameTime gameTime)
     {
-        foreach (Room room in floor)        
-            if (room != null)            
+        foreach (Room room in floor)
+            if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
+                || room.position == currentRoom.position + new Vector2(0,1) || room.position == currentRoom.position - new Vector2(0,1)))            
                 room.Update(gameTime);
     }
 
@@ -306,12 +306,15 @@ public class Floor
 
     void DrawMinimap(SpriteBatch spriteBatch)
     {
+        //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
+        //int roomheight = PlayingState.currentFloor.currentRoom.roomheight;
+        //krijgt soms 0 mee van currentroom
         int FloorCellWidth = 15;
         int FloorCellHeight = 15;
-        float currentroomx = (PlayingState.player.position.X - PlayingState.player.position.X % 1260) / 1260;
-        float currentroomy = (PlayingState.player.position.Y - PlayingState.player.position.Y % 900) / 900;
+        int currentroomx = (int) PlayingState.player.position.X / 1260;
+        int currentroomy = (int) PlayingState.player.position.Y / 900;
         currentRoom.position = new Vector2(currentroomx, currentroomy);
-        currentRoom = floor[(int)currentroomx, (int)currentroomy];
+        currentRoom = floor[currentroomx, currentroomy];
 
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
