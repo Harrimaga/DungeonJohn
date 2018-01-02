@@ -110,6 +110,7 @@
     <Compile Include="States\GameOverState.cs" />
     <Compile Include="States\Leveling.cs" />
     <Compile Include="States\MainMenuState.cs" />
+    <Compile Include="States\Option.cs" />
     <Compile Include="States\PauseMenuState.cs" />
     <Compile Include="States\PlayingState.cs" />
     <Compile Include="Structs\Circle.cs" />
@@ -174,11 +175,15 @@
     <Content Include="Content\Sprites\MinimapBossTile.png" />
     <Content Include="Content\Sprites\MinimapItemTile.png" />
     <Content Include="Content\Sprites\MinimapStartTile.png" />
+    <Content Include="Content\Sprites\Option.png" />
+    <Content Include="Content\Sprites\OptionPressed.png" />
     <Content Include="Content\Sprites\pauze.png" />
     <Content Include="Content\Sprites\Random.png" />
     <Content Include="Content\Sprites\OldRock.png" />
     <Content Include="Content\Sprites\Rock Sprite.png" />
     <Content Include="Content\Sprites\Standardtile.png" />
+    <Content Include="Content\Sprites\Start.png" />
+    <Content Include="Content\Sprites\StartPressed.png" />
     <Content Include="Content\Sprites\Wall Sprite Corner.png" />
     <Content Include="Content\Sprites\Wall Sprite.png" />
     <Content Include="Icon.ico" />
