@@ -10,7 +10,7 @@ public class Room : GameObjectList
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, Visited = false;
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
     public static GameObjectList enemies, solid, door, consumable, bosses;
-    public Vector2 Up, Down, Left, Right, Exit;
+    public Vector2 Up, Down, Left, Right, Exit, ExitShop;
     Vector2 TilePosition;
     int roomarraywidth, roomarrayheight;
     Random random = new Random();
@@ -111,6 +111,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Exit";
                 Exit = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
                 break;
+            case 'L':
+                roomarray[x, y] = "ExitShop";
+                ExitShop = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                break;
             case 'S':
                 roomarray[x, y] = "Start";
                 break;
@@ -208,6 +212,13 @@ public class Room : GameObjectList
             Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
             if (MiddleofPlayer.X >= Exit.X && MiddleofPlayer.X <= Exit.X + CellWidth)
                 if (MiddleofPlayer.Y >= Exit.Y && MiddleofPlayer.Y <= Exit.Y + CellHeight)
+                    PlayingState.currentFloor.NextShop();
+        }
+        if (RoomListIndex == 6)
+        {
+            Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+            if (MiddleofPlayer.X >= ExitShop.X && MiddleofPlayer.X <= ExitShop.X + CellWidth)
+                if (MiddleofPlayer.Y >= ExitShop.Y && MiddleofPlayer.Y <= ExitShop.Y + CellHeight)
                     PlayingState.currentFloor.NextFloor();
         }
     }            
@@ -278,6 +289,9 @@ public class Room : GameObjectList
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/ItemTile")), TilePosition, Color.Gray);
                                 break;
                             case "Exit":
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/EndTile")), TilePosition, Color.White);
+                                break;
+                            case "ExitShop":
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/EndTile")), TilePosition, Color.White);
                                 break;
                             case "Start":
