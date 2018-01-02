@@ -58,7 +58,6 @@ class Door : Solid
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.enemycounter > 0)
         {
             base.Update(gameTime);
