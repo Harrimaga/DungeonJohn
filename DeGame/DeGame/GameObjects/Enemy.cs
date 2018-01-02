@@ -77,7 +77,7 @@ public class Enemy : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        healthbar.Draw(spriteBatch, position);
+        healthbar.Draw(spriteBatch);
     }
 
     public bool CheckDown()

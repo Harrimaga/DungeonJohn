@@ -8,8 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Boss :  SpriteGameObject
 {
-    protected float health = 100;
-    protected float maxhealth = 100;
+    protected float health = 300;
+    protected float maxhealth = 300;
     protected int expGive = 240;
     //protected float attack;
     //protected float attackspeed;
@@ -28,7 +28,7 @@ public class Boss :  SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        healthbar.Update(gameTime, health, maxhealth, position);
+        healthbar.Update(gameTime, health, maxhealth, new Vector2(Roomposition.X * PlayingState.currentFloor.currentRoom.roomwidth, Roomposition.Y * PlayingState.currentFloor.currentRoom.roomheight)); //<---
 
         List<GameObject> RemoveBullets = new List<GameObject>();
 
@@ -38,7 +38,6 @@ public class Boss :  SpriteGameObject
                 health -= PlayingState.player.attack;
                 RemoveBullets.Add(bullet);
             }
-
 
         foreach (Bullet bullet in RemoveBullets)
             PlayingState.player.bullets.Remove(bullet);
@@ -57,6 +56,6 @@ public class Boss :  SpriteGameObject
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        healthbar.Draw(spriteBatch, position);
+        healthbar.Draw(spriteBatch);
     }
 }
