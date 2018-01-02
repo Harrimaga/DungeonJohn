@@ -10,9 +10,8 @@ public class Room : GameObjectList
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, start = true, Visited = false;
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
     public static GameObjectList enemies, solid, door, consumable, bosses;
-    bool onup = false, ondown = false, onleft = false, onright = false;
     public Vector2 Up, Down, Left, Right, Exit;
-    int roomarraywidth, roomarrayheight, counter;
+    int roomarraywidth, roomarrayheight;
     Random random = new Random();
     public string[,] roomarray;
 
