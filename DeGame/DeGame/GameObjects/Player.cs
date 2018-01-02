@@ -70,8 +70,14 @@ public class Player : SpriteGameObject
         base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
+        if (health > maxhealth)
+        {
+            health = maxhealth;
+        }
         if (health <= 0)
+        {
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

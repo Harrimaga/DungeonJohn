@@ -230,7 +230,16 @@ public class Floor
         b = 0;
         CurrentRooms = 1;
     }
-
+    public void NextShop()
+    {
+        ClearFloor();
+        floor = new Room[floorWidth, floorHeight];
+        Checked = new bool[floorWidth, floorHeight];
+        AdjacentRooms = new int[floorWidth, floorHeight];
+        floor[4, 4] = new Room(6, 4, 4);
+        CurrentLevel++;
+        FloorGenerated = false;
+    }
     public void NextFloor()
     {
         ClearFloor();
