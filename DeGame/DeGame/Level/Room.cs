@@ -218,7 +218,7 @@ public class Room : GameObjectList
             for (int y = 0; y < roomarray.GetLength(1); y++)
             {
                 TilePosition = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
-                if (roomarray != null && PlayingState.currentFloor.currentRoom.position == position)
+                if (roomarray != null)
                 {
                     if (roomarray[x, y] == "Wall")
                     {

@@ -6,12 +6,12 @@ using Microsoft.Xna.Framework.Input;
 public class Floor
 {
     int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
+    public Room currentRoom;
     public int screenwidth, screenheight;
+    public bool FloorGenerated = false;
     public Vector2 startPlayerPosition;
     Random random = new Random();
-    public bool FloorGenerated = false;
     public WornItems wornItems;
-    public Room currentRoom;
     int[,] possiblespecial;
     public Room[,] floor;
     int[,] AdjacentRooms;
