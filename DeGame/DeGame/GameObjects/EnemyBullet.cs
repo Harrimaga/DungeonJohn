@@ -17,10 +17,11 @@ class EnemyBullet : SpriteGameObject
         position = Startpositon;
         direction = (PlayingState.player.position - position);
         speed = 0.1f;
-        direction.Normalize();
+        
     }
     public override void Update(GameTime gameTime)
     {
+        direction.Normalize();
         position += direction * speed;
         CheckCollision();
     }
