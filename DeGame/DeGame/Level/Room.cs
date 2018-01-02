@@ -203,7 +203,7 @@ public class Room : GameObjectList
 
     public void CheckExit()
     {
-        if (RoomListIndex == 2)
+        if (RoomListIndex == 2 && enemycounter == 0)
         {
             Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
             if (MiddleofPlayer.X >= Exit.X && MiddleofPlayer.X <= Exit.X + CellWidth)
