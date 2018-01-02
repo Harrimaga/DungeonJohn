@@ -9,7 +9,7 @@ class Consumables : SpriteGameObject
     public Consumables(Vector2 startPosition, string consumablename, int layer = 0, string id = "consumable")
     : base("Sprites/Coin", layer, id)
     {
-        dropposition = startPosition + new Vector2(30,30);
+        position = startPosition + new Vector2(30,30);
         type = consumablename;
         if (type == "heart")
             consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Heart");
@@ -20,12 +20,12 @@ class Consumables : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (CollidesWith(PlayingState.player)) //werkt niet
+        if (CollidesWith(PlayingState.player)) 
         {
             switch (type)
             {
                 case "heart":
-                    PlayingState.player.health += 20; PlayingState.player.health += 20;
+                    PlayingState.player.health += 20;
                     break;
                 case "gold":
                     PlayingState.player.gold += 5;
@@ -37,7 +37,7 @@ class Consumables : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(consumablesprite, dropposition, Color.White);
+        spriteBatch.Draw(consumablesprite, position, Color.White);
     }
 
     public override string ToString()

@@ -25,8 +25,8 @@ public class RangedEnemy : Enemy
     public void Range()
     {
         Counter--;
-        if (PlayingState.player.position.X + 200 < position.X || PlayingState.player.position.X - 200 > position.X ||
-            PlayingState.player.position.Y + 200 < position.Y || PlayingState.player.position.Y - 200 > position.Y)
+        if (PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
+            PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
         {
             Chase();
         }
@@ -55,15 +55,10 @@ public class RangedEnemy : Enemy
     }
     public override void Update(GameTime gameTime)
     {
-       
         bullets.Update(gameTime);
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Range();
-        //if (health <= 0)
-        //{
-        //    GameObjectList.RemovedObjects.Add(this);
-        //}
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

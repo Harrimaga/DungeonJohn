@@ -9,11 +9,11 @@ using RoyT.AStar;
 
 public class Enemy : SpriteGameObject
 {
-    protected float health = 100;
+    public float health = 100;
     protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
-    protected float range;
+    protected float range = 200;
     protected float expGive = 120;
     protected bool alive = true;
     protected int counter = 100;
@@ -36,6 +36,7 @@ public class Enemy : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        CollisionWithEnemy();
         if (CollidesWith(PlayingState.player))
         {
             counter--;
@@ -65,12 +66,12 @@ public class Enemy : SpriteGameObject
         healthbar.Update(gameTime, health, maxhealth, position);
         if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
         {
-            GameObjectList.RemovedObjects.Add(this);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.player.exp += expGive;
             PlayingState.player.NextLevel();
             alive = false;
+            GameObjectList.RemovedObjects.Add(this);
         }
     }
 
@@ -112,7 +113,7 @@ public class Enemy : SpriteGameObject
         return false;
     }
 
-    public virtual void Chase()
+    public void Chase()
     {
         // Create a new grid and let each cell have a default traversal cost of 1.0
         //var grid = new Grid(100, 100, 1.0f);
@@ -184,6 +185,39 @@ public class Enemy : SpriteGameObject
         if (CheckLeft() == true && position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
         {
             position.Y -= velocity.Y;
+        }
+    }
+
+    public void CollisionWithEnemy()
+    {
+        foreach (Enemy enemy in Room.enemies.Children)
+        {
+            if (enemy != this)
+            {
+                if (CollidesWith(enemy) && BoundingBox.Left < enemy.position.X + enemy.Width && BoundingBox.Left + (enemy.Width / 2) > enemy.position.X + enemy.Width)
+                {
+                    while (CollidesWith(enemy))
+                        enemy.position.X--;
+                }
+
+                if (CollidesWith(enemy) && BoundingBox.Right > enemy.position.X && BoundingBox.Right - (enemy.Width / 2) < enemy.position.X)
+                {
+                    while (CollidesWith(enemy))
+                        enemy.position.X++;
+                }
+
+                if (CollidesWith(enemy) && BoundingBox.Top < enemy.position.Y + enemy.Height && BoundingBox.Top + (enemy.Height / 2) > enemy.position.Y + enemy.Height)
+                {
+                    while (CollidesWith(enemy))
+                        enemy.position.Y--;
+                }
+
+                if (CollidesWith(enemy) && BoundingBox.Bottom > enemy.position.Y && BoundingBox.Bottom - (enemy.Height / 2) < enemy.position.Y)
+                {
+                    while (CollidesWith(enemy))
+                        enemy.position.Y++;
+                }
+            }
         }
     }
 }
