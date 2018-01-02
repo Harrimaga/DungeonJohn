@@ -25,13 +25,18 @@ class Consumables : SpriteGameObject
             switch (type)
             {
                 case "heart":
-                    PlayingState.player.health += 20;
-                    break;
+                    if (PlayingState.player.health < PlayingState.player.maxhealth)
+                    {
+                        PlayingState.player.health += 20;
+                        GameObjectList.RemovedObjects.Add(this);
+                    }
+                        break;
                 case "gold":
                     PlayingState.player.gold += 5;
+                    GameObjectList.RemovedObjects.Add(this);
                     break;
             }
-            GameObjectList.RemovedObjects.Add(this);
+
         }
     }
 

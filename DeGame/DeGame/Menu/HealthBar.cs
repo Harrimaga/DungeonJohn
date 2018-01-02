@@ -30,7 +30,9 @@ class HealthBar
         newhealth = newhealthUpdate;
         maxhealth = maxhealthUpdate;
         if (newhealth < 0)
+        {
             newhealth = 0;
+        }
 
         if (newhealth > health)
         {
@@ -41,6 +43,11 @@ class HealthBar
         {
             health -= 0.4f;
             //health2 = newhealth;
+        }
+
+        if (healthbarwidth2 > healthbarwidth)
+        {
+            healthbarwidth2 = healthbarwidth;
         }
 
         if (isBoss)

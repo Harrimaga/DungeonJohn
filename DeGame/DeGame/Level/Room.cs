@@ -7,7 +7,7 @@ using System;
 public class Room : GameObjectList
 {
 
-    public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, Visited = false;
+    public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, Visited = false, CameraMoving = false;
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
     public static GameObjectList enemies, solid, door, consumable, bosses, tiles;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop;
