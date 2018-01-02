@@ -307,7 +307,11 @@ public class Floor
         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUDbackground")), new Vector2(screenwidth - 340 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2)), Color.White);
         int FloorCellWidth = 15;
         int FloorCellHeight = 15;
-        RoomWithPlayer();
+        float currentroomx = (PlayingState.player.position.X - PlayingState.player.position.X % 1260) / 1260;
+        float currentroomy = (PlayingState.player.position.Y - PlayingState.player.position.Y % 900) / 900;
+        currentRoom.position = new Vector2(currentroomx, currentroomy);
+        currentRoom = floor[(int)currentroomx, (int)currentroomy];
+
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
                 if (floor[x, y] != null) //&& floor[x,y].Visited)
@@ -329,18 +333,6 @@ public class Floor
                     }
                 }
         //TODO alleen kamer tekenen op minimap als de speler er is geweest
-    }
-
-    void RoomWithPlayer()
-    {
-        for (int x = 0; x < floorWidth; x++)
-            for (int y = 0; y < floorHeight; y++)
-                if (PlayingState.player.position.X >= x * 1260 && PlayingState.player.position.X < (x + 1) * 1260)
-                    if (PlayingState.player.position.Y >= y * screenheight && PlayingState.player.position.Y < (y + 1) * screenheight)
-                    {
-                        currentRoom.position = new Vector2(x, y);
-                        currentRoom = floor[x, y];
-                    }
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
