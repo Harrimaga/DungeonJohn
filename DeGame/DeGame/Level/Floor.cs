@@ -10,6 +10,8 @@ public class Floor
     public Vector2 startPlayerPosition;
     Random random = new Random();
     bool FloorGenerated = false;
+    public int screenwidth, screenheight;
+    public WornItems wornItems;
     public Room currentRoom;
     int[,] possiblespecial;
     public Room[,] floor;
@@ -25,6 +27,7 @@ public class Floor
         FloorGenerator();
         screenwidth = GameEnvironment.WindowSize.X;
         screenheight = GameEnvironment.WindowSize.Y;
+        wornItems = new WornItems(new Vector2(0, 0));
     }
 
     void FloorGenerator()
@@ -369,6 +372,9 @@ public class Floor
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2),(Camera.Position.Y - screenheight / 2) + 50), Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), enemycount, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 450), Color.White);
+
+        wornItems.Position = new Vector2(screenwidth - 300 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 510);
+        wornItems.Draw(gameTime, spriteBatch);
     }
 }
 
