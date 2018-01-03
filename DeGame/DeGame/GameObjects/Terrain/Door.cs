@@ -69,29 +69,28 @@ class Door : Solid
     void ControlCamera()
     {
         Vector2 Cam = Camera.Position;
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
         if (PlayingState.currentFloor.currentRoom.enemycounter == 0 && CollidesWith(PlayingState.player) && doortimer == 0)         
             switch (direction)
             {
                 case (1):
                     PlayingState.player.position -= new Vector2(0, 2 * CellHeight + 130);
                     onup = true;
-                    doortimer = 120;
+                    doortimer = 500;
                     break;
                 case (2):
                     PlayingState.player.position += new Vector2(0, 2 * CellHeight + 130);
                     ondown = true;
-                    doortimer = 120;
+                    doortimer = 500;
                     break;
                 case (3):
                     PlayingState.player.position -= new Vector2(2 * CellHeight + 130, 0);
                     onleft = true;
-                    doortimer = 120;
+                    doortimer = 500;
                     break;
                 case (4):
                     PlayingState.player.position += new Vector2(2 * CellHeight + 130, 0);
                     onright = true;
-                    doortimer = 120;
+                    doortimer = 500;
                     break;
                 default:
                     break;
