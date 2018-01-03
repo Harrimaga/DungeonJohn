@@ -5,11 +5,11 @@ using System.Collections.Generic;
 class Door : Solid
 {
     bool isdoor, onup = false, ondown = false, onleft = false, onright = false;
-    Vector2 doorposition, positionOld = PlayingState.player.position;
+    Vector2 doorposition;
     SpriteEffects Effect = SpriteEffects.None;
     Texture2D doorsprite, wallsprite;
     GameObjectList solid;
-    int direction, counter = 0;
+    int direction, counter = 0, doortimer = 0;
     int CellWidth = PlayingState.currentFloor.currentRoom.CellWidth;
     int CellHeight = PlayingState.currentFloor.currentRoom.CellHeight;
     int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
@@ -45,7 +45,7 @@ class Door : Solid
             if (direction == 4)
             {
                 Effect = SpriteEffects.FlipHorizontally;
-                wallsprite = wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Right2");
+                wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Right2");
             }
             else
                 wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Left2");
@@ -62,6 +62,7 @@ class Door : Solid
         {
             base.Update(gameTime);
         }
+        //else
         ControlCamera();
     }
 
@@ -69,67 +70,75 @@ class Door : Solid
     {
         Vector2 Cam = Camera.Position;
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
-        if (PlayingState.currentFloor.currentRoom.enemycounter == 0 && CollidesWith(PlayingState.player))         
+        if (PlayingState.currentFloor.currentRoom.enemycounter == 0 && CollidesWith(PlayingState.player) && doortimer == 0)         
             switch (direction)
             {
                 case (1):
-                    PlayingState.player.position -= new Vector2(0, 2 * CellHeight + 70);
+                    PlayingState.player.position -= new Vector2(0, 2 * CellHeight + 130);
                     onup = true;
+                    doortimer = 120;
                     break;
                 case (2):
-                    PlayingState.player.position += new Vector2(0, 2 * CellHeight + 70);
+                    PlayingState.player.position += new Vector2(0, 2 * CellHeight + 130);
                     ondown = true;
+                    doortimer = 120;
                     break;
                 case (3):
-                    PlayingState.player.position -= new Vector2(2 * CellHeight + 70, 0);
+                    PlayingState.player.position -= new Vector2(2 * CellHeight + 130, 0);
                     onleft = true;
+                    doortimer = 120;
                     break;
                 case (4):
-                    PlayingState.player.position += new Vector2(2 * CellHeight + 70, 0);
+                    PlayingState.player.position += new Vector2(2 * CellHeight + 130, 0);
                     onright = true;
+                    doortimer = 120;
                     break;
                 default:
                     break;
             }
+        if (doortimer > 0)
+            doortimer--;
 
-        Vector2 CameraVelocity = new Vector2(0, 0);
+        Camera.Position = PlayingState.player.position;
 
-        if (direction == 1 && Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
-        {
-            CameraVelocity = new Vector2(0, -roomheight / 30);
-            PlayingState.currentFloor.currentRoom.CameraMoving = true;
-        }
-        else if (direction == 2 && Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 30)
-        {
-            CameraVelocity = new Vector2(0, roomheight / 30);
-            PlayingState.currentFloor.currentRoom.CameraMoving = true;
-        }
-        else if (direction == 3 && Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 30)
-        {
-            CameraVelocity = new Vector2(-roomwidth / 30, 0);
-            PlayingState.currentFloor.currentRoom.CameraMoving = true;
-        }
-        else if (direction == 4 && Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 30)
-        {
-            CameraVelocity = new Vector2(roomwidth / 30, 0);
-            PlayingState.currentFloor.currentRoom.CameraMoving = true;
-        }
+        //Vector2 CameraVelocity = new Vector2(0, 0);
 
-        if  ((onup || ondown || onleft || onright) && counter < 30)
-        {
-            Camera.Position += CameraVelocity;
-            counter++;
-        }
+        //if (direction == 1 && Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
+        //{
+        //    CameraVelocity = new Vector2(0, -roomheight / 30);
+        //    PlayingState.currentFloor.currentRoom.CameraMoving = true;
+        //}
+        //else if (direction == 2 && Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 30)
+        //{
+        //    CameraVelocity = new Vector2(0, roomheight / 30);
+        //    PlayingState.currentFloor.currentRoom.CameraMoving = true;
+        //}
+        //else if (direction == 3 && Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 30)
+        //{
+        //    CameraVelocity = new Vector2(-roomwidth / 30, 0);
+        //    PlayingState.currentFloor.currentRoom.CameraMoving = true;
+        //}
+        //else if (direction == 4 && Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 30)
+        //{
+        //    CameraVelocity = new Vector2(roomwidth / 30, 0);
+        //    PlayingState.currentFloor.currentRoom.CameraMoving = true;
+        //}
 
-        if (counter >= 30)
-        {
-            onup = false;
-            ondown = false;
-            onleft = false;
-            onright = false;
-            counter = 0;
-            PlayingState.currentFloor.currentRoom.CameraMoving = false;
-        }
+        //if  ((onup || ondown || onleft || onright) && counter < 30)
+        //{
+        //    Camera.Position += CameraVelocity;
+        //    counter++;
+        //}
+
+        //if (counter >= 30)
+        //{
+        //    onup = false;
+        //    ondown = false;
+        //    onleft = false;
+        //    onright = false;
+        //    counter = 0;
+        //    PlayingState.currentFloor.currentRoom.CameraMoving = false;
+        //}
     }
     
 
