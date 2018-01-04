@@ -34,8 +34,12 @@ public class Boss1 : Boss
         Counter--;
         if (Counter <= 0)
         {
-            BossBullet bullet = new BossBullet(position);
-            Bullets.Add(bullet);
+            BossBullet bullet1 = new BossBullet(position);
+            BossBullet bullet2 = new BossBullet(position + new Vector2(20, 20));
+            BossBullet bullet3 = new BossBullet(position + new Vector2(40, 40));
+            Bullets.Add(bullet1);
+            Bullets.Add(bullet2);
+            Bullets.Add(bullet3);
             Counter = 300;
         }
     }

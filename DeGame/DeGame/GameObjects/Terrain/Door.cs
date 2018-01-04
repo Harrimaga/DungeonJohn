@@ -5,7 +5,6 @@ using System.Collections.Generic;
 class Door : Solid
 {
     bool isdoor, onup = false, ondown = false, onleft = false, onright = false;
-    Vector2 doorposition;
     SpriteEffects Effect = SpriteEffects.None;
     Texture2D doorsprite, wallsprite;
     GameObjectList solid;
@@ -19,7 +18,7 @@ class Door : Solid
     : base(Startposition, layer, id)
     {
         solid = new GameObjectList();
-        doorposition = Startposition;
+        position = Startposition;
         direction = Direction;
         isdoor = Isdoor;
     }
@@ -69,7 +68,7 @@ class Door : Solid
         {
             base.Update(gameTime);
         }
-        else
+        if (isdoor)
             ControlCamera();
     }
 
@@ -149,8 +148,8 @@ class Door : Solid
     {
         //ad
         ChooseSprite();
-        spriteBatch.Draw(wallsprite, doorposition, Color.Gray);
+        spriteBatch.Draw(wallsprite, position, Color.Gray);
         if (isdoor)
-            spriteBatch.Draw(doorsprite, doorposition, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
+            spriteBatch.Draw(doorsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
     }
 }

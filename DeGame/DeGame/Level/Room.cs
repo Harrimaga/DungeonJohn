@@ -144,7 +144,7 @@ public class Room : GameObjectList
         }
     }
 
-    public void Update(GameTime gameTime)
+    public override void Update(GameTime gameTime)
     {
         if (PlayingState.currentFloor.currentRoom.position == new Vector2(a, b))
         {
