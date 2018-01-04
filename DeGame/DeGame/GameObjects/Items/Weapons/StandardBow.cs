@@ -27,6 +27,12 @@ public class StandardBow : Item, IWeapon
         ammo = PlayingState.player.ammo;
     }
 
+    public void Attack(int direction)
+    {
+        Bullet bullet = new Bullet(PlayingState.player.position, direction);
+        PlayingState.player.bullets.Add(bullet);
+    }
+
     public int AddedDamage
     {
         get
