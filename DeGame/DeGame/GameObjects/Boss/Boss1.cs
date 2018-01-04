@@ -8,8 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Boss1 : Boss
 {
-    GameObjectList Bullets;
+   // public GameObjectList Bullets;
     int Counter = 300;
+
     public Boss1(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
     {
         Bullets = new GameObjectList();
@@ -20,8 +21,6 @@ public class Boss1 : Boss
         Bullets.Update(gameTime);
         base.Update(gameTime);
         Shoot();
-        
-        
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -39,6 +38,5 @@ public class Boss1 : Boss
             Bullets.Add(bullet);
             Counter = 300;
         }
-        
     }
 }

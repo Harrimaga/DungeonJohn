@@ -132,7 +132,7 @@ public class Floor
                         possiblespecial[b, 1] = y;
                         b++;
                     }
-            q = random.Next(b - 1); //error
+             q = random.Next(b - 1); //error
         }
         else
         {

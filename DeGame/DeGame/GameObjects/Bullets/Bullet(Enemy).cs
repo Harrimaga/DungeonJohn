@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 
 class E_Bullet : SpriteGameObject
 {
-    Vector2 direction;
-    float speed;
-    public E_Bullet(Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base("Sprites/Random", layer, id)
+    public E_Bullet(string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
     {
 
     }
@@ -29,7 +27,7 @@ class E_Bullet : SpriteGameObject
         if (CollidesWith(PlayingState.player))
         {
             GameObjectList.RemovedObjects.Add(this);
-            PlayingState.player.health -= 0;
+            PlayingState.player.health -= 1;
         }
         foreach (Solid solid in Room.solid.Children)
         {

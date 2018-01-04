@@ -12,7 +12,7 @@ class EnemyBullet : E_Bullet
 {
     Vector2 direction;
     float speed;
-    public EnemyBullet(Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base(Startpositon, layer, id)
+    public EnemyBullet(Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base("Sprites/Random", layer, id)
     {
         position = Startpositon;
         direction = (PlayingState.player.position - position);
@@ -21,6 +21,7 @@ class EnemyBullet : E_Bullet
     }
     public override void Update(GameTime gameTime)
     {
+        base.Update(gameTime);
         direction.Normalize();
         position += direction * speed;
     }
