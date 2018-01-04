@@ -140,20 +140,20 @@ public class Player : SpriteGameObject
                 Shoot(3);
             }
         }
-        if(state==true)
-        {
-            GameEnvironment.gameStateManager.SwitchTo("Leveling");
-            /*if (inputHelper.currentKeyboardState.IsKeyDown(Keys.N))
-            {
-                StateIncrease(1);
-                state = false;
-            }
-            if (inputHelper.currentKeyboardState.IsKeyDown(Keys.M))
-            {
-                StateIncrease(2);
-                state = false;
-            }*/
-        }
+        //if(state==true)
+        //{
+        //    GameEnvironment.gameStateManager.SwitchTo("Leveling");
+        //    /*if (inputHelper.currentKeyboardState.IsKeyDown(Keys.N))
+        //    {
+        //        StateIncrease(1);
+        //        state = false;
+        //    }
+        //    if (inputHelper.currentKeyboardState.IsKeyDown(Keys.M))
+        //    {
+        //        StateIncrease(2);
+        //        state = false;
+        //    }*/
+        //}
     }
 
     public void NextLevel()
