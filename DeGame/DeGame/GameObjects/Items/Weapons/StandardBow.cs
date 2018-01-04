@@ -19,7 +19,7 @@ public class StandardBow : Item, IWeapon
         damageMultiplier = 1;
         ammo = -1;
         Type = "weapon";
-        itemName = "Standard Bow";
+        itemName = "StandardBow";
     }
 
     public override void unequip()

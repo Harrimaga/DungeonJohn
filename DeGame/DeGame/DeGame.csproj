@@ -98,6 +98,7 @@
     <Compile Include="Inventory\Slots\ArmourSlot.cs" />
     <Compile Include="Inventory\Slots\BootsSlot.cs" />
     <Compile Include="Inventory\Slots\HelmetSlot.cs" />
+    <Compile Include="Inventory\Slots\InventorySlot.cs" />
     <Compile Include="Inventory\Slots\PassiveSlot.cs" />
     <Compile Include="Inventory\Slots\ShieldSlot.cs" />
     <Compile Include="Inventory\Slots\WeaponSlot.cs" />
@@ -186,6 +187,7 @@
     <Content Include="Content\Sprites\HealthbarBackground.png" />
     <Content Include="Content\Sprites\InventorySlots\ArmourSLot.png" />
     <Content Include="Content\Sprites\InventorySlots\BootsSlot.png" />
+    <Content Include="Content\Sprites\InventorySlots\EmptySlot.png" />
     <Content Include="Content\Sprites\InventorySlots\HelmetSlot.png" />
     <Content Include="Content\Sprites\InventorySlots\PassiveSlot.png" />
     <Content Include="Content\Sprites\InventorySlots\ShieldSlot.png" />
@@ -193,6 +195,7 @@
     <Content Include="Content\Sprites\HealthUp.png" />
     <Content Include="Content\Sprites\HealthUpPressed.png" />
     <Content Include="Content\Sprites\Item1.png" />
+    <Content Include="Content\Sprites\Items\StandardBow.png" />
     <Content Include="Content\Sprites\Lava.png" />
     <Content Include="Content\Sprites\LevelUp.png" />
     <Content Include="Content\Sprites\MinimapBossTile.png" />
@@ -225,6 +228,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roomlist\" />
+    <Folder Include="Content\Sprites\PauseMenu\" />
     <Folder Include="GameObjects\Items\Armour\" />
     <Folder Include="GameObjects\Items\Boots\" />
     <Folder Include="GameObjects\Items\Helmets\" />

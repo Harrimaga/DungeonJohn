@@ -10,7 +10,7 @@ public class InventoryManager
     public Item currentHelmet, currentArmour, currentBoots, currentWeapon, currentShield;
 
     public Item[] currentPassives;
-    List<Item> items;
+    public List<Item> items;
 
     public InventoryManager()
     {
