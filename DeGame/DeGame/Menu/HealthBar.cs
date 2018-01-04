@@ -52,8 +52,8 @@ class HealthBar
 
         if (isBoss)
         {
-            healthbarwidth = (int)((health / maxhealth) * 1000);
-            healthbarwidth2 = (int)((newhealth / maxhealth) * 1000);
+            healthbarwidth = (int)((health / maxhealth) * GameEnvironment.WindowSize.X / 1.6);
+            healthbarwidth2 = (int)((newhealth / maxhealth) * GameEnvironment.WindowSize.X / 1.6);
             healthbar = new Rectangle((int)positionNow.X + 130, (int)positionNow.Y + 70, healthbarwidth, 40);
             healthbar2 = new Rectangle((int)positionNow.X + 130, (int)positionNow.Y + 70, healthbarwidth2, 40);
         }
