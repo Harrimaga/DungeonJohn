@@ -19,12 +19,18 @@ public class StandardBow : Item, IWeapon
         damageMultiplier = 1;
         ammo = -1;
         Type = "weapon";
-        itemName = "Standard Bow";
+        itemName = "StandardBow";
     }
 
     public override void unequip()
     {
         ammo = PlayingState.player.ammo;
+    }
+
+    public void Attack(int direction)
+    {
+        Bullet bullet = new Bullet(PlayingState.player.position, direction);
+        PlayingState.player.bullets.Add(bullet);
     }
 
     public int AddedDamage
