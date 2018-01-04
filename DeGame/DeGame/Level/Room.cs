@@ -8,7 +8,7 @@ public class Room : GameObjectList
 {
 
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, Visited = false, CameraMoving = false;
-    public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
+    public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0, doortimer = 0;
     public static GameObjectList enemies, solid, door, consumable, bosses, tiles;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop;
     Vector2 TilePosition;
@@ -217,16 +217,15 @@ public class Room : GameObjectList
 
     public void CheckExit()
     {
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
         if (RoomListIndex == 2 && enemycounter == 0)
         {
-            Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
             if (MiddleofPlayer.X >= Exit.X && MiddleofPlayer.X <= Exit.X + CellWidth)
                 if (MiddleofPlayer.Y >= Exit.Y && MiddleofPlayer.Y <= Exit.Y + CellHeight)
                     PlayingState.currentFloor.NextShop();
         }
         if (RoomListIndex == 6)
         {
-            Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
             if (MiddleofPlayer.X >= ExitShop.X && MiddleofPlayer.X <= ExitShop.X + CellWidth)
                 if (MiddleofPlayer.Y >= ExitShop.Y && MiddleofPlayer.Y <= ExitShop.Y + CellHeight)
                     PlayingState.currentFloor.NextFloor();
