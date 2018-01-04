@@ -20,6 +20,7 @@ public class RangedEnemy : Enemy
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bullets = new GameObjectList();
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
     }
 
     public void Range()
@@ -50,8 +51,47 @@ public class RangedEnemy : Enemy
     //}
     public void Shoot()
     {
-        EnemyBullet bullet = new EnemyBullet(position);
-        bullets.Add(bullet);
+        if (PlayingState.player.position.Y > position.Y)
+        {
+            EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, sprite.Height));
+            bullets.Add(bullet);
+        }
+        if (PlayingState.player.position.Y < position.Y)
+        {
+            EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
+            bullets.Add(bullet);
+        }
+        if (PlayingState.player.position.X > position.X)
+        {
+            EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
+            bullets.Add(bullet);
+        }
+        if (PlayingState.player.position.X < position.Y)
+        {
+            EnemyBullet bullet = new EnemyBullet(position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
+            bullets.Add(bullet);
+        }
+       
+        //if (PlayingState.player.position.Y > position.Y && PlayingState.player.position.X > position.X && PlayingState.player.position.X < position.X)
+        //{
+        //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, sprite.Height));
+        //    bullets.Add(bullet);
+        //}
+        //if (PlayingState.player.position.Y < position.Y && PlayingState.player.position.X > position.X && PlayingState.player.position.X < position.X)
+        //{
+        //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
+        //    bullets.Add(bullet);
+        //}
+        //if (PlayingState.player.position.X > position.X && PlayingState.player.position.Y > position.Y && PlayingState.player.position.Y < position.Y)
+        //{
+        //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
+        //    bullets.Add(bullet);
+        //}
+        //if (PlayingState.player.position.X < position.X && PlayingState.player.position.Y > position.Y && PlayingState.player.position.Y < position.Y)
+        //{
+        //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
+        //    bullets.Add(bullet);
+        //}
     }
     public override void Update(GameTime gameTime)
     {
@@ -59,6 +99,15 @@ public class RangedEnemy : Enemy
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Range();
+        if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
+        {
+            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
+            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
+            PlayingState.player.exp += expGive;
+            PlayingState.player.NextLevel();
+            alive = false;
+            GameObjectList.RemovedObjects.Add(this);
+        }
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
