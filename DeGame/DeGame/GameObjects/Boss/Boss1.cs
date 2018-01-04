@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Boss1 : Boss
 {
-   // public GameObjectList Bullets;
+    GameObjectList Bullets;
     int Counter = 300;
 
     public Boss1(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
