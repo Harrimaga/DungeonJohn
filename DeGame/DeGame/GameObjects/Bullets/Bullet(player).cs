@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 class Bullet : SpriteGameObject
@@ -53,7 +54,7 @@ class Bullet : SpriteGameObject
 
     public void CheckCollision()
     {
-        foreach( Solid solid in Room.solid.Children)        
+        foreach(Solid solid in Room.solid.Children)        
             if (CollidesWith(solid))            
                 GameObjectList.RemovedObjects.Add(this);
 
@@ -65,4 +66,5 @@ class Bullet : SpriteGameObject
             if (CollidesWith(wall))            
                 GameObjectList.RemovedObjects.Add(this);*/
     }
+
 }

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 //TODO: Damage regulation;
 //TODO: Friendly Fire?;
-class EnemyBullet : SpriteGameObject
+class EnemyBullet : E_Bullet
 {
     Vector2 direction;
     float speed;
@@ -17,31 +17,16 @@ class EnemyBullet : SpriteGameObject
         position = Startpositon;
         direction = (PlayingState.player.position - position);
         speed = 0.1f;
-        direction.Normalize();
+        
     }
     public override void Update(GameTime gameTime)
     {
+        base.Update(gameTime);
+        direction.Normalize();
         position += direction * speed;
-        CheckCollision();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
-    }
-
-    public void CheckCollision()
-    {
-        if (CollidesWith(PlayingState.player))
-        {
-            GameObjectList.RemovedObjects.Add(this);
-            PlayingState.player.health -= 0;
-        }
-        foreach (Solid solid in Room.solid.Children)
-        {
-            if (CollidesWith(solid))
-            {
-                GameObjectList.RemovedObjects.Add(this);
-            }
-        }
     }
 }
