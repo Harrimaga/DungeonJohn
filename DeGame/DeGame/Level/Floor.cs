@@ -7,7 +7,7 @@ public class Floor
 {
     int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
     public Room currentRoom;
-    public int screenwidth, screenheight;
+    public int screenwidth, screenheight, used;
     public bool FloorGenerated = false;
     public Vector2 startPlayerPosition;
     Random random = new Random();
@@ -38,10 +38,10 @@ public class Floor
         floor[x, y] = new Room(1, x, y);
         currentRoom = floor[x, y];
         FloorGeneratorRecursive(x, y, RoomAmount);
-        SpawnBossRoom(x, y);
         SpawnItemRoom();
         if (CurrentLevel >= 7)
             SpawnItemRoom();
+        SpawnBossRoom(x, y);
         DoorCheck();
     }
     int RandomRoom()
@@ -126,67 +126,78 @@ public class Floor
         {
             for (int x = 0; x < floorWidth; x++)
                 for (int y = 0; y < floorHeight; y++)
-                    if (floor[x, y] == null && CanSpawnSpecialRoom(x, y))
+                    if (CanSpawnSpecialRoom(x, y))
                     {
                         possiblespecial[b, 0] = x;
                         possiblespecial[b, 1] = y;
                         b++;
                     }
-             q = random.Next(b - 1); //error
+            q = random.Next(b);
         }
         else
         {
-            q = random.Next(b - 1); //error
+            q = random.Next(b);
             CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
-            while (AdjacentRooms[possiblespecial[q, 0], possiblespecial[q, 1]] != 1)
+            while (AdjacentRooms[possiblespecial[q,0], possiblespecial[q,1]] != 1)
             {
                 q = random.Next(b - 1);
                 CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
             }
         }
-            floor[possiblespecial[q, 0], possiblespecial[q, 1]] = new Room(3, possiblespecial[q, 0], possiblespecial[q, 1]);
-            if (q != 0)
-            {
-                possiblespecial[q, 0] = possiblespecial[q - 1, 0];
-                possiblespecial[q, 1] = possiblespecial[q - 1, 1];
-            }
-            else
-            {
-                possiblespecial[q, 0] = possiblespecial[q + 1, 0];
-                possiblespecial[q, 1] = possiblespecial[q + 1, 1];
-            }        
-    }
-
-    bool CanSpawnSpecialRoom(int x, int y)
-    {
-        CheckAdjacent(x, y);
-        if (AdjacentRooms[x, y] == 1)
-        {
-            if (x + 1 < floorWidth && floor[x + 1, y] != null && floor[x + 1, y].RoomListIndex <= 3)
-                return false;
-            if (x - 1 > 0 && floor[x - 1, y] != null && floor[x - 1, y].RoomListIndex <= 3)
-                return false;
-            if (y + 1 < floorHeight && floor[x, y + 1] != null && (floor[x, y + 1].RoomListIndex <= 3))
-                return false;
-            if (y - 1 > 0 && floor[x, y - 1] != null && floor[x, y - 1].RoomListIndex <= 3)
-                return false;
-            return true;
-        }
-        return false;
+        floor[possiblespecial[q, 0], possiblespecial[q, 1]] = new Room(3, possiblespecial[q, 0], possiblespecial[q, 1]);
+        possiblespecial[q, 0] = possiblespecial[b, 0];
+        possiblespecial[q, 1] = possiblespecial[b, 1];            
     }
 
     void SpawnBossRoom(int x, int y)
     {
         int DistancefromStart = 0;
         int bossx = 4, bossy = 4;
-        for (int a = 0; a < floorWidth; a++)
-            for (int b = 0; b < floorHeight; b++)
-                if (floor[a, b] == null && CanSpawnSpecialRoom(a, b) && Math.Abs(x - a) + Math.Abs(y - b) > DistancefromStart)
-                {
-                    bossx = a;
-                    bossy = b;
-                }         
+        for (int a = 0; a <= b; a++)
+            if (CanSpawnSpecialRoom(possiblespecial[a,0], possiblespecial[a,1]) && Math.Abs(x - possiblespecial[a, 0]) + Math.Abs(y - possiblespecial[a, 1]) > DistancefromStart)
+            {
+                bossx = possiblespecial[a, 0];
+                bossy = possiblespecial[a, 1];
+            }
         floor[bossx, bossy] = new Room(2, bossx, bossy);
+    }
+
+    bool CanSpawnSpecialRoom(int x, int y)
+    {
+        if (floor[x, y] == null)
+        {
+            CheckAdjacent(x, y);
+            if (AdjacentRooms[x, y] == 1)
+            {
+                if (x + 1 < floorWidth && floor[x + 1, y] != null && floor[x + 1, y].RoomListIndex <= 3)
+                    return false;
+                if (x - 1 > 0 && floor[x - 1, y] != null && floor[x - 1, y].RoomListIndex <= 3)
+                    return false;
+                if (y + 1 < floorHeight && floor[x, y + 1] != null && (floor[x, y + 1].RoomListIndex <= 3))
+                    return false;
+                if (y - 1 > 0 && floor[x, y - 1] != null && floor[x, y - 1].RoomListIndex <= 3)
+                    return false;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void DoorCheck()
+    {
+        for (int x = 0; x < floorWidth; x++)
+            for (int y = 0; y < floorHeight; y++)
+                if (floor[x, y] != null)
+                {
+                    if (y - 1 >= 0 && floor[x, y - 1] != null)
+                        floor[x, y].updoor = true;
+                    if (y + 1 < floorWidth && floor[x, y + 1] != null)
+                        floor[x, y].downdoor = true;
+                    if (x - 1 >= 0 && floor[x - 1, y] != null)
+                        floor[x, y].leftdoor = true;
+                    if (x + 1 < floorWidth && floor[x + 1, y] != null)
+                        floor[x, y].rightdoor = true;
+                }
     }
 
     int CheckAdjacent(int x, int y)
@@ -264,27 +275,10 @@ public class Floor
         AdjacentRooms = new int[floorWidth, floorHeight];
         maxRooms = 5;
         minRooms = 3;
-        FloorGenerator();
         CurrentLevel = 1;
+        FloorGenerator();
         FloorGenerated = false;
         PlayingState.player.Reset();
-    }
-
-    void DoorCheck()
-    {        
-            for (int x = 0; x < floorWidth; x++)
-                for (int y = 0; y < floorHeight; y++)
-                    if (floor[x, y] != null)
-                    {
-                        if (y - 1 >= 0 && floor[x, y - 1] != null)
-                            floor[x, y].updoor = true;
-                        if (y + 1 < floorWidth && floor[x, y + 1] != null)
-                            floor[x, y].downdoor = true;
-                        if (x - 1 >= 0 && floor[x - 1, y] != null)
-                            floor[x, y].leftdoor = true;
-                        if (x + 1 < floorWidth && floor[x + 1, y] != null)
-                            floor[x, y].rightdoor = true;
-                    }        
     }
 
     public void Update(GameTime gameTime)

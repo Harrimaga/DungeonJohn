@@ -25,6 +25,7 @@ public class Player : SpriteGameObject
     public int gold = 0;
     public GameObjectList bullets;
     public static InventoryManager inventory;
+    int leveltokens = 0;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Random", 0, "Player")
@@ -46,23 +47,6 @@ public class Player : SpriteGameObject
             int top = (int)(position.Y - origin.Y);
             return new Rectangle(left , top , Width, Height);
         }
-    }
-
-    public override void Reset()
-    {
-        List<GameObject> RemoveBullets = new List<GameObject>();
-        maxhealth = 100;
-        health = 100;
-        //ammo = 20;
-        gold = 0;
-        level = 1;
-        exp = 0;
-        CalculateAmmo();
-        CalculateDamage();
-        foreach (Bullet bullet in PlayingState.player.bullets.Children)
-            RemoveBullets.Add(bullet);        
-        foreach (Bullet bullet in RemoveBullets)        
-            PlayingState.player.bullets.Remove(bullet);
     }
 
     public override void Update(GameTime gameTime)
@@ -140,20 +124,29 @@ public class Player : SpriteGameObject
                 Shoot(3);
             }
         }
-        //if(state==true)
-        //{
-        //    GameEnvironment.gameStateManager.SwitchTo("Leveling");
-        //    /*if (inputHelper.currentKeyboardState.IsKeyDown(Keys.N))
-        //    {
-        //        StateIncrease(1);
-        //        state = false;
-        //    }
-        //    if (inputHelper.currentKeyboardState.IsKeyDown(Keys.M))
-        //    {
-        //        StateIncrease(2);
-        //        state = false;
-        //    }*/
-        //}
+        if(leveltokens > 0 && inputHelper.KeyPressed(Keys.O))
+        {
+            leveltokens--;
+            GameEnvironment.gameStateManager.SwitchTo("Leveling");
+        }
+    }
+
+    public override void Reset()
+    {
+        List<GameObject> RemoveBullets = new List<GameObject>();
+        health = 100;
+        maxhealth = 100;
+        //ammo = 20;
+        gold = 0;
+        level = 1;
+        exp = 0;
+        nextLevelExp = 100;
+        CalculateAmmo();
+        CalculateDamage();
+        foreach (Bullet bullet in PlayingState.player.bullets.Children)
+            RemoveBullets.Add(bullet);
+        foreach (Bullet bullet in RemoveBullets)
+            PlayingState.player.bullets.Remove(bullet);
     }
 
     public void NextLevel()
@@ -162,10 +155,12 @@ public class Player : SpriteGameObject
         {
             exp -= nextLevelExp;
             nextLevelExp += 20;
+            leveltokens++;
             level++;
             state = true;
         }
     }
+
     public void StateIncrease(int type)
     {
         if (type == 1)
@@ -178,6 +173,7 @@ public class Player : SpriteGameObject
             health += 50;
         }
     }
+
     public void Shoot(int direction)
     {
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
