@@ -68,7 +68,7 @@ class Door : Solid
         {
             base.Update(gameTime);
         }
-        else
+        if (isdoor)
             ControlCamera();
     }
 
