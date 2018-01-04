@@ -44,19 +44,18 @@ class Leveling : IGameObject
         healthB.Update(gameTime);
         if (picked)
         {
+            picked = false;
             GameEnvironment.gameStateManager.SwitchTo("Playing");
         }
-        if (PlayingState.player.state && attackB.Pressed)
+        if (attackB.Pressed)
         {
             PlayingState.player.StateIncrease(1);
-            PlayingState.player.state = false;
             //attackB.Pressed = false;
             picked = true;
         }
-        if (PlayingState.player.state && healthB.Pressed)
+        if (healthB.Pressed)
         {
             PlayingState.player.StateIncrease(2);
-            PlayingState.player.state = false;
             //healthB.Pressed = false;
             picked = true;
         }
@@ -64,7 +63,5 @@ class Leveling : IGameObject
 
     public virtual void Reset()
     {
-        picked = false;
-        PlayingState.player.state = true;
     }
 }
