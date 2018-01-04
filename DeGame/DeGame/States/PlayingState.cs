@@ -23,20 +23,6 @@ public class PlayingState : IGameObject
         Player.inventory.items.Add(new StandardBow());
         Player.inventory.items.Add(new StandardBow());
         Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
         //enemy = new RangedEnemy(Vector2.Zero, 0, "Enemy");
     }
     public virtual void HandleInput(InputHelper inputHelper)
