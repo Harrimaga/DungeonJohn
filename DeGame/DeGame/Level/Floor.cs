@@ -6,12 +6,12 @@ using Microsoft.Xna.Framework.Input;
 public class Floor
 {
     int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
+    public Room currentRoom;
     public int screenwidth, screenheight;
+    public bool FloorGenerated = false;
     public Vector2 startPlayerPosition;
     Random random = new Random();
-    bool FloorGenerated = false;
     public WornItems wornItems;
-    public Room currentRoom;
     int[,] possiblespecial;
     public Room[,] floor;
     int[,] AdjacentRooms;
@@ -122,12 +122,11 @@ public class Floor
 
     void SpawnItemRoom()
     {
-        bool secondtime = false;
         if (b == 0)
         {
             for (int x = 0; x < floorWidth; x++)
                 for (int y = 0; y < floorHeight; y++)
-                    if (floor[x, y] == null && CanSpawnSpecialRoom(x, y) == true)
+                    if (floor[x, y] == null && CanSpawnSpecialRoom(x, y))
                     {
                         possiblespecial[b, 0] = x;
                         possiblespecial[b, 1] = y;
@@ -163,25 +162,15 @@ public class Floor
         CheckAdjacent(x, y);
         if (AdjacentRooms[x, y] == 1)
         {
-            int counter = 0;
-            if (x + 1 >= floorWidth)
-                counter++;
-            else if (floor[x + 1, y] == null)
-                counter++;
-            if (x - 1 < 0)
-                counter++;
-            else if (floor[x - 1, y] == null)
-                counter++;
-            if (y + 1 > -floorHeight)
-                counter++;
-            else if (floor[x, y + 1] == null)
-                counter++;
-            if (y - 1 < 0)
-                counter++;
-            else if (floor[x, y - 1] == null)
-                counter++;
-            if (counter == 3)
-                return true;
+            if (x + 1 < floorWidth && floor[x + 1, y] != null && floor[x + 1, y].RoomListIndex <= 3)
+                return false;
+            if (x - 1 > 0 && floor[x - 1, y] != null && floor[x - 1, y].RoomListIndex <= 3)
+                return false;
+            if (y + 1 < floorHeight && floor[x, y + 1] != null && (floor[x, y + 1].RoomListIndex <= 3))
+                return false;
+            if (y - 1 > 0 && floor[x, y - 1] != null && floor[x, y - 1].RoomListIndex <= 3)
+                return false;
+            return true;
         }
         return false;
     }
@@ -241,7 +230,16 @@ public class Floor
         b = 0;
         CurrentRooms = 1;
     }
-
+    public void NextShop()
+    {
+        ClearFloor();
+        floor = new Room[floorWidth, floorHeight];
+        Checked = new bool[floorWidth, floorHeight];
+        AdjacentRooms = new int[floorWidth, floorHeight];
+        floor[4, 4] = new Room(6, 4, 4);
+        CurrentLevel++;
+        FloorGenerated = false;
+    }
     public void NextFloor()
     {
         ClearFloor();
@@ -291,9 +289,10 @@ public class Floor
 
     public void Update(GameTime gameTime)
     {
-        foreach (Room room in floor)        
-            if (room != null)            
-                room.Update(gameTime, currentRoom);
+        foreach (Room room in floor)
+            if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
+                || room.position == currentRoom.position + new Vector2(0,1) || room.position == currentRoom.position - new Vector2(0,1)))            
+                room.Update(gameTime);
     }
 
     public void HandleInput(InputHelper inputHelper)
@@ -306,42 +305,41 @@ public class Floor
 
     void DrawMinimap(SpriteBatch spriteBatch)
     {
+        //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
+        //int roomheight = PlayingState.currentFloor.currentRoom.roomheight;
+        //krijgt soms 0 mee van currentroom
         int FloorCellWidth = 15;
         int FloorCellHeight = 15;
-        RoomWithPlayer();
+        int currentroomx = (int) PlayingState.player.position.X / 1260;
+        int currentroomy = (int) PlayingState.player.position.Y / 900;
+        currentRoom.position = new Vector2(currentroomx, currentroomy);
+        currentRoom = floor[currentroomx, currentroomy];
+
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
                 if (floor[x, y] != null) //&& floor[x,y].Visited)
                 {
-                    if (floor[x, y].RoomListIndex == 1)
+                    switch (floor[x,y].RoomListIndex)
                     {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapStartTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
-                        //Console.WriteLine(new Vector2(600 + x * (FloorCellWidth + 2) + Camera.Position.X, y * (FloorCellHeight + 2) + Camera.Position.Y).ToString());
+                        case (1):
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapStartTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            break;
+                        case (2):
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapBossTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            break;
+                        case (3):
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapItemTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            break;
+                        default:
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            break;
                     }
-                    else if (floor[x, y].RoomListIndex == 2)                    
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapBossTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
-                    else if (floor[x, y].RoomListIndex == 3)                    
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapItemTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);                    
-                    else                    
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
-                    if (new Vector2(x, y) == currentRoom.position)
+                    if (currentRoom.position == new Vector2(x, y))
                     {
                         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/CurrentMinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                     }
                 }
         //TODO alleen kamer tekenen op minimap als de speler er is geweest
-    }
-
-    void RoomWithPlayer()
-    {
-        for (int x = 0; x < floorWidth; x++)
-            for (int y = 0; y < floorHeight; y++)
-                if (PlayingState.player.position.X >= x * 1260 && PlayingState.player.position.X < (x + 1) * 1260)
-                    if (PlayingState.player.position.Y >= y * screenheight && PlayingState.player.position.Y < (y + 1) * screenheight)
-                    {
-                        currentRoom.position = new Vector2(x, y);
-                        currentRoom = floor[x, y];
-                    }
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
