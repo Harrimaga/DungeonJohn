@@ -79,22 +79,22 @@ class Door : Solid
             switch (direction)
             {
                 case (1):
-                    PlayingState.player.position -= new Vector2(0, 4 * CellHeight);
+                    PlayingState.player.position -= new Vector2(0, 3 * CellHeight);
                     onup = true;
                     PlayingState.currentFloor.currentRoom.doortimer = 2000;
                     break;
                 case (2):
-                    PlayingState.player.position += new Vector2(0, 4 * CellHeight + 40);
+                    PlayingState.player.position += new Vector2(0, 3 * CellHeight + 40);
                     ondown = true;
                     PlayingState.currentFloor.currentRoom.doortimer = 2000;
                     break;
                 case (3):
-                    PlayingState.player.position -= new Vector2(4 * CellHeight, 0);
+                    PlayingState.player.position -= new Vector2(3 * CellHeight, 0);
                     onleft = true;
                     PlayingState.currentFloor.currentRoom.doortimer = 2000;
                     break;
                 case (4):
-                    PlayingState.player.position += new Vector2(4 * CellHeight + 40, 0);
+                    PlayingState.player.position += new Vector2(3 * CellHeight + 40, 0);
                     onright = true;
                     PlayingState.currentFloor.currentRoom.doortimer = 2000;
                     break;
