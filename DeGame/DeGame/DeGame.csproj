@@ -93,6 +93,7 @@
     <Compile Include="GameObjects\Terrain\Lava.cs" />
     <Compile Include="GameObjects\Terrain\Rock.cs" />
     <Compile Include="GameObjects\Terrain\Solid.cs" />
+    <Compile Include="GameObjects\Terrain\SpiderWeb.cs" />
     <Compile Include="GameObjects\Terrain\Tiles.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
@@ -209,6 +210,7 @@
     <Content Include="Content\Sprites\Random.png" />
     <Content Include="Content\Sprites\OldRock.png" />
     <Content Include="Content\Sprites\Rock Sprite.png" />
+    <Content Include="Content\Sprites\SpiderWeb.png" />
     <Content Include="Content\Sprites\Standardtile.png" />
     <Content Include="Content\Sprites\Start.png" />
     <Content Include="Content\Sprites\StartPressed.png" />
