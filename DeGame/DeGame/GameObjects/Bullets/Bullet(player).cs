@@ -8,31 +8,31 @@ class Bullet : SpriteGameObject
     Texture2D Bulletsprite;
     SpriteEffects Effect = SpriteEffects.None;
 
-    public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
+    public Bullet(Vector2 Startposition, int Direction, float projectile_velocity, int layer = 0, string id = "bullet")
     : base("Sprites/Random", layer, id)
     {
         position = Startposition;
 
         // Determine the direction of the bullets
-        if (Direction == 0)
+        if (Direction == 1)
         {
-            velocity.Y = 10;
+            velocity.Y = projectile_velocity;
             Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletup");
             Effect = SpriteEffects.FlipVertically;
         }
-        else if (Direction == 1)
-        {
-            velocity.X = -10;
-            Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletleft");
-        }
         else if (Direction == 2)
         {
-            velocity.Y = -10;
-            Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletup");
+            velocity.X = -projectile_velocity;
+            Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletleft");
         }
         else if (Direction == 3)
         {
-            velocity.X = 10;
+            velocity.Y = -projectile_velocity;
+            Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletup");
+        }
+        else if (Direction == 4)
+        {
+            velocity.X = projectile_velocity;
             Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletleft");
             Effect = SpriteEffects.FlipHorizontally;
         }

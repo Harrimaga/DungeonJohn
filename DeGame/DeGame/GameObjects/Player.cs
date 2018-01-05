@@ -10,24 +10,24 @@ using System.Threading.Tasks;
 
 public class Player : SpriteGameObject
 {
+    public bool state = false, Cool_Boots = false, onIce = false, next = false;
     public float health = 100, maxhealth = 200;
     public float exp = 0,nextLevelExp = 100;
-    public int level = 0;
+    public float attackspeedreduction = 0;
     public float attack;
     public float attackspeed;
     public float speed = 5;
     public float range;
     public int ammo;
-    public bool state = false, Cool_Boots = false, onIce = false;
-    bool next = false;
-    public SpriteEffects Effect;
-    public float velocitybase;
-    public float velocity;
-    HealthBar healthbar;
     public int gold = 0;
+    public int level = 0;
+    public SpriteEffects Effect;
+    public float velocitybase, velocity;
+    HealthBar healthbar;
     public GameObjectList bullets;
     public static InventoryManager inventory;
     int leveltokens = 0;
+    float shoottimer = 0;
     string lastUsedVelocity;
 
     public Player(int layer = 0, string id = "Player")
@@ -66,6 +66,17 @@ public class Player : SpriteGameObject
         {
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
         }
+
+        if (shoottimer < 0)
+        {
+            shoottimer = 0;
+        }
+
+        if (shoottimer > 0)
+        {
+            shoottimer--;
+        }
+
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -134,21 +145,21 @@ public class Player : SpriteGameObject
         if (ammo > 0 || ammo == -1)
         {
             // Player shooting
-            if (inputHelper.KeyPressed(Keys.Down))
-            {
-                Shoot(0);
-            }
-            else if (inputHelper.KeyPressed(Keys.Left))
+            if (inputHelper.IsKeyDown(Keys.Down))
             {
                 Shoot(1);
             }
-            else if (inputHelper.KeyPressed(Keys.Up))
+            else if (inputHelper.IsKeyDown(Keys.Left))
             {
                 Shoot(2);
             }
-            else if (inputHelper.KeyPressed(Keys.Right))
+            else if (inputHelper.IsKeyDown(Keys.Up))
             {
                 Shoot(3);
+            }
+            else if (inputHelper.IsKeyDown(Keys.Right))
+            {
+                Shoot(4);
             }
         }
         if(leveltokens > 0 && inputHelper.KeyPressed(Keys.O))
@@ -203,11 +214,15 @@ public class Player : SpriteGameObject
 
     public void Shoot(int direction)
     {
-        IWeapon weapon = (IWeapon)inventory.currentWeapon;
-        weapon.Attack(direction);
-        if (ammo > 1)
+        if (shoottimer == 0)
         {
-            ammo--;
+            IWeapon weapon = (IWeapon)inventory.currentWeapon;
+            weapon.Attack(direction);
+            if (ammo > 1)
+            {
+                ammo--;
+            }
+            shoottimer += weapon.AttackSpeed - attackspeedreduction;
         }
     }
 

@@ -17,17 +17,27 @@ public interface IWeapon
         get;
     }
 
-    int AddedDamage
+    float AddedDamage
     {
         get;
     }
 
-    int DamageMultiplier
+    float DamageMultiplier
     {
         get;
     }
 
     int Ammo
+    {
+        get;
+    }
+
+    float Projectile_Velocity
+    {
+        get;
+    }
+
+    float AttackSpeed
     {
         get;
     }
