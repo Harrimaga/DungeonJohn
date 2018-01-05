@@ -8,13 +8,14 @@ public class Room : GameObjectList
 {
 
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, Visited = false, CameraMoving = false;
-    public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0, doortimer = 0;
+    public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
     public static GameObjectList enemies, solid, door, consumable, bosses, tiles;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop;
     Vector2 TilePosition;
     int roomarraywidth, roomarrayheight;
     Random random = new Random();
     public string[,] roomarray;
+    public int lavatimer = 0;
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
@@ -165,6 +166,10 @@ public class Room : GameObjectList
         CheckExit();
         solid.Update(gameTime);
         tiles.Update(gameTime);
+        if (lavatimer > 0)
+        {
+            lavatimer--;
+        }
     }
 
     public void CreateObject(int x, int y, string Type)
@@ -294,7 +299,7 @@ public class Room : GameObjectList
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite Up")), TilePosition, Color.Gray);
                         else if (y < roomarray.GetLength(1) && roomarray[x, y + 1] == "Wall" || roomarray[x, y + 1] == "DownDoor")
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite Down")), TilePosition, Color.Gray);
-                        else if (roomarray[x, y] == "Background")
+                        else
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
                     }
 

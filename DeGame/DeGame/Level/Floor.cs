@@ -12,6 +12,7 @@ public class Floor
     public Vector2 startPlayerPosition;
     Random random = new Random();
     public WornItems wornItems;
+    public int doortimer = 0;
     int[,] possiblespecial;
     public Room[,] floor;
     int[,] AdjacentRooms;
@@ -286,6 +287,10 @@ public class Floor
             if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
                 || room.position == currentRoom.position + new Vector2(0,1) || room.position == currentRoom.position - new Vector2(0,1)))            
                 room.Update(gameTime);
+        if (doortimer > 0)
+        {
+            doortimer--;
+        }
     }
 
     public void HandleInput(InputHelper inputHelper)

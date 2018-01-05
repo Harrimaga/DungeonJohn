@@ -9,10 +9,12 @@ using Microsoft.Xna.Framework.Graphics;
 public class Item
 {
     public string itemName;
+    public string itemDescription;
 
     public Item()
     {
         itemName = "null";
+        itemDescription = "null";
     }
 
     public string Type

@@ -15,12 +15,14 @@ public class Player : SpriteGameObject
     public int level = 0;
     public float attack;
     public float attackspeed;
+    public float speed = 5;
     public float range;
     public int ammo;
-    public bool state = false, onIce = false;
+    public bool state = false, Cool_Boots = false, onIce = false;
     bool next = false;
     public SpriteEffects Effect;
-    public Vector2 velocitybase;
+    public float velocitybase;
+    public float velocity;
     HealthBar healthbar;
     public int gold = 0;
     public GameObjectList bullets;
@@ -32,7 +34,7 @@ public class Player : SpriteGameObject
     : base("Sprites/Random", 0, "Player")
     {
         bullets = new GameObjectList();
-        velocitybase = new Vector2(5, 5);
+        velocitybase = 5;
         healthbar = new HealthBar(health, maxhealth, position, true);
         velocity = velocitybase;
         inventory = new InventoryManager();
@@ -53,6 +55,7 @@ public class Player : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        velocity = speed;
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
         if (health > maxhealth)
@@ -89,23 +92,23 @@ public class Player : SpriteGameObject
         // Player movement
         if (inputHelper.IsKeyDown(Keys.W) && !onIce)
         {
-            position.Y -= velocity.Y;
+            position.Y -= velocity;
             lastUsedVelocity = "up";
         }
         if (inputHelper.IsKeyDown(Keys.S) && !onIce)
         {
-            position.Y += velocity.Y;
+            position.Y += velocity;
             lastUsedVelocity = "down";
         }
         if (inputHelper.IsKeyDown(Keys.D) && !onIce)
         {
-            position.X += velocity.X;
+            position.X += velocity;
             Effect = SpriteEffects.None;
             lastUsedVelocity = "right";
         }
         if (inputHelper.IsKeyDown(Keys.A) && !onIce)
         {
-            position.X -= velocity.X;
+            position.X -= velocity;
             Effect = SpriteEffects.FlipHorizontally;
             lastUsedVelocity = "left";
         }
@@ -113,19 +116,19 @@ public class Player : SpriteGameObject
         {
             if(lastUsedVelocity == "up")
             {
-                position.Y -= velocity.Y;
+                position.Y -= velocity;
             }
             if (lastUsedVelocity == "down")
             {
-                position.Y += velocity.Y;
+                position.Y += velocity;
             }
             if (lastUsedVelocity == "right")
             {
-                position.X += velocity.X;
+                position.X += velocity;
             }
             if (lastUsedVelocity == "left")
             {
-                position.X -= velocity.X;
+                position.X -= velocity;
             }
         }
         if (ammo > 0 || ammo == -1)

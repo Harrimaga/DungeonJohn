@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 class Door : Solid
 {
-    bool isdoor, onup = false, ondown = false, onleft = false, onright = false;
+    bool isdoor, onup = false, ondown = false, onleft = false, onright = false, closed = false;
     SpriteEffects Effect = SpriteEffects.None;
     Texture2D doorsprite, wallsprite;
     GameObjectList solid;
@@ -25,6 +25,7 @@ class Door : Solid
 
     void ChooseSprite()
     {
+        closed = false;
         if (direction == 1 || direction == 2)
         {
             if (direction == 2)
@@ -34,8 +35,11 @@ class Door : Solid
             }
             else
                 wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Up2");
-            if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || PlayingState.currentFloor.currentRoom.doortimer > 0)
+            if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || PlayingState.currentFloor.doortimer > 0)
+            {
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorupclosed");
+                closed = true;
+            }
             else
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorup");
         }
@@ -48,8 +52,11 @@ class Door : Solid
             }
             else
                 wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Left2");
-            if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || PlayingState.currentFloor.currentRoom.doortimer > 0)
+            if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || PlayingState.currentFloor.doortimer > 0)
+            {
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleftclosed");
+                closed = true;
+            }
             else
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleft");
         }
@@ -64,7 +71,7 @@ class Door : Solid
             roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
             roomheight = PlayingState.currentFloor.currentRoom.roomheight;
         }
-        if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || !isdoor)
+        if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || !isdoor || closed)
         {
             base.Update(gameTime);
         }
@@ -75,34 +82,32 @@ class Door : Solid
     void ControlCamera()
     {
         Vector2 Cam = Camera.Position;
-        if (PlayingState.currentFloor.currentRoom.enemycounter == 0 && CollidesWith(PlayingState.player) && PlayingState.currentFloor.currentRoom.doortimer == 0)
+        if (PlayingState.currentFloor.currentRoom.enemycounter == 0 && CollidesWith(PlayingState.player) && PlayingState.currentFloor.doortimer == 0)
             switch (direction)
             {
                 case (1):
                     PlayingState.player.position -= new Vector2(0, 3 * CellHeight);
                     onup = true;
-                    PlayingState.currentFloor.currentRoom.doortimer = 2000;
+                    PlayingState.currentFloor.doortimer = 50;
                     break;
                 case (2):
                     PlayingState.player.position += new Vector2(0, 3 * CellHeight + 40);
                     ondown = true;
-                    PlayingState.currentFloor.currentRoom.doortimer = 2000;
+                    PlayingState.currentFloor.doortimer = 50;
                     break;
                 case (3):
                     PlayingState.player.position -= new Vector2(3 * CellHeight, 0);
                     onleft = true;
-                    PlayingState.currentFloor.currentRoom.doortimer = 2000;
+                    PlayingState.currentFloor.doortimer = 50;
                     break;
                 case (4):
                     PlayingState.player.position += new Vector2(3 * CellHeight + 40, 0);
                     onright = true;
-                    PlayingState.currentFloor.currentRoom.doortimer = 2000;
+                    PlayingState.currentFloor.doortimer = 50;
                     break;
                 default:
                     break;
             }
-        if (PlayingState.currentFloor.currentRoom.doortimer > 0)
-            PlayingState.currentFloor.currentRoom.doortimer--;
 
         Vector2 CameraVelocity = new Vector2(0, 0);
 
