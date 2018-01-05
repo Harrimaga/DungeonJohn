@@ -19,7 +19,7 @@ public class Enemy : SpriteGameObject
     protected int counter = 100;
     protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
     public SpriteEffects Effects;
-    Texture2D playersprite;
+    public Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
     protected Vector2 Roomposition;
 
@@ -64,15 +64,15 @@ public class Enemy : SpriteGameObject
         RemoveBullets.Clear();
 
         healthbar.Update(gameTime, health, maxhealth, position);
-        if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
-        {
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
-            PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();
-            alive = false;
-            GameObjectList.RemovedObjects.Add(this);
-        }
+        //if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
+        //{
+        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
+        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
+        //    PlayingState.player.exp += expGive;
+        //    PlayingState.player.NextLevel();
+        //    alive = false;
+        //    GameObjectList.RemovedObjects.Add(this);
+        //}
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
