@@ -18,11 +18,11 @@ class SpiderWeb : Tiles
     {
         if (CollidesWith(PlayingState.player))
         {
-            PlayingState.player.velocity = new Vector2(2.5f,2.5f);
+            PlayingState.player.speed = 2.5f;
         }
         else
         {
-            PlayingState.player.velocity = PlayingState.player.velocitybase;
+            PlayingState.player.speed = PlayingState.player.velocitybase;
         }
     }
 
