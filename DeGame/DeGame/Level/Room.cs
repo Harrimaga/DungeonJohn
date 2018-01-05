@@ -79,6 +79,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Ice";
                 CreateObject(x, y, "G");
                 break;
+            case 'W':
+                roomarray[x, y] = "SpiderWeb";
+                CreateObject(x, y, "W");
+                break;
             case '-':
                 roomarray[x, y] = "UpDoor";
                 Up = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
@@ -208,6 +212,10 @@ public class Room : GameObjectList
             case ("G"):
                 Ice ice = new Ice(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Ice");
                 tiles.Add(ice);
+                break;
+            case ("W"):
+                SpiderWeb web = new SpiderWeb(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Ice");
+                tiles.Add(web);
                 break;
             case ("-"):
                     Door up = new Door(updoor, Up, 1);

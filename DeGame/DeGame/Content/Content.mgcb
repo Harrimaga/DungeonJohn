@@ -931,6 +931,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Rock Sprite.png
 
+#begin Sprites/SpiderWeb.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/SpiderWeb.png
+
 #begin Sprites/Items/Cool Boots.png
 /importer:TextureImporter
 /processor:TextureProcessor
