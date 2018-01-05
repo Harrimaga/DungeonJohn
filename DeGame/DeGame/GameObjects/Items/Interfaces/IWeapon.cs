@@ -31,5 +31,7 @@ public interface IWeapon
     {
         get;
     }
+
+    void Attack(int direction);
 }
 

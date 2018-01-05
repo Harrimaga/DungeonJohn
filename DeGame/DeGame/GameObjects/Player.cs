@@ -176,8 +176,8 @@ public class Player : SpriteGameObject
 
     public void Shoot(int direction)
     {
-        Bullet bullet = new Bullet(position, direction);
-        bullets.Add(bullet);
+        IWeapon weapon = (IWeapon)inventory.currentWeapon;
+        weapon.Attack(direction);
         if (ammo > 1)
         {
             ammo--;
