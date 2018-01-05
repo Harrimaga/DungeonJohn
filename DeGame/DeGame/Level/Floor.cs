@@ -23,7 +23,6 @@ public class Floor
         Checked = new bool[floorWidth, floorHeight];
         AdjacentRooms = new int[floorWidth, floorHeight];
         possiblespecial = new int[floorWidth * floorHeight / 2, 2];
-        FloorGenerator();
         screenwidth = GameEnvironment.WindowSize.X;
         screenheight = GameEnvironment.WindowSize.Y;
         wornItems = new WornItems(new Vector2(0, 0));

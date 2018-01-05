@@ -39,6 +39,11 @@ class HealthBar
             health = newhealth;
         }
 
+        if (health > maxhealth)
+        {
+            health = maxhealth;
+        }
+
         if (newhealth < health)
         {
             health -= 0.4f;
