@@ -87,6 +87,7 @@
     <Compile Include="GameObjects\Consumables.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\CheckCurrentTile.cs" />
+    <Compile Include="GameObjects\RoomItem.cs" />
     <Compile Include="GameObjects\Terrain\Door.cs" />
     <Compile Include="GameObjects\Terrain\Lava.cs" />
     <Compile Include="GameObjects\Terrain\Rock.cs" />
