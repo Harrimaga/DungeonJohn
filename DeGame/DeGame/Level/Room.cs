@@ -278,7 +278,7 @@ public class Room : GameObjectList
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite Up")), TilePosition, Color.Gray);
                         else if (y < roomarray.GetLength(1) && roomarray[x, y + 1] == "Wall" || roomarray[x, y + 1] == "DownDoor")
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite Down")), TilePosition, Color.Gray);
-                        else if (roomarray[x, y] == "Background")
+                        else
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
                     }
 

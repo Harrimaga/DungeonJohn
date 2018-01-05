@@ -15,9 +15,10 @@ public class Player : SpriteGameObject
     public int level = 0;
     public float attack;
     public float attackspeed;
+    public float speed = 5;
     public float range;
     public int ammo;
-    public bool state = false;
+    public bool state = false, Cool_Boots = false;
     bool next = false;
     public SpriteEffects Effect;
     public Vector2 velocitybase;
@@ -52,6 +53,7 @@ public class Player : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        velocity = new Vector2(speed, speed);
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
         if (health > maxhealth)

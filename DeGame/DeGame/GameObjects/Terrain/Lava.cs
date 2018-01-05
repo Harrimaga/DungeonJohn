@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 class Lava : Tiles
 {
+    int counter = 0;
+    float LavaDamage = 10;
+    bool check = false;
+
     public Lava(Vector2 startPosition, int layer = 0, string id = "Lava")
     : base(startPosition, layer, id)
     {
@@ -16,10 +20,20 @@ class Lava : Tiles
     }
     public override void Update(GameTime gameTime)
     {
-        if (CollidesWith(PlayingState.player))
+        if (PlayingState.player.Cool_Boots == true && check == false)
         {
-            PlayingState.player.health -= 1;
+            LavaDamage -= 5;
+            check = true;
         }
+        if (CollidesWith(PlayingState.player) && counter == 0)
+        {
+                PlayingState.player.health -= LavaDamage;
+                counter += 80;
+        }
+        if (counter > 0)
+            counter--;
+        if (counter < 0)
+            counter = 0;
     }
 
          public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
