@@ -27,7 +27,10 @@ class Consumables : SpriteGameObject
                 case "heart":
                     if (PlayingState.player.health < PlayingState.player.maxhealth)
                     {
-                        PlayingState.player.health += 20;
+                        if (PlayingState.player.health <= PlayingState.player.maxhealth - 20)
+                            PlayingState.player.health += 20;
+                        else
+                            PlayingState.player.health += PlayingState.player.maxhealth - PlayingState.player.health;
                         GameObjectList.RemovedObjects.Add(this);
                     }
                         break;
