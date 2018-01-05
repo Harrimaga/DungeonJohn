@@ -7,32 +7,33 @@ class Bullet : SpriteGameObject
 {
     Texture2D Bulletsprite;
     SpriteEffects Effect = SpriteEffects.None;
+    float counter = 0;
 
-    public Bullet(Vector2 Startposition, int Direction, float projectile_velocity, int layer = 0, string id = "bullet")
+    public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
     : base("Sprites/Random", layer, id)
     {
+        IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
         position = Startposition;
-
         // Determine the direction of the bullets
         if (Direction == 1)
         {
-            velocity.Y = projectile_velocity;
+            velocity.Y = weapon.Projectile_Velocity;
             Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletup");
             Effect = SpriteEffects.FlipVertically;
         }
         else if (Direction == 2)
         {
-            velocity.X = -projectile_velocity;
+            velocity.X = -weapon.Projectile_Velocity;
             Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletleft");
         }
         else if (Direction == 3)
         {
-            velocity.Y = -projectile_velocity;
+            velocity.Y = -weapon.Projectile_Velocity;
             Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletup");
         }
         else if (Direction == 4)
         {
-            velocity.X = projectile_velocity;
+            velocity.X = weapon.Projectile_Velocity;
             Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletleft");
             Effect = SpriteEffects.FlipHorizontally;
         }
@@ -42,6 +43,13 @@ class Bullet : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
+        if (counter + weapon.Projectile_Velocity >= weapon.Range)
+        {
+            GameObjectList.RemovedObjects.Add(this);
+        }
+        else
+            counter += weapon.Projectile_Velocity;
         position += velocity;
         CheckCollision();
     }

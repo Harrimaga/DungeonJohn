@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class StandardBow : Item, IWeapon
 {
     bool melee, twoHanded;
-    float addedDamage, damageMultiplier, projectile_velocity, attackspeed;
+    float addedDamage, damageMultiplier, projectile_velocity, attackspeed, range;
     int ammo;
 
     public StandardBow()
@@ -20,6 +20,7 @@ public class StandardBow : Item, IWeapon
         damageMultiplier = 1;
         projectile_velocity = 10;
         attackspeed = 50;
+        range = 800;
         ammo = -1;
         Type = "weapon";
         itemName = "StandardBow";
@@ -33,7 +34,7 @@ public class StandardBow : Item, IWeapon
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position, direction, projectile_velocity);
+        Bullet bullet = new Bullet(PlayingState.player.position, direction);
         PlayingState.player.bullets.Add(bullet);
     }
 
@@ -90,6 +91,14 @@ public class StandardBow : Item, IWeapon
         get
         {
             return attackspeed;
+        }
+    }
+
+    public float Range
+    {
+        get
+        {
+            return range;
         }
     }
 }

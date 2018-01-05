@@ -42,6 +42,11 @@ public interface IWeapon
         get;
     }
 
+    float Range
+    {
+        get;
+    }
+
     void Attack(int direction);
 }
 
