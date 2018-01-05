@@ -15,26 +15,27 @@ class Bullet : SpriteGameObject
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
         position = Startposition;
         // Determine the direction of the bullets
+
         if (Direction == 1)
         {
-            velocity.Y = weapon.Projectile_Velocity;
-            Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletup");
-            Effect = SpriteEffects.FlipVertically;
+            velocity.Y = -weapon.Projectile_Velocity;
+            Bulletsprite = weapon.BulletSpriteUp;
         }
         else if (Direction == 2)
         {
-            velocity.X = -weapon.Projectile_Velocity;
-            Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletleft");
+            velocity.Y = weapon.Projectile_Velocity;
+            Bulletsprite = weapon.BulletSpriteUp;
+            Effect = SpriteEffects.FlipVertically;
         }
         else if (Direction == 3)
         {
-            velocity.Y = -weapon.Projectile_Velocity;
-            Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletup");
+            velocity.X = -weapon.Projectile_Velocity;
+            Bulletsprite = weapon.BulletSpriteLeft;
         }
         else if (Direction == 4)
         {
             velocity.X = weapon.Projectile_Velocity;
-            Bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/bulletleft");
+            Bulletsprite = weapon.BulletSpriteLeft;
             Effect = SpriteEffects.FlipHorizontally;
         }
     }

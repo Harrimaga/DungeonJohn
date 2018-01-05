@@ -11,6 +11,7 @@ public class StandardBow : Item, IWeapon
     bool melee, twoHanded;
     float addedDamage, damageMultiplier, projectile_velocity, attackspeed, range;
     int ammo;
+    Texture2D bulletleft, bulletup;
 
     public StandardBow()
     {
@@ -25,6 +26,8 @@ public class StandardBow : Item, IWeapon
         Type = "weapon";
         itemName = "StandardBow";
         itemDescription = "Basic weapon with infinte ammo and suck damage.";
+        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardBow_BulletLeft");
+        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardBow_BulletUp");
     }
 
     public override void unequip()
@@ -101,5 +104,21 @@ public class StandardBow : Item, IWeapon
             return range;
         }
     }
-}
 
+    public Texture2D BulletSpriteLeft
+    {
+        get
+        {
+            return bulletleft;
+        }
+    }
+
+    public Texture2D BulletSpriteUp
+    {
+        get
+        {
+            return bulletup;
+        }
+    }
+
+}

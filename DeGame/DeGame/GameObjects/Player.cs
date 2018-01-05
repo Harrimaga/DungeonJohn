@@ -145,15 +145,15 @@ public class Player : SpriteGameObject
         if (ammo > 0 || ammo == -1)
         {
             // Player shooting
-            if (inputHelper.IsKeyDown(Keys.Down))
+            if (inputHelper.IsKeyDown(Keys.Up))
             {
                 Shoot(1);
             }
-            else if (inputHelper.IsKeyDown(Keys.Left))
+            else if (inputHelper.IsKeyDown(Keys.Down))
             {
                 Shoot(2);
             }
-            else if (inputHelper.IsKeyDown(Keys.Up))
+            else if (inputHelper.IsKeyDown(Keys.Left))
             {
                 Shoot(3);
             }

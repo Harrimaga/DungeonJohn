@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,6 +44,16 @@ public interface IWeapon
     }
 
     float Range
+    {
+        get;
+    }
+
+    Texture2D BulletSpriteLeft
+    {
+        get;
+    }
+
+    Texture2D BulletSpriteUp
     {
         get;
     }
