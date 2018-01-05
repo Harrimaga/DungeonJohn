@@ -18,7 +18,6 @@ public class Boss :  SpriteGameObject
     public SpriteEffects Effects;
     HealthBar healthbar;
     Vector2 Roomposition;
-    public GameObjectList Bullets;
 
     public Boss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base("Sprites/Boss", layer, id)
     {
