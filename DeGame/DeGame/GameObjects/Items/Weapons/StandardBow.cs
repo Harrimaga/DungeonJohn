@@ -16,7 +16,7 @@ public class StandardBow : Item, IWeapon
     {
         melee = false;
         twoHanded = true;
-        addedDamage = 30;
+        addedDamage = 50;
         damageMultiplier = 1;
         projectile_velocity = 10;
         attackspeed = 50;
