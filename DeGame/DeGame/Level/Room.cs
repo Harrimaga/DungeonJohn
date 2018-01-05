@@ -74,6 +74,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Lava";
                 CreateObject(x, y, "H");
                 break;
+            case 'G':
+                roomarray[x, y] = "Ice";
+                CreateObject(x, y, "G");
+                break;
             case '-':
                 roomarray[x, y] = "UpDoor";
                 Up = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
@@ -195,6 +199,10 @@ public class Room : GameObjectList
             case ("H"):
                 Lava lava = new Lava(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Wall");
                 tiles.Add(lava);
+                break;
+            case ("G"):
+                Ice ice = new Ice(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Wall");
+                tiles.Add(ice);
                 break;
             case ("-"):
                     Door up = new Door(updoor, Up, 1);
