@@ -20,6 +20,7 @@ public class StandardBow : Item, IWeapon
         ammo = -1;
         Type = "weapon";
         itemName = "StandardBow";
+        itemDescription = "Basic weapon with infinte ammo and suck damage.";
     }
 
     public override void unequip()

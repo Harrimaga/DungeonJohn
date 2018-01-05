@@ -18,7 +18,7 @@ public class Player : SpriteGameObject
     public float speed = 5;
     public float range;
     public int ammo;
-    public bool state = false, Cool_Boots = false;
+    public bool state = false, Cool_Boots = false, onIce = false;
     bool next = false;
     public SpriteEffects Effect;
     public Vector2 velocitybase;
@@ -27,6 +27,7 @@ public class Player : SpriteGameObject
     public GameObjectList bullets;
     public static InventoryManager inventory;
     int leveltokens = 0;
+    string lastUsedVelocity;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Random", 0, "Player")
@@ -88,23 +89,46 @@ public class Player : SpriteGameObject
     public override void HandleInput(InputHelper inputHelper)
     {
         // Player movement
-        if (inputHelper.IsKeyDown(Keys.W))
+        if (inputHelper.IsKeyDown(Keys.W) && !onIce)
         {
             position.Y -= velocity.Y;
+            lastUsedVelocity = "up";
         }
-        if (inputHelper.IsKeyDown(Keys.S))
+        if (inputHelper.IsKeyDown(Keys.S) && !onIce)
         {
             position.Y += velocity.Y;
+            lastUsedVelocity = "down";
         }
-        if (inputHelper.IsKeyDown(Keys.D))
+        if (inputHelper.IsKeyDown(Keys.D) && !onIce)
         {
             position.X += velocity.X;
             Effect = SpriteEffects.None;
+            lastUsedVelocity = "right";
         }
-        if (inputHelper.IsKeyDown(Keys.A))
+        if (inputHelper.IsKeyDown(Keys.A) && !onIce)
         {
             position.X -= velocity.X;
             Effect = SpriteEffects.FlipHorizontally;
+            lastUsedVelocity = "left";
+        }
+        if(onIce)
+        {
+            if(lastUsedVelocity == "up")
+            {
+                position.Y -= velocity.Y;
+            }
+            if (lastUsedVelocity == "down")
+            {
+                position.Y += velocity.Y;
+            }
+            if (lastUsedVelocity == "right")
+            {
+                position.X += velocity.X;
+            }
+            if (lastUsedVelocity == "left")
+            {
+                position.X -= velocity.X;
+            }
         }
         if (ammo > 0 || ammo == -1)
         {

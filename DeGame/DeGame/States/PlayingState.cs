@@ -16,7 +16,6 @@ public class PlayingState : IGameObject
 
     public PlayingState()
     {
-
         player = new Player();
         floor = new Floor();
         currentFloor = floor;
