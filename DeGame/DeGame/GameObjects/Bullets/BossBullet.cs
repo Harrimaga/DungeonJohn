@@ -12,10 +12,13 @@ class BossBullet : E_Bullet
     float speed = 0.5f;
     int health = 100, maxhealth = 100;
     HealthBar healthbar;
+    public SpriteEffects Effects;
+    
     public BossBullet(Vector2 Startposition, int layer = 0, string id = "BossBullet") : base("Sprites/BossBullet", 0, "BossBullet") 
     {
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
+        
         direction = (PlayingState.player.position - position);
         direction.Normalize();
     }
@@ -24,7 +27,7 @@ class BossBullet : E_Bullet
         base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth, position);
         position += direction * speed;
-        DestroyBullet();
+        DestroyableBullet();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
@@ -32,16 +35,8 @@ class BossBullet : E_Bullet
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BossBullet"), position);
         //healthbar.Draw(spriteBatch);
     }
-    public override Rectangle BoundingBox
-    {
-        get
-        {
-            int left = (int)(position.X);
-            int top = (int)(position.Y);
-            return new Rectangle(left, top, Width, sprite.Height);
-        }
-    }
-    public void DestroyBullet()
+
+    public void DestroyableBullet()
     {
         List<GameObject> RemoveBullets = new List<GameObject>();
 
@@ -61,4 +56,8 @@ class BossBullet : E_Bullet
             GameObjectList.RemovedObjects.Add(this);
         }
     }
+
+
+
+
 }
