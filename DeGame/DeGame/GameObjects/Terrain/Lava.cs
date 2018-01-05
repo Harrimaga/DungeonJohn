@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 class Lava : Tiles
 {
-    int counter = 0;
     float LavaDamage = 10;
     bool check = false;
 
@@ -25,15 +24,11 @@ class Lava : Tiles
             LavaDamage -= 5;
             check = true;
         }
-        if (CollidesWith(PlayingState.player) && counter == 0)
+        if (CollidesWith(PlayingState.player) && PlayingState.currentFloor.currentRoom.lavatimer == 0)
         {
-                PlayingState.player.health -= LavaDamage;
-                counter += 80;
+            PlayingState.player.health -= LavaDamage;
+            PlayingState.currentFloor.currentRoom.lavatimer += 30;
         }
-        if (counter > 0)
-            counter--;
-        if (counter < 0)
-            counter = 0;
     }
 
          public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
