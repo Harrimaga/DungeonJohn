@@ -197,11 +197,11 @@ public class Room : GameObjectList
                 solid.Add(wall);
                 break;
             case ("H"):
-                Lava lava = new Lava(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Wall");
+                Lava lava = new Lava(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Lava");
                 tiles.Add(lava);
                 break;
             case ("G"):
-                Ice ice = new Ice(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Wall");
+                Ice ice = new Ice(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Ice");
                 tiles.Add(ice);
                 break;
             case ("-"):
