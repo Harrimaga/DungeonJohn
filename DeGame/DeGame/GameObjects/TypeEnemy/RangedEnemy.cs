@@ -99,15 +99,15 @@ public class RangedEnemy : Enemy
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Range();
-        if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
-        {
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
-            PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();
-            alive = false;
-            GameObjectList.RemovedObjects.Add(this);
-        }
+        //if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
+        //{
+        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
+        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
+        //    PlayingState.player.exp += expGive;
+        //    PlayingState.player.NextLevel();
+        //    alive = false;
+        //    GameObjectList.RemovedObjects.Add(this);
+        //}
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
