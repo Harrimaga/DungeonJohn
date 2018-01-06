@@ -237,11 +237,11 @@ public class Room : GameObjectList
                 solid.Add(wall);
                 break;
             case ("I"):
-                ItemAltar item = new ItemAltar(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight),false, 0, "Item");
+                ItemSpawn item = new ItemSpawn(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight),false, 0, "Item");
                 altar.Add(item);
                 break;
             case ("M"):
-                ItemAltar Shopitem = new ItemAltar(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), true, 0, "ShopItem");
+                ItemSpawn Shopitem = new ItemSpawn(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), true, 0, "ShopItem");
                 altar.Add(Shopitem);
                 break;
             case ("H"):
@@ -391,17 +391,17 @@ public class Room : GameObjectList
         {
             t.Draw(gameTime, spriteBatch);
         }
-        foreach (ItemAltar a in altar.Children)
+        foreach (Solid s in solid.Children)
+        {
+            s.Draw(gameTime, spriteBatch);
+        }
+        foreach (ItemSpawn a in altar.Children)
         {
             a.Draw(gameTime, spriteBatch);
         }
         foreach (Enemy e in enemies.Children)
         {
             e.Draw(gameTime, spriteBatch);
-        }
-        foreach (Solid s in solid.Children)
-        {
-            s.Draw(gameTime, spriteBatch);
         }
         foreach (Consumables c in consumable.Children)
         {
