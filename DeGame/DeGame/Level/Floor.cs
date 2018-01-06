@@ -284,9 +284,10 @@ public class Floor
     public void Update(GameTime gameTime)
     {
         foreach (Room room in floor)
-            if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
-                || room.position == currentRoom.position + new Vector2(0,1) || room.position == currentRoom.position - new Vector2(0,1)))            
+            if (room != null && room.position == currentRoom.position)
+            {
                 room.Update(gameTime);
+            }
         if (doortimer > 0)
         {
             doortimer--;
@@ -352,7 +353,9 @@ public class Floor
             {
                 if (!FloorGenerated)
                     room.LoadTiles();
-                room.Draw(gameTime, spriteBatch);
+                if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
+                || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1)))
+                    room.Draw(gameTime, spriteBatch);
             }
         }
 
@@ -370,6 +373,7 @@ public class Floor
 
         wornItems.Position = new Vector2(screenwidth - 300 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 510);
         wornItems.Draw(gameTime, spriteBatch);
+                  
     }
 }
 
