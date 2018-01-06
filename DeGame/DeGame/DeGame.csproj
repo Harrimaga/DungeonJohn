@@ -72,7 +72,7 @@
     <Compile Include="GameObjects\Bullets\BossBullet.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28player%29.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
-    <Compile Include="GameObjects\Items\Boots\Cool Boots.cs" />
+    <Compile Include="GameObjects\Items\Boots\CoolBoots.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IArmour.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IBoots.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IHelmet.cs" />
@@ -80,7 +80,6 @@
     <Compile Include="GameObjects\Items\Interfaces\IShield.cs" />
     <Compile Include="GameObjects\Items\Item.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
-    <Compile Include="GameObjects\Items\ShopItem.cs" />
     <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
     <Compile Include="GameObjects\Boss\Boss.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
@@ -88,7 +87,7 @@
     <Compile Include="GameObjects\Consumables.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\CheckCurrentTile.cs" />
-    <Compile Include="GameObjects\RoomItem.cs" />
+    <Compile Include="GameObjects\Items\ItemAltar.cs" />
     <Compile Include="GameObjects\Terrain\Door.cs" />
     <Compile Include="GameObjects\Terrain\Ice.cs" />
     <Compile Include="GameObjects\Terrain\Lava.cs" />
@@ -199,6 +198,7 @@
     <Content Include="Content\Sprites\HealthUp.png" />
     <Content Include="Content\Sprites\HealthUpPressed.png" />
     <Content Include="Content\Sprites\Item1.png" />
+    <Content Include="Content\Sprites\Items\Altar.png" />
     <Content Include="Content\Sprites\Items\StandardBow.png" />
     <Content Include="Content\Sprites\Lava.png" />
     <Content Include="Content\Sprites\LevelUp.png" />
