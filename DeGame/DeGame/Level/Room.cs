@@ -163,6 +163,7 @@ public class Room : GameObjectList
     {
         int onicecounter = 0;
         int onwebcounter = 0;
+        int onSolidcounter = 0;
         if (PlayingState.currentFloor.currentRoom.position == new Vector2(a, b))
         {
             Visited = true;
@@ -171,10 +172,10 @@ public class Room : GameObjectList
         door.Update(gameTime);
         consumable.Update(gameTime);
         bosses.Update(gameTime);
-        CheckExit();
         solid.Update(gameTime);
         tiles.Update(gameTime);
         altar.Update(gameTime);
+        CheckExit();
         if (lavatimer > 0)
         {
             lavatimer--;
@@ -196,10 +197,17 @@ public class Room : GameObjectList
                         onwebcounter++;
                 }
             }
+            foreach (Solid solid in solid.Children)
+            {
+                if (solid.OnThisTile)
+                    onSolidcounter++;
+            }
             if (onicecounter == 0)
                 PlayingState.player.onIce = false;
             if (onwebcounter == 0)
                 PlayingState.player.onWeb = false;
+            if (onSolidcounter == 0)
+                PlayingState.player.onSolid = false;
         }
     }
 
