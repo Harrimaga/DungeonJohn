@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 class Consumables : SpriteGameObject
 {
-    Vector2 dropposition;
     string type;
     Texture2D consumablesprite;
     public Consumables(Vector2 startPosition, string consumablename, int layer = 0, string id = "consumable")

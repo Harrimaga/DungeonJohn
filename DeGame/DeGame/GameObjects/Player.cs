@@ -22,7 +22,8 @@ public class Player : SpriteGameObject
     public int gold = 0;
     public int level = 0;
     public SpriteEffects Effect;
-    public float velocitybase, velocity;
+    public float velocitybase;
+    new public float velocity;
     HealthBar healthbar;
     public GameObjectList bullets;
     public static InventoryManager inventory;

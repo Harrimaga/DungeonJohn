@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 public class ShieldSlot : SpriteGameObject
 {
-    Texture2D sprite, itemSprite;
-    public Vector2 position;
+    Texture2D itemSprite;
+
 
     public ShieldSlot(Vector2 position, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/ShieldSlot", layer, id)
 {

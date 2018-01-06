@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 public class HelmetSlot : SpriteGameObject
 {
-    Texture2D sprite, itemSprite;
-    public Vector2 position;
+    Texture2D itemSprite;
 
     public HelmetSlot(Vector2 position, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/HelmetSlot", layer, id)
     {
