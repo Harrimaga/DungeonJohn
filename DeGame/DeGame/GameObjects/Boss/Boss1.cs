@@ -10,13 +10,15 @@ public class Boss1 : Boss
 {
     GameObjectList Bullets, HomingBullets;
     int Counter = 300;
-    Texture2D playersprite;
+    Texture2D playersprite, bulletsprite;
     BossBullet bullet1, bullet2, bullet3;
     public Boss1(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
     {
+        position = startPosition;
         Bullets = new GameObjectList();
         HomingBullets = new GameObjectList();
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/BossBullet");
         velocity = new Vector2(1, 1);
         velocity.Normalize();
     }
@@ -25,6 +27,7 @@ public class Boss1 : Boss
     {
         Bullets.Update(gameTime);
         HomingBullets.Update(gameTime);
+        Boom();
         base.Update(gameTime);
         Shoot();
         HomingBullet();
@@ -40,11 +43,11 @@ public class Boss1 : Boss
     public void Shoot()
     {
         Counter--;
-        if (Counter <= 0)
+        if (Counter <= 0 && PlayingState.player.position.Y < position.Y)
         {
             bullet1 = new BossBullet(position);
-            bullet2 = new BossBullet(position + new Vector2(20, 20));
-            bullet3 = new BossBullet(position + new Vector2(40, 40));
+            bullet2 = new BossBullet(position + new Vector2(sprite.Width / 2, 0));
+            bullet3 = new BossBullet(position + new Vector2(sprite.Width - bulletsprite.Width, 0));
             Bullets.Add(bullet1);
             HomingBullets.Add(bullet2);
             Bullets.Add(bullet3);
@@ -74,6 +77,18 @@ public class Boss1 : Boss
                 {
                     bullet2.position.X += velocity.X;
                 }
+            }
+        }
+    }
+    public void Boom()
+    {
+        if (health <= 0)
+        {
+            Rectangle DamageRectangle = new Rectangle((int)position.X - 100, (int)position.Y - 100, 200 + sprite.Width, 200 + sprite.Height);
+            if (DamageRectangle.Intersects(PlayingState.player.BoundingBox))
+            {
+                PlayingState.player.health -= 150;
+                Console.WriteLine("afds");
             }
         }
     }

@@ -68,7 +68,7 @@
     <Compile Include="GameManagement\InputHelper.cs" />
     <Compile Include="GameManagement\InventoryManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
-    <Compile Include="GameObjects\Bullets\Boss1.cs" />
+    <Compile Include="GameObjects\Boss\Boss1.cs" />
     <Compile Include="GameObjects\Bullets\BossBullet.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28player%29.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
