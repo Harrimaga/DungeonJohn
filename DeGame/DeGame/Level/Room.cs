@@ -161,6 +161,8 @@ public class Room : GameObjectList
 
     public override void Update(GameTime gameTime)
     {
+        int onicecounter = 0;
+        int onwebcounter = 0;
         if (PlayingState.currentFloor.currentRoom.position == new Vector2(a, b))
         {
             Visited = true;
@@ -176,6 +178,28 @@ public class Room : GameObjectList
         if (lavatimer > 0)
         {
             lavatimer--;
+        }
+        if (tiles.Children.Count > 0)
+        {
+            foreach (Tiles tile in tiles.Children)
+            {
+                if (tile is Ice)
+                {
+                    Ice ice = tile as Ice;
+                    if (ice.OnThisTile)
+                        onicecounter++;
+                }
+                else if (tile is SpiderWeb)
+                {
+                    SpiderWeb web = tile as SpiderWeb;
+                    if (web.OnThisTile)
+                        onwebcounter++;
+                }
+            }
+            if (onicecounter == 0)
+                PlayingState.player.onIce = false;
+            if (onwebcounter == 0)
+                PlayingState.player.onWeb = false;
         }
     }
 
