@@ -9,7 +9,6 @@ class Cool_Boots : Item, IBoots
     public Cool_Boots()
     {
         itemName = "Cool Boots";
-        Equip();
         itemDescription = "Boots so cool they can withstand the hottest of lava!";
     }
     public void Equip()
