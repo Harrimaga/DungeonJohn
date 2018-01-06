@@ -23,4 +23,3 @@ class Tiles : SpriteGameObject
     }
 
 }
-
