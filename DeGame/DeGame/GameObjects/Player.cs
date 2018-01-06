@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 public class Player : SpriteGameObject
 {
-    public bool state = false, Cool_Boots = false, onIce = false, next = false;
+    public bool state = false, onIce = false, next = false;
+    public bool HardHelmet = false, Cool_Boots = false;
     public float health = 100, maxhealth = 200;
     public float exp = 0,nextLevelExp = 100;
     public float attackspeedreduction = 0;
@@ -94,7 +95,7 @@ public class Player : SpriteGameObject
 
         }
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);
         bullets.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch);
     }

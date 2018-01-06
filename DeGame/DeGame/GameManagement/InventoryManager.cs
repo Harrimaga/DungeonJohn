@@ -14,7 +14,7 @@ public class InventoryManager
 
     public InventoryManager()
     {
-        currentHelmet = null;
+        currentHelmet = new HardHelmet();
         currentArmour = null;
         currentBoots = new Cool_Boots();
         currentWeapon = new StandardBow();
