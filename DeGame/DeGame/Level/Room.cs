@@ -9,7 +9,7 @@ public class Room : GameObjectList
 
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, Visited = false, CameraMoving = false;
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
-    public static GameObjectList enemies, solid, door, consumable, bosses, tiles;
+    public static GameObjectList enemies, solid, door, consumable, bosses, tiles, altar;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop;
     Vector2 TilePosition;
     int roomarraywidth, roomarrayheight;
@@ -25,6 +25,7 @@ public class Room : GameObjectList
         bosses = new GameObjectList();
         solid = new GameObjectList();
         door = new GameObjectList();
+        altar = new GameObjectList();
         RoomListIndex = roomListIndex;
         a = A;
         b = B;
@@ -120,6 +121,11 @@ public class Room : GameObjectList
                 break;
             case 'I':
                 roomarray[x, y] = "Item";
+                CreateObject(x, y, "I");
+                break;
+            case 'M':
+                roomarray[x, y] = "ShopItem";
+                CreateObject(x, y, "M");
                 break;
             case 'E':
                 roomarray[x, y] = "Exit";
@@ -168,6 +174,7 @@ public class Room : GameObjectList
         CheckExit();
         solid.Update(gameTime);
         tiles.Update(gameTime);
+        altar.Update(gameTime);
         if (lavatimer > 0)
         {
             lavatimer--;
@@ -228,6 +235,14 @@ public class Room : GameObjectList
             case ("+"):
                 Solid wall = new Wall(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Wall");
                 solid.Add(wall);
+                break;
+            case ("I"):
+                ItemAltar item = new ItemAltar(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight),false, 0, "Item");
+                altar.Add(item);
+                break;
+            case ("M"):
+                ItemAltar Shopitem = new ItemAltar(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), true, 0, "ShopItem");
+                altar.Add(Shopitem);
                 break;
             case ("H"):
                 Lava lava = new Lava(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Lava");
@@ -340,7 +355,10 @@ public class Room : GameObjectList
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/PitTile")), TilePosition, Color.White);
                                 break;
                             case "Item":
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/ItemTile")), TilePosition, Color.Gray);
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
+                                break;
+                            case "ShopItem":
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
                                 break;
                             case "Exit":
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/EndTile")), TilePosition, Color.White);
@@ -372,6 +390,10 @@ public class Room : GameObjectList
         foreach (Tiles t in tiles.Children)
         {
             t.Draw(gameTime, spriteBatch);
+        }
+        foreach (ItemAltar a in altar.Children)
+        {
+            a.Draw(gameTime, spriteBatch);
         }
         foreach (Enemy e in enemies.Children)
         {
