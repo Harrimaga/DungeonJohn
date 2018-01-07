@@ -284,9 +284,10 @@ public class Floor
     public void Update(GameTime gameTime)
     {
         foreach (Room room in floor)
-            if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
-                || room.position == currentRoom.position + new Vector2(0,1) || room.position == currentRoom.position - new Vector2(0,1)))            
+            if (room != null && room.position == currentRoom.position)
+            {
                 room.Update(gameTime);
+            }
         if (doortimer > 0)
         {
             doortimer--;
@@ -310,7 +311,6 @@ public class Floor
         int FloorCellHeight = 15;
         int currentroomx = (int) PlayingState.player.position.X / 1260;
         int currentroomy = (int) PlayingState.player.position.Y / 900;
-        currentRoom.position = new Vector2(currentroomx, currentroomy);
         currentRoom = floor[currentroomx, currentroomy];
 
         for (int x = 0; x < floorWidth; x++)
@@ -352,7 +352,9 @@ public class Floor
             {
                 if (!FloorGenerated)
                     room.LoadTiles();
-                room.Draw(gameTime, spriteBatch);
+                if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
+                || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1)))
+                    room.Draw(gameTime, spriteBatch);
             }
         }
 
@@ -362,14 +364,17 @@ public class Floor
             Camera.Position = startPlayerPosition + new Vector2(170, 0);
             FloorGenerated = true;
         }
-        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUDbackground")), new Vector2(screenwidth - 340 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2)));
-        DrawMinimap(spriteBatch);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2),(Camera.Position.Y - screenheight / 2) + 50), Color.White);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.Yellow);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), enemycount, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 450), Color.White);
-
+        else
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUDbackground")), new Vector2(screenwidth - 340 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2)));
+            DrawMinimap(spriteBatch);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 50), Color.White);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.Yellow);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), enemycount, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 450), Color.White);
+        }
         wornItems.Position = new Vector2(screenwidth - 300 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 510);
         wornItems.Draw(gameTime, spriteBatch);
+                  
     }
 }
 
