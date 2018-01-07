@@ -103,6 +103,7 @@ public class Room : GameObjectList
                 break;
             case 'O':
                 roomarray[x, y] = "Pit";
+                CreateObject(x, y, "O");
                 break;
             case 'I':
                 roomarray[x, y] = "Item";
@@ -192,9 +193,13 @@ public class Room : GameObjectList
                 solid.Add(wall);
                 break;
 
+            case ("O"):
+                Pit pit = new Pit(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Pit");
+                break;
+
             case ("-"):
-                    Door up = new Door(updoor, Up, 1);
-                    door.Add(up);                
+                Door up = new Door(updoor, Up, 1);
+                door.Add(up);                
                 break;
 
             case ("="):                
