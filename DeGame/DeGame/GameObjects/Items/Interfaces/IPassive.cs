@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public interface IPassive
 {
-    int DamageMultiplier
+    float DamageMultiplier
     {
         get;
     }
