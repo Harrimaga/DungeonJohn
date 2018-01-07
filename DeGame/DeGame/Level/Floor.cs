@@ -311,7 +311,6 @@ public class Floor
         int FloorCellHeight = 15;
         int currentroomx = (int) PlayingState.player.position.X / 1260;
         int currentroomy = (int) PlayingState.player.position.Y / 900;
-        currentRoom.position = new Vector2(currentroomx, currentroomy);
         currentRoom = floor[currentroomx, currentroomy];
 
         for (int x = 0; x < floorWidth; x++)
