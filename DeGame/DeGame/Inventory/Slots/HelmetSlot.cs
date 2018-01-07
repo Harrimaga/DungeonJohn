@@ -9,13 +9,16 @@ using System.Threading.Tasks;
 
 public class HelmetSlot : SpriteGameObject
 {
-    Texture2D sprite;
-    public Vector2 position;
+    Texture2D itemSprite;
 
     public HelmetSlot(Vector2 position, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/HelmetSlot", layer, id)
     {
         this.position = position;
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/HelmetSlot");
+        if (Player.inventory.currentHelmet != null)
+        {
+            itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentHelmet.itemName);
+        }
     }
 
     public override void Update(GameTime gameTime)
@@ -26,6 +29,10 @@ public class HelmetSlot : SpriteGameObject
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(sprite, position);
+        if (Player.inventory.currentHelmet != null)
+        {
+            InventorySlot.DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
+        }
     }
 }
 

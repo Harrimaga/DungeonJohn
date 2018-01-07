@@ -3,40 +3,36 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 public class Player : SpriteGameObject
 {
-    public bool state = false, Cool_Boots = false, onIce = false, next = false;
+    public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
+    public bool HardHelmet = false, CoolBoots = false;
     public float health = 100, maxhealth = 200;
     public float exp = 0,nextLevelExp = 100;
     public float attackspeedreduction = 0;
+    public float extraspeed = 0;
     public float attack;
     public float attackspeed;
-    public float speed = 5;
+    public float speed;
     public float range;
     public int ammo;
     public int gold = 0;
     public int level = 0;
     public SpriteEffects Effect;
-    public float velocitybase, velocity;
+    public float velocitybase = 5;
     HealthBar healthbar;
     public GameObjectList bullets;
     public static InventoryManager inventory;
     int leveltokens = 0;
     float shoottimer = 0;
-    string lastUsedVelocity;
+    string lastUsedspeed;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Random", 0, "Player")
     {
         bullets = new GameObjectList();
-        velocitybase = 5;
         healthbar = new HealthBar(health, maxhealth, position, true);
-        velocity = velocitybase;
         inventory = new InventoryManager();
         CalculateDamage();
         CalculateAmmo();
@@ -55,7 +51,7 @@ public class Player : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        velocity = speed;
+        speed = velocitybase + extraspeed;
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
         if (health > maxhealth)
@@ -76,7 +72,18 @@ public class Player : SpriteGameObject
         {
             shoottimer--;
         }
-
+        if (onIce && !onWeb && speed != 5 + extraspeed)
+        {
+            speed = 5 + extraspeed;
+        }
+        if (onWeb)
+        {
+            velocitybase = 2.5f;
+        }
+        else
+        {
+            velocitybase = 5;
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -93,7 +100,7 @@ public class Player : SpriteGameObject
 
         }
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);
         bullets.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch);
     }
@@ -101,45 +108,48 @@ public class Player : SpriteGameObject
     public override void HandleInput(InputHelper inputHelper)
     {
         // Player movement
-        if (inputHelper.IsKeyDown(Keys.W) && !onIce)
+        if ((onIce && onSolid) || !onIce)
         {
-            position.Y -= velocity;
-            lastUsedVelocity = "up";
-        }
-        if (inputHelper.IsKeyDown(Keys.S) && !onIce)
-        {
-            position.Y += velocity;
-            lastUsedVelocity = "down";
-        }
-        if (inputHelper.IsKeyDown(Keys.D) && !onIce)
-        {
-            position.X += velocity;
-            Effect = SpriteEffects.None;
-            lastUsedVelocity = "right";
-        }
-        if (inputHelper.IsKeyDown(Keys.A) && !onIce)
-        {
-            position.X -= velocity;
-            Effect = SpriteEffects.FlipHorizontally;
-            lastUsedVelocity = "left";
-        }
-        if(onIce)
-        {
-            if(lastUsedVelocity == "up")
+            if (inputHelper.IsKeyDown(Keys.W))
             {
-                position.Y -= velocity;
+                position.Y -= speed;
+                lastUsedspeed = "up";
             }
-            if (lastUsedVelocity == "down")
+            if (inputHelper.IsKeyDown(Keys.S))
             {
-                position.Y += velocity;
+                position.Y += speed;
+                lastUsedspeed = "down";
             }
-            if (lastUsedVelocity == "right")
+            if (inputHelper.IsKeyDown(Keys.D))
             {
-                position.X += velocity;
+                position.X += speed;
+                Effect = SpriteEffects.None;
+                lastUsedspeed = "right";
             }
-            if (lastUsedVelocity == "left")
+            if (inputHelper.IsKeyDown(Keys.A))
             {
-                position.X -= velocity;
+                position.X -= speed;
+                Effect = SpriteEffects.FlipHorizontally;
+                lastUsedspeed = "left";
+            }
+        }
+        else
+        {
+            if(lastUsedspeed == "up")
+            {
+                position.Y -= speed;
+            }
+            else if (lastUsedspeed == "down")
+            {
+                position.Y += speed;
+            }
+            else if (lastUsedspeed == "right")
+            {
+                position.X += speed;
+            }
+            else if (lastUsedspeed == "left")
+            {
+                position.X -= speed;
             }
         }
         if (ammo > 0 || ammo == -1)

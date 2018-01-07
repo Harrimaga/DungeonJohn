@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 class Lava : Tiles
 {
@@ -17,12 +11,18 @@ class Lava : Tiles
     {
         position = startPosition;
     }
+
     public override void Update(GameTime gameTime)
     {
-        if (PlayingState.player.Cool_Boots == true && check == false)
+        if (PlayingState.player.CoolBoots && !check)
         {
             LavaDamage -= 5;
             check = true;
+        }
+        if (!PlayingState.player.CoolBoots && check)
+        {
+            LavaDamage += 5;
+            check = false;
         }
         if (CollidesWith(PlayingState.player) && PlayingState.currentFloor.currentRoom.lavatimer == 0)
         {

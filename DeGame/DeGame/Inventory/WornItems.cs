@@ -25,8 +25,8 @@ public class WornItems : GameObjectList
         armourSlot = new ArmourSlot(position + new Vector2(74, 74));
         bootsSlot = new BootsSlot(position + new Vector2(74, 212));
         shieldShot = new ShieldSlot(position + new Vector2(212, 74));
-        passiveSlot1 = new PassiveSlot(position);
-        passiveSlot2 = new PassiveSlot(position + new Vector2(212, 0));
+        passiveSlot1 = new PassiveSlot(position, Player.inventory.currentPassives[0]);
+        passiveSlot2 = new PassiveSlot(position + new Vector2(212, 0), Player.inventory.currentPassives[1]);
 
         Add(weaponSlot);
         Add(helmetSlot);

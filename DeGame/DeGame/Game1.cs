@@ -8,9 +8,6 @@ namespace DeGame
 {
     public class Game1 : GameEnvironment
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
         [STAThread]
         static void Main()
         {

@@ -9,7 +9,7 @@ public class Room : GameObjectList
 
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, Visited = false, CameraMoving = false;
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
-    public static GameObjectList enemies, solid, door, consumable, bosses, tiles;
+    public static GameObjectList enemies, solid, door, consumable, bosses, tiles, altar;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop;
     Vector2 TilePosition;
     int roomarraywidth, roomarrayheight;
@@ -25,6 +25,7 @@ public class Room : GameObjectList
         bosses = new GameObjectList();
         solid = new GameObjectList();
         door = new GameObjectList();
+        altar = new GameObjectList();
         RoomListIndex = roomListIndex;
         a = A;
         b = B;
@@ -120,6 +121,11 @@ public class Room : GameObjectList
                 break;
             case 'I':
                 roomarray[x, y] = "Item";
+                CreateObject(x, y, "I");
+                break;
+            case 'M':
+                roomarray[x, y] = "ShopItem";
+                CreateObject(x, y, "M");
                 break;
             case 'E':
                 roomarray[x, y] = "Exit";
@@ -155,6 +161,9 @@ public class Room : GameObjectList
 
     public override void Update(GameTime gameTime)
     {
+        int onicecounter = 0;
+        int onwebcounter = 0;
+        int onSolidcounter = 0;
         if (PlayingState.currentFloor.currentRoom.position == new Vector2(a, b))
         {
             Visited = true;
@@ -163,12 +172,42 @@ public class Room : GameObjectList
         door.Update(gameTime);
         consumable.Update(gameTime);
         bosses.Update(gameTime);
-        CheckExit();
         solid.Update(gameTime);
         tiles.Update(gameTime);
+        altar.Update(gameTime);
+        CheckExit();
         if (lavatimer > 0)
         {
             lavatimer--;
+        }
+        if (tiles.Children.Count > 0)
+        {
+            foreach (Tiles tile in tiles.Children)
+            {
+                if (tile is Ice)
+                {
+                    Ice ice = tile as Ice;
+                    if (ice.OnThisTile)
+                        onicecounter++;
+                }
+                else if (tile is SpiderWeb)
+                {
+                    SpiderWeb web = tile as SpiderWeb;
+                    if (web.OnThisTile)
+                        onwebcounter++;
+                }
+            }
+            foreach (Solid solid in solid.Children)
+            {
+                if (solid.OnThisTile)
+                    onSolidcounter++;
+            }
+            if (onicecounter == 0)
+                PlayingState.player.onIce = false;
+            if (onwebcounter == 0)
+                PlayingState.player.onWeb = false;
+            if (onSolidcounter == 0)
+                PlayingState.player.onSolid = false;
         }
     }
 
@@ -204,6 +243,14 @@ public class Room : GameObjectList
             case ("+"):
                 Solid wall = new Wall(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Wall");
                 solid.Add(wall);
+                break;
+            case ("I"):
+                ItemSpawn item = new ItemSpawn(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight),false, 0, "Item");
+                altar.Add(item);
+                break;
+            case ("M"):
+                ItemSpawn Shopitem = new ItemSpawn(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), true, 0, "ShopItem");
+                altar.Add(Shopitem);
                 break;
             case ("H"):
                 Lava lava = new Lava(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Lava");
@@ -263,21 +310,21 @@ public class Room : GameObjectList
                 {
                     if (roomarray[x, y] == "Wall")
                     {
-                        if (x > 0 && roomarray[x - 1, y] == "Background")
+                        if (x > 0 && (roomarray[x - 1, y] == "Background" || roomarray[x - 1, y] == "Lava" || roomarray[x - 1, y] == "Ice" || roomarray[x - 1, y] == "SpiderWeb"))
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Right2")), TilePosition, Color.Gray);
-                        else if (x < roomarray.GetLength(0) - 1 && roomarray[x + 1, y] == "Background")
+                        else if (x < roomarray.GetLength(0) - 1 && (roomarray[x + 1, y] == "Background" || roomarray[x + 1, y] == "Lava" || roomarray[x + 1, y] == "Ice" || roomarray[x + 1, y] == "SpiderWeb"))
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Left2")), TilePosition, Color.Gray);
-                        else if (y > 0 && roomarray[x, y - 1] == "Background")
+                        else if (y > 0 && (roomarray[x, y - 1] == "Background" || roomarray[x, y - 1] == "Lava" || roomarray[x, y - 1] == "Ice" || roomarray[x, y - 1] == "SpiderWeb"))
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Down2")), TilePosition, Color.Gray);
-                        else if (y < roomarray.GetLength(1) - 1 && roomarray[x, y + 1] == "Background")
+                        else if (y < roomarray.GetLength(1) - 1 && (roomarray[x, y + 1] == "Background" || roomarray[x, y + 1] == "Lava" || roomarray[x, y + 1] == "Ice" || roomarray[x, y + 1] == "SpiderWeb"))
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Up2")), TilePosition, Color.Gray);
-                        else if (y > 0 && x > 0 && roomarray[x - 1, y - 1] == "Background")
+                        else if (y > 0 && x > 0 && (roomarray[x - 1, y - 1] == "Background" || roomarray[x - 1, y - 1] == "Lava" || roomarray[x - 1, y - 1] == "Ice" || roomarray[x - 1, y - 1] == "SpiderWeb"))
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Corner RD")), TilePosition, Color.Gray);
-                        else if (y < roomarray.GetLength(1) - 1 && x > 0 && roomarray[x - 1, y + 1] == "Background")
+                        else if (y < roomarray.GetLength(1) - 1 && x > 0 && (roomarray[x - 1, y + 1] == "Background" || roomarray[x - 1, y + 1] == "Lava" || roomarray[x - 1, y + 1] == "Ice" || roomarray[x - 1, y + 1] == "SpiderWeb"))
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Corner RU")), TilePosition, Color.Gray);
-                        else if (y > 0 && x < roomarray.GetLength(0) - 1 && roomarray[x + 1, y - 1] == "Background")
+                        else if (y > 0 && x < roomarray.GetLength(0) - 1 && (roomarray[x + 1, y - 1] == "Background" || roomarray[x + 1, y - 1] == "Lava" || roomarray[x + 1, y - 1] == "Ice" || roomarray[x + 1, y - 1] == "SpiderWeb"))
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Corner LD")), TilePosition, Color.Gray);
-                        else if (y < roomarray.GetLength(1) - 1 && x < roomarray.GetLength(0) && roomarray[x + 1, y + 1] == "Background")
+                        else if (y < roomarray.GetLength(1) - 1 && x < roomarray.GetLength(0) && (roomarray[x + 1, y + 1] == "Background" || roomarray[x + 1, y + 1] == "Lava" || roomarray[x + 1, y + 1] == "Ice" || roomarray[x + 1, y + 1] == "SpiderWeb"))
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Corner LU")), TilePosition, Color.Gray);
                     }
 
@@ -316,7 +363,10 @@ public class Room : GameObjectList
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/PitTile")), TilePosition, Color.White);
                                 break;
                             case "Item":
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/ItemTile")), TilePosition, Color.Gray);
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
+                                break;
+                            case "ShopItem":
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
                                 break;
                             case "Exit":
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/EndTile")), TilePosition, Color.White);
@@ -349,13 +399,17 @@ public class Room : GameObjectList
         {
             t.Draw(gameTime, spriteBatch);
         }
-        foreach (Enemy e in enemies.Children)
-        {
-            e.Draw(gameTime, spriteBatch);
-        }
         foreach (Solid s in solid.Children)
         {
             s.Draw(gameTime, spriteBatch);
+        }
+        foreach (ItemSpawn a in altar.Children)
+        {
+            a.Draw(gameTime, spriteBatch);
+        }
+        foreach (Enemy e in enemies.Children)
+        {
+            e.Draw(gameTime, spriteBatch);
         }
         foreach (Consumables c in consumable.Children)
         {

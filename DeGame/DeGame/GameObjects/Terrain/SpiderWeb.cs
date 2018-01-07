@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 class SpiderWeb : Tiles
 {
+    public bool OnThisTile = false;
     public SpiderWeb(Vector2 startPosition, int layer = 0, string id = "SpiderWeb")
     : base(startPosition, layer, id)
     {
@@ -18,11 +19,12 @@ class SpiderWeb : Tiles
     {
         if (CollidesWith(PlayingState.player))
         {
-            PlayingState.player.speed = 2.5f;
+            PlayingState.player.onWeb = true;
+            OnThisTile = true;
         }
         else
         {
-            PlayingState.player.speed = PlayingState.player.velocitybase;
+            OnThisTile = false;
         }
     }
 

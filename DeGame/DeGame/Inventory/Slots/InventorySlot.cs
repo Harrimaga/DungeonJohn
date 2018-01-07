@@ -22,22 +22,39 @@ public class InventorySlot : SpriteGameObject
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(sprite, position, Color.White);
-        float scale = (float)(sprite.Height * sprite.Width) / (float)(itemSprite.Height * itemSprite.Width);
+        DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
+    }
 
+    public static void DrawItem(Texture2D sprite, Texture2D itemSprite, Vector2 position, GameTime gameTime, SpriteBatch spriteBatch)
+    {
         Vector2 itemSpritePosition;
-        if (itemSprite.Height * scale == sprite.Height)
+        float scale = CalculateScale(sprite, itemSprite);
+        if (itemSprite.Height * scale == sprite.Height && itemSprite.Width * scale == sprite.Width)
         {
-            itemSpritePosition = position + new Vector2(itemSprite.Width * scale / 2, 0);
+            itemSpritePosition = position;
         }
-        else if(itemSprite.Width * scale == sprite.Width)
+        else if (itemSprite.Width * scale == sprite.Width)
         {
             itemSpritePosition = position + new Vector2(0, itemSprite.Height * scale / 2);
+        }
+        else if (itemSprite.Height * scale == sprite.Height)
+        {
+            itemSpritePosition = position + new Vector2(itemSprite.Width * scale / 2, 0);
         }
         else
         {
             itemSpritePosition = position;
         }
-
         spriteBatch.Draw(itemSprite, itemSpritePosition, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+    }
+
+    public static float CalculateScale(Texture2D sprite, Texture2D itemSprite)
+    {
+        float scale = (float)sprite.Height / itemSprite.Height;
+        if (itemSprite.Width * scale > sprite.Width)
+        {
+            scale = (float)sprite.Width / itemSprite.Height;
+        }
+        return scale;
     }
 }

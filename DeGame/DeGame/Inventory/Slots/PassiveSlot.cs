@@ -9,13 +9,18 @@ using System.Threading.Tasks;
 
 public class PassiveSlot : SpriteGameObject
 {
-    Texture2D sprite;
-    public Vector2 position;
+    Texture2D itemSprite;
+    Item item;
 
-    public PassiveSlot(Vector2 position, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/PassiveSlot", layer, id)
+    public PassiveSlot(Vector2 position, Item item = null, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/PassiveSlot", layer, id)
     {
         this.position = position;
+        this.item = item;
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/PassiveSlot");
+        if (item != null)
+        {
+            itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
+        }
     }
 
     public override void Update(GameTime gameTime)
@@ -26,6 +31,10 @@ public class PassiveSlot : SpriteGameObject
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(sprite, position);
+        if (item != null)
+        {
+            InventorySlot.DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
+        }
     }
 }
 

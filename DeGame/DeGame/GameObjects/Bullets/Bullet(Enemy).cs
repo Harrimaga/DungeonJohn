@@ -27,7 +27,14 @@ class E_Bullet : SpriteGameObject
         if (CollidesWith(PlayingState.player))
         {
             GameObjectList.RemovedObjects.Add(this);
-            PlayingState.player.health -= 1;
+            if(PlayingState.player.HardHelmet)
+            {
+                PlayingState.player.health -= 2;
+            }
+            if (!PlayingState.player.HardHelmet)
+            {
+                PlayingState.player.health -= 4;
+            }   
         }
         foreach (Solid solid in Room.solid.Children)
         {
