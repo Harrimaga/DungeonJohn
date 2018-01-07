@@ -17,24 +17,33 @@ public class ChasingEnemy : Enemy
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        Chase();
-        //if (CollidesWith(PlayingState.player))
-        //{
-        //    counter--;
-        //    if (counter == 0)
-        //    {
-        //        // velocity = Vector2.Zero;
-        //        PlayingState.player.health -= 0;
-        //        counter = 100;
-        //    }
-        //}
-        
-        //if (!CollidesWith(PlayingState.player))
-        //{
-        //    velocity = basevelocity;
-        //}
+        if (CollidesWith(PlayingState.player))
+        {
+            counter--;
+            if (counter == 0)
+            {
+                // velocity = Vector2.Zero;
+                PlayingState.player.health -= 0;
+                counter = 100;
+            }
+        }
+
+        if (!CollidesWith(PlayingState.player))
+        {
+            velocity = basevelocity;
+        }
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
+
+        //if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
+        //{
+        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
+        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
+        //    PlayingState.player.exp += expGive;
+        //    PlayingState.player.NextLevel();
+        //    //alive = false;
+        //    GameObjectList.RemovedObjects.Add(this);
+        //}
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -3,36 +3,36 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 public class Player : SpriteGameObject
 {
+    public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
+    public bool HardHelmet = false, CoolBoots = false;
     public float health = 100, maxhealth = 200;
     public float exp = 0,nextLevelExp = 100;
-    public int level = 0;
+    public float attackspeedreduction = 0;
+    public float extraspeed = 0;
     public float attack;
     public float attackspeed;
+    public float speed;
     public float range;
     public int ammo;
-    public bool state = false;
-    bool next = false;
-    public SpriteEffects Effect;
-    public Vector2 velocitybase;
-    HealthBar healthbar;
     public int gold = 0;
+    public int level = 0;
+    public SpriteEffects Effect;
+    public float velocitybase = 5;
+    HealthBar healthbar;
     public GameObjectList bullets;
     public static InventoryManager inventory;
+    int leveltokens = 0;
+    float shoottimer = 0;
+    string lastUsedspeed;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Random", 0, "Player")
     {
         bullets = new GameObjectList();
-        velocitybase = new Vector2(5, 5);
         healthbar = new HealthBar(health, maxhealth, position, true);
-        velocity = velocitybase;
         inventory = new InventoryManager();
         CalculateDamage();
         CalculateAmmo();
@@ -48,30 +48,42 @@ public class Player : SpriteGameObject
         }
     }
 
-    public override void Reset()
-    {
-        List<GameObject> RemoveBullets = new List<GameObject>();
-        maxhealth = 100;
-        health = 100;
-        //ammo = 20;
-        gold = 0;
-        level = 1;
-        exp = 0;
-        CalculateAmmo();
-        CalculateDamage();
-        foreach (Bullet bullet in PlayingState.player.bullets.Children)
-            RemoveBullets.Add(bullet);        
-        foreach (Bullet bullet in RemoveBullets)        
-            PlayingState.player.bullets.Remove(bullet);
-    }
-
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        speed = velocitybase + extraspeed;
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
+        if (health > maxhealth)
+        {
+            health = maxhealth;
+        }
         if (health <= 0)
+        {
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
+        }
+
+        if (shoottimer < 0)
+        {
+            shoottimer = 0;
+        }
+
+        if (shoottimer > 0)
+        {
+            shoottimer--;
+        }
+        if (onIce && !onWeb && speed != 5 + extraspeed)
+        {
+            speed = 5 + extraspeed;
+        }
+        if (onWeb)
+        {
+            velocitybase = 2.5f;
+        }
+        else
+        {
+            velocitybase = 5;
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -88,66 +100,101 @@ public class Player : SpriteGameObject
 
         }
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);
         bullets.Draw(gameTime, spriteBatch);
-        healthbar.Draw(spriteBatch, Vector2.Zero);
+        healthbar.Draw(spriteBatch);
     }
 
     public override void HandleInput(InputHelper inputHelper)
     {
         // Player movement
-        if (inputHelper.IsKeyDown(Keys.W))
+        if ((onIce && onSolid) || !onIce)
         {
-            position.Y -= velocity.Y;
+            if (inputHelper.IsKeyDown(Keys.W))
+            {
+                position.Y -= speed;
+                lastUsedspeed = "up";
+            }
+            if (inputHelper.IsKeyDown(Keys.S))
+            {
+                position.Y += speed;
+                lastUsedspeed = "down";
+            }
+            if (inputHelper.IsKeyDown(Keys.D))
+            {
+                position.X += speed;
+                Effect = SpriteEffects.None;
+                lastUsedspeed = "right";
+            }
+            if (inputHelper.IsKeyDown(Keys.A))
+            {
+                position.X -= speed;
+                Effect = SpriteEffects.FlipHorizontally;
+                lastUsedspeed = "left";
+            }
         }
-        if (inputHelper.IsKeyDown(Keys.S))
+        else
         {
-            position.Y += velocity.Y;
-        }
-        if (inputHelper.IsKeyDown(Keys.D))
-        {
-            position.X += velocity.X;
-            Effect = SpriteEffects.None;
-        }
-        if (inputHelper.IsKeyDown(Keys.A))
-        {
-            position.X -= velocity.X;
-            Effect = SpriteEffects.FlipHorizontally;
+            if(lastUsedspeed == "up")
+            {
+                position.Y -= speed;
+            }
+            else if (lastUsedspeed == "down")
+            {
+                position.Y += speed;
+            }
+            else if (lastUsedspeed == "right")
+            {
+                position.X += speed;
+            }
+            else if (lastUsedspeed == "left")
+            {
+                position.X -= speed;
+            }
         }
         if (ammo > 0 || ammo == -1)
         {
             // Player shooting
-            if (inputHelper.KeyPressed(Keys.Down))
-            {
-                Shoot(0);
-            }
-            else if (inputHelper.KeyPressed(Keys.Left))
+            if (inputHelper.IsKeyDown(Keys.Up))
             {
                 Shoot(1);
             }
-            else if (inputHelper.KeyPressed(Keys.Up))
+            else if (inputHelper.IsKeyDown(Keys.Down))
             {
                 Shoot(2);
             }
-            else if (inputHelper.KeyPressed(Keys.Right))
+            else if (inputHelper.IsKeyDown(Keys.Left))
             {
                 Shoot(3);
             }
-        }
-        if(state==true)
-        {
-            GameEnvironment.gameStateManager.SwitchTo("Leveling");
-            /*if (inputHelper.currentKeyboardState.IsKeyDown(Keys.N))
+            else if (inputHelper.IsKeyDown(Keys.Right))
             {
-                StateIncrease(1);
-                state = false;
+                Shoot(4);
             }
-            if (inputHelper.currentKeyboardState.IsKeyDown(Keys.M))
-            {
-                StateIncrease(2);
-                state = false;
-            }*/
         }
+        if(leveltokens > 0 && inputHelper.KeyPressed(Keys.O))
+        {
+            leveltokens--;
+            GameEnvironment.gameStateManager.SwitchTo("Leveling");
+        }
+    }
+
+    public override void Reset()
+    {
+        List<GameObject> RemoveBullets = new List<GameObject>();
+        health = 100;
+        maxhealth = 100;
+        //ammo = 20;
+        gold = 0;
+        level = 1;
+        exp = 0;
+        nextLevelExp = 100;
+        CalculateAmmo();
+        CalculateDamage();
+        foreach (Bullet bullet in PlayingState.player.bullets.Children)
+            RemoveBullets.Add(bullet);
+        foreach (Bullet bullet in RemoveBullets)
+            PlayingState.player.bullets.Remove(bullet);
     }
 
     public void NextLevel()
@@ -156,10 +203,12 @@ public class Player : SpriteGameObject
         {
             exp -= nextLevelExp;
             nextLevelExp += 20;
+            leveltokens++;
             level++;
             state = true;
         }
     }
+
     public void StateIncrease(int type)
     {
         if (type == 1)
@@ -172,13 +221,18 @@ public class Player : SpriteGameObject
             health += 50;
         }
     }
+
     public void Shoot(int direction)
     {
-        Bullet bullet = new Bullet(position, direction);
-        bullets.Add(bullet);
-        if (ammo > 1)
+        if (shoottimer == 0)
         {
-            ammo--;
+            IWeapon weapon = (IWeapon)inventory.currentWeapon;
+            weapon.Attack(direction);
+            if (ammo > 1)
+            {
+                ammo--;
+            }
+            shoottimer += weapon.AttackSpeed - attackspeedreduction;
         }
     }
 

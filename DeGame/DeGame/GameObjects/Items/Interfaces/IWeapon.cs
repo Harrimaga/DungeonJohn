@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,12 +18,12 @@ public interface IWeapon
         get;
     }
 
-    int AddedDamage
+    float AddedDamage
     {
         get;
     }
 
-    int DamageMultiplier
+    float DamageMultiplier
     {
         get;
     }
@@ -31,5 +32,32 @@ public interface IWeapon
     {
         get;
     }
+
+    float Projectile_Velocity
+    {
+        get;
+    }
+
+    float AttackSpeed
+    {
+        get;
+    }
+
+    float Range
+    {
+        get;
+    }
+
+    Texture2D BulletSpriteLeft
+    {
+        get;
+    }
+
+    Texture2D BulletSpriteUp
+    {
+        get;
+    }
+
+    void Attack(int direction);
 }
 
