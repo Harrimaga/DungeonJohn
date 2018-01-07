@@ -6,12 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class ItemAltar : SpriteGameObject
+class ItemSpawn : SpriteGameObject
 {
     //betere naam voor de class is welkom
     //als het een shopitem moet zijn dan is price true
-    bool itemGone = false, price;
-    public ItemAltar(Vector2 startPosition,bool Price, int layer = 0, string id = "ItemAltar")
+    Item item;
+    bool price, pickedUp = false;
+    public ItemSpawn(Vector2 startPosition,bool Price, int layer = 0, string id = "ItemAltar")
     : base("Sprites/Items/Altar", layer, id)
     {
         position = startPosition;
@@ -20,18 +21,19 @@ class ItemAltar : SpriteGameObject
     }
     void RandomItem()
     {
+        item = new HardHelmet();
         //TODO kiest een random item
-    }
-    void AddItemPlayer()
-    {
-        //TODO weet nog niet hoe je items aan player geeft
     }
     public override void Update(GameTime gameTime)
     {
-        if (CollidesWith(PlayingState.player) && (PlayingState.player.gold > 10 || !price))
+        if (CollidesWith(PlayingState.player) && !pickedUp && (PlayingState.player.gold >= 5 || !price))
         {
-            AddItemPlayer();
-            itemGone = true;
+            Player.inventory.addItemToInventory(item);
+            pickedUp = true;
+            if(price)
+            {
+                PlayingState.player.gold -= 5;
+            }
         }
     }
 
@@ -41,10 +43,11 @@ class ItemAltar : SpriteGameObject
         if (price)
         {
             //price voor onder de shopitem
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "10", position + new Vector2(18, 60), Color.Yellow);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "5", position + new Vector2(18, 60), Color.Yellow);
         }
-        if (itemGone)
+        if (!pickedUp)
         {
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName), position - new Vector2(0, 30));
             //TODO draw item van op de altar tot het gepakt is
         }
     }
