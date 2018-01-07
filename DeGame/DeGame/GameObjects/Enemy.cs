@@ -63,9 +63,7 @@ public class Enemy : SpriteGameObject
         RemoveBullets.Clear();
 
         healthbar.Update(gameTime, health, maxhealth, position);
-        foreach (Enemy enemy in Room.enemies.Children)
-        {
-            if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
+        if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
         {
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
@@ -73,9 +71,6 @@ public class Enemy : SpriteGameObject
             PlayingState.player.NextLevel();
             alive = false;
             GameObjectList.RemovedObjects.Add(this);
-        }
-    
-
         }
     }
 
