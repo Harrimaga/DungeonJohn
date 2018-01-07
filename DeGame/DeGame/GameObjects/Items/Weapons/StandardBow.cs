@@ -9,17 +9,25 @@ using Microsoft.Xna.Framework.Graphics;
 public class StandardBow : Item, IWeapon
 {
     bool melee, twoHanded;
-    int addedDamage, damageMultiplier, ammo;
+    float addedDamage, damageMultiplier, projectile_velocity, attackspeed, range;
+    int ammo;
+    Texture2D bulletleft, bulletup;
 
     public StandardBow()
     {
         melee = false;
         twoHanded = true;
-        addedDamage = 5;
+        addedDamage = 50;
         damageMultiplier = 1;
+        projectile_velocity = 10;
+        attackspeed = 50;
+        range = 800;
         ammo = -1;
         Type = "weapon";
-        itemName = "Standard Bow";
+        itemName = "StandardBow";
+        itemDescription = "Basic weapon with infinte ammo and suck damage.";
+        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardBow_BulletLeft");
+        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardBow_BulletUp");
     }
 
     public override void unequip()
@@ -27,7 +35,13 @@ public class StandardBow : Item, IWeapon
         ammo = PlayingState.player.ammo;
     }
 
-    public int AddedDamage
+    public void Attack(int direction)
+    {
+        Bullet bullet = new Bullet(PlayingState.player.position, direction);
+        PlayingState.player.bullets.Add(bullet);
+    }
+
+    public float AddedDamage
     {
         get
         {
@@ -43,7 +57,7 @@ public class StandardBow : Item, IWeapon
         }
     }
 
-    public int DamageMultiplier
+    public float DamageMultiplier
     {
         get
         {
@@ -66,5 +80,45 @@ public class StandardBow : Item, IWeapon
             return twoHanded;
         }
     }
-}
 
+    public float Projectile_Velocity
+    {
+        get
+        {
+            return projectile_velocity;
+        }
+    }
+
+    public float AttackSpeed
+    {
+        get
+        {
+            return attackspeed;
+        }
+    }
+
+    public float Range
+    {
+        get
+        {
+            return range;
+        }
+    }
+
+    public Texture2D BulletSpriteLeft
+    {
+        get
+        {
+            return bulletleft;
+        }
+    }
+
+    public Texture2D BulletSpriteUp
+    {
+        get
+        {
+            return bulletup;
+        }
+    }
+
+}

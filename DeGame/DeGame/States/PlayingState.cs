@@ -16,10 +16,12 @@ public class PlayingState : IGameObject
 
     public PlayingState()
     {
-
         player = new Player();
         floor = new Floor();
         currentFloor = floor;
+        Player.inventory.items.Add(new StandardBow());
+        Player.inventory.items.Add(new StandardBow());
+        Player.inventory.items.Add(new StandardBow());
         //enemy = new RangedEnemy(Vector2.Zero, 0, "Enemy");
     }
     public virtual void HandleInput(InputHelper inputHelper)

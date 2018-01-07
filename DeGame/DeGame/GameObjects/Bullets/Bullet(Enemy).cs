@@ -1,28 +1,25 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-//TODO: Damage regulation;
-//TODO: Friendly Fire?;
-class EnemyBullet : SpriteGameObject
+
+class E_Bullet : SpriteGameObject
 {
-    public EnemyBullet(Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base("Sprites/Random", layer, id)
+    public E_Bullet(string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
     {
-        position = Startpositon;
-        velocity = ((PlayingState.player.position - position) / 50) / 10;
+
     }
     public override void Update(GameTime gameTime)
     {
-        position += velocity;
         CheckCollision();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
+
     }
 
     public void CheckCollision()
@@ -30,7 +27,14 @@ class EnemyBullet : SpriteGameObject
         if (CollidesWith(PlayingState.player))
         {
             GameObjectList.RemovedObjects.Add(this);
-            PlayingState.player.health -= 0;
+            if(PlayingState.player.HardHelmet)
+            {
+                PlayingState.player.health -= 2;
+            }
+            if (!PlayingState.player.HardHelmet)
+            {
+                PlayingState.player.health -= 4;
+            }   
         }
         foreach (Solid solid in Room.solid.Children)
         {
@@ -41,3 +45,4 @@ class EnemyBullet : SpriteGameObject
         }
     }
 }
+

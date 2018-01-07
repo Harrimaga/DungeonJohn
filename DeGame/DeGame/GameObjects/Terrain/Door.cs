@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 class Door : Solid
 {
-    bool isdoor, onup = false, ondown = false, onleft = false, onright = false;
-    Vector2 doorposition, positionOld = PlayingState.player.position;
+    bool isdoor, onup = false, ondown = false, onleft = false, onright = false, closed = false;
     SpriteEffects Effect = SpriteEffects.None;
     Texture2D doorsprite, wallsprite;
     GameObjectList solid;
@@ -19,13 +18,14 @@ class Door : Solid
     : base(Startposition, layer, id)
     {
         solid = new GameObjectList();
-        doorposition = Startposition;
+        position = Startposition;
         direction = Direction;
         isdoor = Isdoor;
     }
 
     void ChooseSprite()
     {
+        closed = false;
         if (direction == 1 || direction == 2)
         {
             if (direction == 2)
@@ -35,8 +35,11 @@ class Door : Solid
             }
             else
                 wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Up2");
-            if (PlayingState.currentFloor.currentRoom.enemycounter > 0)
+            if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || PlayingState.currentFloor.doortimer > 0)
+            {
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorupclosed");
+                closed = true;
+            }
             else
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorup");
         }
@@ -45,12 +48,15 @@ class Door : Solid
             if (direction == 4)
             {
                 Effect = SpriteEffects.FlipHorizontally;
-                wallsprite = wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Right2");
+                wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Right2");
             }
             else
                 wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Left2");
-            if (PlayingState.currentFloor.currentRoom.enemycounter > 0)
+            if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || PlayingState.currentFloor.doortimer > 0)
+            {
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleftclosed");
+                closed = true;
+            }
             else
                 doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleft");
         }
@@ -58,91 +64,97 @@ class Door : Solid
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
-        if (PlayingState.currentFloor.currentRoom.enemycounter > 0)
+        if (CellWidth == 0)
+        {
+            CellWidth = PlayingState.currentFloor.currentRoom.CellWidth;
+            CellHeight = PlayingState.currentFloor.currentRoom.CellHeight;
+            roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
+            roomheight = PlayingState.currentFloor.currentRoom.roomheight;
+        }
+        if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || !isdoor || closed)
         {
             base.Update(gameTime);
-            if (CollidesWith(PlayingState.player))
-            {
-                PlayingState.player.position.X -= 10;
-            }
-            List<GameObject> RemoveBullets = new List<GameObject>();
-
-            foreach (Bullet bullet in PlayingState.player.bullets.Children)
-                if (CollidesWith(bullet))
-                    RemoveBullets.Add(bullet);
         }
-        if (!isdoor)
-            solid.Update(gameTime);
-        ControlCamera();
+        if (isdoor)
+            ControlCamera();
     }
 
     void ControlCamera()
     {
         Vector2 Cam = Camera.Position;
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+        if (PlayingState.currentFloor.currentRoom.enemycounter == 0 && CollidesWith(PlayingState.player) && PlayingState.currentFloor.doortimer == 0)
+            switch (direction)
+            {
+                case (1):
+                    PlayingState.player.position -= new Vector2(0, 3 * CellHeight);
+                    onup = true;
+                    PlayingState.currentFloor.doortimer = 50;
+                    break;
+                case (2):
+                    PlayingState.player.position += new Vector2(0, 3 * CellHeight + 40);
+                    ondown = true;
+                    PlayingState.currentFloor.doortimer = 50;
+                    break;
+                case (3):
+                    PlayingState.player.position -= new Vector2(3 * CellHeight, 0);
+                    onleft = true;
+                    PlayingState.currentFloor.doortimer = 50;
+                    break;
+                case (4):
+                    PlayingState.player.position += new Vector2(3 * CellHeight + 40, 0);
+                    onright = true;
+                    PlayingState.currentFloor.doortimer = 50;
+                    break;
+                default:
+                    break;
+            }
 
-        if (PlayingState.currentFloor.currentRoom.enemycounter == 0)
+        Vector2 CameraVelocity = new Vector2(0, 0);
+
+        if (direction == 1 && Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 30)
         {
-            if (isdoor && MiddleofPlayer.X >= doorposition.X && MiddleofPlayer.X <= doorposition.X + CellWidth)
-                if (MiddleofPlayer.Y >= doorposition.Y && MiddleofPlayer.Y <= doorposition.Y + CellHeight)                
-                    switch (direction)
-                    {
-                        case (1):
-                            PlayingState.player.position -= new Vector2(0, 2 * CellHeight + 30);
-                            onup = true;
-                            break;
-                        case (2):
-                            PlayingState.player.position += new Vector2(0, 2 * CellHeight + 30);
-                            ondown = true;
-                            break;
-                        case (3):
-                            PlayingState.player.position -= new Vector2(2 * CellHeight + 30, 0);
-                            onleft = true;
-                            break;
-                        case (4):
-                            PlayingState.player.position += new Vector2(2 * CellHeight + 30, 0);
-                            onright = true;
-                            break;
-                        default:
-                            break;
-                    }                
+            CameraVelocity = new Vector2(0, -roomheight / 30);
+            PlayingState.currentFloor.currentRoom.CameraMoving = true;
+        }
+        else if (direction == 2 && Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 30)
+        {
+            CameraVelocity = new Vector2(0, roomheight / 30);
+            PlayingState.currentFloor.currentRoom.CameraMoving = true;
+        }
+        else if (direction == 3 && Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 30)
+        {
+            CameraVelocity = new Vector2(-roomwidth / 30, 0);
+            PlayingState.currentFloor.currentRoom.CameraMoving = true;
+        }
+        else if (direction == 4 && Camera.Position.X < Cam.X + roomwidth && onright == true && counter < 30)
+        {
+            CameraVelocity = new Vector2(roomwidth / 30, 0);
+            PlayingState.currentFloor.currentRoom.CameraMoving = true;
         }
 
-            Vector2 CameraVelocity = new Vector2(0, 0);
-
-            if (direction == 1 && Camera.Position.Y > Cam.Y - roomheight && onup == true && counter < 180)
-                CameraVelocity = new Vector2(0, -roomheight / 180);
-            if (direction == 2 && Camera.Position.Y < Cam.Y + roomheight && ondown == true && counter < 180)
-                CameraVelocity = new Vector2(0, roomheight / 180);
-            if (direction == 3 && Camera.Position.X > Cam.X - roomwidth && onleft == true && counter < 180)
-                CameraVelocity = new Vector2(-roomwidth / 180, 0);
-            if (direction == 4 && Camera.Position.Y < Cam.X + roomwidth && onright == true && counter < 180)
-                CameraVelocity = new Vector2(roomwidth / 180, 0);
-
-            if ((onup || ondown || onleft || onright) && counter < 180)
-            {
-                Camera.Position += CameraVelocity;
-                counter++;
-            }
-
-            if (counter >= 180)
-            {
-                onup = false;
-                ondown = false;
-                onleft = false;
-                onright = false;
-                counter = 0;
-            }
+        if ((onup || ondown || onleft || onright) && counter < 30)
+        {
+            Camera.Position += CameraVelocity;
+            counter++;
         }
-    
+
+        if (counter >= 30)
+        {
+            onup = false;
+            ondown = false;
+            onleft = false;
+            onright = false;
+            counter = 0;
+            PlayingState.currentFloor.currentRoom.CameraMoving = false;
+        }
+    }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         //ad
         ChooseSprite();
-        spriteBatch.Draw(wallsprite, doorposition, Color.Gray);
+        spriteBatch.Draw(wallsprite, position, Color.Gray);
         if (isdoor)
-            spriteBatch.Draw(doorsprite, doorposition, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
+            spriteBatch.Draw(doorsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
     }
 }
