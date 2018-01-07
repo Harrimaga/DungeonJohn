@@ -12,6 +12,7 @@ class EnemyBullet : E_Bullet
 {
     Vector2 direction;
     float speed;
+
     public EnemyBullet(Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base("Sprites/Random", layer, id)
     {
         position = Startpositon;

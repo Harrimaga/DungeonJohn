@@ -17,10 +17,12 @@ public class Enemy : SpriteGameObject
     public Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
     protected Vector2 Roomposition;
+    public GameObjectList bullets;
 
     public Enemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy")
     : base("Sprites/BearEnemy", layer, id)
     {
+        bullets = new GameObjectList();
         healthbar = new HealthBar(health, maxhealth, position);
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
         position = startPosition;
@@ -44,6 +46,7 @@ public class Enemy : SpriteGameObject
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
         healthbar.Update(gameTime, health, maxhealth, position);
+        bullets.Update(gameTime);
 
         if (health <= 0 && alive == true)
         {
@@ -54,11 +57,14 @@ public class Enemy : SpriteGameObject
             alive = false;
             GameObjectList.RemovedObjects.Add(this);
         }
+    
+        
     }
-
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        bullets.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch);
+        
     }
 
     public bool CheckDown()
@@ -212,6 +218,30 @@ public class Enemy : SpriteGameObject
                         enemy.position.Y++;
                 }
             }
+        }
+    }
+
+    public void Shoot()
+    {
+        if (PlayingState.player.position.Y > position.Y)
+        {
+            EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, sprite.Height));
+            bullets.Add(bullet);
+        }
+        if (PlayingState.player.position.Y < position.Y)
+        {
+            EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
+            bullets.Add(bullet);
+        }
+        if (PlayingState.player.position.X > position.X)
+        {
+            EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
+            bullets.Add(bullet);
+        }
+        if (PlayingState.player.position.X < position.Y)
+        {
+            EnemyBullet bullet = new EnemyBullet(position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
+            bullets.Add(bullet);
         }
     }
 }

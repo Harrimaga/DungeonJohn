@@ -88,7 +88,6 @@ public class Boss1 : Boss
             if (DamageRectangle.Intersects(PlayingState.player.BoundingBox))
             {
                 PlayingState.player.health -= 150;
-                Console.WriteLine("afds");
             }
         }
     }
