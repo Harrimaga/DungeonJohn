@@ -9,10 +9,18 @@ using System.Threading.Tasks;
 
 class MainMenuState : IGameObject
 {
-    //public static bool reset = false;
+    Button start, option;
+
+    public MainMenuState()
+    {
+       start = new Button(new Vector2(620, 400), "Start", "Start","StartPressed",true, 1);
+       option = new Button(new Vector2(620, 600), "Option", "Option", "OptionPressed", true, 1);
+    }
     public virtual void HandleInput(InputHelper inputHelper)
     {
-        if (inputHelper.KeyPressed(Keys.Space))
+        start.HandleInput(inputHelper);
+        option.HandleInput(inputHelper);
+        if (inputHelper.KeyPressed(Keys.Space) || start.Pressed)
         {
             GameEnvironment.gameStateManager.SwitchTo("Playing");
             Reset();
@@ -20,10 +28,14 @@ class MainMenuState : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/NewBTeam"), new Vector2(-300, -300));
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/bteam"), new Vector2(-200, -200));
+        start.Draw(gameTime, spriteBatch);
+        option.Draw(gameTime, spriteBatch);
     }
     public virtual void Update(GameTime gameTime)
     {
+        start.Update(gameTime);
+        option.Update(gameTime);
         Camera.Position = new Vector2(0,0);
     }
     public virtual void Reset()

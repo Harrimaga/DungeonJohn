@@ -1,25 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RoyT.AStar;
 
 public class Enemy : SpriteGameObject
 {
-    protected float health = 100;
+    public float health = 100;
     protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
-    protected float range;
+    protected float range = 200;
     protected float expGive = 120;
     protected bool alive = true;
     protected int counter = 100;
     protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
     public SpriteEffects Effects;
-    Texture2D playersprite;
+    public Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
     protected Vector2 Roomposition;
 
@@ -35,35 +30,22 @@ public class Enemy : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
-        if (CollidesWith(PlayingState.player))
-        {
-            counter--;
-            if (counter == 0)
-            {
-                velocity = Vector2.Zero;
-                //PlayingState.player.health -= 5;
-                counter = 100;
-            }
-        }
-        else
-            velocity = basevelocity;
-
         List<GameObject> RemoveBullets = new List<GameObject>();
 
+        base.Update(gameTime);
+        CollisionWithEnemy();
         foreach (Bullet bullet in PlayingState.player.bullets.Children)        
             if (CollidesWith(bullet))
             {
                 health -= PlayingState.player.attack;
                 RemoveBullets.Add(bullet);
-            }        
-
+            }
         foreach (Bullet bullet in RemoveBullets)        
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
-
         healthbar.Update(gameTime, health, maxhealth, position);
-        if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
+
+        if (health <= 0 && alive == true)
         {
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
@@ -76,15 +58,15 @@ public class Enemy : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        healthbar.Draw(spriteBatch, position);
+        healthbar.Draw(spriteBatch);
     }
 
     public bool CheckDown()
     {
         Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y + sprite.Height, 60, 60);
         foreach (Solid solid in Room.solid.Children)
-        if (CheckDown.Intersects(solid.BoundingBox))        
-            return true;        
+            if (CheckDown.Intersects(solid.BoundingBox))
+                return true;       
         return false;
     }
     public bool CheckUp()
@@ -112,7 +94,7 @@ public class Enemy : SpriteGameObject
         return false;
     }
 
-    public virtual void Chase()
+    public void Chase()
     {
         // Create a new grid and let each cell have a default traversal cost of 1.0
         //var grid = new Grid(100, 100, 1.0f);
@@ -132,8 +114,8 @@ public class Enemy : SpriteGameObject
         // var movementPattern = new[] { new Offset(-1, 0), new Offset(0, -1) };
         // var path = grid.GetPath(new Position(0, 0), new Position(99, 99), movementPattern);
 
-
         //Position[] path = grid.GetPath(new Position(0, 0), new Position(99, 99));
+
         if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
         {
             position.Y -= velocity.Y;
@@ -153,37 +135,83 @@ public class Enemy : SpriteGameObject
             Effects = SpriteEffects.FlipHorizontally;
         }
 
-        if (CheckUp() == true && position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
+        if (CheckUp())
         {
-            position.X -= velocity.X;
+            if (CheckLeft() == false && position.X + playersprite.Width > PlayingState.player.position.X + 1)
+            {
+                position.X -= velocity.X;
+            }
+            if (CheckRight() == false && position.X + playersprite.Width < PlayingState.player.position.X - 1)
+            {
+                position.X += velocity.X;
+            }
         }
-        if (CheckUp() == true && position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
+        else
         {
-            position.X += velocity.X;
+            if (CheckRight() == true && position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
+            {
+                position.Y -= velocity.Y;
+            }
+            if (CheckLeft() == true && position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
+            {
+                position.Y -= velocity.Y;
+            }
         }
-        if (CheckDown() == true && position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
+        if (CheckDown())
         {
-            position.X -= velocity.X;
+            if (CheckLeft() == false && position.X + playersprite.Width > PlayingState.player.position.X + 1)
+            {
+                position.X -= velocity.X;
+            }
+            if (CheckRight() == false && position.X + playersprite.Width < PlayingState.player.position.X - 1)
+            {
+                position.X += velocity.X;
+            }
         }
-        if (CheckDown() == true && position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
+        else
         {
-            position.X += velocity.X;
+            if (CheckRight() == true && position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
+            {
+                position.Y += velocity.Y;
+            }
+
+            if (CheckLeft() == true && position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
+            {
+                position.Y += velocity.Y;
+            }
         }
-        if (CheckRight() == true && position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
+    }
+
+    public void CollisionWithEnemy()
+    {
+        foreach (Enemy enemy in Room.enemies.Children)
         {
-            position.Y += velocity.Y;
-        }
-        if (CheckRight() == true && position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
-        {
-            position.Y -= velocity.Y;
-        }
-        if (CheckLeft() == true && position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
-        {
-            position.Y += velocity.Y;
-        }
-        if (CheckLeft() == true && position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
-        {
-            position.Y -= velocity.Y;
+            if (enemy != this)
+            {
+                if (CollidesWith(enemy) && BoundingBox.Left < enemy.position.X + enemy.Width && BoundingBox.Left + (enemy.Width / 2) > enemy.position.X + enemy.Width)
+                {
+                    if (CollidesWith(enemy))
+                        enemy.position.X--;
+                }
+
+                if (CollidesWith(enemy) && BoundingBox.Right > enemy.position.X && BoundingBox.Right - (enemy.Width / 2) < enemy.position.X)
+                {
+                    if (CollidesWith(enemy))
+                        enemy.position.X++;
+                }
+
+                if (CollidesWith(enemy) && BoundingBox.Top < enemy.position.Y + enemy.Height && BoundingBox.Top + (enemy.Height / 2) > enemy.position.Y + enemy.Height)
+                {
+                    if (CollidesWith(enemy))
+                        enemy.position.Y--;
+                }
+
+                if (CollidesWith(enemy) && BoundingBox.Bottom > enemy.position.Y && BoundingBox.Bottom - (enemy.Height / 2) < enemy.position.Y)
+                {
+                    if (CollidesWith(enemy))
+                        enemy.position.Y++;
+                }
+            }
         }
     }
 }

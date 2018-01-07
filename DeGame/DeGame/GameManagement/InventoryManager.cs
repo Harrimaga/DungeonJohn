@@ -10,13 +10,13 @@ public class InventoryManager
     public Item currentHelmet, currentArmour, currentBoots, currentWeapon, currentShield;
 
     public Item[] currentPassives;
-    List<Item> items;
+    public List<Item> items;
 
     public InventoryManager()
     {
-        currentHelmet = null;
+        currentHelmet = new HardHelmet();
         currentArmour = null;
-        currentBoots = null;
+        currentBoots = new CoolBoots();
         currentWeapon = new StandardBow();
         currentShield = null;
         currentPassives = new Item[2];
