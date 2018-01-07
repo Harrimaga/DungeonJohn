@@ -12,6 +12,8 @@ class ItemSpawn : SpriteGameObject
     //als het een shopitem moet zijn dan is price true
     Item item;
     bool price, pickedUp = false;
+    Random random = new Random();
+
     public ItemSpawn(Vector2 startPosition,bool Price, int layer = 0, string id = "ItemAltar")
     : base("Sprites/Items/Altar", layer, id)
     {
@@ -21,7 +23,11 @@ class ItemSpawn : SpriteGameObject
     }
     void RandomItem()
     {
-        item = new HardHelmet();
+        int r = random.Next(2);
+        if (r == 0)
+            item = new Mac10();
+        else
+            item = new HardHelmet();
         //TODO kiest een random item
     }
     public override void Update(GameTime gameTime)

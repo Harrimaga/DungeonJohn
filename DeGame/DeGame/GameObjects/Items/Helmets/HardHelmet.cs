@@ -14,11 +14,11 @@ class HardHelmet : Item, IHelmet
     public void Equip()
     {
         PlayingState.player.HardHelmet = true;
-        PlayingState.player.speed--;
+        PlayingState.player.extraspeed--;
     }
-    public void Unequip()
+    public void unequip()
     {
         PlayingState.player.HardHelmet = false;
-        PlayingState.player.speed++;
+        PlayingState.player.extraspeed++;
     }
 }
