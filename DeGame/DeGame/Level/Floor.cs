@@ -31,6 +31,7 @@ public class Floor
 
     void FloorGenerator()
     {
+        FloorGenerated = false;
         ClearFloor();
         int RoomAmount = random.Next(maxRooms - minRooms + 1) + minRooms;
         int x = random.Next(floorWidth - 2) + 2;
@@ -249,7 +250,6 @@ public class Floor
         AdjacentRooms = new int[floorWidth, floorHeight];
         floor[4, 4] = new Room(6, 4, 4);
         CurrentLevel++;
-        FloorGenerated = false;
     }
     public void NextFloor()
     {
@@ -264,7 +264,6 @@ public class Floor
         }
         FloorGenerator();
         CurrentLevel++;
-        FloorGenerated = false;
     }
 
     public void ResetFloor()
@@ -277,17 +276,18 @@ public class Floor
         minRooms = 3;
         CurrentLevel = 1;
         FloorGenerator();
-        FloorGenerated = false;
         PlayingState.player.Reset();
     }
 
     public void Update(GameTime gameTime)
     {
         foreach (Room room in floor)
-            if (room != null && room.position == currentRoom.position)
-            {
+        {
+            if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
+            || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1)))
                 room.Update(gameTime);
-            }
+        }
+
         if (doortimer > 0)
         {
             doortimer--;
@@ -311,7 +311,8 @@ public class Floor
         int FloorCellHeight = 15;
         int currentroomx = (int) PlayingState.player.position.X / 1260;
         int currentroomy = (int) PlayingState.player.position.Y / 900;
-        currentRoom = floor[currentroomx, currentroomy];
+        if (floor[currentroomx, currentroomy] != null)
+            currentRoom = floor[currentroomx, currentroomy];
 
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
@@ -332,7 +333,7 @@ public class Floor
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                             break;
                     }
-                    if (currentRoom.position == new Vector2(x, y))
+                    if (currentRoom == floor[x,y])
                     {
                         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/CurrentMinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                     }
@@ -348,23 +349,22 @@ public class Floor
 
         foreach (Room room in floor)
         {
-            if (room != null)
-            {
-                if (!FloorGenerated)
-                    room.LoadTiles();
-                if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
-                || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1)))
-                    room.Draw(gameTime, spriteBatch);
-            }
+            if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
+            || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1)))
+                room.Draw(gameTime, spriteBatch);
         }
 
         if (!FloorGenerated)
         {
+            foreach (Room room in floor)
+                if (room != null)
+                    room.LoadTiles();
             PlayingState.player.position = startPlayerPosition - new Vector2(23, 22);
             Camera.Position = startPlayerPosition + new Vector2(170, 0);
             FloorGenerated = true;
         }
-        else
+
+        if (FloorGenerated)
         {
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUDbackground")), new Vector2(screenwidth - 340 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2)));
             DrawMinimap(spriteBatch);
