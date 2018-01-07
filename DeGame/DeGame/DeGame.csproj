@@ -72,6 +72,7 @@
     <Compile Include="GameObjects\Bullets\BossBullet.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28player%29.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
+    <Compile Include="GameObjects\Items\Armour\MageJacket.cs" />
     <Compile Include="GameObjects\Items\Boots\CoolBoots.cs" />
     <Compile Include="GameObjects\Items\Helmets\HardHelmet.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IArmour.cs" />
@@ -201,6 +202,7 @@
     <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\Items\Altar.png" />
     <Content Include="Content\Sprites\Items\HardHelmet.png" />
+    <Content Include="Content\Sprites\Items\MageJacket.png" />
     <Content Include="Content\Sprites\Items\StandardBow.png" />
     <Content Include="Content\Sprites\Lava.png" />
     <Content Include="Content\Sprites\LevelUp.png" />
@@ -236,7 +238,6 @@
   <ItemGroup>
     <Folder Include="Content\Roomlist\" />
     <Folder Include="Content\Sprites\PauseMenu\" />
-    <Folder Include="GameObjects\Items\Armour\" />
     <Folder Include="GameObjects\Items\Passives\" />
     <Folder Include="GameObjects\Items\Shields\" />
   </ItemGroup>
