@@ -17,7 +17,7 @@ public class InventoryManager
         currentHelmet = null;
         currentArmour = null;
         currentBoots = new CoolBoots();
-        currentWeapon = new StandardBow();
+        currentWeapon = new Mac10();
         currentShield = null;
         currentPassives = new Item[2];
         items = new List<Item>();
