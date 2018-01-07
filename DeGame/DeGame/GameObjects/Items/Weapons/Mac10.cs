@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class StandardBow : Item, IWeapon
+public class Mac10 : Item, IWeapon
 {
     bool melee, twoHanded;
     float addedDamage, damageMultiplier, projectile_velocity, attackspeed, range;
     int ammo;
     Texture2D bulletleft, bulletup;
 
-    public StandardBow()
+    public Mac10()
     {
         melee = false;
-        twoHanded = true;
-        addedDamage = 50;
+        twoHanded = false;
+        addedDamage = 8;
         damageMultiplier = 1;
-        projectile_velocity = 10;
-        attackspeed = 50;
-        range = 800;
-        ammo = -1;
+        projectile_velocity = 12;
+        attackspeed = 6;
+        range = 600;
+        ammo = 200;
         Type = "weapon";
-        itemName = "StandardBow";
-        itemDescription = "Basic weapon with infinte ammo and suck damage.";
-        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardBow_BulletLeft");
-        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardBow_BulletUp");
+        itemName = "Mac10";
+        itemDescription = "You ought to know this weapon by now.";
+        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Items/Mac10_BulletLeft");
+        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Items/Mac10_BulletUp");
     }
 
     public override void unequip()
@@ -37,7 +37,7 @@ public class StandardBow : Item, IWeapon
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2( 0, GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 4), direction);
+        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 4), direction);
         PlayingState.player.bullets.Add(bullet);
     }
 
