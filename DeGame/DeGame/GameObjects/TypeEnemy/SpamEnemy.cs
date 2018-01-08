@@ -55,45 +55,16 @@ public class SpamEnemy : Enemy
             EnemyBullet bullet = new EnemyBullet(position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
             Room.enemybullets.Add(bullet);
         }
-
-        //if (PlayingState.player.position.Y > position.Y && PlayingState.player.position.X > position.X && PlayingState.player.position.X < position.X)
-        //{
-        //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, sprite.Height));
-        //    Room.enemybullets.Add(bullet);
-        //}
-        //if (PlayingState.player.position.Y < position.Y && PlayingState.player.position.X > position.X && PlayingState.player.position.X < position.X)
-        //{
-        //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
-        //    Room.enemybullets.Add(bullet);
-        //}
-        //if (PlayingState.player.position.X > position.X && PlayingState.player.position.Y > position.Y && PlayingState.player.position.Y < position.Y)
-        //{
-        //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
-        //    Room.enemybullets.Add(bullet);
-        //}
-        //if (PlayingState.player.position.X < position.X && PlayingState.player.position.Y > position.Y && PlayingState.player.position.Y < position.Y)
-        //{
-        //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
-        //    Room.enemybullets.Add(bullet);
-        //}
     }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Range();
-        //if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
-        //{
-        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
-        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
-        //    PlayingState.player.exp += expGive;
-        //    alive = false;
-        //    GameObjectList.RemovedObjects.Add(this);
-        //}
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/CutieEnemy"), position);
     }
 }
