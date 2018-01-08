@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class Pit : SpriteGameObject
+class Pit : Tiles
 {
     public Pit(Vector2 startPosition, int layer = 0, string id = "Pit")
-        : base("Sprites/PitTile", layer, id)
+        : base(startPosition, layer, id)
     {
         position = startPosition;
     }
@@ -20,7 +20,8 @@ class Pit : SpriteGameObject
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
         if (BoundingBox.Contains(MiddleofPlayer.X, MiddleofPlayer.Y))
         {
-            PlayingState.player.health--;
+            GameEnvironment.gameStateManager.AddGameState("PitState", new PitState());
+            GameEnvironment.gameStateManager.SwitchTo("PitState");
         }
     }
 

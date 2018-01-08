@@ -268,6 +268,8 @@ public class Room : GameObjectList
 
             case ("O"):
                 Pit pit = new Pit(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Pit");
+                tiles.Add(pit);
+                roomarray[x, y] = "Background";
                 break;
 
             case ("-"):
