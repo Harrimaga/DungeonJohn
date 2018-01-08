@@ -22,32 +22,29 @@ class Solid : SpriteGameObject
         base.Update(gameTime);
         if (CollidesWith(PlayingState.player))
         {
-            PlayingState.player.onSolid = true;
             OnThisTile = true;
         }
         else
             OnThisTile = false;
+        SolidCollision();
+    }
 
-        if (CollidesWith(PlayingState.player) && BoundingBox.Left < PlayingState.player.position.X + PlayingState.player.Width && BoundingBox.Left + (PlayingState.player.Width/2) > PlayingState.player.position.X + PlayingState.player.Width)
-        {
-            while (CollidesWith(PlayingState.player))
-                PlayingState.player.position.X--;
-        }
-        if (CollidesWith(PlayingState.player) && BoundingBox.Right > PlayingState.player.position.X && BoundingBox.Right - (PlayingState.player.Width / 2) < PlayingState.player.position.X)
-        {
-            while (CollidesWith(PlayingState.player))
-                PlayingState.player.position.X++;
-        }
-        if (CollidesWith(PlayingState.player) && BoundingBox.Top < PlayingState.player.position.Y + PlayingState.player.Height && BoundingBox.Top + (PlayingState.player.Height / 2) > PlayingState.player.position.Y + PlayingState.player.Height)
-        {
-            while (CollidesWith(PlayingState.player))
-                PlayingState.player.position.Y--;
-        }
-        if (CollidesWith(PlayingState.player) && BoundingBox.Bottom > PlayingState.player.position.Y && BoundingBox.Bottom - (PlayingState.player.Height / 2) <  PlayingState.player.position.Y)
-        {
+    void SolidCollision()
+    {
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, -(GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2))))
             while (CollidesWith(PlayingState.player))
                 PlayingState.player.position.Y++;
-        }
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, (GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2))))
+            while (CollidesWith(PlayingState.player))
+                PlayingState.player.position.Y--;
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(-(GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2), 0)))
+            while (CollidesWith(PlayingState.player))
+                PlayingState.player.position.X++;
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2((GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2), 0)))
+            while (CollidesWith(PlayingState.player))
+                PlayingState.player.position.X--;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

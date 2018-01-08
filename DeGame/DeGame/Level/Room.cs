@@ -218,10 +218,16 @@ public class Room : GameObjectList
             }
             if (onicecounter == 0)
                 PlayingState.player.onIce = false;
+            else
+                PlayingState.player.onIce = true;
             if (onwebcounter == 0)
                 PlayingState.player.onWeb = false;
+            else
+                PlayingState.player.onWeb = true;
             if (onSolidcounter == 0)
                 PlayingState.player.onSolid = false;
+            else
+                PlayingState.player.onSolid = true;
         }
     }
 
