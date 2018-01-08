@@ -15,17 +15,19 @@ public class InventoryManager
     public InventoryManager()
     {
         currentHelmet = new HardHelmet();
-        currentArmour = null;
+        currentArmour = new MageJacket();
         currentBoots = new CoolBoots();
         currentWeapon = new StandardBow();
         currentShield = null;
         currentPassives = new Item[2];
+        currentPassives[0] = new BloodRing();
+        currentPassives[1] = null;
         items = new List<Item>();
     }
 
     public void equip(Item item)
     {
-        switch(item.Type)
+        switch (item.Type)
         {
             case "helmet":
                 if (currentHelmet != null)
@@ -93,7 +95,7 @@ public class InventoryManager
                 PlayingState.player.CalculateDamage();
                 break;
         }
-    }
+    }    
 
     public void addItemToInventory(Item item)
     {

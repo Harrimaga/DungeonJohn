@@ -43,10 +43,11 @@ public class Floor
             SpawnItemRoom();
         SpawnBossRoom(x, y);
         DoorCheck();
+        FloorGenerated = false;
     }
     int RandomRoom()
     {
-        return random.Next(2) + 4 ;
+        return random.Next(2) + 4;
     }
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
@@ -115,8 +116,9 @@ public class Floor
                 x = random.Next(floorWidth - 2) + 2;
                 y = random.Next(floorHeight - 2) + 2;
                 floor[x, y] = new Room(1, x, y);
+                currentRoom = floor[x, y];
                 FloorGeneratorRecursive(x, y, RoomAmount);
-            }                       
+            }
         }
     }
 
@@ -138,7 +140,7 @@ public class Floor
         {
             q = random.Next(b);
             CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
-            while (AdjacentRooms[possiblespecial[q,0], possiblespecial[q,1]] != 1)
+            while (AdjacentRooms[possiblespecial[q, 0], possiblespecial[q, 1]] != 1)
             {
                 q = random.Next(b - 1);
                 CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
@@ -146,7 +148,7 @@ public class Floor
         }
         floor[possiblespecial[q, 0], possiblespecial[q, 1]] = new Room(3, possiblespecial[q, 0], possiblespecial[q, 1]);
         possiblespecial[q, 0] = possiblespecial[b, 0];
-        possiblespecial[q, 1] = possiblespecial[b, 1];            
+        possiblespecial[q, 1] = possiblespecial[b, 1];
     }
 
     void SpawnBossRoom(int x, int y)
@@ -154,7 +156,7 @@ public class Floor
         int DistancefromStart = 0;
         int bossx = 4, bossy = 4;
         for (int a = 0; a <= b; a++)
-            if (CanSpawnSpecialRoom(possiblespecial[a,0], possiblespecial[a,1]) && Math.Abs(x - possiblespecial[a, 0]) + Math.Abs(y - possiblespecial[a, 1]) > DistancefromStart)
+            if (CanSpawnSpecialRoom(possiblespecial[a, 0], possiblespecial[a, 1]) && Math.Abs(x - possiblespecial[a, 0]) + Math.Abs(y - possiblespecial[a, 1]) > DistancefromStart)
             {
                 bossx = possiblespecial[a, 0];
                 bossy = possiblespecial[a, 1];
@@ -228,7 +230,7 @@ public class Floor
         AdjacentRooms[x, y] = neighbours;
         return RoomSpawnChance * SpawnChanceReduction / 10;
     }
-    
+
     void ClearFloor()
     {
         for (int x = 0; x < floorWidth; x++)
@@ -240,23 +242,22 @@ public class Floor
             }
         b = 0;
         CurrentRooms = 1;
-    }
-    public void NextShop()
-    {
-        ClearFloor();
         floor = new Room[floorWidth, floorHeight];
         Checked = new bool[floorWidth, floorHeight];
         AdjacentRooms = new int[floorWidth, floorHeight];
+    }
+
+    public void NextShop()
+    {
+        ClearFloor();
         floor[4, 4] = new Room(6, 4, 4);
         CurrentLevel++;
         FloorGenerated = false;
     }
+
     public void NextFloor()
     {
         ClearFloor();
-        floor = new Room[floorWidth, floorHeight];
-        Checked = new bool[floorWidth, floorHeight];
-        AdjacentRooms = new int[floorWidth, floorHeight];
         if (CurrentLevel <= 10)
         {
             maxRooms += 2;
@@ -264,20 +265,15 @@ public class Floor
         }
         FloorGenerator();
         CurrentLevel++;
-        FloorGenerated = false;
     }
 
     public void ResetFloor()
     {
         ClearFloor();
-        floor = new Room[floorWidth, floorHeight];
-        Checked = new bool[floorWidth, floorHeight];
-        AdjacentRooms = new int[floorWidth, floorHeight];
         maxRooms = 5;
         minRooms = 3;
         CurrentLevel = 1;
         FloorGenerator();
-        FloorGenerated = false;
         PlayingState.player.Reset();
     }
 
@@ -301,7 +297,7 @@ public class Floor
         if (inputHelper.KeyPressed(Keys.R))
             ResetFloor();
     }
-
+    
     void DrawMinimap(SpriteBatch spriteBatch)
     {
         //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
@@ -309,16 +305,15 @@ public class Floor
         //krijgt soms 0 mee van currentroom
         int FloorCellWidth = 15;
         int FloorCellHeight = 15;
-        int currentroomx = (int) PlayingState.player.position.X / 1260;
-        int currentroomy = (int) PlayingState.player.position.Y / 900;
-        currentRoom.position = new Vector2(currentroomx, currentroomy);
+        int currentroomx = (int)PlayingState.player.position.X / 1260;
+        int currentroomy = (int)PlayingState.player.position.Y / 900;
         currentRoom = floor[currentroomx, currentroomy];
 
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
-                if (floor[x, y] != null) //&& floor[x,y].Visited)
+                if (floor[x, y] != null /*&& floor[x,y].Visited == true*/)
                 {
-                    switch (floor[x,y].RoomListIndex)
+                    switch (floor[x, y].RoomListIndex)
                     {
                         case (1):
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapStartTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
@@ -365,15 +360,17 @@ public class Floor
             Camera.Position = startPlayerPosition + new Vector2(170, 0);
             FloorGenerated = true;
         }
-        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUDbackground")), new Vector2(screenwidth - 340 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2)));
-        DrawMinimap(spriteBatch);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2),(Camera.Position.Y - screenheight / 2) + 50), Color.White);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.Yellow);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), enemycount, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 450), Color.White);
-
+        else
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUDbackground")), new Vector2(screenwidth - 340 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2)));
+            DrawMinimap(spriteBatch);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 50), Color.White);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.Yellow);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), enemycount, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 450), Color.White);
+        }
         wornItems.Position = new Vector2(screenwidth - 300 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 510);
         wornItems.Draw(gameTime, spriteBatch);
-                  
+
     }
 }
 
