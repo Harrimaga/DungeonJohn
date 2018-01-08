@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class RangedEnemy : Enemy
 {
     public static GameObjectList bullets;
-    int Counter = 100;
+    int Counter = 0;
 
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
@@ -31,7 +31,7 @@ public class RangedEnemy : Enemy
         {
             Chase();
         }
-        if(Counter >= 200)
+        if(Counter >= 100)
         {
             Shoot();
             Counter = 0;

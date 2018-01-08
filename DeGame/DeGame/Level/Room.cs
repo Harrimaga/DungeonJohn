@@ -107,6 +107,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "ChasingEnemy";
                 CreateObject(x, y, "C");
                 break;
+            case 'Q':
+                roomarray[x, y] = "SpamEnemy";
+                CreateObject(x, y, "Q");
+                break;
             case 'R':
                 roomarray[x, y] = "RangedEnemy";
                 CreateObject(x, y, "R");
@@ -226,6 +230,12 @@ public class Room : GameObjectList
             case ("R"):
                 Enemy enemyRanged = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
+                roomarray[x, y] = "Background";
+                enemycounter++;
+                break;
+            case ("Q"):
+                Enemy enemySpam = new SpamEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "SpamEnemy");
+                enemies.Add(enemySpam);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
@@ -388,6 +398,9 @@ public class Room : GameObjectList
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
                                 break;
                             case "ChasingEnemy":
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
+                                break;
+                            case "SpamEnemy":
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
                                 break;
                             default:
