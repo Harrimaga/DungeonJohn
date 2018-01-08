@@ -12,6 +12,8 @@ public class Boss1 : Boss
     int Counter = 30;
     Texture2D playersprite, bulletsprite;
     BossBullet bullet1, bullet2, bullet3;
+    Vector2 Roomposition;
+
     public Boss1(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
     {
         Bullets = new GameObjectList();
@@ -19,6 +21,8 @@ public class Boss1 : Boss
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/BossBullet");
         velocity = new Vector2(1, 1);
+        velocity.Normalize();
+        Roomposition = roomposition;
     }
 
     public override void Update(GameTime gameTime)
@@ -26,7 +30,10 @@ public class Boss1 : Boss
         Bullets.Update(gameTime);
         HomingBullets.Update(gameTime);
         base.Update(gameTime);
-        Shoot();
+        if (PlayingState.currentFloor.currentRoom.position == Roomposition)
+        {
+            Shoot();
+        }
         HomingBullet();
     }
 

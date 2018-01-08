@@ -251,6 +251,7 @@ public class Floor
     {
         ClearFloor();
         floor[4, 4] = new Room(6, 4, 4);
+        currentRoom = floor[4, 4];
         CurrentLevel++;
         FloorGenerated = false;
     }
@@ -296,8 +297,10 @@ public class Floor
             NextFloor();
         if (inputHelper.KeyPressed(Keys.R))
             ResetFloor();
-    }
-    
+        if (inputHelper.KeyPressed(Keys.I))
+            PlayingState.player.position.X -= 500;
+    }   
+
     void DrawMinimap(SpriteBatch spriteBatch)
     {
         //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
@@ -307,10 +310,14 @@ public class Floor
         int FloorCellHeight = 15;
         int currentroomx = (int)PlayingState.player.position.X / 1260;
         int currentroomy = (int)PlayingState.player.position.Y / 900;
-        currentRoom = floor[currentroomx, currentroomy];
+        if (floor[currentroomx, currentroomy] != null)
+            currentRoom = floor[currentroomx, currentroomy];
+        else
+            currentRoom.position = new Vector2(currentroomx, currentroomy);
 
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
+            {
                 if (floor[x, y] != null /*&& floor[x,y].Visited == true*/)
                 {
                     switch (floor[x, y].RoomListIndex)
@@ -328,11 +335,12 @@ public class Floor
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                             break;
                     }
-                    if (currentRoom.position == new Vector2(x, y))
-                    {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/CurrentMinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
-                    }
                 }
+                if (currentRoom.position == new Vector2(x, y))
+                {
+                    spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/CurrentMinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                }
+            }
         //TODO alleen kamer tekenen op minimap als de speler er is geweest
     }
 

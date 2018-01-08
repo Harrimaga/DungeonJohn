@@ -53,7 +53,6 @@ public class Enemy : SpriteGameObject
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();
             alive = false;
             GameObjectList.RemovedObjects.Add(this);
         }
