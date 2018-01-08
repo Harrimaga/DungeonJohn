@@ -10,8 +10,8 @@ class CoolBoots : Item, IBoots
     {
         itemName = "CoolBoots";
         itemDescription = "Boots that can withstand lava much better than the average foot";
-        PlayingState.player.CoolBoots = true;
-        PlayingState.player.extraspeed += 2;
+        //PlayingState.player.CoolBoots = true;
+        //PlayingState.player.extraspeed += 2;
     }
 
     public override void equip()
