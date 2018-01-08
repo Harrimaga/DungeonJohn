@@ -15,11 +15,13 @@ public class InventoryManager
     public InventoryManager()
     {
         currentHelmet = new HardHelmet();
-        currentArmour = null;
-        currentBoots = null;
+        currentArmour = new MageJacket();
+        currentBoots = new CoolBoots();
         currentWeapon = new StandardBow();
         currentShield = null;
         currentPassives = new Item[2];
+        currentPassives[0] = new BloodRing();
+        currentPassives[1] = null;
         items = new List<Item>();
     }
 

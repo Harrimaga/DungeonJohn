@@ -297,7 +297,7 @@ public class Floor
         if (inputHelper.KeyPressed(Keys.R))
             ResetFloor();
     }
-
+    
     void DrawMinimap(SpriteBatch spriteBatch)
     {
         //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
@@ -311,7 +311,7 @@ public class Floor
 
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
-                if (floor[x, y] != null) //&& floor[x,y].Visited)
+                if (floor[x, y] != null /*&& floor[x,y].Visited == true*/)
                 {
                     switch (floor[x, y].RoomListIndex)
                     {
