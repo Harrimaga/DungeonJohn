@@ -28,21 +28,22 @@ public class Boss1 : Boss
 
     public override void Update(GameTime gameTime)
     {
-        Shoot();
-        Bullets.Update(gameTime);
         HomingBullets.Update(gameTime);
-        HomingBullet();
-        velocity.Normalize();
+        Bullets.Update(gameTime);
         base.Update(gameTime);
-        Boom();
-    }
-
+        Shoot();
+        HomingBullet();
+        //velocity.Normalize();
+        //Boom();
+        
+    } 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        base.Draw(gameTime, spriteBatch);
+        
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Boss"), position);
-        Bullets.Draw(gameTime, spriteBatch);
         HomingBullets.Draw(gameTime, spriteBatch);
+        Bullets.Draw(gameTime, spriteBatch);
+        base.Draw(gameTime, spriteBatch);
         
     }
     public void Shoot()
@@ -50,16 +51,15 @@ public class Boss1 : Boss
         Counter--;
         if (Counter <= 0)
         {
-            bullet1 = new BossBullet(position);
+            //bullet1 = new BossBullet(position);
             bullet2 = new BossBullet(position + new Vector2(sprite.Width / 2, 0));
-            bullet3 = new BossBullet(position + new Vector2(sprite.Width - bulletsprite.Width, 0));
-            Bullets.Add(bullet1);
+            //bullet3 = new BossBullet(position + new Vector2(sprite.Width - bulletsprite.Width, 0));
+            //Bullets.Add(bullet1);
             HomingBullets.Add(bullet2);
-            Bullets.Add(bullet3);
+            //Bullets.Add(bullet3);
             Counter = 30;
         }
     }
-
     public void HomingBullet()
     {
         foreach (BossBullet bullet2 in HomingBullets.Children)

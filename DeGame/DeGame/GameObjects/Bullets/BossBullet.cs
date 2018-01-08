@@ -31,9 +31,9 @@ class BossBullet : E_Bullet
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        //base.Draw(gameTime, spriteBatch);
+        base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BossBullet"), position);
-        //healthbar.Draw(spriteBatch);
+        healthbar.Draw(spriteBatch);
     }
 
     public void DestroyableBullet()
