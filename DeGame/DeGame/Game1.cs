@@ -35,6 +35,7 @@ namespace DeGame
             WindowSize = new Point(1600, 900);
             FullScreen = false;
 
+            gameStateManager.AddGameState("Crafting", new Crafting());
             gameStateManager.AddGameState("MainMenu", new MainMenuState());
             gameStateManager.AddGameState("Playing", new PlayingState());
             gameStateManager.AddGameState("GameOver", new GameOverState());

@@ -13,6 +13,7 @@ class Leveling : IGameObject
     Button attackB, healthB;
     bool picked = false;
     protected IGameObject playingState;
+    int counter = 0;
 
     public Leveling()
     {
@@ -29,6 +30,7 @@ class Leveling : IGameObject
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
         playingState.Draw(gameTime, spriteBatch);
         attackB.Draw(gameTime, spriteBatch);
         healthB.Draw(gameTime, spriteBatch);
@@ -39,25 +41,27 @@ class Leveling : IGameObject
 
     public virtual void Update(GameTime gameTime)
     {
-        BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
         attackB.Update(gameTime);
         healthB.Update(gameTime);
-        if (picked)
-        {
-            picked = false;
-            GameEnvironment.gameStateManager.SwitchTo("Playing");
-        }
-        if (attackB.Pressed)
+        if (attackB.Pressed && !picked)
         {
             PlayingState.player.StateIncrease(1);
-            //attackB.Pressed = false;
             picked = true;
         }
-        if (healthB.Pressed)
+        if (healthB.Pressed && !picked)
         {
             PlayingState.player.StateIncrease(2);
-            //healthB.Pressed = false;
             picked = true;
+        }
+        if (picked && counter < 10)
+        {
+            counter++;
+        }
+        if (counter >= 10)
+        {
+            counter = 0;
+            picked = false;
+            GameEnvironment.gameStateManager.SwitchTo("Playing");
         }
     }
 

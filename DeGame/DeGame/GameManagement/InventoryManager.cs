@@ -27,7 +27,7 @@ public class InventoryManager
 
     public void equip(Item item)
     {
-        switch(item.Type)
+        switch (item.Type)
         {
             case "helmet":
                 if (currentHelmet != null)
@@ -95,7 +95,7 @@ public class InventoryManager
                 PlayingState.player.CalculateDamage();
                 break;
         }
-    }
+    }    
 
     public void addItemToInventory(Item item)
     {

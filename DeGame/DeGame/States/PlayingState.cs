@@ -21,7 +21,7 @@ public class PlayingState : IGameObject
         currentFloor = floor;
         Player.inventory.items.Add(new StandardBow());
         Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
+        Player.inventory.items.Add(new CoolBoots());
         //enemy = new RangedEnemy(Vector2.Zero, 0, "Enemy");
     }
     public virtual void HandleInput(InputHelper inputHelper)
