@@ -80,6 +80,7 @@ public class RangedEnemy : Enemy
         //    Room.enemybullets.Add(bullet);
         //}
     }
+
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -94,6 +95,7 @@ public class RangedEnemy : Enemy
         //    GameObjectList.RemovedObjects.Add(this);
         //}
     }
+
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
