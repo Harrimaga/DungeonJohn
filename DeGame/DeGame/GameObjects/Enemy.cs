@@ -8,7 +8,7 @@ public class Enemy : SpriteGameObject
     protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
-    protected float range = 200;
+    protected float range = 300;
     protected float expGive = 120;
     protected bool alive = true;
     protected int counter = 100;
