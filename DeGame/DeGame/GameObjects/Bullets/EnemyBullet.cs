@@ -16,7 +16,7 @@ class EnemyBullet : E_Bullet
     {
         position = Startpositon;
         direction = (PlayingState.player.position - position);
-        speed = 0.1f;
+        speed = 1f;
         
     }
     public override void Update(GameTime gameTime)
@@ -27,6 +27,6 @@ class EnemyBullet : E_Bullet
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Random"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet"), position);
     }
 }
