@@ -30,7 +30,7 @@ class CraftingBench : SpriteGameObject
     {
         if(CollidesWith(PlayingState.player)&& inputHelper.IsKeyDown(Keys.Space))
         {
-            GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
+            GameEnvironment.gameStateManager.SwitchTo("Crafting");
         }
     }
 }

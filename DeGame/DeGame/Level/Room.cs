@@ -447,11 +447,6 @@ public class Room : GameObjectList
 
     public override void HandleInput(InputHelper inputHelper)
     {
-        //base.HandleInput(inputHelper);
         anvils.HandleInput(inputHelper);
-        /*foreach (CraftingBench c in anvils.Children)
-        {
-            c.HandleInput(inputHelper);
-        }*/
     }
 }
