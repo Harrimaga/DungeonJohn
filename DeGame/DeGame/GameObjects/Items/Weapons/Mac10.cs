@@ -21,7 +21,7 @@ public class Mac10 : Item, IWeapon
         damageMultiplier = 1;
         projectile_velocity = 12;
         attackspeed = 6;
-        range = 200;
+        range = 400;
         ammo = 200;
         Type = "weapon";
         itemName = "Mac10";
