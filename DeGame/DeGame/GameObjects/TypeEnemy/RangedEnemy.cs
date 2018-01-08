@@ -58,7 +58,7 @@ public class RangedEnemy : Enemy
             EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
             Room.enemybullets.Add(bullet);
         }
-       
+
         //if (PlayingState.player.position.Y > position.Y && PlayingState.player.position.X > position.X && PlayingState.player.position.X < position.X)
         //{
         //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, sprite.Height));
@@ -79,7 +79,7 @@ public class RangedEnemy : Enemy
         //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
         //    Room.enemybullets.Add(bullet);
         //}
-    
+    }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
