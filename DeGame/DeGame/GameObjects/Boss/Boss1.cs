@@ -8,8 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Boss1 : Boss
 {
+    float bulletdamage = 4;
     GameObjectList Bullets, HomingBullets;
-    int Counter = 30;
+    int Counter = 300;
     Texture2D playersprite, bulletsprite;
     BossBullet bullet1, bullet2, bullet3;
     Vector2 Roomposition;
@@ -34,7 +35,6 @@ public class Boss1 : Boss
         {
             Shoot();
         }
-        HomingBullet();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -49,13 +49,13 @@ public class Boss1 : Boss
         Counter--;
         if (Counter <= 0)
         {
-            bullet1 = new BossBullet(position);
-            bullet2 = new BossBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
-            bullet3 = new BossBullet(position + new Vector2(sprite.Width - bulletsprite.Width, 0));
-            Bullets.Add(bullet1);
-            HomingBullets.Add(bullet2);
-            Bullets.Add(bullet3);
-            Counter = 30;
+            bullet1 = new BossBullet(bulletdamage, position);
+            bullet2 = new BossBullet(bulletdamage, position + new Vector2(20, 20));
+            bullet3 = new BossBullet(bulletdamage + 4, position + new Vector2(40, 40), true);
+            Room.enemybullets.Add(bullet1);
+            Room.enemybullets.Add(bullet2);
+            Room.homingenemybullets.Add(bullet3);
+            Counter = 300;
         }
     }
 
@@ -65,29 +65,21 @@ public class Boss1 : Boss
         {
             if (bullet2 != null)
             {
-                velocity.Normalize();
-                //Vector2 direction = (PlayingState.player.position - bullet2.position);
-                //direction.Normalize();
-                //bullet2.position += direction;
                 if (bullet2.position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
                 {
                     bullet2.position.Y -= velocity.Y;
-                    velocity.Normalize();
                 }
                 if (bullet2.position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
                 {
                     bullet2.position.Y += velocity.Y;
-                    velocity.Normalize();
                 }
                 if (bullet2.position.X + playersprite.Width > PlayingState.player.position.X + 1)
                 {
                     bullet2.position.X -= velocity.X;
-                    velocity.Normalize();
                 }
                 if (bullet2.position.X + playersprite.Width < PlayingState.player.position.X - 1)
                 {
                     bullet2.position.X += velocity.X;
-                    velocity.Normalize();
                 }
             }
         }
