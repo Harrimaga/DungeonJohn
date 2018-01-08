@@ -33,11 +33,11 @@ public class InventorySlot : SpriteGameObject
         {
             itemSpritePosition = position;
         }
-        else if (itemSprite.Width * scale == sprite.Width)
+        else if ((int)(itemSprite.Width * scale) == sprite.Width)
         {
-            itemSpritePosition = position + new Vector2(0, itemSprite.Height * scale / 2);
+            itemSpritePosition = position /*+ new Vector2(0, itemSprite.Height * scale / 2)*/;
         }
-        else if (itemSprite.Height * scale == sprite.Height)
+        else if ((int)(itemSprite.Height * scale) == sprite.Height)
         {
             itemSpritePosition = position + new Vector2(itemSprite.Width * scale / 2, 0);
         }
