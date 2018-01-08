@@ -30,6 +30,11 @@ public class GameStateManager : IGameObject
         gameStates[name] = state;
     }
 
+    public void RemoveGameState(string name)
+    {
+        gameStates.Remove(name);
+    }
+
     public IGameObject GetGameState(string name)
     {
         return gameStates[name];

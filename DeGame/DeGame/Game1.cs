@@ -31,7 +31,7 @@ namespace DeGame
         protected override void LoadContent()
         {
             base.LoadContent();
-            this.Window.Position = new Point(150, 50);
+            this.Window.Position = new Point(150, 30);
             WindowSize = new Point(1600, 900);
             FullScreen = false;
 
