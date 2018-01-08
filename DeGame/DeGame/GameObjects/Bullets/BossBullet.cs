@@ -13,27 +13,27 @@ class BossBullet : E_Bullet
     int health = 100, maxhealth = 100;
     HealthBar healthbar;
     public SpriteEffects Effects;
-    
-    public BossBullet(Vector2 Startposition, int layer = 0, string id = "BossBullet") : base("Sprites/BossBullet", 0, "BossBullet") 
+
+    public BossBullet(Vector2 Startposition, int layer = 0, string id = "BossBullet") : base("Sprites/BossBullet", 0, "BossBullet")
     {
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
-        
-        //direction = (PlayingState.player.position - position);
-        //direction.Normalize();
+
+        direction = (PlayingState.player.position - position);
+        direction.Normalize();
     }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth, position);
-        //position += direction * speed;
+        position += direction * speed;
         DestroyableBullet();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        base.Draw(gameTime, spriteBatch);
+        //base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BossBullet"), position);
-        healthbar.Draw(spriteBatch);
+        //healthbar.Draw(spriteBatch);
     }
 
     public void DestroyableBullet()
