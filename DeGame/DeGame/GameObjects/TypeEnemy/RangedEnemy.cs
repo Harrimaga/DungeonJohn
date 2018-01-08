@@ -20,23 +20,23 @@ public class RangedEnemy : Enemy
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bullets = new GameObjectList();
-        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
     }
 
     public void Range()
     {
-        Counter--;
+        Counter++;
         if (PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
             PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
         {
             Chase();
         }
-        if (Counter <= 0)
+        else if(Counter >= 300)
         {
             Shoot();
-            Counter = 300;
+            Counter = 0;
         }
-       
+
     }
 
     //public Circle PlayerCircle
@@ -104,7 +104,6 @@ public class RangedEnemy : Enemy
         //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
         //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
         //    PlayingState.player.exp += expGive;
-        //    PlayingState.player.NextLevel();
         //    alive = false;
         //    GameObjectList.RemovedObjects.Add(this);
         //}

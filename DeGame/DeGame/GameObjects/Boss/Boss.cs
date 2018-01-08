@@ -49,7 +49,6 @@ public class Boss :  SpriteGameObject
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position + new Vector2(30, 50));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position + new Vector2(-40, 10));
             PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();
             GameObjectList.RemovedObjects.Add(this);
         }
 
