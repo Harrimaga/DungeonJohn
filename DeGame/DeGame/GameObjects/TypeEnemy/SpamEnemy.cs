@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class SpamEnemy : Enemy
 {
     public static GameObjectList bullets;
-    int Counter = 100;
+    int Counter = 50;
     int BulletCounter = 0;
 
     public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
@@ -26,12 +26,12 @@ public class SpamEnemy : Enemy
         {
             Shoot();
             BulletCounter++;
-            Counter = 20;
+            Counter = 15;
         }
-        if (BulletCounter == 25)
+        if (BulletCounter == 30)
         {
             BulletCounter = 0;
-            Counter = 200;
+            Counter = 100;
         }
     }
 

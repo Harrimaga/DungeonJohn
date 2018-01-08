@@ -16,7 +16,7 @@ class EnemyBullet : E_Bullet
     {
         position = Startpositon;
         direction = (PlayingState.player.position - position);
-        speed = 1f;
+        speed = 2f;
         
     }
     public override void Update(GameTime gameTime)
