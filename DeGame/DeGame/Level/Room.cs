@@ -114,6 +114,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "RangedEnemy";
                 CreateObject(x, y, "R");
                 break;
+            case 'Q':
+                roomarray[x, y] = "SpamEnemy";
+                CreateObject(x, y, "Q");
+                break;
             case 'B':
                 roomarray[x, y] = "Boss";
                 CreateObject(x, y, "B");
@@ -235,6 +239,12 @@ public class Room : GameObjectList
             case ("R"):
                 Enemy enemyRanged = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
+                roomarray[x, y] = "Background";
+                enemycounter++;
+                break;
+            case ("Q"):
+                Enemy enemySpam = new SpamEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "SpamEnemy");
+                enemies.Add(enemySpam);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
