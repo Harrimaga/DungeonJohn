@@ -19,14 +19,14 @@ class BossBullet : E_Bullet
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
         
-        direction = (PlayingState.player.position - position);
-        direction.Normalize();
+        //direction = (PlayingState.player.position - position);
+        //direction.Normalize();
     }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth, position);
-        position += direction * speed;
+        //position += direction * speed;
         DestroyableBullet();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
