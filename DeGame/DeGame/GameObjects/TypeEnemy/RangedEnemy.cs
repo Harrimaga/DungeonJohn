@@ -6,37 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
-
-//TODO: Bullets;
-//TODO: Stay at a distance; Range;
-//TODO: Sprite;
-//TODO: Damage
-//TODO: Health
 public class RangedEnemy : Enemy
 {
-    public static GameObjectList bullets;
     int Counter = 300;
 
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
-        bullets = new GameObjectList();
-        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
     }
 
     public void Range()
     {
-        Counter--;
+        Counter++;
         if (PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
             PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
         {
             Chase();
         }
-        if (Counter <= 0)
+        else if(Counter >= 300)
         {
             Shoot();
-            Counter = 300;
+            Counter = 0;
         }
-       
     }
 
     //public Circle PlayerCircle
@@ -54,48 +45,47 @@ public class RangedEnemy : Enemy
         if (PlayingState.player.position.Y > position.Y)
         {
             EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, sprite.Height));
-            bullets.Add(bullet);
+            Room.enemybullets.Add(bullet);
         }
         if (PlayingState.player.position.Y < position.Y)
         {
             EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
-            bullets.Add(bullet);
+            Room.enemybullets.Add(bullet);
         }
         if (PlayingState.player.position.X > position.X)
         {
             EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
-            bullets.Add(bullet);
+            Room.enemybullets.Add(bullet);
         }
         if (PlayingState.player.position.X < position.Y)
         {
             EnemyBullet bullet = new EnemyBullet(position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
-            bullets.Add(bullet);
+            Room.enemybullets.Add(bullet);
         }
        
         //if (PlayingState.player.position.Y > position.Y && PlayingState.player.position.X > position.X && PlayingState.player.position.X < position.X)
         //{
         //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, sprite.Height));
-        //    bullets.Add(bullet);
+        //    Room.enemybullets.Add(bullet);
         //}
         //if (PlayingState.player.position.Y < position.Y && PlayingState.player.position.X > position.X && PlayingState.player.position.X < position.X)
         //{
         //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
-        //    bullets.Add(bullet);
+        //    Room.enemybullets.Add(bullet);
         //}
         //if (PlayingState.player.position.X > position.X && PlayingState.player.position.Y > position.Y && PlayingState.player.position.Y < position.Y)
         //{
         //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(sprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
-        //    bullets.Add(bullet);
+        //    Room.enemybullets.Add(bullet);
         //}
         //if (PlayingState.player.position.X < position.X && PlayingState.player.position.Y > position.Y && PlayingState.player.position.Y < position.Y)
         //{
         //    EnemyBullet bullet = new EnemyBullet(position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
-        //    bullets.Add(bullet);
+        //    Room.enemybullets.Add(bullet);
         //}
     }
     public override void Update(GameTime gameTime)
     {
-        bullets.Update(gameTime);
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Range();
@@ -111,7 +101,6 @@ public class RangedEnemy : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        bullets.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BearEnemy"), position);
     }
 }

@@ -297,8 +297,11 @@ public class Floor
             NextFloor();
         if (inputHelper.KeyPressed(Keys.R))
             ResetFloor();
-        if (inputHelper.KeyPressed(Keys.I))
-            PlayingState.player.position.X -= 500;
+        foreach (Room r in floor)
+        {
+            if (r != null)
+                r.HandleInput(inputHelper);
+        }
     }   
 
     void DrawMinimap(SpriteBatch spriteBatch)
