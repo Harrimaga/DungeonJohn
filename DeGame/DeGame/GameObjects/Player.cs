@@ -54,6 +54,7 @@ public class Player : SpriteGameObject
         speed = velocitybase + extraspeed;
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
+        NextLevel();
         if (health > maxhealth)
         {
             health = maxhealth;
@@ -189,6 +190,7 @@ public class Player : SpriteGameObject
         level = 1;
         exp = 0;
         nextLevelExp = 100;
+        leveltokens = 0;
         CalculateAmmo();
         CalculateDamage();
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
