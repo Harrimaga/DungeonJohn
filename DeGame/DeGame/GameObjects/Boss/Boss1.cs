@@ -12,92 +12,76 @@ public class Boss1 : Boss
     int Counter = 30;
     Texture2D playersprite, bulletsprite;
     BossBullet bullet1, bullet2, bullet3;
-    Vector2 direction;
-    float speed = 0.3f;
     public Boss1(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
     {
-        position = startPosition;
         Bullets = new GameObjectList();
         HomingBullets = new GameObjectList();
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/BossBullet");
         velocity = new Vector2(1, 1);
-        velocity.Normalize();
-
     }
 
     public override void Update(GameTime gameTime)
     {
-        HomingBullets.Update(gameTime);
         Bullets.Update(gameTime);
+        HomingBullets.Update(gameTime);
         base.Update(gameTime);
         Shoot();
         HomingBullet();
-        //velocity.Normalize();
-        //Boom();
-        
-    } 
+    }
+
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Boss"), position);
-        HomingBullets.Draw(gameTime, spriteBatch);
-        Bullets.Draw(gameTime, spriteBatch);
         base.Draw(gameTime, spriteBatch);
-        
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Boss"), position);
+        Bullets.Draw(gameTime, spriteBatch);
+        HomingBullets.Draw(gameTime, spriteBatch);
     }
     public void Shoot()
     {
         Counter--;
         if (Counter <= 0)
         {
-            //bullet1 = new BossBullet(position);
-            bullet2 = new BossBullet(position + new Vector2(sprite.Width / 2, 0));
-            //bullet3 = new BossBullet(position + new Vector2(sprite.Width - bulletsprite.Width, 0));
-            //Bullets.Add(bullet1);
+            bullet1 = new BossBullet(position);
+            bullet2 = new BossBullet(position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
+            bullet3 = new BossBullet(position + new Vector2(sprite.Width - bulletsprite.Width, 0));
+            Bullets.Add(bullet1);
             HomingBullets.Add(bullet2);
-            //Bullets.Add(bullet3);
+            Bullets.Add(bullet3);
             Counter = 30;
         }
     }
+
     public void HomingBullet()
     {
         foreach (BossBullet bullet2 in HomingBullets.Children)
         {
             if (bullet2 != null)
-            { 
-                direction = (PlayingState.player.position - bullet2.position);
-                direction.Normalize();
-                bullet2.position = direction * speed;
-
-
-                //if (bullet2.position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
-                //{
-                //    bullet2.position.Y -= velocity.Y;
-                //}
-                //if (bullet2.position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
-                //{
-                //    bullet2.position.Y += velocity.Y;
-                //}
-                //if (bullet2.position.X + playersprite.Width > PlayingState.player.position.X + 1)
-                //{
-                //    bullet2.position.X -= velocity.X;
-                //}
-                //if (bullet2.position.X + playersprite.Width < PlayingState.player.position.X - 1)
-                //{
-                //    bullet2.position.X += velocity.X;
-                //}
-            }
-        }
-    }
-    public void Boom()
-    {
-        if (health <= 0)
-        {
-            Rectangle DamageRectangle = new Rectangle((int)position.X - 100, (int)position.Y - 100, 200 + sprite.Width, 200 + sprite.Height);
-            if (DamageRectangle.Intersects(PlayingState.player.BoundingBox))
             {
-                PlayingState.player.health -= 150;
+                velocity.Normalize();
+                //Vector2 direction = (PlayingState.player.position - bullet2.position);
+                //direction.Normalize();
+                //bullet2.position += direction;
+                if (bullet2.position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
+                {
+                    bullet2.position.Y -= velocity.Y;
+                    velocity.Normalize();
+                }
+                if (bullet2.position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
+                {
+                    bullet2.position.Y += velocity.Y;
+                    velocity.Normalize();
+                }
+                if (bullet2.position.X + playersprite.Width > PlayingState.player.position.X + 1)
+                {
+                    bullet2.position.X -= velocity.X;
+                    velocity.Normalize();
+                }
+                if (bullet2.position.X + playersprite.Width < PlayingState.player.position.X - 1)
+                {
+                    bullet2.position.X += velocity.X;
+                    velocity.Normalize();
+                }
             }
         }
     }

@@ -18,7 +18,6 @@ class BossBullet : E_Bullet
     {
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
-
         direction = (PlayingState.player.position - position);
         direction.Normalize();
     }
