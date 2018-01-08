@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Boss1 : Boss
 {
+    float bulletdamage = 4;
     GameObjectList Bullets, HomingBullets;
     int Counter = 300;
     BossBullet bullet1, bullet2, bullet3;
@@ -45,9 +46,9 @@ public class Boss1 : Boss
         Counter--;
         if (Counter <= 0)
         {
-            bullet1 = new BossBullet(position);
-            bullet2 = new BossBullet(position + new Vector2(20, 20));
-            bullet3 = new BossBullet(position + new Vector2(40, 40), true);
+            bullet1 = new BossBullet(bulletdamage, position);
+            bullet2 = new BossBullet(bulletdamage, position + new Vector2(20, 20));
+            bullet3 = new BossBullet(bulletdamage + 4, position + new Vector2(40, 40), true);
             Room.enemybullets.Add(bullet1);
             Room.enemybullets.Add(bullet2);
             Room.homingenemybullets.Add(bullet3);

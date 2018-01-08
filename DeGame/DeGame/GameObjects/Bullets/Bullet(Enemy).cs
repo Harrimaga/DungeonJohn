@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 class E_Bullet : SpriteGameObject
 {
-    public E_Bullet(string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
-    {
+    float Damage;
 
+    public E_Bullet(float damage, string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
+    {
+        Damage = damage;
     }
     public override void Update(GameTime gameTime)
     {
@@ -29,11 +31,11 @@ class E_Bullet : SpriteGameObject
             GameObjectList.RemovedObjects.Add(this);
             if(PlayingState.player.HardHelmet)
             {
-                PlayingState.player.health -= 3;
+                PlayingState.player.health -= 0.8f * Damage;
             }
             if (!PlayingState.player.HardHelmet)
             {
-                PlayingState.player.health -= 5;
+                PlayingState.player.health -= Damage;
             }   
         }
         foreach (Solid solid in Room.solid.Children)
