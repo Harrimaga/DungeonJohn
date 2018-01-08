@@ -9,9 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 public class Boss1 : Boss
 {
     GameObjectList Bullets, HomingBullets;
-    int Counter = 300;
+    int Counter = 30;
     Texture2D playersprite, bulletsprite;
     BossBullet bullet1, bullet2, bullet3;
+    Vector2 direction;
+    int Boii = 0;
     public Boss1(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
     {
         position = startPosition;
@@ -21,6 +23,7 @@ public class Boss1 : Boss
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/BossBullet");
         velocity = new Vector2(1, 1);
         velocity.Normalize();
+
     }
 
     public override void Update(GameTime gameTime)
@@ -28,9 +31,11 @@ public class Boss1 : Boss
         Bullets.Update(gameTime);
         HomingBullets.Update(gameTime);
         Boom();
-        base.Update(gameTime);
+        
         Shoot();
         HomingBullet();
+        velocity.Normalize();
+        base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -45,13 +50,13 @@ public class Boss1 : Boss
         Counter--;
         if (Counter <= 0 && PlayingState.player.position.Y < position.Y)
         {
-            bullet1 = new BossBullet(position);
+            //bullet1 = new BossBullet(position);
             bullet2 = new BossBullet(position + new Vector2(sprite.Width / 2, 0));
-            bullet3 = new BossBullet(position + new Vector2(sprite.Width - bulletsprite.Width, 0));
-            Bullets.Add(bullet1);
+           // bullet3 = new BossBullet(position + new Vector2(sprite.Width - bulletsprite.Width, 0));
+           // Bullets.Add(bullet1);
             HomingBullets.Add(bullet2);
-            Bullets.Add(bullet3);
-            Counter = 300;
+           // Bullets.Add(bullet3);
+            Counter = 30;
         }
     }
 
@@ -61,22 +66,32 @@ public class Boss1 : Boss
         {
             if (bullet2 != null)
             {
-                if (bullet2.position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
+                
+                if (Boii == 0)
                 {
-                    bullet2.position.Y -= velocity.Y;
+                    direction = (PlayingState.player.position - bullet2.position);
+                    direction.Normalize();
+                    Boii = 1;
                 }
-                if (bullet2.position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
-                {
-                    bullet2.position.Y += velocity.Y;
-                }
-                if (bullet2.position.X + playersprite.Width > PlayingState.player.position.X + 1)
-                {
-                    bullet2.position.X -= velocity.X;
-                }
-                if (bullet2.position.X + playersprite.Width < PlayingState.player.position.X - 1)
-                {
-                    bullet2.position.X += velocity.X;
-                }
+                bullet2.position += direction;
+
+
+                //if (bullet2.position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
+                //{
+                //    bullet2.position.Y -= velocity.Y;
+                //}
+                //if (bullet2.position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
+                //{
+                //    bullet2.position.Y += velocity.Y;
+                //}
+                //if (bullet2.position.X + playersprite.Width > PlayingState.player.position.X + 1)
+                //{
+                //    bullet2.position.X -= velocity.X;
+                //}
+                //if (bullet2.position.X + playersprite.Width < PlayingState.player.position.X - 1)
+                //{
+                //    bullet2.position.X += velocity.X;
+                //}
             }
         }
     }
