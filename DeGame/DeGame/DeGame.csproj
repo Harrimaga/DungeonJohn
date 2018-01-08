@@ -74,6 +74,7 @@
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
     <Compile Include="GameObjects\Items\Armour\MageJacket.cs" />
     <Compile Include="GameObjects\Items\Boots\CoolBoots.cs" />
+    <Compile Include="GameObjects\Items\CraftingBench.cs" />
     <Compile Include="GameObjects\Items\Helmets\HardHelmet.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IArmour.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IBoots.cs" />
@@ -128,6 +129,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="States\Crafting.cs" />
     <Compile Include="States\GameOverState.cs" />
     <Compile Include="States\Leveling.cs" />
     <Compile Include="States\MainMenuState.cs" />
@@ -175,6 +177,7 @@
     <Content Include="Content\Levels\4.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Items\Anvil.png" />
     <Content Include="Content\Sprites\AttackUp.png" />
     <Content Include="Content\Sprites\AttackUpPressed.png" />
     <Content Include="Content\Sprites\Background Sprite.png" />

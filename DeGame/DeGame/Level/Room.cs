@@ -2,13 +2,14 @@
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 
 public class Room : GameObjectList
 {
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, Visited = false, CameraMoving = false;
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
-    public static GameObjectList enemies, solid, door, consumable, bosses, tiles, altar;
+    public static GameObjectList enemies, solid, door, consumable, bosses, tiles, altars, anvils, enemybullets;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop;
     Vector2 TilePosition;
     int roomarraywidth, roomarrayheight;
@@ -24,7 +25,9 @@ public class Room : GameObjectList
         bosses = new GameObjectList();
         solid = new GameObjectList();
         door = new GameObjectList();
-        altar = new GameObjectList();
+        altars = new GameObjectList();
+        anvils = new GameObjectList();
+        enemybullets = new GameObjectList();
         RoomListIndex = roomListIndex;
         a = A;
         b = B;
@@ -130,6 +133,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "ShopItem";
                 CreateObject(x, y, "M");
                 break;
+            case 'Y':
+                roomarray[x, y] = "Anvil";
+                CreateObject(x, y, "Y");
+                break;
             case 'E':
                 roomarray[x, y] = "Exit";
                 Exit = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
@@ -177,7 +184,9 @@ public class Room : GameObjectList
         bosses.Update(gameTime);
         solid.Update(gameTime);
         tiles.Update(gameTime);
-        altar.Update(gameTime);
+        altars.Update(gameTime);
+        anvils.Update(gameTime);
+        enemybullets.Update(gameTime);
         CheckExit();
         if (lavatimer > 0)
         {
@@ -255,11 +264,15 @@ public class Room : GameObjectList
                 break;
             case ("I"):
                 ItemSpawn item = new ItemSpawn(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), false, 0, "Item");
-                altar.Add(item);
+                altars.Add(item);
                 break;
             case ("M"):
                 ItemSpawn Shopitem = new ItemSpawn(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), true, 0, "ShopItem");
-                altar.Add(Shopitem);
+                altars.Add(Shopitem);
+                break;
+            case ("Y"):
+                CraftingBench Anvil = new CraftingBench(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), true, 0, "Anvil");
+                anvils.Add(Anvil);
                 break;
             case ("H"):
                 Lava lava = new Lava(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Lava");
@@ -328,7 +341,7 @@ public class Room : GameObjectList
         else if (y < roomarray.GetLength(1) && roomarray[x, y + 1] == "Wall" || roomarray[x, y + 1] == "DownDoor")
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite Down")), TilePosition, Color.Gray);
         else
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);        
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -404,7 +417,7 @@ public class Room : GameObjectList
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
                                 break;
                             default:
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Standardtile")), TilePosition, Color.Red);
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
                                 break;
                         }
                 }
@@ -418,9 +431,13 @@ public class Room : GameObjectList
         {
             s.Draw(gameTime, spriteBatch);
         }
-        foreach (ItemSpawn a in altar.Children)
+        foreach (ItemSpawn a in altars.Children)
         {
             a.Draw(gameTime, spriteBatch);
+        }
+        foreach (CraftingBench c in anvils.Children)
+        {
+            c.Draw(gameTime, spriteBatch);
         }
         foreach (Enemy e in enemies.Children)
         {
@@ -438,5 +455,16 @@ public class Room : GameObjectList
         {
             d.Draw(gameTime, spriteBatch);
         }
+        enemybullets.Draw(gameTime, spriteBatch);        
+    }
+
+    public override void HandleInput(InputHelper inputHelper)
+    {
+        //base.HandleInput(inputHelper);
+        anvils.HandleInput(inputHelper);
+        /*foreach (CraftingBench c in anvils.Children)
+        {
+            c.HandleInput(inputHelper);
+        }*/
     }
 }
