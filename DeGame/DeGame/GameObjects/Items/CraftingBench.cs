@@ -23,7 +23,7 @@ class CraftingBench : SpriteGameObject
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/items/Anvil"), position);
         if (CollidesWith(PlayingState.player))
         {
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Press SpaceBar to Craft", position + new Vector2(-60,80), Color.White);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Press SpaceBar to Craft", position + new Vector2(-60,100), Color.White);
         }
     }
     public override void HandleInput(InputHelper inputHelper)
