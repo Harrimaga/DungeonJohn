@@ -46,7 +46,7 @@ class HealthBar
 
         if (newhealth < health)
         {
-            health -= 0.4f;
+            health -= Math.Max((health - newhealth) / 50 + 0.1f, 0.4f);
             //health2 = newhealth;
         }
 

@@ -9,7 +9,7 @@ public class Room : GameObjectList
 {
     public bool updoor = false, downdoor = false, leftdoor = false, rightdoor = false, Visited = false, CameraMoving = false;
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0;
-    public static GameObjectList enemies, solid, door, consumable, bosses, tiles, altars, anvils, enemybullets;
+    public static GameObjectList enemies, solid, door, consumable, bosses, tiles, altars, anvils, enemybullets, homingenemybullets;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop;
     Vector2 TilePosition;
     int roomarraywidth, roomarrayheight;
@@ -28,6 +28,7 @@ public class Room : GameObjectList
         altars = new GameObjectList();
         anvils = new GameObjectList();
         enemybullets = new GameObjectList();
+        homingenemybullets = new GameObjectList();
         RoomListIndex = roomListIndex;
         a = A;
         b = B;
@@ -183,6 +184,7 @@ public class Room : GameObjectList
         altars.Update(gameTime);
         anvils.Update(gameTime);
         enemybullets.Update(gameTime);
+        homingenemybullets.Update(gameTime);
         CheckExit();
         if (lavatimer > 0)
         {
@@ -442,7 +444,8 @@ public class Room : GameObjectList
         {
             d.Draw(gameTime, spriteBatch);
         }
-        enemybullets.Draw(gameTime, spriteBatch);        
+        enemybullets.Draw(gameTime, spriteBatch);
+        homingenemybullets.Draw(gameTime, spriteBatch);
     }
 
     public override void HandleInput(InputHelper inputHelper)

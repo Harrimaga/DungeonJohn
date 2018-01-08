@@ -142,7 +142,7 @@ public class Floor
             CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
             while (AdjacentRooms[possiblespecial[q, 0], possiblespecial[q, 1]] != 1)
             {
-                q = random.Next(b - 1);
+                q = random.Next(b);
                 CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
             }
         }
