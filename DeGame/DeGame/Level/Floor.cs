@@ -116,6 +116,7 @@ public class Floor
                 x = random.Next(floorWidth - 2) + 2;
                 y = random.Next(floorHeight - 2) + 2;
                 floor[x, y] = new Room(1, x, y);
+                currentRoom = floor[x, y];
                 FloorGeneratorRecursive(x, y, RoomAmount);
             }
         }
@@ -245,6 +246,7 @@ public class Floor
         Checked = new bool[floorWidth, floorHeight];
         AdjacentRooms = new int[floorWidth, floorHeight];
     }
+
     public void NextShop()
     {
         ClearFloor();
@@ -252,6 +254,7 @@ public class Floor
         CurrentLevel++;
         FloorGenerated = false;
     }
+
     public void NextFloor()
     {
         ClearFloor();
