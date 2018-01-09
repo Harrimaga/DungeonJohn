@@ -84,6 +84,7 @@
     <Compile Include="GameObjects\Items\Item.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
     <Compile Include="GameObjects\Items\Passives\BloodRing.cs" />
+    <Compile Include="GameObjects\Items\Weapons\DoubleGun.cs" />
     <Compile Include="GameObjects\Items\Shields\Mirror.cs" />
     <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
     <Compile Include="GameObjects\Boss\Boss.cs" />
@@ -209,6 +210,7 @@
     <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\Items\Altar.png" />
     <Content Include="Content\Sprites\Items\BloodRing.png" />
+    <Content Include="Content\Sprites\Items\DoubleGun.png" />
     <Content Include="Content\Sprites\Items\HardHelmet.png" />
     <Content Include="Content\Sprites\Items\MageJacket.png" />
     <Content Include="Content\Sprites\Items\StandardBow.png" />

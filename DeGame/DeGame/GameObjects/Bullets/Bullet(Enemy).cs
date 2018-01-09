@@ -9,7 +9,7 @@ class E_Bullet : SpriteGameObject
     int reflectchance = 0;
     public bool reflected = false;
 
-    public E_Bullet(float damage, string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
+    public E_Bullet(float damage, float speed, string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
     {
         Damage = damage;
         random = new Random();

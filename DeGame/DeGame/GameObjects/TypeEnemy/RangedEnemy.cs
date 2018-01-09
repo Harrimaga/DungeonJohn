@@ -5,6 +5,7 @@ public class RangedEnemy : Enemy
 {
     int Counter = 300;
     float bulletdamage = 5;
+    float speed = 0.3f;
 
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
@@ -40,22 +41,22 @@ public class RangedEnemy : Enemy
     {
         if (PlayingState.player.position.Y > position.Y)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, sprite.Height));
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, sprite.Height));
             Room.enemybullets.Add(bullet);
         }
         if (PlayingState.player.position.Y < position.Y)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
             Room.enemybullets.Add(bullet);
         }
         if (PlayingState.player.position.X > position.X)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(sprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + new Vector2(sprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
             Room.enemybullets.Add(bullet);
         }
         if (PlayingState.player.position.X < position.Y)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
             Room.enemybullets.Add(bullet);
         }
        
