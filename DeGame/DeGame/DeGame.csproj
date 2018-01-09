@@ -84,6 +84,7 @@
     <Compile Include="GameObjects\Items\Item.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
     <Compile Include="GameObjects\Items\Passives\BloodRing.cs" />
+    <Compile Include="GameObjects\Items\Shields\Mirror.cs" />
     <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
     <Compile Include="GameObjects\Boss\Boss.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
@@ -245,7 +246,6 @@
   <ItemGroup>
     <Folder Include="Content\Roomlist\" />
     <Folder Include="Content\Sprites\PauseMenu\" />
-    <Folder Include="GameObjects\Items\Shields\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

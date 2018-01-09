@@ -85,18 +85,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/MinimapTile.png
 
-#begin Sprites/Minimap HUD.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Minimap HUD.png
-
 #begin Sprites/Untitled.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1207,7 +1195,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Items/Mac10_BulletUp.png
 
-#begin Sprites/Items/EnemyBullet.png
+#begin Sprites/EnemyBullet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1217,5 +1205,17 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Items/EnemyBullet.png
+/build:Sprites/EnemyBullet.png
+
+#begin Sprites/Items/Mirror.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Items/Mirror.png
 
