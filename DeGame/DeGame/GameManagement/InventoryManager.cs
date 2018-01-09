@@ -17,7 +17,7 @@ public class InventoryManager
         currentHelmet = new HardHelmet();
         currentArmour = new MageJacket();
         currentBoots = new CoolBoots();
-        currentWeapon = new Mac10();
+        currentWeapon = new DoubleGun();
         currentShield = null;
         currentPassives = new Item[2];
         currentPassives[0] = new BloodRing();
