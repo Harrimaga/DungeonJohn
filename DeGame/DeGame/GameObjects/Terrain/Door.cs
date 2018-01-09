@@ -1,26 +1,26 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 
 class Door : Solid
 {
-    bool isdoor, onup = false, ondown = false, onleft = false, onright = false, closed = false;
+    bool onup = false, ondown = false, onleft = false, onright = false, closed = false;
     SpriteEffects Effect = SpriteEffects.None;
-    Texture2D doorsprite, wallsprite;
+    Texture2D doorsprite;
     GameObjectList solid;
+    int DoorNumber;
     int direction, counter = 0;
     int CellWidth = PlayingState.currentFloor.currentRoom.CellWidth;
     int CellHeight = PlayingState.currentFloor.currentRoom.CellHeight;
     int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
     int roomheight = PlayingState.currentFloor.currentRoom.roomheight;
 
-    public Door(bool Isdoor, Vector2 Startposition, int Direction, int layer = 0, string id = "door")
+    public Door(int doornumber, Vector2 Startposition, int Direction, int layer = 0, string id = "door")
     : base(Startposition, layer, id)
     {
         solid = new GameObjectList();
         position = Startposition;
         direction = Direction;
-        isdoor = Isdoor;
+        DoorNumber = doornumber;
     }
 
     void ChooseSprite()
@@ -31,34 +31,72 @@ class Door : Solid
             if (direction == 2)
             {
                 Effect = SpriteEffects.FlipVertically;
-                wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Down2");
             }
-            else
-                wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Up2");
             if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || PlayingState.currentFloor.doortimer > 0)
             {
-                doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorupclosed");
+                switch(DoorNumber)
+                {
+                    case (1):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorupclosed");
+                        break;
+                    case (2):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bossdoorupclosed");
+                        break;
+                    case (3):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Itemdoorupclosed");
+                        break;
+                }
                 closed = true;
             }
             else
-                doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorup");
+                switch (DoorNumber)
+                {
+                    case (1):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorup");
+                        break;
+                    case (2):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bossdoorup");
+                        break;
+                    case (3):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Itemdoorup");
+                        break;
+                }
         }
         else
         {
             if (direction == 4)
             {
                 Effect = SpriteEffects.FlipHorizontally;
-                wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Right2");
             }
-            else
-                wallsprite = GameEnvironment.assetManager.GetSprite("Sprites/Wall Sprite Left2");
             if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || PlayingState.currentFloor.doortimer > 0)
             {
-                doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleftclosed");
+                switch (DoorNumber)
+                {
+                    case (1):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleftclosed");
+                        break;
+                    case (2):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bossdoorleftclosed");
+                        break;
+                    case (3):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Itemdoorleftclosed");
+                        break;
+                }
                 closed = true;
             }
             else
-                doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleft");
+                switch (DoorNumber)
+                {
+                    case (1):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleft");
+                        break;
+                    case (2):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bossdoorleft");
+                        break;
+                    case (3):
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Itemdoorleft");
+                        break;
+                }
         }
     }
 
@@ -71,12 +109,14 @@ class Door : Solid
             roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
             roomheight = PlayingState.currentFloor.currentRoom.roomheight;
         }
-        if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || !isdoor || closed)
+        if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || DoorNumber == 0 || closed)
         {
             base.Update(gameTime);
         }
-        if (isdoor)
+        if (DoorNumber > 0)
+        {
             ControlCamera();
+        }
     }
 
     void ControlCamera()
@@ -151,10 +191,10 @@ class Door : Solid
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        //ad
-        ChooseSprite();
-        spriteBatch.Draw(wallsprite, position, Color.Gray);
-        if (isdoor)
+        if (DoorNumber > 0)
+        {
+            ChooseSprite();
             spriteBatch.Draw(doorsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
+        }
     }
 }

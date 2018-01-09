@@ -230,7 +230,7 @@ public class Player : SpriteGameObject
         {
             IWeapon weapon = (IWeapon)inventory.currentWeapon;
             weapon.Attack(direction);
-            if (ammo > 1)
+            if (ammo > 0)
             {
                 ammo--;
             }

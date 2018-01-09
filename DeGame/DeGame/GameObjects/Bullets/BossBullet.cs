@@ -16,7 +16,7 @@ class BossBullet : E_Bullet
     bool Homing;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
     
-    public BossBullet(Vector2 Startposition, bool homing = false, int layer = 0, string id = "BossBullet") : base("Sprites/BossBullet", 0, "BossBullet") 
+    public BossBullet(float damage, float speed, Vector2 Startposition, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/BossBullet", 0, "BossBullet") 
     {
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
