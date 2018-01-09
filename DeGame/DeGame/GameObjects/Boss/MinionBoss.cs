@@ -1,0 +1,43 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+class MinionBoss : Boss
+{
+    Vector2 Roomposition;
+    int Counter = 150;
+    float bulletdamage = 20, speed = 2;
+    EnemyBullet bullet;
+
+    public MinionBoss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
+    {
+        Roomposition = roomposition;
+        expGive = 240;
+        maxhealth = 400;
+        health = maxhealth;
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+        Shoot();
+    }
+
+    public void Shoot()
+    {
+        Vector2 bulletposition;
+        Counter--;
+        if (Counter <= 0)
+        {
+            bulletposition = position + new Vector2(GameEnvironment.assetManager.GetSprite("Sprites/MinionBoss").Width / 2, GameEnvironment.assetManager.GetSprite("Sprites/MinionBoss").Height * .6f);
+            bullet = new EnemyBullet(bulletdamage, speed, bulletposition, GameEnvironment.assetManager.GetSprite("Sprites/MinionBossBullet"));
+            Room.enemybullets.Add(bullet);
+            Counter = 150;
+        }
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        base.Draw(gameTime, spriteBatch);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/MinionBoss"), position);
+    }
+}

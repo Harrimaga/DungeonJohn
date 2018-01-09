@@ -1,9 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
 public class Boss1 : Boss
@@ -22,26 +17,22 @@ public class Boss1 : Boss
         velocity = new Vector2(1, 1);
         velocity.Normalize();
         Roomposition = roomposition;
+        expGive = 240;
+        maxhealth = 600;
+        health = maxhealth;
     }
 
     public override void Update(GameTime gameTime)
     {
+        base.Update(gameTime);
         Bullets.Update(gameTime);
         HomingBullets.Update(gameTime);
-        base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
         {
             Shoot();
         }
     }
 
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Boss"), position);
-        Bullets.Draw(gameTime, spriteBatch);
-        HomingBullets.Draw(gameTime, spriteBatch);
-    }
     public void Shoot()
     {
         Counter--;
@@ -55,5 +46,13 @@ public class Boss1 : Boss
             Room.enemybullets.Add(bullet3);
             Counter = 300;
         }
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        base.Draw(gameTime, spriteBatch);
+        Bullets.Draw(gameTime, spriteBatch);
+        HomingBullets.Draw(gameTime, spriteBatch);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Boss"), position);
     }
 }

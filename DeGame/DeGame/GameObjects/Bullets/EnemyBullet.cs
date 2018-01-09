@@ -7,13 +7,15 @@ class EnemyBullet : E_Bullet
 {
     Vector2 direction;
     float speed, damage;
-    public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed, "Sprites/Random", layer, id)
+    Texture2D Bulletsprite;
+    public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, Texture2D bulletsprite, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed, "Sprites/Random", layer, id)
     {
         position = Startpositon;
         Position = Startpositon;
         speed = Speed;
         damage = Damage;
         direction = (PlayingState.player.position - Position);
+        Bulletsprite = bulletsprite;
     }
     public override void Update(GameTime gameTime)
     {
@@ -45,6 +47,6 @@ class EnemyBullet : E_Bullet
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet"), position);
+        spriteBatch.Draw(Bulletsprite, position);
     }
 }

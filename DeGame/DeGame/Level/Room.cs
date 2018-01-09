@@ -120,8 +120,12 @@ public class Room : GameObjectList
                 CreateObject(x, y, "Q");
                 break;
             case 'B':
-                roomarray[x, y] = "Boss";
+                roomarray[x, y] = "Boss1";
                 CreateObject(x, y, "B");
+                break;
+            case '*':
+                roomarray[x, y] = "MinionBoss";
+                CreateObject(x, y, "*");
                 break;
             case 'O':
                 roomarray[x, y] = "Pit";
@@ -258,8 +262,13 @@ public class Room : GameObjectList
                 enemycounter++;
                 break;
             case ("B"):
-                Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "Boss");
+                Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "Boss1");
                 bosses.Add(boss);
+                enemycounter++;
+                break;
+            case ("*"):
+                MinionBoss minionboss = new MinionBoss(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "MinionBoss");
+                bosses.Add(minionboss);
                 enemycounter++;
                 break;
             case ("!"):
@@ -321,15 +330,9 @@ public class Room : GameObjectList
         }
     }
 
-    public void CheckExit()
+    public virtual void CheckExit()
     {
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
-        if (RoomListIndex == 2 && enemycounter == 0)
-        {
-            if (MiddleofPlayer.X >= Exit.X && MiddleofPlayer.X <= Exit.X + CellWidth)
-                if (MiddleofPlayer.Y >= Exit.Y && MiddleofPlayer.Y <= Exit.Y + CellHeight)
-                    PlayingState.currentFloor.NextShop();
-        }
         if (RoomListIndex == 6)
         {
             if (MiddleofPlayer.X >= ExitShop.X && MiddleofPlayer.X <= ExitShop.X + CellWidth)
@@ -425,7 +428,7 @@ public class Room : GameObjectList
                             PlayingState.currentFloor.startPlayerPosition = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
                             //Camera.Position = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
                             break;
-                        case "Boss":
+                        case "Boss1":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite")), TilePosition, Color.Gray);
                             break;
                         case "RangedEnemy":
