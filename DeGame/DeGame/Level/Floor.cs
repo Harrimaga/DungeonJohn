@@ -192,13 +192,57 @@ public class Floor
                 if (floor[x, y] != null)
                 {
                     if (y - 1 >= 0 && floor[x, y - 1] != null)
-                        floor[x, y].updoor = true;
+                        switch (floor[x, y - 1].RoomListIndex)
+                        {
+                            case (2):
+                                floor[x, y].updoor = 2;
+                                break;
+                            case (3):
+                                floor[x, y].updoor = 3;
+                                break;
+                            default:
+                                floor[x, y].updoor = 1;
+                                break;
+                        }
                     if (y + 1 < floorWidth && floor[x, y + 1] != null)
-                        floor[x, y].downdoor = true;
+                        switch (floor[x, y + 1].RoomListIndex)
+                        {
+                            case (2):
+                                floor[x, y].downdoor = 2;
+                                break;
+                            case (3):
+                                floor[x, y].downdoor = 3;
+                                break;
+                            default:
+                                floor[x, y].downdoor = 1;
+                                break;
+                        }
                     if (x - 1 >= 0 && floor[x - 1, y] != null)
-                        floor[x, y].leftdoor = true;
+                        switch (floor[x - 1, y].RoomListIndex)
+                        {
+                            case (2):
+                                floor[x, y].leftdoor = 2;
+                                break;
+                            case (3):
+                                floor[x, y].leftdoor = 3;
+                                break;
+                            default:
+                                floor[x, y].leftdoor = 1;
+                                break;
+                        }
                     if (x + 1 < floorWidth && floor[x + 1, y] != null)
-                        floor[x, y].rightdoor = true;
+                        switch (floor[x + 1, y].RoomListIndex)
+                        {
+                            case (2):
+                                floor[x, y].rightdoor = 2;
+                                break;
+                            case (3):
+                                floor[x, y].rightdoor = 3;
+                                break;
+                            default:
+                                floor[x, y].rightdoor = 1;
+                                break;
+                        }
                 }
     }
 
