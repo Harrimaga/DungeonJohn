@@ -185,7 +185,7 @@ public class Floor
         return false;
     }
 
-    void DoorCheck()
+    public void DoorCheck()
     {
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)

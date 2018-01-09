@@ -97,6 +97,7 @@
     <Compile Include="GameObjects\Terrain\Door.cs" />
     <Compile Include="GameObjects\Terrain\Ice.cs" />
     <Compile Include="GameObjects\Terrain\Lava.cs" />
+    <Compile Include="GameObjects\Terrain\Pit.cs" />
     <Compile Include="GameObjects\Terrain\Rock.cs" />
     <Compile Include="GameObjects\Terrain\Solid.cs" />
     <Compile Include="GameObjects\Terrain\SpiderWeb.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="States\MainMenuState.cs" />
     <Compile Include="States\Option.cs" />
     <Compile Include="States\PauseMenuState.cs" />
+    <Compile Include="States\PitState.cs" />
     <Compile Include="States\PlayingState.cs" />
     <Compile Include="Structs\Circle.cs" />
   </ItemGroup>
@@ -181,7 +183,15 @@
     <Content Include="Content\Levels\7.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Sprites\Items\Anvil.png" />
+    <Content Include="Content\Levels\111.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\222.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\333.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Sprites\AttackUp.png" />
     <Content Include="Content\Sprites\AttackUpPressed.png" />
     <Content Include="Content\Sprites\Background Sprite.png" />
