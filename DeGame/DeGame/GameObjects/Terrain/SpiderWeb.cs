@@ -19,7 +19,6 @@ class SpiderWeb : Tiles
     {
         if (CollidesWith(PlayingState.player))
         {
-            PlayingState.player.onWeb = true;
             OnThisTile = true;
         }
         else

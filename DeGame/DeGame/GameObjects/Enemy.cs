@@ -8,7 +8,7 @@ public class Enemy : SpriteGameObject
     protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
-    protected float range = 200;
+    protected float range = 300;
     protected float expGive = 120;
     protected bool alive = true;
     protected int counter = 100;
@@ -50,7 +50,6 @@ public class Enemy : SpriteGameObject
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.player.exp += expGive;
-            PlayingState.player.NextLevel();
             alive = false;
             GameObjectList.RemovedObjects.Add(this);
         }

@@ -47,7 +47,7 @@ public class Floor
     }
     int RandomRoom()
     {
-        return random.Next(2) + 4;
+        return random.Next(3) + 5;
     }
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
@@ -142,7 +142,7 @@ public class Floor
             CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
             while (AdjacentRooms[possiblespecial[q, 0], possiblespecial[q, 1]] != 1)
             {
-                q = random.Next(b - 1);
+                q = random.Next(b);
                 CheckAdjacent(possiblespecial[q, 0], possiblespecial[q, 1]);
             }
         }
@@ -192,13 +192,57 @@ public class Floor
                 if (floor[x, y] != null)
                 {
                     if (y - 1 >= 0 && floor[x, y - 1] != null)
-                        floor[x, y].updoor = true;
+                        switch (floor[x, y - 1].RoomListIndex)
+                        {
+                            case (2):
+                                floor[x, y].updoor = 2;
+                                break;
+                            case (3):
+                                floor[x, y].updoor = 3;
+                                break;
+                            default:
+                                floor[x, y].updoor = 1;
+                                break;
+                        }
                     if (y + 1 < floorWidth && floor[x, y + 1] != null)
-                        floor[x, y].downdoor = true;
+                        switch (floor[x, y + 1].RoomListIndex)
+                        {
+                            case (2):
+                                floor[x, y].downdoor = 2;
+                                break;
+                            case (3):
+                                floor[x, y].downdoor = 3;
+                                break;
+                            default:
+                                floor[x, y].downdoor = 1;
+                                break;
+                        }
                     if (x - 1 >= 0 && floor[x - 1, y] != null)
-                        floor[x, y].leftdoor = true;
+                        switch (floor[x - 1, y].RoomListIndex)
+                        {
+                            case (2):
+                                floor[x, y].leftdoor = 2;
+                                break;
+                            case (3):
+                                floor[x, y].leftdoor = 3;
+                                break;
+                            default:
+                                floor[x, y].leftdoor = 1;
+                                break;
+                        }
                     if (x + 1 < floorWidth && floor[x + 1, y] != null)
-                        floor[x, y].rightdoor = true;
+                        switch (floor[x + 1, y].RoomListIndex)
+                        {
+                            case (2):
+                                floor[x, y].rightdoor = 2;
+                                break;
+                            case (3):
+                                floor[x, y].rightdoor = 3;
+                                break;
+                            default:
+                                floor[x, y].rightdoor = 1;
+                                break;
+                        }
                 }
     }
 
@@ -251,6 +295,7 @@ public class Floor
     {
         ClearFloor();
         floor[4, 4] = new Room(6, 4, 4);
+        currentRoom = floor[4, 4];
         CurrentLevel++;
         FloorGenerated = false;
     }
@@ -296,8 +341,13 @@ public class Floor
             NextFloor();
         if (inputHelper.KeyPressed(Keys.R))
             ResetFloor();
-    }
-    
+        foreach (Room r in floor)
+        {
+            if (r != null)
+                r.HandleInput(inputHelper);
+        }
+    }   
+
     void DrawMinimap(SpriteBatch spriteBatch)
     {
         //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
@@ -307,10 +357,14 @@ public class Floor
         int FloorCellHeight = 15;
         int currentroomx = (int)PlayingState.player.position.X / 1260;
         int currentroomy = (int)PlayingState.player.position.Y / 900;
-        currentRoom = floor[currentroomx, currentroomy];
+        if (floor[currentroomx, currentroomy] != null)
+            currentRoom = floor[currentroomx, currentroomy];
+        else
+            currentRoom.position = new Vector2(currentroomx, currentroomy);
 
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
+            {
                 if (floor[x, y] != null /*&& floor[x,y].Visited == true*/)
                 {
                     switch (floor[x, y].RoomListIndex)
@@ -328,11 +382,12 @@ public class Floor
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                             break;
                     }
-                    if (currentRoom.position == new Vector2(x, y))
-                    {
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/CurrentMinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
-                    }
                 }
+                if (currentRoom.position == new Vector2(x, y))
+                {
+                    spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/CurrentMinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                }
+            }
         //TODO alleen kamer tekenen op minimap als de speler er is geweest
     }
 

@@ -13,12 +13,14 @@ class BossBullet : E_Bullet
     int health = 100, maxhealth = 100;
     HealthBar healthbar;
     public SpriteEffects Effects;
+    bool Homing;
+    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
     
-    public BossBullet(Vector2 Startposition, int layer = 0, string id = "BossBullet") : base("Sprites/BossBullet", 0, "BossBullet") 
+    public BossBullet(float damage, float speed, Vector2 Startposition, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/BossBullet", 0, "BossBullet") 
     {
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
-        
+        Homing = homing;
         direction = (PlayingState.player.position - position);
         direction.Normalize();
     }
@@ -26,7 +28,14 @@ class BossBullet : E_Bullet
     {
         base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth, position);
-        position += direction * speed;
+        if (!Homing)
+        {
+            position += direction * speed;
+        }
+        else
+        {
+            HomingBullet();
+        }
         DestroyableBullet();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -56,8 +65,26 @@ class BossBullet : E_Bullet
             GameObjectList.RemovedObjects.Add(this);
         }
     }
+    public void HomingBullet()
+    {
+
+        if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
+        {
+            position.Y -= speed;
+        }
+        if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
+        {
+            position.Y += speed;
+        }
+        if (position.X + playersprite.Width > PlayingState.player.position.X + 1)
+        {
+            position.X -= speed;
+        }
+        if (position.X + playersprite.Width < PlayingState.player.position.X - 1)
+        {
+            position.X += speed;
+        }
 
 
-
-
+    }
 }

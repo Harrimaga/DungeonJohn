@@ -8,17 +8,20 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Boss1 : Boss
 {
-    GameObjectList Bullets, HomingBullets;
-    int Counter = 300;
-    Texture2D playersprite;
     BossBullet bullet1, bullet2, bullet3;
+    GameObjectList Bullets, HomingBullets;
+    Vector2 Roomposition;
+    int Counter = 300;
+    float speed = 0.3f;
+    float bulletdamage = 4;
+    
     public Boss1(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
     {
         Bullets = new GameObjectList();
         HomingBullets = new GameObjectList();
-        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
         velocity = new Vector2(1, 1);
         velocity.Normalize();
+        Roomposition = roomposition;
     }
 
     public override void Update(GameTime gameTime)
@@ -26,8 +29,10 @@ public class Boss1 : Boss
         Bullets.Update(gameTime);
         HomingBullets.Update(gameTime);
         base.Update(gameTime);
-        Shoot();
-        HomingBullet();
+        if (PlayingState.currentFloor.currentRoom.position == Roomposition)
+        {
+            Shoot();
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -42,39 +47,13 @@ public class Boss1 : Boss
         Counter--;
         if (Counter <= 0)
         {
-            bullet1 = new BossBullet(position);
-            bullet2 = new BossBullet(position + new Vector2(20, 20));
-            bullet3 = new BossBullet(position + new Vector2(40, 40));
-            Bullets.Add(bullet1);
-            HomingBullets.Add(bullet2);
-            Bullets.Add(bullet3);
+            bullet1 = new BossBullet(bulletdamage, speed, position);
+            bullet2 = new BossBullet(bulletdamage + 4, speed, position + new Vector2(40, 40), true);
+            bullet3 = new BossBullet(bulletdamage, speed, position + new Vector2(20, 20));
+            Room.enemybullets.Add(bullet1);
+            Room.homingenemybullets.Add(bullet2);
+            Room.enemybullets.Add(bullet3);
             Counter = 300;
-        }
-    }
-
-    public void HomingBullet()
-    {
-        foreach (BossBullet bullet2 in HomingBullets.Children)
-        {
-            if (bullet2 != null)
-            {
-                if (bullet2.position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
-                {
-                    bullet2.position.Y -= velocity.Y;
-                }
-                if (bullet2.position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
-                {
-                    bullet2.position.Y += velocity.Y;
-                }
-                if (bullet2.position.X + playersprite.Width > PlayingState.player.position.X + 1)
-                {
-                    bullet2.position.X -= velocity.X;
-                }
-                if (bullet2.position.X + playersprite.Width < PlayingState.player.position.X - 1)
-                {
-                    bullet2.position.X += velocity.X;
-                }
-            }
         }
     }
 }

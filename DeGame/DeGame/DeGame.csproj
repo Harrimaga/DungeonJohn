@@ -74,6 +74,7 @@
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
     <Compile Include="GameObjects\Items\Armour\MageJacket.cs" />
     <Compile Include="GameObjects\Items\Boots\CoolBoots.cs" />
+    <Compile Include="GameObjects\Items\CraftingBench.cs" />
     <Compile Include="GameObjects\Items\Helmets\HardHelmet.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IArmour.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IBoots.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="GameObjects\Items\Item.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
     <Compile Include="GameObjects\Items\Passives\BloodRing.cs" />
+    <Compile Include="GameObjects\Items\Weapons\DoubleGun.cs" />
     <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
     <Compile Include="GameObjects\Boss\Boss.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
     <Compile Include="GameObjects\Terrain\Wall.cs" />
+    <Compile Include="GameObjects\TypeEnemy\SpamEnemy.cs" />
     <Compile Include="Inventory\Slots\ArmourSlot.cs" />
     <Compile Include="Inventory\Slots\BootsSlot.cs" />
     <Compile Include="Inventory\Slots\HelmetSlot.cs" />
@@ -115,8 +118,8 @@
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
     <Compile Include="Level\TypeRooms\StartRoom.cs" />
-    <Compile Include="Menu\Button.cs" />
-    <Compile Include="Menu\HealthBar.cs" />
+    <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\HealthBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -128,6 +131,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="States\Crafting.cs" />
     <Compile Include="States\GameOverState.cs" />
     <Compile Include="States\Leveling.cs" />
     <Compile Include="States\MainMenuState.cs" />
@@ -167,13 +171,16 @@
     <Content Include="Content\Levels\3.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Levels\6.txt">
+    <Content Include="Content\Levels\4.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Levels\5.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Levels\4.txt">
+    <Content Include="Content\Levels\6.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\7.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Levels\111.txt">
@@ -215,6 +222,7 @@
     <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\Items\Altar.png" />
     <Content Include="Content\Sprites\Items\BloodRing.png" />
+    <Content Include="Content\Sprites\Items\DoubleGun.png" />
     <Content Include="Content\Sprites\Items\HardHelmet.png" />
     <Content Include="Content\Sprites\Items\MageJacket.png" />
     <Content Include="Content\Sprites\Items\StandardBow.png" />

@@ -14,7 +14,6 @@ class Ice : Tiles
     {
         if (CollidesWith(PlayingState.player))
         {
-            PlayingState.player.onIce = true;
             OnThisTile = true;
         }
         else

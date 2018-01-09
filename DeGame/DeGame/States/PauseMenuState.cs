@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 class PauseMenuState : IGameObject
 {
     Vector2 BasisPosition;
-    protected IGameObject playingState;
+    public IGameObject playingState;
     WornItems wornItems;
     List<InventorySlot> inventory;
     bool startup = true;
