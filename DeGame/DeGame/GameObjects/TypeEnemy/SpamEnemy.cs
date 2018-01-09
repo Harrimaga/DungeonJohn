@@ -10,11 +10,13 @@ public class SpamEnemy : Enemy
 {
     int Counter = 50;
     int BulletCounter = 0;
-    float bulletdamage = 3;
+    float bulletdamage = 5;
+
 
     public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
+        sprite = GameEnvironment.assetManager.GetSprite("Sprites/CutieEnemy");
     }
 
     public void Range()
@@ -36,24 +38,26 @@ public class SpamEnemy : Enemy
 
     public void Shoot()
     {
+        Vector2 MiddleOfSprite = new Vector2(sprite.Width / 2, sprite.Height/2);
+
         if (PlayingState.player.position.Y > position.Y)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, sprite.Height));
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + MiddleOfSprite);
             Room.enemybullets.Add(bullet);
         }
         if (PlayingState.player.position.Y < position.Y)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0));
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + MiddleOfSprite);
             Room.enemybullets.Add(bullet);
         }
         if (PlayingState.player.position.X > position.X)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(sprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + MiddleOfSprite);
             Room.enemybullets.Add(bullet);
         }
-        if (PlayingState.player.position.X < position.Y)
+        if (PlayingState.player.position.X < position.X)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, position + MiddleOfSprite);
             Room.enemybullets.Add(bullet);
         }
     }
