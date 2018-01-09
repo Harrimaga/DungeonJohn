@@ -20,7 +20,7 @@ class E_Bullet : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         if (PlayingState.player.Mirror)
-            reflectchance = 51;//random.Next(100);
+            reflectchance = random.Next(100);
         else
             reflectchance = 0;
         CheckCollision();
@@ -34,6 +34,12 @@ class E_Bullet : SpriteGameObject
                 if (CollidesWith(e))
                 {
                     e.health -= Damage;
+                    GameObjectList.RemovedObjects.Add(this);
+                }
+            foreach (Boss b in Room.bosses.Children)
+                if (CollidesWith(b))
+                {
+                    b.health -= Damage;
                     GameObjectList.RemovedObjects.Add(this);
                 }
         }
