@@ -8,13 +8,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 class BossBullet : E_Bullet
 {
+    HealthBar healthbar;
     Vector2 direction;
+    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
     float speed = 0.5f;
     int health = 100, maxhealth = 100;
-    HealthBar healthbar;
     public SpriteEffects Effects;
     bool Homing;
-    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
+    
     
     public BossBullet(float damage, float speed, Vector2 Startposition, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/BossBullet", 0, "BossBullet") 
     {
@@ -84,7 +85,5 @@ class BossBullet : E_Bullet
         {
             position.X += speed;
         }
-
-
     }
 }
