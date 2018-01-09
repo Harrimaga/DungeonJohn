@@ -32,7 +32,6 @@ class PitState : IGameObject
             pitroomnumber = 111;
 
         actualroom = PlayingState.currentFloor.floor[x, y];
-        PlayingState.currentFloor.floor[x, y] = null;
         PlayingState.currentFloor.floor[x, y] = new Room(pitroomnumber, x, y);
         PlayingState.currentFloor.floor[x, y].LoadTiles();
         player2 = PlayingState.player;
@@ -43,14 +42,14 @@ class PitState : IGameObject
         if(inputHelper.KeyPressed(Keys.H))
         {
             GameEnvironment.gameStateManager.SwitchTo("Playing");
-            PlayingState.currentFloor.floor[x, y] = null;
             PlayingState.currentFloor.floor[x, y] = new Room(actualroom.RoomListIndex, x, y);
             PlayingState.currentFloor.DoorCheck();
+
             for (int a = 0; a < 9; a++)
                 for (int b = 0; b < 9; b++)
                     if(PlayingState.currentFloor.floor[a, b] != null)
                         PlayingState.currentFloor.floor[a, b].LoadTiles(); 
-            actualroom = null;
+
             PlayingState.player = player2;
         }
         PlayingState.currentFloor.floor[x, y].HandleInput(inputHelper);
