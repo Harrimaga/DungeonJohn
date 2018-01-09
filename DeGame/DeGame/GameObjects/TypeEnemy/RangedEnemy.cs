@@ -3,12 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class RangedEnemy : Enemy
 {
-    int Counter = 300;
+    int Counter = 0;
     float bulletdamage = 10;
 
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
+        sprite = GameEnvironment.assetManager.GetSprite("Sprites/ShootingEnemy1");
     }
 
     public void Range()
@@ -19,7 +20,7 @@ public class RangedEnemy : Enemy
         {
             Chase();
         }
-        else if(Counter >= 300)
+        else if(Counter >= 200)
         {
             Shoot();
             Counter = 0;
@@ -53,7 +54,7 @@ public class RangedEnemy : Enemy
             EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(sprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
             Room.enemybullets.Add(bullet);
         }
-        if (PlayingState.player.position.X < position.Y)
+        if (PlayingState.player.position.X < position.X)
         {
             EnemyBullet bullet = new EnemyBullet(bulletdamage, position + new Vector2(bulletsprite.Width, sprite.Height / 2 - bulletsprite.Height / 2));
             Room.enemybullets.Add(bullet);

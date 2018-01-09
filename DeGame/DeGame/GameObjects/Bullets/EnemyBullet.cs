@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 class EnemyBullet : E_Bullet
 {
     Vector2 direction;
-    float speed;
+    public float speed;
     public EnemyBullet(float damage, Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base(damage, "Sprites/Random", layer, id)
     {
         position = Startpositon;
