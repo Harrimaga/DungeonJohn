@@ -10,6 +10,7 @@ public class RangedEnemy : Enemy
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
+        basevelocity = new Vector2(0.5f, 0.5f);
     }
 
     public void Range()
@@ -91,14 +92,6 @@ public class RangedEnemy : Enemy
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Range();
-        //if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
-        //{
-        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
-        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
-        //    PlayingState.player.exp += expGive;
-        //    alive = false;
-        //    GameObjectList.RemovedObjects.Add(this);
-        //}
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

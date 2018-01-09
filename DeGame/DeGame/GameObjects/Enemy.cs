@@ -12,7 +12,7 @@ public class Enemy : SpriteGameObject
     protected float expGive = 120;
     protected bool alive = true;
     protected int counter = 100;
-    protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
+    protected Vector2 basevelocity = Vector2.Zero;
     public SpriteEffects Effects;
     public Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
