@@ -6,13 +6,13 @@ using Microsoft.Xna.Framework.Graphics;
 class EnemyBullet : E_Bullet
 {
     Vector2 direction;
-    public float speed;
-    public EnemyBullet(float damage, Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base(damage, "Sprites/Random", layer, id)
+    float speed, damage;
+    public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed, "Sprites/Random", layer, id)
     {
         position = Startpositon;
+        speed = Speed;
+        damage = Damage;
         direction = (PlayingState.player.position - position);
-        speed = 3f;
-        
     }
     public override void Update(GameTime gameTime)
     {

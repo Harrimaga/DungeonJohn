@@ -11,7 +11,7 @@ class E_Bullet : SpriteGameObject
 {
     float Damage;
 
-    public E_Bullet(float damage, string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
+    public E_Bullet(float damage, float speed, string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
     {
         Damage = damage;
     }

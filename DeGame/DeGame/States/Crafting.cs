@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Crafting : IGameObject
+class Crafting : IGameObject
 {
+    
     public Crafting()
     {
     }
@@ -21,6 +22,7 @@ public class Crafting : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        GameEnvironment.gameStateManager.GetGameState("Playing").Draw(gameTime, spriteBatch);
     }
     public virtual void Update(GameTime gameTime)
     {
