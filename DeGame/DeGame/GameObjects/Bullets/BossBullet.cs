@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 class BossBullet : E_Bullet
 {
-    Vector2 direction;
     float speed = 0.5f;
     int health = 100, maxhealth = 100;
     HealthBar healthbar;
@@ -20,19 +19,14 @@ class BossBullet : E_Bullet
     {
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
+        Position = Startposition;
         Homing = homing;
-        direction = (PlayingState.player.position - position);
-        direction.Normalize();
     }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth, position);
-        if (!Homing)
-        {
-            position += direction * speed;
-        }
-        else
+        if(Homing)
         {
             HomingBullet();
         }

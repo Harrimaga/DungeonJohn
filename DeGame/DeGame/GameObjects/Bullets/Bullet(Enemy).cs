@@ -4,30 +4,40 @@ using System;
 
 class E_Bullet : SpriteGameObject
 {
-    float Damage;
+    float Damage, Speed;
     Random random;
     int reflectchance = 0;
     public bool reflected = false;
+    protected bool changedirection = false;
 
     public E_Bullet(float damage, float speed, string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
     {
         Damage = damage;
+        Speed = speed;
         random = new Random();
-        if (PlayingState.player.Mirror)
-            reflectchance = random.Next(100);
     }
+
     public override void Update(GameTime gameTime)
     {
+        if (PlayingState.player.Mirror)
+            reflectchance = 51;//random.Next(100);
+        else
+            reflectchance = 0;
         CheckCollision();
-    }
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-
     }
 
     public void CheckCollision()
     {
-        if (!reflected)
+        if (reflected)
+        {
+            foreach (Enemy e in Room.enemies.Children)
+                if (CollidesWith(e))
+                {
+                    e.health -= Damage;
+                    GameObjectList.RemovedObjects.Add(this);
+                }
+        }
+        else
         {
             if (CollidesWith(PlayingState.player))
             {
@@ -42,17 +52,10 @@ class E_Bullet : SpriteGameObject
                     PlayingState.player.health -= (float)(Damage * PlayingState.player.damagereduction);
                     PlayingState.player.damagereduction *= 2;
                     reflected = true;
+                    Speed += 1;
+                    changedirection = true;
                 }
-            }         
-        }
-        else
-        {
-            foreach (Enemy e in Room.enemies.Children)
-                if (CollidesWith(e))
-                {
-                    e.health -= PlayingState.player.attack;
-                    GameObjectList.RemovedObjects.Add(this);
-                }
+            }
         }
 
         foreach (Solid solid in Room.solid.Children)
@@ -62,6 +65,11 @@ class E_Bullet : SpriteGameObject
                 GameObjectList.RemovedObjects.Add(this);
             }
         }
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+
     }
 }
 
