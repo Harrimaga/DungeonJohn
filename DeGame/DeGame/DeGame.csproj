@@ -84,6 +84,7 @@
     <Compile Include="GameObjects\Items\Item.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
     <Compile Include="GameObjects\Items\Passives\BloodRing.cs" />
+    <Compile Include="GameObjects\Items\Weapons\DoubleGun.cs" />
     <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
     <Compile Include="GameObjects\Boss\Boss.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="GameObjects\Terrain\Door.cs" />
     <Compile Include="GameObjects\Terrain\Ice.cs" />
     <Compile Include="GameObjects\Terrain\Lava.cs" />
+    <Compile Include="GameObjects\Terrain\Pit.cs" />
     <Compile Include="GameObjects\Terrain\Rock.cs" />
     <Compile Include="GameObjects\Terrain\Solid.cs" />
     <Compile Include="GameObjects\Terrain\SpiderWeb.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="States\MainMenuState.cs" />
     <Compile Include="States\Option.cs" />
     <Compile Include="States\PauseMenuState.cs" />
+    <Compile Include="States\PitState.cs" />
     <Compile Include="States\PlayingState.cs" />
     <Compile Include="Structs\Circle.cs" />
   </ItemGroup>
@@ -168,16 +171,27 @@
     <Content Include="Content\Levels\3.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Levels\6.txt">
+    <Content Include="Content\Levels\4.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Levels\5.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Levels\4.txt">
+    <Content Include="Content\Levels\6.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Sprites\Items\Anvil.png" />
+    <Content Include="Content\Levels\7.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\111.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\222.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\333.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Sprites\AttackUp.png" />
     <Content Include="Content\Sprites\AttackUpPressed.png" />
     <Content Include="Content\Sprites\Background Sprite.png" />
@@ -208,6 +222,7 @@
     <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\Items\Altar.png" />
     <Content Include="Content\Sprites\Items\BloodRing.png" />
+    <Content Include="Content\Sprites\Items\DoubleGun.png" />
     <Content Include="Content\Sprites\Items\HardHelmet.png" />
     <Content Include="Content\Sprites\Items\MageJacket.png" />
     <Content Include="Content\Sprites\Items\StandardBow.png" />

@@ -125,6 +125,7 @@ public class Room : GameObjectList
                 break;
             case 'O':
                 roomarray[x, y] = "Pit";
+                CreateObject(x, y, "O");
                 break;
             case 'I':
                 roomarray[x, y] = "Item";
@@ -294,6 +295,13 @@ public class Room : GameObjectList
                 SpiderWeb web = new SpiderWeb(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Ice");
                 tiles.Add(web);
                 break;
+
+            case ("O"):
+                Pit pit = new Pit(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Pit");
+                tiles.Add(pit);
+                roomarray[x, y] = "Background";
+                break;
+
             case ("-"):
                 Door up = new Door(updoor, Up, 1);
                 door.Add(up);
@@ -472,11 +480,6 @@ public class Room : GameObjectList
 
     public override void HandleInput(InputHelper inputHelper)
     {
-        //base.HandleInput(inputHelper);
         anvils.HandleInput(inputHelper);
-        /*foreach (CraftingBench c in anvils.Children)
-        {
-            c.HandleInput(inputHelper);
-        }*/
     }
 }
