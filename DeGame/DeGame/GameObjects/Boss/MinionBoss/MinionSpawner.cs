@@ -22,7 +22,7 @@ class MinionSpawner : Enemy
             if (counter <= 0)
             {
                 ChasingMinion minion = new ChasingMinion(position, Roomposition);
-                Room.enemies.Add(minion);
+                PlayingState.currentFloor.currentRoom.enemies.Add(minion);
                 counter = 50;
             }
         }
