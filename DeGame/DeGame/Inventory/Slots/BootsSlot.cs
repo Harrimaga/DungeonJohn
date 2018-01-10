@@ -24,6 +24,10 @@ public class BootsSlot : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        if (Player.inventory.currentBoots != null)
+        {
+            itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentBoots.itemName);
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

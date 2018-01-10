@@ -10,6 +10,7 @@ class HardHelmet : Item, IHelmet
     {
         itemName = "HardHelmet";
         itemDescription = "Bullets are not very effective, but it is so heavy that you are a lot slower";
+        Type = "helmet";
     }
     public void Equip()
     {

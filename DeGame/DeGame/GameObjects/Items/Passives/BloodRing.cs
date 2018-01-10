@@ -13,6 +13,7 @@ using System.Threading.Tasks;
         damageMultiplier = 1;
         itemName = "BloodRing";
         itemDescription = "Suck the life force out this ring to gain more health";
+        Type = "passive";
     }
     public float DamageMultiplier
     {

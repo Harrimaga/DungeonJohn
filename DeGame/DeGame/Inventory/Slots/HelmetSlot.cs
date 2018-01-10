@@ -24,6 +24,10 @@ public class HelmetSlot : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        if (Player.inventory.currentHelmet != null)
+        {
+            itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentHelmet.itemName);
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

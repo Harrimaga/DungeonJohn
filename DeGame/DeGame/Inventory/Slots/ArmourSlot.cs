@@ -24,6 +24,10 @@ public class ArmourSlot : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        if (Player.inventory.currentArmour != null)
+        {
+            itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentArmour.itemName);
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

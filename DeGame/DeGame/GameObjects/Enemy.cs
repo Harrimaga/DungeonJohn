@@ -61,6 +61,7 @@ public class Enemy : SpriteGameObject
         {
             Effects = SpriteEffects.FlipHorizontally;
         }
+        Chase();
     }
 
     public bool CheckDown()
@@ -184,7 +185,7 @@ public class Enemy : SpriteGameObject
 
     public void CollisionWithEnemy()
     {
-        foreach (Enemy enemy in Room.enemies.Children)
+        foreach (Enemy enemy in PlayingState.currentFloor.currentRoom.enemies.Children)
         {
             if (enemy != this)
             {

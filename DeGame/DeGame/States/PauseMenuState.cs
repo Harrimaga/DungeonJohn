@@ -26,6 +26,11 @@ class PauseMenuState : IGameObject
             startup = true;
             GameEnvironment.gameStateManager.SwitchTo("Playing");
         }
+
+        foreach (InventorySlot slot in inventory)
+        {
+            slot.HandleInput(inputHelper);
+        }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
@@ -35,21 +40,17 @@ class PauseMenuState : IGameObject
         wornItems.Position = BasisPosition + new Vector2(500, 150);
         wornItems.Draw(gameTime, spriteBatch);
 
-        if (startup)
+        inventory = new List<InventorySlot>();
+        for (int i = 0; i < Player.inventory.items.Count; i++)
         {
-            inventory = new List<InventorySlot>();
-            for (int i = 0; i < Player.inventory.items.Count; i++)
-            {
-                Vector2 slotPosition;
-                int x, y;
-                y = (int) Math.Floor((double) i / 9);
-                x = i % 9;
-                //slotPosition = wornItems.position + new Vector2(0, 200) + new Vector2(x * 74, y * 74);
-                slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
+            Vector2 slotPosition;
+            int x, y;
+            y = (int) Math.Floor((double) i / 9);
+            x = i % 9;
+            //slotPosition = wornItems.position + new Vector2(0, 200) + new Vector2(x * 74, y * 74);
+            slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
 
-                inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
-            }
-            startup = false;
+            inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
         }
 
         foreach (InventorySlot slot in inventory)
@@ -61,6 +62,8 @@ class PauseMenuState : IGameObject
     public virtual void Update(GameTime gameTime)
     {
         BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
+        wornItems = PlayingState.currentFloor.wornItems;
+        wornItems.Update(gameTime);
     }
     public virtual void Reset()
     {

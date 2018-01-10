@@ -4,7 +4,7 @@ using System;
 
 class E_Bullet : SpriteGameObject
 {
-    float Damage, Speed;
+    public float Damage, Speed;
     Random random;
     int reflectchance = 0;
     public bool reflected = false;
@@ -30,7 +30,7 @@ class E_Bullet : SpriteGameObject
     {
         if (reflected)
         {
-            foreach (Enemy e in Room.enemies.Children)
+            foreach (Enemy e in PlayingState.currentFloor.currentRoom.enemies.Children)
                 if (CollidesWith(e))
                 {
                     e.health -= Damage;
