@@ -119,6 +119,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "SpamEnemy";
                 CreateObject(x, y, "Q");
                 break;
+            case 'P':
+                roomarray[x, y] = "SpoederEnemy";
+                CreateObject(x, y, "P");
+                break;
             case 'B':
                 roomarray[x, y] = "Boss";
                 CreateObject(x, y, "B");
@@ -253,6 +257,12 @@ public class Room : GameObjectList
             case ("Q"):
                 Enemy enemySpam = new SpamEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "SpamEnemy");
                 enemies.Add(enemySpam);
+                roomarray[x, y] = "Background";
+                enemycounter++;
+                break;
+            case ("P"):
+                Enemy enemySpoeder = new SpoederEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "SpoederEnemy");
+                enemies.Add(enemySpoeder);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
