@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class TurretEnemy : Enemy
+public class TurretLeftEnemy : Enemy
 {
     int Counter = 0;
     float bulletdamage = 3;
     float speed = 3f;
     Vector2 direction;
 
-    public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    public TurretLeftEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
-        direction = new Vector2(1,0);
+        direction = new Vector2(-1, 0);
     }
 
     public void Shoot()
     {
         Counter++;
-        Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2, sprite.Height / 2 - 25);
+        Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2 - 50, sprite.Height / 2 - 25);
         if (Counter >= 50)
         {
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite, direction);
@@ -39,6 +39,6 @@ public class TurretEnemy : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/TurretEnemy"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/TurretEnemyLeft"), position);
     }
 }
