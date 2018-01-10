@@ -26,8 +26,8 @@ public class StandardBow : Item, IWeapon
         Type = "weapon";
         itemName = "StandardBow";
         itemDescription = "Basic weapon with infinte ammo and suck damage.";
-        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardBow_BulletLeft");
-        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardBow_BulletUp");
+        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/StandardBow_BulletLeft");
+        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/StandardBow_BulletUp");
     }
 
     public override void unequip()

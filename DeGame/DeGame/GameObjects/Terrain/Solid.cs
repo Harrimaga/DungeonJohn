@@ -12,7 +12,7 @@ class Solid : SpriteGameObject
     public bool OnThisTile = false;
 
     public Solid(Vector2 startPosition, int layer = 0, string id = "Rock")
-    : base("Sprites/Rock Sprite", layer, id)
+    : base("Sprites/Tiles/Rock Sprite", layer, id)
     {
         position = startPosition;
     }

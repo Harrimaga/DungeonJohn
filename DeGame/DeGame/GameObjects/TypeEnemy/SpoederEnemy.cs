@@ -1,15 +1,24 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class ChasingEnemy : Enemy
+
+public class SpoederEnemy : Enemy
 {
-    public ChasingEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    int ChaseCounter = 0;
+
+    public SpoederEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
-        basevelocity = new Vector2(0.9f, 0.9f);
+
     }
 
     public override void Update(GameTime gameTime)
     {
+        ChaseCounter++;
         base.Update(gameTime);
         if (CollidesWith(PlayingState.player))
         {
@@ -27,16 +36,22 @@ public class ChasingEnemy : Enemy
             velocity = basevelocity;
         }
 
-        if (PlayingState.currentFloor.currentRoom.position == Roomposition)
+        if (PlayingState.currentFloor.currentRoom.position == Roomposition && ChaseCounter >= 25)
+        {
             Chase();
+        }
+
+        if (ChaseCounter >= 75)
+        {
+            ChaseCounter = 0;
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/BearEnemy"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/SpoederEnemy"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }
 
 
-   

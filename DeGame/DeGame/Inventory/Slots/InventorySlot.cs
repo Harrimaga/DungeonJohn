@@ -31,7 +31,6 @@ public class InventorySlot : SpriteGameObject
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition)) 
         {
             Player.inventory.equip(item);
-            Console.WriteLine("Equipped: " + item.itemName);
         }
     }
 

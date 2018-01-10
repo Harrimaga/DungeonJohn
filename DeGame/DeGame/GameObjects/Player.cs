@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Player : SpriteGameObject
 {
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
-    public bool CoolBoots = false, Mirror = true;
+    public bool CoolBoots = false, SlimyBoots = false, Mirror = true;
     public float health = 100, maxhealth = 200;
     public float exp = 0,nextLevelExp = 100;
     public float attackspeedreduction = 0;
@@ -38,7 +38,7 @@ public class Player : SpriteGameObject
         CalculateDamage();
         CalculateAmmo();
     }
-
+        
     public override Rectangle BoundingBox
     {
         get
@@ -110,7 +110,7 @@ public class Player : SpriteGameObject
     public override void HandleInput(InputHelper inputHelper)
     {
         // Player movement
-        if ((onIce && onSolid) || !onIce)
+        if ((onIce && onSolid) || !onIce || SlimyBoots)
         {
             if (inputHelper.IsKeyDown(Keys.W))
             {
@@ -195,9 +195,13 @@ public class Player : SpriteGameObject
         CalculateAmmo();
         CalculateDamage();
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
+        {
             RemoveBullets.Add(bullet);
+        }  
         foreach (Bullet bullet in RemoveBullets)
+        {
             PlayingState.player.bullets.Remove(bullet);
+        }   
     }
 
     public void NextLevel()
@@ -270,10 +274,14 @@ public class Player : SpriteGameObject
     public void CalculateAmmo()
     {
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
-        if (weapon != null)
+        try
         {
             ammo = weapon.Ammo;
         }
-        
+        catch (Exception e)
+        {
+            inventory.currentWeapon = new StandardBow();
+            CalculateAmmo();
+        }
     }
 }

@@ -37,13 +37,13 @@ class Door : Solid
                 switch(DoorNumber)
                 {
                     case (1):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorupclosed");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/doorupclosed");
                         break;
                     case (2):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bossdoorupclosed");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Bossdoorupclosed");
                         break;
                     case (3):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Itemdoorupclosed");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Itemdoorupclosed");
                         break;
                 }
                 closed = true;
@@ -52,13 +52,13 @@ class Door : Solid
                 switch (DoorNumber)
                 {
                     case (1):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorup");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/doorup");
                         break;
                     case (2):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bossdoorup");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Bossdoorup");
                         break;
                     case (3):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Itemdoorup");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Itemdoorup");
                         break;
                 }
         }
@@ -73,13 +73,13 @@ class Door : Solid
                 switch (DoorNumber)
                 {
                     case (1):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleftclosed");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/doorleftclosed");
                         break;
                     case (2):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bossdoorleftclosed");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Bossdoorleftclosed");
                         break;
                     case (3):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Itemdoorleftclosed");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Itemdoorleftclosed");
                         break;
                 }
                 closed = true;
@@ -88,13 +88,13 @@ class Door : Solid
                 switch (DoorNumber)
                 {
                     case (1):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/doorleft");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/doorleft");
                         break;
                     case (2):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bossdoorleft");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Bossdoorleft");
                         break;
                     case (3):
-                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Itemdoorleft");
+                        doorsprite = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Itemdoorleft");
                         break;
                 }
         }
