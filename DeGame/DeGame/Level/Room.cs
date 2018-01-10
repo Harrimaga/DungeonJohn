@@ -444,10 +444,6 @@ public class Room : GameObjectList
         {
             c.Draw(gameTime, spriteBatch);
         }
-        foreach (Enemy e in enemies.Children)
-        {
-            e.Draw(gameTime, spriteBatch);
-        }
         foreach (Consumables c in consumable.Children)
         {
             c.Draw(gameTime, spriteBatch);
@@ -459,6 +455,10 @@ public class Room : GameObjectList
         foreach (Door d in door.Children)
         {
             d.Draw(gameTime, spriteBatch);
+        }
+        foreach (Enemy e in enemies.Children)
+        {
+            e.Draw(gameTime, spriteBatch);
         }
         enemybullets.Draw(gameTime, spriteBatch);
         homingenemybullets.Draw(gameTime, spriteBatch);
