@@ -43,11 +43,13 @@ class MinionBoss : Boss
     public void Shoot()
     {
         Vector2 bulletposition;
+        Vector2 direction;
         Counter--;
         if (Counter <= 0)
         {
+            direction = (PlayingState.player.position - position);
             bulletposition = position + new Vector2(GameEnvironment.assetManager.GetSprite("Sprites/MinionBoss").Width / 2, GameEnvironment.assetManager.GetSprite("Sprites/MinionBoss").Height * .6f);
-            bullet = new EnemyBullet(bulletdamage, speed, bulletposition, GameEnvironment.assetManager.GetSprite("Sprites/MinionBossBullet"));
+            bullet = new EnemyBullet(bulletdamage, speed, bulletposition, direction,GameEnvironment.assetManager.GetSprite("Sprites/MinionBossBullet"));
             Room.enemybullets.Add(bullet);
             Counter = 150;
         }

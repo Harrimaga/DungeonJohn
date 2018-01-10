@@ -52,9 +52,6 @@ public class Boss1 : Boss
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-
-            public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
         base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/Boss"), position);
         Bullets.Draw(gameTime, spriteBatch);
