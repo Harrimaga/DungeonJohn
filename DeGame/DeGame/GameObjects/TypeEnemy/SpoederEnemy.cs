@@ -39,18 +39,12 @@ public class SpoederEnemy : Enemy
         if (PlayingState.currentFloor.currentRoom.position == Roomposition && ChaseCounter >= 25)
         {
             Chase();
-            velocity = basevelocity;
         }
 
         if (ChaseCounter >= 75)
         {
             ChaseCounter = 0;
         }
-    }
-
-    public void SpoederChace()
-    {
-
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
