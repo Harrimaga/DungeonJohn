@@ -262,12 +262,6 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
-            case ("P"):
-                Enemy enemySpoeder = new SpoederEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "SpoederEnemy");
-                enemies.Add(enemySpoeder);
-                roomarray[x, y] = "Background";
-                enemycounter++;
-                break;
             case ("B"):
                 Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "Boss");
                 bosses.Add(boss);
