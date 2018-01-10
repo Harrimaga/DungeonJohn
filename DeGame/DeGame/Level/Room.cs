@@ -396,6 +396,7 @@ public class Room : GameObjectList
                         case "Background":
                         case "SpiderWeb":
                         case "ShopItem":
+                        case "Anvil":
                         case "Rock":
                         case "Item":
                         case "Boss":
