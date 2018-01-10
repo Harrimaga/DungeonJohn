@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Boss :  SpriteGameObject
 {
-    protected float health = 300;
+    public float health = 300;
     protected float maxhealth = 300;
     protected int expGive = 240;
     //protected float attack;

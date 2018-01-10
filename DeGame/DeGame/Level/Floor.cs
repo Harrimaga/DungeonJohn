@@ -47,7 +47,7 @@ public class Floor
     }
     int RandomRoom()
     {
-        return random.Next(2) + 4;
+        return random.Next(3) + 5;
     }
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
@@ -185,7 +185,7 @@ public class Floor
         return false;
     }
 
-    void DoorCheck()
+    public void DoorCheck()
     {
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
