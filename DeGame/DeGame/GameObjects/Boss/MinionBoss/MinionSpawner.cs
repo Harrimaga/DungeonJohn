@@ -34,6 +34,6 @@ class MinionSpawner : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Spawner"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/Spawner"), position);
     }
 }

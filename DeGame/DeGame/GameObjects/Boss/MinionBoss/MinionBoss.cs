@@ -48,8 +48,8 @@ class MinionBoss : Boss
         if (Counter <= 0)
         {
             direction = (PlayingState.player.position - position);
-            bulletposition = position + new Vector2(GameEnvironment.assetManager.GetSprite("Sprites/MinionBoss").Width / 2, GameEnvironment.assetManager.GetSprite("Sprites/MinionBoss").Height * .6f);
-            bullet = new EnemyBullet(bulletdamage, speed, bulletposition, direction,GameEnvironment.assetManager.GetSprite("Sprites/MinionBossBullet"));
+            bulletposition = position + new Vector2(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss").Width / 2, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss").Height * .6f);
+            bullet = new EnemyBullet(bulletdamage, speed, bulletposition, direction,GameEnvironment.assetManager.GetSprite("Sprites/Bullets/MinionBossBullet"));
             Room.enemybullets.Add(bullet);
             Counter = 150;
         }
@@ -58,6 +58,6 @@ class MinionBoss : Boss
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/MinionBoss"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss"), position);
     }
 }
