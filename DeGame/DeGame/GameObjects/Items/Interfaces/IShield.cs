@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 public interface IShield
 {
-    bool AddedDefence
+    float AddedDefence
     {
-        get; set;
+        get;
     }
 
-    bool DefenceMultiplier
+    float DefenceMultiplier
     {
-        get; set;
+        get;
     }
 }

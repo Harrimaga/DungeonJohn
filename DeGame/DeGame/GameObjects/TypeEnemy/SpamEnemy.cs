@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class SpamEnemy : Enemy
@@ -16,6 +11,7 @@ public class SpamEnemy : Enemy
     public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
+        basevelocity = new Vector2(0, 0);
     }
 
     public void Range()
@@ -71,6 +67,6 @@ public class SpamEnemy : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/CutieEnemyPixel"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/CutieEnemyPixel"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }

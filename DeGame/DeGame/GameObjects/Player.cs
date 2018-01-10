@@ -7,10 +7,11 @@ using System.Collections.Generic;
 public class Player : SpriteGameObject
 {
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
-    public bool HardHelmet = false, CoolBoots = false;
+    public bool CoolBoots = false, Mirror = true;
     public float health = 100, maxhealth = 200;
     public float exp = 0,nextLevelExp = 100;
     public float attackspeedreduction = 0;
+    public double damagereduction = 1;
     public float extraspeed = 0;
     public float attack;
     public float attackspeed;

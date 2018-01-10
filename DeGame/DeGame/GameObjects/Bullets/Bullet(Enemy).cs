@@ -1,43 +1,69 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 class E_Bullet : SpriteGameObject
 {
-    float Damage;
+    float Damage, Speed;
+    Random random;
+    int reflectchance = 0;
+    public bool reflected = false;
+    protected bool changedirection = false;
 
     public E_Bullet(float damage, float speed, string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
     {
         Damage = damage;
+        Speed = speed;
+        random = new Random();
     }
+
     public override void Update(GameTime gameTime)
     {
+        if (PlayingState.player.Mirror)
+            reflectchance = random.Next(100);
+        else
+            reflectchance = 0;
         CheckCollision();
-    }
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-
     }
 
     public void CheckCollision()
     {
-        if (CollidesWith(PlayingState.player))
+        if (reflected)
         {
-            GameObjectList.RemovedObjects.Add(this);
-            if(PlayingState.player.HardHelmet)
-            {
-                PlayingState.player.health -= 0.8f * Damage;
-            }
-            if (!PlayingState.player.HardHelmet)
-            {
-                PlayingState.player.health -= Damage;
-            }   
+            foreach (Enemy e in Room.enemies.Children)
+                if (CollidesWith(e))
+                {
+                    e.health -= Damage;
+                    GameObjectList.RemovedObjects.Add(this);
+                }
+            foreach (Boss b in Room.bosses.Children)
+                if (CollidesWith(b))
+                {
+                    b.health -= Damage;
+                    GameObjectList.RemovedObjects.Add(this);
+                }
         }
+        else
+        {
+            if (CollidesWith(PlayingState.player))
+            {
+                if (reflectchance < 50)
+                {
+                    PlayingState.player.health -= (float)(Damage * PlayingState.player.damagereduction);
+                    GameObjectList.RemovedObjects.Add(this);
+                }
+                else
+                {
+                    PlayingState.player.damagereduction *= 0.5;
+                    PlayingState.player.health -= (float)(Damage * PlayingState.player.damagereduction);
+                    PlayingState.player.damagereduction *= 2;
+                    reflected = true;
+                    Speed += 1;
+                    changedirection = true;
+                }
+            }
+        }
+
         foreach (Solid solid in Room.solid.Children)
         {
             if (CollidesWith(solid))
@@ -45,6 +71,11 @@ class E_Bullet : SpriteGameObject
                 GameObjectList.RemovedObjects.Add(this);
             }
         }
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+
     }
 }
 

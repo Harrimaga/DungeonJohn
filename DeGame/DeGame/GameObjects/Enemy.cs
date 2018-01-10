@@ -12,7 +12,7 @@ public class Enemy : SpriteGameObject
     protected float expGive = 120;
     protected bool alive = true;
     protected int counter = 100;
-    protected Vector2 basevelocity = new Vector2((float) 0.5, (float)0.5);
+    protected Vector2 basevelocity = Vector2.Zero;
     public SpriteEffects Effects;
     public Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
@@ -53,11 +53,14 @@ public class Enemy : SpriteGameObject
             alive = false;
             GameObjectList.RemovedObjects.Add(this);
         }
-    }
-
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        healthbar.Draw(spriteBatch);
+        if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
+        {
+            Effects = SpriteEffects.None;
+        }
+        if (position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
+        {
+            Effects = SpriteEffects.FlipHorizontally;
+        }
     }
 
     public bool CheckDown()
@@ -126,12 +129,10 @@ public class Enemy : SpriteGameObject
         if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
         {
             position.X -= velocity.X;
-            Effects = SpriteEffects.None;
         }
         if (position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
         {
             position.X += velocity.X;
-            Effects = SpriteEffects.FlipHorizontally;
         }
 
         if (CheckUp())
@@ -212,6 +213,11 @@ public class Enemy : SpriteGameObject
                 }
             }
         }
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        healthbar.Draw(spriteBatch);
     }
 }
 

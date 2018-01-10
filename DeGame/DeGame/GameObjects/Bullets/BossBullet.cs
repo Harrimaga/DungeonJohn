@@ -14,48 +14,70 @@ class BossBullet : E_Bullet
     float speed = 0.5f;
     int health = 100, maxhealth = 100;
     public SpriteEffects Effects;
-    bool Homing;
-    
+    bool Homing, reflected = false;
+    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
     
     public BossBullet(float damage, float speed, Vector2 Startposition, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/BossBullet", 0, "BossBullet") 
     {
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
+        direction = (PlayingState.player.position - position);      
         Homing = homing;
-        direction = (PlayingState.player.position - position);
-        direction.Normalize();
+        Damage = damage;
     }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         healthbar.Update(gameTime, health, maxhealth, position);
+        if(!reflected)
+        {
+            if (Homing)
+                HomingBullet();
+            DestroyableBullet();
+        }
         if (!Homing)
         {
+            direction.Normalize();
             position += direction * speed;
         }
-        else
+        if (changedirection)
         {
-            HomingBullet();
+            if (!Homing)
+            {
+                direction = CalculateReflect(direction);
+            }
+            changedirection = false;
+            Homing = false;
+            reflected = true;
         }
-        DestroyableBullet();
     }
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+
+    Vector2 CalculateReflect(Vector2 direction)
     {
-        //base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BossBullet"), position);
-        //healthbar.Draw(spriteBatch);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+        Vector2 newdirection = direction;
+        if (position.X < MiddleofPlayer.X - GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2 || position.X > MiddleofPlayer.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2)
+        {
+            newdirection.X = -direction.X;
+        }
+        if (position.Y < MiddleofPlayer.Y - GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2 || position.Y > MiddleofPlayer.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2)
+        {
+            newdirection.Y = -direction.Y;
+        }
+        return newdirection;
     }
 
     public void DestroyableBullet()
     {
         List<GameObject> RemoveBullets = new List<GameObject>();
 
+
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
             if (CollidesWith(bullet))
             {
                 health -= (int)PlayingState.player.attack;
                 RemoveBullets.Add(bullet);
-            }
+            }    
 
         foreach (Bullet bullet in RemoveBullets)
             PlayingState.player.bullets.Remove(bullet);
@@ -66,9 +88,9 @@ class BossBullet : E_Bullet
             GameObjectList.RemovedObjects.Add(this);
         }
     }
+
     public void HomingBullet()
     {
-
         if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
         {
             position.Y -= speed;
@@ -85,5 +107,12 @@ class BossBullet : E_Bullet
         {
             position.X += speed;
         }
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        //base.Draw(gameTime, spriteBatch);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BossBullet"), position);
+        //healthbar.Draw(spriteBatch);
     }
 }
