@@ -10,7 +10,7 @@ public class Enemy : SpriteGameObject
     protected float attackspeed;
     protected float range = 300;
     protected float expGive = 120;
-    protected bool alive = true, drop = true, flying = false;
+    protected bool alive = true, drop = true, flying = false, backgroundenemy = false;
     protected int counter = 100;
     protected Vector2 basevelocity = Vector2.Zero;
     public SpriteEffects Effects;
@@ -196,7 +196,7 @@ public class Enemy : SpriteGameObject
     {
         foreach (Enemy enemy in PlayingState.currentFloor.currentRoom.enemies.Children)
         {
-            if (enemy != this)
+            if (enemy != this && !enemy.backgroundenemy)
             {
                 if (CollidesWith(enemy) && BoundingBox.Left < enemy.position.X + enemy.Width && BoundingBox.Left + (enemy.Width / 2) > enemy.position.X + enemy.Width)
                 {

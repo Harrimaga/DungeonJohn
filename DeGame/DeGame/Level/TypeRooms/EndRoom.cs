@@ -10,9 +10,12 @@ class EndRoom : Room
     {
         currentlevel = PlayingState.currentFloor.CurrentLevel;
         PlaceBoss(ChooseBoss(currentlevel));
+        Type = "bossroom";
+        RoomListIndex = 2;
+        position = new Vector2(a, b);
     }
 
-    public virtual void Update(GameTime gameTime)
+    public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         //TODO check player volgende floor mag nextFloor true maken
@@ -30,7 +33,7 @@ class EndRoom : Room
         switch (boss)
         {
             case ("MinionBoss"):
-                Boss MinionBoss = new MinionBoss(new Vector2(11 * CellWidth + a * roomwidth, 11 * CellHeight + b * roomheight), new Vector2(a,b));
+                Boss MinionBoss = new Boss1(new Vector2(11 * CellWidth + a * roomwidth, 11 * CellHeight + b * roomheight), new Vector2(a,b));
                 bosses.Add(MinionBoss);
                 MinionSpawner factory1 = new MinionSpawner(new Vector2(4 * CellWidth + a * roomwidth, 11 * CellHeight + b * roomheight), new Vector2(a, b));
                 MinionSpawner factory2 = new MinionSpawner(new Vector2(17 * CellWidth + a * roomwidth, 11 * CellHeight + b * roomheight), new Vector2(a, b));
@@ -56,7 +59,7 @@ class EndRoom : Room
         }
     }
 
-    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
     }

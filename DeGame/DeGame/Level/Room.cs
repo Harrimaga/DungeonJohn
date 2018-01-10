@@ -18,7 +18,8 @@ public class Room : GameObjectList
     Random random = new Random();
     public string[,] roomarray;
     public int lavatimer = 0;
-    IList addedenemies = new List<Enemy>();
+    public IList addedenemies = new List<Enemy>();
+    public string Type = "normalroom";
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
@@ -125,10 +126,6 @@ public class Room : GameObjectList
             case 'B':
                 roomarray[x, y] = "Boss1";
                 CreateObject(x, y, "B");
-                break;
-            case '*':
-                roomarray[x, y] = "MinionSpawner";
-                CreateObject(x, y, "*");
                 break;
             case 'O':
                 roomarray[x, y] = "Pit";
@@ -274,11 +271,6 @@ public class Room : GameObjectList
                 bosses.Add(boss);
                 enemycounter++;
                 break;
-            case ("*"):
-                Enemy MinionSpawner = new MinionSpawner(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "MinionSpawner");
-                addedenemies.Add(MinionSpawner);
-                enemycounter++;
-                break;
             case ("!"):
                 Solid rock = new Rock(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Rock");
                 solid.Add(rock);
@@ -312,13 +304,11 @@ public class Room : GameObjectList
                 SpiderWeb web = new SpiderWeb(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Ice");
                 tiles.Add(web);
                 break;
-
             case ("O"):
                 Pit pit = new Pit(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Pit");
                 tiles.Add(pit);
                 roomarray[x, y] = "Background";
                 break;
-
             case ("-"):
                 Door up = new Door(updoor, Up, 1);
                 door.Add(up);
@@ -347,6 +337,11 @@ public class Room : GameObjectList
                 if (MiddleofPlayer.Y >= ExitShop.Y && MiddleofPlayer.Y <= ExitShop.Y + CellHeight)
                     PlayingState.currentFloor.NextFloor();
         }
+    }
+
+    public override void HandleInput(InputHelper inputHelper)
+    {
+        anvils.HandleInput(inputHelper);
     }
 
     void WallShader (GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
@@ -487,10 +482,5 @@ public class Room : GameObjectList
         }
         enemybullets.Draw(gameTime, spriteBatch);
         homingenemybullets.Draw(gameTime, spriteBatch);
-    }
-
-    public override void HandleInput(InputHelper inputHelper)
-    {
-        anvils.HandleInput(inputHelper);
     }
 }

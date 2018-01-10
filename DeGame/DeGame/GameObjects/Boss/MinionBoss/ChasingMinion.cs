@@ -5,6 +5,7 @@ public class ChasingMinion : Enemy
 {
     public ChasingMinion(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
+        position = startPosition;
         basevelocity = new Vector2(2.4f, 2.4f);
         health = 50;
         maxhealth = 30;
@@ -12,6 +13,7 @@ public class ChasingMinion : Enemy
         attack = 1;
         drop = false;
         flying = true;
+        backgroundenemy = false;
     }
 
     public override void Update(GameTime gameTime)
