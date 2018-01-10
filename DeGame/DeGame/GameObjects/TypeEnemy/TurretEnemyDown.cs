@@ -24,7 +24,7 @@ public class TurretEnemyDown : Enemy
         Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2 - 25, sprite.Height / 2 + 10);
         if (Counter >= 50)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite, direction);
             Room.enemybullets.Add(bullet);
             Counter = 0;
         }
