@@ -9,7 +9,8 @@ public class Room : GameObjectList
 {
     public bool Visited = false, CameraMoving = false;
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0;
-    public static GameObjectList enemies, solid, door, consumable, bosses, tiles, altars, anvils, enemybullets, homingenemybullets;
+    public static GameObjectList solid, door, consumable, bosses, tiles, altars, anvils, enemybullets, homingenemybullets;
+    public GameObjectList enemies;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop;
     Vector2 TilePosition;
     int roomarraywidth, roomarrayheight;

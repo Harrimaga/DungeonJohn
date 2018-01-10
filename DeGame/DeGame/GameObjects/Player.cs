@@ -38,7 +38,7 @@ public class Player : SpriteGameObject
         CalculateDamage();
         CalculateAmmo();
     }
-
+        
     public override Rectangle BoundingBox
     {
         get
