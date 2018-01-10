@@ -3,30 +3,45 @@ using Microsoft.Xna.Framework.Graphics;
 
 class EndRoom : Room
 {
-    public bool cleared = false;
+    static public bool cleared = false, trigger = false;
     int currentlevel;
 
     public EndRoom(int roomListIndex, int a, int b, int layer = 0, string id = "") : base(a, b, layer)
     {
-
+        currentlevel = PlayingState.currentFloor.CurrentLevel;
+        PlaceBoss(ChooseBoss(currentlevel));
     }
 
     public virtual void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        currentlevel = PlayingState.currentFloor.CurrentLevel;
         //TODO check player volgende floor mag nextFloor true maken
+        CheckExit();
     }
 
-    public void ChooseBoss(int currentlevel)
+    public string ChooseBoss(int currentlevel)
     {
         // if (currentlevel == 1)
-
+        return "MinionBoss";
     }
 
-    public void ChooseBossPosition(Boss boss)
+    public void PlaceBoss(string boss)
     {
-        //
+        switch (boss)
+        {
+            case ("MinionBoss"):
+                Boss MinionBoss = new MinionBoss(new Vector2(11 * CellWidth + a * roomwidth, 11 * CellHeight + b * roomheight), new Vector2(a,b));
+                bosses.Add(MinionBoss);
+                MinionSpawner factory1 = new MinionSpawner(new Vector2(4 * CellWidth + a * roomwidth, 11 * CellHeight + b * roomheight), new Vector2(a, b));
+                MinionSpawner factory2 = new MinionSpawner(new Vector2(17 * CellWidth + a * roomwidth, 11 * CellHeight + b * roomheight), new Vector2(a, b));
+                enemies.Add(factory1);
+                enemies.Add(factory2);
+                break;
+            default:
+                Boss Boss1 = new Boss1(new Vector2(11 * CellWidth + a * roomwidth, 3 * CellHeight + b * roomheight), new Vector2(a, b));
+                bosses.Add(Boss1);
+                break;
+        }
     }
 
     public override void CheckExit()

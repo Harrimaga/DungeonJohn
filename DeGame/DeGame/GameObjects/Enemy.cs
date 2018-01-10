@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Enemy : SpriteGameObject
 {
-    public float health = 100;
+    public float health;
     protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
@@ -26,6 +26,7 @@ public class Enemy : SpriteGameObject
         position = startPosition;
         velocity = basevelocity;
         Roomposition = roomposition;
+        health = maxhealth;
     }
 
     public override void Update(GameTime gameTime)

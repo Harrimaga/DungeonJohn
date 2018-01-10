@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 class MinionBoss : Boss
 {
     Vector2 Roomposition;
-    int Counter = 150;
+    int Counter = 150, spawncounter = 0, spawncountercooldown;
     float bulletdamage = 20, speed = 2;
     EnemyBullet bullet;
 
@@ -19,7 +19,25 @@ class MinionBoss : Boss
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        Shoot();
+        if (!EndRoom.trigger)
+            Shoot();
+        if (spawncountercooldown > 0)
+            spawncountercooldown--;
+        else
+            spawncounter = 400;
+        if (spawncounter > 0)
+        {
+            if (health < 300 && spawncountercooldown <= 0)
+            {
+                EndRoom.trigger = true;
+                spawncounter--;
+            }
+        }
+        else
+        {
+            spawncountercooldown = 400;
+            EndRoom.trigger = false;
+        }        
     }
 
     public void Shoot()
