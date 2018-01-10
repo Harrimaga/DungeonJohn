@@ -33,7 +33,7 @@ public class ShieldSlot : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(sprite, position);
+        spriteBatch.Draw(sprite, position, Color.White);
         if (Player.inventory.currentShield != null)
         {
             InventorySlot.DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
