@@ -13,7 +13,7 @@ public class Boss1 : Boss
 
     public Boss1(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
     {
-        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/BossBullet");
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet");
         Bullets = new GameObjectList();
         HomingBullets = new GameObjectList();
         velocity = new Vector2(1, 1);

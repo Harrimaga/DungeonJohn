@@ -16,7 +16,7 @@ class BossBullet : E_Bullet
     public SpriteEffects Effects;
     bool Homing, reflected = false;
     
-    public BossBullet(float damage, float speed, Vector2 Startposition, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/BossBullet", 0, "BossBullet") 
+    public BossBullet(float damage, float speed, Vector2 Startposition, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/Bullets/BossBullet", 0, "BossBullet") 
     {
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
@@ -111,7 +111,7 @@ class BossBullet : E_Bullet
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         //base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/BossBullet"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position);
         //healthbar.Draw(spriteBatch);
     }
 }
