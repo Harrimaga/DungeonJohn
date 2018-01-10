@@ -135,7 +135,7 @@ public class Player : SpriteGameObject
                 lastUsedspeed = "left";
             }
         }
-        else
+        else// if (!SlimyBoots)
         {
             if(lastUsedspeed == "up")
             {
