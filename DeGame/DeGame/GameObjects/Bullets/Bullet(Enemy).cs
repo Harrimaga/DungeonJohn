@@ -4,7 +4,7 @@ using System;
 
 class E_Bullet : SpriteGameObject
 {
-    float Damage, Speed;
+    public float Damage, Speed;
     Random random;
     int reflectchance = 0;
     public bool reflected = false;

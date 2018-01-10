@@ -23,7 +23,10 @@ public class WeaponSlot : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
+        if (Player.inventory.currentWeapon != null)
+        {
+            itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentWeapon.itemName);
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

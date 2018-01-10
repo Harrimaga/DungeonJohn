@@ -27,6 +27,6 @@ class Pit : Tiles
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PitTile"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitTile"), position);
     }
 }

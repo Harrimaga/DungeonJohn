@@ -14,6 +14,7 @@ class Mirror : Item, IShield
         defencemultiplier = 1;
         itemName = "Mirror";
         itemDescription = "Sometimes reduces bullet damage and reflects the projectile";
+        Type = "shield";
     }
 
     public override void equip()

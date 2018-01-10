@@ -22,6 +22,8 @@ public class GameEnvironment : Game
 
     public static Point Dimensions;
 
+    public Texture2D CursorSprite;
+
     bool startup;
 
 
@@ -32,9 +34,8 @@ public class GameEnvironment : Game
         gameStateManager = new GameStateManager();
         random = new Random();
         assetManager = new AssetManager(Content);
-
         Dimensions = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-
+        IsMouseVisible = true;
         startup = true;
 
         //ApplyResolutionSettings();
@@ -50,6 +51,7 @@ public class GameEnvironment : Game
         System.Console.WriteLine(Dimensions.ToString());
         System.Console.WriteLine(GraphicsDevice.Viewport.ToString());
     }
+
     protected void HandleInput()
     {
         inputHelper.Update();

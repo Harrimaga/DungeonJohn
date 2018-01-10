@@ -16,7 +16,7 @@ public class Boss :  SpriteGameObject
     Vector2 Roomposition;
     bool alive = true;
 
-    public Boss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base("Sprites/Boss", layer, id)
+    public Boss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base("Sprites/Enemies/Boss", layer, id)
     {
         position = startPosition;
         healthbar = new HealthBar(health, maxhealth, position, false, true);

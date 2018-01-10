@@ -1,27 +1,32 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 public class RangedEnemy : Enemy
 {
     int Counter = 300;
     float bulletdamage = 5;
     float speed = 2f;
-
+    Vector2 direction;
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
+        position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
-        basevelocity = new Vector2(0.5f, 0.5f);
+        velocity = new Vector2(0.5f, 0.5f);
+        Console.WriteLine("Playerposition" + PlayingState.player.position);
+        Console.WriteLine("position = " + position);
+        Console.WriteLine("direction =" + direction);
     }
 
     public void Range()
     {
         Counter++;
         if (PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
-            PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
+           PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
         {
-            Chase();
+        Chase();
         }
-        else if(Counter >= 300)
+        if(Counter >= 300)
         {
             Shoot();
             Counter = 0;
@@ -91,12 +96,13 @@ public class RangedEnemy : Enemy
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Range();
+              Range();
+        direction = (PlayingState.player.position - position);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/ShootingEnemy1"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/ShootingEnemy1"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }

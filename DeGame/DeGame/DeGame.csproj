@@ -76,6 +76,7 @@
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
     <Compile Include="GameObjects\Items\Armour\MageJacket.cs" />
     <Compile Include="GameObjects\Items\Boots\CoolBoots.cs" />
+    <Compile Include="GameObjects\Items\Boots\SlimyBoots.cs" />
     <Compile Include="GameObjects\Items\CraftingBench.cs" />
     <Compile Include="GameObjects\Items\Helmets\HardHelmet.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IArmour.cs" />
@@ -203,15 +204,10 @@
     <Content Include="Content\Sprites\Boss.png" />
     <Content Include="Content\Sprites\BossBullet.png" />
     <Content Include="Content\Sprites\bteam.png" />
-    <Content Include="Content\Sprites\bullet1.png" />
-    <Content Include="Content\Sprites\doordown.png" />
     <Content Include="Content\Sprites\doorleft.png" />
-    <Content Include="Content\Sprites\doorright.png" />
     <Content Include="Content\Sprites\doorup.png" />
     <Content Include="Content\Sprites\Button Sprite.png" />
     <Content Include="Content\Sprites\Button2 Sprite.png" />
-    <Content Include="Content\Sprites\Eind Sprite.png" />
-    <Content Include="Content\Sprites\Eind Sprite2.png" />
     <Content Include="Content\Sprites\healthbar.png" />
     <Content Include="Content\Sprites\HealthbarBackground.png" />
     <Content Include="Content\Sprites\InventorySlots\ArmourSLot.png" />
@@ -223,12 +219,12 @@
     <Content Include="Content\Sprites\InventorySlots\WeaponSlot.png" />
     <Content Include="Content\Sprites\HealthUp.png" />
     <Content Include="Content\Sprites\HealthUpPressed.png" />
-    <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\Items\Altar.png" />
     <Content Include="Content\Sprites\Items\BloodRing.png" />
     <Content Include="Content\Sprites\Items\DoubleGun.png" />
     <Content Include="Content\Sprites\Items\HardHelmet.png" />
     <Content Include="Content\Sprites\Items\MageJacket.png" />
+    <Content Include="Content\Sprites\Items\SlimyBoots.png" />
     <Content Include="Content\Sprites\Items\StandardBow.png" />
     <Content Include="Content\Sprites\Lava.png" />
     <Content Include="Content\Sprites\LevelUp.png" />
@@ -239,13 +235,11 @@
     <Content Include="Content\Sprites\OptionPressed.png" />
     <Content Include="Content\Sprites\pauze.png" />
     <Content Include="Content\Sprites\Random.png" />
-    <Content Include="Content\Sprites\OldRock.png" />
     <Content Include="Content\Sprites\Rock Sprite.png" />
     <Content Include="Content\Sprites\SpiderWeb.png" />
     <Content Include="Content\Sprites\Standardtile.png" />
     <Content Include="Content\Sprites\Start.png" />
     <Content Include="Content\Sprites\StartPressed.png" />
-    <Content Include="Content\Sprites\Wall Sprite Corner.png" />
     <Content Include="Content\Sprites\Wall Sprite.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
