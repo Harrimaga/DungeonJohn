@@ -10,6 +10,7 @@ class SlimyBoots : Item, IBoots
     {
         itemName = "SlimyBoots";
         itemDescription = "Spiderwebs stand no chance against these boots.";
+        Type = "boots";
     }
 
     public override void equip()
