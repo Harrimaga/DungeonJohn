@@ -11,7 +11,7 @@ public class RangedEnemy : Enemy
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         position = startPosition;
-        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
         velocity = new Vector2(0.5f, 0.5f);
         Console.WriteLine("Playerposition" + PlayingState.player.position);
         Console.WriteLine("position = " + position);

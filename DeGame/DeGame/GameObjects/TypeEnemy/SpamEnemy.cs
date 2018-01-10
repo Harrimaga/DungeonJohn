@@ -12,7 +12,7 @@ public class SpamEnemy : Enemy
     public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         position = startPosition;
-        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
         basevelocity = new Vector2(0, 0);
         
     }

@@ -26,8 +26,8 @@ public class Mac10 : Item, IWeapon
         Type = "weapon";
         itemName = "Mac10";
         itemDescription = "You ought to know this weapon by now.";
-        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Items/Mac10_BulletLeft");
-        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Items/Mac10_BulletUp");
+        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/Mac10_BulletLeft");
+        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/Mac10_BulletUp");
     }
 
     public override void unequip()

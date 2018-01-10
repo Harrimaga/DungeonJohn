@@ -26,8 +26,8 @@ public class DoubleGun : Item, IWeapon
         Type = "weapon";
         itemName = "DoubleGun";
         itemDescription = "What is better then 1 gun 2 guns!";
-        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Items/Mac10_BulletLeft");
-        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Items/Mac10_BulletUp");
+        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/Mac10_BulletLeft");
+        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/Mac10_BulletUp");
     }
 
     public override void unequip()

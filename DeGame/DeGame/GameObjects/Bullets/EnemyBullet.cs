@@ -45,6 +45,6 @@ class EnemyBullet : E_Bullet
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"), position);
     }
 }
