@@ -195,9 +195,13 @@ public class Player : SpriteGameObject
         CalculateAmmo();
         CalculateDamage();
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
+        {
             RemoveBullets.Add(bullet);
+        }  
         foreach (Bullet bullet in RemoveBullets)
+        {
             PlayingState.player.bullets.Remove(bullet);
+        }   
     }
 
     public void NextLevel()
@@ -270,10 +274,14 @@ public class Player : SpriteGameObject
     public void CalculateAmmo()
     {
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
-        if (weapon != null)
+        try
         {
             ammo = weapon.Ammo;
         }
-        
+        catch (Exception e)
+        {
+            inventory.currentWeapon = new StandardBow();
+            CalculateAmmo();
+        }
     }
 }
