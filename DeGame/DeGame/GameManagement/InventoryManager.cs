@@ -16,7 +16,7 @@ public class InventoryManager
     {
         currentHelmet = new HardHelmet();
         currentArmour = new MageJacket();
-        currentBoots = new CoolBoots();
+        currentBoots = new SlimyBoots();
         currentWeapon = new DoubleGun();
         currentShield = new Mirror();
         currentPassives = new Item[2];

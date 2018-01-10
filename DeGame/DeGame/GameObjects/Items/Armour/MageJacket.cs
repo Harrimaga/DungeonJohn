@@ -9,15 +9,15 @@ class MageJacket : Item, IArmour
     public MageJacket()
     {
         itemName = "MageJacket";
-        itemDescription = "This jacket was worn by a old mage making take move faster";
+        itemDescription = "This jacket was worn by a old mage making you move really faster";
     }
     public void Equip()
     {
-        PlayingState.player.speed += 2;
+        PlayingState.player.extraspeed += 2;
     }
     public void Unequip()
     {
 
-        PlayingState.player.speed -= 2;
+        PlayingState.player.extraspeed -= 2;
     }
 }
