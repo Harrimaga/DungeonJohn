@@ -61,6 +61,7 @@ public class Enemy : SpriteGameObject
         {
             Effects = SpriteEffects.FlipHorizontally;
         }
+        Chase();
     }
 
     public bool CheckDown()
