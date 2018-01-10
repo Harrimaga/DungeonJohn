@@ -40,7 +40,7 @@ public class TurretEnemy : Enemy
         Vector2 MiddleOfSprite = new Vector2(sprite.Width / 2 - 25, sprite.Height / 2 + 10);
         if (Counter >= 50)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddleOfSprite, direction);
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddleOfSprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
             Room.enemybullets.Add(bullet);
             Counter = 0;
         }
