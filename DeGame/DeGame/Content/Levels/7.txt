@@ -5,7 +5,7 @@
 +HHHHHHHHH.HHHHHHHHH+
 +.HHHH.........HHHH.+
 +..HHH.........HHH..+
-<.........Q.........>
+<...................>
 +..HHH.........HHH..+
 +.HHHH.........HHHH.+
 +HHHHHHHHH.HHHHHHHHH+
