@@ -8,69 +8,67 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class TurretEnemy : Enemy
 {
-    int Counter = 50;
-    int BulletCounter = 0;
+    int Counter = 0, Directioncount;
     float bulletdamage = 3;
     float speed = 3f;
+    Vector2 direction;
 
-    public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, layer, id)
     {
 
-    }
-
-    public void Range()
-    {
-        Counter--;
-
-        if (Counter <= 10)
+        Directioncount = directioncount;
+        switch (Directioncount)
         {
-            Shoot();
-            BulletCounter++;
-            Counter = 20;
-        }
-        if (BulletCounter == 30)
-        {
-            BulletCounter = 0;
-            Counter = 100;
+            case 1:
+                direction = new Vector2(0, -1);
+                break;
+            case 2:
+                direction = new Vector2(0, 1);
+                break;
+            case 3:
+                direction = new Vector2(-1, 0);
+                break;
+            default:
+                direction = new Vector2(1, 0);
+                break;
         }
     }
 
     public void Shoot()
     {
-        Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2, sprite.Height / 2);
-        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
-        Room.enemybullets.Add(bullet);
-
-        //if (PlayingState.player.position.Y > position.Y)
-        //{
-        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
-        //    Room.enemybullets.Add(bullet);
-        //}
-        //if (PlayingState.player.position.Y < position.Y)
-        //{
-        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
-        //    Room.enemybullets.Add(bullet);
-        //}
-        //if (PlayingState.player.position.X > position.X)
-        //{
-        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
-        //    Room.enemybullets.Add(bullet);
-        //}
-        //if (PlayingState.player.position.X < position.Y)
-        //{
-        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
-        //    Room.enemybullets.Add(bullet);
-        //}
+        Counter++;
+        Vector2 MiddleOfSprite = new Vector2(sprite.Width / 2 - 25, sprite.Height / 2 + 10);
+        if (Counter >= 50)
+        {
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddleOfSprite, direction);
+            Room.enemybullets.Add(bullet);
+            Counter = 0;
+        }
     }
+
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Range();
+            Shoot();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/CutieEnemyPixel"), position);
+        switch (Directioncount)
+        {
+            case 1:
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/TurretEnemyUp"), position);
+                break;
+            case 2:
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/TurretEnemyDown"), position);
+                break;
+            case 3:
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/TurretEnemyLeft"), position);
+                break;
+            default:
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/TurretEnemyRight"), position);
+                break;
+        }
     }
 }
