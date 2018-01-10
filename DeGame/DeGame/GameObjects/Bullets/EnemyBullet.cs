@@ -5,14 +5,14 @@ using Microsoft.Xna.Framework.Graphics;
 //TODO: Friendly Fire?;
 class EnemyBullet : E_Bullet
 {
-    public Vector2 direction;
+    Vector2 direction;
     float speed, damage;
-    public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed, "Sprites/Random", layer, id)
+    public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed, "Sprites/Random", layer, id)
     {
         position = Startpositon;
         speed = Speed;
         damage = Damage;
-        direction = Direction;
+        direction = (PlayingState.player.position - position);
     }
     public override void Update(GameTime gameTime)
     {

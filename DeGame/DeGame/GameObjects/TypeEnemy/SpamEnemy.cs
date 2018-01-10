@@ -12,11 +12,10 @@ public class SpamEnemy : Enemy
     int BulletCounter = 0;
     float bulletdamage = 3;
     float speed = 3f;
-    Vector2 direction;
 
     public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
-        direction = (PlayingState.player.position - position);
+
     }
 
     public void Range()
@@ -39,7 +38,7 @@ public class SpamEnemy : Enemy
     public void Shoot()
     {
         Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2, sprite.Height / 2);
-        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite, direction);
+        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
         Room.enemybullets.Add(bullet);
 
         //if (PlayingState.player.position.Y > position.Y)
