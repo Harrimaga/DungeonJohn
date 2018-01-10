@@ -32,9 +32,8 @@ public class GameEnvironment : Game
         gameStateManager = new GameStateManager();
         random = new Random();
         assetManager = new AssetManager(Content);
-
         Dimensions = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-
+        IsMouseVisible = true;
         startup = true;
 
         //ApplyResolutionSettings();

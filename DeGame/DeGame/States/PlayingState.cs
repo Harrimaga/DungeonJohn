@@ -49,6 +49,7 @@ public class PlayingState : IGameObject
         {
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
         }
+        currentFloor.wornItems.Update(gameTime);
     }
     public virtual void Reset()
     {

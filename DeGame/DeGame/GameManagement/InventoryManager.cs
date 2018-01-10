@@ -16,7 +16,7 @@ public class InventoryManager
     {
         currentHelmet = new HardHelmet();
         currentArmour = new MageJacket();
-        currentBoots = new CoolBoots();
+        currentBoots = null;
         currentWeapon = new DoubleGun();
         currentShield = new Mirror();
         currentPassives = new Item[2];
@@ -33,10 +33,13 @@ public class InventoryManager
                 if (currentHelmet != null)
                 {
                     currentHelmet.unequip();
-                    addItemToInventory(currentHelmet);
+                    items[items.IndexOf(item)] = currentHelmet;
+                }
+                else
+                {
+                    removeItemFromInventory(item);
                 }
                 currentHelmet = item;
-                removeItemFromInventory(item);
                 currentHelmet.equip();
                 break;
             case "armour":
@@ -53,20 +56,26 @@ public class InventoryManager
                 if (currentBoots != null)
                 {
                     currentBoots.unequip();
-                    addItemToInventory(currentBoots);
+                    items[items.IndexOf(item)] = currentBoots;
+                }
+                else
+                {
+                    removeItemFromInventory(item);
                 }
                 currentBoots = item;
-                removeItemFromInventory(item);
                 currentBoots.equip();
                 break;
             case "weapon":
                 if (currentWeapon != null)
                 {
                     currentWeapon.unequip();
-                    addItemToInventory(currentWeapon);
+                    items[items.IndexOf(item)] = currentWeapon;
+                }
+                else
+                {
+                    removeItemFromInventory(item);
                 }
                 currentWeapon = item;
-                removeItemFromInventory(item);
                 currentWeapon.equip();
                 PlayingState.player.CalculateAmmo();
                 PlayingState.player.CalculateDamage();

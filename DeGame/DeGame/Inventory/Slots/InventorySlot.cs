@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 public class InventorySlot : SpriteGameObject
 {
@@ -23,6 +24,15 @@ public class InventorySlot : SpriteGameObject
     {
         spriteBatch.Draw(sprite, position, Color.White);
         DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
+    }
+
+    public override void HandleInput(InputHelper inputHelper)
+    {
+        if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition)) 
+        {
+            Player.inventory.equip(item);
+            Console.WriteLine("Equipped: " + item.itemName);
+        }
     }
 
     public static void DrawItem(Texture2D sprite, Texture2D itemSprite, Vector2 position, GameTime gameTime, SpriteBatch spriteBatch)

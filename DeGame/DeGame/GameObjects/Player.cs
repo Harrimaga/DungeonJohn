@@ -253,15 +253,15 @@ public class Player : SpriteGameObject
             passives[1] = (IPassive)inventory.currentPassives[1];
         }
 
-        if (passives[0] == null)
+        if (passives[0] == null && weapon != null)
         {
             attack = weapon.AddedDamage * weapon.DamageMultiplier;
         }
-        else if (passives[0] != null && passives[1] == null)
+        else if (passives[0] != null && passives[1] == null && weapon != null)
         {
             attack = weapon.AddedDamage * Math.Max(weapon.DamageMultiplier, passives[0].DamageMultiplier);
         }
-        else if (passives[1] != null)
+        else if (passives[1] != null && weapon != null)
         {
             attack = weapon.AddedDamage * Math.Max(weapon.DamageMultiplier, Math.Max(passives[0].DamageMultiplier, passives[1].DamageMultiplier));
         }
@@ -270,6 +270,10 @@ public class Player : SpriteGameObject
     public void CalculateAmmo()
     {
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
-        ammo = weapon.Ammo;
+        if (weapon != null)
+        {
+            ammo = weapon.Ammo;
+        }
+        
     }
 }

@@ -10,6 +10,7 @@ class MageJacket : Item, IArmour
     {
         itemName = "MageJacket";
         itemDescription = "This jacket was worn by a old mage making take move faster";
+        Type = "armour";
     }
     public void Equip()
     {
