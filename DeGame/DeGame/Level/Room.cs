@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections;
 
 public class Room : GameObjectList
 {
@@ -16,6 +17,7 @@ public class Room : GameObjectList
     Random random = new Random();
     public string[,] roomarray;
     public int lavatimer = 0;
+    IList addedenemies = new List<Enemy>();
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
@@ -124,7 +126,7 @@ public class Room : GameObjectList
                 CreateObject(x, y, "B");
                 break;
             case '*':
-                roomarray[x, y] = "MinionBoss";
+                roomarray[x, y] = "MinionSpawner";
                 CreateObject(x, y, "*");
                 break;
             case 'O':
@@ -185,6 +187,11 @@ public class Room : GameObjectList
             Visited = true;
         }
         enemies.Update(gameTime);
+        foreach (Enemy e in addedenemies)
+        {
+            enemies.Add(e);
+        }
+        addedenemies.Clear();
         door.Update(gameTime);
         consumable.Update(gameTime);
         bosses.Update(gameTime);
@@ -267,8 +274,8 @@ public class Room : GameObjectList
                 enemycounter++;
                 break;
             case ("*"):
-                MinionBoss minionboss = new MinionBoss(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "MinionBoss");
-                bosses.Add(minionboss);
+                Enemy MinionSpawner = new MinionSpawner(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "MinionSpawner");
+                enemies.Add(MinionSpawner);
                 enemycounter++;
                 break;
             case ("!"):

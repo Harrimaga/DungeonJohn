@@ -13,11 +13,12 @@ class MinionSpawner : Enemy
         Roomposition = roomposition;
     }
 
-    void Update(GameTime gameTime)
+    public override void Update(GameTime gameTime)
     {
-        if (EndRoom.trigger)
+        counter--;
+        //if (EndRoom.trigger)
         {
-            counter--;
+
             if (counter <= 0)
             {
                 ChasingMinion minion = new ChasingMinion(position, Roomposition);
@@ -29,6 +30,6 @@ class MinionSpawner : Enemy
 
     void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/MinionSpawner"), position);
     }
 }
