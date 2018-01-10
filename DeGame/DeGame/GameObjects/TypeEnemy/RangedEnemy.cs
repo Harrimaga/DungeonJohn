@@ -6,23 +6,22 @@ public class RangedEnemy : Enemy
     int Counter = 300;
     float bulletdamage = 5;
     float speed = 2f;
-    Vector2 direction;
 
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
-        direction = (PlayingState.player.position - position);
+        velocity = new Vector2(0.5f, 0.5f);
     }
 
     public void Range()
     {
         Counter++;
         if (PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
-            PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
+           PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
         {
-            Chase();
+        Chase();
         }
-        else if(Counter >= 300)
+        if(Counter >= 300)
         {
             Shoot();
             Counter = 0;
@@ -42,7 +41,7 @@ public class RangedEnemy : Enemy
     public void Shoot()
     {
         Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2, sprite.Height / 2);
-        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite, direction);
+        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
         Room.enemybullets.Add(bullet);
 
         //if (PlayingState.player.position.Y > position.Y)
@@ -92,15 +91,7 @@ public class RangedEnemy : Enemy
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Range();
-        //if (health <= 0 && alive == true && PlayingState.currentFloor.currentRoom.position == Roomposition)
-        //{
-        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
-        //    PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
-        //    PlayingState.player.exp += expGive;
-        //    alive = false;
-        //    GameObjectList.RemovedObjects.Add(this);
-        //}
+              Range();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

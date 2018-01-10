@@ -4,20 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class CoolBoots : Item, IBoots
+class SlimyBoots : Item, IBoots
 {
-    public CoolBoots()
+    public SlimyBoots()
     {
-        itemName = "CoolBoots";
-        itemDescription = "Boots that can withstand lava much better than the average foot";
+        itemName = "SlimyBoots";
+        itemDescription = "Spiderwebs stand no chance against these boots.";
         Type = "boots";
-
     }
 
     public override void equip()
     {
-        PlayingState.player.CoolBoots = true;
-        PlayingState.player.extraspeed += 2;
+
     }
 
     public override void unequip()

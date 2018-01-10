@@ -22,6 +22,7 @@ public class PlayingState : IGameObject
         Player.inventory.items.Add(new StandardBow());
         Player.inventory.items.Add(new StandardBow());
         Player.inventory.items.Add(new CoolBoots());
+        //Player.inventory.items.Add(new Mirror());
         //enemy = new RangedEnemy(Vector2.Zero, 0, "Enemy");
     }
     public virtual void HandleInput(InputHelper inputHelper)
@@ -48,6 +49,7 @@ public class PlayingState : IGameObject
         {
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
         }
+        currentFloor.wornItems.Update(gameTime);
     }
     public virtual void Reset()
     {

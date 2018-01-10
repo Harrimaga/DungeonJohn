@@ -10,15 +10,16 @@ class HardHelmet : Item, IHelmet
     {
         itemName = "HardHelmet";
         itemDescription = "Bullets are not very effective, but it is so heavy that you are a lot slower";
+        Type = "helmet";
     }
     public void Equip()
     {
-        PlayingState.player.HardHelmet = true;
+        PlayingState.player.damagereduction *= 0.8;
         PlayingState.player.extraspeed--;
     }
     public void unequip()
     {
-        PlayingState.player.HardHelmet = false;
+        PlayingState.player.damagereduction *= 1.25;
         PlayingState.player.extraspeed++;
     }
 }

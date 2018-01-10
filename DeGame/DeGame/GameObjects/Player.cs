@@ -7,10 +7,11 @@ using System.Collections.Generic;
 public class Player : SpriteGameObject
 {
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
-    public bool HardHelmet = false, CoolBoots = false;
+    public bool CoolBoots = false, Mirror = true;
     public float health = 100, maxhealth = 200;
     public float exp = 0,nextLevelExp = 100;
     public float attackspeedreduction = 0;
+    public double damagereduction = 1;
     public float extraspeed = 0;
     public float attack;
     public float attackspeed;
@@ -37,7 +38,7 @@ public class Player : SpriteGameObject
         CalculateDamage();
         CalculateAmmo();
     }
-
+        
     public override Rectangle BoundingBox
     {
         get
@@ -194,9 +195,13 @@ public class Player : SpriteGameObject
         CalculateAmmo();
         CalculateDamage();
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
+        {
             RemoveBullets.Add(bullet);
+        }  
         foreach (Bullet bullet in RemoveBullets)
+        {
             PlayingState.player.bullets.Remove(bullet);
+        }   
     }
 
     public void NextLevel()
@@ -252,15 +257,15 @@ public class Player : SpriteGameObject
             passives[1] = (IPassive)inventory.currentPassives[1];
         }
 
-        if (passives[0] == null)
+        if (passives[0] == null && weapon != null)
         {
             attack = weapon.AddedDamage * weapon.DamageMultiplier;
         }
-        else if (passives[0] != null && passives[1] == null)
+        else if (passives[0] != null && passives[1] == null && weapon != null)
         {
             attack = weapon.AddedDamage * Math.Max(weapon.DamageMultiplier, passives[0].DamageMultiplier);
         }
-        else if (passives[1] != null)
+        else if (passives[1] != null && weapon != null)
         {
             attack = weapon.AddedDamage * Math.Max(weapon.DamageMultiplier, Math.Max(passives[0].DamageMultiplier, passives[1].DamageMultiplier));
         }
@@ -269,6 +274,14 @@ public class Player : SpriteGameObject
     public void CalculateAmmo()
     {
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
-        ammo = weapon.Ammo;
+        try
+        {
+            ammo = weapon.Ammo;
+        }
+        catch (Exception e)
+        {
+            inventory.currentWeapon = new StandardBow();
+            CalculateAmmo();
+        }
     }
 }

@@ -9,7 +9,8 @@ public class Room : GameObjectList
 {
     public bool Visited = false, CameraMoving = false;
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0;
-    public static GameObjectList enemies, solid, door, consumable, bosses, tiles, altars, anvils, enemybullets, homingenemybullets;
+    public static GameObjectList solid, door, consumable, bosses, tiles, altars, anvils, enemybullets, homingenemybullets;
+    public GameObjectList enemies;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop;
     Vector2 TilePosition;
     int roomarraywidth, roomarrayheight;
@@ -145,6 +146,7 @@ public class Room : GameObjectList
                 break;
             case 'O':
                 roomarray[x, y] = "Pit";
+                CreateObject(x, y, "O");
                 break;
             case 'I':
                 roomarray[x, y] = "Item";
@@ -340,6 +342,13 @@ public class Room : GameObjectList
                 SpiderWeb web = new SpiderWeb(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Ice");
                 tiles.Add(web);
                 break;
+
+            case ("O"):
+                Pit pit = new Pit(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Pit");
+                tiles.Add(pit);
+                roomarray[x, y] = "Background";
+                break;
+
             case ("-"):
                 Door up = new Door(updoor, Up, 1);
                 door.Add(up);
