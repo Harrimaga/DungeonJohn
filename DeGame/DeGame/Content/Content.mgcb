@@ -1219,7 +1219,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Bullets/StandardBow_BulletUp.png
 
-#begin Sprites/TurretEnemyDown.png
+#begin Sprites/Enemies/TurretEnemyDown.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1229,9 +1229,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/TurretEnemyDown.png
+/build:Sprites/Enemies/TurretEnemyDown.png
 
-#begin Sprites/TurretEnemyLeft.png
+#begin Sprites/Enemies/TurretEnemyLeft.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1241,9 +1241,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/TurretEnemyLeft.png
+/build:Sprites/Enemies/TurretEnemyLeft.png
 
-#begin Sprites/TurretEnemyRight.png
+#begin Sprites/Enemies/TurretEnemyRight.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1253,9 +1253,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/TurretEnemyRight.png
+/build:Sprites/Enemies/TurretEnemyRight.png
 
-#begin Sprites/TurretEnemyUp.png
+#begin Sprites/Enemies/TurretEnemyUp.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1265,5 +1265,17 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/TurretEnemyUp.png
+/build:Sprites/Enemies/TurretEnemyUp.png
+
+#begin Sprites/Enemies/SpoederEnemy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Enemies/SpoederEnemy.png
 

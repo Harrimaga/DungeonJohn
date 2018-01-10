@@ -58,16 +58,16 @@ public class TurretEnemy : Enemy
         switch (Directioncount)
         {
             case 1:
-                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/TurretEnemyUp"), position);
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyUp"), position);
                 break;
             case 2:
-                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/TurretEnemyDown"), position);
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyDown"), position);
                 break;
             case 3:
-                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/TurretEnemyLeft"), position);
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyLeft"), position);
                 break;
             default:
-                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/TurretEnemyRight"), position);
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyRight"), position);
                 break;
         }
     }
