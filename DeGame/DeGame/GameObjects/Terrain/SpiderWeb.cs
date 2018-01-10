@@ -29,6 +29,6 @@ class SpiderWeb : Tiles
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/SpiderWeb"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/SpiderWeb"), position);
     }
 }

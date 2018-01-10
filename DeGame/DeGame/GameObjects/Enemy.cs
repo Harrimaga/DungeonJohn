@@ -19,7 +19,7 @@ public class Enemy : SpriteGameObject
     protected Vector2 Roomposition;
 
     public Enemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy")
-    : base("Sprites/BearEnemy", layer, id)
+    : base("Sprites/Enemies/BearEnemy", layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");

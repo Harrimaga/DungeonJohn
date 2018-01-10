@@ -23,6 +23,6 @@ class Rock : Solid
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Rock Sprite"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Rock Sprite"), position);
     }
 }
