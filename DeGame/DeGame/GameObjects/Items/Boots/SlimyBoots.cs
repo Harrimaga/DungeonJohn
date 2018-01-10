@@ -14,7 +14,8 @@ class SlimyBoots : Item, IBoots
 
     public override void equip()
     {
-
+        PlayingState.player.SlimyBoots = true;
+        PlayingState.player.extraspeed += 2;
     }
 
     public override void unequip()
