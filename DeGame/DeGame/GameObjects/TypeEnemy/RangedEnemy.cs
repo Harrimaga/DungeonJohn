@@ -10,18 +10,18 @@ public class RangedEnemy : Enemy
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
-        basevelocity = new Vector2(0.5f, 0.5f);
+        velocity = new Vector2(0.5f, 0.5f);
     }
 
     public void Range()
     {
         Counter++;
         if (PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
-            PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
+           PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
         {
-            Chase();
+        Chase();
         }
-        else if(Counter >= 300)
+        if(Counter >= 300)
         {
             Shoot();
             Counter = 0;
@@ -91,7 +91,7 @@ public class RangedEnemy : Enemy
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Range();
+              Range();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
