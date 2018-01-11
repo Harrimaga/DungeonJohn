@@ -10,7 +10,7 @@ public class Enemy : SpriteGameObject
     protected float attackspeed;
     protected float range = 300;
     protected float expGive = 120;
-    protected bool alive = true, drop = true, flying = false, backgroundenemy = false;
+    protected bool alive = true, drop = true, flying = false, backgroundenemy = false, bossenemy = false;
     protected int counter = 100;
     protected Vector2 basevelocity = Vector2.Zero;
     public SpriteEffects Effects;
@@ -46,7 +46,7 @@ public class Enemy : SpriteGameObject
         RemoveBullets.Clear();
         healthbar.Update(gameTime, health, maxhealth, position);
 
-        if (health <= 0 && alive == true)
+        if (health <= 0 && alive == true || (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom" && EndRoom.cleared && bossenemy))
         {
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             if (drop)

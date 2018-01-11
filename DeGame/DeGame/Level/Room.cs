@@ -66,6 +66,7 @@ public class Room : GameObjectList
 
     private void AssignType(char textlines, int x, int y)
     {
+        TilePosition = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
         switch (textlines)
         {
             case '.':
@@ -93,22 +94,22 @@ public class Room : GameObjectList
                 break;
             case '-':
                 roomarray[x, y] = "UpDoor";
-                Up = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                Up = TilePosition;
                 CreateObject(x, y, "-");
                 break;
             case '=':
                 roomarray[x, y] = "DownDoor";
-                Down = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                Down = TilePosition;
                 CreateObject(x, y, "=");
                 break;
             case '<':
                 roomarray[x, y] = "LeftDoor";
-                Left = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                Left = TilePosition;
                 CreateObject(x, y, "<");
                 break;
             case '>':
                 roomarray[x, y] = "RightDoor";
-                Right = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                Right = TilePosition;
                 CreateObject(x, y, ">");
                 break;
             case 'C':
@@ -161,11 +162,11 @@ public class Room : GameObjectList
                 break;
             case 'E':
                 roomarray[x, y] = "Exit";
-                Exit = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                Exit = TilePosition;
                 break;
             case 'L':
                 roomarray[x, y] = "ExitShop";
-                ExitShop = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
+                ExitShop = TilePosition;
                 break;
             case 'S':
                 roomarray[x, y] = "Start";
@@ -259,89 +260,90 @@ public class Room : GameObjectList
 
     public void CreateObject(int x, int y, string Type)
     {
+        TilePosition = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
         //Enemy enemyChase;
         //Enemy enemyRanged;
         //Enemy enemy;
         switch (Type)
         {
             case ("C"):
-                Enemy enemyChase = new ChasingEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "ChasingEnemy");
+                Enemy enemyChase = new ChasingEnemy(TilePosition, new Vector2(a, b), 0, "ChasingEnemy");
                 enemies.Add(enemyChase);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("R"):
-                Enemy enemyRanged = new RangedEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "RangedEnemy");
+                Enemy enemyRanged = new RangedEnemy(TilePosition, new Vector2(a, b), 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("Q"):
-                Enemy enemySpam = new SpamEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "SpamEnemy");
+                Enemy enemySpam = new SpamEnemy(TilePosition, new Vector2(a, b), 0, "SpamEnemy");
                 enemies.Add(enemySpam);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("U"):
-                Enemy enemyTurretUp = new TurretEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 1, 0, "TurretEnemyUp");
+                Enemy enemyTurretUp = new TurretEnemy(TilePosition, new Vector2(a, b), 1, 0, "TurretEnemyUp");
                 enemies.Add(enemyTurretUp);
                 roomarray[x, y] = "Background";
                 break;
             case ("D"):
-                Enemy enemyTurretDown = new TurretEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 2, 0, "TurretEnemyDown");
+                Enemy enemyTurretDown = new TurretEnemy(TilePosition, new Vector2(a, b), 2, 0, "TurretEnemyDown");
                 enemies.Add(enemyTurretDown);
                 roomarray[x, y] = "Background";
                 break;
             case ("F"):
-                Enemy enemyTurretLeft = new TurretEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 3, 0, "TurretEnemyLeft");
+                Enemy enemyTurretLeft = new TurretEnemy(TilePosition, new Vector2(a, b), 3, 0, "TurretEnemyLeft");
                 enemies.Add(enemyTurretLeft);
                 roomarray[x, y] = "Background";
                 break;
             case ("T"):
-                Enemy enemyTurretRight = new TurretEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 4, 0, "TurretEnemyRight");
+                Enemy enemyTurretRight = new TurretEnemy(TilePosition, new Vector2(a, b), 4, 0, "TurretEnemyRight");
                 enemies.Add(enemyTurretRight);
                 roomarray[x, y] = "Background";
                 break;
             case ("B"):
-                Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "Boss1");
+                Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, "Boss1");
                 bosses.Add(boss);
                 enemycounter++;
                 break;
             case ("!"):
-                Solid rock = new Rock(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Rock");
+                Solid rock = new Rock(TilePosition, 0, "Rock");
                 solid.Add(rock);
                 roomarray[x, y] = "Background";
                 break;
             case ("+"):
-                Solid wall = new Wall(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Wall");
+                Solid wall = new Wall(TilePosition, 0, "Wall");
                 solid.Add(wall);
                 break;
             case ("I"):
-                ItemSpawn item = new ItemSpawn(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), false, 0, "Item");
+                ItemSpawn item = new ItemSpawn(TilePosition, false, 0, "Item");
                 altars.Add(item);
                 break;
             case ("M"):
-                ItemSpawn Shopitem = new ItemSpawn(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), true, 0, "ShopItem");
+                ItemSpawn Shopitem = new ItemSpawn(TilePosition, true, 0, "ShopItem");
                 altars.Add(Shopitem);
                 break;
             case ("Y"):
-                CraftingBench Anvil = new CraftingBench(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), true, 0, "Anvil");
+                CraftingBench Anvil = new CraftingBench(TilePosition, true, 0, "Anvil");
                 anvils.Add(Anvil);
                 break;
             case ("H"):
-                Lava lava = new Lava(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Lava");
+                Lava lava = new Lava(TilePosition, 0, "Lava");
                 tiles.Add(lava);
                 break;
             case ("G"):
-                Ice ice = new Ice(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Ice");
+                Ice ice = new Ice(TilePosition, 0, "Ice");
                 tiles.Add(ice);
                 break;
             case ("W"):
-                SpiderWeb web = new SpiderWeb(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Ice");
+                SpiderWeb web = new SpiderWeb(TilePosition, 0, "Ice");
                 tiles.Add(web);
                 break;
             case ("O"):
-                Pit pit = new Pit(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Pit");
+                Pit pit = new Pit(TilePosition, 0, "Pit");
                 tiles.Add(pit);
                 roomarray[x, y] = "Background";
                 break;

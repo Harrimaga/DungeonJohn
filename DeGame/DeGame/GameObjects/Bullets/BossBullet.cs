@@ -13,7 +13,6 @@ class BossBullet : E_Bullet
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
     float speed = 0.5f;
     int health = 100, maxhealth = 100;
-    public SpriteEffects Effects;
     bool Homing, reflected = false;
     
     public BossBullet(float damage, float speed, Vector2 Startposition, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/Bullets/BossBullet", 0, "BossBullet") 

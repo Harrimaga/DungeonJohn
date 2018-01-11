@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 class MinionSpawner : Enemy
 {
-    int counter = 100;
+    new int counter = 100;
     Vector2 Roomposition;
 
     public MinionSpawner(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
@@ -13,22 +13,26 @@ class MinionSpawner : Enemy
         position = startPosition;
         Roomposition = roomposition;
         backgroundenemy = true;
+        drop = false;
+        bossenemy = true;
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         counter--;
-        //if (EndRoom.trigger)
+        if (EndRoom.trigger)
         {
 
             if (counter <= 0)
             {
-                ChasingMinion minion = new ChasingMinion(position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Spawner").Height * 0.8f), Roomposition);
+                ChasingMinion minion = new ChasingMinion(position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/Spawner").Height * 0.8f), Roomposition);
                 PlayingState.currentFloor.currentRoom.addedenemies.Add(minion);
-                counter = 250;
+                counter = 400;
             }
         }
+        else
+            counter = 100;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
