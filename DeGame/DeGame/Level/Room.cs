@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections;
 
 public class Room : GameObjectList
 {
@@ -17,6 +18,8 @@ public class Room : GameObjectList
     Random random = new Random();
     public string[,] roomarray;
     public int lavatimer = 0;
+    public IList addedenemies = new List<Enemy>();
+    public string Type = "normalroom";
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
@@ -137,7 +140,7 @@ public class Room : GameObjectList
                 CreateObject(x, y, "T");
                 break;
             case 'B':
-                roomarray[x, y] = "Boss";
+                roomarray[x, y] = "Boss1";
                 CreateObject(x, y, "B");
                 break;
             case 'O':
@@ -198,6 +201,11 @@ public class Room : GameObjectList
             Visited = true;
         }
         enemies.Update(gameTime);
+        foreach (Enemy e in addedenemies)
+        {
+            enemies.Add(e);
+        }
+        addedenemies.Clear();
         door.Update(gameTime);
         consumable.Update(gameTime);
         bosses.Update(gameTime);
@@ -295,7 +303,7 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Background";
                 break;
             case ("B"):
-                Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "Boss");
+                Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "Boss1");
                 bosses.Add(boss);
                 enemycounter++;
                 break;
@@ -332,13 +340,11 @@ public class Room : GameObjectList
                 SpiderWeb web = new SpiderWeb(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Ice");
                 tiles.Add(web);
                 break;
-
             case ("O"):
                 Pit pit = new Pit(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), 0, "Pit");
                 tiles.Add(pit);
                 roomarray[x, y] = "Background";
                 break;
-
             case ("-"):
                 Door up = new Door(updoor, Up, 1);
                 door.Add(up);
@@ -358,21 +364,20 @@ public class Room : GameObjectList
         }
     }
 
-    public void CheckExit()
+    public virtual void CheckExit()
     {
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
-        if (RoomListIndex == 2 && enemycounter == 0)
-        {
-            if (MiddleofPlayer.X >= Exit.X && MiddleofPlayer.X <= Exit.X + CellWidth)
-                if (MiddleofPlayer.Y >= Exit.Y && MiddleofPlayer.Y <= Exit.Y + CellHeight)
-                    PlayingState.currentFloor.NextShop();
-        }
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Player").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Player").Height / 2);
         if (RoomListIndex == 6)
         {
             if (MiddleofPlayer.X >= ExitShop.X && MiddleofPlayer.X <= ExitShop.X + CellWidth)
                 if (MiddleofPlayer.Y >= ExitShop.Y && MiddleofPlayer.Y <= ExitShop.Y + CellHeight)
                     PlayingState.currentFloor.NextFloor();
         }
+    }
+
+    public override void HandleInput(InputHelper inputHelper)
+    {
+        anvils.HandleInput(inputHelper);
     }
 
     void WallShader (GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
@@ -498,10 +503,5 @@ public class Room : GameObjectList
         }
         enemybullets.Draw(gameTime, spriteBatch);
         homingenemybullets.Draw(gameTime, spriteBatch);
-    }
-
-    public override void HandleInput(InputHelper inputHelper)
-    {
-        anvils.HandleInput(inputHelper);
     }
 }
