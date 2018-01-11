@@ -21,7 +21,7 @@ public class TurretEnemy : Enemy
         {
             case 1:
                 direction = new Vector2(0, -1);
-                MiddleOfSprite = new Vector2(sprite.Width / 2 - 25, -10);
+                MiddleOfSprite = new Vector2(sprite.Width / 2 - 35, -10);
                 break;
             case 2:
                 direction = new Vector2(0, 1);
@@ -29,11 +29,11 @@ public class TurretEnemy : Enemy
                 break;
             case 3:
                 direction = new Vector2(-1, 0);
-                MiddleOfSprite = new Vector2(0, sprite.Height / 2 - 25);
+                MiddleOfSprite = new Vector2( -10, sprite.Height / 2 - 25);
                 break;
             default:
                 direction = new Vector2(1, 0);
-                MiddleOfSprite = new Vector2(sprite.Width - 55, sprite.Height / 2 - 25);
+                MiddleOfSprite = new Vector2(sprite.Width - 35, sprite.Height / 2 - 35);
                 break;
         }
     }

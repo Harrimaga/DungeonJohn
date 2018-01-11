@@ -77,7 +77,7 @@ class PitState : IGameObject
 
         if (PlayingState.currentFloor.floor[x, y].enemycounter == 0)
         {
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/StartTile")), exitposition);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/StartTile")), exitposition);
         }
 
         player2.Draw(gameTime, spriteBatch);
