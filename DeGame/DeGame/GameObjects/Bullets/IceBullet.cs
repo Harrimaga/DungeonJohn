@@ -1,16 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-//TODO: Damage regulation;
-//TODO: Friendly Fire?;
-class EnemyBullet : E_Bullet
+class IceBullet : E_Bullet
 {
     Vector2 direction;
     float speed, damage;
-    public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed,"Sprites/Random", layer, id)
+    public IceBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, int layer = 0, string id = "IceBullet") : base(Damage, Speed, "Sprites/Random", layer, id)
     {
         position = Startpositon;
-        direction = (PlayingState.player.position - position);
         Position = Startpositon;
         speed = Speed;
         damage = Damage;
@@ -46,6 +43,6 @@ class EnemyBullet : E_Bullet
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/EnemyIceBullet"), position);
     }
 }
