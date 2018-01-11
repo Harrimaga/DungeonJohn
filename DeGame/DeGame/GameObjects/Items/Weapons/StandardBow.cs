@@ -26,8 +26,8 @@ public class StandardBow : Item, IWeapon
         Type = "weapon";
         itemName = "StandardBow";
         itemDescription = "Basic weapon with infinte ammo and suck damage.";
-        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardBow_BulletLeft");
-        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardBow_BulletUp");
+        bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/StandardBow_BulletLeft");
+        bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/StandardBow_BulletUp");
     }
 
     public override void unequip()
@@ -37,7 +37,7 @@ public class StandardBow : Item, IWeapon
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2( 0, GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 4), direction);
+        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2( 0, GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 4), direction);
         PlayingState.player.bullets.Add(bullet);
     }
 

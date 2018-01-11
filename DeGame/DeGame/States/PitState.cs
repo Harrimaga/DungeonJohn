@@ -49,7 +49,7 @@ class PitState : IGameObject
     {
         PlayingState.currentFloor.floor[x, y].Update(gameTime);
         player2.Update(gameTime);
-        MiddleofPlayer = new Vector2(player2.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, player2.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+        MiddleofPlayer = new Vector2(player2.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, player2.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
 
         if (PlayingState.currentFloor.floor[x, y].enemycounter == 0)
         {

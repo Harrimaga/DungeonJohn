@@ -69,6 +69,8 @@
     <Compile Include="GameManagement\InventoryManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
     <Compile Include="GameObjects\Boss\Boss1.cs" />
+    <Compile Include="GameObjects\Boss\MinionBoss\MinionBoss.cs" />
+    <Compile Include="GameObjects\Boss\MinionBoss\MinionSpawner.cs" />
     <Compile Include="GameObjects\Bullets\BossBullet.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28player%29.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="GameObjects\Terrain\SpiderWeb.cs" />
     <Compile Include="GameObjects\Terrain\Tiles.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
+    <Compile Include="GameObjects\Boss\MinionBoss\ChasingMinion.cs" />
     <Compile Include="GameObjects\TypeEnemy\IceEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
     <Compile Include="GameObjects\Terrain\Wall.cs" />

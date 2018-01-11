@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Input;
 
 public class Floor
 {
-    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
+    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, q;
     public Room currentRoom;
-    public int screenwidth, screenheight, used;
+    public int screenwidth, screenheight, used, CurrentLevel = 1;
     public bool FloorGenerated = false;
     public Vector2 startPlayerPosition;
     Random random = new Random();
@@ -382,6 +382,8 @@ public class Floor
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                             break;
                     }
+                    if (floor[x,y].Type == "bossroom")
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapBossTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                 }
                 if (currentRoom.position == new Vector2(x, y))
                 {
