@@ -8,7 +8,7 @@ public class Enemy : SpriteGameObject
     protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
-    protected float range = 300;
+    protected float range = 100;
     protected float expGive = 120;
     protected bool alive = true, drop = true, flying = false, backgroundenemy = false;
     protected int counter = 100;
@@ -17,6 +17,8 @@ public class Enemy : SpriteGameObject
     public Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
     protected Vector2 Roomposition;
+    Vector2 direction;
+    public float ChargeSpeed = 2f;
 
     public Enemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy")
     : base("Sprites/Enemies/BearEnemy", layer, id)
@@ -31,6 +33,7 @@ public class Enemy : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
+        direction = (PlayingState.player.position - position);
         List<GameObject> RemoveBullets = new List<GameObject>();
 
         base.Update(gameTime);
@@ -63,7 +66,7 @@ public class Enemy : SpriteGameObject
         {
             Effects = SpriteEffects.FlipHorizontally;
         }
-        Chase();
+        //Chase();
     }
 
     public bool CheckDown()

@@ -11,6 +11,7 @@ class EnemyBullet : E_Bullet
     public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, Texture2D bulletsprite, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed,"Sprites/PlayerFront", layer, id)
     {
         position = Startpositon;
+        direction = (PlayingState.player.position - position);
         Position = Startpositon;
         speed = Speed;
         damage = Damage;

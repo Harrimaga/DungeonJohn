@@ -139,6 +139,14 @@ public class Room : GameObjectList
                 roomarray[x, y] = "TurretEnemyRight";
                 CreateObject(x, y, "T");
                 break;
+            case 'P':
+                roomarray[x, y] = "SpiderEnemy";
+                CreateObject(x, y, "P");
+                break;
+            case 'K':
+                roomarray[x, y] = "IceEnemy";
+                CreateObject(x, y, "K");
+                break;
             case 'B':
                 roomarray[x, y] = "Boss1";
                 CreateObject(x, y, "B");
@@ -283,24 +291,36 @@ public class Room : GameObjectList
                 enemycounter++;
                 break;
             case ("U"):
-                Enemy enemyTurretUp = new TurretEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 1, 0, "TurretEnemyUp");
+                Enemy enemyTurretUp = new TurretEnemyUp(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "TurretEnemyUp");
                 enemies.Add(enemyTurretUp);
                 roomarray[x, y] = "Background";
                 break;
             case ("D"):
-                Enemy enemyTurretDown = new TurretEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 2, 0, "TurretEnemyDown");
+                Enemy enemyTurretDown = new TurretEnemyDown(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "TurretEnemyDown");
                 enemies.Add(enemyTurretDown);
                 roomarray[x, y] = "Background";
                 break;
             case ("F"):
-                Enemy enemyTurretLeft = new TurretEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 3, 0, "TurretEnemyLeft");
+                Enemy enemyTurretLeft = new TurretEnemyLeft(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "TurretEnemyLeft");
                 enemies.Add(enemyTurretLeft);
                 roomarray[x, y] = "Background";
                 break;
             case ("T"):
-                Enemy enemyTurretRight = new TurretEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 4, 0, "TurretEnemyRight");
+                Enemy enemyTurretRight = new TurretEnemyRight(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "TurretEnemyRight");
                 enemies.Add(enemyTurretRight);
                 roomarray[x, y] = "Background";
+                break;
+            case ("P"):
+                Enemy enemySpider = new SpiderEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "SpiderEnemy");
+                enemies.Add(enemySpider);
+                roomarray[x, y] = "Background";
+                enemycounter++;
+                break;
+            case ("K"):
+                Enemy enemyIce = new IceEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "IceEnemy");
+                enemies.Add(enemyIce);
+                roomarray[x, y] = "Background";
+                enemycounter++;
                 break;
             case ("B"):
                 Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "Boss1");
