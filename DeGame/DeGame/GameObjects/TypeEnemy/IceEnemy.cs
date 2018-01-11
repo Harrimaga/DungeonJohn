@@ -52,7 +52,7 @@ public class IceEnemy : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/IceEnemy"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/IceEnemy"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
 
     }
 }
