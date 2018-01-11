@@ -36,7 +36,7 @@ public class IceEnemy : Enemy
 
     public void Shoot()
     {
-        Vector2 MiddenOfSprite = new Vector2(sprite.Width / 4, sprite.Height / 4);
+        Vector2 MiddenOfSprite = new Vector2(sprite.Width / 4 - 10, sprite.Height / 4);
         IceBullet bullet = new IceBullet(bulletdamage, speed, position + MiddenOfSprite, direction);
         Room.enemybullets.Add(bullet);
     }

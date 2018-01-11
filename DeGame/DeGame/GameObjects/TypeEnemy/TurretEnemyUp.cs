@@ -21,10 +21,10 @@ public class TurretEnemyUp : Enemy
     public void Shoot()
     {
         Counter++;
-        Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2 - 25, sprite.Height / 2 - 40);
+        Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2 - 35, sprite.Height / 2 - 35);
         if (Counter >= 50)
         {
-            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite, direction);
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
             Room.enemybullets.Add(bullet);
             Counter = 0;
         }
