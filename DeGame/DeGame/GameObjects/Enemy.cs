@@ -22,7 +22,7 @@ public class Enemy : SpriteGameObject
     : base("Sprites/Enemies/BearEnemy", layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
-        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Player");
         position = startPosition;
         velocity = basevelocity;
         Roomposition = roomposition;
