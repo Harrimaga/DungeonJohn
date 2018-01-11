@@ -8,7 +8,7 @@ class EnemyBullet : E_Bullet
     Vector2 direction;
     float speed, damage;
     Texture2D Bulletsprite;
-    public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, Texture2D bulletsprite, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed,"Sprites/Player", layer, id)
+    public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, Texture2D bulletsprite, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed,"Sprites/PlayerFront", layer, id)
     {
         position = Startpositon;
         Position = Startpositon;
@@ -32,13 +32,13 @@ class EnemyBullet : E_Bullet
 
     Vector2 CalculateReflect(Vector2 direction)
     {
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Player").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Player").Height / 2);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
         Vector2 newdirection = direction;
-        if (position.X < MiddleofPlayer.X - GameEnvironment.assetManager.GetSprite("Sprites/Player").Width / 2 || position.X > MiddleofPlayer.X + GameEnvironment.assetManager.GetSprite("Sprites/Player").Width / 2)
+        if (position.X < MiddleofPlayer.X - GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2 || position.X > MiddleofPlayer.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2)
         {
             newdirection.X = -direction.X;
         }
-        if (position.Y < MiddleofPlayer.Y - GameEnvironment.assetManager.GetSprite("Sprites/Player").Height / 2 || position.Y > MiddleofPlayer.Y + GameEnvironment.assetManager.GetSprite("Sprites/Player").Height / 2)
+        if (position.Y < MiddleofPlayer.Y - GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2 || position.Y > MiddleofPlayer.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2)
         {
             newdirection.Y = -direction.Y;
         }

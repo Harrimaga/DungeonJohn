@@ -10,7 +10,7 @@ class Bullet : SpriteGameObject
     float counter = 0;
 
     public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
-    : base("Sprites/Player", layer, id)
+    : base("Sprites/PlayerFront", layer, id)
     {
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
         position = Startposition;

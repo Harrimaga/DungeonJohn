@@ -30,7 +30,7 @@ public class Player : SpriteGameObject
     string lastUsedspeed;
 
     public Player(int layer = 0, string id = "Player")
-    : base("Sprites/Player", 0, "Player")
+    : base("Sprites/PlayerFront", 0, "Player")
     {
         bullets = new GameObjectList();
         healthbar = new HealthBar(health, maxhealth, position, true);
@@ -90,7 +90,7 @@ public class Player : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Player"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
         if (ammo < 0)
         {
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: infinite!", new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);

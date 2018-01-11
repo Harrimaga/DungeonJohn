@@ -31,18 +31,18 @@ class Solid : SpriteGameObject
 
     void SolidCollision()
     {
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Player").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Player").Height / 2);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
 
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, -(GameEnvironment.assetManager.GetSprite("Sprites/Player").Height / 2))))
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, -(GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2))))
             while (CollidesWith(PlayingState.player))
                 PlayingState.player.position.Y++;
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, (GameEnvironment.assetManager.GetSprite("Sprites/Player").Height / 2))))
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, (GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2))))
             while (CollidesWith(PlayingState.player))
                 PlayingState.player.position.Y--;
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(-(GameEnvironment.assetManager.GetSprite("Sprites/Player").Width / 2), 0)))
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(-(GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2), 0)))
             while (CollidesWith(PlayingState.player))
                 PlayingState.player.position.X++;
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2((GameEnvironment.assetManager.GetSprite("Sprites/Player").Width / 2), 0)))
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2((GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2), 0)))
             while (CollidesWith(PlayingState.player))
                 PlayingState.player.position.X--;
     }
