@@ -66,7 +66,7 @@ class PitState : IGameObject
                                 PlayingState.currentFloor.floor[a, b].LoadTiles();
 
                     PlayingState.player = player2;
-                    PlayingState.player.position = new Vector2(10 * PlayingState.currentFloor.currentRoom.CellWidth + x * PlayingState.currentFloor.currentRoom.roomwidth, 7 * PlayingState.currentFloor.currentRoom.CellHeight + y * PlayingState.currentFloor.currentRoom.roomheight);
+                PlayingState.player.position = actualroom.LastEntryPoint; //new Vector2(10 * PlayingState.currentFloor.currentRoom.CellWidth + x * PlayingState.currentFloor.currentRoom.roomwidth, 7 * PlayingState.currentFloor.currentRoom.CellHeight + y * PlayingState.currentFloor.currentRoom.roomheight);
                 }
         }
     }

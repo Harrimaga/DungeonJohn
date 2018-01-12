@@ -8,18 +8,18 @@ using System.Collections;
 
 public class Room : GameObjectList
 {
-    public bool Visited = false, CameraMoving = false;
-    public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0;
+    public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, Lastentrypoint, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0;
     public static GameObjectList solid, door, consumable, bosses, tiles, altars, anvils, enemybullets, homingenemybullets;
+    public bool Visited = false, CameraMoving = false;
     public GameObjectList enemies;
-    public Vector2 Up, Down, Left, Right, Exit, ExitShop;
+    public Vector2 Up, Down, Left, Right, Exit, ExitShop, LastEntryPoint;
     Vector2 TilePosition;
     int roomarraywidth, roomarrayheight;
     Random random = new Random();
+    public string Type = "normalroom";
     public string[,] roomarray;
     public int lavatimer = 0;
     public IList addedenemies = new List<Enemy>();
-    public string Type = "normalroom";
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
@@ -255,6 +255,24 @@ public class Room : GameObjectList
                 PlayingState.player.onSolid = false;
             else
                 PlayingState.player.onSolid = true;
+switch (Lastentrypoint)
+            {
+                case 1:
+                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 2 * CellHeight + b * roomheight);
+                    break;
+                case 2:
+                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 14 * CellHeight + b * roomheight - GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height);
+                    break;
+                case 3:
+                    LastEntryPoint = new Vector2(2 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
+                    break;
+                case 4:
+                    LastEntryPoint = new Vector2(20 * CellWidth + a * roomwidth - GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width, 7 * CellHeight + b * roomheight);
+                    break;
+                default:
+                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
+                    break;
+            }
         }
     }
 
