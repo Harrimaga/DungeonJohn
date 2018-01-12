@@ -294,8 +294,9 @@ public class Floor
     public void NextShop()
     {
         ClearFloor();
-        floor[4, 4] = new Room(6, 4, 4);
+        floor[4, 4] = new Room(4, 4, 4);
         currentRoom = floor[4, 4];
+        floor[4, 4].LoadTiles();
         CurrentLevel++;
         FloorGenerated = false;
     }

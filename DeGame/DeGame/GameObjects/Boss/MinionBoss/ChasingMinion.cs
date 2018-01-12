@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class ChasingMinion : Enemy
 {
-    public ChasingMinion(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/ChasingMinion", layer, id)
+    public ChasingMinion(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ChasingMinion", layer, id)
     {
         position = startPosition;
         basevelocity = new Vector2(1.0f, 0.8f);
@@ -42,7 +42,7 @@ public class ChasingMinion : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MiniChase"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/ChasingMinion"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }
 

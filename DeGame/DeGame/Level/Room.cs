@@ -178,6 +178,7 @@ public class Room : GameObjectList
                 break;
             case 'S':
                 roomarray[x, y] = "Start";
+                PlayingState.currentFloor.startPlayerPosition = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
                 break;
             default:
                 roomarray[x, y] = "N/A";
@@ -406,7 +407,7 @@ switch (Lastentrypoint)
     public virtual void CheckExit()
     {
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
-        if (RoomListIndex == 6)
+        if (RoomListIndex == 4)
         {
             if (MiddleofPlayer.X >= ExitShop.X && MiddleofPlayer.X <= ExitShop.X + CellWidth)
                 if (MiddleofPlayer.Y >= ExitShop.Y && MiddleofPlayer.Y <= ExitShop.Y + CellHeight)
@@ -501,7 +502,6 @@ switch (Lastentrypoint)
                             break;
                         case "Start":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/StartTile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight - 120), Color.Gray);
-                            PlayingState.currentFloor.startPlayerPosition = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
                             break;
                         default:
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Standardtile")), TilePosition, Color.Red);
