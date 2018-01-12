@@ -17,6 +17,7 @@ public class IceEnemy : Enemy
         Console.WriteLine("Playerposition" + PlayingState.player.position);
         Console.WriteLine("position = " + position);
         Console.WriteLine("direction =" + direction);
+        killable = false;
     }
 
     public void Range()
