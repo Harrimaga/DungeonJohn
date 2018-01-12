@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -28,7 +24,7 @@ public class TurretEnemy : Enemy
                 break;
             case 3:
                 direction = new Vector2(-1, 0);
-                MiddleOfSprite = new Vector2( -10, sprite.Height / 2 - 25);
+                MiddleOfSprite = new Vector2(-10, sprite.Height / 2 - 25);
                 break;
             default:
                 direction = new Vector2(1, 0);
@@ -41,7 +37,7 @@ public class TurretEnemy : Enemy
     public void Shoot()
     {
         Counter++;
-        
+
         if (Counter >= 50)
         {
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddleOfSprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
