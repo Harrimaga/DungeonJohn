@@ -140,6 +140,14 @@ public class Room : GameObjectList
                 roomarray[x, y] = "TurretEnemyRight";
                 CreateObject(x, y, "T");
                 break;
+            case 'P':
+                roomarray[x, y] = "SpiderEnemy";
+                CreateObject(x, y, "P");
+                break;
+            case 'K':
+                roomarray[x, y] = "IceEnemy";
+                CreateObject(x, y, "K");
+                break;
             case 'B':
                 roomarray[x, y] = "Boss1";
                 CreateObject(x, y, "B");
@@ -321,6 +329,18 @@ switch (Lastentrypoint)
                 Enemy enemyTurretRight = new TurretEnemy(TilePosition, new Vector2(a, b), 4, 0, "TurretEnemyRight");
                 enemies.Add(enemyTurretRight);
                 roomarray[x, y] = "Background";
+                break;
+            case ("P"):
+                Enemy enemySpider = new SpiderEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "SpiderEnemy");
+                enemies.Add(enemySpider);
+                roomarray[x, y] = "Background";
+                enemycounter++;
+                break;
+            case ("K"):
+                Enemy enemyIce = new IceEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "IceEnemy");
+                enemies.Add(enemyIce);
+                roomarray[x, y] = "Background";
+                enemycounter++;
                 break;
             case ("B"):
                 Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, "Boss1");
