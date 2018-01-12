@@ -6,7 +6,7 @@ class MinionSpawner : Enemy
     int counter = 100;
     Vector2 Roomposition;
 
-    public MinionSpawner(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    public MinionSpawner(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/MinionSpawner",layer, id)
     {
         maxhealth = 200;
         health = 200;

@@ -13,7 +13,7 @@ public class TurretEnemyLeft : Enemy
     float speed = 3f;
     Vector2 direction;
 
-    public TurretEnemyLeft(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    public TurretEnemyLeft(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/TurretEnemyLeft", layer, id)
     {
         direction = new Vector2(-1, 0);
     }

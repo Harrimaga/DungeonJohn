@@ -20,8 +20,8 @@ public class Enemy : SpriteGameObject
     Vector2 direction;
     public float ChargeSpeed = 2f;
 
-    public Enemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy")
-    : base("Sprites/Enemies/BearEnemy", layer, id)
+    public Enemy(Vector2 startPosition, Vector2 roomposition, string assetname, int layer = 0, string id = "Enemy")
+    : base(assetname, layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
