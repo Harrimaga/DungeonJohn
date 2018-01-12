@@ -8,7 +8,6 @@ class EndRoom : Room
 
     public EndRoom(int roomListIndex, int a, int b, int layer = 0, string id = "") : base(roomListIndex, a, b, layer)
     {
-        currentlevel = PlayingState.currentFloor.CurrentLevel;
         Type = "bossroom";
         RoomListIndex = 2;
         position = new Vector2(a, b);
@@ -17,6 +16,7 @@ class EndRoom : Room
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        currentlevel = PlayingState.currentFloor.CurrentLevel;
         //TODO check player volgende floor mag nextFloor true maken
         CheckExit();
         if (!placed)
