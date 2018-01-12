@@ -9,7 +9,7 @@ public class IceEnemy : Enemy
     float speed = 1.5f;
     Vector2 direction;
 
-    public IceEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    public IceEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition,"Sprites/Enemies/IceEnemy", layer, id)
     {
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyIceBullet");
