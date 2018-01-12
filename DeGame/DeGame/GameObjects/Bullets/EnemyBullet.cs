@@ -8,7 +8,7 @@ class EnemyBullet : E_Bullet
     Vector2 direction;
     float speed, damage;
     Texture2D Bulletsprite;
-    public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, Texture2D bulletsprite, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed,"Sprites/PlayerFront", layer, id)
+    public EnemyBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, Texture2D bulletsprite, int layer = 0, string id = "EnemyBullet") : base(Damage, Speed,"Sprites/Bullets/EnemyBullet", layer, id)
     {
         position = Startpositon;
         direction = (PlayingState.player.position - position);
@@ -24,7 +24,7 @@ class EnemyBullet : E_Bullet
         Position = position;
         direction.Normalize();
         position += direction * speed;
-        if (changedirection)
+        //if (changedirection)
         {
             direction = CalculateReflect(direction);
             changedirection = false;
@@ -48,6 +48,8 @@ class EnemyBullet : E_Bullet
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"), position);
+
     }
 }
