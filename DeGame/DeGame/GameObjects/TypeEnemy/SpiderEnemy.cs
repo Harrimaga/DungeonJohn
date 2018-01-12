@@ -13,6 +13,7 @@ public class SpiderEnemy : Enemy
     {
         basevelocity = new Vector2(5f, 5f);
         direction = (PlayingState.player.position - position);
+        range = 500;
     }
 
     public override void Update(GameTime gameTime)
@@ -41,56 +42,49 @@ public class SpiderEnemy : Enemy
             {
                 Charge();
             }
-            //if (ChargeCounter <= 50 && CheckUp() == false)
-            //{
-            //    Charge();
-            //}
-            //if (ChargeCounter <= 50 && CheckDown() == false)
-            //{
-            //    Charge();
-            //}
-            //if (ChargeCounter <= 50 && CheckRight() == false)
-            //{
-            //    Charge();
-            //}
-            //if (ChargeCounter <= 50 && CheckLeft() == false)
-            //{
-            //    Charge();
-            //}
+
             if (ChargeCounter == 50)
             {
-                ChargeDirection = random.Next(8);
-                if (ChargeDirection == 0)
+                if (PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
+                PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
                 {
-                    direction = new Vector2(0, -1);
+                    ChargeDirection = random.Next(8);
+                    if (ChargeDirection == 0)
+                    {
+                        direction = new Vector2(0, -1);
+                    }
+                    if (ChargeDirection == 1)
+                    {
+                        direction = new Vector2(1, -1);
+                    }
+                    if (ChargeDirection == 2)
+                    {
+                        direction = new Vector2(1, 0);
+                    }
+                    if (ChargeDirection == 3)
+                    {
+                        direction = new Vector2(1, 1);
+                    }
+                    if (ChargeDirection == 4)
+                    {
+                        direction = new Vector2(0, 1);
+                    }
+                    if (ChargeDirection == 5)
+                    {
+                        direction = new Vector2(-1, 1);
+                    }
+                    if (ChargeDirection == 6)
+                    {
+                        direction = new Vector2(-1, 0);
+                    }
+                    if (ChargeDirection == 6)
+                    {
+                        direction = new Vector2(-1, -1);
+                    }
                 }
-                if (ChargeDirection == 1)
+                else
                 {
-                    direction = new Vector2(1, -1);
-                }
-                if (ChargeDirection == 2)
-                {
-                    direction = new Vector2(1, 0);
-                }
-                if (ChargeDirection == 3)
-                {
-                    direction = new Vector2(1, 1);
-                }
-                if (ChargeDirection == 4)
-                {
-                    direction = new Vector2(0, 1);
-                }
-                if (ChargeDirection == 5)
-                {
-                    direction = new Vector2(-1, 1);
-                }
-                if (ChargeDirection == 6)
-                {
-                    direction = new Vector2(-1, 0);
-                }
-                if (ChargeDirection == 6)
-                {
-                    direction = new Vector2(-1, -1);
+                    direction = (PlayingState.player.position - position);
                 }
             }
             if (ChargeCounter >= 100)
