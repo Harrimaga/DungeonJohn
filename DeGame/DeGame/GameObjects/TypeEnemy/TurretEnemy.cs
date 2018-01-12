@@ -9,7 +9,7 @@ public class TurretEnemy : Enemy
     float speed = 3f;
     Vector2 direction, MiddleOfSprite;
 
-    public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, layer, id)
+    public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, "Sprites/Enemies/TurretEnemyUp", layer, id)
     {
         Directioncount = directioncount;
         switch (Directioncount)

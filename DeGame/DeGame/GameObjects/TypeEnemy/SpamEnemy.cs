@@ -9,7 +9,7 @@ public class SpamEnemy : Enemy
     float speed = 3f;
     Vector2 direction;
 
-    public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/CutieEnemyPixel", layer, id)
     {
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
