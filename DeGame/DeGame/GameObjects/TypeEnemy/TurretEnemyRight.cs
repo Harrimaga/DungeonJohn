@@ -16,6 +16,7 @@ public class TurretEnemyRight : Enemy
     public TurretEnemyRight(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
     {
         direction = new Vector2(1, 0);
+        sprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyRight");
     }
 
     public void Shoot()

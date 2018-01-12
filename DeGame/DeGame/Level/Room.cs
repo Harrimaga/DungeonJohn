@@ -320,7 +320,6 @@ public class Room : GameObjectList
                 Enemy enemyIce = new IceEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "IceEnemy");
                 enemies.Add(enemyIce);
                 roomarray[x, y] = "Background";
-                enemycounter++;
                 break;
             case ("B"):
                 Boss1 boss = new Boss1(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "Boss1");
