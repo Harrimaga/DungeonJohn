@@ -506,8 +506,6 @@ switch (Lastentrypoint)
                     }
                 }
             }
-    
-
         foreach (Tiles t in tiles.Children)
         {
             t.Draw(gameTime, spriteBatch);

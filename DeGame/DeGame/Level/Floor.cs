@@ -5,17 +5,16 @@ using Microsoft.Xna.Framework.Input;
 
 public class Floor
 {
-    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, q;
+    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, displayint = 1, q;
     public Room currentRoom;
-    public int screenwidth, screenheight, used, CurrentLevel = 1;
+    public int screenwidth, screenheight, used, CurrentLevel = 1, doortimer = 0;
     public bool FloorGenerated = false;
     public Vector2 startPlayerPosition;
     Random random = new Random();
     public WornItems wornItems;
-    public int doortimer = 0;
-    int[,] possiblespecial;
+    string Level;
+    int[,] possiblespecial, AdjacentRooms;
     public Room[,] floor;
-    int[,] AdjacentRooms;
     bool[,] Checked;
 
     public Floor()
@@ -298,6 +297,7 @@ public class Floor
         currentRoom = floor[4, 4];
         floor[4, 4].LoadTiles();
         CurrentLevel++;
+        Level = "Level: Shop after " + displayint;
         FloorGenerated = false;
     }
 
@@ -311,6 +311,8 @@ public class Floor
         }
         FloorGenerator();
         CurrentLevel++;
+        displayint++;
+        Level = "Level: " + displayint;
     }
 
     public void ResetFloor()
@@ -319,6 +321,8 @@ public class Floor
         maxRooms = 5;
         minRooms = 3;
         CurrentLevel = 1;
+        displayint = 1;
+        Level = "Level: " + displayint;
         FloorGenerator();
         PlayingState.player.Reset();
     }
@@ -339,7 +343,10 @@ public class Floor
     public void HandleInput(InputHelper inputHelper)
     {
         if (inputHelper.KeyPressed(Keys.T))
-            NextFloor();
+            if (CurrentLevel % 2 == 0)
+                NextFloor();
+            else
+                NextShop();
         if (inputHelper.KeyPressed(Keys.R))
             ResetFloor();
         foreach (Room r in floor)
@@ -397,7 +404,6 @@ public class Floor
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         string enemycount = "Count: " + PlayingState.currentFloor.currentRoom.enemycounter;
-        string Level = "Level " + CurrentLevel;
         string Gold = "Gold: " + PlayingState.player.gold;
 
         foreach (Room room in floor)
