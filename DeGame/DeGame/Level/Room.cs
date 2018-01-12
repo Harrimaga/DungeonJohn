@@ -178,6 +178,7 @@ public class Room : GameObjectList
                 break;
             case 'S':
                 roomarray[x, y] = "Start";
+                PlayingState.currentFloor.startPlayerPosition = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
                 break;
             default:
                 roomarray[x, y] = "N/A";
@@ -498,7 +499,6 @@ switch (Lastentrypoint)
                             break;
                         case "Start":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/StartTile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight - 120), Color.Gray);
-                            PlayingState.currentFloor.startPlayerPosition = new Vector2(x * CellWidth + a * roomwidth + CellWidth / 2, y * CellHeight + b * roomheight + CellHeight / 2);
                             break;
                         default:
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Standardtile")), TilePosition, Color.Red);
