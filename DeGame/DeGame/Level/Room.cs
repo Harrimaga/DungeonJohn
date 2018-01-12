@@ -331,13 +331,13 @@ switch (Lastentrypoint)
                 roomarray[x, y] = "Background";
                 break;
             case ("P"):
-                Enemy enemySpider = new SpiderEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "SpiderEnemy");
+                Enemy enemySpider = new SpiderEnemy(TilePosition, new Vector2(a, b), 0, "SpiderEnemy");
                 enemies.Add(enemySpider);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("K"):
-                Enemy enemyIce = new IceEnemy(new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), new Vector2(a, b), 0, "IceEnemy");
+                Enemy enemyIce = new IceEnemy(TilePosition, new Vector2(a, b), 0, "IceEnemy");
                 enemies.Add(enemyIce);
                 roomarray[x, y] = "Background";
                 enemycounter++;
