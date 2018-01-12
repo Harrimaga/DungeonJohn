@@ -33,10 +33,8 @@ public class Enemy : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        direction = (PlayingState.player.position - position);
-        List<GameObject> RemoveBullets = new List<GameObject>();
-
         base.Update(gameTime);
+        direction = (PlayingState.player.position - position);;
         List<GameObject> RemoveBullets = new List<GameObject>();
         CollisionWithEnemy();
         foreach (Bullet bullet in PlayingState.player.bullets.Children)        
