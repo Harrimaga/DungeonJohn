@@ -10,7 +10,7 @@ public class Enemy : SpriteGameObject
     protected float attackspeed;
     protected float range = 300;
     protected float expGive = 120;
-    protected bool alive = true, drop = true, flying = false, backgroundenemy = false, bossenemy = false;
+    protected bool alive = true, drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true;
     protected int counter = 100;
     protected Vector2 basevelocity = Vector2.Zero;
     public SpriteEffects Effects;
@@ -31,9 +31,8 @@ public class Enemy : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        List<GameObject> RemoveBullets = new List<GameObject>();
-
         base.Update(gameTime);
+        List<GameObject> RemoveBullets = new List<GameObject>();
         CollisionWithEnemy();
         foreach (Bullet bullet in PlayingState.player.bullets.Children)        
             if (CollidesWith(bullet))
@@ -45,8 +44,7 @@ public class Enemy : SpriteGameObject
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
         healthbar.Update(gameTime, health, maxhealth, position);
-
-        if (health <= 0 && alive == true || (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom" && EndRoom.cleared && bossenemy))
+        if (health <= 0 && alive == true && killable || (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom" && EndRoom.cleared && bossenemy))
         {
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             if (drop)
@@ -228,7 +226,10 @@ public class Enemy : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        healthbar.Draw(spriteBatch);
+        if (killable)
+        {
+            healthbar.Draw(spriteBatch);
+        }
     }
 }
 

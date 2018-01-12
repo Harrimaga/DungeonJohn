@@ -15,7 +15,6 @@ public class TurretEnemy : Enemy
 
     public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, layer, id)
     {
-
         Directioncount = directioncount;
         switch (Directioncount)
         {
@@ -36,6 +35,7 @@ public class TurretEnemy : Enemy
                 MiddleOfSprite = new Vector2(sprite.Width - 35, sprite.Height / 2 - 35);
                 break;
         }
+        killable = false;
     }
 
     public void Shoot()
