@@ -339,7 +339,7 @@ switch (Lastentrypoint)
             case ("K"):
                 Enemy enemyIce = new IceEnemy(TilePosition, new Vector2(a, b), 0, "IceEnemy");
                 enemies.Add(enemyIce);
-                roomarray[x, y] = "Background";
+                roomarray[x, y] = "Ice";
                 break;
             case ("B"):
                 Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, "Boss1");
@@ -495,6 +495,9 @@ switch (Lastentrypoint)
                             break;
                         case "ExitShop":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/EndTile")), TilePosition, Color.White);
+                            break;
+                        case "Ice":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite")), position, Color.Red);
                             break;
                         case "Start":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/StartTile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight - 120), Color.Gray);
