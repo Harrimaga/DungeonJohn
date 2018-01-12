@@ -9,7 +9,7 @@ public class SpiderEnemy : Enemy
     Random random = new Random();
     Vector2 direction;
 
-    public SpiderEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    public SpiderEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/SpiderEnemy", layer, id)
     {
         basevelocity = new Vector2(5f, 5f);
         direction = (PlayingState.player.position - position);

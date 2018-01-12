@@ -114,10 +114,7 @@
     <Compile Include="GameObjects\Terrain\Wall.cs" />
     <Compile Include="GameObjects\TypeEnemy\SpamEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\SpiderEnemy.cs" />
-    <Compile Include="GameObjects\TypeEnemy\TurretEnemyDown.cs" />
-    <Compile Include="GameObjects\TypeEnemy\TurretEnemyLeft.cs" />
-    <Compile Include="GameObjects\TypeEnemy\TurretEnemyRight.cs" />
-    <Compile Include="GameObjects\TypeEnemy\TurretEnemyUp.cs" />
+    <Compile Include="GameObjects\TypeEnemy\TurretEnemy.cs" />
     <Compile Include="Inventory\Slots\ArmourSlot.cs" />
     <Compile Include="Inventory\Slots\BootsSlot.cs" />
     <Compile Include="Inventory\Slots\HelmetSlot.cs" />

@@ -127,21 +127,25 @@ class Door : Solid
             {
                 case (1):
                     PlayingState.player.position -= new Vector2(0, 3 * CellHeight);
+                    PlayingState.currentFloor.floor[(int)PlayingState.currentFloor.currentRoom.position.X, (int)PlayingState.currentFloor.currentRoom.position.Y - 1].Lastentrypoint = 2;
                     onup = true;
                     PlayingState.currentFloor.doortimer = 50;
                     break;
                 case (2):
                     PlayingState.player.position += new Vector2(0, 3 * CellHeight + 40);
+                    PlayingState.currentFloor.floor[(int)PlayingState.currentFloor.currentRoom.position.X, (int)PlayingState.currentFloor.currentRoom.position.Y + 1].Lastentrypoint = 1;
                     ondown = true;
                     PlayingState.currentFloor.doortimer = 50;
                     break;
                 case (3):
                     PlayingState.player.position -= new Vector2(3 * CellHeight, 0);
+                    PlayingState.currentFloor.floor[(int)PlayingState.currentFloor.currentRoom.position.X - 1, (int)PlayingState.currentFloor.currentRoom.position.Y].Lastentrypoint = 4;
                     onleft = true;
                     PlayingState.currentFloor.doortimer = 50;
                     break;
                 case (4):
                     PlayingState.player.position += new Vector2(3 * CellHeight + 40, 0);
+                    PlayingState.currentFloor.floor[(int)PlayingState.currentFloor.currentRoom.position.X + 1, (int)PlayingState.currentFloor.currentRoom.position.Y].Lastentrypoint = 3;
                     onright = true;
                     PlayingState.currentFloor.doortimer = 50;
                     break;

@@ -46,6 +46,8 @@ public class Boss :  SpriteGameObject
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position + new Vector2(30, 50));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position + new Vector2(-40, 10));
             PlayingState.player.exp += expGive;
+            if (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom")
+                EndRoom.cleared = true;
             GameObjectList.RemovedObjects.Add(this);
             alive = false;
         }

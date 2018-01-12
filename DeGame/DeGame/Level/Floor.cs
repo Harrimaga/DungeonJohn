@@ -161,7 +161,7 @@ public class Floor
                 bossx = possiblespecial[a, 0];
                 bossy = possiblespecial[a, 1];
             }
-        floor[bossx, bossy] = new Room(2, bossx, bossy);
+        floor[bossx, bossy] = new EndRoom(2, bossx, bossy);
     }
 
     bool CanSpawnSpecialRoom(int x, int y)

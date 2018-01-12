@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,15 +9,14 @@ public class TurretEnemy : Enemy
     float speed = 3f;
     Vector2 direction, MiddleOfSprite;
 
-    public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, layer, id)
+    public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, "Sprites/Enemies/TurretEnemyUp", layer, id)
     {
-
         Directioncount = directioncount;
         switch (Directioncount)
         {
             case 1:
                 direction = new Vector2(0, -1);
-                MiddleOfSprite = new Vector2(sprite.Width / 2 - 25, -10);
+                MiddleOfSprite = new Vector2(sprite.Width / 2 - 35, -10);
                 break;
             case 2:
                 direction = new Vector2(0, 1);
@@ -29,19 +24,20 @@ public class TurretEnemy : Enemy
                 break;
             case 3:
                 direction = new Vector2(-1, 0);
-                MiddleOfSprite = new Vector2(0, sprite.Height / 2 - 25);
+                MiddleOfSprite = new Vector2(-10, sprite.Height / 2 - 25);
                 break;
             default:
                 direction = new Vector2(1, 0);
-                MiddleOfSprite = new Vector2(sprite.Width - 55, sprite.Height / 2 - 25);
+                MiddleOfSprite = new Vector2(sprite.Width - 35, sprite.Height / 2 - 35);
                 break;
         }
+        killable = false;
     }
 
     public void Shoot()
     {
         Counter++;
-        
+
         if (Counter >= 50)
         {
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddleOfSprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));

@@ -3,17 +3,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class ChasingMinion : Enemy
 {
-    public ChasingMinion(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    public ChasingMinion(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/ChasingMinion", layer, id)
     {
         position = startPosition;
-        basevelocity = new Vector2(2.4f, 2.4f);
+        basevelocity = new Vector2(1.0f, 0.8f);
         health = 50;
         maxhealth = 30;
         expGive = 10;
         attack = 1;
         drop = false;
         flying = true;
-        backgroundenemy = false;
+        bossenemy = true;
     }
 
     public override void Update(GameTime gameTime)
