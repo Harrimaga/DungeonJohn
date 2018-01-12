@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class ChasingMinion : Enemy
 {
-    public ChasingMinion(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/ChasingMinion", layer, id)
+    public ChasingMinion(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ChasingMinion", layer, id)
     {
         position = startPosition;
         basevelocity = new Vector2(1.0f, 0.8f);

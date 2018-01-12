@@ -60,7 +60,7 @@ class EndRoom : Room
 
     public override void CheckExit()
     {
-        base.CheckExit();
+        //base.CheckExit();
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
         if (cleared)
         {
