@@ -4,20 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface IShield
+
+public interface IActive
 {
-    float AddedDefence
+    int MaxCharges
     {
-        get;
+        get; set;
     }
 
-    float DefenceMultiplier
+    int Charges
     {
-        get;
+        get; set;
     }
 
     string Type
     {
         get;
     }
+    void ExecuteActive();
 }
