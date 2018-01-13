@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 class HealthBar
 {
     float health;
-    public float health2;
     float maxhealth;
     float newhealth;
     int healthbarwidth = 200, healthbarwidth2 = 200;
@@ -47,7 +46,6 @@ class HealthBar
         if (newhealth < health)
         {
             health -= Math.Max((health - newhealth) / 50 + 0.1f, 0.4f);
-            //health2 = newhealth;
         }
 
         if (healthbarwidth2 > healthbarwidth)

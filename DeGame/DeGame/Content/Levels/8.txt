@@ -4,9 +4,9 @@
 +HHHHH!.WWWWW.!HHHHH+
 +.HHH!.WWWWWWWF!HHH.+
 +!!!!D..........!!!!+
-+...WW..........WW..+
-<...WW..........WW..>
-+...WW..........WW..+
++..WW...........WW..+
+<..WW...........WW..>
++..WW...........WW..+
 +!!!!..........U!!!!+
 +.HHH!TWWWWWWW.!HHH.+
 +HHHHH!.WWWWW.!HHHHH+

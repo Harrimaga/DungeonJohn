@@ -9,10 +9,10 @@ public class SpamEnemy : Enemy
     float speed = 3f;
     Vector2 direction;
 
-    public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/CutieEnemyPixel", layer, id)
     {
         position = startPosition;
-        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
         basevelocity = new Vector2(0, 0);
         
     }
@@ -36,28 +36,29 @@ public class SpamEnemy : Enemy
 
     public void Shoot()
     {
-        Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2, sprite.Height / 2);
-        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite, direction);
+        Vector2 direction = (PlayingState.player.position - position);
+        Vector2 middleofsprite = new Vector2(sprite.Width / 4, sprite.Height / 4);
+        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
         Room.enemybullets.Add(bullet);
 
         //if (PlayingState.player.position.Y > position.Y)
         //{
-        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
+        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite);
         //    Room.enemybullets.Add(bullet);
         //}
         //if (PlayingState.player.position.Y < position.Y)
         //{
-        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
+        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite);
         //    Room.enemybullets.Add(bullet);
         //}
         //if (PlayingState.player.position.X > position.X)
         //{
-        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
+        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite);
         //    Room.enemybullets.Add(bullet);
         //}
         //if (PlayingState.player.position.X < position.Y)
         //{
-        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
+        //    EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite);
         //    Room.enemybullets.Add(bullet);
         //}
     }

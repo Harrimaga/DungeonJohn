@@ -69,9 +69,12 @@
     <Compile Include="GameManagement\InventoryManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
     <Compile Include="GameObjects\Boss\Boss1.cs" />
+    <Compile Include="GameObjects\Boss\MinionBoss\MinionBoss.cs" />
+    <Compile Include="GameObjects\Boss\MinionBoss\MinionSpawner.cs" />
     <Compile Include="GameObjects\Bullets\BossBullet.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28player%29.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
+    <Compile Include="GameObjects\Bullets\IceBullet.cs" />
     <Compile Include="GameObjects\Items\Armour\MageJacket.cs" />
     <Compile Include="GameObjects\Items\Boots\CoolBoots.cs" />
     <Compile Include="GameObjects\Items\Boots\SlimyBoots.cs" />
@@ -105,13 +108,13 @@
     <Compile Include="GameObjects\Terrain\SpiderWeb.cs" />
     <Compile Include="GameObjects\Terrain\Tiles.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
+    <Compile Include="GameObjects\Boss\MinionBoss\ChasingMinion.cs" />
+    <Compile Include="GameObjects\TypeEnemy\IceEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
     <Compile Include="GameObjects\Terrain\Wall.cs" />
     <Compile Include="GameObjects\TypeEnemy\SpamEnemy.cs" />
-    <Compile Include="GameObjects\TypeEnemy\TurretEnemyDown.cs" />
-    <Compile Include="GameObjects\TypeEnemy\TurretEnemyLeft.cs" />
-    <Compile Include="GameObjects\TypeEnemy\TurretEnemyRight.cs" />
-    <Compile Include="GameObjects\TypeEnemy\TurretEnemyUp.cs" />
+    <Compile Include="GameObjects\TypeEnemy\SpiderEnemy.cs" />
+    <Compile Include="GameObjects\TypeEnemy\TurretEnemy.cs" />
     <Compile Include="Inventory\Slots\ArmourSlot.cs" />
     <Compile Include="Inventory\Slots\BootsSlot.cs" />
     <Compile Include="Inventory\Slots\HelmetSlot.cs" />
@@ -199,6 +202,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Levels\8.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\9.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\AttackUp.png" />

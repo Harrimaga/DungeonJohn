@@ -4,35 +4,38 @@ using System.Collections.Generic;
 
 public class Enemy : SpriteGameObject
 {
-    public float health = 100;
+    public float health;
     protected float maxhealth = 100;
     protected float attack;
     protected float attackspeed;
-    protected float range = 300;
+    protected float range = 100;
     protected float expGive = 120;
-    protected bool alive = true;
+    protected bool alive = true, drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true;
     protected int counter = 100;
     protected Vector2 basevelocity = Vector2.Zero;
     public SpriteEffects Effects;
     public Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
     protected Vector2 Roomposition;
+    Vector2 direction;
+    public float ChargeSpeed = 2f;
 
-    public Enemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy")
-    : base("Sprites/Enemies/BearEnemy", layer, id)
+    public Enemy(Vector2 startPosition, Vector2 roomposition, string assetname, int layer = 0, string id = "Enemy")
+    : base(assetname, layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
-        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Random");
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
         position = startPosition;
         velocity = basevelocity;
         Roomposition = roomposition;
+        health = maxhealth;
     }
 
     public override void Update(GameTime gameTime)
     {
-        List<GameObject> RemoveBullets = new List<GameObject>();
-
         base.Update(gameTime);
+        direction = (PlayingState.player.position - position);;
+        List<GameObject> RemoveBullets = new List<GameObject>();
         CollisionWithEnemy();
         foreach (Bullet bullet in PlayingState.player.bullets.Children)        
             if (CollidesWith(bullet))
@@ -44,11 +47,11 @@ public class Enemy : SpriteGameObject
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
         healthbar.Update(gameTime, health, maxhealth, position);
-
-        if (health <= 0 && alive == true)
+        if (health <= 0 && alive == true && killable || (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom" && EndRoom.cleared && bossenemy))
         {
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
+            if (drop)
+                PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.player.exp += expGive;
             alive = false;
             GameObjectList.RemovedObjects.Add(this);
@@ -61,11 +64,13 @@ public class Enemy : SpriteGameObject
         {
             Effects = SpriteEffects.FlipHorizontally;
         }
-        Chase();
+        //Chase();
     }
 
     public bool CheckDown()
     {
+        if (flying)
+            return false;
         Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y + sprite.Height, 60, 60);
         foreach (Solid solid in Room.solid.Children)
             if (CheckDown.Intersects(solid.BoundingBox))
@@ -74,6 +79,8 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckUp()
     {
+        if (flying)
+            return false;
         Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y - 60, 60, 60);
         foreach (Solid solid in Room.solid.Children)
             if (CheckUp.Intersects(solid.BoundingBox))            
@@ -82,6 +89,8 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckLeft()
     {
+        if (flying)
+            return false;
         Rectangle CheckLeft = new Rectangle((int)position.X - 60, (int)position.Y, 60, 60);
         foreach (Solid solid in Room.solid.Children)
             if (CheckLeft.Intersects(solid.BoundingBox))            
@@ -90,6 +99,8 @@ public class Enemy : SpriteGameObject
     }
     public bool CheckRight()
     {
+        if (flying)
+            return false;
         Rectangle CheckRight = new Rectangle((int)position.X + sprite.Width, (int)position.Y, 60, 60);
         foreach (Solid solid in Room.solid.Children)
             if (CheckRight.Intersects(solid.BoundingBox))            
@@ -119,19 +130,19 @@ public class Enemy : SpriteGameObject
 
         //Position[] path = grid.GetPath(new Position(0, 0), new Position(99, 99));
 
-        if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1 && CheckUp() == false)
+        if (position.Y + playersprite.Height / 2 > PlayingState.player.position.Y + 1 && CheckUp() == false)
         {
             position.Y -= velocity.Y;
         }
-        if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1 && CheckDown() == false)
+        if (position.Y - playersprite.Height / 2 < PlayingState.player.position.Y - 1 && CheckDown() == false)
         {
             position.Y += velocity.Y;
         }
-        if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
+        if (position.X + playersprite.Width / 2 > PlayingState.player.position.X + 1 && CheckLeft() == false)
         {
             position.X -= velocity.X;
         }
-        if (position.X + playersprite.Width < PlayingState.player.position.X - 1 && CheckRight() == false)
+        if (position.X + playersprite.Width / 2 < PlayingState.player.position.X - 1 && CheckRight() == false)
         {
             position.X += velocity.X;
         }
@@ -187,7 +198,7 @@ public class Enemy : SpriteGameObject
     {
         foreach (Enemy enemy in PlayingState.currentFloor.currentRoom.enemies.Children)
         {
-            if (enemy != this)
+            if (enemy != this && !enemy.backgroundenemy)
             {
                 if (CollidesWith(enemy) && BoundingBox.Left < enemy.position.X + enemy.Width && BoundingBox.Left + (enemy.Width / 2) > enemy.position.X + enemy.Width)
                 {
@@ -218,7 +229,10 @@ public class Enemy : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        healthbar.Draw(spriteBatch);
+        if (killable)
+        {
+            healthbar.Draw(spriteBatch);
+        }
     }
 }
 

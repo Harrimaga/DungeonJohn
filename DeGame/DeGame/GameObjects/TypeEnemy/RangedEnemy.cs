@@ -8,10 +8,10 @@ public class RangedEnemy : Enemy
     float bulletdamage = 5;
     float speed = 2f;
     Vector2 direction;
-    public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ShootingEnemy1", layer, id)
     {
         position = startPosition;
-        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
         velocity = new Vector2(0.5f, 0.5f);
         Console.WriteLine("Playerposition" + PlayingState.player.position);
         Console.WriteLine("position = " + position);
@@ -45,8 +45,9 @@ public class RangedEnemy : Enemy
     //}
     public void Shoot()
     {
-        Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2, sprite.Height / 2);
-        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite, direction);
+        Vector2 middleofsprite = new Vector2(sprite.Width / 2, sprite.Height / 2);
+        Vector2 direction = (PlayingState.player.position - position);
+        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
         Room.enemybullets.Add(bullet);
 
         //if (PlayingState.player.position.Y > position.Y)

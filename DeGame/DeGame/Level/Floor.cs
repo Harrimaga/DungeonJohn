@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Input;
 
 public class Floor
 {
-    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
+    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, q;
     public Room currentRoom;
-    public int screenwidth, screenheight, used;
+    public int screenwidth, screenheight, used, CurrentLevel = 1;
     public bool FloorGenerated = false;
     public Vector2 startPlayerPosition;
     Random random = new Random();
@@ -47,7 +47,7 @@ public class Floor
     }
     int RandomRoom()
     {
-        return random.Next(4) + 5;
+        return random.Next(5) + 5;
     }
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
@@ -161,7 +161,7 @@ public class Floor
                 bossx = possiblespecial[a, 0];
                 bossy = possiblespecial[a, 1];
             }
-        floor[bossx, bossy] = new Room(2, bossx, bossy);
+        floor[bossx, bossy] = new EndRoom(2, bossx, bossy);
     }
 
     bool CanSpawnSpecialRoom(int x, int y)
@@ -294,8 +294,9 @@ public class Floor
     public void NextShop()
     {
         ClearFloor();
-        floor[4, 4] = new Room(6, 4, 4);
+        floor[4, 4] = new Room(4, 4, 4);
         currentRoom = floor[4, 4];
+        floor[4, 4].LoadTiles();
         CurrentLevel++;
         FloorGenerated = false;
     }
@@ -382,6 +383,8 @@ public class Floor
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                             break;
                     }
+                    if (floor[x,y].Type == "bossroom")
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapBossTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                 }
                 if (currentRoom.position == new Vector2(x, y))
                 {
