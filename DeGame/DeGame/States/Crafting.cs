@@ -9,16 +9,21 @@ using System.Threading.Tasks;
 
 class Crafting : IGameObject
 {
-    List<InventorySlot> inventory;
+    List<CraftingSlot> inventory;
     Vector2 BasisPosition;
     public Crafting()
     {
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {
-        if(inputHelper.IsKeyDown(Keys.Space))
+        if(inputHelper.KeyPressed(Keys.Space))
         {
             GameEnvironment.gameStateManager.SwitchTo("Playing");
+        }
+
+        foreach (CraftingSlot cs in inventory)
+        {
+            cs.HandleInput(inputHelper);
         }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -26,7 +31,7 @@ class Crafting : IGameObject
         GameEnvironment.gameStateManager.GetGameState("Playing").Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PauseMenu/CraftingMenu"), BasisPosition);
 
-        inventory = new List<InventorySlot>();
+        inventory = new List<CraftingSlot>();
         for (int i = 0; i < Player.inventory.items.Count; i++)
         {
             Vector2 slotPosition;
@@ -35,10 +40,10 @@ class Crafting : IGameObject
             x = i % 9;
             slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
 
-            inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
+            inventory.Add(new CraftingSlot(slotPosition, Player.inventory.items[i]));
         }
 
-        foreach (InventorySlot slot in inventory)
+        foreach (CraftingSlot slot in inventory)
         {
             slot.Draw(gameTime, spriteBatch);
         }
