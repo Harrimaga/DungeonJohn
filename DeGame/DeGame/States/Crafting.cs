@@ -24,7 +24,7 @@ class Crafting : IGameObject
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         GameEnvironment.gameStateManager.GetGameState("Playing").Draw(gameTime, spriteBatch);
-
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PauseMenu/CraftingMenu"), BasisPosition);
 
         inventory = new List<InventorySlot>();
         for (int i = 0; i < Player.inventory.items.Count; i++)
@@ -33,7 +33,6 @@ class Crafting : IGameObject
             int x, y;
             y = (int)Math.Floor((double)i / 9);
             x = i % 9;
-            //slotPosition = wornItems.position + new Vector2(0, 200) + new Vector2(x * 74, y * 74);
             slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
 
             inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
