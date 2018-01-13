@@ -8,6 +8,7 @@ public class RangedEnemy : Enemy
     float bulletdamage = 5;
     float speed = 2f;
     Vector2 direction;
+    
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ShootingEnemy1", layer, id)
     {
         position = startPosition;
@@ -48,7 +49,7 @@ public class RangedEnemy : Enemy
         Vector2 middleofsprite = new Vector2(sprite.Width / 2, sprite.Height / 2);
         Vector2 direction = (PlayingState.player.position - position);
         EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
-        Room.enemybullets.Add(bullet);
+        PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
 
         //if (PlayingState.player.position.Y > position.Y)
         //{

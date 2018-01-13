@@ -72,7 +72,7 @@ public class Enemy : SpriteGameObject
         if (flying)
             return false;
         Rectangle CheckDown = new Rectangle((int)position.X, (int)position.Y + sprite.Height, 60, 60);
-        foreach (Solid solid in Room.solid.Children)
+        foreach (Solid solid in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
             if (CheckDown.Intersects(solid.BoundingBox))
                 return true;       
         return false;
@@ -82,7 +82,7 @@ public class Enemy : SpriteGameObject
         if (flying)
             return false;
         Rectangle CheckUp = new Rectangle((int)position.X, (int)position.Y - 60, 60, 60);
-        foreach (Solid solid in Room.solid.Children)
+        foreach (Solid solid in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
             if (CheckUp.Intersects(solid.BoundingBox))            
                 return true;            
         return false;
@@ -92,7 +92,7 @@ public class Enemy : SpriteGameObject
         if (flying)
             return false;
         Rectangle CheckLeft = new Rectangle((int)position.X - 60, (int)position.Y, 60, 60);
-        foreach (Solid solid in Room.solid.Children)
+        foreach (Solid solid in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
             if (CheckLeft.Intersects(solid.BoundingBox))            
                 return true;            
         return false;
@@ -102,7 +102,7 @@ public class Enemy : SpriteGameObject
         if (flying)
             return false;
         Rectangle CheckRight = new Rectangle((int)position.X + sprite.Width, (int)position.Y, 60, 60);
-        foreach (Solid solid in Room.solid.Children)
+        foreach (Solid solid in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
             if (CheckRight.Intersects(solid.BoundingBox))            
                 return true;            
         return false;
