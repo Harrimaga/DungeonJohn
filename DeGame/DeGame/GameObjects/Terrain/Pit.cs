@@ -17,7 +17,7 @@ class Pit : Tiles
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
         if (BoundingBox.Contains(MiddleofPlayer.X, MiddleofPlayer.Y))
         {
             GameEnvironment.gameStateManager.AddGameState("PitState", new PitState());
@@ -27,6 +27,6 @@ class Pit : Tiles
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PitTile"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitTile"), position);
     }
 }

@@ -10,7 +10,7 @@ class Bullet : SpriteGameObject
     float counter = 0;
 
     public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
-    : base("Sprites/Random", layer, id)
+    : base("Sprites/PlayerFront", layer, id)
     {
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
         position = Startposition;
@@ -63,11 +63,11 @@ class Bullet : SpriteGameObject
 
     public void CheckCollision()
     {
-        foreach (Solid solid in Room.solid.Children)
+        foreach (Solid solid in PlayingState.currentFloor.currentRoom.solid.Children)
             if (CollidesWith(solid))
                 GameObjectList.RemovedObjects.Add(this);        
 
-        foreach (Door door in Room.door.Children)
+        foreach (Door door in PlayingState.currentFloor.currentRoom.Children)
             if (CollidesWith(door))
                 GameObjectList.RemovedObjects.Add(this);
     }

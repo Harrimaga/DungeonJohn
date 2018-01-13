@@ -24,6 +24,6 @@ class Ice : Tiles
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Background Sprite"), position,Color.Aqua);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite"), position,Color.Aqua);
     }
 }

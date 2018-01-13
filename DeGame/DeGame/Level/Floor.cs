@@ -5,17 +5,16 @@ using Microsoft.Xna.Framework.Input;
 
 public class Floor
 {
-    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentLevel = 1, CurrentRooms, b = 0, q;
+    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, displayint = 1, q;
     public Room currentRoom;
-    public int screenwidth, screenheight, used;
+    public int screenwidth, screenheight, used, CurrentLevel = 1, doortimer = 0;
     public bool FloorGenerated = false;
     public Vector2 startPlayerPosition;
     Random random = new Random();
     public WornItems wornItems;
-    public int doortimer = 0;
-    int[,] possiblespecial;
+    string Level;
+    int[,] possiblespecial, AdjacentRooms;
     public Room[,] floor;
-    int[,] AdjacentRooms;
     bool[,] Checked;
 
     public Floor()
@@ -47,7 +46,7 @@ public class Floor
     }
     int RandomRoom()
     {
-        return random.Next(3) + 5;
+        return random.Next(5) + 5;
     }
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
@@ -161,7 +160,7 @@ public class Floor
                 bossx = possiblespecial[a, 0];
                 bossy = possiblespecial[a, 1];
             }
-        floor[bossx, bossy] = new Room(2, bossx, bossy);
+        floor[bossx, bossy] = new EndRoom(2, bossx, bossy);
     }
 
     bool CanSpawnSpecialRoom(int x, int y)
@@ -294,9 +293,11 @@ public class Floor
     public void NextShop()
     {
         ClearFloor();
-        floor[4, 4] = new Room(6, 4, 4);
+        floor[4, 4] = new Room(4, 4, 4);
         currentRoom = floor[4, 4];
+        floor[4, 4].LoadTiles();
         CurrentLevel++;
+        Level = "Level: Shop after " + displayint;
         FloorGenerated = false;
     }
 
@@ -310,6 +311,8 @@ public class Floor
         }
         FloorGenerator();
         CurrentLevel++;
+        displayint++;
+        Level = "Level: " + displayint;
     }
 
     public void ResetFloor()
@@ -318,6 +321,8 @@ public class Floor
         maxRooms = 5;
         minRooms = 3;
         CurrentLevel = 1;
+        displayint = 1;
+        Level = "Level: " + displayint;
         FloorGenerator();
         PlayingState.player.Reset();
     }
@@ -338,7 +343,10 @@ public class Floor
     public void HandleInput(InputHelper inputHelper)
     {
         if (inputHelper.KeyPressed(Keys.T))
-            NextFloor();
+            if (CurrentLevel % 2 == 0)
+                NextFloor();
+            else
+                NextShop();
         if (inputHelper.KeyPressed(Keys.R))
             ResetFloor();
         foreach (Room r in floor)
@@ -370,22 +378,24 @@ public class Floor
                     switch (floor[x, y].RoomListIndex)
                     {
                         case (1):
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapStartTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapStartTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                             break;
                         case (2):
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapBossTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapBossTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                             break;
                         case (3):
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapItemTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapItemTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                             break;
                         default:
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                             break;
                     }
+                    if (floor[x,y].Type == "bossroom")
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapBossTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                 }
                 if (currentRoom.position == new Vector2(x, y))
                 {
-                    spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/CurrentMinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                    spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/CurrentMinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                 }
             }
         //TODO alleen kamer tekenen op minimap als de speler er is geweest
@@ -394,18 +404,24 @@ public class Floor
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         string enemycount = "Count: " + PlayingState.currentFloor.currentRoom.enemycounter;
-        string Level = "Level " + CurrentLevel;
         string Gold = "Gold: " + PlayingState.player.gold;
-
+        //if (floor[(int)currentRoom.position.X, (int)currentRoom.position.Y] != null)
+        //{
+        //    if (!FloorGenerated)
+        //        floor[(int)currentRoom.position.X, (int)currentRoom.position.Y].LoadTiles();
+        //    floor[(int)currentRoom.position.X, (int)currentRoom.position.Y].Draw(gameTime, spriteBatch);
+        //}
         foreach (Room room in floor)
         {
             if (room != null)
             {
                 if (!FloorGenerated)
                     room.LoadTiles();
-                if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
-                || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1)))
+                if (room != null && (room.position == currentRoom.position) || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
+                || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1))
                     room.Draw(gameTime, spriteBatch);
+
+
             }
         }
 

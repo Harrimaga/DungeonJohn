@@ -1,16 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 public class RangedEnemy : Enemy
 {
     int Counter = 300;
     float bulletdamage = 5;
     float speed = 2f;
-
-    public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, layer, id)
+    Vector2 direction;
+    
+    public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ShootingEnemy1", layer, id)
     {
-        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyBullet");
+        position = startPosition;
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
         velocity = new Vector2(0.5f, 0.5f);
+        Console.WriteLine("Playerposition" + PlayingState.player.position);
+        Console.WriteLine("position = " + position);
+        Console.WriteLine("direction =" + direction);
     }
 
     public void Range()
@@ -40,9 +46,10 @@ public class RangedEnemy : Enemy
     //}
     public void Shoot()
     {
-        Vector2 MiddenOfSprite = new Vector2(sprite.Width / 2, sprite.Height / 2);
-        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + MiddenOfSprite);
-        Room.enemybullets.Add(bullet);
+        Vector2 middleofsprite = new Vector2(sprite.Width / 2, sprite.Height / 2);
+        Vector2 direction = (PlayingState.player.position - position);
+        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
+        PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
 
         //if (PlayingState.player.position.Y > position.Y)
         //{
@@ -92,11 +99,12 @@ public class RangedEnemy : Enemy
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
               Range();
+        direction = (PlayingState.player.position - position);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/ShootingEnemy1"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/ShootingEnemy1"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }
