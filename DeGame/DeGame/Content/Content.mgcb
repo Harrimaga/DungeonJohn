@@ -1507,7 +1507,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/InventorySlots/CraftingNewSlot.png
 
-#begin Sprites/InventorySlots/CraftingSlot1.png
+#begin Sprites/InventorySlots/CraftingSlot.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1517,17 +1517,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/InventorySlots/CraftingSlot1.png
-
-#begin Sprites/InventorySlots/CraftingSlot2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/InventorySlots/CraftingSlot2.png
+/build:Sprites/InventorySlots/CraftingSlot.png
 

@@ -12,11 +12,11 @@ public class CraftingSlot : SpriteGameObject
     Texture2D itemSprite;
     Item item;
 
-    public CraftingSlot(Vector2 position, Item item = null, int layer = 0, string id = "CraftingSlot") : base("Sprites/InventorySlots/CraftingSlot1", layer, id)
+    public CraftingSlot(Vector2 position, Item item = null, int layer = 0, string id = "CraftingSlot") : base("Sprites/InventorySlots/CraftingSlot", layer, id)
     {
         this.position = position;
         this.item = item;
-        sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/PassiveSlot");
+        sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/CraftingSlot");
         if (item != null)
         {
             itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);

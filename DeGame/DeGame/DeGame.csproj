@@ -225,8 +225,7 @@
     <Content Include="Content\Sprites\HealthbarBackground.png" />
     <Content Include="Content\Sprites\InventorySlots\ArmourSLot.png" />
     <Content Include="Content\Sprites\InventorySlots\BootsSlot.png" />
-    <Content Include="Content\Sprites\InventorySlots\CraftingSlot1.png" />
-    <Content Include="Content\Sprites\InventorySlots\CraftingSlot2.png" />
+    <Content Include="Content\Sprites\InventorySlots\CraftingSlot.png" />
     <Content Include="Content\Sprites\InventorySlots\CraftingNewSlot.png" />
     <Content Include="Content\Sprites\InventorySlots\EmptySlot.png" />
     <Content Include="Content\Sprites\InventorySlots\HelmetSlot.png" />
