@@ -39,7 +39,7 @@ public class SpamEnemy : Enemy
         Vector2 direction = (PlayingState.player.position - position);
         Vector2 middleofsprite = new Vector2(sprite.Width / 4, sprite.Height / 4);
         EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
-        Room.enemybullets.Add(bullet);
+        PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
 
         //if (PlayingState.player.position.Y > position.Y)
         //{

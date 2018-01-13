@@ -405,16 +405,23 @@ public class Floor
     {
         string enemycount = "Count: " + PlayingState.currentFloor.currentRoom.enemycounter;
         string Gold = "Gold: " + PlayingState.player.gold;
-
+        //if (floor[(int)currentRoom.position.X, (int)currentRoom.position.Y] != null)
+        //{
+        //    if (!FloorGenerated)
+        //        floor[(int)currentRoom.position.X, (int)currentRoom.position.Y].LoadTiles();
+        //    floor[(int)currentRoom.position.X, (int)currentRoom.position.Y].Draw(gameTime, spriteBatch);
+        //}
         foreach (Room room in floor)
         {
             if (room != null)
             {
                 if (!FloorGenerated)
                     room.LoadTiles();
-                if (room != null && (room.position == currentRoom.position || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
-                || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1)))
+                if (room != null && (room.position == currentRoom.position) || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
+                || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1))
                     room.Draw(gameTime, spriteBatch);
+
+
             }
         }
 
