@@ -8,7 +8,7 @@ using System.Collections;
 
 public class Room : GameObjectList
 {
-    public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, Lastentrypoint, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 2;
+    public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, Lastentrypoint, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0;
     public GameObjectList enemies, tiles, solid, consumable, bosses, altars, anvils, enemybullets, homingenemybullets;
     public static GameObjectList door;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop, LastEntryPoint;
@@ -530,17 +530,23 @@ switch (Lastentrypoint)
         {
             c.Draw(gameTime, spriteBatch);
         }
-        foreach (Boss b in bosses.Children)
-        {
-            b.Draw(gameTime, spriteBatch);
-        }
         foreach (Door d in door.Children)
         {
             d.Draw(gameTime, spriteBatch);
         }
+        foreach (Boss b in bosses.Children)
+        {
+            if (!b.alive)
+                Remove(b);
+            else
+                b.Draw(gameTime, spriteBatch);
+        }
         foreach (Enemy e in enemies.Children)
         {
-            e.Draw(gameTime, spriteBatch);
+            if (!e.alive)
+                Remove(e);
+            else
+                e.Draw(gameTime, spriteBatch);
         }
         enemybullets.Draw(gameTime, spriteBatch);
         homingenemybullets.Draw(gameTime, spriteBatch);

@@ -10,7 +10,7 @@ public class Enemy : SpriteGameObject
     protected float attackspeed;
     protected float range = 100;
     protected float expGive = 120;
-    protected bool alive = true, drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true;
+    protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true;
     protected int counter = 100;
     protected Vector2 basevelocity = Vector2.Zero;
     public SpriteEffects Effects;
@@ -18,7 +18,7 @@ public class Enemy : SpriteGameObject
     HealthBar healthbar;
     protected Vector2 Roomposition;
     Vector2 direction;
-    public float ChargeSpeed = 2f;
+    public bool alive = true;
 
     public Enemy(Vector2 startPosition, Vector2 roomposition, string assetname, int layer = 0, string id = "Enemy")
     : base(assetname, layer, id)
@@ -34,7 +34,9 @@ public class Enemy : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        healthbar.Update(gameTime, health, maxhealth, position);
         direction = (PlayingState.player.position - position);;
+
         List<GameObject> RemoveBullets = new List<GameObject>();
         CollisionWithEnemy();
         foreach (Bullet bullet in PlayingState.player.bullets.Children)        
@@ -46,7 +48,8 @@ public class Enemy : SpriteGameObject
         foreach (Bullet bullet in RemoveBullets)        
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
-        healthbar.Update(gameTime, health, maxhealth, position);
+
+
         if (health <= 0 && alive == true && killable || (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom" && EndRoom.cleared && bossenemy))
         {
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
@@ -56,6 +59,7 @@ public class Enemy : SpriteGameObject
             alive = false;
             GameObjectList.RemovedObjects.Add(this);
         }
+
         if (position.X + playersprite.Width > PlayingState.player.position.X + 1 && CheckLeft() == false)
         {
             Effects = SpriteEffects.None;
