@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class Crafting : IGameObject
+public class Crafting : IGameObject
 {
-    List<CraftingInventorySlot> inventory;
-    public CraftingSlots craftingSlots;
+    public List<CraftingInventorySlot> inventory;
+    public static CraftingSlots craftingSlots;
     Item item1, item2, newItem;
     Vector2 BasisPosition;
     public Crafting()

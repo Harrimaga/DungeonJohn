@@ -39,7 +39,31 @@ public class InventorySlot : SpriteGameObject
             Player.inventory.equip(item);
         }
     }
+    public void ToInventory(Item item)
+    {
+        Player.inventory.addItemToInventory(item);
+    }
+    public void ItemSwitch(Item item)
+    {
+        if (Crafting.craftingSlots.itemSlot1.item == null)
+        {
+            Crafting.craftingSlots.itemSlot1.item = item;
+            Player.inventory.removeItemFromInventory(item);
+        }
 
+        if (Crafting.craftingSlots.itemSlot1.item != null && Crafting.craftingSlots.itemSlot2.item == null)
+        {
+            Crafting.craftingSlots.itemSlot2.item = item;
+            Player.inventory.removeItemFromInventory(item);
+        }
+
+        if (Crafting.craftingSlots.itemSlot1.item != null && Crafting.craftingSlots.itemSlot2.item != null)
+        { 
+            Player.inventory.addItemToInventory(Crafting.craftingSlots.itemSlot1.item);
+            Crafting.craftingSlots.itemSlot1.item = item;
+        }
+    }
+   
     public static void DrawItem(Texture2D sprite, Texture2D itemSprite, Vector2 position, GameTime gameTime, SpriteBatch spriteBatch)
     {
         Vector2 itemSpritePosition;
@@ -62,7 +86,6 @@ public class InventorySlot : SpriteGameObject
         }
         spriteBatch.Draw(itemSprite, itemSpritePosition, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
     }
-
     public static float CalculateScale(Texture2D sprite, Texture2D itemSprite)
     {
         float scale = (float)sprite.Height / itemSprite.Height;

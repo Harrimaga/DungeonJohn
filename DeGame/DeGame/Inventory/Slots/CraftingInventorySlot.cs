@@ -19,6 +19,7 @@ public class CraftingInventorySlot : InventorySlot
         // Handle input for crafting slot
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition))
         {
+            ItemSwitch(item);
             Console.WriteLine("Clicked a crafting interface inventory button!");
         } 
     }

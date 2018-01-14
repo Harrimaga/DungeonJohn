@@ -8,13 +8,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class CraftingSlots : GameObjectList
 {
-    CraftingSlot itemSlot1, itemSlot2;
+    public CraftingSlot itemSlot1, itemSlot2;
     new Vector2 position;
+    protected bool clicked1 = false, clicked2 = false ;
 
     public CraftingSlots(Vector2 position) : base()
     {
         this.position = position;
-        itemSlot1 = new CraftingSlot(position, null);
+        itemSlot1 = new CraftingSlot(position, new HardHelmet());
         itemSlot2 = new CraftingSlot(position + new Vector2(212,0),null);
 
         Add(itemSlot1);
