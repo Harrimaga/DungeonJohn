@@ -24,7 +24,7 @@ class Lava : Tiles
             LavaDamage += 5;
             check = false;
         }
-        if (CollidesWith(PlayingState.player) && PlayingState.currentFloor.currentRoom.lavatimer == 0)
+        if (BoundingBox.Intersects(PlayingState.player.collisionhitbox) && PlayingState.currentFloor.currentRoom.lavatimer == 0)
         {
             PlayingState.player.health -= LavaDamage;
             PlayingState.currentFloor.currentRoom.lavatimer += 30;

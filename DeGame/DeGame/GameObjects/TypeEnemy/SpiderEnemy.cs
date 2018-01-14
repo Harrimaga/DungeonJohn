@@ -19,7 +19,6 @@ public class SpiderEnemy : Enemy
 
     public override void Update(GameTime gameTime)
     {
-        Console.WriteLine(direction);
         base.Update(gameTime);
         ChargeCounter++;
 

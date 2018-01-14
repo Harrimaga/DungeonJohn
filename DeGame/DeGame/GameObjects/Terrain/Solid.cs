@@ -31,20 +31,30 @@ class Solid : SpriteGameObject
 
     void SolidCollision()
     {
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
-
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, -(GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2))))
-            while (CollidesWith(PlayingState.player))
+        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Top)))
+            while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
+            {
                 PlayingState.player.position.Y++;
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, (GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2))))
+                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+            }
+        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Bottom)))
             while (CollidesWith(PlayingState.player))
+            {
                 PlayingState.player.position.Y--;
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(-(GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2), 0)))
-            while (CollidesWith(PlayingState.player))
+                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+            }
+        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Left, PlayingState.player.collisionhitbox.Center.Y)))
+            while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
+            {
                 PlayingState.player.position.X++;
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2((GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2), 0)))
-            while (CollidesWith(PlayingState.player))
+                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+            }
+        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Right, PlayingState.player.collisionhitbox.Center.Y)))
+            while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
+            {
                 PlayingState.player.position.X--;
+                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+            }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
