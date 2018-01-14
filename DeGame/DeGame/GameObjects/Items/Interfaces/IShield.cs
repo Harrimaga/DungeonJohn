@@ -15,4 +15,9 @@ public interface IShield
     {
         get;
     }
+
+    string Type
+    {
+        get;
+    }
 }

@@ -58,6 +58,11 @@ public interface IWeapon
         get;
     }
 
+    string Type
+    {
+        get;
+    }
+
     void Attack(int direction);
 }
 

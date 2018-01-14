@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 class Tiles : SpriteGameObject
 {
     public Tiles(Vector2 startPosition, int layer = 0, string id = "Tiles")
-    : base("Sprites/Lava", layer, id)
+    : base("Sprites/Tiles/Lava", layer, id)
     {
         position = startPosition;
     }

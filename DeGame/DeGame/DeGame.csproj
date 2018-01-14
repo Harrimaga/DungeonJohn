@@ -69,14 +69,19 @@
     <Compile Include="GameManagement\InventoryManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
     <Compile Include="GameObjects\Boss\Boss1.cs" />
+    <Compile Include="GameObjects\Boss\MinionBoss\MinionBoss.cs" />
+    <Compile Include="GameObjects\Boss\MinionBoss\MinionSpawner.cs" />
     <Compile Include="GameObjects\Bullets\BossBullet.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28player%29.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
+    <Compile Include="GameObjects\Items\Actives\Nani.cs" />
+    <Compile Include="GameObjects\Bullets\IceBullet.cs" />
     <Compile Include="GameObjects\Items\Armour\MageJacket.cs" />
     <Compile Include="GameObjects\Items\Boots\CoolBoots.cs" />
     <Compile Include="GameObjects\Items\Boots\SlimyBoots.cs" />
     <Compile Include="GameObjects\Items\CraftingBench.cs" />
     <Compile Include="GameObjects\Items\Helmets\HardHelmet.cs" />
+    <Compile Include="GameObjects\Items\Interfaces\IActive.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IArmour.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IBoots.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IHelmet.cs" />
@@ -105,9 +110,13 @@
     <Compile Include="GameObjects\Terrain\SpiderWeb.cs" />
     <Compile Include="GameObjects\Terrain\Tiles.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
+    <Compile Include="GameObjects\Boss\MinionBoss\ChasingMinion.cs" />
+    <Compile Include="GameObjects\TypeEnemy\IceEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
     <Compile Include="GameObjects\Terrain\Wall.cs" />
     <Compile Include="GameObjects\TypeEnemy\SpamEnemy.cs" />
+    <Compile Include="GameObjects\TypeEnemy\SpiderEnemy.cs" />
+    <Compile Include="GameObjects\TypeEnemy\TurretEnemy.cs" />
     <Compile Include="Inventory\Slots\ArmourSlot.cs" />
     <Compile Include="Inventory\Slots\BootsSlot.cs" />
     <Compile Include="Inventory\Slots\HelmetSlot.cs" />
@@ -194,6 +203,12 @@
     <Content Include="Content\Levels\333.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Levels\8.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\9.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Sprites\AttackUp.png" />
     <Content Include="Content\Sprites\AttackUpPressed.png" />
     <Content Include="Content\Sprites\Background Sprite.png" />
@@ -201,15 +216,10 @@
     <Content Include="Content\Sprites\Boss.png" />
     <Content Include="Content\Sprites\BossBullet.png" />
     <Content Include="Content\Sprites\bteam.png" />
-    <Content Include="Content\Sprites\bullet1.png" />
-    <Content Include="Content\Sprites\doordown.png" />
     <Content Include="Content\Sprites\doorleft.png" />
-    <Content Include="Content\Sprites\doorright.png" />
     <Content Include="Content\Sprites\doorup.png" />
     <Content Include="Content\Sprites\Button Sprite.png" />
     <Content Include="Content\Sprites\Button2 Sprite.png" />
-    <Content Include="Content\Sprites\Eind Sprite.png" />
-    <Content Include="Content\Sprites\Eind Sprite2.png" />
     <Content Include="Content\Sprites\healthbar.png" />
     <Content Include="Content\Sprites\HealthbarBackground.png" />
     <Content Include="Content\Sprites\InventorySlots\ArmourSLot.png" />
@@ -221,7 +231,6 @@
     <Content Include="Content\Sprites\InventorySlots\WeaponSlot.png" />
     <Content Include="Content\Sprites\HealthUp.png" />
     <Content Include="Content\Sprites\HealthUpPressed.png" />
-    <Content Include="Content\Sprites\Item1.png" />
     <Content Include="Content\Sprites\Items\Altar.png" />
     <Content Include="Content\Sprites\Items\BloodRing.png" />
     <Content Include="Content\Sprites\Items\DoubleGun.png" />
@@ -238,13 +247,11 @@
     <Content Include="Content\Sprites\OptionPressed.png" />
     <Content Include="Content\Sprites\pauze.png" />
     <Content Include="Content\Sprites\Random.png" />
-    <Content Include="Content\Sprites\OldRock.png" />
     <Content Include="Content\Sprites\Rock Sprite.png" />
     <Content Include="Content\Sprites\SpiderWeb.png" />
     <Content Include="Content\Sprites\Standardtile.png" />
     <Content Include="Content\Sprites\Start.png" />
     <Content Include="Content\Sprites\StartPressed.png" />
-    <Content Include="Content\Sprites\Wall Sprite Corner.png" />
     <Content Include="Content\Sprites\Wall Sprite.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>

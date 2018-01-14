@@ -12,7 +12,7 @@ class Solid : SpriteGameObject
     public bool OnThisTile = false;
 
     public Solid(Vector2 startPosition, int layer = 0, string id = "Rock")
-    : base("Sprites/Rock Sprite", layer, id)
+    : base("Sprites/Tiles/Rock Sprite", layer, id)
     {
         position = startPosition;
     }
@@ -31,18 +31,18 @@ class Solid : SpriteGameObject
 
     void SolidCollision()
     {
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
 
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, -(GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2))))
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, -(GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2))))
             while (CollidesWith(PlayingState.player))
                 PlayingState.player.position.Y++;
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, (GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2))))
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(0, (GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2))))
             while (CollidesWith(PlayingState.player))
                 PlayingState.player.position.Y--;
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(-(GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2), 0)))
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2(-(GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2), 0)))
             while (CollidesWith(PlayingState.player))
                 PlayingState.player.position.X++;
-        if (BoundingBox.Contains(MiddleofPlayer + new Vector2((GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2), 0)))
+        if (BoundingBox.Contains(MiddleofPlayer + new Vector2((GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2), 0)))
             while (CollidesWith(PlayingState.player))
                 PlayingState.player.position.X--;
     }
