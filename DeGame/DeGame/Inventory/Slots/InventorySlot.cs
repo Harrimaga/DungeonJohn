@@ -39,6 +39,10 @@ public class InventorySlot : SpriteGameObject
             Player.inventory.equip(item);
         }
     }
+    public override void Update(GameTime gameTime)
+    {
+        
+    }
     public void ToInventory(Item item)
     {
         Player.inventory.addItemToInventory(item);

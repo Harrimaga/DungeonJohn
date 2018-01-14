@@ -17,6 +17,17 @@ public class CraftingSlot : InventorySlot
         this.item = item;
         itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
     }
+    public override void Update(GameTime gameTime)
+    {
+        if (item != null)
+        {
+            sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/CraftingSlotEmpty");
+        }
+        else
+        {
+            sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/CraftingSlot");
+        }
+    }
     public override void HandleInput(InputHelper inputHelper)
     {
         // Handle input for crafting slot
@@ -27,7 +38,6 @@ public class CraftingSlot : InventorySlot
                 Player.inventory.addItemToInventory(item);
                 item = null;
             }
-            Console.WriteLine("Clicked a craftingslot button!");
         }
     }
 }
