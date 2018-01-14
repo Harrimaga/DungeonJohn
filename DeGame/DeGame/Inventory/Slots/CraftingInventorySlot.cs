@@ -27,10 +27,8 @@ public class CraftingInventorySlot : InventorySlot
             {
                 open.item = item;
                 Crafting.craftingSlots.FillSlot(open, item);
+                Player.inventory.removeItemFromInventory(item);
             }
-            Player.inventory.removeItemFromInventory(item);
-
-
 
             Console.WriteLine("Clicked a crafting interface inventory button!");
         } 
