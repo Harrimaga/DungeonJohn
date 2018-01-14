@@ -84,6 +84,8 @@ public class CraftingSlots : GameObjectList
     public override void Update(GameTime gameTime)
     {
         craftingB.Update(gameTime);
+        itemSlot1.Update(gameTime);
+        itemSlot2.Update(gameTime);
         // TODO: imlement
         // Weet niet of hier veel mee gedaan moet worden, misschien alleen de positie updaten ofzo? 
         //      Hoeft niet als je in Crafting state elke keer in de draw of update een nieuwe instance maakt hiervan

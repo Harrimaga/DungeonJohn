@@ -16,11 +16,8 @@ public class CraftingInventorySlot : InventorySlot
 
     public override void HandleInput(InputHelper inputHelper)
     {
-        // Handle input for crafting slot
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition))
         {
-            //ItemSwitch(item);
-
             CraftingSlot open = Crafting.craftingSlots.CheckForEmptySlot();
 
             if (open != null)
@@ -29,8 +26,12 @@ public class CraftingInventorySlot : InventorySlot
                 Crafting.craftingSlots.FillSlot(open, item);
                 Player.inventory.removeItemFromInventory(item);
             }
-
-            Console.WriteLine("Clicked a crafting interface inventory button!");
+            else
+            {
+                Player.inventory.addItemToInventory(Crafting.craftingSlots.itemSlot1.item);
+                Crafting.craftingSlots.FillSlot(Crafting.craftingSlots.itemSlot1,item);
+                Player.inventory.removeItemFromInventory(item);
+            }
         } 
     }
 }

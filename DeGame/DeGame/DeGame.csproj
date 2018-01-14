@@ -232,6 +232,7 @@
     <Content Include="Content\Sprites\InventorySlots\BootsSlot.png" />
     <Content Include="Content\Sprites\InventorySlots\CraftingSlot.png" />
     <Content Include="Content\Sprites\InventorySlots\CraftingNewSlot.png" />
+    <Content Include="Content\Sprites\InventorySlots\CraftingSlotEmpty.png" />
     <Content Include="Content\Sprites\InventorySlots\EmptySlot.png" />
     <Content Include="Content\Sprites\InventorySlots\HelmetSlot.png" />
     <Content Include="Content\Sprites\InventorySlots\PassiveSlot.png" />
