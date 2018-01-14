@@ -28,7 +28,8 @@ public class Player : SpriteGameObject
     public static InventoryManager inventory;
     int leveltokens = 0;
     float shoottimer = 0;
-    public string lastUsedspeed;
+    string lastUsedspeed;
+    public Rectangle collisionhitbox;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/PlayerFront", 0, "Player")
@@ -54,6 +55,7 @@ public class Player : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
         speed = velocitybase + extraspeed;
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
