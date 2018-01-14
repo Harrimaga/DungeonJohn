@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 public class InventorySlot : SpriteGameObject
 {
-    protected Item item;
+    public Item item;
     protected Texture2D itemSprite;
 
     public InventorySlot(Vector2 position, Item item, int layer = 0, string id = "InventorySlot") : base("Sprites/InventorySlots/EmptySlot", layer, id)
@@ -42,26 +42,6 @@ public class InventorySlot : SpriteGameObject
     public void ToInventory(Item item)
     {
         Player.inventory.addItemToInventory(item);
-    }
-    public void ItemSwitch(Item item)
-    {
-        if (Crafting.craftingSlots.itemSlot1.item == null)
-        {
-            Crafting.craftingSlots.itemSlot1.item = item;
-            Player.inventory.removeItemFromInventory(item);
-        }
-
-        if (Crafting.craftingSlots.itemSlot1.item != null && Crafting.craftingSlots.itemSlot2.item == null)
-        {
-            Crafting.craftingSlots.itemSlot2.item = item;
-            Player.inventory.removeItemFromInventory(item);
-        }
-
-        if (Crafting.craftingSlots.itemSlot1.item != null && Crafting.craftingSlots.itemSlot2.item != null)
-        { 
-            Player.inventory.addItemToInventory(Crafting.craftingSlots.itemSlot1.item);
-            Crafting.craftingSlots.itemSlot1.item = item;
-        }
     }
    
     public static void DrawItem(Texture2D sprite, Texture2D itemSprite, Vector2 position, GameTime gameTime, SpriteBatch spriteBatch)

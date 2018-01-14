@@ -36,6 +36,24 @@ public class CraftingSlots : GameObjectList
         }
     }
 
+    public CraftingSlot CheckForEmptySlot()
+    {
+        if (itemSlot1.item == null)
+        {
+            return itemSlot1;
+        }
+        if (itemSlot2.item == null)
+        {
+            return itemSlot2;
+        }
+        return null;
+    }
+
+    public void FillSlot(CraftingSlot slot, Item item)
+    {
+        slot.AddItem(item);
+    }
+
     public override void HandleInput(InputHelper inputHelper)
     {
         // TODO: Implement

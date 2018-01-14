@@ -12,9 +12,10 @@ public class CraftingSlot : InventorySlot
         // Voor een andere sprite dan de standaard
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/CraftingSlot");
     }
-    void AddItem(Item item)
+    public void AddItem(Item item)
     {
         this.item = item;
+        itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
     }
     public override void HandleInput(InputHelper inputHelper)
     {

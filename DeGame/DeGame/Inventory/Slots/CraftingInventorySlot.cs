@@ -19,7 +19,19 @@ public class CraftingInventorySlot : InventorySlot
         // Handle input for crafting slot
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition))
         {
-            ItemSwitch(item);
+            //ItemSwitch(item);
+
+            CraftingSlot open = Crafting.craftingSlots.CheckForEmptySlot();
+
+            if (open != null)
+            {
+                open.item = item;
+                Crafting.craftingSlots.FillSlot(open, item);
+            }
+            Player.inventory.removeItemFromInventory(item);
+
+
+
             Console.WriteLine("Clicked a crafting interface inventory button!");
         } 
     }
