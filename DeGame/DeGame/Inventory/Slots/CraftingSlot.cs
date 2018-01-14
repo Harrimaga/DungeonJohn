@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 
 public class CraftingSlot : InventorySlot
 {
-    public CraftingSlot(Vector2 position, Item item, int layer = 0, string id = "InventorySlot") : base(position, item, layer, id)
+    public CraftingSlot(Vector2 position, Item item, int layer = 0, string id = "CraftingSlot") : base(position, item, layer, id)
     {
-        
     }
 
     public override void HandleInput(InputHelper inputHelper)

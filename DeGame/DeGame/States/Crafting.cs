@@ -12,7 +12,6 @@ class Crafting : IGameObject
     List<CraftingSlot> inventory;
     public CraftingSlots craftingSlots;
     Item item1, item2, newItem;
-    List<InventorySlot> inventory;
     Vector2 BasisPosition;
     public Crafting()
     {

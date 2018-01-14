@@ -9,21 +9,27 @@ using Microsoft.Xna.Framework.Input;
 
 public class InventorySlot : SpriteGameObject
 {
-    Item item;
-    Texture2D itemSprite;
+    protected Item item;
+    protected Texture2D itemSprite;
 
     public InventorySlot(Vector2 position, Item item, int layer = 0, string id = "InventorySlot") : base("Sprites/InventorySlots/EmptySlot", layer, id)
     {
         this.position = position;
         this.item = item;
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/EmptySlot");
-        itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
+        if (item != null)
+        {
+            itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(sprite, position, Color.White);
-        DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
+        if (item != null)
+        {
+            DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
+        }
     }
 
     public override void HandleInput(InputHelper inputHelper)

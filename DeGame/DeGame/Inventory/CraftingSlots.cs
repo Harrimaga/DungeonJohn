@@ -49,6 +49,10 @@ public class CraftingSlots : GameObjectList
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        foreach (CraftingSlot slot in inventory)
+        {
+            slot.Draw(gameTime, spriteBatch);
+        }
         // TODO: draw functie implementeren.
         // Hier wss de twee slots tekenen (met evt een + ertussen ofzo, verzin wat)
     }
