@@ -28,7 +28,7 @@ public class Player : SpriteGameObject
     public static InventoryManager inventory;
     int leveltokens = 0;
     float shoottimer = 0;
-    string lastUsedspeed;
+    public string lastUsedspeed;
     public Rectangle collisionhitbox;
 
     public Player(int layer = 0, string id = "Player")
