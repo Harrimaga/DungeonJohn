@@ -12,6 +12,7 @@ class MageJacket : Item, IArmour
         itemDescription = "This jacket was worn by a old mage making you move really faster";
         Type = "armour";
     }
+
     public void Equip()
     {
         PlayingState.player.extraspeed += 2;

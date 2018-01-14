@@ -6,4 +6,8 @@ using System.Threading.Tasks;
 
 public interface IBoots
 {
+    string Type
+    {
+        get;
+    }
 }
