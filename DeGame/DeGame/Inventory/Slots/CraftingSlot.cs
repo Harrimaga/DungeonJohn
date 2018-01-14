@@ -7,37 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class CraftingSlot : SpriteGameObject
+public class CraftingSlot : InventorySlot
 {
-    Texture2D itemSprite;
-    Item item;
-
-    public CraftingSlot(Vector2 position, Item item = null, int layer = 0, string id = "CraftingSlot") : base("Sprites/InventorySlots/CraftingSlot", layer, id)
+    public CraftingSlot(Vector2 position, Item item, int layer = 0, string id = "InventorySlot") : base(position, item, layer, id)
     {
-        this.position = position;
-        this.item = item;
-        sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/CraftingSlot");
-        if (item != null)
-        {
-            itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
-        }
+        
     }
 
-    public override void Update(GameTime gameTime)
+    public override void HandleInput(InputHelper inputHelper)
     {
-        base.Update(gameTime);
-        if (item != null)
+        // Handle input for crafting slot
+        if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition))
         {
-            itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
-        }
-    }
-
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        spriteBatch.Draw(sprite, position);
-        if (item != null)
-        {
-            InventorySlot.DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
-        }
+            Console.WriteLine("Clicked a crafting interface inventory button!");
+        } 
     }
 }
