@@ -9,17 +9,18 @@ using System.Collections;
 public class Room : GameObjectList
 {
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, Lastentrypoint, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0;
-    public static GameObjectList solid, door, consumable, bosses, tiles, altars, anvils, enemybullets, homingenemybullets;
-    public bool Visited = false, CameraMoving = false;
-    public GameObjectList enemies;
+    public GameObjectList enemies, tiles, solid, consumable, bosses, altars, anvils, enemybullets, homingenemybullets;
+    public static GameObjectList door;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop, LastEntryPoint;
-    Vector2 TilePosition;
+    public bool Visited = false, CameraMoving = false;
+    public IList addedenemies = new List<Enemy>();
     int roomarraywidth, roomarrayheight;
-    Random random = new Random();
     public string Type = "normalroom";
+    Random random = new Random();
     public string[,] roomarray;
     public int lavatimer = 0;
-    public IList addedenemies = new List<Enemy>();
+    Vector2 TilePosition;
+
 
     public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
@@ -509,8 +510,6 @@ switch (Lastentrypoint)
                     }
                 }
             }
-    
-
         foreach (Tiles t in tiles.Children)
         {
             t.Draw(gameTime, spriteBatch);
@@ -531,17 +530,23 @@ switch (Lastentrypoint)
         {
             c.Draw(gameTime, spriteBatch);
         }
-        foreach (Boss b in bosses.Children)
-        {
-            b.Draw(gameTime, spriteBatch);
-        }
         foreach (Door d in door.Children)
         {
             d.Draw(gameTime, spriteBatch);
         }
+        foreach (Boss b in bosses.Children)
+        {
+            if (!b.alive)
+                Remove(b);
+            else
+                b.Draw(gameTime, spriteBatch);
+        }
         foreach (Enemy e in enemies.Children)
         {
-            e.Draw(gameTime, spriteBatch);
+            if (!e.alive)
+                Remove(e);
+            else
+                e.Draw(gameTime, spriteBatch);
         }
         enemybullets.Draw(gameTime, spriteBatch);
         homingenemybullets.Draw(gameTime, spriteBatch);

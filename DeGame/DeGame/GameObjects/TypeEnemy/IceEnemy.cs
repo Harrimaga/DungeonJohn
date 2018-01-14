@@ -39,7 +39,7 @@ public class IceEnemy : Enemy
     {
         Vector2 MiddenOfSprite = new Vector2(sprite.Width / 4 - 10, sprite.Height / 4);
         IceBullet bullet = new IceBullet(bulletdamage, speed, position + MiddenOfSprite, direction);
-        Room.enemybullets.Add(bullet);
+        PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
     }
 
     public override void Update(GameTime gameTime)

@@ -9,12 +9,14 @@ class E_Bullet : SpriteGameObject
     int reflectchance = 0;
     public bool reflected = false;
     protected bool changedirection = false;
+    Vector2 Roomposition;
 
     public E_Bullet(float damage, float speed, string assetname, int layer = 0, string id = "EnemyBullet") : base(assetname, layer, id)
     {
         Damage = damage;
         Speed = speed;
         random = new Random();
+        Roomposition = PlayingState.currentFloor.currentRoom.position;
     }
 
     public override void Update(GameTime gameTime)
@@ -30,13 +32,13 @@ class E_Bullet : SpriteGameObject
     {
         if (reflected)
         {
-            foreach (Enemy e in PlayingState.currentFloor.currentRoom.enemies.Children)
+            foreach (Enemy e in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemies.Children)
                 if (CollidesWith(e))
                 {
                     e.health -= Damage;
                     GameObjectList.RemovedObjects.Add(this);
                 }
-            foreach (Boss b in Room.bosses.Children)
+            foreach (Boss b in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].bosses.Children)
                 if (CollidesWith(b))
                 {
                     b.health -= Damage;
@@ -64,7 +66,7 @@ class E_Bullet : SpriteGameObject
             }
         }
 
-        foreach (Solid solid in Room.solid.Children)
+        foreach (Solid solid in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
         {
             if (CollidesWith(solid))
             {

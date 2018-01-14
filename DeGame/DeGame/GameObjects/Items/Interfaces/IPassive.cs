@@ -10,5 +10,10 @@ public interface IPassive
     {
         get;
     }
+
+    string Type
+    {
+        get;
+    }
 }
 

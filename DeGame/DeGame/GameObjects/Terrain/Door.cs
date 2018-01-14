@@ -109,6 +109,7 @@ class Door : Solid
             roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
             roomheight = PlayingState.currentFloor.currentRoom.roomheight;
         }
+
         if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || DoorNumber == 0 || closed)
         {
             base.Update(gameTime);
@@ -198,7 +199,10 @@ class Door : Solid
         if (DoorNumber > 0)
         {
             ChooseSprite();
-            spriteBatch.Draw(doorsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
+            if (direction == 4)
+                spriteBatch.Draw(doorsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
+            else
+                spriteBatch.Draw(doorsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
         }
     }
 }
