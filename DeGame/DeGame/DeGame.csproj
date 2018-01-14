@@ -236,8 +236,16 @@
     <Content Include="Content\Sprites\Items\DoubleGun.png" />
     <Content Include="Content\Sprites\Items\HardHelmet.png" />
     <Content Include="Content\Sprites\Items\MageJacket.png" />
+    <Content Include="Content\Sprites\Items\MageJacketdown.png" />
+    <Content Include="Content\Sprites\Items\MageJacketleft.png" />
+    <Content Include="Content\Sprites\Items\MageJacketright.png" />
+    <Content Include="Content\Sprites\Items\MageJacketup.png" />
     <Content Include="Content\Sprites\Items\SlimyBoots.png" />
     <Content Include="Content\Sprites\Items\StandardBow.png" />
+    <Content Include="Content\Sprites\Items\StandardBowdown.png" />
+    <Content Include="Content\Sprites\Items\StandardBowleft.png" />
+    <Content Include="Content\Sprites\Items\StandardBowright.png" />
+    <Content Include="Content\Sprites\Items\StandardBowup.png" />
     <Content Include="Content\Sprites\Lava.png" />
     <Content Include="Content\Sprites\LevelUp.png" />
     <Content Include="Content\Sprites\MinimapBossTile.png" />
