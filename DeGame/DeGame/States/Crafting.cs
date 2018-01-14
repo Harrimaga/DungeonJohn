@@ -28,6 +28,8 @@ class Crafting : IGameObject
         {
             cs.HandleInput(inputHelper);
         }
+
+        craftingSlots.HandleInput(inputHelper);
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

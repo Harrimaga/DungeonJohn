@@ -45,11 +45,14 @@ public class CraftingSlots : GameObjectList
 
         // Deze handle input moet alleen kijken naar de + (of whatever je ervan maakt), dus niet naar de twee slots.
         //      De craftingslots hebben zelf hun HandleInput (in CraftingSlot.cs), dus houdt hier rekening mee dat je de goede boundingbox gebruikt! :p
+
+        children[0].HandleInput(inputHelper);
+        children[1].HandleInput(inputHelper);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        foreach (CraftingSlot slot in inventory)
+        foreach (CraftingSlot slot in children)
         {
             slot.Draw(gameTime, spriteBatch);
         }
