@@ -1,16 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class CraftingSlot : InventorySlot
+
+public class CraftingInventorySlot : InventorySlot
 {
-    public CraftingSlot(Vector2 position, Item item, int layer = 0, string id = "CraftingSlot") : base(position, item, layer, id)
+    public CraftingInventorySlot(Vector2 position, Item item, int layer = 0, string id = "CraftingInventorySlot") : base(position, item, layer, id)
     {
-        // Voor een andere sprite dan de standaard:
-        // sprite = ...
+        
     }
 
     public override void HandleInput(InputHelper inputHelper)
@@ -18,7 +19,7 @@ public class CraftingSlot : InventorySlot
         // Handle input for crafting slot
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition))
         {
-            Console.WriteLine("Clicked a craftingslot button!");
-        }
+            Console.WriteLine("Clicked a crafting interface inventory button!");
+        } 
     }
 }

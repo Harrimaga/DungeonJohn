@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 class Crafting : IGameObject
 {
-    List<CraftingSlot> inventory;
+    List<CraftingInventorySlot> inventory;
     Vector2 BasisPosition;
     public Crafting()
     {
@@ -21,7 +21,7 @@ class Crafting : IGameObject
             GameEnvironment.gameStateManager.SwitchTo("Playing");
         }
 
-        foreach (CraftingSlot cs in inventory)
+        foreach (CraftingInventorySlot cs in inventory)
         {
             cs.HandleInput(inputHelper);
         }
@@ -31,7 +31,7 @@ class Crafting : IGameObject
         GameEnvironment.gameStateManager.GetGameState("Playing").Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PauseMenu/CraftingMenu"), BasisPosition);
 
-        inventory = new List<CraftingSlot>();
+        inventory = new List<CraftingInventorySlot>();
         for (int i = 0; i < Player.inventory.items.Count; i++)
         {
             Vector2 slotPosition;
@@ -40,10 +40,10 @@ class Crafting : IGameObject
             x = i % 9;
             slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
 
-            inventory.Add(new CraftingSlot(slotPosition, Player.inventory.items[i]));
+            inventory.Add(new CraftingInventorySlot(slotPosition, Player.inventory.items[i]));
         }
 
-        foreach (CraftingSlot slot in inventory)
+        foreach (CraftingInventorySlot slot in inventory)
         {
             slot.Draw(gameTime, spriteBatch);
         }
