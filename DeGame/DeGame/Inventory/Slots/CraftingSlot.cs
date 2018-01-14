@@ -22,7 +22,11 @@ public class CraftingSlot : InventorySlot
         // Handle input for crafting slot
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition))
         {
-            AddItem(new HardHelmet());
+            if (item != null)
+            {
+                Player.inventory.addItemToInventory(item);
+                item = null;
+            }
             Console.WriteLine("Clicked a craftingslot button!");
         }
     }

@@ -21,6 +21,17 @@ public class Crafting : IGameObject
     {
         if(inputHelper.KeyPressed(Keys.Space))
         {
+            if (craftingSlots.itemSlot1.item != null)
+            {
+                Player.inventory.addItemToInventory(craftingSlots.itemSlot1.item);
+                craftingSlots.itemSlot1.item = null;
+            }
+
+            if (craftingSlots.itemSlot2.item != null)
+            {
+                Player.inventory.addItemToInventory(craftingSlots.itemSlot2.item);
+                craftingSlots.itemSlot2.item = null;
+            }
             GameEnvironment.gameStateManager.SwitchTo("Playing");
         }
 
@@ -58,6 +69,7 @@ public class Crafting : IGameObject
     public virtual void Update(GameTime gameTime)
     {
         BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
+        craftingSlots.Update(gameTime);
     }
     public virtual void Reset()
     {

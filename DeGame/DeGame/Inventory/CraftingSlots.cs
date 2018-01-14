@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class CraftingSlots : GameObjectList
 {
+    Button craftingB;
     public CraftingSlot itemSlot1, itemSlot2;
     new Vector2 position;
     protected bool clicked1 = false, clicked2 = false ;
@@ -15,9 +16,9 @@ public class CraftingSlots : GameObjectList
     public CraftingSlots(Vector2 position) : base()
     {
         this.position = position;
-        itemSlot1 = new CraftingSlot(position, new HardHelmet());
-        itemSlot2 = new CraftingSlot(position + new Vector2(212,0),null);
-
+        itemSlot1 = new CraftingSlot(position, null);
+        itemSlot2 = new CraftingSlot(position + new Vector2(500,0),null);
+        craftingB = new Button(position + new Vector2(-230, 50), "Craft", "CraftButton", "CraftButtonPressed", true, 1);
         Add(itemSlot1);
         Add(itemSlot2);
     }
@@ -32,7 +33,7 @@ public class CraftingSlots : GameObjectList
         {
             position = value;
             itemSlot1.position = position;
-            itemSlot2.position = position + new Vector2(212, 0);
+            itemSlot2.position = position + new Vector2(500, 0);
         }
     }
 
@@ -64,7 +65,7 @@ public class CraftingSlots : GameObjectList
 
         // Deze handle input moet alleen kijken naar de + (of whatever je ervan maakt), dus niet naar de twee slots.
         //      De craftingslots hebben zelf hun HandleInput (in CraftingSlot.cs), dus houdt hier rekening mee dat je de goede boundingbox gebruikt! :p
-
+        craftingB.HandleInput(inputHelper);
         children[0].HandleInput(inputHelper);
         children[1].HandleInput(inputHelper);
     }
@@ -75,12 +76,14 @@ public class CraftingSlots : GameObjectList
         {
             slot.Draw(gameTime, spriteBatch);
         }
+        craftingB.Draw(gameTime, spriteBatch);
         // TODO: draw functie implementeren.
         // Hier wss de twee slots tekenen (met evt een + ertussen ofzo, verzin wat)
     }
 
     public override void Update(GameTime gameTime)
     {
+        craftingB.Update(gameTime);
         // TODO: imlement
         // Weet niet of hier veel mee gedaan moet worden, misschien alleen de positie updaten ofzo? 
         //      Hoeft niet als je in Crafting state elke keer in de draw of update een nieuwe instance maakt hiervan

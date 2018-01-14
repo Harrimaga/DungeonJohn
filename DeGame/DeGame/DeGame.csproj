@@ -218,6 +218,8 @@
     <Content Include="Content\Sprites\Boss.png" />
     <Content Include="Content\Sprites\BossBullet.png" />
     <Content Include="Content\Sprites\bteam.png" />
+    <Content Include="Content\Sprites\CraftButton.png" />
+    <Content Include="Content\Sprites\CraftButtonPressed.png" />
     <Content Include="Content\Sprites\doorleft.png" />
     <Content Include="Content\Sprites\doorup.png" />
     <Content Include="Content\Sprites\Button Sprite.png" />
