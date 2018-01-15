@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 class Recipe
 {
-    List<Item> list1, list2, listNewItem;
+    public List<Item> list1, list2, listNewItem;
     public Recipe()
     {
         list1 = new List<Item>();
@@ -20,7 +20,12 @@ class Recipe
     {
         list1.Add(new Mac10());
         list2.Add(new Mac10());
-        listNewItem(new BigMac());
+        listNewItem.Add(new BigMac());
+
+        list1.Add(new StandardBow());
+        list2.Add(new Mac10());
+        listNewItem.Add(new DoubleGun());
     }
+
 }
 

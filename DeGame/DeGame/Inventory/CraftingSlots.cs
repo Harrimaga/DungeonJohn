@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class CraftingSlots : GameObjectList
 {
     Button craftingB;
+    Recipe recipe;
     public CraftingSlot itemSlot1, itemSlot2, itemNew;
     new Vector2 position;
     protected bool clicked1 = false, clicked2 = false ;
@@ -16,6 +17,7 @@ public class CraftingSlots : GameObjectList
     public CraftingSlots(Vector2 position) : base()
     {
         this.position = position;
+        recipe = new Recipe();
         itemSlot1 = new CraftingSlot(position, null,false);
         itemSlot2 = new CraftingSlot(position + new Vector2(500,0),null,false);
         itemNew = new CraftingSlot(position + new Vector2(245, 0), null,true);
@@ -58,6 +60,36 @@ public class CraftingSlots : GameObjectList
         slot.AddItem(item);
     }
 
+    public void RecipeCheck()
+    {
+        if(itemSlot1.item == null || itemSlot2.item == null)
+        {
+            itemNew.item = null;
+        }
+        else if(itemSlot1.item != null && itemSlot2.item != null)
+        {
+            for (int i = 0; i < recipe.list1.Count; i++)
+            {
+                if(recipe.list1[i].itemName == itemSlot1.item.itemName)
+                {
+                    if (recipe.list2[i].itemName == itemSlot2.item.itemName)
+                    {
+                        itemNew.AddItem(recipe.listNewItem[i]);
+                    }
+                }
+                for (int c = 0; c < recipe.list1.Count; c++)
+                {
+                    if (recipe.list2[c].itemName == itemSlot1.item.itemName)
+                    {
+                        if (recipe.list1[c].itemName == itemSlot2.item.itemName)
+                        {
+                            itemNew.AddItem(recipe.listNewItem[c]);
+                        }
+                    }
+                }
+            }
+        }
+    }
     public override void HandleInput(InputHelper inputHelper)
     {
         // TODO: Implement
@@ -90,6 +122,14 @@ public class CraftingSlots : GameObjectList
         itemSlot1.Update(gameTime);
         itemSlot2.Update(gameTime);
         itemNew.Update(gameTime);
+        RecipeCheck();
+        if(craftingB.Pressed && itemNew.item != null)
+        {
+            itemSlot1.item = null;
+            itemSlot2.item = null;
+            Player.inventory.addItemToInventory(itemNew.item);
+            itemNew.item = null;
+        }
         // TODO: imlement
         // Weet niet of hier veel mee gedaan moet worden, misschien alleen de positie updaten ofzo? 
         //      Hoeft niet als je in Crafting state elke keer in de draw of update een nieuwe instance maakt hiervan
