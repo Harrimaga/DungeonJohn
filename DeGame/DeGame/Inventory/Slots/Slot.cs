@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 public class Slot : SpriteGameObject
 {
     public Texture2D itemSprite;
+    public Item item;
+    public bool text = false;
 
     public Slot(string name, int layer = 0, string id = "slot") : base(name, layer, id)
     {
@@ -22,11 +24,21 @@ public class Slot : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        
+        if(text)
+        {
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), item.itemName, position, Color.White);
+        }
     }
 
     public override void HandleInput(InputHelper inputHelper)
     {
-        
+        if (BoundingBox.Contains(inputHelper.MousePosition))
+        {
+            text = true;
+        }
+        else
+        {
+            text = false;
+        }
     }
 }

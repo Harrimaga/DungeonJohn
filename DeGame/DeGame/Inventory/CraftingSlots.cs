@@ -62,15 +62,11 @@ public class CraftingSlots : GameObjectList
 
     public void RecipeCheck()
     {
-        if(itemSlot1.item == null || itemSlot2.item == null)
-        {
-            itemNew.item = null;
-        }
-        else if(itemSlot1.item != null && itemSlot2.item != null)
+        if (itemSlot1.item != null && itemSlot2.item != null)
         {
             for (int i = 0; i < recipe.list1.Count; i++)
             {
-                if(recipe.list1[i].itemName == itemSlot1.item.itemName)
+                if (recipe.list1[i].itemName == itemSlot1.item.itemName)
                 {
                     if (recipe.list2[i].itemName == itemSlot2.item.itemName)
                     {
@@ -122,8 +118,10 @@ public class CraftingSlots : GameObjectList
         itemSlot1.Update(gameTime);
         itemSlot2.Update(gameTime);
         itemNew.Update(gameTime);
+        itemNew.item = null;
         RecipeCheck();
-        if(craftingB.Pressed && itemNew.item != null)
+        
+        if (craftingB.Pressed && itemNew.item != null)
         {
             itemSlot1.item = null;
             itemSlot2.item = null;
