@@ -11,6 +11,7 @@ class ItemSpawn : SpriteGameObject
     //betere naam voor de class is welkom
     //als het een shopitem moet zijn dan is price true
     Item item;
+    ItemList itemList;
     bool price, pickedUp = false;
     Random random = new Random();
 
@@ -19,15 +20,20 @@ class ItemSpawn : SpriteGameObject
     {
         position = startPosition;
         price = Price;
+        itemList = new ItemList();
         RandomItem();
     }
     void RandomItem()
     {
+        int r = random.Next(8);
+        item = itemList.RoomList[r];
+
+        /*
         int r = random.Next(2);
         if (r == 0)
             item = new Mac10();
         else
-            item = new HardHelmet();
+            item = new HardHelmet();*/
         //TODO kiest een random item
     }
     public override void Update(GameTime gameTime)

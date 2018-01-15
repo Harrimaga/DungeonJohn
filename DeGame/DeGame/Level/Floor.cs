@@ -159,6 +159,7 @@ public class Floor
             {
                 bossx = possiblespecial[a, 0];
                 bossy = possiblespecial[a, 1];
+                DistancefromStart = Math.Abs(x - possiblespecial[a, 0]) + Math.Abs(y - possiblespecial[a, 1]);
             }
         floor[bossx, bossy] = new EndRoom(2, bossx, bossy);
     }
@@ -304,10 +305,15 @@ public class Floor
     public void NextFloor()
     {
         ClearFloor();
-        if (CurrentLevel <= 10)
+        if (CurrentLevel <= 5)
         {
             maxRooms += 2;
             minRooms += 1;
+        }
+        else if (CurrentLevel < 10)
+        {
+            maxRooms += 2;
+            minRooms += 2;
         }
         FloorGenerator();
         CurrentLevel++;
@@ -356,7 +362,7 @@ public class Floor
         }
     }   
 
-    void DrawMinimap(SpriteBatch spriteBatch)
+    public void DrawMinimap(SpriteBatch spriteBatch)
     {
         //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
         //int roomheight = PlayingState.currentFloor.currentRoom.roomheight;

@@ -120,13 +120,13 @@ public class Enemy : SpriteGameObject
         {
             while (CollidesWith(s))
             {
-                if (velocity.X > 0)
+                if (actualvelocity.X > 0)
                     position.X--;
-                if (velocity.X < 0)
+                if (actualvelocity.X < 0)
                     position.X++;
-                if (velocity.Y > 0)
+                if (actualvelocity.Y > 0)
                     position.Y--;
-                if (velocity.Y < 0)
+                if (actualvelocity.Y < 0)
                     position.Y++;
             }
         }

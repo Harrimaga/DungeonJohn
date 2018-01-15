@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-public class InventorySlot : SpriteGameObject
+public class InventorySlot : Slot
 {
-    public Item item;
-    protected Texture2D itemSprite;
+    //public Item item;
 
     public InventorySlot(Vector2 position, Item item, int layer = 0, string id = "InventorySlot") : base("Sprites/InventorySlots/EmptySlot", layer, id)
     {
@@ -25,10 +24,15 @@ public class InventorySlot : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(sprite, position, Color.White);
         if (item != null)
         {
             DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
+        }
+        if (text)
+        {
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), item.itemName, position, Color.White);
         }
     }
 
