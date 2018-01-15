@@ -79,7 +79,6 @@ public class Enemy : SpriteGameObject
     {
         direction = PlayingState.player.position - position;
         direction.Normalize();
-        actualvelocity = direction * velocity;
     }
 
     protected void CollisionWithEnemy()

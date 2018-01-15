@@ -8,7 +8,7 @@ class MinionBoss : Boss
     float bulletdamage = 20, speed = 2;
     EnemyBullet bullet;
 
-    public MinionBoss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
+    public MinionBoss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Bosses/MinionBoss",layer, id)
     {
         Roomposition = roomposition;
         position = startPosition;
