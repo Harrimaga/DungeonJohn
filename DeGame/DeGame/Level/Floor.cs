@@ -291,48 +291,6 @@ public class Floor
         AdjacentRooms = new int[floorWidth, floorHeight];
     }
 
-    public void NextShop()
-    {
-        ClearFloor();
-        floor[4, 4] = new Room(4, 4, 4);
-        currentRoom = floor[4, 4];
-        floor[4, 4].LoadTiles();
-        CurrentLevel++;
-        Level = "Level: Shop after " + displayint;
-        FloorGenerated = false;
-    }
-
-    public void NextFloor()
-    {
-        ClearFloor();
-        if (CurrentLevel <= 5)
-        {
-            maxRooms += 2;
-            minRooms += 1;
-        }
-        else if (CurrentLevel < 10)
-        {
-            maxRooms += 2;
-            minRooms += 2;
-        }
-        FloorGenerator();
-        CurrentLevel++;
-        displayint++;
-        Level = "Level: " + displayint;
-    }
-
-    public void ResetFloor()
-    {
-        ClearFloor();
-        maxRooms = 5;
-        minRooms = 3;
-        CurrentLevel = 1;
-        displayint = 1;
-        Level = "Level: " + displayint;
-        FloorGenerator();
-        PlayingState.player.Reset();
-    }
-
     public void Update(GameTime gameTime)
     {
         foreach (Room room in floor)
@@ -360,7 +318,49 @@ public class Floor
             if (r != null)
                 r.HandleInput(inputHelper);
         }
-    }   
+    }
+
+    public void NextFloor()
+    {
+        ClearFloor();
+        if (CurrentLevel <= 5)
+        {
+            maxRooms += 2;
+            minRooms += 1;
+        }
+        else if (CurrentLevel < 10)
+        {
+            maxRooms += 2;
+            minRooms += 2;
+        }
+        FloorGenerator();
+        CurrentLevel++;
+        displayint++;
+        Level = "Level: " + displayint;
+    }
+
+    public void NextShop()
+    {
+        ClearFloor();
+        floor[4, 4] = new Room(4, 4, 4);
+        currentRoom = floor[4, 4];
+        floor[4, 4].LoadTiles();
+        CurrentLevel++;
+        Level = "Level: Shop after " + displayint;
+        FloorGenerated = false;
+    }
+
+    public void ResetFloor()
+    {
+        ClearFloor();
+        maxRooms = 5;
+        minRooms = 3;
+        CurrentLevel = 1;
+        displayint = 1;
+        Level = "Level: " + displayint;
+        FloorGenerator();
+        PlayingState.player.Reset();
+    }
 
     public void DrawMinimap(SpriteBatch spriteBatch)
     {
@@ -379,7 +379,7 @@ public class Floor
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
             {
-                if (floor[x, y] != null /*&& floor[x,y].Visited == true*/)
+                if (floor[x, y] != null /*&& floor[x,y].Visited*/)
                 {
                     switch (floor[x, y].RoomListIndex)
                     {
@@ -411,12 +411,6 @@ public class Floor
     {
         string enemycount = "Count: " + PlayingState.currentFloor.currentRoom.enemycounter;
         string Gold = "Gold: " + PlayingState.player.gold;
-        //if (floor[(int)currentRoom.position.X, (int)currentRoom.position.Y] != null)
-        //{
-        //    if (!FloorGenerated)
-        //        floor[(int)currentRoom.position.X, (int)currentRoom.position.Y].LoadTiles();
-        //    floor[(int)currentRoom.position.X, (int)currentRoom.position.Y].Draw(gameTime, spriteBatch);
-        //}
         foreach (Room room in floor)
         {
             if (room != null)
