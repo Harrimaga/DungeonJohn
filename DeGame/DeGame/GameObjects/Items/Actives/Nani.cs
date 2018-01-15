@@ -16,7 +16,6 @@ public class Nani : Item, IActive
         Type = "active";
     }
 
-
     public int Charges
     {
         get
