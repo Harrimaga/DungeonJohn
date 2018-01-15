@@ -60,13 +60,13 @@ public class Player : SpriteGameObject
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
         NextLevel();
-        if (health > maxhealth)
-        {
-            health = maxhealth;
-        }
         if (health <= 0)
         {
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
+        }
+        else if (health > maxhealth)
+        {
+            health = maxhealth;
         }
 
         if (shoottimer < 0)
@@ -74,7 +74,7 @@ public class Player : SpriteGameObject
             shoottimer = 0;
         }
 
-        if (shoottimer > 0)
+        else if (shoottimer > 0)
         {
             shoottimer--;
         }
