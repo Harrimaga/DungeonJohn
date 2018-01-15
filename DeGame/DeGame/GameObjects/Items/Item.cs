@@ -59,8 +59,8 @@ public class Item
 
     public void DrawOnPlayer(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        switch (PlayingState.player.lastUsedspeed)
-        {
+        //switch (PlayingState.player.lastUsedspeed)
+        //{
             //case "up":
             //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + itemName + "up"), PlayingState.player.position, Color.White);
             //    break;
@@ -73,6 +73,6 @@ public class Item
             //case "left":
             //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + itemName + "left"), PlayingState.player.position, Color.White);
             //    break;
-        }
+        //}
     }
 }
