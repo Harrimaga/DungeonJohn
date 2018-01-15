@@ -5,7 +5,7 @@ public class ChasingEnemy : Enemy
 {
     public ChasingEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/BearEnemyPixel", layer, id)
     {
-        basevelocity = new Vector2(0.9f, 0.9f);
+        basevelocity = new Vector2(1.3f, 1.3f);
     }
 
     public override void Update(GameTime gameTime)

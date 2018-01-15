@@ -356,7 +356,7 @@ public class Floor
         }
     }   
 
-    void DrawMinimap(SpriteBatch spriteBatch)
+    public void DrawMinimap(SpriteBatch spriteBatch)
     {
         //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
         //int roomheight = PlayingState.currentFloor.currentRoom.roomheight;

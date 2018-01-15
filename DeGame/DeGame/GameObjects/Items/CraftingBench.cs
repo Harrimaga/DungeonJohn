@@ -28,7 +28,7 @@ class CraftingBench : SpriteGameObject
     }
     public override void HandleInput(InputHelper inputHelper)
     {
-        if(CollidesWith(PlayingState.player)&& inputHelper.IsKeyDown(Keys.Space))
+        if(CollidesWith(PlayingState.player)&& inputHelper.KeyPressed(Keys.Space))
         {
             GameEnvironment.gameStateManager.SwitchTo("Crafting");
         }
