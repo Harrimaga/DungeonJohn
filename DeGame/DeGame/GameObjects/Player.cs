@@ -8,7 +8,7 @@ public class Player : SpriteGameObject
 {
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
-    public bool CoolBoots = false, SlimyBoots = false, Mirror = true;
+    public bool CoolBoots = false, SlimyBoots = false, Mirror = false;
     public float health = 100, maxhealth = 200;
     public float exp = 0,nextLevelExp = 100;
     public float attackspeedreduction = 0;
@@ -28,7 +28,7 @@ public class Player : SpriteGameObject
     public static InventoryManager inventory;
     int leveltokens = 0;
     float shoottimer = 0;
-    string lastUsedspeed;
+    public string lastUsedspeed;
     public Rectangle collisionhitbox;
 
     public Player(int layer = 0, string id = "Player")
@@ -56,7 +56,10 @@ public class Player : SpriteGameObject
     {
         base.Update(gameTime);
         collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
-        speed = velocitybase + extraspeed;
+        if (extraspeed < 0)
+            speed = velocitybase;
+        else
+            speed = velocitybase + extraspeed;
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
         NextLevel();
