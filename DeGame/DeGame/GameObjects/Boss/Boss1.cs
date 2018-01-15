@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 public class Boss1 : Boss
 {
@@ -10,7 +11,6 @@ public class Boss1 : Boss
     int Counter = 30;
     float speed = 0.3f;
     float bulletdamage = 0;
-
     public Boss1(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
     {
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet");
@@ -37,16 +37,40 @@ public class Boss1 : Boss
 
     public void Shoot()
     {
+        bool Hmng = true;
         Counter--;
+
         if (Counter <= 0)
         {
-            bullet1 = new BossBullet(bulletdamage, speed, position);
-            bullet2 = new BossBullet(bulletdamage + 4, speed, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0), true);
-            bullet3 = new BossBullet(bulletdamage, speed, position + new Vector2(sprite.Width - bulletsprite.Width, 0));
-            PlayingState.currentFloor.currentRoom.enemybullets.Add(bullet1);
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].homingenemybullets.Add(bullet2);
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet3);
-            Counter = 300;
+            Random r = new Random();
+            if (r.Next(2) == 1)
+            {
+                Hmng = true;
+            }
+
+            if (PlayingState.player.position.X > position.X + sprite.Width / 2)
+            {
+                
+                bullet1 = new BossBullet(bulletdamage, speed, position + new Vector2(sprite.Width, 0), Hmng);
+                    //bullet2 = new BossBullet(bulletdamage + 4, speed, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0), true);
+                    //bullet3 = new BossBullet(bulletdamage, speed, position + new Vector2(sprite.Width - bulletsprite.Width, 0));
+                    //PlayingState.currentFloor.currentRoom.enemybullets.Add(bullet1);
+                    //PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].homingenemybullets.Add(bullet2);
+                PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet1);
+                Counter = 300;
+        
+            }
+            else if (PlayingState.player.position.X < position.X + sprite.Width / 2)
+            {
+                bullet1 = new BossBullet(bulletdamage, speed, position, Hmng);
+                //bullet1 = new BossBullet(bulletdamage, speed, position);
+                //bullet2 = new BossBullet(bulletdamage + 4, speed, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0), true);
+                //bullet3 = new BossBullet(bulletdamage, speed, position + new Vector2(sprite.Width - bulletsprite.Width, 0));
+                //PlayingState.currentFloor.currentRoom.enemybullets.Add(bullet1);
+                //PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].homingenemybullets.Add(bullet2);
+                PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet1);
+                Counter = 300;
+            }
         }
     }
 
