@@ -7,19 +7,26 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class CraftingNewSlot : InventorySlot
+public class Slot : SpriteGameObject
 {
+    public Texture2D itemSprite;
 
-    public CraftingNewSlot(Vector2 position, Item item, int layer = 0, string id = "CraftingInventorySlot") : base(position, item, layer, id)
+    public Slot(string name, int layer = 0, string id = "slot") : base(name, layer, id)
     {
-
     }
 
     public override void Update(GameTime gameTime)
     {
+        
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        
+    }
+
+    public override void HandleInput(InputHelper inputHelper)
+    {
+        
     }
 }

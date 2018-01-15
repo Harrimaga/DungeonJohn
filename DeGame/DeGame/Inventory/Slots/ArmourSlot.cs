@@ -7,9 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class ArmourSlot : SpriteGameObject
+public class ArmourSlot : Slot
 {
-    Texture2D itemSprite;
 
     public ArmourSlot(Vector2 position, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/ArmourSlot", layer, id)
     {

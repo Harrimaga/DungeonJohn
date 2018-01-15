@@ -7,9 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class PassiveSlot : SpriteGameObject
+public class PassiveSlot : Slot
 {
-    Texture2D itemSprite;
     Item item;
 
     public PassiveSlot(Vector2 position, Item item = null, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/PassiveSlot", layer, id)
