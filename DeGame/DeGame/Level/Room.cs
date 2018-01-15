@@ -339,9 +339,9 @@ switch (Lastentrypoint)
                 enemycounter++;
                 break;
             case ("K"):
+                CreateObject(x, y, "G");
                 Enemy enemyIce = new IceEnemy(TilePosition, new Vector2(a, b), 0, "IceEnemy");
                 enemies.Add(enemyIce);
-                roomarray[x, y] = "Ice";
                 break;
             case ("B"):
                 Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, "Boss1");
