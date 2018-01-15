@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 public class CraftingSlot : InventorySlot
 {
-    public CraftingSlot(Vector2 position, Item item, int layer = 0, string id = "CraftingSlot") : base(position, item, layer, id)
+    bool New;
+    public CraftingSlot(Vector2 position, Item item,bool New, int layer = 0, string id = "CraftingSlot") : base(position, item, layer, id)
     {
         // Voor een andere sprite dan de standaard
+        this.New = New;
+
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/CraftingSlot");
     }
     public void AddItem(Item item)
@@ -25,7 +28,14 @@ public class CraftingSlot : InventorySlot
         }
         else
         {
-            sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/CraftingSlot");
+            if (!New)
+            {
+                sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/CraftingSlot");
+            }
+            if(New)
+            {
+                sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/CraftingNewSlot");
+            }
         }
     }
     public override void HandleInput(InputHelper inputHelper)

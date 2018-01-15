@@ -118,6 +118,7 @@
     <Compile Include="GameObjects\TypeEnemy\SpiderEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\TurretEnemy.cs" />
     <Compile Include="Inventory\CraftingSlots.cs" />
+    <Compile Include="Inventory\Recipe.cs" />
     <Compile Include="Inventory\Slots\ArmourSlot.cs" />
     <Compile Include="Inventory\Slots\BootsSlot.cs" />
     <Compile Include="Inventory\Slots\CraftingNewSlot.cs" />

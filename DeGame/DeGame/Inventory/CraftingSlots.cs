@@ -9,18 +9,20 @@ using Microsoft.Xna.Framework.Graphics;
 public class CraftingSlots : GameObjectList
 {
     Button craftingB;
-    public CraftingSlot itemSlot1, itemSlot2;
+    public CraftingSlot itemSlot1, itemSlot2, itemNew;
     new Vector2 position;
     protected bool clicked1 = false, clicked2 = false ;
 
     public CraftingSlots(Vector2 position) : base()
     {
         this.position = position;
-        itemSlot1 = new CraftingSlot(position, null);
-        itemSlot2 = new CraftingSlot(position + new Vector2(500,0),null);
+        itemSlot1 = new CraftingSlot(position, null,false);
+        itemSlot2 = new CraftingSlot(position + new Vector2(500,0),null,false);
+        itemNew = new CraftingSlot(position + new Vector2(245, 0), null,true);
         craftingB = new Button(position + new Vector2(-230, 50), "Craft", "CraftButton", "CraftButtonPressed", true, 1);
         Add(itemSlot1);
         Add(itemSlot2);
+        Add(itemNew);
     }
 
     public override Vector2 Position
@@ -34,6 +36,7 @@ public class CraftingSlots : GameObjectList
             position = value;
             itemSlot1.position = position;
             itemSlot2.position = position + new Vector2(500, 0);
+            itemNew.position = position + new Vector2(245, 0);
         }
     }
 
@@ -86,6 +89,7 @@ public class CraftingSlots : GameObjectList
         craftingB.Update(gameTime);
         itemSlot1.Update(gameTime);
         itemSlot2.Update(gameTime);
+        itemNew.Update(gameTime);
         // TODO: imlement
         // Weet niet of hier veel mee gedaan moet worden, misschien alleen de positie updaten ofzo? 
         //      Hoeft niet als je in Crafting state elke keer in de draw of update een nieuwe instance maakt hiervan
