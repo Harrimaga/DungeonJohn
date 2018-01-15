@@ -119,6 +119,7 @@
     <Compile Include="GameObjects\TypeEnemy\SpiderEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\TurretEnemy.cs" />
     <Compile Include="Inventory\CraftingSlots.cs" />
+    <Compile Include="Inventory\Recipe.cs" />
     <Compile Include="Inventory\Slots\ArmourSlot.cs" />
     <Compile Include="Inventory\Slots\BootsSlot.cs" />
     <Compile Include="Inventory\Slots\CraftingNewSlot.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Inventory\Slots\InventorySlot.cs" />
     <Compile Include="Inventory\Slots\PassiveSlot.cs" />
     <Compile Include="Inventory\Slots\ShieldSlot.cs" />
+    <Compile Include="Inventory\Slots\Slot.cs" />
     <Compile Include="Inventory\Slots\WeaponSlot.cs" />
     <Compile Include="Inventory\WornItems.cs" />
     <Compile Include="Level\Floor.cs" />
