@@ -90,6 +90,7 @@
     <Compile Include="GameObjects\Items\Item.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
     <Compile Include="GameObjects\Items\Passives\BloodRing.cs" />
+    <Compile Include="GameObjects\Items\Weapons\BigMac.cs" />
     <Compile Include="GameObjects\Items\Weapons\DoubleGun.cs" />
     <Compile Include="GameObjects\Items\Shields\Mirror.cs" />
     <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
