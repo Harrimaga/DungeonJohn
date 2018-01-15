@@ -127,6 +127,7 @@
     <Compile Include="Inventory\Slots\InventorySlot.cs" />
     <Compile Include="Inventory\Slots\PassiveSlot.cs" />
     <Compile Include="Inventory\Slots\ShieldSlot.cs" />
+    <Compile Include="Inventory\Slots\Slot.cs" />
     <Compile Include="Inventory\Slots\WeaponSlot.cs" />
     <Compile Include="Inventory\WornItems.cs" />
     <Compile Include="Level\Floor.cs" />

@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-public class InventorySlot : SpriteGameObject
+public class InventorySlot : Slot
 {
     public Item item;
-    protected Texture2D itemSprite;
 
     public InventorySlot(Vector2 position, Item item, int layer = 0, string id = "InventorySlot") : base("Sprites/InventorySlots/EmptySlot", layer, id)
     {
