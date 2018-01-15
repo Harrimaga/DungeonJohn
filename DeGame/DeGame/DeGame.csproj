@@ -117,8 +117,12 @@
     <Compile Include="GameObjects\TypeEnemy\SpamEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\SpiderEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\TurretEnemy.cs" />
+    <Compile Include="Inventory\CraftingSlots.cs" />
     <Compile Include="Inventory\Slots\ArmourSlot.cs" />
     <Compile Include="Inventory\Slots\BootsSlot.cs" />
+    <Compile Include="Inventory\Slots\CraftingNewSlot.cs" />
+    <Compile Include="Inventory\Slots\CraftingInventorySlot.cs" />
+    <Compile Include="Inventory\Slots\CraftingSlot.cs" />
     <Compile Include="Inventory\Slots\HelmetSlot.cs" />
     <Compile Include="Inventory\Slots\InventorySlot.cs" />
     <Compile Include="Inventory\Slots\PassiveSlot.cs" />
@@ -216,6 +220,8 @@
     <Content Include="Content\Sprites\Boss.png" />
     <Content Include="Content\Sprites\BossBullet.png" />
     <Content Include="Content\Sprites\bteam.png" />
+    <Content Include="Content\Sprites\CraftButton.png" />
+    <Content Include="Content\Sprites\CraftButtonPressed.png" />
     <Content Include="Content\Sprites\doorleft.png" />
     <Content Include="Content\Sprites\doorup.png" />
     <Content Include="Content\Sprites\Button Sprite.png" />
@@ -224,6 +230,9 @@
     <Content Include="Content\Sprites\HealthbarBackground.png" />
     <Content Include="Content\Sprites\InventorySlots\ArmourSLot.png" />
     <Content Include="Content\Sprites\InventorySlots\BootsSlot.png" />
+    <Content Include="Content\Sprites\InventorySlots\CraftingSlot.png" />
+    <Content Include="Content\Sprites\InventorySlots\CraftingNewSlot.png" />
+    <Content Include="Content\Sprites\InventorySlots\CraftingSlotEmpty.png" />
     <Content Include="Content\Sprites\InventorySlots\EmptySlot.png" />
     <Content Include="Content\Sprites\InventorySlots\HelmetSlot.png" />
     <Content Include="Content\Sprites\InventorySlots\PassiveSlot.png" />
@@ -253,6 +262,7 @@
     <Content Include="Content\Sprites\MinimapStartTile.png" />
     <Content Include="Content\Sprites\Option.png" />
     <Content Include="Content\Sprites\OptionPressed.png" />
+    <Content Include="Content\Sprites\PauseMenu\CraftingMenu.png" />
     <Content Include="Content\Sprites\pauze.png" />
     <Content Include="Content\Sprites\Random.png" />
     <Content Include="Content\Sprites\Rock Sprite.png" />
@@ -277,7 +287,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Roomlist\" />
-    <Folder Include="Content\Sprites\PauseMenu\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
