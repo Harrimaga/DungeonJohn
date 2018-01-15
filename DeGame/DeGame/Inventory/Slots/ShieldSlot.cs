@@ -7,13 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class ShieldSlot : SpriteGameObject
+public class ShieldSlot : Slot
 {
-    Texture2D itemSprite;
-
 
     public ShieldSlot(Vector2 position, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/ShieldSlot", layer, id)
-{
+    {
         this.position = position;
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/ShieldSlot");
         if (Player.inventory.currentShield != null)

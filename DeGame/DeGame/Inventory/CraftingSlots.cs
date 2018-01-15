@@ -9,18 +9,22 @@ using Microsoft.Xna.Framework.Graphics;
 public class CraftingSlots : GameObjectList
 {
     Button craftingB;
-    public CraftingSlot itemSlot1, itemSlot2;
+    Recipe recipe;
+    public CraftingSlot itemSlot1, itemSlot2, itemNew;
     new Vector2 position;
     protected bool clicked1 = false, clicked2 = false ;
 
     public CraftingSlots(Vector2 position) : base()
     {
         this.position = position;
-        itemSlot1 = new CraftingSlot(position, null);
-        itemSlot2 = new CraftingSlot(position + new Vector2(500,0),null);
+        recipe = new Recipe();
+        itemSlot1 = new CraftingSlot(position, null,false);
+        itemSlot2 = new CraftingSlot(position + new Vector2(500,0),null,false);
+        itemNew = new CraftingSlot(position + new Vector2(245, 0), null,true);
         craftingB = new Button(position + new Vector2(-230, 50), "Craft", "CraftButton", "CraftButtonPressed", true, 1);
         Add(itemSlot1);
         Add(itemSlot2);
+        Add(itemNew);
     }
 
     public override Vector2 Position
@@ -34,6 +38,7 @@ public class CraftingSlots : GameObjectList
             position = value;
             itemSlot1.position = position;
             itemSlot2.position = position + new Vector2(500, 0);
+            itemNew.position = position + new Vector2(245, 0);
         }
     }
 
@@ -55,6 +60,36 @@ public class CraftingSlots : GameObjectList
         slot.AddItem(item);
     }
 
+    public void RecipeCheck()
+    {
+        if(itemSlot1.item == null || itemSlot2.item == null)
+        {
+            itemNew.item = null;
+        }
+        else if(itemSlot1.item != null && itemSlot2.item != null)
+        {
+            for (int i = 0; i < recipe.list1.Count; i++)
+            {
+                if(recipe.list1[i].itemName == itemSlot1.item.itemName)
+                {
+                    if (recipe.list2[i].itemName == itemSlot2.item.itemName)
+                    {
+                        itemNew.AddItem(recipe.listNewItem[i]);
+                    }
+                }
+                for (int c = 0; c < recipe.list1.Count; c++)
+                {
+                    if (recipe.list2[c].itemName == itemSlot1.item.itemName)
+                    {
+                        if (recipe.list1[c].itemName == itemSlot2.item.itemName)
+                        {
+                            itemNew.AddItem(recipe.listNewItem[c]);
+                        }
+                    }
+                }
+            }
+        }
+    }
     public override void HandleInput(InputHelper inputHelper)
     {
         // TODO: Implement
@@ -86,6 +121,15 @@ public class CraftingSlots : GameObjectList
         craftingB.Update(gameTime);
         itemSlot1.Update(gameTime);
         itemSlot2.Update(gameTime);
+        itemNew.Update(gameTime);
+        RecipeCheck();
+        if(craftingB.Pressed && itemNew.item != null)
+        {
+            itemSlot1.item = null;
+            itemSlot2.item = null;
+            Player.inventory.addItemToInventory(itemNew.item);
+            itemNew.item = null;
+        }
         // TODO: imlement
         // Weet niet of hier veel mee gedaan moet worden, misschien alleen de positie updaten ofzo? 
         //      Hoeft niet als je in Crafting state elke keer in de draw of update een nieuwe instance maakt hiervan
