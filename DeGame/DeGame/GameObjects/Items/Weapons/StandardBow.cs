@@ -37,7 +37,7 @@ public class StandardBow : Item, IWeapon
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2( 0, GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 4), direction);
+        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2( 0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), direction);
         PlayingState.player.bullets.Add(bullet);
     }
 

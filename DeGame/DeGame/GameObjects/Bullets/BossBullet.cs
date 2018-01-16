@@ -9,9 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 class BossBullet : E_Bullet
 {
     HealthBar healthbar;
-    Vector2 direction, actualvelocity;
-    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
-    Vector2 Bulletorigin;
+    Vector2 direction;
+    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     float speed = 0.5f;
     int health = 100, maxhealth = 100;
     bool Homing, reflected = false;
@@ -65,13 +64,13 @@ class BossBullet : E_Bullet
 
     Vector2 CalculateReflect(Vector2 direction)
     {
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 2);
         Vector2 newdirection = direction;
-        if (position.X < MiddleofPlayer.X - GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2 || position.X > MiddleofPlayer.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2)
+        if (position.X < MiddleofPlayer.X - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width / 2 || position.X > MiddleofPlayer.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width / 2)
         {
             newdirection.X = -direction.X;
         }
-        if (position.Y < MiddleofPlayer.Y - GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2 || position.Y > MiddleofPlayer.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2)
+        if (position.Y < MiddleofPlayer.Y - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 2 || position.Y > MiddleofPlayer.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 2)
         {
             newdirection.Y = -direction.Y;
         }

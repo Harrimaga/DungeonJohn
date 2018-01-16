@@ -6,7 +6,7 @@ class EndRoom : Room
     static public bool cleared = false, trigger = false, placed = false;
     int currentlevel;
 
-    public EndRoom(int roomListIndex, int a, int b, int layer = 0, string id = "") : base(roomListIndex, a, b, layer)
+    public EndRoom(string map, int roomListIndex, int a, int b, int layer = 0, string id = "") : base(map, roomListIndex, a, b, layer)
     {
         Type = "bossroom";
         RoomListIndex = 2;
@@ -61,7 +61,7 @@ class EndRoom : Room
     public override void CheckExit()
     {
         //base.CheckExit();
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 2);
         if (cleared)
         {
             if (MiddleofPlayer.X >= Exit.X && MiddleofPlayer.X <= Exit.X + CellWidth)

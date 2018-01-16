@@ -22,7 +22,7 @@ class GameOverState : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/GameOver"), BasisPosition);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/GameOver"), BasisPosition);
     }
 
     public virtual void Update(GameTime gameTime)
