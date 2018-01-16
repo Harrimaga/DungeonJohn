@@ -14,6 +14,9 @@ class BossBullet : E_Bullet
     float speed = 0.5f;
     int health = 100, maxhealth = 100;
     bool Homing, reflected = false;
+    double opposite;
+    double adjacent;
+    float angle, Rangle, RotateAngle, circle = MathHelper.Pi * 2;
     
     public BossBullet(float damage, float speed, Vector2 Startposition, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/Bullets/BossBullet", 0, "BossBullet") 
     {
@@ -22,16 +25,25 @@ class BossBullet : E_Bullet
         direction = (PlayingState.player.position - position);      
         Homing = homing;
         Damage = damage;
+        Bulletorigin = new Vector2(sprite.Width / 2, sprite.Height / 2);
     }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        opposite = PlayingState.player.position.Y - position.Y;
+        adjacent = PlayingState.player.position.X - position.Y;
+        angle = (float)Math.Atan2(opposite, adjacent);
+        Rangle = MathHelper.ToDegrees(angle);
         healthbar.Update(gameTime, health, maxhealth, position);
         if(!reflected)
         {
             if (Homing)
+            {
                 HomingBullet();
-            DestroyableBullet();
+                DestroyableBullet();
+                actualvelocity = direction * speed;
+                position += actualvelocity;
+            }
         }
         if (!Homing)
         {
@@ -89,28 +101,14 @@ class BossBullet : E_Bullet
 
     public void HomingBullet()
     {
-        if (position.Y + playersprite.Height > PlayingState.player.position.Y + 1)
-        {
-            position.Y -= speed;
-        }
-        if (position.Y - playersprite.Height < PlayingState.player.position.Y - 1)
-        {
-            position.Y += speed;
-        }
-        if (position.X + playersprite.Width > PlayingState.player.position.X + 1)
-        {
-            position.X -= speed;
-        }
-        if (position.X + playersprite.Width < PlayingState.player.position.X - 1)
-        {
-            position.X += speed;
-        }
+        direction = PlayingState.player.position - position;
+        direction.Normalize();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         //base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, Bulletorigin, Rangle, null, null, SpriteEffects.None, 0);
         //healthbar.Draw(spriteBatch);
     }
 }

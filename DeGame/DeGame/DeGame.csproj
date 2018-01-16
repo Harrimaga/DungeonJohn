@@ -89,6 +89,7 @@
     <Compile Include="GameObjects\Items\Interfaces\IShield.cs" />
     <Compile Include="GameObjects\Items\Item.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
+    <Compile Include="GameObjects\Items\ItemList.cs" />
     <Compile Include="GameObjects\Items\Passives\BloodRing.cs" />
     <Compile Include="GameObjects\Items\Weapons\BigMac.cs" />
     <Compile Include="GameObjects\Items\Weapons\DoubleGun.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="GameObjects\TypeEnemy\SpiderEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\TurretEnemy.cs" />
     <Compile Include="Inventory\CraftingSlots.cs" />
+    <Compile Include="Inventory\Recipe.cs" />
     <Compile Include="Inventory\Slots\ArmourSlot.cs" />
     <Compile Include="Inventory\Slots\BootsSlot.cs" />
     <Compile Include="Inventory\Slots\CraftingNewSlot.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="Inventory\Slots\InventorySlot.cs" />
     <Compile Include="Inventory\Slots\PassiveSlot.cs" />
     <Compile Include="Inventory\Slots\ShieldSlot.cs" />
+    <Compile Include="Inventory\Slots\Slot.cs" />
     <Compile Include="Inventory\Slots\WeaponSlot.cs" />
     <Compile Include="Inventory\WornItems.cs" />
     <Compile Include="Level\Floor.cs" />
