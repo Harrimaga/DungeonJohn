@@ -66,23 +66,16 @@ public class CraftingSlots : GameObjectList
         {
             for (int i = 0; i < recipe.list1.Count; i++)
             {
-                if (recipe.list1[i].itemName == itemSlot1.item.itemName)
+                if (recipe.list1[i].itemName == itemSlot1.item.itemName && recipe.list2[i].itemName == itemSlot2.item.itemName)
                 {
-                    if (recipe.list2[i].itemName == itemSlot2.item.itemName)
-                    {
-                        itemNew.AddItem(recipe.listNewItem[i]);
-                    }
+                    itemNew.AddItem(recipe.listNewItem[i]);
                 }
-                for (int c = 0; c < recipe.list1.Count; c++)
+                
+                if (recipe.list2[i].itemName == itemSlot1.item.itemName && recipe.list1[i].itemName == itemSlot2.item.itemName)
                 {
-                    if (recipe.list2[c].itemName == itemSlot1.item.itemName)
-                    {
-                        if (recipe.list1[c].itemName == itemSlot2.item.itemName)
-                        {
-                            itemNew.AddItem(recipe.listNewItem[c]);
-                        }
-                    }
+                    itemNew.AddItem(recipe.listNewItem[i]);
                 }
+                
             }
         }
     }
