@@ -71,11 +71,10 @@ public class CraftingSlots : GameObjectList
                     itemNew.AddItem(recipe.listNewItem[i]);
                 }
                 
-                if (recipe.list2[i].itemName == itemSlot1.item.itemName && recipe.list1[i].itemName == itemSlot2.item.itemName)
+                else if (recipe.list2[i].itemName == itemSlot1.item.itemName && recipe.list1[i].itemName == itemSlot2.item.itemName)
                 {
                     itemNew.AddItem(recipe.listNewItem[i]);
                 }
-                
             }
         }
     }
