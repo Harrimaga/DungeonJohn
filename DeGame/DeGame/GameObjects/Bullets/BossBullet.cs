@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 class BossBullet : E_Bullet
 {
     HealthBar healthbar;
-    Vector2 direction;
+    Vector2 direction, actualvelocity, Bulletorigin;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     float speed = 0.5f;
     int health = 100, maxhealth = 100;
