@@ -25,8 +25,16 @@ class ItemSpawn : SpriteGameObject
     }
     void RandomItem()
     {
-        int r = random.Next(8);
-        item = itemList.RoomList[r];
+        if (!price)
+        {
+            int r = random.Next(itemList.RoomList.Count);
+            item = itemList.RoomList[r];
+        }
+        if(price)
+        {
+            int r = random.Next(itemList.ShopList.Count);
+            item = itemList.ShopList[r];
+        }
 
         /*
         int r = random.Next(2);
