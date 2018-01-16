@@ -9,6 +9,7 @@ using System.Collections;
 public class Room : GameObjectList
 {
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, Lastentrypoint, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0;
+    public string Map;
     public GameObjectList enemies, tiles, solid, consumable, bosses, altars, anvils, enemybullets, homingenemybullets;
     public static GameObjectList door;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop, LastEntryPoint;
@@ -22,7 +23,7 @@ public class Room : GameObjectList
     Vector2 TilePosition;
 
 
-    public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
+    public Room(string map, int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
         tiles = new GameObjectList();
         consumable = new GameObjectList();
@@ -35,6 +36,7 @@ public class Room : GameObjectList
         enemybullets = new GameObjectList();
         homingenemybullets = new GameObjectList();
         RoomListIndex = roomListIndex;
+        Map = map;
         a = A;
         b = B;
         position = new Vector2(a, b);
@@ -42,7 +44,7 @@ public class Room : GameObjectList
 
     public void LoadTiles()
     {
-        StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
+        StreamReader fileReader = new StreamReader("Content/Levels/" + Map + "/" + RoomListIndex + ".txt");
         string line = fileReader.ReadLine();
         List<string> textLines = new List<string>();
         while (line != null)
@@ -271,13 +273,13 @@ switch (Lastentrypoint)
                     LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 2 * CellHeight + b * roomheight);
                     break;
                 case 2:
-                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 14 * CellHeight + b * roomheight - GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height);
+                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 14 * CellHeight + b * roomheight - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height);
                     break;
                 case 3:
                     LastEntryPoint = new Vector2(2 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
                     break;
                 case 4:
-                    LastEntryPoint = new Vector2(20 * CellWidth + a * roomwidth - GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width, 7 * CellHeight + b * roomheight);
+                    LastEntryPoint = new Vector2(20 * CellWidth + a * roomwidth - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width, 7 * CellHeight + b * roomheight);
                     break;
                 default:
                     LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
@@ -407,7 +409,7 @@ switch (Lastentrypoint)
 
     public virtual void CheckExit()
     {
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 2);
         if (RoomListIndex == 4)
         {
             if (MiddleofPlayer.X >= ExitShop.X && MiddleofPlayer.X <= ExitShop.X + CellWidth)

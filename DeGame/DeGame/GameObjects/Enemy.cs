@@ -26,7 +26,7 @@ public class Enemy : SpriteGameObject
     : base(assetname, layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
-        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
         position = startPosition;
         velocity = basevelocity;
         Roomposition = roomposition;

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Player : SpriteGameObject
 {
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
-    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
+    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     public bool CoolBoots = false, SlimyBoots = false, Mirror = false;
     public float health = 100, maxhealth = 200;
     public float exp = 0,nextLevelExp = 100;
@@ -32,7 +32,7 @@ public class Player : SpriteGameObject
     public Rectangle collisionhitbox;
 
     public Player(int layer = 0, string id = "Player")
-    : base("Sprites/PlayerFront", 0, "Player")
+    : base("Sprites/Characters/PlayerFront", 0, "Player")
     {
         bullets = new GameObjectList();
         healthbar = new HealthBar(health, maxhealth, position, true);
@@ -104,25 +104,25 @@ public class Player : SpriteGameObject
             {
                 position.Y -= speed;
                 lastUsedspeed = "up";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerBack");
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerBack");
             }
             if (inputHelper.IsKeyDown(Keys.S))
             {
                 position.Y += speed;
                 lastUsedspeed = "down";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
             }
             if (inputHelper.IsKeyDown(Keys.D))
             {
                 position.X += speed;
                 lastUsedspeed = "right";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerRight");
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
             }
             if (inputHelper.IsKeyDown(Keys.A))
             {
                 position.X -= speed;
                 lastUsedspeed = "left";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerLeft");
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
             }
         }
         else
