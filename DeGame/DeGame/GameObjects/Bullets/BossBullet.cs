@@ -9,31 +9,40 @@ using Microsoft.Xna.Framework.Graphics;
 class BossBullet : E_Bullet
 {
     HealthBar healthbar;
-    Vector2 direction, actualvelocity, Bulletorigin;
+    Vector2 direction, actualvelocity, difference, Homingdifference, Bulletorigin;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+    SpriteEffects Effects;
     float speed = 0.5f;
     int health = 100, maxhealth = 100;
     bool Homing, reflected = false;
     double opposite;
     double adjacent;
-    float angle, Rangle, RotateAngle, circle = MathHelper.Pi * 2;
+    float Homingangle, HomingRotateAngle, RotateAngle, angle, circle = MathHelper.Pi * 2;
     
-    public BossBullet(float damage, float speed, Vector2 Startposition, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/Bullets/BossBullet", 0, "BossBullet") 
+    public BossBullet(float damage, float speed, Vector2 Startposition, SpriteEffects effects, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/Bullets/BossBullet", 0, "BossBullet") 
     {
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
         direction = (PlayingState.player.position - position);      
         Homing = homing;
         Damage = damage;
+        Effects = effects;
         Bulletorigin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+        difference = PlayingState.player.position - position;
+        difference.Normalize();
+        RotateAngle = (float)Math.Atan2(difference.Y, difference.X);
+
     }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        opposite = PlayingState.player.position.Y - position.Y;
-        adjacent = PlayingState.player.position.X - position.Y;
-        angle = (float)Math.Atan2(opposite, adjacent);
-        Rangle = MathHelper.ToDegrees(angle);
+        Homingdifference = PlayingState.player.position - position;
+        Homingdifference.Normalize();
+        HomingRotateAngle = (float)Math.Atan2(Homingdifference.Y, Homingdifference.X);
+        //opposite = PlayingState.player.position.Y - position.Y;
+        //adjacent = PlayingState.player.position.X - position.Y;
+        //Homingangle = (float)Math.Atan2(opposite, adjacent) / circle;
+        //HomingRotateAngle = MathHelper.ToDegrees(Homingangle);
         healthbar.Update(gameTime, health, maxhealth, position);
         if(!reflected)
         {
@@ -108,7 +117,10 @@ class BossBullet : E_Bullet
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         //base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, Bulletorigin, Rangle, null, null, SpriteEffects.None, 0);
+        if(Homing == true)
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, null, HomingRotateAngle, null, null, Effects, 0);
+        else
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, null, RotateAngle, null, null, Effects, 0);
         //healthbar.Draw(spriteBatch);
     }
 }
