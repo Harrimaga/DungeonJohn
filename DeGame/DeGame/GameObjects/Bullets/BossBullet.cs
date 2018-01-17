@@ -12,7 +12,7 @@ class BossBullet : E_Bullet
     Vector2 direction, actualvelocity, difference, Homingdifference, BulletOrigin, HomingPlayerOrigin, PlayerOrigin;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     SpriteEffects Effects;
-    float speed = 5f;
+    float speed = 2f;
     int health = 100, maxhealth = 100;
     bool Homing, reflected = false;
     double opposite;
@@ -21,19 +21,26 @@ class BossBullet : E_Bullet
     
     public BossBullet(float damage, float speed, Vector2 Startposition, SpriteEffects effects, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/Bullets/BossBullet", 0, "BossBullet") 
     {
+        PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
+        BulletOrigin = new Vector2(0, sprite.Height / 2);
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
-        direction = (PlayingState.player.position - position);      
+        direction = (PlayerOrigin - position);      
         Homing = homing;
         Damage = damage;
         Effects = effects;
-        PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
-        BulletOrigin = new Vector2(sprite.Width / 2, sprite.Height / 2);
         difference = PlayerOrigin - position;
         difference.Normalize();
         RotateAngle = (float)Math.Atan2(difference.Y, difference.X);
 
     }
+    //public override Rectangle BoundingBox
+    //{
+    //    get
+    //    {
+            
+    //    }
+    //}
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -112,7 +119,7 @@ class BossBullet : E_Bullet
 
     public void HomingBullet()
     {
-        direction = PlayingState.player.position - position;
+        direction = PlayerOrigin - position;
         direction.Normalize();
     }
 
@@ -120,9 +127,9 @@ class BossBullet : E_Bullet
     {
         //base.Draw(gameTime, spriteBatch);
         if(Homing == true)
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, null, HomingRotateAngle, null, null, Effects, 0);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, BulletOrigin, HomingRotateAngle, null, null, Effects, 0);
         else
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, null, RotateAngle, null, null, Effects, 0);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, BulletOrigin, RotateAngle, null, null, Effects, 0);
         //healthbar.Draw(spriteBatch);
     }
 }

@@ -348,7 +348,6 @@ switch (Lastentrypoint)
             case ("B"):
                 Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, "Boss1");
                 bosses.Add(boss);
-                enemycounter++;
                 break;
             case ("!"):
                 Solid rock = new Rock(TilePosition, 0, "Rock");
