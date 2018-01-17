@@ -26,10 +26,13 @@ public class HelmetSlot : Slot
         {
             itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentHelmet.itemName);
         }
+
+        item = Player.inventory.currentHelmet;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(sprite, position);
         if (Player.inventory.currentHelmet != null)
         {

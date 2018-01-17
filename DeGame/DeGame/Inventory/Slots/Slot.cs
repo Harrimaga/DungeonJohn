@@ -11,11 +11,11 @@ public class Slot : SpriteGameObject
 {
     public Texture2D itemSprite;
     public Item item;
-    public bool text = false;
+    public bool text = false, hover;
 
     public Slot(string name, int layer = 0, string id = "slot") : base(name, layer, id)
     {
-
+        
     }
 
     public override void Update(GameTime gameTime)
@@ -25,9 +25,9 @@ public class Slot : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        if(text)
+        if (hover && item != null && GameEnvironment.gameStateManager.currentGameState == GameEnvironment.gameStateManager.GetGameState("PauseMenu")) 
         {
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), item.itemName, position, Color.White);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), item.itemName, PauseMenuState.BasisPosition + new Vector2(800,150), Color.White);
         }
     }
 
@@ -79,11 +79,11 @@ public class Slot : SpriteGameObject
         }
         if (BoundingBox.Contains(inputHelper.MousePosition))
         {
-            text = true;
+            hover = true;
         }
         else
         {
-            text = false;
+            hover = false;
         }
     }
 }

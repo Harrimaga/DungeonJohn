@@ -21,13 +21,13 @@ public class InventorySlot : Slot
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        base.Draw(gameTime, spriteBatch);
+    {     
         spriteBatch.Draw(sprite, position, Color.White);
         if (item != null)
         {
             DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
         }
+        base.Draw(gameTime, spriteBatch);
     }
 
     public override void HandleInput(InputHelper inputHelper)
@@ -35,6 +35,14 @@ public class InventorySlot : Slot
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition)) 
         {
             Player.inventory.equip(item);
+        }
+        if (BoundingBox.Contains(inputHelper.MousePosition))
+        {
+            hover = true;
+        }
+        else
+        {
+            hover = false;
         }
     }
     public override void Update(GameTime gameTime)

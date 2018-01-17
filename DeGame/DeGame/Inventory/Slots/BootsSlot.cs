@@ -27,10 +27,13 @@ public class BootsSlot : Slot
         {
             itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentBoots.itemName);
         }
+
+        item = Player.inventory.currentBoots;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(sprite, position);
         if (Player.inventory.currentBoots != null)
         {

@@ -39,6 +39,7 @@ public class PassiveSlot : Slot
         {
             InventorySlot.DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
         }
+        base.Draw(gameTime, spriteBatch);
     }
 }
 

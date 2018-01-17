@@ -27,10 +27,13 @@ public class ArmourSlot : Slot
         {
             itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentArmour.itemName);
         }
+
+        item = Player.inventory.currentArmour;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(sprite, position);
         if (Player.inventory.currentArmour != null)
         {

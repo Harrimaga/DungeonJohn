@@ -26,6 +26,8 @@ public class ShieldSlot : Slot
         {
             itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentShield.itemName);
         }
+
+        item = Player.inventory.currentShield;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -35,5 +37,6 @@ public class ShieldSlot : Slot
         {
             InventorySlot.DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
         }
+        base.Draw(gameTime, spriteBatch);
     }
 }
