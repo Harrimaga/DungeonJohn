@@ -33,6 +33,7 @@ public class Mac10 : Item, IWeapon
     public override void unequip()
     {
         ammo = PlayingState.player.ammo;
+        base.unequip();
     }
 
     public void Attack(int direction)

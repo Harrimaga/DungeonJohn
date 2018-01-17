@@ -15,6 +15,7 @@ public class Slot : SpriteGameObject
 
     public Slot(string name, int layer = 0, string id = "slot") : base(name, layer, id)
     {
+
     }
 
     public override void Update(GameTime gameTime)
@@ -32,6 +33,50 @@ public class Slot : SpriteGameObject
 
     public override void HandleInput(InputHelper inputHelper)
     {
+        if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition))
+        {
+            try
+            {
+                switch (id)
+                {
+                    case "ArmourSlot":
+                        Player.inventory.currentArmour.unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentArmour);
+                        Player.inventory.currentArmour = null;
+                        break;
+                    case "BootsSlot":
+                        Player.inventory.currentBoots.unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentBoots);
+                        Player.inventory.currentBoots = null;
+                        break;
+                    case "HelmetSlot":
+                        Player.inventory.currentHelmet.unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentHelmet);
+                        Player.inventory.currentHelmet = null;
+                        break;
+                    case "PassiveSlot":
+                        PassiveSlot slot = (PassiveSlot)this;
+                        Player.inventory.currentPassives[slot.slotno - 1].unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentPassives[slot.slotno - 1]);
+                        Player.inventory.currentPassives[slot.slotno - 1] = null;
+                        break;
+                    case "ShieldSlot":
+                        Player.inventory.currentShield.unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentShield);
+                        Player.inventory.currentShield = null;
+                        break;
+                    case "WeaponSlot":
+                        Player.inventory.currentWeapon.unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentWeapon);
+                        Player.inventory.currentWeapon = null;
+                        break;
+                }
+            }
+            catch(NullReferenceException nre)
+            {
+
+            }
+        }
         if (BoundingBox.Contains(inputHelper.MousePosition))
         {
             text = true;

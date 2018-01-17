@@ -27,6 +27,8 @@ class PauseMenuState : IGameObject
             GameEnvironment.gameStateManager.SwitchTo("Playing");
         }
 
+        wornItems.HandleInput(inputHelper);
+
         foreach (InventorySlot slot in inventory)
         {
             slot.HandleInput(inputHelper);

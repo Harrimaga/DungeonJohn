@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 public class ShieldSlot : Slot
 {
-
-    public ShieldSlot(Vector2 position, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/ShieldSlot", layer, id)
+    public ShieldSlot(Vector2 position, int layer = 0, string id = "ShieldSlot") : base ("Sprites/InventorySlots/ShieldSlot", layer, id)
     {
         this.position = position;
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/ShieldSlot");

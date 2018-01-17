@@ -21,5 +21,6 @@ class HardHelmet : Item, IHelmet
     {
         PlayingState.player.damagereduction *= 1.25;
         PlayingState.player.extraspeed++;
+        base.unequip();
     }
 }
