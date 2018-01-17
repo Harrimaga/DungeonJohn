@@ -13,7 +13,8 @@ public class ChasingMinion : Enemy
         attack = 1;
         drop = false;
         flying = true;
-        //bossenemy = true;
+        bossenemy = true;
+        expGive = 0;
     }
 
     public override void Update(GameTime gameTime)

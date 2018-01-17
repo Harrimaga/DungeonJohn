@@ -76,6 +76,7 @@ public class InventorySlot : Slot
         }
         spriteBatch.Draw(itemSprite, itemSpritePosition, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
     }
+
     public static float CalculateScale(Texture2D sprite, Texture2D itemSprite)
     {
         float scale = (float)sprite.Height / itemSprite.Height;

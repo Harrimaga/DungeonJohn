@@ -9,7 +9,7 @@ public class Player : SpriteGameObject
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     public bool CoolBoots = false, SlimyBoots = false, Mirror = false;
-    public float health = 100, maxhealth = 200;
+    public float health = 100, maxhealth = 100;
     public float exp = 0,nextLevelExp = 100;
     public float attackspeedreduction = 0;
     public double damagereduction = 1;
@@ -21,12 +21,12 @@ public class Player : SpriteGameObject
     public int ammo;
     public int gold = 0;
     public int level = 0;
+    public int leveltokens = 0;
     public SpriteEffects Effect;
     public float velocitybase = 5;
     HealthBar healthbar;
     public GameObjectList bullets;
     public static InventoryManager inventory;
-    int leveltokens = 0;
     float shoottimer = 0;
     public string lastUsedspeed;
     public Rectangle collisionhitbox;
@@ -201,14 +201,20 @@ public class Player : SpriteGameObject
         List<GameObject> RemoveBullets = new List<GameObject>();
         health = 100;
         maxhealth = 100;
-        //ammo = 20;
         gold = 0;
         level = 1;
         exp = 0;
         nextLevelExp = 100;
+        attackspeedreduction = 0;
+        damagereduction = 0;
+        extraspeed = 0;
         leveltokens = 0;
+        velocitybase = 5;
         CalculateAmmo();
         CalculateDamage();
+        onIce = false;
+        onWeb = false;
+        onSolid = false;
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
         {
             RemoveBullets.Add(bullet);
@@ -218,7 +224,7 @@ public class Player : SpriteGameObject
             PlayingState.player.bullets.Remove(bullet);
         }
         startup = true;
-    }
+}
 
     public void NextLevel()
     {
@@ -338,5 +344,8 @@ public class Player : SpriteGameObject
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);
         bullets.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch);
+        if (leveltokens > 0)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/LevelUp"), new Vector2(position.X, position.Y - 30), Color.White);
+
     }
 }

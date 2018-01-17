@@ -20,7 +20,7 @@ class Solid : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (CollidesWith(PlayingState.player))
+        if (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
         {
             OnThisTile = true;
         }

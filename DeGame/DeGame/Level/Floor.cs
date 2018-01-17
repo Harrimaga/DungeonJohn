@@ -291,48 +291,6 @@ public class Floor
         AdjacentRooms = new int[floorWidth, floorHeight];
     }
 
-    public void NextShop()
-    {
-        ClearFloor();
-        floor[4, 4] = new Room("", 4, 4, 4);
-        currentRoom = floor[4, 4];
-        floor[4, 4].LoadTiles();
-        CurrentLevel++;
-        Level = "Level: Shop after " + displayint;
-        FloorGenerated = false;
-    }
-
-    public void NextFloor()
-    {
-        ClearFloor();
-        if (CurrentLevel <= 5)
-        {
-            maxRooms += 2;
-            minRooms += 1;
-        }
-        else if (CurrentLevel < 10)
-        {
-            maxRooms += 2;
-            minRooms += 2;
-        }
-        FloorGenerator();
-        CurrentLevel++;
-        displayint++;
-        Level = "Level: " + displayint;
-    }
-
-    public void ResetFloor()
-    {
-        ClearFloor();
-        maxRooms = 5;
-        minRooms = 3;
-        CurrentLevel = 1;
-        displayint = 1;
-        Level = "Level: " + displayint;
-        FloorGenerator();
-        PlayingState.player.Reset();
-    }
-
     public void Update(GameTime gameTime)
     {
         foreach (Room room in floor)
@@ -360,9 +318,49 @@ public class Floor
             if (r != null)
                 r.HandleInput(inputHelper);
         }
+    }
 
-        wornItems.HandleInput(inputHelper);
-    }   
+    public void NextFloor()
+    {
+        ClearFloor();
+        if (CurrentLevel <= 5)
+        {
+            maxRooms += 2;
+            minRooms += 1;
+        }
+        else if (CurrentLevel < 10)
+        {
+            maxRooms += 2;
+            minRooms += 2;
+        }
+        FloorGenerator();
+        CurrentLevel++;
+        displayint++;
+        Level = "Level: " + displayint;
+    }
+
+    public void NextShop()
+    {
+        ClearFloor();
+        floor[4, 4] = new Room("", 4, 4, 4);
+        currentRoom = floor[4, 4];
+        floor[4, 4].LoadTiles();
+        CurrentLevel++;
+        Level = "Level: Shop after " + displayint;
+        FloorGenerated = false;
+    }
+
+    public void ResetFloor()
+    {
+        ClearFloor();
+        maxRooms = 5;
+        minRooms = 3;
+        CurrentLevel = 1;
+        displayint = 1;
+        Level = "Level: " + displayint;
+        FloorGenerator();
+        PlayingState.player.Reset();
+    }
 
     public void DrawMinimap(SpriteBatch spriteBatch)
     {
@@ -381,7 +379,7 @@ public class Floor
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
             {
-                if (floor[x, y] != null /*&& floor[x,y].Visited == true*/)
+                if (floor[x, y] != null /*&& floor[x,y].Visited*/)
                 {
                     switch (floor[x, y].RoomListIndex)
                     {
@@ -413,12 +411,7 @@ public class Floor
     {
         string enemycount = "Count: " + PlayingState.currentFloor.currentRoom.enemycounter;
         string Gold = "Gold: " + PlayingState.player.gold;
-        //if (floor[(int)currentRoom.position.X, (int)currentRoom.position.Y] != null)
-        //{
-        //    if (!FloorGenerated)
-        //        floor[(int)currentRoom.position.X, (int)currentRoom.position.Y].LoadTiles();
-        //    floor[(int)currentRoom.position.X, (int)currentRoom.position.Y].Draw(gameTime, spriteBatch);
-        //}
+        string tokens = "Unspent Tokens: " + PlayingState.player.leveltokens;
         foreach (Room room in floor)
         {
             if (room != null)
@@ -445,11 +438,11 @@ public class Floor
             DrawMinimap(spriteBatch);
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 50), Color.White);
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.Yellow);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), tokens, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 425), Color.White);
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), enemycount, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 450), Color.White);
         }
         wornItems.Position = new Vector2(screenwidth - 300 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 510);
         wornItems.Draw(gameTime, spriteBatch);
-
     }
 }
 

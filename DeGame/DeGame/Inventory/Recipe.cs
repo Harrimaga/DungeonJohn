@@ -26,6 +26,5 @@ class Recipe
         list2.Add(new Mac10());
         listNewItem.Add(new DoubleGun());
     }
-
 }
 
