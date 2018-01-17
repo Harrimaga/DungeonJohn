@@ -35,33 +35,40 @@ public class Slot : SpriteGameObject
     {
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition))
         {
-            switch (id)
+            try
             {
-                case "ArmourSlot":
-                    Player.inventory.currentArmour.unequip();
-                    Player.inventory.currentArmour = null;
-                    break;
-                case "BootsSlot":
-                    Player.inventory.currentBoots.unequip();
-                    Player.inventory.currentBoots = null;
-                    break;
-                case "HelmetSlot":
-                    Player.inventory.currentHelmet.unequip();
-                    Player.inventory.currentHelmet = null;
-                    break;
-                case "PassiveSlot":
-                    PassiveSlot slot = (PassiveSlot)this;
-                    slot.item.unequip();
-                    slot.item = null;
-                    break;
-                case "ShieldSlot":
-                    Player.inventory.currentShield.unequip();
-                    Player.inventory.currentShield = null;
-                    break;
-                case "WeaponSlot":
-                    Player.inventory.currentWeapon.unequip();
-                    Player.inventory.currentWeapon = null;
-                    break;
+                switch (id)
+                {
+                    case "ArmourSlot":
+                        Player.inventory.currentArmour.unequip();
+                        Player.inventory.currentArmour = null;
+                        break;
+                    case "BootsSlot":
+                        Player.inventory.currentBoots.unequip();
+                        Player.inventory.currentBoots = null;
+                        break;
+                    case "HelmetSlot":
+                        Player.inventory.currentHelmet.unequip();
+                        Player.inventory.currentHelmet = null;
+                        break;
+                    case "PassiveSlot":
+                        PassiveSlot slot = (PassiveSlot)this;
+                        slot.item.unequip();
+                        slot.item = null;
+                        break;
+                    case "ShieldSlot":
+                        Player.inventory.currentShield.unequip();
+                        Player.inventory.currentShield = null;
+                        break;
+                    case "WeaponSlot":
+                        Player.inventory.currentWeapon.unequip();
+                        Player.inventory.currentWeapon = null;
+                        break;
+                }
+            }
+            catch(NullReferenceException nre)
+            {
+
             }
         }
         if (BoundingBox.Contains(inputHelper.MousePosition))

@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 
 public class PassiveSlot : Slot
 {
-    public Item item;
-
     public PassiveSlot(Vector2 position, Item item = null, int layer = 0, string id = "PassiveSlot") : base ("Sprites/InventorySlots/PassiveSlot", layer, id)
     {
         this.position = position;
