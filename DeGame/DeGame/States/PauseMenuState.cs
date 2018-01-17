@@ -66,6 +66,8 @@ class PauseMenuState : IGameObject
         BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
         wornItems = PlayingState.currentFloor.wornItems;
         wornItems.Update(gameTime);
+
+        PlayingState.player.Update(gameTime);
     }
     public virtual void Reset()
     {
