@@ -184,6 +184,9 @@ public class Player : SpriteGameObject
         leveltokens = 0;
         CalculateAmmo();
         CalculateDamage();
+        onIce = false;
+        onWeb = false;
+        onSolid = false;
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
         {
             RemoveBullets.Add(bullet);

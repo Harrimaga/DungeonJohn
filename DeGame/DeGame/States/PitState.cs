@@ -39,13 +39,13 @@ class PitState : IGameObject
         player2.position = new Vector2(10 * PlayingState.currentFloor.currentRoom.CellWidth + x * PlayingState.currentFloor.currentRoom.roomwidth, 7 * PlayingState.currentFloor.currentRoom.CellHeight + y * PlayingState.currentFloor.currentRoom.roomheight);
     }
 
-    public virtual void HandleInput(InputHelper inputHelper)
+    public void HandleInput(InputHelper inputHelper)
     {
         PlayingState.currentFloor.floor[x, y].HandleInput(inputHelper);
         player2.HandleInput(inputHelper);
     }
 
-    public virtual void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
         PlayingState.currentFloor.floor[x, y].Update(gameTime);
         player2.Update(gameTime);
@@ -62,7 +62,6 @@ class PitState : IGameObject
                 && MiddleofPlayer.Y >= exitposition.Y + 120 && MiddleofPlayer.Y <= exitposition.Y + PlayingState.currentFloor.currentRoom.CellHeight + 120)
             {
                 PlayingState.currentFloor.floor[x, y] = actualroom;
-                PlayingState.currentFloor.DoorCheck();
                 PlayingState.player = player2;
                 PlayingState.player.position = actualroom.LastEntryPoint;
                 GameEnvironment.gameStateManager.SwitchTo("Playing");
