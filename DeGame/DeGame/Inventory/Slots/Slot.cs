@@ -28,6 +28,7 @@ public class Slot : SpriteGameObject
         if (hover && item != null && GameEnvironment.gameStateManager.currentGameState == GameEnvironment.gameStateManager.GetGameState("PauseMenu")) 
         {
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), item.itemName, PauseMenuState.BasisPosition + new Vector2(800,150), Color.White);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), item.itemDescription, PauseMenuState.BasisPosition + new Vector2(800, 200), Color.White);
         }
     }
 
