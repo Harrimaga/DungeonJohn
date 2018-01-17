@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+                       
 public class InventorySlot : Slot
 {
     public InventorySlot(Vector2 position, Item item, int layer = 0, string id = "InventorySlot") : base("Sprites/InventorySlots/EmptySlot", layer, id)

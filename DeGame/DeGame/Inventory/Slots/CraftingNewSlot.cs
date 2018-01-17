@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 public class CraftingNewSlot : InventorySlot
 {
 
-    public CraftingNewSlot(Vector2 position, Item item, int layer = 0, string id = "CraftingInventorySlot") : base(position, item, layer, id)
+    public CraftingNewSlot(Vector2 position, Item item = null, int layer = 0, string id = "CraftingNewSlot") : base(position, item, layer, id)
     {
 
     }

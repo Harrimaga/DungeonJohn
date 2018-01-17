@@ -26,8 +26,9 @@ using System.Threading.Tasks;
     {
         PlayingState.player.maxhealth += 100;
     }
-    public void unequip()
+    public override void unequip()
     {
-        PlayingState.player.extraspeed -= 100;
+        PlayingState.player.maxhealth -= 100;
+        base.unequip();
     }
 }
