@@ -9,7 +9,7 @@ public class Player : SpriteGameObject
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     public bool CoolBoots = false, SlimyBoots = false, Mirror = false;
-    public float health = 100, maxhealth = 200;
+    public float health = 100, maxhealth = 100;
     public float exp = 0,nextLevelExp = 100;
     public float attackspeedreduction = 0;
     public double damagereduction = 1;
@@ -182,12 +182,15 @@ public class Player : SpriteGameObject
         List<GameObject> RemoveBullets = new List<GameObject>();
         health = 100;
         maxhealth = 100;
-        //ammo = 20;
         gold = 0;
         level = 1;
         exp = 0;
         nextLevelExp = 100;
+        attackspeedreduction = 0;
+        damagereduction = 0;
+        extraspeed = 0;
         leveltokens = 0;
+        velocitybase = 5;
         CalculateAmmo();
         CalculateDamage();
         onIce = false;
@@ -202,7 +205,7 @@ public class Player : SpriteGameObject
             PlayingState.player.bullets.Remove(bullet);
         }
         startup = true;
-    }
+}
 
     public void NextLevel()
     {
