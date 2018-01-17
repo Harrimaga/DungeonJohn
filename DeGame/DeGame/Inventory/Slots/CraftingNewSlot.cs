@@ -11,7 +11,7 @@ public class CraftingNewSlot : Slot
 {
     Item item;
 
-    public CraftingNewSlot(Vector2 position, Item item = null, int layer = 0, string id = "WeaponSlot") : base("Sprites/InventorySlots/PassiveSlot", layer, id)
+    public CraftingNewSlot(Vector2 position, Item item = null, int layer = 0, string id = "CraftingNewSlot") : base("Sprites/InventorySlots/PassiveSlot", layer, id)
     {
         this.position = position;
         this.item = item;

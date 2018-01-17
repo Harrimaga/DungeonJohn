@@ -19,7 +19,7 @@ class MageJacket : Item, IArmour
     }
     public void Unequip()
     {
-
         PlayingState.player.extraspeed -= 2;
+        base.unequip();
     }
 }

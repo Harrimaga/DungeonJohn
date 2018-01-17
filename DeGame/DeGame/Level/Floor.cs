@@ -354,6 +354,8 @@ public class Floor
             if (r != null)
                 r.HandleInput(inputHelper);
         }
+
+        wornItems.HandleInput(inputHelper);
     }   
 
     void DrawMinimap(SpriteBatch spriteBatch)

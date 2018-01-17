@@ -49,7 +49,7 @@ public class Item
 
     public virtual void unequip()
     {
-
+        Player.inventory.addItemToInventory(this);
     }
 
     public override string ToString()

@@ -91,20 +91,31 @@ public class InventoryManager
                 currentShield.equip();
                 break;
             case "passive":
-                if (currentPassives.Count() == 2)
+                if (currentPassives[0] != null && currentPassives[1] != null)
                 {
                     currentPassives[1].unequip();
-                    currentPassives[1] = currentPassives[0];
                     addItemToInventory(currentPassives[1]);
+                    currentPassives[1] = currentPassives[0];
                 }
-                currentPassives[0] = item;
-                removeItemFromInventory(item);
-                currentPassives[0].equip();
+                else if (currentPassives[1] == null && currentPassives[0] != null)
+                {
+                    currentPassives[1] = item;
+                    removeItemFromInventory(item);
+                    currentPassives[1].equip();
+                    PlayingState.currentFloor.wornItems.passiveSlot2.item = item;
+                }
+                else
+                {
+                    currentPassives[0] = item;
+                    removeItemFromInventory(item);
+                    currentPassives[0].equip();
+                    PlayingState.currentFloor.wornItems.passiveSlot1.item = item;
+                }
                 PlayingState.player.CalculateAmmo();
                 PlayingState.player.CalculateDamage();
                 break;
         }
-    }    
+    }
 
     public void addItemToInventory(Item item)
     {

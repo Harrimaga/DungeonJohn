@@ -8,12 +8,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class WornItems : GameObjectList
 {
-    WeaponSlot weaponSlot;
-    HelmetSlot helmetSlot;
-    ArmourSlot armourSlot;
-    BootsSlot bootsSlot;
-    ShieldSlot shieldShot;
-    PassiveSlot passiveSlot1, passiveSlot2;
+    public WeaponSlot weaponSlot;
+    public HelmetSlot helmetSlot;
+    public ArmourSlot armourSlot;
+    public BootsSlot bootsSlot;
+    public ShieldSlot shieldShot;
+    public PassiveSlot passiveSlot1, passiveSlot2;
     new Vector2 position;
 
 
@@ -54,6 +54,17 @@ public class WornItems : GameObjectList
             passiveSlot1.position = position;
             passiveSlot2.position = position + new Vector2(212, 0);
         }
+    }
+
+    public override void HandleInput(InputHelper inputHelper)
+    {
+        weaponSlot.HandleInput(inputHelper);
+        helmetSlot.HandleInput(inputHelper);
+        armourSlot.HandleInput(inputHelper);
+        bootsSlot.HandleInput(inputHelper);
+        shieldShot.HandleInput(inputHelper);
+        passiveSlot1.HandleInput(inputHelper);
+        passiveSlot2.HandleInput(inputHelper);
     }
 }
 

@@ -286,8 +286,14 @@ public class Player : SpriteGameObject
 
         }
 
-        inventory.currentArmour.DrawOnPlayer(gameTime, spriteBatch);
-        inventory.currentWeapon.DrawOnPlayer(gameTime, spriteBatch);
+        if (inventory.currentArmour != null)
+        {
+            inventory.currentArmour.DrawOnPlayer(gameTime, spriteBatch);
+        }
+        if (inventory.currentWeapon != null)
+        {
+            inventory.currentWeapon.DrawOnPlayer(gameTime, spriteBatch);
+        }
         
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);

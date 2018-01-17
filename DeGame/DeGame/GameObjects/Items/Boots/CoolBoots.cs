@@ -24,5 +24,6 @@ class CoolBoots : Item, IBoots
     {
         PlayingState.player.CoolBoots = false;
         PlayingState.player.extraspeed -= 2;
+        base.unequip();
     }
 }
