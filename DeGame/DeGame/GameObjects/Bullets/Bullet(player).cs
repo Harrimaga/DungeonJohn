@@ -8,31 +8,31 @@ class Bullet : SpriteGameObject
     Texture2D Bulletsprite;
     SpriteEffects Effect = SpriteEffects.None;
     float counter = 0;
-
+    int direction;
     public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
-    : base("Sprites/PlayerFront", layer, id)
+    : base("Sprites/Characters/PlayerFront", layer, id)
     {
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
         position = Startposition;
         // Determine the direction of the bullets
-
-        if (Direction == 1)
+        direction = Direction;
+        if (direction == 1)
         {
             velocity.Y = -weapon.Projectile_Velocity;
             Bulletsprite = weapon.BulletSpriteUp;
         }
-        else if (Direction == 2)
+        else if (direction == 2)
         {
             velocity.Y = weapon.Projectile_Velocity;
             Bulletsprite = weapon.BulletSpriteUp;
             Effect = SpriteEffects.FlipVertically;
         }
-        else if (Direction == 3)
+        else if (direction == 3)
         {
             velocity.X = -weapon.Projectile_Velocity;
             Bulletsprite = weapon.BulletSpriteLeft;
         }
-        else if (Direction == 4)
+        else if (direction == 4)
         {
             velocity.X = weapon.Projectile_Velocity;
             Bulletsprite = weapon.BulletSpriteLeft;
@@ -58,7 +58,7 @@ class Bullet : SpriteGameObject
     // Draw the bullets
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(Bulletsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
+          spriteBatch.Draw(Bulletsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
     }
 
     public void CheckCollision()

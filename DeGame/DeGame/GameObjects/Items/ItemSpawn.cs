@@ -11,6 +11,7 @@ class ItemSpawn : SpriteGameObject
     //betere naam voor de class is welkom
     //als het een shopitem moet zijn dan is price true
     Item item;
+    ItemList itemList;
     bool price, pickedUp = false;
     Random random = new Random();
 
@@ -19,16 +20,21 @@ class ItemSpawn : SpriteGameObject
     {
         position = startPosition;
         price = Price;
+        itemList = new ItemList();
         RandomItem();
     }
     void RandomItem()
     {
-        int r = random.Next(2);
-        if (r == 0)
-            item = new Mac10();
-        else
-            item = new HardHelmet();
-        //TODO kiest een random item
+        if (!price)
+        {
+            int r = random.Next(itemList.RoomList.Count);
+            item = itemList.RoomList[r];
+        }
+        if(price)
+        {
+            int r = random.Next(itemList.ShopList.Count);
+            item = itemList.ShopList[r];
+        }
     }
     public override void Update(GameTime gameTime)
     {
@@ -48,13 +54,21 @@ class ItemSpawn : SpriteGameObject
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Altar"), position);
         if (price)
         {
-            //price voor onder de shopitem
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "5", position + new Vector2(18, 60), Color.Yellow);
         }
         if (!pickedUp)
         {
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName), position - new Vector2(0, 30));
-            //TODO draw item van op de altar tot het gepakt is
+            Texture2D itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
+            float scale = 50f / itemSprite.Height;
+            if (itemSprite.Width * scale > 50f)
+            {
+                scale = 50f / itemSprite.Width;
+            }
+            Vector2 itemPosition = new Vector2(0, 0);
+            itemPosition += position;
+            itemPosition.Y -= 30;
+            itemPosition.X -= -5 - 25 + (itemSprite.Width * scale) / 2;
+            spriteBatch.Draw(itemSprite, itemPosition, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
     }
 }

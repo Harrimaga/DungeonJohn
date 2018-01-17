@@ -6,11 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+                       
 public class InventorySlot : Slot
 {
-    public Item item;
-
     public InventorySlot(Vector2 position, Item item, int layer = 0, string id = "InventorySlot") : base("Sprites/InventorySlots/EmptySlot", layer, id)
     {
         this.position = position;
@@ -24,6 +22,7 @@ public class InventorySlot : Slot
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(sprite, position, Color.White);
         if (item != null)
         {
@@ -40,7 +39,7 @@ public class InventorySlot : Slot
     }
     public override void Update(GameTime gameTime)
     {
-        
+        base.Update(gameTime);
     }
     public void ToInventory(Item item)
     {
@@ -74,7 +73,7 @@ public class InventorySlot : Slot
         float scale = (float)sprite.Height / itemSprite.Height;
         if (itemSprite.Width * scale > sprite.Width)
         {
-            scale = (float)sprite.Width / itemSprite.Height;
+            scale = (float)sprite.Width / itemSprite.Width;
         }
         return scale;
     }

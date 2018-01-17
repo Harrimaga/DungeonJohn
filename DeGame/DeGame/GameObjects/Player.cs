@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Player : SpriteGameObject
 {
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
-    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
+    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     public bool CoolBoots = false, SlimyBoots = false, Mirror = false;
     public float health = 100, maxhealth = 200;
     public float exp = 0,nextLevelExp = 100;
@@ -30,9 +30,10 @@ public class Player : SpriteGameObject
     float shoottimer = 0;
     public string lastUsedspeed;
     public Rectangle collisionhitbox;
+    bool startup = true;
 
     public Player(int layer = 0, string id = "Player")
-    : base("Sprites/PlayerFront", 0, "Player")
+    : base("Sprites/Characters/PlayerFront", 0, "Player")
     {
         bullets = new GameObjectList();
         healthbar = new HealthBar(health, maxhealth, position, true);
@@ -54,6 +55,12 @@ public class Player : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
+        if (startup)
+        {
+            inventory.startUp();
+            startup = false;
+        }
+
         base.Update(gameTime);
         collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
         if (extraspeed < 0)
@@ -63,13 +70,13 @@ public class Player : SpriteGameObject
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
         NextLevel();
-        if (health > maxhealth)
-        {
-            health = maxhealth;
-        }
         if (health <= 0)
         {
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
+        }
+        else if (health > maxhealth)
+        {
+            health = maxhealth;
         }
 
         if (shoottimer < 0)
@@ -77,7 +84,7 @@ public class Player : SpriteGameObject
             shoottimer = 0;
         }
 
-        if (shoottimer > 0)
+        else if (shoottimer > 0)
         {
             shoottimer--;
         }
@@ -104,25 +111,25 @@ public class Player : SpriteGameObject
             {
                 position.Y -= speed;
                 lastUsedspeed = "up";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerBack");
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerBack");
             }
             if (inputHelper.IsKeyDown(Keys.S))
             {
                 position.Y += speed;
                 lastUsedspeed = "down";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
             }
             if (inputHelper.IsKeyDown(Keys.D))
             {
                 position.X += speed;
                 lastUsedspeed = "right";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerRight");
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
             }
             if (inputHelper.IsKeyDown(Keys.A))
             {
                 position.X -= speed;
                 lastUsedspeed = "left";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerLeft");
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
             }
         }
         else
@@ -191,7 +198,8 @@ public class Player : SpriteGameObject
         foreach (Bullet bullet in RemoveBullets)
         {
             PlayingState.player.bullets.Remove(bullet);
-        }   
+        }
+        startup = true;
     }
 
     public void NextLevel()
@@ -275,6 +283,13 @@ public class Player : SpriteGameObject
         }
     }
 
+    public void changeMaxHealth(float changeAmout)
+    {
+        float currentHealthPercentage = health / maxhealth;
+        maxhealth += changeAmout;
+        health = maxhealth * currentHealthPercentage;
+    }
+
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(playersprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
@@ -289,8 +304,14 @@ public class Player : SpriteGameObject
 
         }
 
-        inventory.currentArmour.DrawOnPlayer(gameTime, spriteBatch);
-        inventory.currentWeapon.DrawOnPlayer(gameTime, spriteBatch);
+        if (inventory.currentArmour != null)
+        {
+            inventory.currentArmour.DrawOnPlayer(gameTime, spriteBatch);
+        }
+        if (inventory.currentWeapon != null)
+        {
+            inventory.currentWeapon.DrawOnPlayer(gameTime, spriteBatch);
+        }
         
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);

@@ -25,6 +25,7 @@ class Mirror : Item, IShield
     public override void unequip()
     {
         PlayingState.player.Mirror = false;
+        base.unequip();
     }
 
     public float AddedDefence

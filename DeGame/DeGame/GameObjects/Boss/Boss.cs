@@ -16,12 +16,12 @@ public class Boss :  SpriteGameObject
     Vector2 Roomposition;
     public bool alive = true;
 
-    public Boss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base("Sprites/Enemies/Boss", layer, id)
+    public Boss(Vector2 startPosition, Vector2 roomposition, string assetname, int layer = 0, string id = "Boss") : base(assetname, layer, id)
     {
         position = startPosition;
         healthbar = new HealthBar(health, maxhealth, position, false, true);
         Roomposition = roomposition;
-}
+    }
 
     public override void Update(GameTime gameTime)
     {
@@ -41,7 +41,6 @@ public class Boss :  SpriteGameObject
 
         if (health <= 0 && alive)
         {
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position + new Vector2(30, 50));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position + new Vector2(-40, 10));
