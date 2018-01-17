@@ -12,7 +12,7 @@ class BossBullet : E_Bullet
     Vector2 direction, actualvelocity, difference, Homingdifference, Bulletorigin;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     SpriteEffects Effects;
-    float speed = 0.5f;
+    float speed = 5f;
     int health = 100, maxhealth = 100;
     bool Homing, reflected = false;
     double opposite;

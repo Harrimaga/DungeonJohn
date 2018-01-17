@@ -52,9 +52,9 @@ public class Boss1 : Boss
             {
                 
                 bullet1 = new BossBullet(bulletdamage, speed, position + new Vector2(sprite.Width, (sprite.Height / 2) - (2 * bulletsprite.Height) + 10), SpriteEffects.None, Hmng);
-                    //bullet2 = new BossBullet(bulletdamage + 4, speed, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0), true);
-                    //bullet3 = new BossBullet(bulletdamage, speed, position + new Vector2(sprite.Width - bulletsprite.Width, 0));
-                    //PlayingState.currentFloor.currentRoom.enemybullets.Add(bullet1);
+               // bullet1 = new BossBullet(bulletdamage + 4, speed, position + new Vector2(sprite.Width / 2 - bulletsprite.Width / 2, 0), SpriteEffects.None);
+               // bullet1 = new BossBullet(bulletdamage, speed, position + new Vector2(sprite.Width - bulletsprite.Width, 0)), ;
+                    //PlayingState.currentFloor.currentRoom.enemybullets.Add(bullet1);uogifdsfdaasthdjfkjljlk
                     //PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].homingenemybullets.Add(bullet2);
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet1);
                 Counter = 100;
