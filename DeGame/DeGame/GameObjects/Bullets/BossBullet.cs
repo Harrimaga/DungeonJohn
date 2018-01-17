@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 class BossBullet : E_Bullet
 {
     HealthBar healthbar;
-    Vector2 direction, actualvelocity, difference, Homingdifference, Bulletorigin;
+    Vector2 direction, actualvelocity, difference, Homingdifference, BulletOrigin, HomingPlayerOrigin, PlayerOrigin;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     SpriteEffects Effects;
     float speed = 5f;
@@ -27,8 +27,9 @@ class BossBullet : E_Bullet
         Homing = homing;
         Damage = damage;
         Effects = effects;
-        Bulletorigin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-        difference = PlayingState.player.position - position;
+        PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
+        BulletOrigin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+        difference = PlayerOrigin - position;
         difference.Normalize();
         RotateAngle = (float)Math.Atan2(difference.Y, difference.X);
 
@@ -36,7 +37,8 @@ class BossBullet : E_Bullet
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        Homingdifference = PlayingState.player.position - position;
+        HomingPlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
+        Homingdifference = HomingPlayerOrigin - position;
         Homingdifference.Normalize();
         HomingRotateAngle = (float)Math.Atan2(Homingdifference.Y, Homingdifference.X);
         //opposite = PlayingState.player.position.Y - position.Y;
