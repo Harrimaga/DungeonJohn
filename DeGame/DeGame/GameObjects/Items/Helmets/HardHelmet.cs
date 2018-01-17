@@ -15,7 +15,7 @@ class HardHelmet : Item, IHelmet
     public void Equip()
     {
         PlayingState.player.damagereduction *= 0.8;
-        PlayingState.player.extraspeed--;
+        PlayingState.player.extraspeed-= 10;
     }
     public void unequip()
     {

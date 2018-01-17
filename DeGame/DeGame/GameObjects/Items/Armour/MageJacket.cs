@@ -15,7 +15,7 @@ class MageJacket : Item, IArmour
 
     public void Equip()
     {
-        PlayingState.player.extraspeed += 2;
+        PlayingState.player.extraspeed += 10;
     }
     public void Unequip()
     {

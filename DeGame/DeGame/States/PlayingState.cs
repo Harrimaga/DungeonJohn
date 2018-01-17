@@ -19,9 +19,14 @@ public class PlayingState : IGameObject
         player = new Player();
         floor = new Floor();
         currentFloor = floor;
-        Player.inventory.items.Add(new StandardBow());
-        Player.inventory.items.Add(new StandardBow());
+        Player.inventory.items.Add(new Mirror());
+        Player.inventory.items.Add(new HardHelmet());
         Player.inventory.items.Add(new CoolBoots());
+        Player.inventory.items.Add(new MageJacket());
+        Player.inventory.items.Add(new BloodRing());
+        Player.inventory.items.Add(new Mac10());
+        Player.inventory.items.Add(new Mac10());
+        Player.inventory.items.Add(new StandardBow());
         //Player.inventory.items.Add(new Mirror());
         //enemy = new RangedEnemy(Vector2.Zero, 0, "Enemy");
     }
