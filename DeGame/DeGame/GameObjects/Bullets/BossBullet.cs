@@ -21,14 +21,14 @@ class BossBullet : E_Bullet
     
     public BossBullet(float damage, float speed, Vector2 Startposition, SpriteEffects effects, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/Bullets/BossBullet", 0, "BossBullet") 
     {
+        PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
+        BulletOrigin = new Vector2(0, sprite.Height / 2);
         healthbar = new HealthBar(health, maxhealth, position);
         position = Startposition;
-        direction = (PlayingState.player.position - position);      
+        direction = (PlayerOrigin - position);      
         Homing = homing;
         Damage = damage;
         Effects = effects;
-        PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
-        BulletOrigin = new Vector2(0, sprite.Height / 2);
         difference = PlayerOrigin - position;
         difference.Normalize();
         RotateAngle = (float)Math.Atan2(difference.Y, difference.X);
@@ -119,7 +119,7 @@ class BossBullet : E_Bullet
 
     public void HomingBullet()
     {
-        direction = PlayingState.player.position - position;
+        direction = PlayerOrigin - position;
         direction.Normalize();
     }
 
