@@ -33,7 +33,7 @@ public class PlayingState : IGameObject
     public virtual void HandleInput(InputHelper inputHelper)
     {
         player.HandleInput(inputHelper);
-        if (inputHelper.currentKeyboardState.IsKeyDown(Keys.P) && inputHelper.previousKeyboardState.IsKeyUp(Keys.P))
+        if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
         }

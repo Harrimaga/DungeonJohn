@@ -131,6 +131,25 @@ public class Player : SpriteGameObject
                 lastUsedspeed = "left";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
             }
+
+            position.X += speed * inputHelper.currentGamePadState.ThumbSticks.Left.X;
+            position.Y -= speed * inputHelper.currentGamePadState.ThumbSticks.Left.Y;
+            switch (inputHelper.getThumpDirection("left"))
+            {
+                case "up":
+                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerBack");
+                    break;
+                case "down":
+                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+                    break;
+                case "right":
+                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
+                    break;
+                case "left":
+                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
+                    break;
+            }
+
         }
         else
         {
@@ -154,24 +173,24 @@ public class Player : SpriteGameObject
         if (ammo > 0 || ammo == -1)
         {
             // Player shooting
-            if (inputHelper.IsKeyDown(Keys.Up))
+            if (inputHelper.IsKeyDown(Keys.Up) || inputHelper.getThumpDirection("right") == "up")
             {
                 Shoot(1);
             }
-            else if (inputHelper.IsKeyDown(Keys.Down))
+            else if (inputHelper.IsKeyDown(Keys.Down) || inputHelper.getThumpDirection("right") == "down")
             {
                 Shoot(2);
             }
-            else if (inputHelper.IsKeyDown(Keys.Left))
+            else if (inputHelper.IsKeyDown(Keys.Left) || inputHelper.getThumpDirection("right") == "left")
             {
                 Shoot(3);
             }
-            else if (inputHelper.IsKeyDown(Keys.Right))
+            else if (inputHelper.IsKeyDown(Keys.Right) || inputHelper.getThumpDirection("right") == "right")
             {
                 Shoot(4);
             }
         }
-        if(leveltokens > 0 && inputHelper.KeyPressed(Keys.O))
+        if(leveltokens > 0 && (inputHelper.KeyPressed(Keys.O) || inputHelper.ButtonPressed(Buttons.RightTrigger)))
         {
             leveltokens--;
             GameEnvironment.gameStateManager.SwitchTo("Leveling");

@@ -21,7 +21,7 @@ class PauseMenuState : IGameObject
     }
     public virtual void HandleInput(InputHelper inputHelper)
     {
-        if (inputHelper.KeyPressed(Keys.P))
+        if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
             startup = true;
             GameEnvironment.gameStateManager.SwitchTo("Playing");
