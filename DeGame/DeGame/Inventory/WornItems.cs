@@ -25,8 +25,8 @@ public class WornItems : GameObjectList
         armourSlot = new ArmourSlot(position + new Vector2(74, 74));
         bootsSlot = new BootsSlot(position + new Vector2(74, 212));
         shieldShot = new ShieldSlot(position + new Vector2(212, 74));
-        passiveSlot1 = new PassiveSlot(position, Player.inventory.currentPassives[0]);
-        passiveSlot2 = new PassiveSlot(position + new Vector2(212, 0), Player.inventory.currentPassives[1]);
+        passiveSlot1 = new PassiveSlot(position, 1, Player.inventory.currentPassives[0]);
+        passiveSlot2 = new PassiveSlot(position + new Vector2(212, 0), 2, Player.inventory.currentPassives[1]);
 
         Add(weaponSlot);
         Add(helmetSlot);
@@ -35,6 +35,13 @@ public class WornItems : GameObjectList
         Add(shieldShot);
         Add(passiveSlot1);
         Add(passiveSlot2);
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        passiveSlot1.item = Player.inventory.currentPassives[0];
+        passiveSlot2.item = Player.inventory.currentPassives[1];
+        base.Update(gameTime);
     }
 
     public override Vector2 Position

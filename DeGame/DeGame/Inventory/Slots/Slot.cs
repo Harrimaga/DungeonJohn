@@ -41,27 +41,33 @@ public class Slot : SpriteGameObject
                 {
                     case "ArmourSlot":
                         Player.inventory.currentArmour.unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentArmour);
                         Player.inventory.currentArmour = null;
                         break;
                     case "BootsSlot":
                         Player.inventory.currentBoots.unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentBoots);
                         Player.inventory.currentBoots = null;
                         break;
                     case "HelmetSlot":
                         Player.inventory.currentHelmet.unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentHelmet);
                         Player.inventory.currentHelmet = null;
                         break;
                     case "PassiveSlot":
                         PassiveSlot slot = (PassiveSlot)this;
-                        slot.item.unequip();
-                        slot.item = null;
+                        Player.inventory.currentPassives[slot.slotno - 1].unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentPassives[slot.slotno - 1]);
+                        Player.inventory.currentPassives[slot.slotno - 1] = null;
                         break;
                     case "ShieldSlot":
                         Player.inventory.currentShield.unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentShield);
                         Player.inventory.currentShield = null;
                         break;
                     case "WeaponSlot":
                         Player.inventory.currentWeapon.unequip();
+                        Player.inventory.addItemToInventory(Player.inventory.currentWeapon);
                         Player.inventory.currentWeapon = null;
                         break;
                 }
