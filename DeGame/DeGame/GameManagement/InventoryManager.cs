@@ -108,6 +108,38 @@ public class InventoryManager
         }
     }
 
+    public void startUp()
+    {
+        if (currentArmour != null)
+        {
+            currentArmour.equip();
+        }
+        if (currentBoots != null)
+        {
+            currentBoots.equip();
+        }
+        if (currentHelmet != null)
+        {
+            currentHelmet.equip();
+        }
+        if (currentPassives[0] != null)
+        {
+            currentPassives[0].equip();
+        }
+        if (currentPassives[1] != null)
+        {
+            currentPassives[1].equip();
+        }
+        if (currentShield != null)
+        {
+            currentShield.equip();
+        }
+        if (currentWeapon != null)
+        {
+            currentWeapon.equip();
+        }
+    }
+
     public void addItemToInventory(Item item)
     {
         items.Add(item);

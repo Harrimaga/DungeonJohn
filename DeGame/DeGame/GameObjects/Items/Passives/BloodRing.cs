@@ -22,13 +22,13 @@ using System.Threading.Tasks;
             return damageMultiplier;
         }
     }
-    public void Equip()
+    public override void equip()
     {
-        PlayingState.player.maxhealth += 100;
+        PlayingState.player.changeMaxHealth(100);
     }
     public override void unequip()
     {
-        PlayingState.player.maxhealth -= 100;
+        PlayingState.player.changeMaxHealth(-100);
         base.unequip();
     }
 }

@@ -30,6 +30,7 @@ public class Player : SpriteGameObject
     float shoottimer = 0;
     public string lastUsedspeed;
     public Rectangle collisionhitbox;
+    bool startup = true;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Characters/PlayerFront", 0, "Player")
@@ -54,6 +55,12 @@ public class Player : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
+        if (startup)
+        {
+            inventory.startUp();
+            startup = false;
+        }
+
         base.Update(gameTime);
         collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
         if (extraspeed < 0)
@@ -191,7 +198,8 @@ public class Player : SpriteGameObject
         foreach (Bullet bullet in RemoveBullets)
         {
             PlayingState.player.bullets.Remove(bullet);
-        }   
+        }
+        startup = true;
     }
 
     public void NextLevel()
@@ -273,6 +281,13 @@ public class Player : SpriteGameObject
             inventory.currentWeapon = new StandardBow();
             CalculateAmmo();
         }
+    }
+
+    public void changeMaxHealth(float changeAmout)
+    {
+        float currentHealthPercentage = health / maxhealth;
+        maxhealth += changeAmout;
+        health = maxhealth * currentHealthPercentage;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
