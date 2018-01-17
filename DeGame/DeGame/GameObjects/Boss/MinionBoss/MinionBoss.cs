@@ -15,6 +15,7 @@ class MinionBoss : Boss
         expGive = 240;
         maxhealth = 400;
         health = maxhealth;
+
     }
 
     public override void Update(GameTime gameTime)

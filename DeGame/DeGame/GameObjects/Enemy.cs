@@ -64,9 +64,10 @@ public class Enemy : SpriteGameObject
 
     void CheckAlive()
     {
-        if (health <= 0 && alive == true && killable /*|| (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom" && EndRoom.cleared && bossenemy)*/)
+        if (health <= 0 && alive == true && killable)
         {
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
+            if (!bossenemy)
+                PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             if (drop)
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.player.exp += expGive;

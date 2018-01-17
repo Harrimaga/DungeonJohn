@@ -21,12 +21,12 @@ public class Player : SpriteGameObject
     public int ammo;
     public int gold = 0;
     public int level = 0;
+    public int leveltokens = 0;
     public SpriteEffects Effect;
     public float velocitybase = 5;
     HealthBar healthbar;
     public GameObjectList bullets;
     public static InventoryManager inventory;
-    int leveltokens = 0;
     float shoottimer = 0;
     public string lastUsedspeed;
     public Rectangle collisionhitbox;
@@ -325,5 +325,8 @@ public class Player : SpriteGameObject
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);
         bullets.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch);
+        if (leveltokens > 0)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/LevelUp"), new Vector2(position.X, position.Y - 30), Color.White);
+
     }
 }
