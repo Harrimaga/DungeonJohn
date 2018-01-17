@@ -111,6 +111,5 @@ class BossBullet : E_Bullet
     {
         //base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position);
-        //healthbar.Draw(spriteBatch);
     }
 }
