@@ -58,7 +58,17 @@ class ItemSpawn : SpriteGameObject
         }
         if (!pickedUp)
         {
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName), position - new Vector2(0, 30));
+            Texture2D itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
+            float scale = 50f / itemSprite.Height;
+            if (itemSprite.Width * scale > 50f)
+            {
+                scale = 50f / itemSprite.Width;
+            }
+            Vector2 itemPosition = new Vector2(0, 0);
+            itemPosition += position;
+            itemPosition.Y -= 30;
+            itemPosition.X -= -5 - 25 + (itemSprite.Width * scale) / 2;
+            spriteBatch.Draw(itemSprite, itemPosition, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
     }
 }

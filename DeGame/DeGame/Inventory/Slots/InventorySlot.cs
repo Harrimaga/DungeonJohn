@@ -73,7 +73,7 @@ public class InventorySlot : Slot
         float scale = (float)sprite.Height / itemSprite.Height;
         if (itemSprite.Width * scale > sprite.Width)
         {
-            scale = (float)sprite.Width / itemSprite.Height;
+            scale = (float)sprite.Width / itemSprite.Width;
         }
         return scale;
     }
