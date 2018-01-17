@@ -79,14 +79,13 @@ public class Player : SpriteGameObject
             health = maxhealth;
         }
 
-        if (shoottimer < 0)
-        {
-            shoottimer = 0;
-        }
-
-        else if (shoottimer > 0)
+        if (shoottimer > 0)
         {
             shoottimer--;
+        }
+        else
+        {
+            shoottimer = 0;
         }
         if (onIce && !onWeb && speed != 5 + extraspeed)
         {
@@ -232,12 +231,15 @@ public class Player : SpriteGameObject
         if (shoottimer == 0)
         {
             IWeapon weapon = (IWeapon)inventory.currentWeapon;
-            weapon.Attack(direction);
-            if (ammo > 0)
+            if (weapon != null)
             {
-                ammo--;
+                weapon.Attack(direction);
+                if (ammo > 0)
+                {
+                    ammo--;
+                }
+                shoottimer += weapon.AttackSpeed - attackspeedreduction;
             }
-            shoottimer += weapon.AttackSpeed - attackspeedreduction;
         }
     }
 
