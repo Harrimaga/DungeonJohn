@@ -62,47 +62,29 @@ public class CraftingSlots : GameObjectList
 
     public void RecipeCheck()
     {
-        if(itemSlot1.item == null || itemSlot2.item == null)
-        {
-            itemNew.item = null;
-        }
-        else if(itemSlot1.item != null && itemSlot2.item != null)
+        if (itemSlot1.item != null && itemSlot2.item != null)
         {
             for (int i = 0; i < recipe.list1.Count; i++)
             {
-                if(recipe.list1[i].itemName == itemSlot1.item.itemName)
+                if (recipe.list1[i].itemName == itemSlot1.item.itemName && recipe.list2[i].itemName == itemSlot2.item.itemName)
                 {
-                    if (recipe.list2[i].itemName == itemSlot2.item.itemName)
-                    {
-                        itemNew.AddItem(recipe.listNewItem[i]);
-                    }
+                    itemNew.AddItem(recipe.listNewItem[i]);
                 }
-                for (int c = 0; c < recipe.list1.Count; c++)
+                
+                if (recipe.list2[i].itemName == itemSlot1.item.itemName && recipe.list1[i].itemName == itemSlot2.item.itemName)
                 {
-                    if (recipe.list2[c].itemName == itemSlot1.item.itemName)
-                    {
-                        if (recipe.list1[c].itemName == itemSlot2.item.itemName)
-                        {
-                            itemNew.AddItem(recipe.listNewItem[c]);
-                        }
-                    }
+                    itemNew.AddItem(recipe.listNewItem[i]);
                 }
+                
             }
         }
     }
     public override void HandleInput(InputHelper inputHelper)
     {
-        // TODO: Implement
-        // Kijk of er twee items in zitten
-        // Als er 2 in zitten en je klikt op de +, kijk of ze samen een ander item vormen
-        // Als dit zo is, verwijder de items in de slots (gewoon het item weghalen en niet in Player.inventory toevoegen)
-        //      en voeg het gecrafte item toe aan Player.inventory
-
-        // Deze handle input moet alleen kijken naar de + (of whatever je ervan maakt), dus niet naar de twee slots.
-        //      De craftingslots hebben zelf hun HandleInput (in CraftingSlot.cs), dus houdt hier rekening mee dat je de goede boundingbox gebruikt! :p
         craftingB.HandleInput(inputHelper);
         children[0].HandleInput(inputHelper);
         children[1].HandleInput(inputHelper);
+        children[2].HandleInput(inputHelper);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -112,8 +94,6 @@ public class CraftingSlots : GameObjectList
             slot.Draw(gameTime, spriteBatch);
         }
         craftingB.Draw(gameTime, spriteBatch);
-        // TODO: draw functie implementeren.
-        // Hier wss de twee slots tekenen (met evt een + ertussen ofzo, verzin wat)
     }
 
     public override void Update(GameTime gameTime)
@@ -122,16 +102,15 @@ public class CraftingSlots : GameObjectList
         itemSlot1.Update(gameTime);
         itemSlot2.Update(gameTime);
         itemNew.Update(gameTime);
+        itemNew.item = null;
         RecipeCheck();
-        if(craftingB.Pressed && itemNew.item != null)
+        
+        if (craftingB.Pressed && itemNew.item != null)
         {
+            Player.inventory.addItemToInventory(itemNew.item);
             itemSlot1.item = null;
             itemSlot2.item = null;
-            Player.inventory.addItemToInventory(itemNew.item);
             itemNew.item = null;
         }
-        // TODO: imlement
-        // Weet niet of hier veel mee gedaan moet worden, misschien alleen de positie updaten ofzo? 
-        //      Hoeft niet als je in Crafting state elke keer in de draw of update een nieuwe instance maakt hiervan
     }
 }

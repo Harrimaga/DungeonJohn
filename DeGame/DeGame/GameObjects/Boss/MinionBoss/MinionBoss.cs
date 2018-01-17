@@ -8,7 +8,7 @@ class MinionBoss : Boss
     float bulletdamage = 20, speed = 2;
     EnemyBullet bullet;
 
-    public MinionBoss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
+    public MinionBoss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/MinionBoss",layer, id)
     {
         Roomposition = roomposition;
         position = startPosition;
@@ -22,7 +22,7 @@ class MinionBoss : Boss
         base.Update(gameTime);
         if (!EndRoom.trigger || health < 150)
             Shoot();
-        if (health < 300)
+        if (health < 300 && !EndRoom.cleared)
         {
             EndRoom.trigger = true;
         }
@@ -30,14 +30,12 @@ class MinionBoss : Boss
 
     public void Shoot()
     {
-        Vector2 bulletposition;
-        Vector2 direction;
         shootcounter--;
         if (shootcounter <= 0)
         {
-            direction = (PlayingState.player.position - position);
-            bulletposition = position + new Vector2(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss").Width / 2, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss").Height * .6f);
-            bullet = new EnemyBullet(bulletdamage, speed, bulletposition, direction,GameEnvironment.assetManager.GetSprite("Sprites/Bullets/MinionBossBullet"));
+            Vector2 bulletposition = new Vector2(sprite.Width / 2, sprite.Height * .6f);
+            Vector2 direction = (PlayingState.player.position - position);
+            EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + bulletposition, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/MinionBossBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
             shootcounter = 150;
         }

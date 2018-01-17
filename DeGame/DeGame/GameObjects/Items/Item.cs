@@ -49,30 +49,30 @@ public class Item
 
     public virtual void unequip()
     {
-
+        
     }
 
     public override string ToString()
     {
         return itemName;
     }
-
     public void DrawOnPlayer(GameTime gameTime, SpriteBatch spriteBatch)
     {
+
         //switch (PlayingState.player.lastUsedspeed)
         //{
-            //case "up":
-            //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + itemName + "up"), PlayingState.player.position, Color.White);
-            //    break;
-            //case "down":
-            //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + itemName + "down"), PlayingState.player.position, Color.White);
-            //    break;
-            //case "right":
-            //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + itemName + "right"), PlayingState.player.position, Color.White);
-            //    break;
-            //case "left":
-            //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + itemName + "left"), PlayingState.player.position, Color.White);
-            //    break;
+        //case "up":
+        //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + itemName + "up"), PlayingState.player.position, Color.White);
+        //    break;
+        //case "down":
+        //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + itemName + "down"), PlayingState.player.position, Color.White);
+        //    break;
+        //case "right":
+        //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + itemName + "right"), PlayingState.player.position, Color.White);
+        //    break;
+        //case "left":
+        //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/" + itemName + "left"), PlayingState.player.position, Color.White);
+        //    break;
         //}
     }
 }

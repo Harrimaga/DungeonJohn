@@ -76,9 +76,9 @@ class HealthBar
     public void Draw(SpriteBatch spriteBatch)
     {
         if (isPlayer)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HealthbarBackground"), new Vector2(GameEnvironment.WindowSize.X - 5 + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - 5 - GameEnvironment.WindowSize.Y / 2 + 300), Color.White);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/damagehealthbar"), healthbar, Color.White);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/healthbar"), healthbar2, Color.White);
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/HealthbarBackground"), new Vector2(GameEnvironment.WindowSize.X - 5 + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - 5 - GameEnvironment.WindowSize.Y / 2 + 300), Color.White);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/damagehealthbar"), healthbar, Color.White);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/healthbar"), healthbar2, Color.White);
         if (isBoss)
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), HP, new Vector2(healthbar.X + 450, healthbar.Y), Color.White);
         else

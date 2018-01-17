@@ -26,14 +26,14 @@ class PitState : IGameObject
         r = new Random();
         int random = r.Next(100);
         if (random < 20)
-            pitroomnumber = 111;
+            pitroomnumber = 1;
         else if (random < 50)
-            pitroomnumber = 111;
+            pitroomnumber = 2;
         else
-            pitroomnumber = 111;
+            pitroomnumber = 3;
 
         actualroom = PlayingState.currentFloor.floor[x, y];
-        PlayingState.currentFloor.floor[x, y] = new Room(pitroomnumber, x, y);
+        PlayingState.currentFloor.floor[x, y] = new Room("Pitrooms", pitroomnumber, x, y);
         PlayingState.currentFloor.floor[x, y].LoadTiles();
         player2 = PlayingState.player;
         player2.position = new Vector2(10 * PlayingState.currentFloor.currentRoom.CellWidth + x * PlayingState.currentFloor.currentRoom.roomwidth, 7 * PlayingState.currentFloor.currentRoom.CellHeight + y * PlayingState.currentFloor.currentRoom.roomheight);
@@ -54,7 +54,7 @@ class PitState : IGameObject
 
     public void PitExit(GameTime gameTime)
     {
-        MiddleofPlayer = new Vector2(player2.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, player2.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
+        MiddleofPlayer = new Vector2(player2.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width / 2, player2.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 2);
 
         if (PlayingState.currentFloor.floor[x, y].enemycounter == 0)
         {

@@ -26,7 +26,7 @@ public class Enemy : SpriteGameObject
     : base(assetname, layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
-        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
         position = startPosition;
         velocity = basevelocity;
         Roomposition = roomposition;
@@ -64,7 +64,7 @@ public class Enemy : SpriteGameObject
 
     void CheckAlive()
     {
-        if (health <= 0 && alive == true && killable || (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom" && EndRoom.cleared && bossenemy))
+        if (health <= 0 && alive == true && killable /*|| (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom" && EndRoom.cleared && bossenemy)*/)
         {
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             if (drop)
@@ -79,7 +79,6 @@ public class Enemy : SpriteGameObject
     {
         direction = PlayingState.player.position - position;
         direction.Normalize();
-        actualvelocity = direction * velocity;
     }
 
     protected void CollisionWithEnemy()
