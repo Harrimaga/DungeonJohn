@@ -11,7 +11,7 @@ class CreamBatBoss : Boss
     float bulletdamage = 10, speed = 5;
     Vector2 moving, MoveDirection, bulletPosition;
 
-    public CreamBatBoss(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Boss") : base(startPosition, roomposition, layer, id)
+    public CreamBatBoss(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/CreamBatSprite1", Difficulty, layer, id)
     {
         Roomposition = roomposition;
         position = startPosition;
