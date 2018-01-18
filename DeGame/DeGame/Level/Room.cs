@@ -272,7 +272,8 @@ public class Room : GameObjectList
                 PlayingState.player.onSolid = false;
             else
                 PlayingState.player.onSolid = true;
-switch (Lastentrypoint)
+
+            switch (Lastentrypoint)
             {
                 case 1:
                     LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 2 * CellHeight + b * roomheight);
