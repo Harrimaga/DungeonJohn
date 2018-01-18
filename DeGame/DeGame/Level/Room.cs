@@ -79,6 +79,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Rock";
                 CreateObject(x, y, "!");
                 break;
+            case 'A':
+                roomarray[x, y] = "IceRock";
+                CreateObject(x, y, "A");
+                break;
             case '+':
                 roomarray[x, y] = "Wall";
                 CreateObject(x, y, "+");
@@ -357,6 +361,11 @@ public class Room : GameObjectList
                 Solid rock = new Rock(TilePosition, 0, "Rock");
                 solid.Add(rock);
                 roomarray[x, y] = "Background";
+                break;
+            case ("A"):
+                Solid icerock = new Rock(TilePosition, 0, "Rock", true);
+                solid.Add(icerock);
+                CreateObject(x, y, "G");
                 break;
             case ("+"):
                 Solid wall = new Wall(TilePosition, 0, "Wall");

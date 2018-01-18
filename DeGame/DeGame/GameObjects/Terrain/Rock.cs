@@ -9,10 +9,13 @@ using System.Threading.Tasks;
 
 class Rock : Solid
 {
-    public Rock(Vector2 startPosition, int layer = 0, string id = "Rock")
+    bool IceRock;
+
+    public Rock(Vector2 startPosition, int layer = 0, string id = "Rock", bool icerock = false)
     : base(startPosition, layer, id)
     {
         position = startPosition;
+        IceRock = icerock;
     }
 
 
@@ -23,6 +26,9 @@ class Rock : Solid
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Rock Sprite"), position);
+        if (!IceRock)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Rock Sprite"), position);
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Ice Rock Sprite"), position);
     }
 }
