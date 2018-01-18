@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class TurretEnemy : Enemy
 {
     int Counter = 0, Directioncount;
-    float bulletdamage = 3;
+    float bulletdamage = 10;
     float speed = 3f;
     Vector2 direction, BulletPosition;
 

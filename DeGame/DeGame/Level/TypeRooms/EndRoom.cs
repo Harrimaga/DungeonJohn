@@ -30,7 +30,7 @@ class EndRoom : Room
     public string ChooseBoss(int currentlevel)
     {
         if (currentlevel == 1)
-            return "HomingBoss";
+            return "CreamBatBoss";
         else
             return "MinionBoss";
     }
@@ -50,6 +50,10 @@ class EndRoom : Room
                 MinionSpawner factory2 = new MinionSpawner(new Vector2(12 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a, b));
                 enemies.Add(factory1);
                 enemies.Add(factory2);
+                break;
+            case ("CreamBatBoss"):
+                CreamBatBoss CreamBatBoss = new CreamBatBoss(new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a, b));
+                bosses.Add(CreamBatBoss);
                 break;
             default:
                 SpamEnemy spam = new SpamEnemy(new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a, b));

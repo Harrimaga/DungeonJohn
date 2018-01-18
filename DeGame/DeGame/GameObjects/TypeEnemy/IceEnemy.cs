@@ -4,8 +4,8 @@ using System;
 
 public class IceEnemy : Enemy
 {
-    int Counter = 0;
-    float bulletdamage = 5;
+    int Counter = 50;
+    float bulletdamage = 10;
     float speed = 1.5f;
     Vector2 direction;
 
@@ -14,16 +14,16 @@ public class IceEnemy : Enemy
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyIceBullet");
         velocity = new Vector2(0.5f, 0.5f);
-        Console.WriteLine("Playerposition" + PlayingState.player.position);
-        Console.WriteLine("position = " + position);
-        Console.WriteLine("direction =" + direction);
+        //Console.WriteLine("Playerposition" + PlayingState.player.position);
+        //Console.WriteLine("position = " + position);
+        //Console.WriteLine("direction =" + direction);
         killable = false;
     }
 
     public void Range()
     {
         Counter++;
-        if (Counter >= 150)
+        if (Counter >= 100)
         {
             if (PlayingState.player.position.X + range > position.X || PlayingState.player.position.X - range < position.X ||
             PlayingState.player.position.Y + range > position.Y || PlayingState.player.position.Y - range < position.Y)

@@ -33,6 +33,7 @@ public class Boss1 : Boss
         {
             Shoot();
         }
+        FinalStage();
     }
 
     public void Shoot()
