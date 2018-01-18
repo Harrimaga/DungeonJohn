@@ -29,9 +29,9 @@ class EndRoom : Room
 
     public string ChooseBoss(int currentlevel)
     {
-        //if (currentlevel == 1)
-        //    return "HomingBoss";
-        //else
+        if (currentlevel == 1)
+            return "HomingBoss";
+        else
             return "MinionBoss";
     }
 
