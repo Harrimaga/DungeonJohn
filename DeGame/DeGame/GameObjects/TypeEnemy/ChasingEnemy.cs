@@ -3,9 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class ChasingEnemy : Enemy
 {
-    public ChasingEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/BearEnemyPixel", layer, id)
+    public ChasingEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/BearEnemyPixel", Difficulty, layer, id)
     {
         basevelocity = new Vector2(1.3f, 1.3f);
+        health = 120 * statmultiplier;
+        maxhealth = 120 * statmultiplier;
+        expGive = 120 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)

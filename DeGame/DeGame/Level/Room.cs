@@ -290,59 +290,57 @@ switch (Lastentrypoint)
 
     public void CreateObject(int x, int y, string Type)
     {
+        int enemylevel = PlayingState.currentFloor.displayint;
         TilePosition = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
-        //Enemy enemyChase;
-        //Enemy enemyRanged;
-        //Enemy enemy;
         switch (Type)
         {
             case ("C"):
-                Enemy enemyChase = new ChasingEnemy(TilePosition, new Vector2(a, b), 0, "ChasingEnemy");
+                Enemy enemyChase = new ChasingEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "ChasingEnemy");
                 enemies.Add(enemyChase);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("R"):
-                Enemy enemyRanged = new RangedEnemy(TilePosition, new Vector2(a, b), 0, "RangedEnemy");
+                Enemy enemyRanged = new RangedEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("Q"):
-                Enemy enemySpam = new SpamEnemy(TilePosition, new Vector2(a, b), 0, "SpamEnemy");
+                Enemy enemySpam = new SpamEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "SpamEnemy");
                 enemies.Add(enemySpam);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("U"):
-                Enemy enemyTurretUp = new TurretEnemy(TilePosition, new Vector2(a, b), 1, 0, "TurretEnemyUp");
+                Enemy enemyTurretUp = new TurretEnemy(TilePosition, new Vector2(a, b), 1, enemylevel, 0, "TurretEnemyUp");
                 enemies.Add(enemyTurretUp);
                 roomarray[x, y] = "Background";
                 break;
             case ("D"):
-                Enemy enemyTurretDown = new TurretEnemy(TilePosition, new Vector2(a, b), 2, 0, "TurretEnemyDown");
+                Enemy enemyTurretDown = new TurretEnemy(TilePosition, new Vector2(a, b), 2, enemylevel, 0, "TurretEnemyDown");
                 enemies.Add(enemyTurretDown);
                 roomarray[x, y] = "Background";
                 break;
             case ("F"):
-                Enemy enemyTurretLeft = new TurretEnemy(TilePosition, new Vector2(a, b), 3, 0, "TurretEnemyLeft");
+                Enemy enemyTurretLeft = new TurretEnemy(TilePosition, new Vector2(a, b), 3, enemylevel, 0, "TurretEnemyLeft");
                 enemies.Add(enemyTurretLeft);
                 roomarray[x, y] = "Background";
                 break;
             case ("T"):
-                Enemy enemyTurretRight = new TurretEnemy(TilePosition, new Vector2(a, b), 4, 0, "TurretEnemyRight");
+                Enemy enemyTurretRight = new TurretEnemy(TilePosition, new Vector2(a, b), 4, enemylevel, 0, "TurretEnemyRight");
                 enemies.Add(enemyTurretRight);
                 roomarray[x, y] = "Background";
                 break;
             case ("P"):
-                Enemy enemySpider = new SpiderEnemy(TilePosition, new Vector2(a, b), 0, "SpiderEnemy");
+                Enemy enemySpider = new SpiderEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "SpiderEnemy");
                 enemies.Add(enemySpider);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("K"):
                 CreateObject(x, y, "G");
-                Enemy enemyIce = new IceEnemy(TilePosition, new Vector2(a, b), 0, "IceEnemy");
+                Enemy enemyIce = new IceEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "IceEnemy");
                 enemies.Add(enemyIce);
                 break;
             case ("B"):

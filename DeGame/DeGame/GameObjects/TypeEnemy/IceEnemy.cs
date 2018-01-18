@@ -5,15 +5,16 @@ using System;
 public class IceEnemy : Enemy
 {
     int Counter = 0;
-    float bulletdamage = 5;
+    float bulletdamage;
     float speed = 1.5f;
     Vector2 direction;
 
-    public IceEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition,"Sprites/Enemies/IceEnemy", layer, id)
+    public IceEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition,"Sprites/Enemies/IceEnemy", Difficulty, layer, id)
     {
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyIceBullet");
         velocity = new Vector2(0.5f, 0.5f);
+        bulletdamage = 5 * statmultiplier;
         Console.WriteLine("Playerposition" + PlayingState.player.position);
         Console.WriteLine("position = " + position);
         Console.WriteLine("direction =" + direction);
