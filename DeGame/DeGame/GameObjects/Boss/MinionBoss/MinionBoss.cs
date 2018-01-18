@@ -29,6 +29,7 @@ class MinionBoss : Boss
         {
             EndRoom.trigger = true;
         }
+        FinalStage();
     }
 
     public void Shoot()
