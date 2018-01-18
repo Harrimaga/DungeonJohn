@@ -71,9 +71,8 @@ class CreamBatBoss : Boss
     {
         if (shootcounter1 <= 0)
         {
-            Vector2 ShootDirection = (PlayingState.player.position - position);
+            Vector2 ShootDirection = PlayerOrigin - (position + bulletPosition);
             ShootDirection.Normalize();
-            Vector2 bulletPosition = new Vector2(sprite.Width / 2, 50);
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + bulletPosition, ShootDirection, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/CreamBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
             if (Stage == 1)
