@@ -346,7 +346,7 @@ switch (Lastentrypoint)
                 enemies.Add(enemyIce);
                 break;
             case ("B"):
-                Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, "Boss1");
+                Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, 0, "Boss1");
                 bosses.Add(boss);
                 break;
             case ("!"):

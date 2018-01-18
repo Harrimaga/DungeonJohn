@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Input;
 
 public class Floor
 {
-    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, displayint = 1, q;
+    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, q;
     public Room currentRoom;
-    public int screenwidth, screenheight, used, CurrentLevel = 1, doortimer = 0;
+    public int screenwidth, screenheight, used, CurrentLevel = 1, doortimer = 0, displayint = 1;
     public bool FloorGenerated = false;
     public Vector2 startPlayerPosition;
     Random random = new Random();
