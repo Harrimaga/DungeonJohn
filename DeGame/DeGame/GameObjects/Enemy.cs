@@ -26,7 +26,7 @@ public class Enemy : SpriteGameObject
     : base(assetname, layer, id)
     {
         healthbar = new HealthBar(health, maxhealth, position);
-        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
         position = startPosition;
         velocity = basevelocity;
         Roomposition = roomposition;
@@ -64,9 +64,10 @@ public class Enemy : SpriteGameObject
 
     void CheckAlive()
     {
-        if (health <= 0 && alive == true && killable || (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom" && EndRoom.cleared && bossenemy))
+        if (health <= 0 && alive == true && killable)
         {
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
+            if (!bossenemy)
+                PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             if (drop)
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.player.exp += expGive;
@@ -79,7 +80,6 @@ public class Enemy : SpriteGameObject
     {
         direction = PlayingState.player.position - position;
         direction.Normalize();
-        actualvelocity = direction * velocity;
     }
 
     protected void CollisionWithEnemy()
@@ -121,13 +121,13 @@ public class Enemy : SpriteGameObject
         {
             while (CollidesWith(s))
             {
-                if (velocity.X > 0)
+                if (actualvelocity.X > 0)
                     position.X--;
-                if (velocity.X < 0)
+                if (actualvelocity.X < 0)
                     position.X++;
-                if (velocity.Y > 0)
+                if (actualvelocity.Y > 0)
                     position.Y--;
-                if (velocity.Y < 0)
+                if (actualvelocity.Y < 0)
                     position.Y++;
             }
         }

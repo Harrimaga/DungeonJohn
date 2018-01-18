@@ -12,7 +12,7 @@ class Ice : Tiles
 
     public override void Update(GameTime gameTime)
     {
-        if (CollidesWith(PlayingState.player))
+        if (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
         {
             OnThisTile = true;
         }

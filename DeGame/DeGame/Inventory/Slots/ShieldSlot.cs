@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 public class ShieldSlot : Slot
 {
-
-    public ShieldSlot(Vector2 position, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/ShieldSlot", layer, id)
+    public ShieldSlot(Vector2 position, int layer = 0, string id = "ShieldSlot") : base ("Sprites/InventorySlots/ShieldSlot", layer, id)
     {
         this.position = position;
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/ShieldSlot");
@@ -27,6 +26,8 @@ public class ShieldSlot : Slot
         {
             itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentShield.itemName);
         }
+
+        item = Player.inventory.currentShield;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -36,5 +37,6 @@ public class ShieldSlot : Slot
         {
             InventorySlot.DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
         }
+        base.Draw(gameTime, spriteBatch);
     }
 }

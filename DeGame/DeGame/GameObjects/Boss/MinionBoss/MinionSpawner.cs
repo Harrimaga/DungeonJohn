@@ -15,6 +15,7 @@ class MinionSpawner : Enemy
         backgroundenemy = true;
         drop = false;
         bossenemy = true;
+        expGive = 0;
     }
 
     public override void Update(GameTime gameTime)

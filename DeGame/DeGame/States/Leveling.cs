@@ -34,7 +34,7 @@ class Leveling : IGameObject
         playingState.Draw(gameTime, spriteBatch);
         attackB.Draw(gameTime, spriteBatch);
         healthB.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/LevelUp"), new Vector2(350,100) + BasisPosition);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/LevelUp"), new Vector2(350,100) + BasisPosition);
         //spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Level-Up",BasisPosition + new Vector2(600,240), Color.Black);
         //spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/pauze"), BasisPosition);
     }

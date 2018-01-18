@@ -25,15 +25,19 @@ public class WeaponSlot : Slot
         {
             itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + Player.inventory.currentWeapon.itemName);
         }
+
+        item = Player.inventory.currentWeapon;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(sprite, position);
         if (Player.inventory.currentWeapon != null)
         {
             InventorySlot.DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
         }
+        
     }
 }
 

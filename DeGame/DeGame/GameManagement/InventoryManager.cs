@@ -35,22 +35,19 @@ public class InventoryManager
                     currentHelmet.unequip();
                     items[items.IndexOf(item)] = currentHelmet;
                 }
-                else
-                {
-                    removeItemFromInventory(item);
-                }
                 currentHelmet = item;
                 currentHelmet.equip();
+                removeItemFromInventory(item);
                 break;
             case "armour":
                 if (currentArmour != null)
                 {
                     currentArmour.unequip();
-                    addItemToInventory(currentArmour);
+                    items[items.IndexOf(item)] = currentArmour;
                 }
                 currentArmour = item;
-                removeItemFromInventory(item);
                 currentArmour.equip();
+                removeItemFromInventory(item);
                 break;
             case "boots":
                 if (currentBoots != null)
@@ -58,12 +55,9 @@ public class InventoryManager
                     currentBoots.unequip();
                     items[items.IndexOf(item)] = currentBoots;
                 }
-                else
-                {
-                    removeItemFromInventory(item);
-                }
                 currentBoots = item;
                 currentBoots.equip();
+                removeItemFromInventory(item);
                 break;
             case "weapon":
                 if (currentWeapon != null)
@@ -71,12 +65,9 @@ public class InventoryManager
                     currentWeapon.unequip();
                     items[items.IndexOf(item)] = currentWeapon;
                 }
-                else
-                {
-                    removeItemFromInventory(item);
-                }
                 currentWeapon = item;
                 currentWeapon.equip();
+                removeItemFromInventory(item);
                 PlayingState.player.CalculateAmmo();
                 PlayingState.player.CalculateDamage();
                 break;
@@ -84,27 +75,70 @@ public class InventoryManager
                 if (currentShield != null)
                 {
                     currentShield.unequip();
-                    addItemToInventory(currentShield);
+                    items[items.IndexOf(item)] = currentShield;
                 }
                 currentShield = item;
-                removeItemFromInventory(item);
                 currentShield.equip();
+                removeItemFromInventory(item);
                 break;
             case "passive":
-                if (currentPassives.Count() == 2)
+                if (currentPassives[0] == null)
+                {
+                    currentPassives[0] = item;
+                    currentPassives[0].equip();
+                    removeItemFromInventory(item);
+                }
+                else if (currentPassives[1] == null)
+                {
+                    currentPassives[1] = item;
+                    currentPassives[1].equip();
+                    removeItemFromInventory(item);
+                }
+                else
                 {
                     currentPassives[1].unequip();
+                    items[items.IndexOf(item)] = currentPassives[1];
                     currentPassives[1] = currentPassives[0];
-                    addItemToInventory(currentPassives[1]);
+                    currentPassives[0] = item;
+                    currentPassives[0].equip();
                 }
-                currentPassives[0] = item;
-                removeItemFromInventory(item);
-                currentPassives[0].equip();
                 PlayingState.player.CalculateAmmo();
                 PlayingState.player.CalculateDamage();
                 break;
         }
-    }    
+    }
+
+    public void startUp()
+    {
+        if (currentArmour != null)
+        {
+            currentArmour.equip();
+        }
+        if (currentBoots != null)
+        {
+            currentBoots.equip();
+        }
+        if (currentHelmet != null)
+        {
+            currentHelmet.equip();
+        }
+        if (currentPassives[0] != null)
+        {
+            currentPassives[0].equip();
+        }
+        if (currentPassives[1] != null)
+        {
+            currentPassives[1].equip();
+        }
+        if (currentShield != null)
+        {
+            currentShield.equip();
+        }
+        if (currentWeapon != null)
+        {
+            currentWeapon.equip();
+        }
+    }
 
     public void addItemToInventory(Item item)
     {

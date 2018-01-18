@@ -12,7 +12,7 @@ public class IceEnemy : Enemy
     public IceEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition,"Sprites/Enemies/IceEnemy", layer, id)
     {
         position = startPosition;
-        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/EnemyIceBullet");
+        bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyIceBullet");
         velocity = new Vector2(0.5f, 0.5f);
         //Console.WriteLine("Playerposition" + PlayingState.player.position);
         //Console.WriteLine("position = " + position);

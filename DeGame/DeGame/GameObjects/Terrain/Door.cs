@@ -199,10 +199,7 @@ class Door : Solid
         if (DoorNumber > 0)
         {
             ChooseSprite();
-            if (direction == 4)
-                spriteBatch.Draw(doorsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
-            else
-                spriteBatch.Draw(doorsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
+            spriteBatch.Draw(doorsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
         }
     }
 }

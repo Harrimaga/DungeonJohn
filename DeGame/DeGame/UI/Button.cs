@@ -13,7 +13,7 @@ class Button : SpriteGameObject
     bool withouttext;
 
     public Button(Vector2 startposition, string text, string imageAsset, string imageAssetPressed,bool withoutText, int layer = 0, string id = "")
-        : base("Sprites/Button Sprite", 0, "button")
+        : base("Sprites/Buttons/Button Sprite", 0, "button")
     {
         pressed = false;
         withouttext = withoutText;
@@ -21,8 +21,8 @@ class Button : SpriteGameObject
         buttontext = text;
         textureNormal = imageAsset;
         texturePressed  = imageAssetPressed;
-        spriteWidth = GameEnvironment.assetManager.GetSprite("Sprites/" + imageAsset).Width;
-        spriteHeight = GameEnvironment.assetManager.GetSprite("Sprites/" + imageAsset).Height;
+        spriteWidth = GameEnvironment.assetManager.GetSprite("Sprites/Buttons/" + imageAsset).Width;
+        spriteHeight = GameEnvironment.assetManager.GetSprite("Sprites/buttons/" + imageAsset).Height;
     }
 
     public override Rectangle BoundingBox
@@ -52,9 +52,9 @@ class Button : SpriteGameObject
             return;
 
         if(hover)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/" + texturePressed), position, Color.White);
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Buttons/" + texturePressed), position, Color.White);
         else
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/" + textureNormal), position, Color.White);
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Buttons/" + textureNormal), position, Color.White);
 
         if(!withouttext)
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), buttontext, position + new Vector2(12, 5), Color.White);

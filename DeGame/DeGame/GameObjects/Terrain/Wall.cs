@@ -13,6 +13,8 @@ class Wall : Solid
     : base(startPosition, layer, id)
     {
         position = startPosition;
+        Rectangle newBoundingBox = new Rectangle((int)startPosition.X, (int)startPosition.Y, GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite").Width, GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite").Height);
+        //BoundingBox = newBoundingBox;
     }
 
 
@@ -23,6 +25,6 @@ class Wall : Solid
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        //spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Rock Sprite"), position);
+
     }
 }

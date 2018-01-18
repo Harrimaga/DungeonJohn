@@ -25,7 +25,7 @@ public class BigMac : Item, IWeapon
         ammo = 300;
         Type = "weapon";
         itemName = "BigMac";
-        itemDescription = "What is better than 1 gun? 2 guns!";
+        itemDescription = "I'm lovin' it";
         bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BigMac_BulletLeft");
         bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BigMac_BulletUp");
     }
@@ -33,11 +33,12 @@ public class BigMac : Item, IWeapon
     public override void unequip()
     {
         ammo = PlayingState.player.ammo;
+        base.unequip();
     }
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 4), direction);
+        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), direction);
         PlayingState.player.bullets.Add(bullet);
     }
 

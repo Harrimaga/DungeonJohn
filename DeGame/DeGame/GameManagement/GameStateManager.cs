@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class GameStateManager : IGameObject
 {
-    IGameObject currentGameState;
+    public IGameObject currentGameState;
     Dictionary<string, IGameObject> gameStates;
 
     public GameStateManager()
