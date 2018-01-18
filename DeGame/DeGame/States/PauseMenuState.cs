@@ -24,7 +24,14 @@ class PauseMenuState : IGameObject
         if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
             startup = true;
-            GameEnvironment.gameStateManager.SwitchTo("Playing");
+            if (GameEnvironment.gameStateManager.LastState == "playing")
+            {
+                GameEnvironment.gameStateManager.SwitchTo("Playing");
+            }
+            if(GameEnvironment.gameStateManager.LastState == "pit")
+            {
+                GameEnvironment.gameStateManager.SwitchTo("PitState");
+            }
         }
 
         wornItems.HandleInput(inputHelper);

@@ -6,6 +6,7 @@ public class GameStateManager : IGameObject
 {
     public IGameObject currentGameState;
     Dictionary<string, IGameObject> gameStates;
+    public string LastState;
 
     public GameStateManager()
     {

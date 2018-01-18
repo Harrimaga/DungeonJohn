@@ -194,7 +194,7 @@ public class Room : GameObjectList
         int r = random.Next(100);
         if (r < 10)
         {
-            Consumables golddrop = new Consumables(position, "coin");
+            Consumables golddrop = new Consumables(position, "gold");
             consumable.Add(golddrop);
         }
         else if(r < 30)

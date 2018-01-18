@@ -14,9 +14,9 @@ class Consumables : SpriteGameObject
         type = consumablename;
         if (type == "heart")
             consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Heart");
-        if (type == "ammo")
+        else if (type == "ammo")
             consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Ammo");
-        if (type == "gold")
+        else if (type == "gold")
             consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Coin");
     }
 
