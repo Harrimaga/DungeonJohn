@@ -29,7 +29,6 @@ class EndRoom : Room
         }
         if (cleared && enemycounter > 0)
             enemycounter--;
-
     }
 
     public string ChooseBoss(int currentlevel)
@@ -102,11 +101,11 @@ class EndRoom : Room
                 enemies.Add(factory2);
                 break;
             case ("HomingBoss2"):
-                Boss1 Homingboss2 = new Boss1(BossPosition, new Vector2(a, b), 3);
+                Boss1 Homingboss2 = new Boss1(BossPosition, new Vector2(a, b), 10);
                 bosses.Add(Homingboss2);
                 break;
             case ("MinionBoss2"):
-                MinionBoss MinionBoss2 = new MinionBoss(BossPosition, new Vector2(a, b), 3);
+                MinionBoss MinionBoss2 = new MinionBoss(BossPosition, new Vector2(a, b), 10);
                 bosses.Add(MinionBoss2);
                 MinionSpawner factory11 = new MinionSpawner(SpawnPosition1, new Vector2(a, b), currentlevel);
                 MinionSpawner factory22 = new MinionSpawner(SpawnPosition2, new Vector2(a, b), currentlevel);
@@ -131,6 +130,10 @@ class EndRoom : Room
                 if (MiddleofPlayer.Y >= Exit.Y && MiddleofPlayer.Y <= Exit.Y + CellHeight)
                     PlayingState.currentFloor.NextShop();
         }
+        for (int x = 0; x < roomarraywidth; ++x)
+            for (int y = 0; y < roomarrayheight; ++y)
+                if (roomarray[x, y] == "Exit" && cleared)
+                    roomarray[x, y] = "ExitShop";
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

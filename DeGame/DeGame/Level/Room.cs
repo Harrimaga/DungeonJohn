@@ -15,7 +15,7 @@ public class Room : GameObjectList
     public Vector2 Up, Down, Left, Right, Exit, ExitShop, LastEntryPoint;
     public bool Visited = false, CameraMoving = false;
     public IList addedenemies = new List<Enemy>();
-    int roomarraywidth, roomarrayheight;
+    protected int roomarraywidth, roomarrayheight;
     public string Type = "normalroom";
     Random random = new Random();
     public string[,] roomarray;
