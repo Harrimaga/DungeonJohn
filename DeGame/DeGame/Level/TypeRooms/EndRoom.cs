@@ -113,7 +113,7 @@ class EndRoom : Room
                 enemies.Add(factory22);
                 break;
             case ("CreamBatBoss"):
-                CreamBatBoss CreamBatBoss = new CreamBatBoss(BossPosition, new Vector2(a, b));
+                CreamBatBoss CreamBatBoss = new CreamBatBoss(new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a, b));
                 bosses.Add(CreamBatBoss);
                 break;
         }
