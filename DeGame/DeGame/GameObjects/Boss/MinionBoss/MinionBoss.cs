@@ -38,7 +38,7 @@ class MinionBoss : Boss
         if (shootcounter <= 0)
         {
             Vector2 bulletposition = new Vector2(sprite.Width / 2, sprite.Height * .6f);
-            Vector2 direction = (PlayingState.player.position - position);
+            Vector2 direction = PlayerOrigin - (position + bulletposition);
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + bulletposition, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/MinionBossBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
             shootcounter = (int)max;

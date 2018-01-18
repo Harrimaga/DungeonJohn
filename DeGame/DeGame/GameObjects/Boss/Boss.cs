@@ -11,6 +11,8 @@ public class Boss :  SpriteGameObject
     //protected float attackspeed;
     //protected float range;
     protected Vector2 basevelocity = new Vector2((float)0.5, (float)0.5);
+    public Vector2 PlayerOrigin;
+    public Texture2D playersprite;
     Vector2 Roomposition;
     public SpriteEffects Effects;
     HealthBar healthbar;
@@ -42,6 +44,8 @@ public class Boss :  SpriteGameObject
             PlayingState.player.bullets.Remove(bullet);
 
         RemoveBullets.Clear();
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+        PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         base.Update(gameTime);
     }
 
