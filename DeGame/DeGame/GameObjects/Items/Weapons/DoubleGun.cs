@@ -33,27 +33,28 @@ public class DoubleGun : Item, IWeapon
     public override void unequip()
     {
         ammo = PlayingState.player.ammo;
+        base.unequip();
     }
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 4), direction);
-        Bullet bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 4), direction);
+        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), direction);
+        Bullet bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), direction);
         if (direction == 1)
         {
-            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 4), 2);
+            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), 2);
         }
         if (direction == 2)
         {
-            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 4), 1);
+            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), 1);
         }
         if (direction == 3)
         {
-            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 4), 4);
+            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), 4);
         }
         if (direction == 4)
         {
-            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 4), 3);
+            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), 3);
         }
         PlayingState.player.bullets.Add(bullet);
         PlayingState.player.bullets.Add(bulletBack);

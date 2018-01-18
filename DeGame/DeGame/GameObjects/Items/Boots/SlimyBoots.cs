@@ -9,7 +9,7 @@ class SlimyBoots : Item, IBoots
     public SlimyBoots()
     {
         itemName = "SlimyBoots";
-        itemDescription = "Spiderwebs stand no chance against these boots.";
+        itemDescription = "Spiderwebs and ice stand no chance against these boots.";
         Type = "boots";
     }
 
@@ -21,7 +21,8 @@ class SlimyBoots : Item, IBoots
 
     public override void unequip()
     {
-        PlayingState.player.CoolBoots = false;
+        PlayingState.player.SlimyBoots = false;
         PlayingState.player.extraspeed -= 2;
+        base.unequip();
     }
 }

@@ -5,15 +5,19 @@ class Consumables : SpriteGameObject
 {
     string type;
     Texture2D consumablesprite;
+    public static InventoryManager inventory;
+
     public Consumables(Vector2 startPosition, string consumablename, int layer = 0, string id = "consumable")
-    : base("Sprites/Coin", layer, id)
+    : base("Sprites/Drops/Coin", layer, id)
     {
         position = startPosition + new Vector2(30,30);
         type = consumablename;
         if (type == "heart")
-            consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Heart");
+            consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Heart");
+        if (type == "ammo")
+            consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Ammo");
         if (type == "gold")
-            consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Coin");
+            consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Coin");
     }
 
     public override void Update(GameTime gameTime)
@@ -32,7 +36,11 @@ class Consumables : SpriteGameObject
                             PlayingState.player.health += PlayingState.player.maxhealth - PlayingState.player.health;
                         GameObjectList.RemovedObjects.Add(this);
                     }
-                        break;
+                    break;
+                case "ammo":
+                    PlayingState.player.ammo += 25;
+                    GameObjectList.RemovedObjects.Add(this);
+                    break;
                 case "gold":
                     PlayingState.player.gold += 5;
                     GameObjectList.RemovedObjects.Add(this);

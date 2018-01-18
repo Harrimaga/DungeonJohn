@@ -6,9 +6,11 @@ using System.Collections.Generic;
 public class Enemy : SpriteGameObject
 {
     public float health;
-    protected float maxhealth = 100;
+    protected float maxhealth;
     protected float attack;
     protected float attackspeed;
+    protected float EnemyLevel;
+    protected float statmultiplier;
     protected float range = 100;
     protected float expGive = 120;
     protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true;
@@ -22,16 +24,20 @@ public class Enemy : SpriteGameObject
     public bool alive = true;
     string AssetName;
 
-    public Enemy(Vector2 startPosition, Vector2 roomposition, string assetname, int layer = 0, string id = "Enemy")
+    public Enemy(Vector2 startPosition, Vector2 roomposition, string assetname, int difficulty = 0, int layer = 0, string id = "Enemy")
     : base(assetname, layer, id)
     {
-        healthbar = new HealthBar(health, maxhealth, position);
-        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront");
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+        if (difficulty > 0)
+            statmultiplier = (float)(difficulty - 1) / 10 + 1;
+        else
+            statmultiplier = (float)difficulty / 10 + 1;
+        EnemyLevel = difficulty;
         position = startPosition;
         velocity = basevelocity;
         Roomposition = roomposition;
-        health = maxhealth;
         AssetName = assetname;
+        healthbar = new HealthBar(health, maxhealth, position);
     }
 
     public override void Update(GameTime gameTime)
@@ -64,9 +70,10 @@ public class Enemy : SpriteGameObject
 
     void CheckAlive()
     {
-        if (health <= 0 && alive == true && killable || (PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].Type == "bossroom" && EndRoom.cleared && bossenemy))
+        if (health <= 0 && alive == true && killable)
         {
-            PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
+            if (!bossenemy)
+                PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
             if (drop)
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
             PlayingState.player.exp += expGive;
@@ -79,7 +86,6 @@ public class Enemy : SpriteGameObject
     {
         direction = PlayingState.player.position - position;
         direction.Normalize();
-        actualvelocity = direction * velocity;
     }
 
     protected void CollisionWithEnemy()

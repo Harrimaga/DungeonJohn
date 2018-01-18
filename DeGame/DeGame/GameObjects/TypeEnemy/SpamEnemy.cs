@@ -5,16 +5,19 @@ public class SpamEnemy : Enemy
 {
     int Counter = 50;
     int BulletCounter = 0;
-    float bulletdamage = 3;
+    float bulletdamage;
     float speed = 3f;
     Vector2 direction;
 
-    public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/CutieEnemyPixel", layer, id)
+    public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/CutieEnemyPixel", Difficulty, layer, id)
     {
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
         basevelocity = new Vector2(0, 0);
-        
+        bulletdamage = 3 * statmultiplier;
+        health = 100 * statmultiplier;
+        maxhealth = 100 * statmultiplier;
+        expGive = 120 * statmultiplier;
     }
 
     public void Range()

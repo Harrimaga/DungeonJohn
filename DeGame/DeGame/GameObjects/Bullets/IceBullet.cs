@@ -5,7 +5,7 @@ class IceBullet : E_Bullet
 {
     Vector2 direction;
     float speed, damage;
-    public IceBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, int layer = 0, string id = "IceBullet") : base(Damage, Speed, "Sprites/Random", layer, id)
+    public IceBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, int layer = 0, string id = "IceBullet") : base(Damage, Speed, "Sprites/Characters/Random", layer, id)
     {
         position = Startpositon;
         Position = Startpositon;
@@ -28,13 +28,13 @@ class IceBullet : E_Bullet
 
     Vector2 CalculateReflect(Vector2 direction)
     {
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/Random").Height / 2);
         Vector2 newdirection = direction;
-        if (position.X < MiddleofPlayer.X - GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2 || position.X > MiddleofPlayer.X + GameEnvironment.assetManager.GetSprite("Sprites/Random").Width / 2)
+        if (position.X < MiddleofPlayer.X - GameEnvironment.assetManager.GetSprite("Sprites/Characters/Random").Width / 2 || position.X > MiddleofPlayer.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/Random").Width / 2)
         {
             newdirection.X = -direction.X;
         }
-        if (position.Y < MiddleofPlayer.Y - GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2 || position.Y > MiddleofPlayer.Y + GameEnvironment.assetManager.GetSprite("Sprites/Random").Height / 2)
+        if (position.Y < MiddleofPlayer.Y - GameEnvironment.assetManager.GetSprite("Sprites/Characters/Random").Height / 2 || position.Y > MiddleofPlayer.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/Random").Height / 2)
         {
             newdirection.Y = -direction.Y;
         }
@@ -43,6 +43,6 @@ class IceBullet : E_Bullet
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/EnemyIceBullet"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyIceBullet"), position);
     }
 }

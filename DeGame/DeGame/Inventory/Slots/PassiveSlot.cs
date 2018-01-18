@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 public class PassiveSlot : Slot
 {
-    Item item;
+    public int slotno;
 
-    public PassiveSlot(Vector2 position, Item item = null, int layer = 0, string id = "WeaponSlot") : base ("Sprites/InventorySlots/PassiveSlot", layer, id)
+    public PassiveSlot(Vector2 position, int slotno, Item item = null, int layer = 0, string id = "PassiveSlot") : base ("Sprites/InventorySlots/PassiveSlot", layer, id)
     {
         this.position = position;
         this.item = item;
+        this.slotno = slotno;
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/PassiveSlot");
         if (item != null)
         {
@@ -24,11 +25,11 @@ public class PassiveSlot : Slot
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
         if (item != null)
         {
             itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
         }
+        base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -38,6 +39,7 @@ public class PassiveSlot : Slot
         {
             InventorySlot.DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
         }
+        base.Draw(gameTime, spriteBatch);
     }
 }
 

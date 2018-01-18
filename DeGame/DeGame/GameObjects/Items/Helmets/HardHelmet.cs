@@ -12,14 +12,15 @@ class HardHelmet : Item, IHelmet
         itemDescription = "Bullets are not very effective, but it is so heavy that you are a lot slower";
         Type = "helmet";
     }
-    public void Equip()
+    public override void equip()
     {
         PlayingState.player.damagereduction *= 0.8;
         PlayingState.player.extraspeed-= 10;
     }
-    public void unequip()
+    public override void unequip()
     {
         PlayingState.player.damagereduction *= 1.25;
         PlayingState.player.extraspeed++;
+        base.unequip();
     }
 }

@@ -9,6 +9,7 @@ using System.Collections;
 public class Room : GameObjectList
 {
     public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, Lastentrypoint, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0;
+    public string Map;
     public GameObjectList enemies, tiles, solid, consumable, bosses, altars, anvils, enemybullets, homingenemybullets;
     public static GameObjectList door;
     public Vector2 Up, Down, Left, Right, Exit, ExitShop, LastEntryPoint;
@@ -22,7 +23,7 @@ public class Room : GameObjectList
     Vector2 TilePosition;
 
 
-    public Room(int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
+    public Room(string map, int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
         tiles = new GameObjectList();
         consumable = new GameObjectList();
@@ -35,6 +36,7 @@ public class Room : GameObjectList
         enemybullets = new GameObjectList();
         homingenemybullets = new GameObjectList();
         RoomListIndex = roomListIndex;
+        Map = map;
         a = A;
         b = B;
         position = new Vector2(a, b);
@@ -42,7 +44,7 @@ public class Room : GameObjectList
 
     public void LoadTiles()
     {
-        StreamReader fileReader = new StreamReader("Content/Levels/" + RoomListIndex + ".txt");
+        StreamReader fileReader = new StreamReader("Content/Levels/" + Map + "/" + RoomListIndex + ".txt");
         string line = fileReader.ReadLine();
         List<string> textLines = new List<string>();
         while (line != null)
@@ -190,15 +192,20 @@ public class Room : GameObjectList
     public void DropConsumable(Vector2 position)
     {
         int r = random.Next(100);
-        if (r > 50)
+        if (r < 10)
         {
-            Consumables golddrop = new Consumables(position, "gold");
+            Consumables golddrop = new Consumables(position, "coin");
             consumable.Add(golddrop);
         }
-        else
+        else if(r < 30)
         {
             Consumables healthdrop = new Consumables(position, "heart");
             consumable.Add(healthdrop);
+        }
+        else if(r < 50)
+        {
+            Consumables ammodrop = new Consumables(position, "ammo");
+            consumable.Add(ammodrop);
         }
     }
 
@@ -265,19 +272,20 @@ public class Room : GameObjectList
                 PlayingState.player.onSolid = false;
             else
                 PlayingState.player.onSolid = true;
-switch (Lastentrypoint)
+
+            switch (Lastentrypoint)
             {
                 case 1:
                     LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 2 * CellHeight + b * roomheight);
                     break;
                 case 2:
-                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 14 * CellHeight + b * roomheight - GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height);
+                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 14 * CellHeight + b * roomheight - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height);
                     break;
                 case 3:
                     LastEntryPoint = new Vector2(2 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
                     break;
                 case 4:
-                    LastEntryPoint = new Vector2(20 * CellWidth + a * roomwidth - GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width, 7 * CellHeight + b * roomheight);
+                    LastEntryPoint = new Vector2(20 * CellWidth + a * roomwidth - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width, 7 * CellHeight + b * roomheight);
                     break;
                 default:
                     LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
@@ -288,65 +296,62 @@ switch (Lastentrypoint)
 
     public void CreateObject(int x, int y, string Type)
     {
+        int enemylevel = PlayingState.currentFloor.displayint;
         TilePosition = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
-        //Enemy enemyChase;
-        //Enemy enemyRanged;
-        //Enemy enemy;
         switch (Type)
         {
             case ("C"):
-                Enemy enemyChase = new ChasingEnemy(TilePosition, new Vector2(a, b), 0, "ChasingEnemy");
+                Enemy enemyChase = new ChasingEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "ChasingEnemy");
                 enemies.Add(enemyChase);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("R"):
-                Enemy enemyRanged = new RangedEnemy(TilePosition, new Vector2(a, b), 0, "RangedEnemy");
+                Enemy enemyRanged = new RangedEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("Q"):
-                Enemy enemySpam = new SpamEnemy(TilePosition, new Vector2(a, b), 0, "SpamEnemy");
+                Enemy enemySpam = new SpamEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "SpamEnemy");
                 enemies.Add(enemySpam);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("U"):
-                Enemy enemyTurretUp = new TurretEnemy(TilePosition, new Vector2(a, b), 1, 0, "TurretEnemyUp");
+                Enemy enemyTurretUp = new TurretEnemy(TilePosition, new Vector2(a, b), 1, enemylevel, 0, "TurretEnemyUp");
                 enemies.Add(enemyTurretUp);
                 roomarray[x, y] = "Background";
                 break;
             case ("D"):
-                Enemy enemyTurretDown = new TurretEnemy(TilePosition, new Vector2(a, b), 2, 0, "TurretEnemyDown");
+                Enemy enemyTurretDown = new TurretEnemy(TilePosition, new Vector2(a, b), 2, enemylevel, 0, "TurretEnemyDown");
                 enemies.Add(enemyTurretDown);
                 roomarray[x, y] = "Background";
                 break;
             case ("F"):
-                Enemy enemyTurretLeft = new TurretEnemy(TilePosition, new Vector2(a, b), 3, 0, "TurretEnemyLeft");
+                Enemy enemyTurretLeft = new TurretEnemy(TilePosition, new Vector2(a, b), 3, enemylevel, 0, "TurretEnemyLeft");
                 enemies.Add(enemyTurretLeft);
                 roomarray[x, y] = "Background";
                 break;
             case ("T"):
-                Enemy enemyTurretRight = new TurretEnemy(TilePosition, new Vector2(a, b), 4, 0, "TurretEnemyRight");
+                Enemy enemyTurretRight = new TurretEnemy(TilePosition, new Vector2(a, b), 4, enemylevel, 0, "TurretEnemyRight");
                 enemies.Add(enemyTurretRight);
                 roomarray[x, y] = "Background";
                 break;
             case ("P"):
-                Enemy enemySpider = new SpiderEnemy(TilePosition, new Vector2(a, b), 0, "SpiderEnemy");
+                Enemy enemySpider = new SpiderEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "SpiderEnemy");
                 enemies.Add(enemySpider);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("K"):
                 CreateObject(x, y, "G");
-                Enemy enemyIce = new IceEnemy(TilePosition, new Vector2(a, b), 0, "IceEnemy");
+                Enemy enemyIce = new IceEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "IceEnemy");
                 enemies.Add(enemyIce);
                 break;
             case ("B"):
-                Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, "Boss1");
+                Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, 0, "Boss1");
                 bosses.Add(boss);
-                enemycounter++;
                 break;
             case ("!"):
                 Solid rock = new Rock(TilePosition, 0, "Rock");
@@ -407,7 +412,7 @@ switch (Lastentrypoint)
 
     public virtual void CheckExit()
     {
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/PlayerFront").Height / 2);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 2);
         if (RoomListIndex == 4)
         {
             if (MiddleofPlayer.X >= ExitShop.X && MiddleofPlayer.X <= ExitShop.X + CellWidth)
@@ -519,7 +524,7 @@ switch (Lastentrypoint)
                             WallShader(gameTime, spriteBatch, x, y);
                             break;
                         case "Exit":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/EndTile")), TilePosition, Color.White);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/EndTileClosed")), TilePosition, Color.White);
                             break;
                         case "ExitShop":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/EndTile")), TilePosition, Color.White);

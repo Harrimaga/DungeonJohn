@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+                       
 public class InventorySlot : Slot
 {
     public InventorySlot(Vector2 position, Item item, int layer = 0, string id = "InventorySlot") : base("Sprites/InventorySlots/EmptySlot", layer, id)
@@ -21,13 +21,13 @@ public class InventorySlot : Slot
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        base.Draw(gameTime, spriteBatch);
+    {     
         spriteBatch.Draw(sprite, position, Color.White);
         if (item != null)
         {
             DrawItem(sprite, itemSprite, position, gameTime, spriteBatch);
         }
+        base.Draw(gameTime, spriteBatch);
     }
 
     public override void HandleInput(InputHelper inputHelper)
@@ -35,6 +35,14 @@ public class InventorySlot : Slot
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition)) 
         {
             Player.inventory.equip(item);
+        }
+        if (BoundingBox.Contains(inputHelper.MousePosition))
+        {
+            hover = true;
+        }
+        else
+        {
+            hover = false;
         }
     }
     public override void Update(GameTime gameTime)
@@ -68,12 +76,13 @@ public class InventorySlot : Slot
         }
         spriteBatch.Draw(itemSprite, itemSpritePosition, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
     }
+
     public static float CalculateScale(Texture2D sprite, Texture2D itemSprite)
     {
         float scale = (float)sprite.Height / itemSprite.Height;
         if (itemSprite.Width * scale > sprite.Width)
         {
-            scale = (float)sprite.Width / itemSprite.Height;
+            scale = (float)sprite.Width / itemSprite.Width;
         }
         return scale;
     }
