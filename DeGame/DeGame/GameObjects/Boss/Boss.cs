@@ -37,10 +37,16 @@ public class Boss :  SpriteGameObject
                 health -= PlayingState.player.attack;
                 RemoveBullets.Add(bullet);
             }
-
+         
         foreach (Bullet bullet in RemoveBullets)
             PlayingState.player.bullets.Remove(bullet);
 
+        RemoveBullets.Clear();
+        base.Update(gameTime);
+    }
+
+    public void FinalStage()
+    {
         if (health <= 0 && alive)
         {
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].DropConsumable(position);
@@ -52,9 +58,6 @@ public class Boss :  SpriteGameObject
                 EndRoom.cleared = true;
             GameObjectList.RemovedObjects.Add(this);
         }
-
-        RemoveBullets.Clear();
-        base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

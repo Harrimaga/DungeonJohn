@@ -45,7 +45,7 @@ class EndRoom : Room
             case 4:
                 return "MinionBoss2";
             case 5:
-                return "CreamBat";
+                return "CreamBatBoss";
             default:
                 return "HomingBoss";
         }
@@ -75,6 +75,11 @@ class EndRoom : Room
                 BossPosition = new Vector2(2 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight);
                 SpawnPosition1 = new Vector2(BossPosition.X, BossPosition.Y + 5 * CellHeight);
                 SpawnPosition2 = new Vector2(BossPosition.X, BossPosition.Y - 2 * CellHeight);
+                break;
+            case 5:
+                BossPosition = new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight);
+                SpawnPosition1 = new Vector2(BossPosition.X + 6 * CellWidth, BossPosition.Y);
+                SpawnPosition2 = new Vector2(BossPosition.X - 3 * CellWidth, BossPosition.Y);
                 break;
             default:
                 BossPosition = new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight);
@@ -108,7 +113,9 @@ class EndRoom : Room
                 enemies.Add(factory11);
                 enemies.Add(factory22);
                 break;
-            case ("CreamBat"):
+            case ("CreamBatBoss"):
+                CreamBatBoss CreamBatBoss = new CreamBatBoss(BossPosition, new Vector2(a, b));
+                bosses.Add(CreamBatBoss);
                 break;
         }
         enemycounter++;

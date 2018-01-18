@@ -24,7 +24,7 @@ public class IceEnemy : Enemy
     public void Range()
     {
         Counter++;
-        if (Counter >= 150)
+        if (Counter >= 100)
         {
             if (PlayingState.player.position.X + range > position.X || PlayingState.player.position.X - range < position.X ||
             PlayingState.player.position.Y + range > position.Y || PlayingState.player.position.Y - range < position.Y)
