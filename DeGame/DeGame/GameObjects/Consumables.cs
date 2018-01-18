@@ -5,6 +5,8 @@ class Consumables : SpriteGameObject
 {
     string type;
     Texture2D consumablesprite;
+    public static InventoryManager inventory;
+
     public Consumables(Vector2 startPosition, string consumablename, int layer = 0, string id = "consumable")
     : base("Sprites/Drops/Coin", layer, id)
     {
@@ -12,6 +14,8 @@ class Consumables : SpriteGameObject
         type = consumablename;
         if (type == "heart")
             consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Heart");
+        if (type == "ammo")
+            consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Ammo");
         if (type == "gold")
             consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Coin");
     }
@@ -32,7 +36,11 @@ class Consumables : SpriteGameObject
                             PlayingState.player.health += PlayingState.player.maxhealth - PlayingState.player.health;
                         GameObjectList.RemovedObjects.Add(this);
                     }
-                        break;
+                    break;
+                case "ammo":
+                    PlayingState.player.ammo += 25;
+                    GameObjectList.RemovedObjects.Add(this);
+                    break;
                 case "gold":
                     PlayingState.player.gold += 5;
                     GameObjectList.RemovedObjects.Add(this);
