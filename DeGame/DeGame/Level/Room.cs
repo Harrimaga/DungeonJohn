@@ -192,15 +192,20 @@ public class Room : GameObjectList
     public void DropConsumable(Vector2 position)
     {
         int r = random.Next(100);
-        if (r > 50)
+        if (r < 10)
         {
-            Consumables golddrop = new Consumables(position, "gold");
+            Consumables golddrop = new Consumables(position, "coin");
             consumable.Add(golddrop);
         }
-        else
+        else if(r < 30)
         {
             Consumables healthdrop = new Consumables(position, "heart");
             consumable.Add(healthdrop);
+        }
+        else if(r < 50)
+        {
+            Consumables ammodrop = new Consumables(position, "ammo");
+            consumable.Add(ammodrop);
         }
     }
 
@@ -267,7 +272,8 @@ public class Room : GameObjectList
                 PlayingState.player.onSolid = false;
             else
                 PlayingState.player.onSolid = true;
-switch (Lastentrypoint)
+
+            switch (Lastentrypoint)
             {
                 case 1:
                     LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 2 * CellHeight + b * roomheight);
