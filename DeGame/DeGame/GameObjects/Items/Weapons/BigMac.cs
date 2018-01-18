@@ -20,7 +20,7 @@ public class BigMac : Item, IWeapon
         addedDamage = 40;
         damageMultiplier = 1;
         projectile_velocity = 15;
-        attackspeed = 40;
+        attackspeed = 10;
         range = 700;
         ammo = 300;
         Type = "weapon";
