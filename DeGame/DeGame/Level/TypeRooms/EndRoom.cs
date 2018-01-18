@@ -11,12 +11,15 @@ class EndRoom : Room
         Type = "bossroom";
         RoomListIndex = 2;
         position = new Vector2(a, b);
+        placed = false;
+        cleared = false;
+        trigger = false;
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        currentlevel = PlayingState.currentFloor.CurrentLevel;
+        currentlevel = PlayingState.currentFloor.displayint;
         //TODO check player volgende floor mag nextFloor true maken
         CheckExit();
         if (!placed)
@@ -24,38 +27,91 @@ class EndRoom : Room
             PlaceBoss(ChooseBoss(currentlevel));
             placed = true;
         }
+        if (cleared && enemycounter > 0)
+            enemycounter--;
 
     }
 
     public string ChooseBoss(int currentlevel)
     {
-        if (currentlevel == 1)
-            return "HomingBoss";
-        else
-            return "MinionBoss";
+        switch (currentlevel)
+        {
+            case 1:
+                return "HomingBoss";
+            case 2:
+                return "MinionBoss";
+            case 3:
+                return "HomingBoss2";
+            case 4:
+                return "MinionBoss2";
+            case 5:
+                return "CreamBat";
+            default:
+                return "HomingBoss";
+        }
     }
 
     public void PlaceBoss(string boss)
     {
+        Vector2 BossPosition, SpawnPosition1, SpawnPosition2;
+        switch (Lastentrypoint)
+        {
+            case 1:
+                BossPosition = new Vector2(8 * CellWidth + a * roomwidth, 9 * CellHeight + b * roomheight);
+                SpawnPosition1 = new Vector2(BossPosition.X + 6 * CellWidth, BossPosition.Y);
+                SpawnPosition2 = new Vector2(BossPosition.X - 3 * CellWidth, BossPosition.Y);
+                break;
+            case 2:
+                BossPosition = new Vector2(8 * CellWidth + a * roomwidth, 2 * CellHeight + b * roomheight);
+                SpawnPosition1 = new Vector2(BossPosition.X + 6 * CellWidth, BossPosition.Y);
+                SpawnPosition2 = new Vector2(BossPosition.X - 3 * CellWidth, BossPosition.Y);
+                break;
+            case 3:
+                BossPosition = new Vector2(15 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight);
+                SpawnPosition1 = new Vector2(BossPosition.X, BossPosition.Y + 5 * CellHeight);
+                SpawnPosition2 = new Vector2(BossPosition.X, BossPosition.Y - 2 * CellHeight);
+                break;
+            case 4:
+                BossPosition = new Vector2(2 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight);
+                SpawnPosition1 = new Vector2(BossPosition.X, BossPosition.Y + 5 * CellHeight);
+                SpawnPosition2 = new Vector2(BossPosition.X, BossPosition.Y - 2 * CellHeight);
+                break;
+            default:
+                BossPosition = new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight);
+                SpawnPosition1 = BossPosition;
+                SpawnPosition2 = BossPosition;
+                break;
+        }
         switch (boss)
         {
             case ("HomingBoss"):
-                Boss1 Homingboss = new Boss1(new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a, b));
+                Boss1 Homingboss = new Boss1(BossPosition, new Vector2(a, b));
                 bosses.Add(Homingboss);
                 break;
             case ("MinionBoss"):
-                MinionBoss MinionBoss = new MinionBoss(new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a,b));
+                MinionBoss MinionBoss = new MinionBoss(BossPosition, new Vector2(a,b));
                 bosses.Add(MinionBoss);
-                MinionSpawner factory1 = new MinionSpawner(new Vector2(4 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a, b));
-                MinionSpawner factory2 = new MinionSpawner(new Vector2(12 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a, b));
+                MinionSpawner factory1 = new MinionSpawner(SpawnPosition1, new Vector2(a, b));
+                MinionSpawner factory2 = new MinionSpawner(SpawnPosition2, new Vector2(a, b));
                 enemies.Add(factory1);
                 enemies.Add(factory2);
                 break;
-            default:
-                SpamEnemy spam = new SpamEnemy(new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a, b));
-                enemies.Add(spam);
+            case ("HomingBoss2"):
+                Boss1 Homingboss2 = new Boss1(BossPosition, new Vector2(a, b), 3);
+                bosses.Add(Homingboss2);
+                break;
+            case ("MinionBoss2"):
+                MinionBoss MinionBoss2 = new MinionBoss(BossPosition, new Vector2(a, b), 3);
+                bosses.Add(MinionBoss2);
+                MinionSpawner factory11 = new MinionSpawner(SpawnPosition1, new Vector2(a, b));
+                MinionSpawner factory22 = new MinionSpawner(SpawnPosition2, new Vector2(a, b));
+                enemies.Add(factory11);
+                enemies.Add(factory22);
+                break;
+            case ("CreamBat"):
                 break;
         }
+        enemycounter++;
     }
 
     public override void CheckExit()

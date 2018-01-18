@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Input;
 
 public class Floor
 {
-    int maxRooms = 5, minRooms = 3, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, displayint = 1, q;
+    int maxRooms = 7, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, q;
     public Room currentRoom;
-    public int screenwidth, screenheight, used, CurrentLevel = 1, doortimer = 0;
+    public int screenwidth, screenheight, used, CurrentLevel = 1, doortimer = 0, displayint = 1;
     public bool FloorGenerated = false;
     public Vector2 startPlayerPosition;
     Random random = new Random();
@@ -154,14 +154,22 @@ public class Floor
     {
         int DistancefromStart = 0;
         int bossx = 4, bossy = 4;
+        bool changed = false;
         for (int a = 0; a <= b; a++)
             if (CanSpawnSpecialRoom(possiblespecial[a, 0], possiblespecial[a, 1]) && Math.Abs(x - possiblespecial[a, 0]) + Math.Abs(y - possiblespecial[a, 1]) > DistancefromStart)
             {
                 bossx = possiblespecial[a, 0];
                 bossy = possiblespecial[a, 1];
                 DistancefromStart = Math.Abs(x - possiblespecial[a, 0]) + Math.Abs(y - possiblespecial[a, 1]);
+                changed = true;
             }
-        floor[bossx, bossy] = new EndRoom("", 2, bossx, bossy);
+        if (changed)
+            floor[bossx, bossy] = new EndRoom("", 2, bossx, bossy);
+        else
+        {
+            ClearFloor();
+            FloorGenerator();
+        }
     }
 
     bool CanSpawnSpecialRoom(int x, int y)
@@ -248,7 +256,7 @@ public class Floor
 
     int CheckAdjacent(int x, int y)
     {
-        int RoomSpawnChance = 70;
+        int RoomSpawnChance = 80;
         int SpawnChanceReduction = 20;
         int neighbours = 0;
         if (y + 1 < floorHeight && floor[x, y + 1] != null)
@@ -323,15 +331,10 @@ public class Floor
     public void NextFloor()
     {
         ClearFloor();
-        if (CurrentLevel <= 5)
+        if (displayint <= 5)
         {
-            maxRooms += 2;
-            minRooms += 1;
-        }
-        else if (CurrentLevel < 10)
-        {
-            maxRooms += 2;
-            minRooms += 2;
+            maxRooms += 3;
+            minRooms += 3;
         }
         FloorGenerator();
         CurrentLevel++;
@@ -353,8 +356,8 @@ public class Floor
     public void ResetFloor()
     {
         ClearFloor();
-        maxRooms = 5;
-        minRooms = 3;
+        maxRooms = 7;
+        minRooms = 5;
         CurrentLevel = 1;
         displayint = 1;
         Level = "Level: " + displayint;
@@ -411,7 +414,13 @@ public class Floor
     {
         string enemycount = "Count: " + PlayingState.currentFloor.currentRoom.enemycounter;
         string Gold = "Gold: " + PlayingState.player.gold;
-        string tokens = "Unspent Tokens: " + PlayingState.player.leveltokens;
+        string tokens; 
+        if (PlayingState.player.leveltokens == 1)
+            tokens = "You have " + PlayingState.player.leveltokens + " unspent token,";
+        else
+            tokens = "You have " + PlayingState.player.leveltokens + " unspent tokens,";
+        string tokens2 = "press 'O' to level up";
+
         foreach (Room room in floor)
         {
             if (room != null)
@@ -438,8 +447,12 @@ public class Floor
             DrawMinimap(spriteBatch);
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 50), Color.White);
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.Yellow);
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), tokens, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 425), Color.White);
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), enemycount, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 450), Color.White);
+            if (PlayingState.player.leveltokens > 0)
+            {
+                spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), tokens, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 400), Color.White);
+                spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), tokens2, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 425), Color.White);
+            }
+                spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), enemycount, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 450), Color.White);
         }
         wornItems.Position = new Vector2(screenwidth - 300 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 510);
         wornItems.Draw(gameTime, spriteBatch);

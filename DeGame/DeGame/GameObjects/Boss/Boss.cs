@@ -4,23 +4,25 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Boss :  SpriteGameObject
 {
-    protected float maxhealth;
+    protected float maxhealth, statmultiplier;
     public float health;
-    protected int expGive;
+    protected int expGive, LevelofBoss;
     //protected float attack;
     //protected float attackspeed;
     //protected float range;
     protected Vector2 basevelocity = new Vector2((float)0.5, (float)0.5);
+    Vector2 Roomposition;
     public SpriteEffects Effects;
     HealthBar healthbar;
-    Vector2 Roomposition;
     public bool alive = true;
 
-    public Boss(Vector2 startPosition, Vector2 roomposition, string assetname, int layer = 0, string id = "Boss") : base(assetname, layer, id)
+    public Boss(Vector2 startPosition, Vector2 roomposition, string assetname, int difficulty = 0, int layer = 0, string id = "Boss") : base(assetname, layer, id)
     {
         position = startPosition;
         healthbar = new HealthBar(health, maxhealth, position, false, true);
         Roomposition = roomposition;
+        statmultiplier = difficulty / 10 + 1;
+        LevelofBoss = difficulty;
     }
 
     public override void Update(GameTime gameTime)

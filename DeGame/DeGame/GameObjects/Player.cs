@@ -18,6 +18,7 @@ public class Player : SpriteGameObject
     public float attackspeed;
     public float speed;
     public float range;
+    public float extraattack = 0;
     public int ammo;
     public int gold = 0;
     public int level = 0;
@@ -208,6 +209,7 @@ public class Player : SpriteGameObject
         attackspeedreduction = 0;
         damagereduction = 0;
         extraspeed = 0;
+        extraattack = 0;
         leveltokens = 0;
         velocitybase = 5;
         CalculateAmmo();
@@ -242,7 +244,8 @@ public class Player : SpriteGameObject
     {
         if (type == 1)
         {
-            attack+= 5;
+            extraattack+= 5;
+            CalculateDamage();
         }
         if (type == 2)
         {
@@ -284,15 +287,15 @@ public class Player : SpriteGameObject
 
         if (passives[0] == null && weapon != null)
         {
-            attack = weapon.AddedDamage * weapon.DamageMultiplier;
+            attack = weapon.AddedDamage * weapon.DamageMultiplier + extraattack;
         }
         else if (passives[0] != null && passives[1] == null && weapon != null)
         {
-            attack = weapon.AddedDamage * Math.Max(weapon.DamageMultiplier, passives[0].DamageMultiplier);
+            attack = weapon.AddedDamage * Math.Max(weapon.DamageMultiplier, passives[0].DamageMultiplier) + extraattack;
         }
         else if (passives[1] != null && weapon != null)
         {
-            attack = weapon.AddedDamage * Math.Max(weapon.DamageMultiplier, Math.Max(passives[0].DamageMultiplier, passives[1].DamageMultiplier));
+            attack = weapon.AddedDamage * Math.Max(weapon.DamageMultiplier, Math.Max(passives[0].DamageMultiplier, passives[1].DamageMultiplier)) + extraattack;
         }
     }
 
