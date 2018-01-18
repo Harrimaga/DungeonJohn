@@ -4,22 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class MageJacket : Item, IArmour
+class SimpleArmour : Item, IArmour
 {
-    public MageJacket()
+    public SimpleArmour()
     {
-        itemName = "MageJacket";
-        itemDescription = "This jacket was worn by a old mage making you move really faster";
+        itemName = "SimpleArmour";
+        itemDescription = "This is simply Armour";
         Type = "armour";
     }
 
     public override void equip()
     {
-        PlayingState.player.extraspeed += 2;
+        PlayingState.player.maxhealth += 120;
     }
     public override void unequip()
     {
-        PlayingState.player.extraspeed -= 2;
+        PlayingState.player.maxhealth -= 120;
         base.unequip();
     }
 }

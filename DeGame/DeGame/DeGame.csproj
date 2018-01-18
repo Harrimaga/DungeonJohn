@@ -78,6 +78,7 @@
     <Compile Include="GameObjects\Items\Actives\Nani.cs" />
     <Compile Include="GameObjects\Bullets\IceBullet.cs" />
     <Compile Include="GameObjects\Items\Armour\MageJacket.cs" />
+    <Compile Include="GameObjects\Items\Armour\SimpleArmour.cs" />
     <Compile Include="GameObjects\Items\Boots\CoolBoots.cs" />
     <Compile Include="GameObjects\Items\Boots\SlimyBoots.cs" />
     <Compile Include="GameObjects\Items\CraftingBench.cs" />
@@ -221,6 +222,7 @@
     <Content Include="Content\Levels\9.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Items\SimpleArmour.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

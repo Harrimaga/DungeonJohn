@@ -25,7 +25,7 @@ public class DoubleGun : Item, IWeapon
         ammo = 200;
         Type = "weapon";
         itemName = "DoubleGun";
-        itemDescription = "What is better then 1 gun 2 guns!";
+        itemDescription = "What is better than 1 gun 2 guns!!";
         bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/Mac10_BulletLeft");
         bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/Mac10_BulletUp");
     }

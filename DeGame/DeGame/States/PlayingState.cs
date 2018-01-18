@@ -27,6 +27,7 @@ public class PlayingState : IGameObject
         Player.inventory.items.Add(new Mac10());
         Player.inventory.items.Add(new Mac10());
         Player.inventory.items.Add(new StandardBow());
+        Player.inventory.items.Add(new SimpleArmour());
         GameEnvironment.gameStateManager.LastState = "playing";
         //Player.inventory.items.Add(new Mirror());
         //enemy = new RangedEnemy(Vector2.Zero, 0, "Enemy");
