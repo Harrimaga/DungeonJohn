@@ -27,6 +27,8 @@ class EndRoom : Room
             PlaceBoss(ChooseBoss(currentlevel));
             placed = true;
         }
+        if (cleared && enemycounter > 0)
+            enemycounter--;
 
     }
 
@@ -109,6 +111,7 @@ class EndRoom : Room
             case ("CreamBat"):
                 break;
         }
+        enemycounter++;
     }
 
     public override void CheckExit()

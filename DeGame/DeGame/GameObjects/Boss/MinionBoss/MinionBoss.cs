@@ -4,9 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 class MinionBoss : Boss
 {
     Vector2 Roomposition;
-    int shootcounter, spawncounter;
+    int shootcounter;
     float bulletdamage, speed = 2, max;
-    EnemyBullet bullet;
 
     public MinionBoss(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/MinionBoss", Difficulty,layer, id)
     {
