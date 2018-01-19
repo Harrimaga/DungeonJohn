@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 public class AssetManager
 {
@@ -15,7 +16,15 @@ public class AssetManager
         {
             return null;
         }
-        return contentManager.Load<Texture2D>(assetName);
+        try
+        {
+            return contentManager.Load<Texture2D>(assetName);
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+        
     }
     public SpriteFont GetFont(string assetName)
     {

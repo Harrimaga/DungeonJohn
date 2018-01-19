@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-public class Boss1 : Boss
+public class HomingBoss : Boss
 {
     BossBullet bullet1, bullet2, bullet3;
     GameObjectList Bullets, HomingBullets;
@@ -11,7 +11,7 @@ public class Boss1 : Boss
     int Counter = 30;
     float speed = 0.3f;
     float bulletdamage;
-    public Boss1(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/CowboyBoss",Difficulty , layer, id)
+    public HomingBoss(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/CowboyBoss",Difficulty , layer, id)
     {
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet");
         Bullets = new GameObjectList();

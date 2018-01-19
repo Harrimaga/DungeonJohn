@@ -15,7 +15,7 @@ public class Enemy : SpriteGameObject
     protected float expGive = 120;
     protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true;
     protected int counter = 100, poisoncounter = 0;
-    protected Vector2 direction, basevelocity = Vector2.Zero;
+    protected Vector2 direction, basevelocity = Vector2.Zero, PlayerOrigin;
     public SpriteEffects Effects;
     public Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
@@ -44,6 +44,7 @@ public class Enemy : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         healthbar.Update(gameTime, health, maxhealth, position);
 
         if (!flying)
@@ -97,7 +98,7 @@ public class Enemy : SpriteGameObject
 
     public void Chase()
     {
-        direction = PlayingState.player.position - position;
+        direction = PlayerOrigin - position;
         direction.Normalize();
     }
 
