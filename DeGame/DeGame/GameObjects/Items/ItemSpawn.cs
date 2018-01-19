@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 class ItemSpawn : SpriteGameObject
 {
@@ -15,24 +11,24 @@ class ItemSpawn : SpriteGameObject
     bool price, pickedUp = false;
     Random random = new Random();
 
-    public ItemSpawn(Vector2 startPosition,bool Price, int layer = 0, string id = "ItemAltar")
+    public ItemSpawn(Vector2 startPosition,bool Price, int randomint, int layer = 0, string id = "ItemAltar")
     : base("Sprites/Items/Altar", layer, id)
     {
         position = startPosition;
         price = Price;
         itemList = new ItemList();
-        RandomItem();
+        RandomItem(randomint);
     }
-    void RandomItem()
+    void RandomItem(int randomint)
     {
         if (!price)
         {
-            int r = random.Next(itemList.RoomList.Count);
+            int r = randomint % itemList.RoomList.Count;
             item = itemList.RoomList[r];
         }
         if(price)
         {
-            int r = random.Next(itemList.ShopList.Count);
+            int r = randomint % itemList.ShopList.Count;
             item = itemList.ShopList[r];
         }
     }

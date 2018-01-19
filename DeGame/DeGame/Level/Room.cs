@@ -372,11 +372,13 @@ public class Room : GameObjectList
                 solid.Add(wall);
                 break;
             case ("I"):
-                ItemSpawn item = new ItemSpawn(TilePosition, false, 0, "Item");
+                int v = random.Next(50);
+                ItemSpawn item = new ItemSpawn(TilePosition, false, v, 0, "Item");
                 altars.Add(item);
                 break;
             case ("M"):
-                ItemSpawn Shopitem = new ItemSpawn(TilePosition, true, 0, "ShopItem");
+                int w = random.Next(50);
+                ItemSpawn Shopitem = new ItemSpawn(TilePosition, true, w, 0, "ShopItem");
                 altars.Add(Shopitem);
                 break;
             case ("Y"):
