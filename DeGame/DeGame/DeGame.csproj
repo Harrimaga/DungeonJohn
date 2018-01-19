@@ -104,7 +104,6 @@
     <Compile Include="GameObjects\Consumables.cs" />
     <Compile Include="GameObjects\Items\Weapons\Mac10.cs" />
     <Compile Include="GameObjects\Player.cs" />
-    <Compile Include="GameObjects\CheckCurrentTile.cs" />
     <Compile Include="GameObjects\Items\ItemSpawn.cs" />
     <Compile Include="GameObjects\Terrain\Door.cs" />
     <Compile Include="GameObjects\Terrain\Ice.cs" />
@@ -139,7 +138,6 @@
     <Compile Include="Level\Floor.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
-    <Compile Include="Level\TypeRooms\StartRoom.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\HealthBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
