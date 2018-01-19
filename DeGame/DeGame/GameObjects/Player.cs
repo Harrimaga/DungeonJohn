@@ -8,7 +8,7 @@ public class Player : SpriteGameObject
 {
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
-    public bool CoolBoots = false, SlimyBoots = false, Mirror = false;
+    public bool CoolBoots = false, SlimyBoots = false, Mirror = false, VialOfPoison = false;
     public float health = 100, maxhealth = 100;
     public float exp = 0,nextLevelExp = 100;
     public float attackspeedreduction = 0;

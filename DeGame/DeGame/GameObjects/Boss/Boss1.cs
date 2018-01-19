@@ -78,8 +78,8 @@ public class Boss1 : Boss
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        if (LevelofBoss == 0)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CowboyBoss"), position);
+        if (LevelofBoss == 0 || poisoncounter > 0)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CowboyBoss"), position, color);
         else
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CowboyBoss"), position, Color.MediumVioletRed);
         Bullets.Draw(gameTime, spriteBatch);

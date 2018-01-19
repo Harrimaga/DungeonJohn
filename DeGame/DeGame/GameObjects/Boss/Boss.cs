@@ -6,7 +6,7 @@ public class Boss :  SpriteGameObject
 {
     protected float maxhealth, statmultiplier;
     public float health;
-    protected int expGive, LevelofBoss;
+    protected int expGive, LevelofBoss, poisoncounter = 0;
     //protected float attack;
     //protected float attackspeed;
     //protected float range;
@@ -17,6 +17,7 @@ public class Boss :  SpriteGameObject
     public SpriteEffects Effects;
     HealthBar healthbar;
     public bool alive = true;
+    protected Color color = Color.White;
 
     public Boss(Vector2 startPosition, Vector2 roomposition, string assetname, int difficulty = 0, int layer = 0, string id = "Boss") : base(assetname, layer, id)
     {
@@ -37,6 +38,8 @@ public class Boss :  SpriteGameObject
             if (CollidesWith(bullet))
             {
                 health -= PlayingState.player.attack;
+                if (PlayingState.player.VialOfPoison && bullet.poisonbullet)
+                    poisoncounter = 350;
                 RemoveBullets.Add(bullet);
             }
          
@@ -47,6 +50,16 @@ public class Boss :  SpriteGameObject
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         base.Update(gameTime);
+
+        if (poisoncounter > 0)
+        {
+            if (poisoncounter % 75 == 0 && poisoncounter < 350)
+                health -= 4;
+            poisoncounter--;
+            color = Color.YellowGreen;
+        }
+        else
+            color = Color.White;
     }
 
     public void FinalStage()
