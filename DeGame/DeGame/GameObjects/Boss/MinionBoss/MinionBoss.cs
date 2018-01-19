@@ -48,9 +48,10 @@ class MinionBoss : Boss
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        if (LevelofBoss == 0)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss"), position);
+        if (LevelofBoss == 0 || poisoncounter > 0)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss"), position, color);
         else
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss"), position, Color.MediumVioletRed);
+
     }
 }

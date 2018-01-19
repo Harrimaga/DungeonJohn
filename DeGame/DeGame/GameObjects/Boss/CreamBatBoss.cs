@@ -10,6 +10,7 @@ class CreamBatBoss : Boss
     int MoveTimer = 0;
     float bulletdamage = 10, speed = 5;
     Vector2 moving, MoveDirection, bulletPosition;
+    Texture2D creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite1");
 
     public CreamBatBoss(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/CreamBatSprite1", Difficulty, layer, id)
     {
@@ -40,6 +41,7 @@ class CreamBatBoss : Boss
                 Stage = 2;
                 maxhealth = 500;
                 health = 500;
+                creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite2");
             }
         }
         if (Stage == 2)
@@ -52,6 +54,7 @@ class CreamBatBoss : Boss
                 Stage = 3;
                 maxhealth = 800;
                 health = 800;
+                creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite3");
             }
         }
         if (Stage == 3)
@@ -154,15 +157,15 @@ class CreamBatBoss : Boss
     {
         if (MoveTimer <= 50)
             MoveDirection = new Vector2(0,1.5f);
-        if (MoveTimer <= 150 && MoveTimer >= 50)
+        else if (MoveTimer <= 150 && MoveTimer >= 50)
             MoveDirection = new Vector2(-2, -1);
-        if (MoveTimer <= 250 && MoveTimer >= 150)
+        else if (MoveTimer <= 250 && MoveTimer >= 150)
             MoveDirection = new Vector2(2, -1);
-        if (MoveTimer <= 350 && MoveTimer >= 250)
+        else if (MoveTimer <= 350 && MoveTimer >= 250)
             MoveDirection = new Vector2(2, 1);
-        if (MoveTimer <= 450 && MoveTimer >= 350)
+        else if (MoveTimer <= 450 && MoveTimer >= 350)
             MoveDirection = new Vector2(-2, 1);
-        if (MoveTimer >= 450)
+        else if (MoveTimer >= 450)
             MoveTimer = 50;
         moving = MoveDirection * velocity;
         position += moving;
@@ -171,12 +174,7 @@ class CreamBatBoss : Boss
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        if (Stage == 1)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite1"), position);
-        if (Stage == 2)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite2"), position);
-        if (Stage == 3)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite3"), position);
+        spriteBatch.Draw(creambatsprite, position, color);
     }
 }
 

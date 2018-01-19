@@ -14,7 +14,7 @@ public class Enemy : SpriteGameObject
     protected float range = 100;
     protected float expGive = 120;
     protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true;
-    protected int counter = 100;
+    protected int counter = 100, poisoncounter = 0;
     protected Vector2 direction, basevelocity = Vector2.Zero, PlayerOrigin;
     public SpriteEffects Effects;
     public Texture2D playersprite, bulletsprite;
@@ -23,6 +23,7 @@ public class Enemy : SpriteGameObject
     Vector2 actualvelocity;
     public bool alive = true;
     string AssetName;
+    protected Color color = Color.White;
 
     public Enemy(Vector2 startPosition, Vector2 roomposition, string assetname, int difficulty = 0, int layer = 0, string id = "Enemy")
     : base(assetname, layer, id)
@@ -61,13 +62,24 @@ public class Enemy : SpriteGameObject
             if (CollidesWith(bullet))
             {
                 health -= PlayingState.player.attack;
+                if (PlayingState.player.VialOfPoison && bullet.poisonbullet)
+                    poisoncounter = 350;
                 RemoveBullets.Add(bullet);
             }
         foreach (Bullet bullet in RemoveBullets)        
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
         CheckAlive();
-       
+
+        if (poisoncounter > 0)
+        {
+            if (poisoncounter % 75 == 0 && poisoncounter < 350)
+                health -= 4;
+            poisoncounter--;
+            color = Color.YellowGreen;
+        }
+        else
+            color = Color.White;
     }
 
     void CheckAlive()

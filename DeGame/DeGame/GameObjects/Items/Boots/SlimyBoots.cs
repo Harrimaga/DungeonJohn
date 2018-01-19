@@ -9,7 +9,7 @@ class SlimyBoots : Item, IBoots
     public SlimyBoots()
     {
         itemName = "SlimyBoots";
-        itemDescription = "Spiderwebs and ice stand no chance against these boots.";
+        itemDescription = "Ice stands no chance against these boots.";
         Type = "boots";
     }
 
