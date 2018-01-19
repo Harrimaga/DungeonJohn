@@ -64,10 +64,6 @@ public class Player : SpriteGameObject
 
         base.Update(gameTime);
         collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
-        if (extraspeed < 0)
-            speed = velocitybase;
-        else
-            speed = velocitybase + extraspeed;
         healthbar.Update(gameTime, health, maxhealth,position);
         bullets.Update(gameTime);
         NextLevel();
@@ -88,6 +84,8 @@ public class Player : SpriteGameObject
         {
             shoottimer = 0;
         }
+
+        //krijg weer originele snelheid als je over ijs glijdt en van een spinnenweb afkomt
         if (onIce && !onWeb && speed != 5 + extraspeed)
         {
             speed = 5 + extraspeed;
@@ -100,6 +98,10 @@ public class Player : SpriteGameObject
         {
             velocitybase = 5;
         }
+        if (extraspeed < 0)
+            speed = velocitybase;
+        else
+            speed = velocitybase + extraspeed;
     }
 
     public override void HandleInput(InputHelper inputHelper)
