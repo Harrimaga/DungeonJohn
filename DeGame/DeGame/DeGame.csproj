@@ -68,7 +68,7 @@
     <Compile Include="GameManagement\InputHelper.cs" />
     <Compile Include="GameManagement\InventoryManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
-    <Compile Include="GameObjects\Boss\Boss1.cs" />
+    <Compile Include="GameObjects\Boss\HomingBoss.cs" />
     <Compile Include="GameObjects\Boss\CreamBatBoss.cs" />
     <Compile Include="GameObjects\Boss\MinionBoss\MinionBoss.cs" />
     <Compile Include="GameObjects\Boss\MinionBoss\MinionSpawner.cs" />

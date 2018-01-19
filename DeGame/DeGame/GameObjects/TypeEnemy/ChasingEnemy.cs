@@ -21,7 +21,7 @@ public class ChasingEnemy : Enemy
             if (counter == 0)
             {
                
-                PlayingState.player.health -= 0;
+                PlayingState.player.health -= 10;
                 counter = 100;
             }
         }

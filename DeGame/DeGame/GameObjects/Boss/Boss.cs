@@ -17,7 +17,7 @@ public class Boss :  SpriteGameObject
     public SpriteEffects Effects;
     HealthBar healthbar;
     public bool alive = true;
-
+    int counter = 10;
     public Boss(Vector2 startPosition, Vector2 roomposition, string assetname, int difficulty = 0, int layer = 0, string id = "Boss") : base(assetname, layer, id)
     {
         position = startPosition;
@@ -45,7 +45,19 @@ public class Boss :  SpriteGameObject
             PlayingState.player.bullets.Remove(bullet);
 
         RemoveBullets.Clear();
-        
+        if (CollidesWith(PlayingState.player))
+        {
+            velocity = Vector2.Zero;
+            counter--;
+            if (counter <= 0)
+            {
+
+                PlayingState.player.health -= 1;
+                counter = 100;
+            }
+        }
+        PlayerCollision();
+        SolidCollision();
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         base.Update(gameTime);
     }
@@ -65,6 +77,38 @@ public class Boss :  SpriteGameObject
         }
     }
 
+    protected void SolidCollision()
+    {
+        foreach (Solid s in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
+        {
+            if (CollidesWith(s))
+            {
+                if (velocity.X > 0)
+                    position.X -= velocity.X;
+                if (velocity.X < 0)
+                    position.X += velocity.X;
+                if (velocity.Y > 0)
+                    position.Y -= velocity.Y;
+                if (velocity.Y < 0)
+                    position.Y += velocity.Y;
+            }
+        }
+    }
+
+    public void PlayerCollision()
+    {
+        if (CollidesWith(PlayingState.player))
+        {
+            velocity = Vector2.Zero;
+            counter--;
+            if (counter <= 0)
+            {
+
+                PlayingState.player.health -= 1;
+                counter = 100;
+            }
+        }
+    }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
