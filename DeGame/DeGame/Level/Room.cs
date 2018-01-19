@@ -156,7 +156,7 @@ public class Room : GameObjectList
                 CreateObject(x, y, "K");
                 break;
             case 'B':
-                roomarray[x, y] = "Boss1";
+                roomarray[x, y] = "HomingBoss";
                 CreateObject(x, y, "B");
                 break;
             case 'O':
@@ -354,7 +354,7 @@ public class Room : GameObjectList
                 enemies.Add(enemyIce);
                 break;
             case ("B"):
-                Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, 0, "Boss1");
+                HomingBoss boss = new HomingBoss(TilePosition, new Vector2(a, b), 0, 0, "HomingBoss");
                 bosses.Add(boss);
                 break;
             case ("!"):
