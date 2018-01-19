@@ -13,13 +13,14 @@ public class ChasingEnemy : Enemy
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
-        if (CollidesWith(PlayingState.player))
+        
+        if(CollidesWith(PlayingState.player))
         {
+            velocity = Vector2.Zero;
             counter--;
             if (counter == 0)
             {
-                // velocity = Vector2.Zero;
+               
                 PlayingState.player.health -= 0;
                 counter = 100;
             }
@@ -32,6 +33,7 @@ public class ChasingEnemy : Enemy
 
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
+        base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

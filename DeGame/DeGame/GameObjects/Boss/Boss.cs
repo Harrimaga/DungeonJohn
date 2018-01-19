@@ -25,6 +25,7 @@ public class Boss :  SpriteGameObject
         Roomposition = roomposition;
         statmultiplier = difficulty / 10 + 1;
         LevelofBoss = difficulty;
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     }
 
     public override void Update(GameTime gameTime)
@@ -44,7 +45,7 @@ public class Boss :  SpriteGameObject
             PlayingState.player.bullets.Remove(bullet);
 
         RemoveBullets.Clear();
-        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+        
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         base.Update(gameTime);
     }
