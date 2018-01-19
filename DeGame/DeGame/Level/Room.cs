@@ -438,33 +438,34 @@ public class Room : GameObjectList
     void WallShader (GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
         //als er...
-        if (x > 0 && (roomarray[x - 1, y] == "Background" || roomarray[x - 1, y] == "Lava" || roomarray[x - 1, y] == "Ice" || roomarray[x - 1, y] == "SpiderWeb"))
+        if (x > 0 && (roomarray[x - 1, y] == "Background" || roomarray[x - 1, y] == "Lava" || roomarray[x - 1, y] == "Ice" || roomarray[x - 1, y] == "SpiderWeb" || roomarray[x - 1, y] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Right2")), TilePosition, Color.Gray);
         //links
-        else if (x < roomarray.GetLength(0) - 1 && (roomarray[x + 1, y] == "Background" || roomarray[x + 1, y] == "Lava" || roomarray[x + 1, y] == "Ice" || roomarray[x + 1, y] == "SpiderWeb"))
+        else if (x < roomarray.GetLength(0) - 1 && (roomarray[x + 1, y] == "Background" || roomarray[x + 1, y] == "Lava" || roomarray[x + 1, y] == "Ice" || roomarray[x + 1, y] == "SpiderWeb" || roomarray[x + 1, y] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Left2")), TilePosition, Color.Gray);
         //rechts
-        else if (y > 0 && (roomarray[x, y - 1] == "Background" || roomarray[x, y - 1] == "Lava" || roomarray[x, y - 1] == "Ice" || roomarray[x, y - 1] == "SpiderWeb"))
+        else 
+        if (y > 0 && (roomarray[x, y - 1] == "Background" || roomarray[x, y - 1] == "Lava" || roomarray[x, y - 1] == "Ice" || roomarray[x, y - 1] == "SpiderWeb" || roomarray[x, y - 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Down2")), TilePosition, Color.Gray);
         //boven
-        else if (y < roomarray.GetLength(1) - 1 && (roomarray[x, y + 1] == "Background" || roomarray[x, y + 1] == "Lava" || roomarray[x, y + 1] == "Ice" || roomarray[x, y + 1] == "SpiderWeb"))
+        else if (y < roomarray.GetLength(1) - 1 && (roomarray[x, y + 1] == "Background" || roomarray[x, y + 1] == "Lava" || roomarray[x, y + 1] == "Ice" || roomarray[x, y + 1] == "SpiderWeb" || roomarray[x , y + 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Up2")), TilePosition, Color.Gray);
-        //onder een tile is waar men over kan lopen, teken dan een schaduw op de muur aan die kant.
+        //onder een steen is of een tile is waar men over kan lopen, teken dan een schaduw op de muur aan die kant.
 
         //als er..
-        else if (y > 0 && x > 0 && (roomarray[x - 1, y - 1] == "Background" || roomarray[x - 1, y - 1] == "Lava" || roomarray[x - 1, y - 1] == "Ice" || roomarray[x - 1, y - 1] == "SpiderWeb"))
+        else if (y > 0 && x > 0 && (roomarray[x - 1, y - 1] == "Background" || roomarray[x - 1, y - 1] == "Lava" || roomarray[x - 1, y - 1] == "Ice" || roomarray[x - 1, y - 1] == "SpiderWeb" || roomarray[x - 1, y - 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner RD")), TilePosition, Color.Gray);
         //linksboven
-        else if (y < roomarray.GetLength(1) - 1 && x > 0 && (roomarray[x - 1, y + 1] == "Background" || roomarray[x - 1, y + 1] == "Lava" || roomarray[x - 1, y + 1] == "Ice" || roomarray[x - 1, y + 1] == "SpiderWeb"))
+        else if (y < roomarray.GetLength(1) - 1 && x > 0 && (roomarray[x - 1, y + 1] == "Background" || roomarray[x - 1, y + 1] == "Lava" || roomarray[x - 1, y + 1] == "Ice" || roomarray[x - 1, y + 1] == "SpiderWeb" || roomarray[x - 1, y + 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner RU")), TilePosition, Color.Gray);
         //linksonder
-        else if (y > 0 && x < roomarray.GetLength(0) - 1 && (roomarray[x + 1, y - 1] == "Background" || roomarray[x + 1, y - 1] == "Lava" || roomarray[x + 1, y - 1] == "Ice" || roomarray[x + 1, y - 1] == "SpiderWeb"))
+        else if (y > 0 && x < roomarray.GetLength(0) - 1 && (roomarray[x + 1, y - 1] == "Background" || roomarray[x + 1, y - 1] == "Lava" || roomarray[x + 1, y - 1] == "Ice" || roomarray[x + 1, y - 1] == "SpiderWeb" || roomarray[x + 1, y - 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner LD")), TilePosition, Color.Gray);
         //rechtsboven
-        else if (y < roomarray.GetLength(1) - 1 && x < roomarray.GetLength(0) && (roomarray[x + 1, y + 1] == "Background" || roomarray[x + 1, y + 1] == "Lava" || roomarray[x + 1, y + 1] == "Ice" || roomarray[x + 1, y + 1] == "SpiderWeb"))
+        else if (y < roomarray.GetLength(1) - 1 && x < roomarray.GetLength(0) && (roomarray[x + 1, y + 1] == "Background" || roomarray[x + 1, y + 1] == "Lava" || roomarray[x + 1, y + 1] == "Ice" || roomarray[x + 1, y + 1] == "SpiderWeb" || roomarray[x + 1, y + 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner LU")), TilePosition, Color.Gray);
         //rechtsonder 
-        //...een tile is waar men over kan lopen, teken dan een hoekstuk van een muur
+        //...een steen is of een tile is waar men over kan lopen, teken dan een hoekstuk van een muur
     }
 
     void BackgroundShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
