@@ -1759,11 +1759,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Tiles/Ice Rock Sprite.png
 
-#begin Sprites/Items/BootsDown.pdn
-/importer:
-/processor:
-/build:Sprites/Items/BootsDown.pdn
-
 #begin Sprites/Items/BootsLeft.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1943,4 +1938,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Items/TorsoUp.png
+
+#begin Sprites/Items/BootsDown.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Items/BootsDown.png
 
