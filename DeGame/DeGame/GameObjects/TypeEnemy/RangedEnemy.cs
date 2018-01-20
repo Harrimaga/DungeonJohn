@@ -18,9 +18,6 @@ public class RangedEnemy : Enemy
         health = 100 * statmultiplier;
         maxhealth = 100 * statmultiplier;
         expGive = 100 * statmultiplier;
-        Console.WriteLine("Playerposition" + PlayingState.player.position);
-        Console.WriteLine("position = " + position);
-        Console.WriteLine("direction =" + direction);
     }
 
     public void Range()
