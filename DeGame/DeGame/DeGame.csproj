@@ -115,8 +115,10 @@
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
     <Compile Include="GameObjects\Boss\MinionBoss\ChasingMinion.cs" />
     <Compile Include="GameObjects\TypeEnemy\IceEnemy.cs" />
+    <Compile Include="GameObjects\TypeEnemy\RandomEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />
     <Compile Include="GameObjects\Terrain\Wall.cs" />
+    <Compile Include="GameObjects\TypeEnemy\ShootingEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\SpamEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\SpiderEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\TurretEnemy.cs" />
@@ -188,6 +190,9 @@
     <Content Include="Content\Levels\10.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Levels\12.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Levels\2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -219,6 +224,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Levels\9.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\11.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />

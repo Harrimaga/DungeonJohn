@@ -151,6 +151,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "IceEnemy";
                 CreateObject(x, y, "K");
                 break;
+            case 'V':
+                roomarray[x, y] = "RandomEnemy";
+                CreateObject(x, y, "V");
+                break;
             case 'B':
                 roomarray[x, y] = "Boss1";
                 CreateObject(x, y, "B");
@@ -305,6 +309,12 @@ switch (Lastentrypoint)
             case ("R"):
                 Enemy enemyRanged = new RangedEnemy(TilePosition, new Vector2(a, b), 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
+                roomarray[x, y] = "Background";
+                enemycounter++;
+                break;
+            case ("V"):
+                Enemy enemyRandom = new RandomEnemy(TilePosition, new Vector2(a, b), 0, "RandomEnemy");
+                enemies.Add(enemyRandom);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;

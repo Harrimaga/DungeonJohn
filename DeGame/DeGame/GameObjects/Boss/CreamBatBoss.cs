@@ -173,11 +173,11 @@ class CreamBatBoss : Boss
     {
         base.Draw(gameTime, spriteBatch);
         if (Stage == 1)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite1"), position);
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/SpookyGhostEnemy"), position);
         if (Stage == 2)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite2"), position);
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/SpookyGhostEnemy"), position);
         if (Stage == 3)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite3"), position);
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/SpookyGhostEnemy"), position);
     }
 }
 
