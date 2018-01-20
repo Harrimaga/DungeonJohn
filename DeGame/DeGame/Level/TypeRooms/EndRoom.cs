@@ -128,7 +128,10 @@ class EndRoom : Room
         {
             if (MiddleofPlayer.X >= Exit.X && MiddleofPlayer.X <= Exit.X + CellWidth)
                 if (MiddleofPlayer.Y >= Exit.Y && MiddleofPlayer.Y <= Exit.Y + CellHeight)
+                {
                     PlayingState.currentFloor.NextShop();
+                    cleared = false;
+                }
         }
         for (int x = 0; x < roomarraywidth; ++x)
             for (int y = 0; y < roomarrayheight; ++y)
