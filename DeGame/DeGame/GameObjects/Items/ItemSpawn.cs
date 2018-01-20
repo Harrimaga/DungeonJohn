@@ -26,7 +26,7 @@ class ItemSpawn : SpriteGameObject
             int r = randomint % itemList.RoomList.Count;
             item = itemList.RoomList[r];
         }
-        if(price)
+        else if(price)
         {
             int r = randomint % itemList.ShopList.Count;
             item = itemList.ShopList[r];
