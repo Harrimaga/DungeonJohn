@@ -37,11 +37,6 @@ public class PlayingState : IGameObject
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
         }
-        if (inputHelper.KeyPressed(Keys.Space))
-        {
-            GameEnvironment.gameStateManager.SwitchTo("GameOver");
-            Reset();
-        }
         floor.HandleInput(inputHelper);        
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -58,6 +53,10 @@ public class PlayingState : IGameObject
         if (player.health <= 0)
         {
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
+        }
+        if (currentFloor.CurrentLevel >= 10)
+        {
+            GameEnvironment.gameStateManager.SwitchTo("Victory");
         }
         currentFloor.wornItems.Update(gameTime);
     }

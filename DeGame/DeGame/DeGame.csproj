@@ -140,6 +140,7 @@
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
     <Compile Include="Level\TypeRooms\StartRoom.cs" />
+    <Compile Include="States\VictoryState.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\HealthBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
