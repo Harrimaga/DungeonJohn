@@ -5,7 +5,7 @@ public class TurretEnemy : Enemy
 {
     int Counter = 0, Directioncount;
     float bulletdamage;
-    float speed = 3f;
+    float speed = 0.2f;
     Vector2 direction, BulletPosition;
 
     public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int Difficulty = 0, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, "Sprites/Enemies/TurretEnemyUp", Difficulty, layer, id)

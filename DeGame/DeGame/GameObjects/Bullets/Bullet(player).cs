@@ -60,7 +60,8 @@ class Bullet : SpriteGameObject
         }
         else
             counter += weapon.Projectile_Velocity;
-        position += velocity;
+        position.X += velocity.X * gameTime.ElapsedGameTime.Milliseconds;
+        position.Y += velocity.Y * gameTime.ElapsedGameTime.Milliseconds;
         CheckCollision();
     }
 

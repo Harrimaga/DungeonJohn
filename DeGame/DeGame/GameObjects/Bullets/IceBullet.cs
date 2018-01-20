@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 class IceBullet : E_Bullet
 {
-    Vector2 direction;
+    Vector2 direction, actualvelocity;
     float speed, damage;
     public IceBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, int layer = 0, string id = "IceBullet") : base(Damage, Speed, "Sprites/Characters/Random", layer, id)
     {
@@ -18,7 +18,9 @@ class IceBullet : E_Bullet
         base.Update(gameTime);
         Position = position;
         direction.Normalize();
-        position += direction * speed;
+        actualvelocity = direction * speed;
+        position.X += actualvelocity.X * gameTime.ElapsedGameTime.Milliseconds;
+        position.Y += actualvelocity.Y * gameTime.ElapsedGameTime.Milliseconds;
         if (changedirection)
         {
             direction = CalculateReflect(direction);

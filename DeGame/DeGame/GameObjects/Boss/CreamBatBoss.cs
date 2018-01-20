@@ -8,7 +8,7 @@ class CreamBatBoss : Boss
     int MoveCounter = 0;
     int Stage = 1;
     int MoveTimer = 0;
-    float bulletdamage = 10, speed = 5;
+    float bulletdamage = 10, speed = 0.3f;
     Vector2 moving, MoveDirection, bulletPosition;
     Texture2D creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite1");
 

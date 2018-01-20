@@ -19,7 +19,7 @@ public class StandardBow : Item, IWeapon
         twoHanded = true;
         addedDamage = 50;
         damageMultiplier = 1;
-        projectile_velocity = 10;
+        projectile_velocity = 0.67f;
         attackspeed = 50;
         range = 800;
         ammo = -1;

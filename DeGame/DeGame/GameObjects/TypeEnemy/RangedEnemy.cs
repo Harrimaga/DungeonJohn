@@ -6,7 +6,7 @@ public class RangedEnemy : Enemy
 {
     int Counter = 300;
     float bulletdamage;
-    float speed = 2f;
+    float speed = 0.13f;
     Vector2 direction;
     
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ShootingEnemy1", Difficulty, layer, id)
