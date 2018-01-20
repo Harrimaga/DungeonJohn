@@ -321,7 +321,7 @@ public class Room : GameObjectList
                 enemycounter++;
                 break;
             case ("V"):
-                Enemy enemyRandom = new RandomEnemy(TilePosition, new Vector2(a, b), 0, "RandomEnemy");
+                Enemy enemyRandom = new RandomEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "RandomEnemy");
                 enemies.Add(enemyRandom);
                 roomarray[x, y] = "Background";
                 enemycounter++;

@@ -19,7 +19,7 @@ class GameOverState : IGameObject
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        MainMenu.HandleInput(inputHelper);
+        MainMenu.HandleInput(inputHelper, gameTime);
         if (inputHelper.KeyPressed(Keys.Z))
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
     }

@@ -4,16 +4,20 @@ using Microsoft.Xna.Framework.Graphics;
 public class RandomEnemy : Enemy
 {
     int Counter = 0;
-    float bulletdamage = 3;
-    float speed = 3f;
+    float bulletdamage;
+    float speed = 0.2f;
     Vector2 direction;
 
-    public RandomEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/CutieEnemyPixel", layer, id)
+    public RandomEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/RandomEnemy", Difficulty, layer, id)
     {
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
-        basevelocity = new Vector2(0.5f, 0.5f);
+        basevelocity = new Vector2(0.06f, 0.06f);
         velocity = basevelocity;
+        bulletdamage = 3 * statmultiplier;
+        health = 100 * statmultiplier;
+        maxhealth = 100 * statmultiplier;
+        expGive = 120 * statmultiplier;
 
     }
 

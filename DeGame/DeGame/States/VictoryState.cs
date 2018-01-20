@@ -17,9 +17,9 @@ class VictoryState : IGameObject
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
         MainMenu = new Button(new Vector2(655, 775), "ReturnToMainMenu", "ReturnToMainMenu", "ReturnToMainMenuPressed", true, 1);
     }
-    public virtual void HandleInput(InputHelper inputHelper)
+    public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        MainMenu.HandleInput(inputHelper);
+        MainMenu.HandleInput(inputHelper, gameTime);
         if (inputHelper.KeyPressed(Keys.Z))
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
     }

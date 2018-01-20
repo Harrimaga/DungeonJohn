@@ -4,7 +4,7 @@ using System;
 
 public class IceEnemy : Enemy
 {
-    int Counter = 0;
+    int Counter = 75;
     float bulletdamage;
     float speed = 0.1f;
     Vector2 direction;
