@@ -15,11 +15,11 @@ class SimpleArmour : Item, IArmour
 
     public override void equip()
     {
-        PlayingState.player.maxhealth += 120;
+        PlayingState.player.changeMaxHealth(120);
     }
     public override void unequip()
     {
-        PlayingState.player.maxhealth -= 120;
+        PlayingState.player.changeMaxHealth(-120);
         base.unequip();
     }
 }
