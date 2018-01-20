@@ -66,17 +66,16 @@ class HealthBar
             healthbarwidth2 = (int)((newhealth / maxhealth) * 200);
             healthbar = new Rectangle((int)positionNow.X - 30, (int)positionNow.Y - 30, healthbarwidth, 20);
         }
-        if (isPlayer)
-        {
-            healthbar = new Rectangle(GameEnvironment.WindowSize.X + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - GameEnvironment.WindowSize.Y / 2 + 300, healthbarwidth, 20);
-            healthbar2 = new Rectangle(GameEnvironment.WindowSize.X + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - GameEnvironment.WindowSize.Y / 2 + 300, healthbarwidth2, 20);
-        }
         HP = "HP " + (int)newhealth;
     }
     public void Draw(SpriteBatch spriteBatch)
     {
         if (isPlayer)
+        {
+            healthbar = new Rectangle(GameEnvironment.WindowSize.X + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - GameEnvironment.WindowSize.Y / 2 + 300, healthbarwidth, 20);
+            healthbar2 = new Rectangle(GameEnvironment.WindowSize.X + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - GameEnvironment.WindowSize.Y / 2 + 300, healthbarwidth2, 20);
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/HealthbarBackground"), new Vector2(GameEnvironment.WindowSize.X - 5 + (int)Camera.Position.X - GameEnvironment.WindowSize.X / 2 - 300, (int)Camera.Position.Y - 5 - GameEnvironment.WindowSize.Y / 2 + 300), Color.White);
+        }
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/damagehealthbar"), healthbar, Color.White);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/healthbar"), healthbar2, Color.White);
         if (isBoss)

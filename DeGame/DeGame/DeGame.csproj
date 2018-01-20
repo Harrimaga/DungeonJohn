@@ -83,6 +83,7 @@
     <Compile Include="GameObjects\Items\Boots\SlimyBoots.cs" />
     <Compile Include="GameObjects\Items\CraftingBench.cs" />
     <Compile Include="GameObjects\Items\Helmets\HardHelmet.cs" />
+    <Compile Include="GameObjects\Items\Helmets\HelicopterHat.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IActive.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IArmour.cs" />
     <Compile Include="GameObjects\Items\Interfaces\IBoots.cs" />

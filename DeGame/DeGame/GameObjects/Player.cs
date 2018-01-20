@@ -13,7 +13,7 @@ public class Player : SpriteGameObject
     public float exp = 0, nextLevelExp = 100;
     public float attackspeedreduction = 0;
     public double damagereduction = 1;
-    public float extraspeed = 0;
+    public float extraspeed = 1;
     public float attack;
     public float attackspeed;
     public float speed;
@@ -43,14 +43,14 @@ public class Player : SpriteGameObject
         CalculateDamage();
         CalculateAmmo();
     }
-        
+
     public override Rectangle BoundingBox
     {
         get
         {
             int left = (int)(position.X - origin.X);
             int top = (int)(position.Y - origin.Y);
-            return new Rectangle(left , top , Width, Height);
+            return new Rectangle(left, top, Width, Height);
         }
     }
 
@@ -64,7 +64,7 @@ public class Player : SpriteGameObject
 
         base.Update(gameTime);
         collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
-        healthbar.Update(gameTime, health, maxhealth,position);
+        healthbar.Update(gameTime, health, maxhealth, position);
         bullets.Update(gameTime);
         NextLevel();
         if (health <= 0)
@@ -86,9 +86,9 @@ public class Player : SpriteGameObject
         }
 
         //krijg weer originele snelheid als je over ijs glijdt en van een spinnenweb afkomt
-        if (onIce && !onWeb && speed != 0.3f + extraspeed)
+        if (onIce && !onWeb && speed != 0.3f * extraspeed)
         {
-            speed = 0.3f + extraspeed;
+            speed = 0.3f * extraspeed;
         }
         if (onWeb)
         {
@@ -98,10 +98,7 @@ public class Player : SpriteGameObject
         {
             velocitybase = 0.3f;
         }
-        if (extraspeed < 0)
-            speed = velocitybase;
-        else
-            speed = velocitybase + extraspeed;
+        speed = velocitybase * extraspeed;
     }
 
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
@@ -155,7 +152,7 @@ public class Player : SpriteGameObject
         }
         else
         {
-            if(lastUsedspeed == "up")
+            if (lastUsedspeed == "up")
             {
                 position.Y -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
@@ -192,7 +189,7 @@ public class Player : SpriteGameObject
                 Shoot(4);
             }
         }
-        if(leveltokens > 0 && (inputHelper.KeyPressed(Keys.O) || inputHelper.ButtonPressed(Buttons.RightTrigger)))
+        if (leveltokens > 0 && (inputHelper.KeyPressed(Keys.O) || inputHelper.ButtonPressed(Buttons.RightTrigger)))
         {
             leveltokens--;
             GameEnvironment.gameStateManager.SwitchTo("Leveling");
@@ -210,7 +207,7 @@ public class Player : SpriteGameObject
         nextLevelExp = 100;
         attackspeedreduction = 0;
         damagereduction = 0;
-        extraspeed = 0;
+        extraspeed = 1;
         extraattack = 0;
         leveltokens = 0;
         velocitybase = 0.3f;
@@ -222,17 +219,17 @@ public class Player : SpriteGameObject
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
         {
             RemoveBullets.Add(bullet);
-        }  
+        }
         foreach (Bullet bullet in RemoveBullets)
         {
             PlayingState.player.bullets.Remove(bullet);
         }
         startup = true;
-}
+    }
 
     public void NextLevel()
     {
-        if(exp >= nextLevelExp)
+        if (exp >= nextLevelExp)
         {
             exp -= nextLevelExp;
             nextLevelExp += 20;
@@ -246,7 +243,7 @@ public class Player : SpriteGameObject
     {
         if (type == 1)
         {
-            extraattack+= 5;
+            extraattack += 5;
             CalculateDamage();
         }
         if (type == 2)
@@ -277,7 +274,7 @@ public class Player : SpriteGameObject
     {
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
         IPassive[] passives = new IPassive[2];
-        
+
         if (inventory.currentPassives[0] != null)
         {
             passives[0] = (IPassive)inventory.currentPassives[0];
@@ -369,6 +366,5 @@ public class Player : SpriteGameObject
         healthbar.Draw(spriteBatch);
         if (leveltokens > 0)
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/LevelUp"), new Vector2(position.X, position.Y - 30), Color.White);
-
     }
 }
