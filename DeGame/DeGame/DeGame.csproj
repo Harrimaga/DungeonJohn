@@ -221,7 +221,25 @@
     <Content Include="Content\Levels\9.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Items\HardHelmetDown.png" />
+    <Content Include="Content\Sprites\Items\HardHelmetLeft.png" />
+    <Content Include="Content\Sprites\Items\HardHelmetRight.png" />
+    <Content Include="Content\Sprites\Items\HardHelmetUp.png" />
+    <Content Include="Content\Sprites\Items\PowerHelmet.png" />
+    <Content Include="Content\Sprites\Items\PowerHelmetDown.png" />
+    <Content Include="Content\Sprites\Items\PowerHelmetLeft.png" />
+    <Content Include="Content\Sprites\Items\PowerHelmetRight.png" />
+    <Content Include="Content\Sprites\Items\PowerHelmetUp.png" />
     <Content Include="Content\Sprites\Items\SimpleArmour.png" />
+    <Content Include="Content\Sprites\Items\SimpleArmourDown.png" />
+    <Content Include="Content\Sprites\Items\SimpleArmourLeft.png" />
+    <Content Include="Content\Sprites\Items\SimpleArmourRight.png" />
+    <Content Include="Content\Sprites\Items\SimpleArmourUp.png" />
+    <Content Include="Content\Sprites\Items\SlimyBootsDown.png" />
+    <Content Include="Content\Sprites\Items\SlimyBootsLeft.png" />
+    <Content Include="Content\Sprites\Items\SlimyBootsRight.png" />
+    <Content Include="Content\Sprites\Items\SlimyBootsUp.png" />
+    <Content Include="Content\Sprites\PowerHelmet.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
