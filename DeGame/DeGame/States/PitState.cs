@@ -59,7 +59,7 @@ class PitState : IGameObject
 
     public void PitExit(GameTime gameTime)
     {
-        MiddleofPlayer = new Vector2(player2.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width / 2, player2.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 2);
+        MiddleofPlayer = new Vector2(player2.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2, player2.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2);
 
         if (PlayingState.currentFloor.floor[x, y].enemycounter == 0)
         {

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Player : SpriteGameObject
 {
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
-    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
     public bool CoolBoots = false, SlimyBoots = false, Mirror = false, VialOfPoison = false;
     public float health = 100, maxhealth = 100;
     public float exp = 0, nextLevelExp = 100;
@@ -34,12 +34,12 @@ public class Player : SpriteGameObject
     bool startup = true;
 
     public Player(int layer = 0, string id = "Player")
-    : base("Sprites/Characters/PlayerFront", 0, "Player")
+    : base("Sprites/Characters/PlayerDown", 0, "Player")
     {
         bullets = new GameObjectList();
         healthbar = new HealthBar(health, maxhealth, position, true);
         inventory = new InventoryManager();
-        lastUsedspeed = "down";
+        lastUsedspeed = "Down";
         CalculateDamage();
         CalculateAmmo();
     }
@@ -109,25 +109,25 @@ public class Player : SpriteGameObject
             if (inputHelper.IsKeyDown(Keys.W))
             {
                 position.Y -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                lastUsedspeed = "up";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerBack");
+                lastUsedspeed = "Up";
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerUp");
             }
             if (inputHelper.IsKeyDown(Keys.S))
             {
                 position.Y += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                lastUsedspeed = "down";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+                lastUsedspeed = "Down";
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
             }
             if (inputHelper.IsKeyDown(Keys.D))
             {
                 position.X += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                lastUsedspeed = "right";
+                lastUsedspeed = "Right";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
             }
             if (inputHelper.IsKeyDown(Keys.A))
             {
                 position.X -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                lastUsedspeed = "left";
+                lastUsedspeed = "Left";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
             }
 
@@ -135,16 +135,16 @@ public class Player : SpriteGameObject
             position.Y -= speed * inputHelper.currentGamePadState.ThumbSticks.Left.Y;
             switch (inputHelper.getThumpDirection("left"))
             {
-                case "up":
-                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerBack");
+                case "Up":
+                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerUp");
                     break;
-                case "down":
-                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+                case "Down":
+                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
                     break;
-                case "right":
+                case "Right":
                     playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
                     break;
-                case "left":
+                case "Left":
                     playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
                     break;
             }
@@ -152,19 +152,19 @@ public class Player : SpriteGameObject
         }
         else
         {
-            if (lastUsedspeed == "up")
+            if (lastUsedspeed == "Up")
             {
                 position.Y -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
-            else if (lastUsedspeed == "down")
+            else if (lastUsedspeed == "Down")
             {
                 position.Y += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
-            else if (lastUsedspeed == "right")
+            else if (lastUsedspeed == "Right")
             {
                 position.X += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
-            else if (lastUsedspeed == "left")
+            else if (lastUsedspeed == "Left")
             {
                 position.X -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
@@ -323,42 +323,37 @@ public class Player : SpriteGameObject
     {
         spriteBatch.Draw(playersprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
         if (ammo < 0)
-        {
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: infinite!", new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-        }
         else
-        {
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: " + Convert.ToString(ammo), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-        }
-
+        
         if (inventory.currentArmour != null)
-        {
             inventory.currentArmour.DrawOnPlayer(gameTime, spriteBatch);
-        }
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Torso" + lastUsedspeed), PlayingState.player.position, Color.White);
+
         if (inventory.currentWeapon != null)
-        {
             inventory.currentWeapon.DrawOnPlayer(gameTime, spriteBatch);
-        }
+
         if (inventory.currentHelmet != null)
-        {
             inventory.currentHelmet.DrawOnPlayer(gameTime, spriteBatch);
-        }
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardHelmet" + lastUsedspeed), PlayingState.player.position, Color.White);
+
         if (inventory.currentShield != null)
-        {
             inventory.currentShield.DrawOnPlayer(gameTime, spriteBatch);
-        }
+
         if (inventory.currentBoots != null)
-        {
             inventory.currentBoots.DrawOnPlayer(gameTime, spriteBatch);
-        }
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Boots" + lastUsedspeed), PlayingState.player.position, Color.White);
+
         if (inventory.currentPassives[0] != null)
-        {
             inventory.currentPassives[0].DrawOnPlayer(gameTime, spriteBatch);
-        }
+
         if (inventory.currentPassives[1] != null)
-        {
             inventory.currentPassives[1].DrawOnPlayer(gameTime, spriteBatch);
-        }
+
 
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);

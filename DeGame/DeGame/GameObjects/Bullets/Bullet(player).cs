@@ -14,7 +14,7 @@ class Bullet : SpriteGameObject
     Color color = Color.White;
 
     public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
-    : base("Sprites/Characters/PlayerFront", layer, id)
+    : base("Sprites/Characters/PlayerDown", layer, id)
     {
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
         position = Startposition;

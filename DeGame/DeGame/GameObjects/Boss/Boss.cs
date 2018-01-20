@@ -27,7 +27,7 @@ public class Boss :  SpriteGameObject
         Roomposition = roomposition;
         statmultiplier = difficulty / 10 + 1;
         LevelofBoss = difficulty;
-        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
     }
 
     public override void Update(GameTime gameTime)

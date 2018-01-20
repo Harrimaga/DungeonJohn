@@ -73,19 +73,19 @@ public class Item
         }
         switch (PlayingState.player.lastUsedspeed)
         {
-            case "up":
+            case "Up":
                 if (up != null)
                     spriteBatch.Draw(up, PlayingState.player.position, Color.White);
                 break;
-            case "down":
+            case "Down":
                 if (down != null)
                     spriteBatch.Draw(down, PlayingState.player.position, Color.White);
                 break;
-            case "left":
+            case "Left":
                 if (left != null)
                     spriteBatch.Draw(left, PlayingState.player.position, Color.White);
                 break;
-            case "right":
+            case "Right":
                 if (right != null)
                     spriteBatch.Draw(right, PlayingState.player.position, Color.White);
                 break;
