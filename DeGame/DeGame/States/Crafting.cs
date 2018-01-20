@@ -17,7 +17,7 @@ public class Crafting : IGameObject
     {
         craftingSlots = new CraftingSlots(new Vector2(GameEnvironment.WindowSize.X - 300 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2) + 510));
     }
-    public virtual void HandleInput(InputHelper inputHelper)
+    public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if(inputHelper.KeyPressed(Keys.Space))
         {
@@ -37,10 +37,10 @@ public class Crafting : IGameObject
 
         foreach (CraftingInventorySlot cs in inventory)
         {
-            cs.HandleInput(inputHelper);
+            cs.HandleInput(inputHelper, gameTime);
         }
 
-        craftingSlots.HandleInput(inputHelper);
+        craftingSlots.HandleInput(inputHelper, gameTime);
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

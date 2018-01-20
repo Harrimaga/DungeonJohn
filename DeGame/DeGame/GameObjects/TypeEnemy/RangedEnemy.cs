@@ -5,15 +5,19 @@ using System;
 public class RangedEnemy : Enemy
 {
     int Counter = 300;
-    float bulletdamage = 5;
-    float speed = 2f;
+    float bulletdamage;
+    float speed = 0.13f;
     Vector2 direction;
     
-    public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ShootingEnemy1", layer, id)
+    public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ShootingEnemy1", Difficulty, layer, id)
     {
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
-        velocity = new Vector2(0.5f, 0.5f);
+        velocity = new Vector2(0.03f, 0.03f);
+        bulletdamage = 3 * statmultiplier;
+        health = 100 * statmultiplier;
+        maxhealth = 100 * statmultiplier;
+        expGive = 100 * statmultiplier;
         Console.WriteLine("Playerposition" + PlayingState.player.position);
         Console.WriteLine("position = " + position);
         Console.WriteLine("direction =" + direction);
@@ -105,6 +109,6 @@ public class RangedEnemy : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/ShootingEnemy1"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/ShootingEnemy1"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }

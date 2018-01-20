@@ -302,17 +302,27 @@ public class Floor
     public void Update(GameTime gameTime)
     {
         foreach (Room room in floor)
-            if (room != null && room.position == currentRoom.position)
+            if (room != null)
             {
-                room.Update(gameTime);
+                if (room.position == currentRoom.position)
+                {
+                    room.Update(gameTime);
+                }
+                else if (room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
+                || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1))
+                {
+                    room.enemybullets.Update(gameTime);
+                    room.homingenemybullets.Update(gameTime);
+                }
             }
+
         if (doortimer > 0)
         {
             doortimer--;
         }
     }
 
-    public void HandleInput(InputHelper inputHelper)
+    public void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (inputHelper.KeyPressed(Keys.T))
             if (CurrentLevel % 2 == 0)
@@ -324,7 +334,7 @@ public class Floor
         foreach (Room r in floor)
         {
             if (r != null)
-                r.HandleInput(inputHelper);
+                r.HandleInput(inputHelper, gameTime);
         }
     }
 
@@ -430,8 +440,6 @@ public class Floor
                 if (room != null && (room.position == currentRoom.position) || room.position == currentRoom.position + new Vector2(1, 0) || room.position == currentRoom.position - new Vector2(1, 0)
                 || room.position == currentRoom.position + new Vector2(0, 1) || room.position == currentRoom.position - new Vector2(0, 1))
                     room.Draw(gameTime, spriteBatch);
-
-
             }
         }
 

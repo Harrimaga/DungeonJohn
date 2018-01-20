@@ -6,6 +6,7 @@ public class GameStateManager : IGameObject
 {
     public IGameObject currentGameState;
     Dictionary<string, IGameObject> gameStates;
+    public string LastState;
 
     public GameStateManager()
     {
@@ -40,11 +41,11 @@ public class GameStateManager : IGameObject
         return gameStates[name];
     }
 
-    public void HandleInput(InputHelper inputHelper)
+    public void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (currentGameState != null)
         {
-            currentGameState.HandleInput(inputHelper);
+            currentGameState.HandleInput(inputHelper, gameTime);
         }
     }
 

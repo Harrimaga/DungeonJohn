@@ -19,13 +19,13 @@ public class DoubleGun : Item, IWeapon
         twoHanded = false;
         addedDamage = 30;
         damageMultiplier = 1;
-        projectile_velocity = 12;
+        projectile_velocity = 0.8f;
         attackspeed = 30;
         range = 800;
         ammo = 200;
         Type = "weapon";
         itemName = "DoubleGun";
-        itemDescription = "What is better then 1 gun 2 guns!";
+        itemDescription = "What is better than 1 gun 2 guns!!";
         bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/Mac10_BulletLeft");
         bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/Mac10_BulletUp");
     }

@@ -6,14 +6,16 @@ using System.Collections.Generic;
 public class Enemy : SpriteGameObject
 {
     public float health;
-    protected float maxhealth = 100;
+    protected float maxhealth;
     protected float attack;
     protected float attackspeed;
+    protected float EnemyLevel;
+    protected float statmultiplier;
     protected float range = 100;
     protected float expGive = 120;
     protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true;
-    protected int counter = 100;
-    protected Vector2 direction, basevelocity = Vector2.Zero;
+    protected int counter = 100, poisoncounter = 0;
+    protected Vector2 direction, basevelocity = Vector2.Zero, PlayerOrigin;
     public SpriteEffects Effects;
     public Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
@@ -21,22 +23,28 @@ public class Enemy : SpriteGameObject
     Vector2 actualvelocity;
     public bool alive = true;
     string AssetName;
+    protected Color color = Color.White;
 
-    public Enemy(Vector2 startPosition, Vector2 roomposition, string assetname, int layer = 0, string id = "Enemy")
+    public Enemy(Vector2 startPosition, Vector2 roomposition, string assetname, int difficulty = 0, int layer = 0, string id = "Enemy")
     : base(assetname, layer, id)
     {
-        healthbar = new HealthBar(health, maxhealth, position);
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+        if (difficulty > 0)
+            statmultiplier = (float)(difficulty - 1) / 10 + 1;
+        else
+            statmultiplier = (float)difficulty / 10 + 1;
+        EnemyLevel = difficulty;
         position = startPosition;
         velocity = basevelocity;
         Roomposition = roomposition;
-        health = maxhealth;
         AssetName = assetname;
+        healthbar = new HealthBar(health, maxhealth, position);
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         healthbar.Update(gameTime, health, maxhealth, position);
 
         if (!flying)
@@ -45,7 +53,8 @@ public class Enemy : SpriteGameObject
         if (moving)
         {
             actualvelocity = velocity * direction;
-            position += actualvelocity;
+            position.X += actualvelocity.X * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            position.Y += actualvelocity.Y * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
         }
 
         List<GameObject> RemoveBullets = new List<GameObject>();
@@ -54,12 +63,24 @@ public class Enemy : SpriteGameObject
             if (CollidesWith(bullet))
             {
                 health -= PlayingState.player.attack;
+                if (PlayingState.player.VialOfPoison && bullet.poisonbullet)
+                    poisoncounter = 350;
                 RemoveBullets.Add(bullet);
             }
         foreach (Bullet bullet in RemoveBullets)        
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
         CheckAlive();
+
+        if (poisoncounter > 0)
+        {
+            if (poisoncounter % 75 == 0 && poisoncounter < 350)
+                health -= 4;
+            poisoncounter--;
+            color = Color.YellowGreen;
+        }
+        else
+            color = Color.White;
     }
 
     void CheckAlive()
@@ -78,7 +99,7 @@ public class Enemy : SpriteGameObject
 
     public void Chase()
     {
-        direction = PlayingState.player.position - position;
+        direction = PlayerOrigin - position;
         direction.Normalize();
     }
 

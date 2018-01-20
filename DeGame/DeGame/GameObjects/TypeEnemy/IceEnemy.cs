@@ -4,19 +4,20 @@ using System;
 
 public class IceEnemy : Enemy
 {
-    int Counter = 50;
-    float bulletdamage = 10;
-    float speed = 1.5f;
+    int Counter = 0;
+    float bulletdamage;
+    float speed = 0.1f;
     Vector2 direction;
 
-    public IceEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition,"Sprites/Enemies/IceEnemy", layer, id)
+    public IceEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition,"Sprites/Enemies/IceEnemy", Difficulty, layer, id)
     {
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyIceBullet");
         velocity = new Vector2(0.5f, 0.5f);
-        //Console.WriteLine("Playerposition" + PlayingState.player.position);
-        //Console.WriteLine("position = " + position);
-        //Console.WriteLine("direction =" + direction);
+        bulletdamage = 5 * statmultiplier;
+        Console.WriteLine("Playerposition" + PlayingState.player.position);
+        Console.WriteLine("position = " + position);
+        Console.WriteLine("direction =" + direction);
         killable = false;
     }
 
@@ -53,7 +54,7 @@ public class IceEnemy : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/IceEnemy"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/IceEnemy"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
 
     }
 }

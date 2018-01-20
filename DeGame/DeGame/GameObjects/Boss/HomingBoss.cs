@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-public class Boss1 : Boss
+public class HomingBoss : Boss
 {
     BossBullet bullet1, bullet2, bullet3;
     GameObjectList Bullets, HomingBullets;
@@ -11,12 +11,12 @@ public class Boss1 : Boss
     int Counter = 30;
     float speed = 0.3f;
     float bulletdamage;
-    public Boss1(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/CowboyBoss",Difficulty , layer, id)
+    public HomingBoss(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/CowboyBoss",Difficulty , layer, id)
     {
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet");
         Bullets = new GameObjectList();
         HomingBullets = new GameObjectList();
-        velocity = new Vector2(1, 1);
+        velocity = new Vector2(0.07f, 0.07f);
         velocity.Normalize();
         Roomposition = roomposition;
         expGive = (int)(240 * statmultiplier);
@@ -78,8 +78,8 @@ public class Boss1 : Boss
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        if (LevelofBoss == 0)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CowboyBoss"), position);
+        if (LevelofBoss == 0 || poisoncounter > 0)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CowboyBoss"), position, color);
         else
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CowboyBoss"), position, Color.MediumVioletRed);
         Bullets.Draw(gameTime, spriteBatch);

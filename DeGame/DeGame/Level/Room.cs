@@ -15,7 +15,7 @@ public class Room : GameObjectList
     public Vector2 Up, Down, Left, Right, Exit, ExitShop, LastEntryPoint;
     public bool Visited = false, CameraMoving = false;
     public IList addedenemies = new List<Enemy>();
-    int roomarraywidth, roomarrayheight;
+    protected int roomarraywidth, roomarrayheight;
     public string Type = "normalroom";
     Random random = new Random();
     public string[,] roomarray;
@@ -78,6 +78,10 @@ public class Room : GameObjectList
             case '!':
                 roomarray[x, y] = "Rock";
                 CreateObject(x, y, "!");
+                break;
+            case 'A':
+                roomarray[x, y] = "IceRock";
+                CreateObject(x, y, "A");
                 break;
             case '+':
                 roomarray[x, y] = "Wall";
@@ -156,7 +160,7 @@ public class Room : GameObjectList
                 CreateObject(x, y, "V");
                 break;
             case 'B':
-                roomarray[x, y] = "Boss1";
+                roomarray[x, y] = "HomingBoss";
                 CreateObject(x, y, "B");
                 break;
             case 'O':
@@ -196,15 +200,20 @@ public class Room : GameObjectList
     public void DropConsumable(Vector2 position)
     {
         int r = random.Next(100);
-        if (r > 50)
+        if (r < 10)
         {
             Consumables golddrop = new Consumables(position, "gold");
             consumable.Add(golddrop);
         }
-        else
+        else if(r < 30)
         {
             Consumables healthdrop = new Consumables(position, "heart");
             consumable.Add(healthdrop);
+        }
+        else if(r < 50)
+        {
+            Consumables ammodrop = new Consumables(position, "ammo");
+            consumable.Add(ammodrop);
         }
     }
 
@@ -271,7 +280,8 @@ public class Room : GameObjectList
                 PlayingState.player.onSolid = false;
             else
                 PlayingState.player.onSolid = true;
-switch (Lastentrypoint)
+
+            switch (Lastentrypoint)
             {
                 case 1:
                     LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 2 * CellHeight + b * roomheight);
@@ -294,20 +304,18 @@ switch (Lastentrypoint)
 
     public void CreateObject(int x, int y, string Type)
     {
+        int enemylevel = PlayingState.currentFloor.displayint;
         TilePosition = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
-        //Enemy enemyChase;
-        //Enemy enemyRanged;
-        //Enemy enemy;
         switch (Type)
         {
             case ("C"):
-                Enemy enemyChase = new ChasingEnemy(TilePosition, new Vector2(a, b), 0, "ChasingEnemy");
+                Enemy enemyChase = new ChasingEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "ChasingEnemy");
                 enemies.Add(enemyChase);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("R"):
-                Enemy enemyRanged = new RangedEnemy(TilePosition, new Vector2(a, b), 0, "RangedEnemy");
+                Enemy enemyRanged = new RangedEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
                 roomarray[x, y] = "Background";
                 enemycounter++;
@@ -319,44 +327,44 @@ switch (Lastentrypoint)
                 enemycounter++;
                 break;
             case ("Q"):
-                Enemy enemySpam = new SpamEnemy(TilePosition, new Vector2(a, b), 0, "SpamEnemy");
+                Enemy enemySpam = new SpamEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "SpamEnemy");
                 enemies.Add(enemySpam);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("U"):
-                Enemy enemyTurretUp = new TurretEnemy(TilePosition, new Vector2(a, b), 1, 0, "TurretEnemyUp");
+                Enemy enemyTurretUp = new TurretEnemy(TilePosition, new Vector2(a, b), 1, enemylevel, 0, "TurretEnemyUp");
                 enemies.Add(enemyTurretUp);
                 roomarray[x, y] = "Background";
                 break;
             case ("D"):
-                Enemy enemyTurretDown = new TurretEnemy(TilePosition, new Vector2(a, b), 2, 0, "TurretEnemyDown");
+                Enemy enemyTurretDown = new TurretEnemy(TilePosition, new Vector2(a, b), 2, enemylevel, 0, "TurretEnemyDown");
                 enemies.Add(enemyTurretDown);
                 roomarray[x, y] = "Background";
                 break;
             case ("F"):
-                Enemy enemyTurretLeft = new TurretEnemy(TilePosition, new Vector2(a, b), 3, 0, "TurretEnemyLeft");
+                Enemy enemyTurretLeft = new TurretEnemy(TilePosition, new Vector2(a, b), 3, enemylevel, 0, "TurretEnemyLeft");
                 enemies.Add(enemyTurretLeft);
                 roomarray[x, y] = "Background";
                 break;
             case ("T"):
-                Enemy enemyTurretRight = new TurretEnemy(TilePosition, new Vector2(a, b), 4, 0, "TurretEnemyRight");
+                Enemy enemyTurretRight = new TurretEnemy(TilePosition, new Vector2(a, b), 4, enemylevel, 0, "TurretEnemyRight");
                 enemies.Add(enemyTurretRight);
                 roomarray[x, y] = "Background";
                 break;
             case ("P"):
-                Enemy enemySpider = new SpiderEnemy(TilePosition, new Vector2(a, b), 0, "SpiderEnemy");
+                Enemy enemySpider = new SpiderEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "SpiderEnemy");
                 enemies.Add(enemySpider);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
             case ("K"):
                 CreateObject(x, y, "G");
-                Enemy enemyIce = new IceEnemy(TilePosition, new Vector2(a, b), 0, "IceEnemy");
+                Enemy enemyIce = new IceEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "IceEnemy");
                 enemies.Add(enemyIce);
                 break;
             case ("B"):
-                Boss1 boss = new Boss1(TilePosition, new Vector2(a, b), 0, 0, "Boss1");
+                HomingBoss boss = new HomingBoss(TilePosition, new Vector2(a, b), 0, 0, "HomingBoss");
                 bosses.Add(boss);
                 break;
             case ("!"):
@@ -364,16 +372,23 @@ switch (Lastentrypoint)
                 solid.Add(rock);
                 roomarray[x, y] = "Background";
                 break;
+            case ("A"):
+                Solid icerock = new Rock(TilePosition, 0, "Rock", true);
+                solid.Add(icerock);
+                CreateObject(x, y, "G");
+                break;
             case ("+"):
                 Solid wall = new Wall(TilePosition, 0, "Wall");
                 solid.Add(wall);
                 break;
             case ("I"):
-                ItemSpawn item = new ItemSpawn(TilePosition, false, 0, "Item");
+                int v = random.Next(50);
+                ItemSpawn item = new ItemSpawn(TilePosition, false, v, 0, "Item");
                 altars.Add(item);
                 break;
             case ("M"):
-                ItemSpawn Shopitem = new ItemSpawn(TilePosition, true, 0, "ShopItem");
+                int w = random.Next(50);
+                ItemSpawn Shopitem = new ItemSpawn(TilePosition, true, w, 0, "ShopItem");
                 altars.Add(Shopitem);
                 break;
             case ("Y"):
@@ -427,41 +442,42 @@ switch (Lastentrypoint)
         }
     }
 
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        anvils.HandleInput(inputHelper);
+        anvils.HandleInput(inputHelper, gameTime);
     }
 
     void WallShader (GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
         //als er...
-        if (x > 0 && (roomarray[x - 1, y] == "Background" || roomarray[x - 1, y] == "Lava" || roomarray[x - 1, y] == "Ice" || roomarray[x - 1, y] == "SpiderWeb"))
+        if (x > 0 && (roomarray[x - 1, y] == "Background" || roomarray[x - 1, y] == "Lava" || roomarray[x - 1, y] == "Ice" || roomarray[x - 1, y] == "SpiderWeb" || roomarray[x - 1, y] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Right2")), TilePosition, Color.Gray);
         //links
-        else if (x < roomarray.GetLength(0) - 1 && (roomarray[x + 1, y] == "Background" || roomarray[x + 1, y] == "Lava" || roomarray[x + 1, y] == "Ice" || roomarray[x + 1, y] == "SpiderWeb"))
+        else if (x < roomarray.GetLength(0) - 1 && (roomarray[x + 1, y] == "Background" || roomarray[x + 1, y] == "Lava" || roomarray[x + 1, y] == "Ice" || roomarray[x + 1, y] == "SpiderWeb" || roomarray[x + 1, y] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Left2")), TilePosition, Color.Gray);
         //rechts
-        else if (y > 0 && (roomarray[x, y - 1] == "Background" || roomarray[x, y - 1] == "Lava" || roomarray[x, y - 1] == "Ice" || roomarray[x, y - 1] == "SpiderWeb"))
+        else 
+        if (y > 0 && (roomarray[x, y - 1] == "Background" || roomarray[x, y - 1] == "Lava" || roomarray[x, y - 1] == "Ice" || roomarray[x, y - 1] == "SpiderWeb" || roomarray[x, y - 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Down2")), TilePosition, Color.Gray);
         //boven
-        else if (y < roomarray.GetLength(1) - 1 && (roomarray[x, y + 1] == "Background" || roomarray[x, y + 1] == "Lava" || roomarray[x, y + 1] == "Ice" || roomarray[x, y + 1] == "SpiderWeb"))
+        else if (y < roomarray.GetLength(1) - 1 && (roomarray[x, y + 1] == "Background" || roomarray[x, y + 1] == "Lava" || roomarray[x, y + 1] == "Ice" || roomarray[x, y + 1] == "SpiderWeb" || roomarray[x , y + 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Up2")), TilePosition, Color.Gray);
-        //onder een tile is waar men over kan lopen, teken dan een schaduw op de muur aan die kant.
+        //onder een steen is of een tile is waar men over kan lopen, teken dan een schaduw op de muur aan die kant.
 
         //als er..
-        else if (y > 0 && x > 0 && (roomarray[x - 1, y - 1] == "Background" || roomarray[x - 1, y - 1] == "Lava" || roomarray[x - 1, y - 1] == "Ice" || roomarray[x - 1, y - 1] == "SpiderWeb"))
+        else if (y > 0 && x > 0 && (roomarray[x - 1, y - 1] == "Background" || roomarray[x - 1, y - 1] == "Lava" || roomarray[x - 1, y - 1] == "Ice" || roomarray[x - 1, y - 1] == "SpiderWeb" || roomarray[x - 1, y - 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner RD")), TilePosition, Color.Gray);
         //linksboven
-        else if (y < roomarray.GetLength(1) - 1 && x > 0 && (roomarray[x - 1, y + 1] == "Background" || roomarray[x - 1, y + 1] == "Lava" || roomarray[x - 1, y + 1] == "Ice" || roomarray[x - 1, y + 1] == "SpiderWeb"))
+        else if (y < roomarray.GetLength(1) - 1 && x > 0 && (roomarray[x - 1, y + 1] == "Background" || roomarray[x - 1, y + 1] == "Lava" || roomarray[x - 1, y + 1] == "Ice" || roomarray[x - 1, y + 1] == "SpiderWeb" || roomarray[x - 1, y + 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner RU")), TilePosition, Color.Gray);
         //linksonder
-        else if (y > 0 && x < roomarray.GetLength(0) - 1 && (roomarray[x + 1, y - 1] == "Background" || roomarray[x + 1, y - 1] == "Lava" || roomarray[x + 1, y - 1] == "Ice" || roomarray[x + 1, y - 1] == "SpiderWeb"))
+        else if (y > 0 && x < roomarray.GetLength(0) - 1 && (roomarray[x + 1, y - 1] == "Background" || roomarray[x + 1, y - 1] == "Lava" || roomarray[x + 1, y - 1] == "Ice" || roomarray[x + 1, y - 1] == "SpiderWeb" || roomarray[x + 1, y - 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner LD")), TilePosition, Color.Gray);
         //rechtsboven
-        else if (y < roomarray.GetLength(1) - 1 && x < roomarray.GetLength(0) && (roomarray[x + 1, y + 1] == "Background" || roomarray[x + 1, y + 1] == "Lava" || roomarray[x + 1, y + 1] == "Ice" || roomarray[x + 1, y + 1] == "SpiderWeb"))
+        else if (y < roomarray.GetLength(1) - 1 && x < roomarray.GetLength(0) && (roomarray[x + 1, y + 1] == "Background" || roomarray[x + 1, y + 1] == "Lava" || roomarray[x + 1, y + 1] == "Ice" || roomarray[x + 1, y + 1] == "SpiderWeb" || roomarray[x + 1, y + 1] == "IceRock"))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner LU")), TilePosition, Color.Gray);
         //rechtsonder 
-        //...een tile is waar men over kan lopen, teken dan een hoekstuk van een muur
+        //...een steen is of een tile is waar men over kan lopen, teken dan een hoekstuk van een muur
     }
 
     void BackgroundShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)

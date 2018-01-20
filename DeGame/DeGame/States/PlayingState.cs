@@ -27,17 +27,19 @@ public class PlayingState : IGameObject
         Player.inventory.items.Add(new Mac10());
         Player.inventory.items.Add(new Mac10());
         Player.inventory.items.Add(new StandardBow());
+        Player.inventory.items.Add(new SimpleArmour());
+        GameEnvironment.gameStateManager.LastState = "playing";
         //Player.inventory.items.Add(new Mirror());
         //enemy = new RangedEnemy(Vector2.Zero, 0, "Enemy");
     }
-    public virtual void HandleInput(InputHelper inputHelper)
+    public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        player.HandleInput(inputHelper);
+        player.HandleInput(inputHelper, gameTime);
         if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
         }
-        floor.HandleInput(inputHelper);        
+        floor.HandleInput(inputHelper, gameTime);        
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

@@ -6,10 +6,10 @@ class MinionSpawner : Enemy
     new int counter = 100;
     Vector2 Roomposition;
 
-    public MinionSpawner(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/Spawner",layer, id)
+    public MinionSpawner(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/Spawner", Difficulty,layer, id)
     {
-        maxhealth = 200;
-        health = 200;
+        health = 200 * statmultiplier;
+        maxhealth = 200 * statmultiplier;
         position = startPosition;
         Roomposition = roomposition;
         backgroundenemy = true;
@@ -27,7 +27,7 @@ class MinionSpawner : Enemy
 
             if (counter <= 0)
             {
-                ChasingMinion minion = new ChasingMinion(position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/Spawner").Height * 0.8f), Roomposition);
+                ChasingMinion minion = new ChasingMinion(position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/Spawner").Height * 0.8f), Roomposition, PlayingState.currentFloor.displayint);
                 PlayingState.currentFloor.currentRoom.addedenemies.Add(minion);
                 counter = 400;
             }
@@ -39,6 +39,6 @@ class MinionSpawner : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/Spawner"), position);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/Spawner"), position, color);
     }
 }

@@ -6,15 +6,20 @@ public class SpiderEnemy : Enemy
 {
     int ChargeCounter = 0;
     int ChargeDirection;
+    float damage;
     Random random = new Random();
     public float ChargeSpeed = 2f;
 
-    public SpiderEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/SpiderEnemy", layer, id)
+    public SpiderEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/SpiderEnemy", Difficulty, layer, id)
     {
-        velocity = new Vector2(3f, 3f);
+        velocity = new Vector2(0.2f, 0.2f);
         direction = (PlayingState.player.position - position);
+        health = 50 * statmultiplier;
+        maxhealth = 50 * statmultiplier;
         range = 100;
         moving = false;
+        damage = 10 * statmultiplier;
+        expGive = 50 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)
@@ -27,7 +32,7 @@ public class SpiderEnemy : Enemy
             counter--;
             if (counter == 0)
             {
-                PlayingState.player.health -= 10;
+                PlayingState.player.health -= damage;
                 counter = 100;
             }
         }
@@ -94,7 +99,7 @@ public class SpiderEnemy : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/SpiderEnemy"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/SpiderEnemy"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }
 

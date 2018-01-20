@@ -37,12 +37,17 @@ class PitState : IGameObject
         PlayingState.currentFloor.floor[x, y].LoadTiles();
         player2 = PlayingState.player;
         player2.position = new Vector2(10 * PlayingState.currentFloor.currentRoom.CellWidth + x * PlayingState.currentFloor.currentRoom.roomwidth, 7 * PlayingState.currentFloor.currentRoom.CellHeight + y * PlayingState.currentFloor.currentRoom.roomheight);
+        GameEnvironment.gameStateManager.LastState = "pit";
     }
 
-    public void HandleInput(InputHelper inputHelper)
+    public void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        PlayingState.currentFloor.floor[x, y].HandleInput(inputHelper);
-        player2.HandleInput(inputHelper);
+        PlayingState.currentFloor.floor[x, y].HandleInput(inputHelper, gameTime);
+        player2.HandleInput(inputHelper, gameTime);
+        if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
+        {
+            GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
+        }
     }
 
     public void Update(GameTime gameTime)

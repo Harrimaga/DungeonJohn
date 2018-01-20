@@ -1,15 +1,14 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class TurretEnemy : Enemy
 {
     int Counter = 0, Directioncount;
-    float bulletdamage = 10;
-    float speed = 3f;
+    float bulletdamage;
+    float speed = 0.2f;
     Vector2 direction, BulletPosition;
 
-    public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, "Sprites/Enemies/TurretEnemyUp", layer, id)
+    public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int Difficulty = 0, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, "Sprites/Enemies/TurretEnemyUp", Difficulty, layer, id)
     {
         Directioncount = directioncount;
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyRight");
@@ -32,6 +31,7 @@ public class TurretEnemy : Enemy
                 BulletPosition = new Vector2(sprite.Width, sprite.Height / 2 - 15);
                 break;
         }
+        bulletdamage = 3 * statmultiplier;
         killable = false;
     }
 
@@ -59,16 +59,16 @@ public class TurretEnemy : Enemy
         switch (Directioncount)
         {
             case 1:
-                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyUp"), position);
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyUp"), position, color);
                 break;
             case 2:
-                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyDown"), position);
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyDown"), position, color);
                 break;
             case 3:
-                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyLeft"), position);
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyLeft"), position, color);
                 break;
             default:
-                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyRight"), position);
+                spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyRight"), position, color);
                 break;
         }
     }

@@ -3,21 +3,25 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class ChasingEnemy : Enemy
 {
-    public ChasingEnemy(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/BearEnemyPixel", layer, id)
+    public ChasingEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/BearEnemyPixel", Difficulty, layer, id)
     {
-        basevelocity = new Vector2(1.3f, 1.3f);
+        basevelocity = new Vector2(0.08f, 0.08f);
+        health = 120 * statmultiplier;
+        maxhealth = 120 * statmultiplier;
+        expGive = 120 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)
     {
-        base.Update(gameTime);
-        if (CollidesWith(PlayingState.player))
+        
+        if(CollidesWith(PlayingState.player))
         {
+            velocity = Vector2.Zero;
             counter--;
             if (counter == 0)
             {
-                // velocity = Vector2.Zero;
-                PlayingState.player.health -= 0;
+               
+                PlayingState.player.health -= 10;
                 counter = 100;
             }
         }
@@ -29,12 +33,13 @@ public class ChasingEnemy : Enemy
 
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
+        base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/BearEnemyPixel"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/BearEnemyPixel"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }
 

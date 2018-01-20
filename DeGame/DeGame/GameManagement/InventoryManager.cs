@@ -21,7 +21,7 @@ public class InventoryManager
         currentShield = new Mirror();
         currentPassives = new Item[2];
         currentPassives[0] = new BloodRing();
-        currentPassives[1] = null;
+        currentPassives[1] = new VialOfPoison();
         items = new List<Item>();
     }
 

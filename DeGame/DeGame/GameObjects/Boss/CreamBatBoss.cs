@@ -8,8 +8,9 @@ class CreamBatBoss : Boss
     int MoveCounter = 0;
     int Stage = 1;
     int MoveTimer = 0;
-    float bulletdamage = 10, speed = 5;
+    float bulletdamage = 10, speed = 0.3f;
     Vector2 moving, MoveDirection, bulletPosition;
+    Texture2D creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite1");
 
     public CreamBatBoss(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/CreamBatSprite1", Difficulty, layer, id)
     {
@@ -32,33 +33,35 @@ class CreamBatBoss : Boss
         shootcounter1--;
         if (Stage == 1)
         {
-            velocity = new Vector2(2, 2);
+            velocity = new Vector2(0.13f, 0.13f);
             Shoot();
-            Move();
+            Move(gameTime);
             if (health <= 0)
             {
                 Stage = 2;
                 maxhealth = 500;
                 health = 500;
+                creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite2");
             }
         }
         if (Stage == 2)
         {
-            velocity = new Vector2(4, 4);
+            velocity = new Vector2(0.26f, 0.26f);
             Shoot();
-            BossChase();
+            BossChase(gameTime);
             if (health <= 0)
             {
                 Stage = 3;
                 maxhealth = 800;
                 health = 800;
+                creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite3");
             }
         }
         if (Stage == 3)
         {
-            velocity = new Vector2(1.5f, 1.5f);
+            velocity = new Vector2(0.1f, 0.1f);
             Spam();
-            BossChase();
+            BossChase(gameTime);
             if (health <= 0)
             {
                 FinalStage();
@@ -71,9 +74,8 @@ class CreamBatBoss : Boss
     {
         if (shootcounter1 <= 0)
         {
-            Vector2 ShootDirection = (PlayingState.player.position - position);
+            Vector2 ShootDirection = PlayerOrigin - (position + bulletPosition);
             ShootDirection.Normalize();
-            Vector2 bulletPosition = new Vector2(sprite.Width / 2, 50);
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + bulletPosition, ShootDirection, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/CreamBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
             if (Stage == 1)
@@ -144,40 +146,37 @@ class CreamBatBoss : Boss
 
     }
 
-    public void BossChase()
+    public void BossChase(GameTime gameTime)
     {
         MoveDirection = PlayingState.player.position - position;
         MoveDirection.Normalize();
         moving = MoveDirection * velocity;
-        position += moving;
+        position.X += moving.X * gameTime.ElapsedGameTime.Milliseconds;
+        position.Y += moving.Y * gameTime.ElapsedGameTime.Milliseconds;
     }
-    public void Move()
+    public void Move(GameTime gameTime)
     {
         if (MoveTimer <= 50)
             MoveDirection = new Vector2(0,1.5f);
-        if (MoveTimer <= 150 && MoveTimer >= 50)
+        else if (MoveTimer <= 150 && MoveTimer >= 50)
             MoveDirection = new Vector2(-2, -1);
-        if (MoveTimer <= 250 && MoveTimer >= 150)
+        else if (MoveTimer <= 250 && MoveTimer >= 150)
             MoveDirection = new Vector2(2, -1);
-        if (MoveTimer <= 350 && MoveTimer >= 250)
+        else if (MoveTimer <= 350 && MoveTimer >= 250)
             MoveDirection = new Vector2(2, 1);
-        if (MoveTimer <= 450 && MoveTimer >= 350)
+        else if (MoveTimer <= 450 && MoveTimer >= 350)
             MoveDirection = new Vector2(-2, 1);
-        if (MoveTimer >= 450)
+        else if (MoveTimer >= 450)
             MoveTimer = 50;
         moving = MoveDirection * velocity;
-        position += moving;
+        position.X += moving.X * gameTime.ElapsedGameTime.Milliseconds;
+        position.Y += moving.Y * gameTime.ElapsedGameTime.Milliseconds;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        if (Stage == 1)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/SpookyGhostEnemy"), position);
-        if (Stage == 2)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/SpookyGhostEnemy"), position);
-        if (Stage == 3)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/SpookyGhostEnemy"), position);
+        spriteBatch.Draw(creambatsprite, position, color);
     }
 }
 

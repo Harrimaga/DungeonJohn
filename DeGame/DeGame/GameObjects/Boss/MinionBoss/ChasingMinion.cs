@@ -3,14 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class ChasingMinion : Enemy
 {
-    public ChasingMinion(Vector2 startPosition, Vector2 roomposition, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ChasingMinion", layer, id)
+    public ChasingMinion(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ChasingMinion", Difficulty, layer, id)
     {
         position = startPosition;
-        basevelocity = new Vector2(1.2f, 1.2f);
-        health = 50;
-        maxhealth = 30;
-        expGive = 10;
-        attack = 1;
+        basevelocity = new Vector2(0.08f, 0.08f);
+        health = 30 * statmultiplier;
+        maxhealth = 30 * statmultiplier;
+        attack = 5 * statmultiplier;
         drop = false;
         flying = true;
         bossenemy = true;
@@ -30,8 +29,7 @@ public class ChasingMinion : Enemy
                 counter = 100;
             }
         }
-
-        if (!CollidesWith(PlayingState.player))
+        else
         {
             velocity = basevelocity;
         }
@@ -43,7 +41,7 @@ public class ChasingMinion : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/ChasingMinion"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/ChasingMinion"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }
 

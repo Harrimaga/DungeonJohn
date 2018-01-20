@@ -19,7 +19,7 @@ public class Mac10 : Item, IWeapon
         twoHanded = false;
         addedDamage = 8;
         damageMultiplier = 1;
-        projectile_velocity = 12;
+        projectile_velocity = 0.8f;
         attackspeed = 6;
         range = 400;
         ammo = 200;

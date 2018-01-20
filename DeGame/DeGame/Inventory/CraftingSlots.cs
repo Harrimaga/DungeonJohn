@@ -71,20 +71,19 @@ public class CraftingSlots : GameObjectList
                     itemNew.AddItem(recipe.listNewItem[i]);
                 }
                 
-                if (recipe.list2[i].itemName == itemSlot1.item.itemName && recipe.list1[i].itemName == itemSlot2.item.itemName)
+                else if (recipe.list2[i].itemName == itemSlot1.item.itemName && recipe.list1[i].itemName == itemSlot2.item.itemName)
                 {
                     itemNew.AddItem(recipe.listNewItem[i]);
                 }
-                
             }
         }
     }
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        craftingB.HandleInput(inputHelper);
-        children[0].HandleInput(inputHelper);
-        children[1].HandleInput(inputHelper);
-        children[2].HandleInput(inputHelper);
+        craftingB.HandleInput(inputHelper, gameTime);
+        children[0].HandleInput(inputHelper, gameTime);
+        children[1].HandleInput(inputHelper, gameTime);
+        children[2].HandleInput(inputHelper, gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

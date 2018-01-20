@@ -17,7 +17,7 @@ class GameOverState : IGameObject
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
         MainMenu = new Button(new Vector2(620, 760), "ReturnToMainMenu", "ReturnToMainMenu", "ReturnToMainMenuPressed", true, 1);
     }
-    public virtual void HandleInput(InputHelper inputHelper)
+    public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         MainMenu.HandleInput(inputHelper);
         if (inputHelper.KeyPressed(Keys.Z))

@@ -48,7 +48,7 @@ public class CraftingSlot : InventorySlot
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), item.itemDescription, position + new Vector2(-60,130), Color.White);
         }
     }
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         // Handle input for crafting slot
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition) && !New)

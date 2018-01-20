@@ -68,7 +68,7 @@
     <Compile Include="GameManagement\InputHelper.cs" />
     <Compile Include="GameManagement\InventoryManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
-    <Compile Include="GameObjects\Boss\Boss1.cs" />
+    <Compile Include="GameObjects\Boss\HomingBoss.cs" />
     <Compile Include="GameObjects\Boss\CreamBatBoss.cs" />
     <Compile Include="GameObjects\Boss\MinionBoss\MinionBoss.cs" />
     <Compile Include="GameObjects\Boss\MinionBoss\MinionSpawner.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="GameObjects\Items\Actives\Nani.cs" />
     <Compile Include="GameObjects\Bullets\IceBullet.cs" />
     <Compile Include="GameObjects\Items\Armour\MageJacket.cs" />
+    <Compile Include="GameObjects\Items\Armour\SimpleArmour.cs" />
     <Compile Include="GameObjects\Items\Boots\CoolBoots.cs" />
     <Compile Include="GameObjects\Items\Boots\SlimyBoots.cs" />
     <Compile Include="GameObjects\Items\CraftingBench.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="GameObjects\Items\Interfaces\IWeapon.cs" />
     <Compile Include="GameObjects\Items\ItemList.cs" />
     <Compile Include="GameObjects\Items\Passives\BloodRing.cs" />
+    <Compile Include="GameObjects\Items\Passives\VialOfPoison.cs" />
     <Compile Include="GameObjects\Items\Weapons\BigMac.cs" />
     <Compile Include="GameObjects\Items\Weapons\DoubleGun.cs" />
     <Compile Include="GameObjects\Items\Shields\Mirror.cs" />
@@ -102,7 +104,6 @@
     <Compile Include="GameObjects\Consumables.cs" />
     <Compile Include="GameObjects\Items\Weapons\Mac10.cs" />
     <Compile Include="GameObjects\Player.cs" />
-    <Compile Include="GameObjects\CheckCurrentTile.cs" />
     <Compile Include="GameObjects\Items\ItemSpawn.cs" />
     <Compile Include="GameObjects\Terrain\Door.cs" />
     <Compile Include="GameObjects\Terrain\Ice.cs" />
@@ -227,6 +228,25 @@
     <Content Include="Content\Levels\9.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Items\HardHelmetDown.png" />
+    <Content Include="Content\Sprites\Items\HardHelmetLeft.png" />
+    <Content Include="Content\Sprites\Items\HardHelmetRight.png" />
+    <Content Include="Content\Sprites\Items\HardHelmetUp.png" />
+    <Content Include="Content\Sprites\Items\PowerHelmet.png" />
+    <Content Include="Content\Sprites\Items\PowerHelmetDown.png" />
+    <Content Include="Content\Sprites\Items\PowerHelmetLeft.png" />
+    <Content Include="Content\Sprites\Items\PowerHelmetRight.png" />
+    <Content Include="Content\Sprites\Items\PowerHelmetUp.png" />
+    <Content Include="Content\Sprites\Items\SimpleArmour.png" />
+    <Content Include="Content\Sprites\Items\SimpleArmourDown.png" />
+    <Content Include="Content\Sprites\Items\SimpleArmourLeft.png" />
+    <Content Include="Content\Sprites\Items\SimpleArmourRight.png" />
+    <Content Include="Content\Sprites\Items\SimpleArmourUp.png" />
+    <Content Include="Content\Sprites\Items\SlimyBootsDown.png" />
+    <Content Include="Content\Sprites\Items\SlimyBootsLeft.png" />
+    <Content Include="Content\Sprites\Items\SlimyBootsRight.png" />
+    <Content Include="Content\Sprites\Items\SlimyBootsUp.png" />
+    <Content Include="Content\Sprites\PowerHelmet.png" />
     <Content Include="Content\Levels\11.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

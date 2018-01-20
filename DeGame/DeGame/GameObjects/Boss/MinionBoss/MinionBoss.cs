@@ -5,7 +5,7 @@ class MinionBoss : Boss
 {
     Vector2 Roomposition;
     int shootcounter;
-    float bulletdamage, speed = 2, max;
+    float bulletdamage, speed = 0.8f, max;
 
     public MinionBoss(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/MinionBoss", Difficulty,layer, id)
     {
@@ -38,7 +38,7 @@ class MinionBoss : Boss
         if (shootcounter <= 0)
         {
             Vector2 bulletposition = new Vector2(sprite.Width / 2, sprite.Height * .6f);
-            Vector2 direction = (PlayingState.player.position - position);
+            Vector2 direction = PlayerOrigin - (position + bulletposition);
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + bulletposition, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/MinionBossBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
             shootcounter = (int)max;
@@ -48,9 +48,10 @@ class MinionBoss : Boss
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        if (LevelofBoss == 0)
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss"), position);
+        if (LevelofBoss == 0 || poisoncounter > 0)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss"), position, color);
         else
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/MinionBoss"), position, Color.MediumVioletRed);
+
     }
 }

@@ -52,7 +52,7 @@ public class GameEnvironment : Game
         System.Console.WriteLine(GraphicsDevice.Viewport.ToString());
     }
 
-    protected void HandleInput()
+    protected void HandleInput(GameTime gameTime)
     {
         inputHelper.Update();
         /*if (inputHelper.KeyPressed(Keys.Escape))
@@ -67,7 +67,7 @@ public class GameEnvironment : Game
         }
         */
 
-        gameStateManager.HandleInput(inputHelper);
+        gameStateManager.HandleInput(inputHelper, gameTime);
     }
 
     public bool FullScreen
@@ -132,7 +132,7 @@ public class GameEnvironment : Game
 
     protected override void Update(GameTime gameTime)
     {
-        HandleInput();
+        HandleInput(gameTime);
         gameStateManager.Update(gameTime);
     }
 

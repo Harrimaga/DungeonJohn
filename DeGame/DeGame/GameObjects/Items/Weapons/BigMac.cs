@@ -19,7 +19,7 @@ public class BigMac : Item, IWeapon
         twoHanded = true;
         addedDamage = 40;
         damageMultiplier = 1;
-        projectile_velocity = 15;
+        projectile_velocity = 1;
         attackspeed = 10;
         range = 700;
         ammo = 300;

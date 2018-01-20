@@ -9,10 +9,10 @@ using Microsoft.Xna.Framework.Graphics;
 class BossBullet : E_Bullet
 {
     HealthBar healthbar;
-    Vector2 direction, actualvelocity, difference, Homingdifference, BulletOrigin, HomingPlayerOrigin, PlayerOrigin;
+    Vector2 Homingdirection, direction, actualvelocity, difference, Homingdifference, BulletOrigin, HomingPlayerOrigin, PlayerOrigin;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     SpriteEffects Effects;
-    float speed = 2f;
+    float speed = 0.13f;
     int health = 100, maxhealth = 100;
     bool Homing, reflected = false;
     double opposite;
@@ -59,14 +59,17 @@ class BossBullet : E_Bullet
             {
                 HomingBullet();
                 DestroyableBullet();
-                actualvelocity = direction * speed;
-                position += actualvelocity;
+                actualvelocity = Homingdirection * speed;
+                position.X += actualvelocity.X * gameTime.ElapsedGameTime.Milliseconds;
+                position.Y += actualvelocity.Y * gameTime.ElapsedGameTime.Milliseconds;
             }
         }
         if (!Homing)
         {
             direction.Normalize();
-            position += direction * speed;
+            actualvelocity = direction * speed;
+            position.X += actualvelocity.X * gameTime.ElapsedGameTime.Milliseconds;
+            position.Y += actualvelocity.Y * gameTime.ElapsedGameTime.Milliseconds;
         }
         if (changedirection)
         {
@@ -119,8 +122,8 @@ class BossBullet : E_Bullet
 
     public void HomingBullet()
     {
-        direction = PlayerOrigin - position;
-        direction.Normalize();
+        Homingdirection = HomingPlayerOrigin - position;
+        Homingdirection.Normalize();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -9,6 +9,10 @@ class Bullet : SpriteGameObject
     SpriteEffects Effect = SpriteEffects.None;
     float counter = 0;
     int direction;
+    public bool poisonbullet = false;
+    Random random = new Random();
+    Color color = Color.White;
+
     public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
     : base("Sprites/Characters/PlayerFront", layer, id)
     {
@@ -38,6 +42,11 @@ class Bullet : SpriteGameObject
             Bulletsprite = weapon.BulletSpriteLeft;
             Effect = SpriteEffects.FlipHorizontally;
         }
+        if (PlayingState.player.VialOfPoison && random.Next(100) < 25)
+        {
+            poisonbullet = true;
+            color = Color.YellowGreen;
+        }
     }
 
     // Update the bullets
@@ -51,14 +60,9 @@ class Bullet : SpriteGameObject
         }
         else
             counter += weapon.Projectile_Velocity;
-        position += velocity;
+        position.X += velocity.X * gameTime.ElapsedGameTime.Milliseconds;
+        position.Y += velocity.Y * gameTime.ElapsedGameTime.Milliseconds;
         CheckCollision();
-    }
-
-    // Draw the bullets
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-          spriteBatch.Draw(Bulletsprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
     }
 
     public void CheckCollision()
@@ -70,5 +74,11 @@ class Bullet : SpriteGameObject
         foreach (Solid solid in PlayingState.currentFloor.currentRoom.solid.Children)
             if (CollidesWith(solid))
                 GameObjectList.RemovedObjects.Add(this);
+    }
+
+    // Draw the bullets
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(Bulletsprite, position, null, color, 0f, Vector2.Zero, 1f, Effect, 0f);
     }
 }
