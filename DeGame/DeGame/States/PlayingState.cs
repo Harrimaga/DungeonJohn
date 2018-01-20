@@ -56,6 +56,10 @@ public class PlayingState : IGameObject
         {
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
         }
+        if (currentFloor.CurrentLevel >= 10)
+        {
+            GameEnvironment.gameStateManager.SwitchTo("Victory");
+        }
         currentFloor.wornItems.Update(gameTime);
     }
     public virtual void Reset()
