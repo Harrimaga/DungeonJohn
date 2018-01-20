@@ -13,7 +13,7 @@ public class RangedEnemy : Enemy
     {
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
-        velocity = new Vector2(0.5f, 0.5f);
+        velocity = new Vector2(0.03f, 0.03f);
         bulletdamage = 3 * statmultiplier;
         health = 100 * statmultiplier;
         maxhealth = 100 * statmultiplier;

@@ -33,9 +33,9 @@ class CreamBatBoss : Boss
         shootcounter1--;
         if (Stage == 1)
         {
-            velocity = new Vector2(2, 2);
+            velocity = new Vector2(0.13f, 0.13f);
             Shoot();
-            Move();
+            Move(gameTime);
             if (health <= 0)
             {
                 Stage = 2;
@@ -46,9 +46,9 @@ class CreamBatBoss : Boss
         }
         if (Stage == 2)
         {
-            velocity = new Vector2(4, 4);
+            velocity = new Vector2(0.26f, 0.26f);
             Shoot();
-            BossChase();
+            BossChase(gameTime);
             if (health <= 0)
             {
                 Stage = 3;
@@ -59,9 +59,9 @@ class CreamBatBoss : Boss
         }
         if (Stage == 3)
         {
-            velocity = new Vector2(1.5f, 1.5f);
+            velocity = new Vector2(0.1f, 0.1f);
             Spam();
-            BossChase();
+            BossChase(gameTime);
             if (health <= 0)
             {
                 FinalStage();
@@ -146,14 +146,15 @@ class CreamBatBoss : Boss
 
     }
 
-    public void BossChase()
+    public void BossChase(GameTime gameTime)
     {
         MoveDirection = PlayingState.player.position - position;
         MoveDirection.Normalize();
         moving = MoveDirection * velocity;
-        position += moving;
+        position.X += moving.X * gameTime.ElapsedGameTime.Milliseconds;
+        position.Y += moving.Y * gameTime.ElapsedGameTime.Milliseconds;
     }
-    public void Move()
+    public void Move(GameTime gameTime)
     {
         if (MoveTimer <= 50)
             MoveDirection = new Vector2(0,1.5f);
@@ -168,7 +169,8 @@ class CreamBatBoss : Boss
         else if (MoveTimer >= 450)
             MoveTimer = 50;
         moving = MoveDirection * velocity;
-        position += moving;
+        position.X += moving.X * gameTime.ElapsedGameTime.Milliseconds;
+        position.Y += moving.Y * gameTime.ElapsedGameTime.Milliseconds;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

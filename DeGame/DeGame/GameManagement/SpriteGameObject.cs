@@ -30,7 +30,7 @@ public class SpriteGameObject : GameObject
 
     }
 
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
     }
 
