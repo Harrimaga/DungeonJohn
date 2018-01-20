@@ -10,7 +10,7 @@ public class Player : SpriteGameObject
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
     public bool CoolBoots = false, SlimyBoots = false, Mirror = false, VialOfPoison = false;
     public float health = 100, maxhealth = 100;
-    public float exp = 0,nextLevelExp = 100;
+    public float exp = 0, nextLevelExp = 100;
     public float attackspeedreduction = 0;
     public double damagereduction = 1;
     public float extraspeed = 0;
@@ -24,7 +24,7 @@ public class Player : SpriteGameObject
     public int level = 0;
     public int leveltokens = 0;
     public SpriteEffects Effect;
-    public float velocitybase = 5;
+    public float velocitybase = 0.3f;
     HealthBar healthbar;
     public GameObjectList bullets;
     public static InventoryManager inventory;
@@ -86,17 +86,17 @@ public class Player : SpriteGameObject
         }
 
         //krijg weer originele snelheid als je over ijs glijdt en van een spinnenweb afkomt
-        if (onIce && !onWeb && speed != 5 + extraspeed)
+        if (onIce && !onWeb && speed != 0.3f + extraspeed)
         {
-            speed = 5 + extraspeed;
+            speed = 0.3f + extraspeed;
         }
         if (onWeb)
         {
-            velocitybase = 2.5f;
+            velocitybase = 0.15f;
         }
         else
         {
-            velocitybase = 5;
+            velocitybase = 0.3f;
         }
         if (extraspeed < 0)
             speed = velocitybase;
@@ -104,32 +104,32 @@ public class Player : SpriteGameObject
             speed = velocitybase + extraspeed;
     }
 
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         // Player movement
         if ((onIce && onSolid) || !onIce || SlimyBoots)
         {
             if (inputHelper.IsKeyDown(Keys.W))
             {
-                position.Y -= speed;
+                position.Y -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 lastUsedspeed = "up";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerBack");
             }
             if (inputHelper.IsKeyDown(Keys.S))
             {
-                position.Y += speed;
+                position.Y += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 lastUsedspeed = "down";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
             }
             if (inputHelper.IsKeyDown(Keys.D))
             {
-                position.X += speed;
+                position.X += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 lastUsedspeed = "right";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
             }
             if (inputHelper.IsKeyDown(Keys.A))
             {
-                position.X -= speed;
+                position.X -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 lastUsedspeed = "left";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
             }
@@ -157,19 +157,19 @@ public class Player : SpriteGameObject
         {
             if(lastUsedspeed == "up")
             {
-                position.Y -= speed;
+                position.Y -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
             else if (lastUsedspeed == "down")
             {
-                position.Y += speed;
+                position.Y += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
             else if (lastUsedspeed == "right")
             {
-                position.X += speed;
+                position.X += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
             else if (lastUsedspeed == "left")
             {
-                position.X -= speed;
+                position.X -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
         }
         if (ammo > 0 || ammo == -1)
@@ -213,7 +213,7 @@ public class Player : SpriteGameObject
         extraspeed = 0;
         extraattack = 0;
         leveltokens = 0;
-        velocitybase = 5;
+        velocitybase = 0.3f;
         CalculateAmmo();
         CalculateDamage();
         onIce = false;
@@ -328,12 +328,10 @@ public class Player : SpriteGameObject
         if (ammo < 0)
         {
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: infinite!", new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-
         }
         else
         {
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: " + Convert.ToString(ammo), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-
         }
 
         if (inventory.currentArmour != null)

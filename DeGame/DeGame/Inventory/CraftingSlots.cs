@@ -78,12 +78,12 @@ public class CraftingSlots : GameObjectList
             }
         }
     }
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        craftingB.HandleInput(inputHelper);
-        children[0].HandleInput(inputHelper);
-        children[1].HandleInput(inputHelper);
-        children[2].HandleInput(inputHelper);
+        craftingB.HandleInput(inputHelper, gameTime);
+        children[0].HandleInput(inputHelper, gameTime);
+        children[1].HandleInput(inputHelper, gameTime);
+        children[2].HandleInput(inputHelper, gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -64,11 +64,11 @@ public class GameObjectList : GameObject
         return null;
     }
 
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         for (int i = children.Count - 1; i >= 0; i--)
         {
-            children[i].HandleInput(inputHelper);
+            children[i].HandleInput(inputHelper, gameTime);
         }
     }
 

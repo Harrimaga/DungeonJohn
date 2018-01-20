@@ -6,7 +6,7 @@ public class SpamEnemy : Enemy
     int Counter = 50;
     int BulletCounter = 0;
     float bulletdamage;
-    float speed = 3f;
+    float speed = 0.2f;
     Vector2 direction;
 
     public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/CutieEnemyPixel", Difficulty, layer, id)

@@ -19,7 +19,7 @@ class PauseMenuState : IGameObject
     {
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
     }
-    public virtual void HandleInput(InputHelper inputHelper)
+    public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
@@ -34,12 +34,12 @@ class PauseMenuState : IGameObject
             }
         }
 
-        wornItems.HandleInput(inputHelper);
+        wornItems.HandleInput(inputHelper, gameTime);
         try
         {
             foreach (InventorySlot slot in inventory)
             {
-                slot.HandleInput(inputHelper);
+                slot.HandleInput(inputHelper, gameTime);
             }
         }
         catch (NullReferenceException nre)

@@ -18,7 +18,7 @@ public abstract class GameObject : IGameObject
         visible = true;
     }
 
-    public virtual void HandleInput(InputHelper inputHelper)
+    public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
     }
 

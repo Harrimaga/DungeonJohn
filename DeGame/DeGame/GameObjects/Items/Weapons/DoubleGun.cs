@@ -19,7 +19,7 @@ public class DoubleGun : Item, IWeapon
         twoHanded = false;
         addedDamage = 30;
         damageMultiplier = 1;
-        projectile_velocity = 12;
+        projectile_velocity = 0.8f;
         attackspeed = 30;
         range = 800;
         ammo = 200;

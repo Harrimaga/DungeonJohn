@@ -6,7 +6,7 @@ public class ChasingMinion : Enemy
     public ChasingMinion(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ChasingMinion", Difficulty, layer, id)
     {
         position = startPosition;
-        basevelocity = new Vector2(1.2f, 1.2f);
+        basevelocity = new Vector2(0.08f, 0.08f);
         health = 30 * statmultiplier;
         maxhealth = 30 * statmultiplier;
         attack = 5 * statmultiplier;
@@ -29,8 +29,7 @@ public class ChasingMinion : Enemy
                 counter = 100;
             }
         }
-
-        if (!CollidesWith(PlayingState.player))
+        else
         {
             velocity = basevelocity;
         }
