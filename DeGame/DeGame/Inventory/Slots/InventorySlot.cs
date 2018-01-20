@@ -30,7 +30,7 @@ public class InventorySlot : Slot
         base.Draw(gameTime, spriteBatch);
     }
 
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition)) 
         {

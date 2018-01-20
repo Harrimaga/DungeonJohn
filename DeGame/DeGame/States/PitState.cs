@@ -40,10 +40,10 @@ class PitState : IGameObject
         GameEnvironment.gameStateManager.LastState = "pit";
     }
 
-    public void HandleInput(InputHelper inputHelper)
+    public void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        PlayingState.currentFloor.floor[x, y].HandleInput(inputHelper);
-        player2.HandleInput(inputHelper);
+        PlayingState.currentFloor.floor[x, y].HandleInput(inputHelper, gameTime);
+        player2.HandleInput(inputHelper, gameTime);
         if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");

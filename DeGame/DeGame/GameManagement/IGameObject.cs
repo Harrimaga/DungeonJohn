@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 public interface IGameObject
 {
-    void HandleInput(InputHelper inputHelper);
+    void HandleInput(InputHelper inputHelper, GameTime gameTime);
 
     void Update(GameTime gameTime);
 

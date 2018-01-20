@@ -35,7 +35,7 @@ class Button : SpriteGameObject
         }
     }
 
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         pressed = inputHelper.MouseLeftButtonDown() && BoundingBox.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y);
         hover = BoundingBox.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y);

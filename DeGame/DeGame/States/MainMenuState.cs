@@ -16,10 +16,10 @@ class MainMenuState : IGameObject
        start = new Button(new Vector2(620, 725), "Start", "Start","StartPressed",true, 1);
        option = new Button(new Vector2(620, 800), "Option", "Option", "OptionPressed", true, 1);
     }
-    public virtual void HandleInput(InputHelper inputHelper)
+    public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        start.HandleInput(inputHelper);
-        option.HandleInput(inputHelper);
+        start.HandleInput(inputHelper, gameTime);
+        option.HandleInput(inputHelper, gameTime);
         if (inputHelper.KeyPressed(Keys.Space) || start.Pressed)
         {
             GameEnvironment.gameStateManager.SwitchTo("Playing");

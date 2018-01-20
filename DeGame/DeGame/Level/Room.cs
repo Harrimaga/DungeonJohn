@@ -432,9 +432,9 @@ public class Room : GameObjectList
         }
     }
 
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        anvils.HandleInput(inputHelper);
+        anvils.HandleInput(inputHelper, gameTime);
     }
 
     void WallShader (GameTime gameTime, SpriteBatch spriteBatch, int x, int y)

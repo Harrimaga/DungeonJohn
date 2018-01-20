@@ -26,7 +26,7 @@ class CraftingBench : SpriteGameObject
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Press SpaceBar to Craft", position + new Vector2(-60,100), Color.White);
         }
     }
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if(CollidesWith(PlayingState.player)&& inputHelper.KeyPressed(Keys.Space))
         {

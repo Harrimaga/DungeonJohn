@@ -6,14 +6,14 @@ public class RangedEnemy : Enemy
 {
     int Counter = 300;
     float bulletdamage;
-    float speed = 2f;
+    float speed = 0.13f;
     Vector2 direction;
     
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ShootingEnemy1", Difficulty, layer, id)
     {
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
-        velocity = new Vector2(0.5f, 0.5f);
+        velocity = new Vector2(0.03f, 0.03f);
         bulletdamage = 3 * statmultiplier;
         health = 100 * statmultiplier;
         maxhealth = 100 * statmultiplier;

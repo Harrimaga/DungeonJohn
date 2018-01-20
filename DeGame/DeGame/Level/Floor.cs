@@ -322,7 +322,7 @@ public class Floor
         }
     }
 
-    public void HandleInput(InputHelper inputHelper)
+    public void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (inputHelper.KeyPressed(Keys.T))
             if (CurrentLevel % 2 == 0)
@@ -334,7 +334,7 @@ public class Floor
         foreach (Room r in floor)
         {
             if (r != null)
-                r.HandleInput(inputHelper);
+                r.HandleInput(inputHelper, gameTime);
         }
     }
 

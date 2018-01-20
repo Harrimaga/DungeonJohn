@@ -53,7 +53,8 @@ public class Enemy : SpriteGameObject
         if (moving)
         {
             actualvelocity = velocity * direction;
-            position += actualvelocity;
+            position.X += actualvelocity.X * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            position.Y += actualvelocity.Y * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
         }
 
         List<GameObject> RemoveBullets = new List<GameObject>();
