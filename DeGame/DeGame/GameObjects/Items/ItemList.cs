@@ -26,6 +26,7 @@ class ItemList
         RoomList.Add(new Mirror());
         RoomList.Add(new BloodRing());
         RoomList.Add(new HardHelmet());
+        RoomList.Add(new PowerHelmet());
         RoomList.Add(new HelicopterHat());
         RoomList.Add(new VialOfPoison());
         RoomList.Add(new SimpleArmour());
@@ -41,6 +42,7 @@ class ItemList
         ShopList.Add(new Mirror());
         ShopList.Add(new BloodRing());
         ShopList.Add(new HardHelmet());
+        RoomList.Add(new PowerHelmet());
         RoomList.Add(new HelicopterHat());
         RoomList.Add(new VialOfPoison());
         RoomList.Add(new SimpleArmour());

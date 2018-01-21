@@ -45,12 +45,12 @@ class Leveling : IGameObject
         healthB.Update(gameTime);
         if (attackB.Pressed && !picked)
         {
-            PlayingState.player.StateIncrease(1);
+            PlayingState.player.StatIncrease(1);
             picked = true;
         }
         if (healthB.Pressed && !picked)
         {
-            PlayingState.player.StateIncrease(2);
+            PlayingState.player.StatIncrease(2);
             picked = true;
         }
         if (picked && counter < 10)
