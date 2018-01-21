@@ -40,10 +40,10 @@ class PitState : IGameObject
         GameEnvironment.gameStateManager.LastState = "pit";
     }
 
-    public void HandleInput(InputHelper inputHelper)
+    public void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        PlayingState.currentFloor.floor[x, y].HandleInput(inputHelper);
-        player2.HandleInput(inputHelper);
+        PlayingState.currentFloor.floor[x, y].HandleInput(inputHelper, gameTime);
+        player2.HandleInput(inputHelper, gameTime);
         if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
@@ -59,7 +59,7 @@ class PitState : IGameObject
 
     public void PitExit(GameTime gameTime)
     {
-        MiddleofPlayer = new Vector2(player2.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width / 2, player2.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 2);
+        MiddleofPlayer = new Vector2(player2.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2, player2.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2);
 
         if (PlayingState.currentFloor.floor[x, y].enemycounter == 0)
         {

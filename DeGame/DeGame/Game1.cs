@@ -41,6 +41,7 @@ namespace DeGame
             gameStateManager.AddGameState("GameOver", new GameOverState());
             gameStateManager.AddGameState("PauseMenu", new PauseMenuState());
             gameStateManager.AddGameState("Leveling", new Leveling());
+            gameStateManager.AddGameState("Victory", new VictoryState());
             gameStateManager.SwitchTo("MainMenu");
             // Create a new SpriteBatch, which can be used to draw textures.
             //spriteBatch = new SpriteBatch(GraphicsDevice);

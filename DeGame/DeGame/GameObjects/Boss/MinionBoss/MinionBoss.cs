@@ -5,7 +5,7 @@ class MinionBoss : Boss
 {
     Vector2 Roomposition;
     int shootcounter;
-    float bulletdamage, speed = 2, max;
+    float bulletdamage, speed = 0.8f, max;
 
     public MinionBoss(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/MinionBoss", Difficulty,layer, id)
     {

@@ -17,13 +17,13 @@ class CoolBoots : Item, IBoots
     public override void equip()
     {
         PlayingState.player.CoolBoots = true;
-        PlayingState.player.extraspeed += 2;
+        PlayingState.player.extraspeed *= 1.20f;
     }
 
     public override void unequip()
     {
         PlayingState.player.CoolBoots = false;
-        PlayingState.player.extraspeed -= 2;
+        PlayingState.player.extraspeed /= 1.20f;
         base.unequip();
     }
 }

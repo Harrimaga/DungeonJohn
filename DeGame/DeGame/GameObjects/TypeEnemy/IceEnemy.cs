@@ -4,9 +4,9 @@ using System;
 
 public class IceEnemy : Enemy
 {
-    int Counter = 0;
+    int Counter = 75;
     float bulletdamage;
-    float speed = 1.5f;
+    float speed = 0.1f;
     Vector2 direction;
 
     public IceEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition,"Sprites/Enemies/IceEnemy", Difficulty, layer, id)

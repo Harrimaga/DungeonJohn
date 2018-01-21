@@ -19,7 +19,7 @@ public class Mac10 : Item, IWeapon
         twoHanded = false;
         addedDamage = 8;
         damageMultiplier = 1;
-        projectile_velocity = 12;
+        projectile_velocity = 0.8f;
         attackspeed = 6;
         range = 400;
         ammo = 200;
@@ -38,7 +38,7 @@ public class Mac10 : Item, IWeapon
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), direction);
+        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), direction);
         PlayingState.player.bullets.Add(bullet);
     }
 

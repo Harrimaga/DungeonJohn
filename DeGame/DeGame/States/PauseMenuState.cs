@@ -19,7 +19,7 @@ class PauseMenuState : IGameObject
     {
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
     }
-    public virtual void HandleInput(InputHelper inputHelper)
+    public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
@@ -34,12 +34,12 @@ class PauseMenuState : IGameObject
             }
         }
 
-        wornItems.HandleInput(inputHelper);
+        wornItems.HandleInput(inputHelper, gameTime);
         try
         {
             foreach (InventorySlot slot in inventory)
             {
-                slot.HandleInput(inputHelper);
+                slot.HandleInput(inputHelper, gameTime);
             }
         }
         catch (NullReferenceException nre)
@@ -61,28 +61,28 @@ class PauseMenuState : IGameObject
             startUp();
         }
 
-        if (!oldInventory.Equals(inventory))
+        inventory = new List<InventorySlot>();
+        for (int i = 0; i < Player.inventory.items.Count; i++)
         {
-            inventory = new List<InventorySlot>();
-            for (int i = 0; i < Player.inventory.items.Count; i++)
-            {
-                Vector2 slotPosition;
-                int x, y;
-                y = (int)Math.Floor((double)i / 9);
-                x = i % 9;
-                //slotPosition = wornItems.position + new Vector2(0, 200) + new Vector2(x * 74, y * 74);
-                slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
+            Vector2 slotPosition;
+            int x, y;
+            y = (int)Math.Floor((double)i / 9);
+            x = i % 9;
+            //slotPosition = wornItems.position + new Vector2(0, 200) + new Vector2(x * 74, y * 74);
+            slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
 
-                inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
-            }
+            inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
         }
 
-        oldInventory = inventory;
-        foreach (InventorySlot slot in inventory)
+        if(oldInventory != inventory)
+        {
+            oldInventory = inventory;
+        }
+
+        foreach (InventorySlot slot in oldInventory)
         {
             slot.Draw(gameTime, spriteBatch);
-        }
-        
+        }        
     }
 
     public void startUp()

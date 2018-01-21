@@ -19,7 +19,7 @@ public class StandardBow : Item, IWeapon
         twoHanded = true;
         addedDamage = 50;
         damageMultiplier = 1;
-        projectile_velocity = 10;
+        projectile_velocity = 0.67f;
         attackspeed = 50;
         range = 800;
         ammo = -1;
@@ -38,7 +38,7 @@ public class StandardBow : Item, IWeapon
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2( 0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), direction);
+        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2( 0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), direction);
         PlayingState.player.bullets.Add(bullet);
     }
 

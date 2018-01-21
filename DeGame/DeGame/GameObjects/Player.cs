@@ -7,13 +7,13 @@ using System.Collections.Generic;
 public class Player : SpriteGameObject
 {
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
-    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
     public bool CoolBoots = false, SlimyBoots = false, Mirror = false, VialOfPoison = false;
     public float health = 100, maxhealth = 100;
-    public float exp = 0,nextLevelExp = 100;
+    public float exp = 0, nextLevelExp = 100;
     public float attackspeedreduction = 0;
     public double damagereduction = 1;
-    public float extraspeed = 0;
+    public float extraspeed = 1;
     public float attack;
     public float attackspeed;
     public float speed;
@@ -24,7 +24,7 @@ public class Player : SpriteGameObject
     public int level = 0;
     public int leveltokens = 0;
     public SpriteEffects Effect;
-    public float velocitybase = 5;
+    public float velocitybase = 0.3f;
     HealthBar healthbar;
     public GameObjectList bullets;
     public static InventoryManager inventory;
@@ -34,23 +34,23 @@ public class Player : SpriteGameObject
     bool startup = true;
 
     public Player(int layer = 0, string id = "Player")
-    : base("Sprites/Characters/PlayerFront", 0, "Player")
+    : base("Sprites/Characters/PlayerDown", 0, "Player")
     {
         bullets = new GameObjectList();
         healthbar = new HealthBar(health, maxhealth, position, true);
         inventory = new InventoryManager();
-        lastUsedspeed = "down";
+        lastUsedspeed = "Down";
         CalculateDamage();
         CalculateAmmo();
     }
-        
+
     public override Rectangle BoundingBox
     {
         get
         {
             int left = (int)(position.X - origin.X);
             int top = (int)(position.Y - origin.Y);
-            return new Rectangle(left , top , Width, Height);
+            return new Rectangle(left, top, Width, Height);
         }
     }
 
@@ -64,7 +64,7 @@ public class Player : SpriteGameObject
 
         base.Update(gameTime);
         collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
-        healthbar.Update(gameTime, health, maxhealth,position);
+        healthbar.Update(gameTime, health, maxhealth, position);
         bullets.Update(gameTime);
         NextLevel();
         if (health <= 0)
@@ -86,51 +86,48 @@ public class Player : SpriteGameObject
         }
 
         //krijg weer originele snelheid als je over ijs glijdt en van een spinnenweb afkomt
-        if (onIce && !onWeb && speed != 5 + extraspeed)
+        if (onIce && !onWeb && speed != 0.3f * extraspeed)
         {
-            speed = 5 + extraspeed;
+            speed = 0.3f * extraspeed;
         }
         if (onWeb)
         {
-            velocitybase = 2.5f;
+            velocitybase = 0.15f;
         }
         else
         {
-            velocitybase = 5;
+            velocitybase = 0.3f;
         }
-        if (extraspeed < 0)
-            speed = velocitybase;
-        else
-            speed = velocitybase + extraspeed;
+        speed = velocitybase * extraspeed;
     }
 
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         // Player movement
         if ((onIce && onSolid) || !onIce || SlimyBoots)
         {
             if (inputHelper.IsKeyDown(Keys.W))
             {
-                position.Y -= speed;
-                lastUsedspeed = "up";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerBack");
+                position.Y -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                lastUsedspeed = "Up";
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerUp");
             }
             if (inputHelper.IsKeyDown(Keys.S))
             {
-                position.Y += speed;
-                lastUsedspeed = "down";
-                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+                position.Y += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                lastUsedspeed = "Down";
+                playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
             }
             if (inputHelper.IsKeyDown(Keys.D))
             {
-                position.X += speed;
-                lastUsedspeed = "right";
+                position.X += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                lastUsedspeed = "Right";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
             }
             if (inputHelper.IsKeyDown(Keys.A))
             {
-                position.X -= speed;
-                lastUsedspeed = "left";
+                position.X -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                lastUsedspeed = "Left";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
             }
 
@@ -138,16 +135,16 @@ public class Player : SpriteGameObject
             position.Y -= speed * inputHelper.currentGamePadState.ThumbSticks.Left.Y;
             switch (inputHelper.getThumpDirection("left"))
             {
-                case "up":
-                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerBack");
+                case "Up":
+                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerUp");
                     break;
-                case "down":
-                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+                case "Down":
+                    playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
                     break;
-                case "right":
+                case "Right":
                     playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
                     break;
-                case "left":
+                case "Left":
                     playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
                     break;
             }
@@ -155,21 +152,21 @@ public class Player : SpriteGameObject
         }
         else
         {
-            if(lastUsedspeed == "up")
+            if (lastUsedspeed == "Up")
             {
-                position.Y -= speed;
+                position.Y -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
-            else if (lastUsedspeed == "down")
+            else if (lastUsedspeed == "Down")
             {
-                position.Y += speed;
+                position.Y += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
-            else if (lastUsedspeed == "right")
+            else if (lastUsedspeed == "Right")
             {
-                position.X += speed;
+                position.X += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
-            else if (lastUsedspeed == "left")
+            else if (lastUsedspeed == "Left")
             {
-                position.X -= speed;
+                position.X -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
         }
         if (ammo > 0 || ammo == -1)
@@ -192,7 +189,7 @@ public class Player : SpriteGameObject
                 Shoot(4);
             }
         }
-        if(leveltokens > 0 && (inputHelper.KeyPressed(Keys.O) || inputHelper.ButtonPressed(Buttons.RightTrigger)))
+        if (leveltokens > 0 && (inputHelper.KeyPressed(Keys.O) || inputHelper.ButtonPressed(Buttons.RightTrigger)))
         {
             leveltokens--;
             GameEnvironment.gameStateManager.SwitchTo("Leveling");
@@ -210,10 +207,10 @@ public class Player : SpriteGameObject
         nextLevelExp = 100;
         attackspeedreduction = 0;
         damagereduction = 0;
-        extraspeed = 0;
+        extraspeed = 1;
         extraattack = 0;
         leveltokens = 0;
-        velocitybase = 5;
+        velocitybase = 0.3f;
         CalculateAmmo();
         CalculateDamage();
         onIce = false;
@@ -222,17 +219,17 @@ public class Player : SpriteGameObject
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
         {
             RemoveBullets.Add(bullet);
-        }  
+        }
         foreach (Bullet bullet in RemoveBullets)
         {
             PlayingState.player.bullets.Remove(bullet);
         }
         startup = true;
-}
+    }
 
     public void NextLevel()
     {
-        if(exp >= nextLevelExp)
+        if (exp >= nextLevelExp)
         {
             exp -= nextLevelExp;
             nextLevelExp += 20;
@@ -246,7 +243,7 @@ public class Player : SpriteGameObject
     {
         if (type == 1)
         {
-            extraattack+= 5;
+            extraattack += 5;
             CalculateDamage();
         }
         if (type == 2)
@@ -277,7 +274,7 @@ public class Player : SpriteGameObject
     {
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
         IPassive[] passives = new IPassive[2];
-        
+
         if (inventory.currentPassives[0] != null)
         {
             passives[0] = (IPassive)inventory.currentPassives[0];
@@ -326,44 +323,37 @@ public class Player : SpriteGameObject
     {
         spriteBatch.Draw(playersprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
         if (ammo < 0)
-        {
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: infinite!", new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-
-        }
         else
-        {
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: " + Convert.ToString(ammo), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-
-        }
-
+        
         if (inventory.currentArmour != null)
-        {
             inventory.currentArmour.DrawOnPlayer(gameTime, spriteBatch);
-        }
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Torso" + lastUsedspeed), PlayingState.player.position, Color.White);
+
         if (inventory.currentWeapon != null)
-        {
             inventory.currentWeapon.DrawOnPlayer(gameTime, spriteBatch);
-        }
+
         if (inventory.currentHelmet != null)
-        {
             inventory.currentHelmet.DrawOnPlayer(gameTime, spriteBatch);
-        }
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardHelmet" + lastUsedspeed), PlayingState.player.position, Color.White);
+
         if (inventory.currentShield != null)
-        {
             inventory.currentShield.DrawOnPlayer(gameTime, spriteBatch);
-        }
+
         if (inventory.currentBoots != null)
-        {
             inventory.currentBoots.DrawOnPlayer(gameTime, spriteBatch);
-        }
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Boots" + lastUsedspeed), PlayingState.player.position, Color.White);
+
         if (inventory.currentPassives[0] != null)
-        {
             inventory.currentPassives[0].DrawOnPlayer(gameTime, spriteBatch);
-        }
+
         if (inventory.currentPassives[1] != null)
-        {
             inventory.currentPassives[1].DrawOnPlayer(gameTime, spriteBatch);
-        }
+
 
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);
@@ -371,6 +361,5 @@ public class Player : SpriteGameObject
         healthbar.Draw(spriteBatch);
         if (leveltokens > 0)
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/LevelUp"), new Vector2(position.X, position.Y - 30), Color.White);
-
     }
 }

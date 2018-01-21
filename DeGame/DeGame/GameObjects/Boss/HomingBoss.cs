@@ -16,7 +16,7 @@ public class HomingBoss : Boss
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet");
         Bullets = new GameObjectList();
         HomingBullets = new GameObjectList();
-        velocity = new Vector2(1, 1);
+        velocity = new Vector2(0.07f, 0.07f);
         velocity.Normalize();
         Roomposition = roomposition;
         expGive = (int)(240 * statmultiplier);

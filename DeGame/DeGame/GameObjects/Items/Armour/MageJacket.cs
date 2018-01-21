@@ -15,11 +15,11 @@ class MageJacket : Item, IArmour
 
     public override void equip()
     {
-        PlayingState.player.extraspeed += 2;
+        PlayingState.player.extraspeed *= 1.30f;
     }
     public override void unequip()
     {
-        PlayingState.player.extraspeed -= 2;
+        PlayingState.player.extraspeed /= 1.30f;
         base.unequip();
     }
 }

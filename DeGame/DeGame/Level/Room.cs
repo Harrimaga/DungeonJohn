@@ -155,6 +155,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "IceEnemy";
                 CreateObject(x, y, "K");
                 break;
+            case 'V':
+                roomarray[x, y] = "RandomEnemy";
+                CreateObject(x, y, "V");
+                break;
             case 'B':
                 roomarray[x, y] = "HomingBoss";
                 CreateObject(x, y, "B");
@@ -283,13 +287,13 @@ public class Room : GameObjectList
                     LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 2 * CellHeight + b * roomheight);
                     break;
                 case 2:
-                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 14 * CellHeight + b * roomheight - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height);
+                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 14 * CellHeight + b * roomheight - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height);
                     break;
                 case 3:
                     LastEntryPoint = new Vector2(2 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
                     break;
                 case 4:
-                    LastEntryPoint = new Vector2(20 * CellWidth + a * roomwidth - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width, 7 * CellHeight + b * roomheight);
+                    LastEntryPoint = new Vector2(20 * CellWidth + a * roomwidth - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width, 7 * CellHeight + b * roomheight);
                     break;
                 default:
                     LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
@@ -313,6 +317,12 @@ public class Room : GameObjectList
             case ("R"):
                 Enemy enemyRanged = new RangedEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
+                roomarray[x, y] = "Background";
+                enemycounter++;
+                break;
+            case ("V"):
+                Enemy enemyRandom = new RandomEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "RandomEnemy");
+                enemies.Add(enemyRandom);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
@@ -423,7 +433,7 @@ public class Room : GameObjectList
 
     public virtual void CheckExit()
     {
-        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 2);
+        Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2);
         if (RoomListIndex == 4)
         {
             if (MiddleofPlayer.X >= ExitShop.X && MiddleofPlayer.X <= ExitShop.X + CellWidth)
@@ -432,9 +442,9 @@ public class Room : GameObjectList
         }
     }
 
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        anvils.HandleInput(inputHelper);
+        anvils.HandleInput(inputHelper, gameTime);
     }
 
     void WallShader (GameTime gameTime, SpriteBatch spriteBatch, int x, int y)

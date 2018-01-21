@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-class HardHelmet : Item, IHelmet
+﻿class HardHelmet : Item, IHelmet
 {
     public HardHelmet()
     {
@@ -15,12 +9,12 @@ class HardHelmet : Item, IHelmet
     public override void equip()
     {
         PlayingState.player.damagereduction *= 0.8;
-        PlayingState.player.extraspeed-= 10;
+        PlayingState.player.extraspeed*= 0.7f;
     }
     public override void unequip()
     {
-        PlayingState.player.damagereduction *= 1.25;
-        PlayingState.player.extraspeed++;
+        PlayingState.player.damagereduction /= 0.8;
+        PlayingState.player.extraspeed/= 0.7f;
         base.unequip();
     }
 }

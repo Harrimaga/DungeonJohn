@@ -19,7 +19,7 @@ public class BigMac : Item, IWeapon
         twoHanded = true;
         addedDamage = 40;
         damageMultiplier = 1;
-        projectile_velocity = 15;
+        projectile_velocity = 1;
         attackspeed = 10;
         range = 700;
         ammo = 300;
@@ -38,7 +38,7 @@ public class BigMac : Item, IWeapon
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront").Height / 4), direction);
+        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), direction);
         PlayingState.player.bullets.Add(bullet);
     }
 

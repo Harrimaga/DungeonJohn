@@ -12,7 +12,7 @@ public class SpiderEnemy : Enemy
 
     public SpiderEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/SpiderEnemy", Difficulty, layer, id)
     {
-        velocity = new Vector2(3f, 3f);
+        velocity = new Vector2(0.2f, 0.2f);
         direction = (PlayingState.player.position - position);
         health = 50 * statmultiplier;
         maxhealth = 50 * statmultiplier;

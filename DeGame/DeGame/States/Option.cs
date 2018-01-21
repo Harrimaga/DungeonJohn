@@ -12,7 +12,7 @@ public class Option : IGameObject
     public Option()
     {
     }
-    public virtual void HandleInput(InputHelper inputHelper)
+    public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

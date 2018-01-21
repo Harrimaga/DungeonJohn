@@ -28,7 +28,7 @@ public class Enemy : SpriteGameObject
     public Enemy(Vector2 startPosition, Vector2 roomposition, string assetname, int difficulty = 0, int layer = 0, string id = "Enemy")
     : base(assetname, layer, id)
     {
-        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerFront");
+        playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
         if (difficulty > 0)
             statmultiplier = (float)(difficulty - 1) / 10 + 1;
         else
@@ -53,7 +53,8 @@ public class Enemy : SpriteGameObject
         if (moving)
         {
             actualvelocity = velocity * direction;
-            position += actualvelocity;
+            position.X += actualvelocity.X * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            position.Y += actualvelocity.Y * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
         }
 
         List<GameObject> RemoveBullets = new List<GameObject>();

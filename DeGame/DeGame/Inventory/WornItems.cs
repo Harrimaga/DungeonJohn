@@ -63,15 +63,15 @@ public class WornItems : GameObjectList
         }
     }
 
-    public override void HandleInput(InputHelper inputHelper)
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        weaponSlot.HandleInput(inputHelper);
-        helmetSlot.HandleInput(inputHelper);
-        armourSlot.HandleInput(inputHelper);
-        bootsSlot.HandleInput(inputHelper);
-        shieldShot.HandleInput(inputHelper);
-        passiveSlot1.HandleInput(inputHelper);
-        passiveSlot2.HandleInput(inputHelper);
+        weaponSlot.HandleInput(inputHelper, gameTime);
+        helmetSlot.HandleInput(inputHelper, gameTime);
+        armourSlot.HandleInput(inputHelper, gameTime);
+        bootsSlot.HandleInput(inputHelper, gameTime);
+        shieldShot.HandleInput(inputHelper, gameTime);
+        passiveSlot1.HandleInput(inputHelper, gameTime);
+        passiveSlot2.HandleInput(inputHelper, gameTime);
     }
 }
 

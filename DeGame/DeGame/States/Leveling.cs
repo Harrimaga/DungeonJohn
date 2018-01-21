@@ -22,10 +22,10 @@ class Leveling : IGameObject
         healthB = new Button(new Vector2(620, 600), "Health", "HealthUp","HealthUpPressed",true, 1);
     }
 
-    public virtual void HandleInput(InputHelper inputHelper)
+    public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        attackB.HandleInput(inputHelper);
-        healthB.HandleInput(inputHelper);
+        attackB.HandleInput(inputHelper, gameTime);
+        healthB.HandleInput(inputHelper, gameTime);
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

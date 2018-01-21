@@ -14,7 +14,7 @@ class Bullet : SpriteGameObject
     Color color = Color.White;
 
     public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
-    : base("Sprites/Characters/PlayerFront", layer, id)
+    : base("Sprites/Characters/PlayerDown", layer, id)
     {
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
         position = Startposition;
@@ -60,7 +60,8 @@ class Bullet : SpriteGameObject
         }
         else
             counter += weapon.Projectile_Velocity;
-        position += velocity;
+        position.X += velocity.X * gameTime.ElapsedGameTime.Milliseconds;
+        position.Y += velocity.Y * gameTime.ElapsedGameTime.Milliseconds;
         CheckCollision();
     }
 

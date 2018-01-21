@@ -46,7 +46,7 @@ public class Floor
     }
     int RandomRoom()
     {
-        return random.Next(6) + 5;
+        return random.Next(8) + 5;
     }
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
@@ -322,7 +322,7 @@ public class Floor
         }
     }
 
-    public void HandleInput(InputHelper inputHelper)
+    public void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (inputHelper.KeyPressed(Keys.T))
             if (CurrentLevel % 2 == 0)
@@ -334,7 +334,7 @@ public class Floor
         foreach (Room r in floor)
         {
             if (r != null)
-                r.HandleInput(inputHelper);
+                r.HandleInput(inputHelper, gameTime);
         }
     }
 
@@ -357,7 +357,6 @@ public class Floor
         ClearFloor();
         floor[4, 4] = new Room("", 4, 4, 4);
         currentRoom = floor[4, 4];
-        floor[4, 4].LoadTiles();
         CurrentLevel++;
         Level = "Level: Shop after " + displayint;
         FloorGenerated = false;
@@ -392,29 +391,28 @@ public class Floor
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
             {
+                Vector2 MinimapTilePosition = new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2));
                 if (floor[x, y] != null /*&& floor[x,y].Visited*/)
                 {
                     switch (floor[x, y].RoomListIndex)
                     {
                         case (1):
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapStartTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapStartTile")), MinimapTilePosition, Color.White);
                             break;
                         case (2):
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapBossTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapBossTile")), MinimapTilePosition, Color.White);
                             break;
                         case (3):
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapItemTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapItemTile")), MinimapTilePosition, Color.White);
                             break;
                         default:
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapTile")), MinimapTilePosition, Color.White);
                             break;
                     }
-                    if (floor[x,y].Type == "bossroom")
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/MinimapBossTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
                 }
                 if (currentRoom.position == new Vector2(x, y))
                 {
-                    spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/CurrentMinimapTile")), new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2)), Color.White);
+                    spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/CurrentMinimapTile")), MinimapTilePosition, Color.White);
                 }
             }
         //TODO alleen kamer tekenen op minimap als de speler er is geweest
