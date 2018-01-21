@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 class CreamBatBoss : Boss
 {
@@ -31,6 +32,7 @@ class CreamBatBoss : Boss
         base.Update(gameTime);
         MoveTimer++;
         shootcounter1--;
+        SolidCollision();
         if (Stage == 1)
         {
             velocity = new Vector2(0.13f, 0.13f);
@@ -151,8 +153,8 @@ class CreamBatBoss : Boss
         MoveDirection = PlayingState.player.position - position;
         MoveDirection.Normalize();
         moving = MoveDirection * velocity;
-        position.X += moving.X * gameTime.ElapsedGameTime.Milliseconds;
-        position.Y += moving.Y * gameTime.ElapsedGameTime.Milliseconds;
+        position += moving * gameTime.ElapsedGameTime.Milliseconds;
+      
     }
     public void Move(GameTime gameTime)
     {
@@ -173,6 +175,67 @@ class CreamBatBoss : Boss
         position.Y += moving.Y * gameTime.ElapsedGameTime.Milliseconds;
     }
 
+    protected void SolidCollision()
+    {
+        //Rectangle BossBox = new Rectangle((int)position.X - 61, (int)position.Y - 61, sprite.Width + 122, sprite.Height + 122);
+        foreach (Solid s in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
+        {
+            //if (BossBox.Intersects(s.BoundingBox) == false)
+            //{
+                if (CollidesWith(s))
+                {
+                    Console.WriteLine("Fucksafdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+                    if (moving.X > 0)
+                        position.X -= moving.X;
+                    if (moving.X < 0)
+                        position.X += moving.X;
+                    if (moving.Y > 0)
+                        position.Y -= moving.Y;
+                    if (moving.Y < 0)
+                        position.Y += moving.Y;
+                }
+            if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Top)))
+                while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
+                {
+                    PlayingState.player.position.Y++;
+                    PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+                }
+            if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Bottom)))
+                while (CollidesWith(PlayingState.player))
+                {
+                    PlayingState.player.position.Y--;
+                    PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+                }
+            if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Left, PlayingState.player.collisionhitbox.Center.Y)))
+                while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
+                {
+                    PlayingState.player.position.X++;
+                    PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+                }
+            if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Right, PlayingState.player.collisionhitbox.Center.Y)))
+                while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
+                {
+                    PlayingState.player.position.X--;
+                    PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+                }
+            // }
+            // else
+            //{
+            //if (CollidesWith(s))
+            //{
+            //    Console.WriteLine("Fucksafdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+            //    if (moving.X > 0)
+            //        position.X -= moving.X;
+            //    if (moving.X < 0)
+            //        position.X += moving.X;
+            //    if (moving.Y > 0)
+            //        position.Y -= moving.Y;
+            //    if (moving.Y < 0)
+            //        position.Y += moving.Y;
+            //}
+            // }
+        }
+    }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
