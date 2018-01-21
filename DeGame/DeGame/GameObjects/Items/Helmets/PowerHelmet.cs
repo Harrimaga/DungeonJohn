@@ -14,11 +14,13 @@ class PowerHelmet : Item, IHelmet
     }
     public override void equip()
     {
-        PlayingState.player.attack += 10;
+        PlayingState.player.extraattack += 10;
+        PlayingState.player.CalculateDamage();
     }
     public override void unequip()
     {
-        PlayingState.player.attack -= 10;
+        PlayingState.player.extraattack -= 10;
+        PlayingState.player.CalculateDamage();
         base.unequip();
     }
 }
