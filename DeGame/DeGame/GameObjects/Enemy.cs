@@ -85,7 +85,7 @@ public class Enemy : SpriteGameObject
 
     void CheckAlive()
     {
-        if (health <= 0 && alive == true && killable)
+        if (health <= 0 && alive == true && killable || (bossenemy && EndRoom.cleared))
         {
             if (!bossenemy)
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter--;
