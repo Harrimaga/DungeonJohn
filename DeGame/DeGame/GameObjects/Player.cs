@@ -240,7 +240,7 @@ public class Player : SpriteGameObject
         }
     }
 
-    public void StateIncrease(int type)
+    public void StatIncrease(int type)
     {
         if (type == 1)
         {
