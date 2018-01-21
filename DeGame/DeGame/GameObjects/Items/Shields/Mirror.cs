@@ -10,6 +10,7 @@ class Mirror : Item, IShield
     float addeddefence, defencemultiplier;
     public Mirror()
     {
+        Cost = 9;
         addeddefence = 1;
         defencemultiplier = 1;
         itemName = "Mirror";

@@ -15,11 +15,12 @@ public class Mac10 : Item, IWeapon
 
     public Mac10()
     {
+        Cost = 7;
         melee = false;
         twoHanded = false;
         addedDamage = 8;
         projectile_velocity = 0.8f;
-        attackspeed = 6;
+        attackspeed = 8;
         range = 250;
         ammo = 200;
         Type = "weapon";

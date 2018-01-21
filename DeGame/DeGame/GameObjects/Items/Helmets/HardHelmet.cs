@@ -2,6 +2,7 @@
 {
     public HardHelmet()
     {
+        Cost = 5;
         itemName = "HardHelmet";
         itemDescription = "Bullets are not very effective, but it is so heavy that you are a lot slower";
         Type = "helmet";

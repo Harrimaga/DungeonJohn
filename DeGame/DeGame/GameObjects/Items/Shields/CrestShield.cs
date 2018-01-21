@@ -11,6 +11,7 @@ class CrestShield : Item, IShield
 
     public CrestShield()
     {
+        Cost = 7;
         addeddefence = 1;
         defencemultiplier = 1;
         itemName = "CrestShield";

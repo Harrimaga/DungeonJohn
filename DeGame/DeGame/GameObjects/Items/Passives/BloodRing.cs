@@ -7,20 +7,12 @@ using System.Threading.Tasks;
 
     public class BloodRing : Item, IPassive
 {
-    float damageMultiplier;
     public BloodRing()
     {
-        damageMultiplier = 1;
+        Cost = 5;
         itemName = "BloodRing";
         itemDescription = "Suck the life force out this ring to gain more health";
         Type = "passive";
-    }
-    public float DamageMultiplier
-    {
-        get
-        {
-            return damageMultiplier;
-        }
     }
     public override void equip()
     {

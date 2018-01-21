@@ -15,6 +15,7 @@ public class DoubleGun : Item, IWeapon
 
     public DoubleGun()
     {
+        Cost = 9;
         melee = false;
         twoHanded = false;
         addedDamage = 30;
