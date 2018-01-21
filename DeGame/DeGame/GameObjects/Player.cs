@@ -6,33 +6,32 @@ using System.Collections.Generic;
 
 public class Player : SpriteGameObject
 {
-    public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
     public bool CoolBoots = false, SlimyBoots = false, VialOfPoison = false, CrestShield = false;
+    public bool onWeb = false, onIce = false, onSolid = false, next = false;
+    bool startup = true;
     new public bool Mirror = false;
-    public float health = 100, maxhealth = 100;
-    public float exp = 0, nextLevelExp = 100;
-    public float attackspeedreduction = 0;
-    public double damagereduction = 1;
-    public float extraspeed = 1;
-    public float attack;
-    public float attackspeed;
-    public float speed;
-    public float range;
-    public float extraattack = 0;
-    public int ammo;
-    public int gold = 0;
-    public int level = 0;
-    public int leveltokens = 0;
-    public SpriteEffects Effect;
+    public double damagereduction = 1, damagemultiplier = 1;
+    public double attackspeedreduction = 1;
+    public double attackmultiplier = 1;
+    public double speed, extraspeed = 1;
     public float velocitybase = 0.3f;
+    public float attack, extraattack = 0;
+    public float health = 100, maxhealth = 100;
+    public float exp = 0;
+    float shoottimer = 0, nextLevelExp = 400;
+    public int leveltokens = 0;
+    public int level = 0;
+    public int gold = 0;
+    public int ammo;
+    public SpriteEffects Effect;
     HealthBar healthbar;
     public GameObjectList bullets;
     public static InventoryManager inventory;
-    float shoottimer = 0;
+
     public string lastUsedspeed;
     public Rectangle collisionhitbox;
-    bool startup = true;
+
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Characters/PlayerDown", 0, "Player")
@@ -109,31 +108,31 @@ public class Player : SpriteGameObject
         {
             if (inputHelper.IsKeyDown(Keys.W))
             {
-                position.Y -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                position.Y -= (float)(speed * gameTime.ElapsedGameTime.TotalMilliseconds);
                 lastUsedspeed = "Up";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerUp");
             }
             if (inputHelper.IsKeyDown(Keys.S))
             {
-                position.Y += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                position.Y += (float)(speed * gameTime.ElapsedGameTime.TotalMilliseconds);
                 lastUsedspeed = "Down";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
             }
             if (inputHelper.IsKeyDown(Keys.D))
             {
-                position.X += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                position.X += (float)(speed * gameTime.ElapsedGameTime.TotalMilliseconds);
                 lastUsedspeed = "Right";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
             }
             if (inputHelper.IsKeyDown(Keys.A))
             {
-                position.X -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                position.X -= (float)(speed * gameTime.ElapsedGameTime.TotalMilliseconds);
                 lastUsedspeed = "Left";
                 playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
             }
 
-            position.X += speed * inputHelper.currentGamePadState.ThumbSticks.Left.X;
-            position.Y -= speed * inputHelper.currentGamePadState.ThumbSticks.Left.Y;
+            position.X += (float)(speed * inputHelper.currentGamePadState.ThumbSticks.Left.X);
+            position.Y -= (float)(speed * inputHelper.currentGamePadState.ThumbSticks.Left.Y);
             switch (inputHelper.getThumpDirection("left"))
             {
                 case "Up":
@@ -155,19 +154,19 @@ public class Player : SpriteGameObject
         {
             if (lastUsedspeed == "Up")
             {
-                position.Y -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                position.Y -= (float)(speed * gameTime.ElapsedGameTime.TotalMilliseconds);
             }
             else if (lastUsedspeed == "Down")
             {
-                position.Y += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                position.Y += (float)(speed * gameTime.ElapsedGameTime.TotalMilliseconds); ;
             }
             else if (lastUsedspeed == "Right")
             {
-                position.X += speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                position.X += (float)(speed * gameTime.ElapsedGameTime.TotalMilliseconds); ;
             }
             else if (lastUsedspeed == "Left")
             {
-                position.X -= speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                position.X -= (float)(speed * gameTime.ElapsedGameTime.TotalMilliseconds); ;
             }
         }
         if (ammo > 0 || ammo == -1)
@@ -205,18 +204,18 @@ public class Player : SpriteGameObject
         gold = 0;
         level = 1;
         exp = 0;
-        nextLevelExp = 100;
-        attackspeedreduction = 0;
+        nextLevelExp = 400;
+        attackspeedreduction = 1;
         damagereduction = 1;
         extraspeed = 1;
         extraattack = 0;
+        attackmultiplier = 1;
         leveltokens = 0;
         velocitybase = 0.3f;
         CalculateAmmo();
         CalculateDamage();
-        onIce = false;
-        onWeb = false;
-        onSolid = false;
+        onIce = false; onWeb = false; onSolid = false;
+        CoolBoots = false; SlimyBoots = false; Mirror = false; VialOfPoison = false; CrestShield = false;
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
         {
             RemoveBullets.Add(bullet);
@@ -233,10 +232,9 @@ public class Player : SpriteGameObject
         if (exp >= nextLevelExp)
         {
             exp -= nextLevelExp;
-            nextLevelExp += 20;
+            nextLevelExp += 100;
             leveltokens++;
             level++;
-            state = true;
         }
     }
 
@@ -244,7 +242,7 @@ public class Player : SpriteGameObject
     {
         if (type == 1)
         {
-            extraattack += 5;
+            attackmultiplier *= 1.05;
             CalculateDamage();
         }
         if (type == 2)
@@ -266,7 +264,7 @@ public class Player : SpriteGameObject
                 {
                     ammo--;
                 }
-                shoottimer += weapon.AttackSpeed - attackspeedreduction;
+                shoottimer += (float)(weapon.AttackSpeed * attackspeedreduction);
             }
         }
     }
@@ -284,19 +282,7 @@ public class Player : SpriteGameObject
         {
             passives[1] = (IPassive)inventory.currentPassives[1];
         }
-
-        if (passives[0] == null && weapon != null)
-        {
-            attack = weapon.AddedDamage * weapon.DamageMultiplier + extraattack;
-        }
-        else if (passives[0] != null && passives[1] == null && weapon != null)
-        {
-            attack = weapon.AddedDamage * Math.Max(weapon.DamageMultiplier, passives[0].DamageMultiplier) + extraattack;
-        }
-        else if (passives[1] != null && weapon != null)
-        {
-            attack = weapon.AddedDamage * Math.Max(weapon.DamageMultiplier, Math.Max(passives[0].DamageMultiplier, passives[1].DamageMultiplier)) + extraattack;
-        }
+        attack = (float)(weapon.AddedDamage * attackmultiplier + extraattack);
     }
 
     public void CalculateAmmo()
@@ -356,7 +342,7 @@ public class Player : SpriteGameObject
             inventory.currentShield.DrawOnPlayer(gameTime, spriteBatch);
 
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString((int)attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);
         bullets.Draw(gameTime, spriteBatch);
         healthbar.Draw(spriteBatch);
         if (leveltokens > 0)

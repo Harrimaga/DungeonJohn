@@ -21,12 +21,6 @@ class E_Bullet : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        reflectchance = 100;
-        blockchance = 100;
-        if (PlayingState.player.CrestShield)
-            blockchance = random.Next(100);
-        else if (PlayingState.player.Mirror)
-            reflectchance = random.Next(100);
         CheckCollision();
     }
 
@@ -49,6 +43,13 @@ class E_Bullet : SpriteGameObject
         }
         else
         {
+            reflectchance = 100;
+            blockchance = 100;
+            if (PlayingState.player.CrestShield)
+                blockchance = random.Next(100);
+            else if (PlayingState.player.Mirror)
+                reflectchance = random.Next(100);
+
             if (CollidesWith(PlayingState.player))
             {
                 if (reflectchance < 20)

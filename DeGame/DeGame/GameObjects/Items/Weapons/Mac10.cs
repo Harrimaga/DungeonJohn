@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class Mac10 : Item, IWeapon
 {
     bool melee, twoHanded;
-    float addedDamage, damageMultiplier, projectile_velocity, attackspeed, range;
+    float addedDamage, projectile_velocity, attackspeed, range;
     int ammo;
     Texture2D bulletleft, bulletup;
 
@@ -18,10 +18,9 @@ public class Mac10 : Item, IWeapon
         melee = false;
         twoHanded = false;
         addedDamage = 8;
-        damageMultiplier = 1;
         projectile_velocity = 0.8f;
         attackspeed = 6;
-        range = 400;
+        range = 250;
         ammo = 200;
         Type = "weapon";
         itemName = "Mac10";
@@ -55,14 +54,6 @@ public class Mac10 : Item, IWeapon
         get
         {
             return ammo;
-        }
-    }
-
-    public float DamageMultiplier
-    {
-        get
-        {
-            return damageMultiplier;
         }
     }
 

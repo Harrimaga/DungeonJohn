@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class StandardBow : Item, IWeapon
 {
     bool melee, twoHanded;
-    float addedDamage, damageMultiplier, projectile_velocity, attackspeed, range;
+    float addedDamage, projectile_velocity, attackspeed, range;
     int ammo;
     Texture2D bulletleft, bulletup;
 
@@ -18,7 +18,6 @@ public class StandardBow : Item, IWeapon
         melee = false;
         twoHanded = true;
         addedDamage = 50;
-        damageMultiplier = 1;
         projectile_velocity = 0.67f;
         attackspeed = 50;
         range = 800;
@@ -55,14 +54,6 @@ public class StandardBow : Item, IWeapon
         get
         {
             return ammo;
-        }
-    }
-
-    public float DamageMultiplier
-    {
-        get
-        {
-            return damageMultiplier;
         }
     }
 

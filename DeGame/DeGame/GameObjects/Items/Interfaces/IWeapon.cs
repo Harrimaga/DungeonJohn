@@ -23,11 +23,6 @@ public interface IWeapon
         get;
     }
 
-    float DamageMultiplier
-    {
-        get;
-    }
-
     int Ammo
     {
         get;

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 public class DoubleGun : Item, IWeapon
 {
     bool melee, twoHanded;
-    float addedDamage, damageMultiplier, projectile_velocity, attackspeed, range;
+    float addedDamage, projectile_velocity, attackspeed, range;
     int ammo;
     Texture2D bulletleft, bulletup;
 
@@ -18,14 +18,13 @@ public class DoubleGun : Item, IWeapon
         melee = false;
         twoHanded = false;
         addedDamage = 30;
-        damageMultiplier = 1;
         projectile_velocity = 0.8f;
         attackspeed = 30;
         range = 800;
         ammo = 200;
         Type = "weapon";
         itemName = "DoubleGun";
-        itemDescription = "What is better than 1 gun 2 guns!!";
+        itemDescription = "What is better than 1 gun? 2 guns!!";
         bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/Mac10_BulletLeft");
         bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/Mac10_BulletUp");
     }
@@ -73,14 +72,6 @@ public class DoubleGun : Item, IWeapon
         get
         {
             return ammo;
-        }
-    }
-
-    public float DamageMultiplier
-    {
-        get
-        {
-            return damageMultiplier;
         }
     }
 
