@@ -6,7 +6,7 @@ class E_Bullet : SpriteGameObject
 {
     public float Damage, Speed;
     Random random;
-    int reflectchance = 0;
+    int reflectchance = 0, blockchance = 0;
     public bool reflected = false;
     protected bool changedirection = false;
     Vector2 Roomposition;
@@ -21,10 +21,12 @@ class E_Bullet : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        if (PlayingState.player.Mirror)
+        reflectchance = 100;
+        blockchance = 100;
+        if (PlayingState.player.CrestShield)
+            blockchance = random.Next(100);
+        else if (PlayingState.player.Mirror)
             reflectchance = random.Next(100);
-        else
-            reflectchance = 0;
         CheckCollision();
     }
 
@@ -49,19 +51,23 @@ class E_Bullet : SpriteGameObject
         {
             if (CollidesWith(PlayingState.player))
             {
-                if (reflectchance < 50)
+                if (reflectchance < 20)
                 {
-                    PlayingState.player.health -= (float)(Damage * PlayingState.player.damagereduction);
-                    GameObjectList.RemovedObjects.Add(this);
-                }
-                else
-                {
-                    PlayingState.player.damagereduction *= 0.5;
-                    PlayingState.player.health -= (float)(Damage * PlayingState.player.damagereduction);
-                    PlayingState.player.damagereduction *= 2;
+                    PlayingState.player.health -= (float)(Damage * PlayingState.player.damagereduction / 2);
                     reflected = true;
                     Speed += 1;
                     changedirection = true;
+                }
+                else if (blockchance < 20)
+                {
+                    GameObjectList.RemovedObjects.Add(this);
+                    return;
+                }
+                else
+                {
+                    PlayingState.player.health -= (float)(Damage * PlayingState.player.damagereduction);
+                    GameObjectList.RemovedObjects.Add(this);
+                    return;
                 }
             }
         }
@@ -71,6 +77,7 @@ class E_Bullet : SpriteGameObject
             if (CollidesWith(solid))
             {
                 GameObjectList.RemovedObjects.Add(this);
+                return;
             }
         }
     }

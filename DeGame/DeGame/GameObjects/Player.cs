@@ -8,7 +8,8 @@ public class Player : SpriteGameObject
 {
     public bool state = false, onWeb = false, onIce = false, onSolid = false, next = false;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
-    public bool CoolBoots = false, SlimyBoots = false, Mirror = false, VialOfPoison = false;
+    public bool CoolBoots = false, SlimyBoots = false, VialOfPoison = false, CrestShield = false;
+    new public bool Mirror = false;
     public float health = 100, maxhealth = 100;
     public float exp = 0, nextLevelExp = 100;
     public float attackspeedreduction = 0;
@@ -206,7 +207,7 @@ public class Player : SpriteGameObject
         exp = 0;
         nextLevelExp = 100;
         attackspeedreduction = 0;
-        damagereduction = 0;
+        damagereduction = 1;
         extraspeed = 1;
         extraattack = 0;
         leveltokens = 0;
@@ -326,27 +327,21 @@ public class Player : SpriteGameObject
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: infinite!", new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
         else
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: " + Convert.ToString(ammo), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-        
-        if (inventory.currentArmour != null)
-            inventory.currentArmour.DrawOnPlayer(gameTime, spriteBatch);
-        else
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Torso" + lastUsedspeed), PlayingState.player.position, Color.White);
-
-        if (inventory.currentWeapon != null)
-            inventory.currentWeapon.DrawOnPlayer(gameTime, spriteBatch);
-
-        if (inventory.currentHelmet != null)
-            inventory.currentHelmet.DrawOnPlayer(gameTime, spriteBatch);
-        else
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardHelmet" + lastUsedspeed), PlayingState.player.position, Color.White);
-
-        if (inventory.currentShield != null)
-            inventory.currentShield.DrawOnPlayer(gameTime, spriteBatch);
 
         if (inventory.currentBoots != null)
             inventory.currentBoots.DrawOnPlayer(gameTime, spriteBatch);
         else
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Boots" + lastUsedspeed), PlayingState.player.position, Color.White);
+
+        if (inventory.currentArmour != null)
+            inventory.currentArmour.DrawOnPlayer(gameTime, spriteBatch);
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Torso" + lastUsedspeed), PlayingState.player.position, Color.White);
+
+        if (inventory.currentHelmet != null)
+            inventory.currentHelmet.DrawOnPlayer(gameTime, spriteBatch);
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/StandardHelmet" + lastUsedspeed), PlayingState.player.position, Color.White);
 
         if (inventory.currentPassives[0] != null)
             inventory.currentPassives[0].DrawOnPlayer(gameTime, spriteBatch);
@@ -354,6 +349,11 @@ public class Player : SpriteGameObject
         if (inventory.currentPassives[1] != null)
             inventory.currentPassives[1].DrawOnPlayer(gameTime, spriteBatch);
 
+        if (inventory.currentWeapon != null)
+            inventory.currentWeapon.DrawOnPlayer(gameTime, spriteBatch);
+
+        if (inventory.currentShield != null)
+            inventory.currentShield.DrawOnPlayer(gameTime, spriteBatch);
 
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString(attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);
