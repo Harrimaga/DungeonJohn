@@ -39,7 +39,7 @@ public class TurretEnemy : Enemy
     {
         Counter++;
 
-        if (Counter >= 50)
+        if (Counter >= 70)
         {
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + BulletPosition, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
