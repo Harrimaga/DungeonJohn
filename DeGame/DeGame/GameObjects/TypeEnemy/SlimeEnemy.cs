@@ -14,8 +14,8 @@ public class SlimeEnemy : Enemy
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/SlimeEnemy");
         position = startPosition;
         basevelocity = new Vector2(0, 0);
-        health = 100 * statmultiplier;
-        maxhealth = 100 * statmultiplier;
+        health = 150 * statmultiplier;
+        maxhealth = 150 * statmultiplier;
         expGive = 120 * statmultiplier;
         switch (Directioncount)
         {
@@ -28,7 +28,7 @@ public class SlimeEnemy : Enemy
                 BulletPosition = new Vector2(sprite.Width, sprite.Height / 2 - 15);
                 break;
         }
-        bulletdamage = 3 * statmultiplier;
+        bulletdamage = 5 * statmultiplier;
     }
 
     public void Shoot()
