@@ -24,6 +24,7 @@ class CreamBatBoss : Boss
         MoveDirection = Vector2.Zero;
         MoveDirection.Normalize();
         bulletPosition = new Vector2(sprite.Width / 2, 50);
+        EndRoom.finalboss = true;
     }
 
     public override void Update(GameTime gameTime)
