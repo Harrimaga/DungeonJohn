@@ -147,6 +147,14 @@ public class Room : GameObjectList
                 roomarray[x, y] = "TurretEnemyRight";
                 CreateObject(x, y, "T");
                 break;
+            case 'X':
+                roomarray[x, y] = "SlimeEnemy";
+                CreateObject(x, y, "X");
+                break;
+            case 'Z':
+                roomarray[x, y] = "SlimeEnemy2";
+                CreateObject(x, y, "Z");
+                break;
             case 'P':
                 roomarray[x, y] = "SpiderEnemy";
                 CreateObject(x, y, "P");
@@ -351,6 +359,18 @@ public class Room : GameObjectList
                 Enemy enemyTurretRight = new TurretEnemy(TilePosition, new Vector2(a, b), 4, enemylevel, 0, "TurretEnemyRight");
                 enemies.Add(enemyTurretRight);
                 roomarray[x, y] = "Background";
+                break;
+            case ("X"):
+                Enemy SlimeEnemy = new SlimeEnemy(TilePosition, new Vector2(a, b), 1, enemylevel, 0, "SlimeEnemy");
+                enemies.Add(SlimeEnemy);
+                roomarray[x, y] = "Background";
+                enemycounter++;
+                break;
+            case ("Z"):
+                Enemy SlimeEnemy2 = new SlimeEnemy(TilePosition, new Vector2(a, b), 2, enemylevel, 0, "'SlimeEnemy2");
+                enemies.Add(SlimeEnemy2);
+                roomarray[x, y] = "Background";
+                enemycounter++;
                 break;
             case ("P"):
                 Enemy enemySpider = new SpiderEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "SpiderEnemy");
