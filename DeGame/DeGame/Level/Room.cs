@@ -197,23 +197,31 @@ public class Room : GameObjectList
         }
     }
 
-    public void DropConsumable(Vector2 position)
+    public void DropConsumable(Vector2 position, bool toaster = false)
     {
-        int r = random.Next(100);
-        if (r < 10)
+        if (!toaster)
         {
-            Consumables golddrop = new Consumables(position, "gold");
-            consumable.Add(golddrop);
+            int r = random.Next(100);
+            if (r < 10)
+            {
+                Consumables golddrop = new Consumables(position, "gold");
+                consumable.Add(golddrop);
+            }
+            else if (r < 30)
+            {
+                Consumables healthdrop = new Consumables(position, "heart");
+                consumable.Add(healthdrop);
+            }
+            else if (r < 50)
+            {
+                Consumables ammodrop = new Consumables(position, "ammo");
+                consumable.Add(ammodrop);
+            }
         }
-        else if(r < 30)
+        else
         {
-            Consumables healthdrop = new Consumables(position, "heart");
-            consumable.Add(healthdrop);
-        }
-        else if(r < 50)
-        {
-            Consumables ammodrop = new Consumables(position, "ammo");
-            consumable.Add(ammodrop);
+            Consumables toasterdrop = new Consumables(position, "toaster");
+            consumable.Add(toasterdrop);
         }
     }
 
