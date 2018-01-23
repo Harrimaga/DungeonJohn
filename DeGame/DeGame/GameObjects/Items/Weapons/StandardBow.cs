@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+/// <summary>
+/// Base weapon class
+/// </summary>
 public class StandardBow : Item, IWeapon
 {
     bool melee, twoHanded;
@@ -29,18 +32,31 @@ public class StandardBow : Item, IWeapon
         bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/StandardBow_BulletUp");
     }
 
+    /// <summary>
+    /// Sets this weapon's ammo to the player's ammo, so that it is saved
+    /// </summary>
     public override void unequip()
     {
         ammo = PlayingState.player.ammo;
         base.unequip();
     }
 
+    /// <summary>
+    /// Shoots a projectile in a given direction
+    /// </summary>
+    /// <param name="direction">Direction int (1 - 4)</param>
     public void Attack(int direction)
     {
+        // Creates a new bullet
         Bullet bullet = new Bullet(PlayingState.player.position + new Vector2( 0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), direction);
+
+        // Add this bullet to the bullet GameObjectList
         PlayingState.player.bullets.Add(bullet);
     }
 
+    /// <summary>
+    /// Gets the damage bonus that this weapon has
+    /// </summary>
     public float AddedDamage
     {
         get
@@ -49,6 +65,9 @@ public class StandardBow : Item, IWeapon
         }
     }
 
+    /// <summary>
+    /// Gets the weapon's ammo
+    /// </summary>
     public int Ammo
     {
         get
@@ -57,6 +76,10 @@ public class StandardBow : Item, IWeapon
         }
     }
 
+    /// <summary>
+    /// Gets whether the weapon is melee or not
+    /// Melee is currently unused
+    /// </summary>
     public bool Melee
     {
         get
@@ -65,6 +88,10 @@ public class StandardBow : Item, IWeapon
         }
     }
 
+    /// <summary>
+    /// Gets whether the weapon is worn in two hands or not
+    /// Currently unused
+    /// </summary>
     public bool TwoHanded
     {
         get
@@ -73,6 +100,10 @@ public class StandardBow : Item, IWeapon
         }
     }
 
+    /// <summary>
+    /// Gets the velocity of the projectiles
+    /// Each weapon has different projectile velocities
+    /// </summary>
     public float Projectile_Velocity
     {
         get
@@ -81,6 +112,10 @@ public class StandardBow : Item, IWeapon
         }
     }
 
+    /// <summary>
+    /// Gets the attack speed of the weapon
+    /// AttackSpeed determines the delay between being able to shoot another projectile
+    /// </summary>
     public float AttackSpeed
     {
         get
@@ -89,6 +124,10 @@ public class StandardBow : Item, IWeapon
         }
     }
 
+    /// <summary>
+    /// Gets the range of the weapon
+    /// Range determines how long a projectile can travel before it despawns
+    /// </summary>
     public float Range
     {
         get
@@ -97,6 +136,9 @@ public class StandardBow : Item, IWeapon
         }
     }
 
+    /// <summary>
+    /// Gets the sprite for the projectile traveling left
+    /// </summary>
     public Texture2D BulletSpriteLeft
     {
         get
@@ -105,6 +147,9 @@ public class StandardBow : Item, IWeapon
         }
     }
 
+    /// <summary>
+    /// Gets the sprite for the projectile traveling up
+    /// </summary>
     public Texture2D BulletSpriteUp
     {
         get
