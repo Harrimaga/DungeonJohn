@@ -14,7 +14,7 @@ class Bullet : SpriteGameObject
     Color color = Color.White;
 
     public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
-    : base("Sprites/Characters/PlayerDown", layer, id)
+    : base("", layer, id)
     {
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
         position = Startposition;
@@ -65,6 +65,17 @@ class Bullet : SpriteGameObject
         CheckCollision();
     }
 
+    public override Rectangle BoundingBox
+    {
+        get
+        {
+            int topx = (int)position.X;
+            int topy = (int)position.Y;
+            int Width = Bulletsprite.Width;
+            int Height = Bulletsprite.Height;
+            return new Rectangle(topx, topy, Width, Height);
+        }
+    }
     public void CheckCollision()
     {
         foreach (Door door in PlayingState.currentFloor.currentRoom.Children)
@@ -72,7 +83,7 @@ class Bullet : SpriteGameObject
                 GameObjectList.RemovedObjects.Add(this);
 
         foreach (Solid solid in PlayingState.currentFloor.currentRoom.solid.Children)
-            if (CollidesWith(solid))
+            if (CollidesWith(solid) && solid.hittable)
                 GameObjectList.RemovedObjects.Add(this);
     }
 

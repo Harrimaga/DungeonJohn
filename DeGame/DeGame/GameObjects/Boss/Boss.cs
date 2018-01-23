@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 public class Boss :  SpriteGameObject
 {
@@ -49,19 +50,8 @@ public class Boss :  SpriteGameObject
             PlayingState.player.bullets.Remove(bullet);
 
         RemoveBullets.Clear();
-        if (CollidesWith(PlayingState.player))
-        {
-            velocity = Vector2.Zero;
-            counter--;
-            if (counter <= 0)
-            {
-
-                PlayingState.player.health -= 1;
-                counter = 100;
-            }
-        }
         PlayerCollision();
-        SolidCollision();
+        //SolidCollision();
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         base.Update(gameTime);
 
@@ -96,23 +86,43 @@ public class Boss :  SpriteGameObject
         }
     }
 
-    protected void SolidCollision()
-    {
-        foreach (Solid s in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
-        {
-            if (CollidesWith(s))
-            {
-                if (velocity.X > 0)
-                    position.X -= velocity.X;
-                if (velocity.X < 0)
-                    position.X += velocity.X;
-                if (velocity.Y > 0)
-                    position.Y -= velocity.Y;
-                if (velocity.Y < 0)
-                    position.Y += velocity.Y;
-            }
-        }
-    }
+    //protected void SolidCollision()
+    //{
+    //    Rectangle BossBox = new Rectangle((int)position.X - 61, (int)position.Y - 61, sprite.Width + 122, sprite.Height + 122);
+    //    foreach (Solid s in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
+    //    {
+    //        if (BossBox.Intersects(s.BoundingBox) == false)
+    //        {
+    //            if (CollidesWith(s))
+    //            {
+    //                Console.WriteLine("Fucksafdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+    //                if (.X > 0)
+    //                    position.X--;
+    //                if (velocity.X < 0)
+    //                    position.X++;
+    //                if (velocity.Y > 0)
+    //                    position.Y--;
+    //                if (velocity.Y < 0)
+    //                    position.Y++;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (CollidesWith(s))
+    //            {
+    //                Console.WriteLine("adfsadfsadfsadfsadfssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+    //                if (velocity.X > 0)
+    //                    position.X--;
+    //                if (velocity.X < 0)
+    //                    position.X++;
+    //                if (velocity.Y > 0)
+    //                    position.Y--;
+    //                if (velocity.Y < 0)
+    //                    position.Y++;
+    //            }
+    //        }
+    //    }
+    //}
 
     public void PlayerCollision()
     {
@@ -122,7 +132,6 @@ public class Boss :  SpriteGameObject
             counter--;
             if (counter <= 0)
             {
-
                 PlayingState.player.health -= 1;
                 counter = 100;
             }
