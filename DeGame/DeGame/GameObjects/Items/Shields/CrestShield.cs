@@ -5,27 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-class Mirror : Item, IShield
+class CrestShield : Item, IShield
 {
     float addeddefence, defencemultiplier;
-    public Mirror()
+
+    public CrestShield()
     {
-        Cost = 9;
+        Cost = 7;
         addeddefence = 1;
         defencemultiplier = 1;
-        itemName = "Mirror";
-        itemDescription = "Sometimes reduces bullet damage and reflects the projectile";
+        itemName = "CrestShield";
+        itemDescription = "Ocassionally blocks a bullet. Alse gives you the urge to roll more often...";
         Type = "shield";
     }
 
     public override void equip()
     {
-        PlayingState.player.Mirror = true;
+        PlayingState.player.CrestShield = true;
     }
 
     public override void unequip()
     {
-        PlayingState.player.Mirror = false;
+        PlayingState.player.CrestShield = false;
         base.unequip();
     }
 

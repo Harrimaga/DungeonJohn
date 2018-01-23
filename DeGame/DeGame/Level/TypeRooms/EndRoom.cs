@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 class EndRoom : Room
 {
-    static public bool cleared = false, trigger = false, placed = false;
+    static public bool cleared = false, trigger = false, placed = false, finalboss = false;
     int currentlevel;
 
     public EndRoom(string map, int roomListIndex, int a, int b, int layer = 0, string id = "") : base(map, roomListIndex, a, b, layer)
@@ -21,12 +21,17 @@ class EndRoom : Room
         base.Update(gameTime);
         currentlevel = PlayingState.currentFloor.displayint;
         //TODO check player volgende floor mag nextFloor true maken
-        CheckExit();
         if (!placed)
         {
             PlaceBoss(ChooseBoss(currentlevel));
+            if (finalboss)
+                for (int x = 0; x < roomarraywidth; ++x)
+                    for (int y = 0; y < roomarrayheight; ++y)
+                        if (roomarray[x, y] == "Exit")
+                            roomarray[x, y] = "Background";
             placed = true;
         }
+        CheckExit();
         if (cleared && enemycounter > 0)
             enemycounter--;
     }
@@ -124,7 +129,7 @@ class EndRoom : Room
     {
         //base.CheckExit();
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2);
-        if (cleared)
+        if (cleared && !finalboss)
         {
             if (MiddleofPlayer.X >= Exit.X && MiddleofPlayer.X <= Exit.X + CellWidth)
                 if (MiddleofPlayer.Y >= Exit.Y && MiddleofPlayer.Y <= Exit.Y + CellHeight)

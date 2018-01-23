@@ -8,6 +8,7 @@ class SimpleArmour : Item, IArmour
 {
     public SimpleArmour()
     {
+        Cost = 7;
         itemName = "SimpleArmour";
         itemDescription = "This is simply Armour";
         Type = "armour";

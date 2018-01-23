@@ -8,6 +8,7 @@ class MageJacket : Item, IArmour
 {
     public MageJacket()
     {
+        Cost = 7;
         itemName = "MageJacket";
         itemDescription = "This jacket was worn by a old mage making you move really faster";
         Type = "armour";

@@ -8,6 +8,7 @@ class SlimyBoots : Item, IBoots
 {
     public SlimyBoots()
     {
+        Cost = 7;
         itemName = "SlimyBoots";
         itemDescription = "Ice stands no chance against these boots.";
         Type = "boots";

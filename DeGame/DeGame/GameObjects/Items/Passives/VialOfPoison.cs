@@ -7,21 +7,14 @@ using System.Threading.Tasks;
 
 public class VialOfPoison : Item, IPassive
 {
-    float damageMultiplier;
     public VialOfPoison()
     {
-        damageMultiplier = 1;
+        Cost = 10;
         itemName = "VialOfPoison";
         itemDescription = "As if bullets weren't deadly enough on their own";
         Type = "passive";
     }
-    public float DamageMultiplier
-    {
-        get
-        {
-            return damageMultiplier;
-        }
-    }
+
     public override void equip()
     {
         PlayingState.player.VialOfPoison = true;

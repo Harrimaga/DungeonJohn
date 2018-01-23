@@ -12,7 +12,6 @@ class CreamBatBoss : Boss
     float bulletdamage = 10, speed = 0.3f;
     Vector2 moving, MoveDirection, bulletPosition;
     Texture2D creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite1");
-    Rectangle BossBox;
 
     public CreamBatBoss(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/CreamBatSprite1", Difficulty, layer, id)
     {
@@ -26,7 +25,7 @@ class CreamBatBoss : Boss
         MoveDirection = Vector2.Zero;
         MoveDirection.Normalize();
         bulletPosition = new Vector2(sprite.Width / 2, 50);
-       
+        EndRoom.finalboss = true;
     }
 
     public override void Update(GameTime gameTime)

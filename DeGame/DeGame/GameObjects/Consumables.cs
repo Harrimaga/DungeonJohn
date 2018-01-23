@@ -18,6 +18,8 @@ class Consumables : SpriteGameObject
             consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Ammo");
         else if (type == "gold")
             consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Coin");
+        else if (type == "toaster")
+            consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Toaster");
     }
 
     public override void Update(GameTime gameTime)
@@ -45,19 +47,23 @@ class Consumables : SpriteGameObject
                     PlayingState.player.gold += 5;
                     GameObjectList.RemovedObjects.Add(this);
                     break;
+                case "toaster":
+                    GameEnvironment.gameStateManager.SwitchTo("Victory");
+                    GameObjectList.RemovedObjects.Add(this);
+                    break;
             }
 
         }
     }
 
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        spriteBatch.Draw(consumablesprite, position, Color.White);
-    }
-
     public override string ToString()
     {
         return type;
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(consumablesprite, position, Color.White);
     }
 }
 

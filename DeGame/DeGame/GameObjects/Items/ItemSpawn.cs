@@ -26,7 +26,7 @@ class ItemSpawn : SpriteGameObject
             int r = randomint % itemList.RoomList.Count;
             item = itemList.RoomList[r];
         }
-        if(price)
+        else if(price)
         {
             int r = randomint % itemList.ShopList.Count;
             item = itemList.ShopList[r];
@@ -40,7 +40,7 @@ class ItemSpawn : SpriteGameObject
             pickedUp = true;
             if(price)
             {
-                PlayingState.player.gold -= 5;
+                PlayingState.player.gold -= item.Cost;
             }
         }
     }
@@ -50,7 +50,7 @@ class ItemSpawn : SpriteGameObject
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Altar"), position);
         if (price)
         {
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "5", position + new Vector2(18, 60), Color.Yellow);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Convert.ToString(item.Cost), position + new Vector2(18, 60), Color.Yellow);
         }
         if (!pickedUp)
         {

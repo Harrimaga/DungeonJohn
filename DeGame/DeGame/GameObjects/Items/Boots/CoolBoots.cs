@@ -8,10 +8,10 @@ class CoolBoots : Item, IBoots
 {
     public CoolBoots()
     {
+        Cost = 5;
         itemName = "CoolBoots";
         itemDescription = "Boots that can withstand lava much better than the average foot";
         Type = "boots";
-
     }
 
     public override void equip()

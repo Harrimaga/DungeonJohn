@@ -19,19 +19,13 @@ class PauseMenuState : IGameObject
     {
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
     }
+
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
             startup = true;
-            if (GameEnvironment.gameStateManager.LastState == "playing")
-            {
-                GameEnvironment.gameStateManager.SwitchTo("Playing");
-            }
-            if(GameEnvironment.gameStateManager.LastState == "pit")
-            {
-                GameEnvironment.gameStateManager.SwitchTo("PitState");
-            }
+            GameEnvironment.gameStateManager.SwitchTo("Playing"); 
         }
 
         wornItems.HandleInput(inputHelper, gameTime);
@@ -46,43 +40,6 @@ class PauseMenuState : IGameObject
         {
             Console.WriteLine("Can't find inventory in PauseMenuState, error code: 3225716");
         }
-        
-    }
-    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        playingState.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PauseMenu/PauseMenu"), BasisPosition);
-        wornItems = PlayingState.currentFloor.wornItems;
-        wornItems.Position = BasisPosition + new Vector2(500, 150);
-        wornItems.Draw(gameTime, spriteBatch);
-
-        if(startup)
-        {
-            startUp();
-        }
-
-        inventory = new List<InventorySlot>();
-        for (int i = 0; i < Player.inventory.items.Count; i++)
-        {
-            Vector2 slotPosition;
-            int x, y;
-            y = (int)Math.Floor((double)i / 9);
-            x = i % 9;
-            //slotPosition = wornItems.position + new Vector2(0, 200) + new Vector2(x * 74, y * 74);
-            slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
-
-            inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
-        }
-
-        if(oldInventory != inventory)
-        {
-            oldInventory = inventory;
-        }
-
-        foreach (InventorySlot slot in oldInventory)
-        {
-            slot.Draw(gameTime, spriteBatch);
-        }        
     }
 
     public void startUp()
@@ -129,4 +86,41 @@ class PauseMenuState : IGameObject
     {
     }
 
+
+    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        playingState.Draw(gameTime, spriteBatch);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PauseMenu/PauseMenu"), BasisPosition);
+        wornItems = PlayingState.currentFloor.wornItems;
+        wornItems.Position = BasisPosition + new Vector2(500, 150);
+        wornItems.Draw(gameTime, spriteBatch);
+
+        if (startup)
+        {
+            startUp();
+        }
+
+        inventory = new List<InventorySlot>();
+        for (int i = 0; i < Player.inventory.items.Count; i++)
+        {
+            Vector2 slotPosition;
+            int x, y;
+            y = (int)Math.Floor((double)i / 9);
+            x = i % 9;
+            //slotPosition = wornItems.position + new Vector2(0, 200) + new Vector2(x * 74, y * 74);
+            slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
+
+            inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
+        }
+
+        if (oldInventory != inventory)
+        {
+            oldInventory = inventory;
+        }
+
+        foreach (InventorySlot slot in oldInventory)
+        {
+            slot.Draw(gameTime, spriteBatch);
+        }
+    }
 }

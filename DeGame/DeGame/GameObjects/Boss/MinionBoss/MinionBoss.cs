@@ -14,10 +14,9 @@ class MinionBoss : Boss
         expGive = (int)(240 * statmultiplier);
         maxhealth = 400 * statmultiplier;
         bulletdamage = 20 * statmultiplier;
-        max = 150 / statmultiplier;
+        max = 120 / statmultiplier;
         shootcounter = (int)max;
-        health = maxhealth;
-
+        health = maxhealth;        
     }
 
     public override void Update(GameTime gameTime)

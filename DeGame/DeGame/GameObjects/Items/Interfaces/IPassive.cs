@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 public interface IPassive
 {
-    float DamageMultiplier
-    {
-        get;
-    }
-
     string Type
     {
         get;
