@@ -26,10 +26,9 @@ class Solid : SpriteGameObject
         }
         else
             OnThisTile = false;
-        SolidCollision();
     }
 
-    void SolidCollision()
+    protected void SolidCollision()
     {
         if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Top)))
             while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))

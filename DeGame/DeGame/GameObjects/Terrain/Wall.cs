@@ -21,6 +21,7 @@ class Wall : Solid
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        SolidCollision();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

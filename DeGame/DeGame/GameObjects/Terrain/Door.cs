@@ -113,6 +113,7 @@ class Door : Solid
         if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || DoorNumber == 0 || closed)
         {
             base.Update(gameTime);
+            SolidCollision();
         }
         if (DoorNumber > 0)
         {
