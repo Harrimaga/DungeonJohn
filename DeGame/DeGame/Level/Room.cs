@@ -438,7 +438,6 @@ public class Room : GameObjectList
             case ("O"):
                 Pit pit = new Pit(TilePosition, 0, "Pit");
                 solid.Add(pit);
-                roomarray[x, y] = "Background";
                 break;
             case ("-"):
                 Door up = new Door(updoor, Up, 1);
@@ -511,31 +510,31 @@ public class Room : GameObjectList
     void BackgroundShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
         //als er...
-        if (CheckRoomarray(x - 1, y, true) && CheckRoomarray(x, y - 1, true))
+        if (CheckRoomarray(x - 1, y, 2) && CheckRoomarray(x, y - 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite LU")), TilePosition, Color.Gray);
         //links en boven
-        else if (CheckRoomarray(x - 1, y, true) && CheckRoomarray(x, y + 1, true))
+        else if (CheckRoomarray(x - 1, y, 2) && CheckRoomarray(x, y + 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite LD")), TilePosition, Color.Gray);
         //links en onder
-        else if (CheckRoomarray(x + 1, y, true) && CheckRoomarray(x, y - 1, true))
+        else if (CheckRoomarray(x + 1, y, 2) && CheckRoomarray(x, y - 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite RU")), TilePosition, Color.Gray);
         //rechts en boven
-        else if (CheckRoomarray(x + 1, y, true) && CheckRoomarray(x, y + 1, true))
+        else if (CheckRoomarray(x + 1, y, 2) && CheckRoomarray(x, y + 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite RD")), TilePosition, Color.Gray);
         //rechts en onder
         //...muren staan, teken dan een backgroundsprite die aan die twee kanten schaduw heeft.
 
         //als er...
-        else if (CheckRoomarray(x - 1, y, true))
+        else if (CheckRoomarray(x - 1, y, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite Left")), TilePosition, Color.Gray);
         //links
-        else if (CheckRoomarray(x + 1, y, true))
+        else if (CheckRoomarray(x + 1, y, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite Right")), TilePosition, Color.Gray);
         //rechts
-        else if (CheckRoomarray(x, y - 1, true))
+        else if (CheckRoomarray(x, y - 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite Up")), TilePosition, Color.Gray);
         //boven
-        else if (CheckRoomarray(x, y + 1, true))
+        else if (CheckRoomarray(x, y + 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite Down")), TilePosition, Color.Gray);
         //onder
         //...een muur of deur staat, teken dan een backgroundsprite die aan die kant een schaduw heeft.
@@ -544,13 +543,92 @@ public class Room : GameObjectList
         //als geen van bovenstaande wordt uitgevoerd, teken dan een normale backgroundsprite
     }
 
-    bool CheckRoomarray(int x, int y, bool wall = false)
+    void PitShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
+    {
+        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitTile")), TilePosition);
+        if (CheckRoomarray(x - 1, y, 3) && CheckRoomarray(x + 1, y, 3) && CheckRoomarray(x, y - 1, 3) && CheckRoomarray(x, y + 1, 3))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitFull")), TilePosition);
+            return;
+        }
+        if (CheckRoomarray(x - 1, y, 3) && CheckRoomarray(x + 1, y, 3) && CheckRoomarray(x, y + 1, 3))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Pit3Up")), TilePosition);
+            return;
+        }
+        if (CheckRoomarray(x - 1, y, 3) && CheckRoomarray(x + 1, y, 3) && CheckRoomarray(x, y - 1, 3))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Pit3Down")), TilePosition);
+            return;
+        }
+        if (CheckRoomarray(x + 1, y, 3) && CheckRoomarray(x, y - 1, 3) && CheckRoomarray(x, y + 1, 3))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Pit3Left")), TilePosition);
+            return;
+        }
+        if (CheckRoomarray(x - 1, y, 3) && CheckRoomarray(x, y - 1, 3) && CheckRoomarray(x, y + 1, 3))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Pit3Right")), TilePosition);
+            return;
+        }
+        if (CheckRoomarray(x - 1, y, 3) && CheckRoomarray(x, y - 1, 3))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitLU")), TilePosition);
+            if (!CheckRoomarray(x + 1, y) && !CheckRoomarray(x, y + 1) && CheckRoomarray(x + 1, y + 1))
+                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitCornerRD")), TilePosition);
+            return;
+        }
+        if (CheckRoomarray(x - 1, y, 3) && CheckRoomarray(x, y + 1, 3))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitLD")), TilePosition);
+            if (!CheckRoomarray(x + 1, y) && !CheckRoomarray(x, y - 1) && CheckRoomarray(x + 1, y - 1))
+                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitCornerRU")), TilePosition);
+            return;
+        }
+        if (CheckRoomarray(x + 1, y, 3) && CheckRoomarray(x, y - 1, 3))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitRU")), TilePosition);
+            if (!CheckRoomarray(x - 1, y) && !CheckRoomarray(x, y + 1) && CheckRoomarray(x - 1, y + 1))
+                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitCornerLD")), TilePosition);
+            return;
+        }
+        if (CheckRoomarray(x + 1, y, 3) && CheckRoomarray(x, y + 1, 3))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitRD")), TilePosition);
+            if (!CheckRoomarray(x - 1, y) && !CheckRoomarray(x, y - 1) && CheckRoomarray(x - 1, y - 1))
+                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitCornerLU")), TilePosition);
+            return;
+        }
+        if (CheckRoomarray(x, y - 1, 3))
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitUp")), TilePosition);
+        if (CheckRoomarray(x, y + 1, 3))
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitDown")), TilePosition);
+        if (CheckRoomarray(x - 1, y, 3))
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitLeft")), TilePosition);
+        if (CheckRoomarray(x + 1, y, 3))
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitRight")), TilePosition);
+        if (!CheckRoomarray(x - 1, y) && !CheckRoomarray(x, y - 1) && CheckRoomarray(x - 1, y - 1))
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitCornerLU")), TilePosition);
+        if (!CheckRoomarray(x - 1, y) && !CheckRoomarray(x, y + 1) && CheckRoomarray(x - 1, y + 1))
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitCornerLD")), TilePosition);
+        if (!CheckRoomarray(x + 1, y) && !CheckRoomarray(x, y - 1) && CheckRoomarray(x + 1, y - 1))
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitCornerRU")), TilePosition);
+        if (!CheckRoomarray(x + 1, y) && !CheckRoomarray(x, y + 1) && CheckRoomarray(x + 1, y + 1))
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitCornerRD")), TilePosition);
+    }
+
+    bool CheckRoomarray(int x, int y, int type = 1)
     {
         if (x >= 0 && x < roomarray.GetLength(0) && y >= 0 && y < roomarray.GetLength(1))
         {
-            if (wall)
+            if (type == 2)
             {
                 if (roomarray[x, y] == "Wall" || roomarray[x, y] == "UpDoor" || roomarray[x, y] == "DownDoor" || roomarray[x, y] == "LeftDoor" || roomarray[x, y] == "RightDoor")
+                    return true;
+            }
+            else if (type == 3)
+            {
+                if (roomarray[x, y] != "Pit")
                     return true;
             }
             else if (roomarray[x, y] == "Background" || roomarray[x, y] == "Lava" || roomarray[x, y] == "Ice" || roomarray[x, y] == "SpiderWeb" || roomarray[x, y] == "IceRock")
@@ -578,8 +656,10 @@ public class Room : GameObjectList
                         case "Rock":
                         case "Item":
                         case "Boss":
-                        case "Pit":
                             BackgroundShader(gameTime, spriteBatch, x, y);
+                            break;
+                        case "Pit":
+                            PitShader(gameTime, spriteBatch, x, y);
                             break;
                         case "RightDoor":
                         case "DownDoor":
