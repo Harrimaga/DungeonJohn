@@ -10,7 +10,6 @@ class CreamBatBoss : Boss
     int Stage = 1;
     int MoveTimer = 0;
     float bulletdamage = 10, speed = 0.3f;
-    bool J = false;
     Vector2 moving, MoveDirection, bulletPosition;
     Texture2D creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite1");
     Rectangle BossBox;
@@ -33,13 +32,24 @@ class CreamBatBoss : Boss
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        MoveTimer++;
+        
         shootcounter1--;
         BossBox = new Rectangle((int)position.X - 61, (int)position.Y - 61, sprite.Width + 122, sprite.Height + 122);
         SolidCollision();
+
         if (Stage == 1)
         {
-            velocity = new Vector2(0.13f, 0.13f);
+            if (CollidesWith(PlayingState.player))
+            {
+
+                velocity = Vector2.Zero;
+
+            }
+            else
+            {
+                velocity = new Vector2(0.13f, 0.13f);
+                MoveTimer++;
+            }
             Shoot();
             Move(gameTime);
             if (health <= 0)
@@ -52,10 +62,16 @@ class CreamBatBoss : Boss
         }
         if (Stage == 2)
         {
-            //if (J == false)
+            if (CollidesWith(PlayingState.player))
+            {
+
+                velocity = Vector2.Zero;
+
+            }
+            else
+            {
                 velocity = new Vector2(0.26f, 0.26f);
-            //else if (J == true)
-                //velocity = new Vector2(0, 0);
+            }
             Shoot(); 
             BossChase(gameTime);
             if (health <= 0)
@@ -68,15 +84,24 @@ class CreamBatBoss : Boss
         }
         if (Stage == 3)
         {
-            velocity = new Vector2(0.1f, 0.1f);
+            if (CollidesWith(PlayingState.player))
+            {
+
+                velocity = Vector2.Zero;
+
+            }
+            else
+            {
+                velocity = new Vector2(0.1f, 0.1f);
+            }
             Spam();
+            
             BossChase(gameTime);
             if (health <= 0)
             {
                 FinalStage();
             }
         }
-
     }
 
     public void Shoot()
@@ -159,91 +184,47 @@ class CreamBatBoss : Boss
     {
         MoveDirection = PlayingState.player.position - position;
         MoveDirection.Normalize();
-       // if (J)
-            moving = MoveDirection * velocity;
-        //else 
-          //  moving = new Vector2(0, 0);
+        moving = MoveDirection * velocity;
         position += moving * gameTime.ElapsedGameTime.Milliseconds;
       
     }
     public void Move(GameTime gameTime)
     {
-        if (MoveTimer <= 50)
+        if (MoveTimer < 50)
             MoveDirection = new Vector2(0,1.5f);
-        else if (MoveTimer <= 150 && MoveTimer >= 50)
+        else if (MoveTimer <= 150 && MoveTimer > 50)
             MoveDirection = new Vector2(-2, -1);
-        else if (MoveTimer <= 250 && MoveTimer >= 150)
+        else if (MoveTimer <= 250 && MoveTimer > 150)
             MoveDirection = new Vector2(2, -1);
-        else if (MoveTimer <= 350 && MoveTimer >= 250)
+        else if (MoveTimer <= 350 && MoveTimer > 250)
             MoveDirection = new Vector2(2, 1);
-        else if (MoveTimer <= 450 && MoveTimer >= 350)
+        else if (MoveTimer <= 450 && MoveTimer > 350)
             MoveDirection = new Vector2(-2, 1);
-        else if (MoveTimer >= 450)
+        else if (MoveTimer > 450)
             MoveTimer = 50;
         moving = MoveDirection * velocity;
-        position.X += moving.X * gameTime.ElapsedGameTime.Milliseconds;
-        position.Y += moving.Y * gameTime.ElapsedGameTime.Milliseconds;
+        position += moving * gameTime.ElapsedGameTime.Milliseconds;       
     }
 
     protected void SolidCollision()
     {
-        J = false;
-        
-        foreach (Solid s in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
+        if (Stage != 1)
         {
-                if (BossBox.Intersects(s.BoundingBox) && CollidesWith(PlayingState.player))
+
+            foreach (Solid s in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
+            {
+
+                while (CollidesWith(s))
                 {
-                    moving = Vector2.Zero;
-                J = true;
-                   
+                    if (moving.X > 0)
+                        position.X -= moving.X;
+                    if (moving.X < 0)
+                        position.X += moving.X;
+                    if (moving.Y > 0)
+                        position.Y -= moving.Y;
+                    if (moving.Y < 0)
+                        position.Y += moving.Y;
                 }
-
-                if (CollidesWith(s))
-                {
-                  
-                    while (CollidesWith(s))
-                    {
-                        if (moving.X > 0)
-                            position.X -= moving.X;
-                        if (moving.X < 0)
-                            position.X += moving.X;
-                        if (moving.Y > 0)
-                            position.Y -= moving.Y;
-                        if (moving.Y < 0)
-                            position.Y += moving.Y;
-                    }
-                    J = true;
-
-                }
-
-                if(J == false)
-                {
-
-                    if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Top)))
-                        while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
-                        {
-                            PlayingState.player.position.Y++;
-                            PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
-                        }
-                    if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Bottom)))
-                        while (CollidesWith(PlayingState.player))
-                        {
-                            PlayingState.player.position.Y--;
-                            PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
-                        }
-                    if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Left, PlayingState.player.collisionhitbox.Center.Y)))
-                        while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
-                        {
-                            PlayingState.player.position.X++;
-                            PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
-                        }
-                    if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Right, PlayingState.player.collisionhitbox.Center.Y)))
-                        while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
-                        {
-                            PlayingState.player.position.X--;
-                            PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
-                        }
-                
             }
         }
     }

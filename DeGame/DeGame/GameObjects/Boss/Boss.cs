@@ -50,17 +50,6 @@ public class Boss :  SpriteGameObject
             PlayingState.player.bullets.Remove(bullet);
 
         RemoveBullets.Clear();
-        if (CollidesWith(PlayingState.player))
-        {
-            velocity = Vector2.Zero;
-            counter--;
-            if (counter <= 0)
-            {
-
-                PlayingState.player.health -= 1;
-                counter = 100;
-            }
-        }
         PlayerCollision();
         //SolidCollision();
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
