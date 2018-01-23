@@ -6,7 +6,6 @@ class Door : Solid
     bool onup = false, ondown = false, onleft = false, onright = false, closed = false;
     SpriteEffects Effect = SpriteEffects.None;
     Texture2D doorsprite;
-    GameObjectList solid;
     int DoorNumber;
     int direction, counter = 0;
     int CellWidth = PlayingState.currentFloor.currentRoom.CellWidth;
@@ -17,7 +16,6 @@ class Door : Solid
     public Door(int doornumber, Vector2 Startposition, int Direction, int layer = 0, string id = "door")
     : base(Startposition, layer, id)
     {
-        solid = new GameObjectList();
         position = Startposition;
         direction = Direction;
         DoorNumber = doornumber;
