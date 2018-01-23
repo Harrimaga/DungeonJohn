@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Player : SpriteGameObject
 {
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
-    public bool CoolBoots, SlimyBoots, VialOfPoison, CrestShield;
+    public bool CoolBoots, SlimyBoots, VialOfPoison, CrestShield, HelicopterHat;
     public bool onWeb, onIce, onSolid, next;
     bool startup;
     new public bool Mirror;
@@ -85,26 +85,29 @@ public class Player : SpriteGameObject
             shoottimer = 0;
         }
 
-        //krijg weer originele snelheid als je over ijs glijdt en van een spinnenweb afkomt
-        if (onIce && !onWeb && speed != 0.3f * extraspeed)
+        if(!HelicopterHat)
         {
-            speed = 0.3f * extraspeed;
+            //krijg weer originele snelheid als je over ijs glijdt en van een spinnenweb afkomt
+            if (onIce && !onWeb && speed != 0.3f * extraspeed)
+            {
+                speed = 0.3f * extraspeed;
+            }
+            if (onWeb)
+            {
+                velocitybase = 0.15f;
+            }
+            else
+            {
+                velocitybase = 0.3f;
+            }
+            speed = velocitybase * extraspeed;
         }
-        if (onWeb)
-        {
-            velocitybase = 0.15f;
-        }
-        else
-        {
-            velocitybase = 0.3f;
-        }
-        speed = velocitybase * extraspeed;
     }
 
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         // Player movement
-        if ((onIce && onSolid) || !onIce || SlimyBoots)
+        if ((onIce && onSolid) || !onIce || SlimyBoots || HelicopterHat)
         {
             if (inputHelper.IsKeyDown(Keys.W))
             {

@@ -9,12 +9,11 @@
     }
     public override void equip()
     {
-        //TODO: deze bool implementeren
-        //PlayingState.player.HelicopterHat = true;
+        PlayingState.player.HelicopterHat = true;
     }
     public override void unequip()
     {
-        //PlayingState.player.HelicopterHat = false;
+        PlayingState.player.HelicopterHat = false;
         base.unequip();
     }
 }
