@@ -179,13 +179,13 @@ public class Floor
             CheckAdjacent(x, y);
             if (AdjacentRooms[x, y] == 1)
             {
-                if (x + 1 < floorWidth && floor[x + 1, y] != null && floor[x + 1, y].RoomListIndex <= 3)
+                if (CheckNeighbours(x, y, true) && floor[x, y - 1].RoomListIndex <= 3)
                     return false;
-                if (x - 1 > 0 && floor[x - 1, y] != null && floor[x - 1, y].RoomListIndex <= 3)
+                if (CheckNeighbours(x, y, false, true) && (floor[x, y + 1].RoomListIndex <= 3))
                     return false;
-                if (y + 1 < floorHeight && floor[x, y + 1] != null && (floor[x, y + 1].RoomListIndex <= 3))
+                if (CheckNeighbours(x, y, false, false, true) && floor[x - 1, y].RoomListIndex <= 3)
                     return false;
-                if (y - 1 > 0 && floor[x, y - 1] != null && floor[x, y - 1].RoomListIndex <= 3)
+                if (CheckNeighbours(x, y, false, false, false, true) && floor[x + 1, y].RoomListIndex <= 3)
                     return false;
                 return true;
             }
@@ -199,7 +199,7 @@ public class Floor
             for (int y = 0; y < floorHeight; y++)
                 if (floor[x, y] != null)
                 {
-                    if (y - 1 >= 0 && floor[x, y - 1] != null)
+                    if (CheckNeighbours(x, y, true))
                         switch (floor[x, y - 1].RoomListIndex)
                         {
                             case (2):
@@ -212,7 +212,7 @@ public class Floor
                                 floor[x, y].updoor = 1;
                                 break;
                         }
-                    if (y + 1 < floorWidth && floor[x, y + 1] != null)
+                    if (CheckNeighbours(x, y, false, true))
                         switch (floor[x, y + 1].RoomListIndex)
                         {
                             case (2):
@@ -225,7 +225,7 @@ public class Floor
                                 floor[x, y].downdoor = 1;
                                 break;
                         }
-                    if (x - 1 >= 0 && floor[x - 1, y] != null)
+                    if (CheckNeighbours(x, y, false, false, true))
                         switch (floor[x - 1, y].RoomListIndex)
                         {
                             case (2):
@@ -238,7 +238,7 @@ public class Floor
                                 floor[x, y].leftdoor = 1;
                                 break;
                         }
-                    if (x + 1 < floorWidth && floor[x + 1, y] != null)
+                    if (CheckNeighbours(x, y, false, false, false, true))
                         switch (floor[x + 1, y].RoomListIndex)
                         {
                             case (2):
@@ -259,22 +259,22 @@ public class Floor
         int RoomSpawnChance = 80;
         int SpawnChanceReduction = 20;
         int neighbours = 0;
-        if (y + 1 < floorHeight && floor[x, y + 1] != null)
+        if (CheckNeighbours(x, y, true))
         {
             RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
-        if (y - 1 >= 0 && floor[x, y - 1] != null)
+        if (CheckNeighbours(x, y, false, true))
         {
             RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
-        if (x + 1 < floorWidth && floor[x + 1, y] != null)
+        if (CheckNeighbours(x, y, false, false, true))
         {
             RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
         }
-        if (x - 1 >= 0 && floor[x - 1, y] != null)
+        if (CheckNeighbours(x, y, false, false, false, true))
         {
             RoomSpawnChance = RoomSpawnChance / SpawnChanceReduction * 10;
             neighbours++;
@@ -374,6 +374,39 @@ public class Floor
         PlayingState.player.Reset();
     }
 
+    bool CheckNeighbours(int x, int y, bool up = false, bool down = false, bool left = false, bool right = false)
+    {
+        int boolcounter = 0;
+        int truecounter = 0;
+        if (up)
+        {
+            boolcounter++;
+            if (y - 1 >= 0 && floor[x, y - 1] != null)
+                truecounter++;
+        }
+        if (down)
+        {
+            boolcounter++;
+            if (y + 1 < floorHeight && floor[x, y + 1] != null)
+                truecounter++;
+        }
+        if (left)
+        {
+            boolcounter++;
+            if (x - 1 >= 0 && floor[x - 1, y] != null)
+                truecounter++;
+        }
+        if (right)
+        {
+            boolcounter++;
+            if (x + 1 < floorWidth && floor[x + 1, y] != null)
+                truecounter++;
+        }
+        if (truecounter == boolcounter)
+            return true;
+        return false;
+    }
+
     public void DrawMinimap(SpriteBatch spriteBatch)
     {
         //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
@@ -392,30 +425,33 @@ public class Floor
             for (int y = 0; y < floorHeight; y++)
             {
                 Vector2 MinimapTilePosition = new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2));
-                if (floor[x, y] != null /*&& floor[x,y].Visited*/)
+                if (floor[x, y] != null)
                 {
-                    switch (floor[x, y].RoomListIndex)
-                    {
-                        case (1):
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapStartTile")), MinimapTilePosition, Color.White);
-                            break;
-                        case (2):
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapBossTile")), MinimapTilePosition, Color.White);
-                            break;
-                        case (3):
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapItemTile")), MinimapTilePosition, Color.White);
-                            break;
-                        default:
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapTile")), MinimapTilePosition, Color.White);
-                            break;
-                    }
+                    if (floor[x,y].Visited)
+                        switch (floor[x, y].RoomListIndex)
+                        {
+                            case (1):
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapStartTile")), MinimapTilePosition, Color.White);
+                                break;
+                            case (2):
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapBossTile")), MinimapTilePosition, Color.White);
+                                break;
+                            case (3):
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapItemTile")), MinimapTilePosition, Color.White);
+                                break;
+                            default:
+                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapTile")), MinimapTilePosition, Color.White);
+                                break;
+                        }
+                    else if ((CheckNeighbours(x, y, true) && floor[x, y - 1].Visited) || (CheckNeighbours(x, y, false, true) && floor[x, y + 1].Visited) 
+                        || (CheckNeighbours(x,y, false, false, true) && floor[x - 1, y].Visited) || (CheckNeighbours(x, y, false, false, false, true) &&  floor[x + 1, y]. Visited))
+                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapUnknownTile")), MinimapTilePosition, Color.White);
                 }
                 if (currentRoom.position == new Vector2(x, y))
                 {
                     spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/CurrentMinimapTile")), MinimapTilePosition, Color.White);
                 }
             }
-        //TODO alleen kamer tekenen op minimap als de speler er is geweest
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
