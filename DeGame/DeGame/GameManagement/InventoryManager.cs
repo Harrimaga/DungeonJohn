@@ -14,14 +14,8 @@ public class InventoryManager
 
     public InventoryManager()
     {
-        currentHelmet = new HardHelmet();
-        currentArmour = new MageJacket();
-        currentBoots = new SlimyBoots();
-        currentWeapon = new BigMac();
-        currentShield = new CrestShield();
+        currentWeapon = new StandardBow();
         currentPassives = new Item[2];
-        currentPassives[0] = new BloodRing();
-        currentPassives[1] = new VialOfPoison();
         items = new List<Item>();
     }
 
