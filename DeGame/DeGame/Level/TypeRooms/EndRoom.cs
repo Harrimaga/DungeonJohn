@@ -41,7 +41,7 @@ class EndRoom : Room
         switch (currentlevel)
         {
             case 1:
-                return "HomingBoss";
+                return "CreamBatBoss";
             case 2:
                 return "MinionBoss";
             case 3:
@@ -79,11 +79,6 @@ class EndRoom : Room
                 BossPosition = new Vector2(2 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight);
                 SpawnPosition1 = new Vector2(BossPosition.X, BossPosition.Y + 5 * CellHeight);
                 SpawnPosition2 = new Vector2(BossPosition.X, BossPosition.Y - 2 * CellHeight);
-                break;
-            case 5:
-                BossPosition = new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight);
-                SpawnPosition1 = new Vector2(BossPosition.X + 6 * CellWidth, BossPosition.Y);
-                SpawnPosition2 = new Vector2(BossPosition.X - 3 * CellWidth, BossPosition.Y);
                 break;
             default:
                 BossPosition = new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight);
