@@ -26,6 +26,6 @@ class Pit : Solid
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitTile"), position);
+        //spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitTile"), position);
     }
 }
