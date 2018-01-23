@@ -6,7 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+/// <summary>
+/// Superclass for all different kinds of slots
+/// Subclass documentation is found in WeaponSlot.cs, InventorySlot.cs and CraftingSlot.cs
+/// </summary>
 public class Slot : SpriteGameObject
 {
     public Texture2D itemSprite;
@@ -18,11 +21,20 @@ public class Slot : SpriteGameObject
         
     }
 
+    /// <summary>
+    /// Update method should be overridden in the subclasses
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         
     }
 
+    /// <summary>
+    /// Draws the item name and description if you hover over the item in the pause menu
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         if (hover && item != null && GameEnvironment.gameStateManager.currentGameState == GameEnvironment.gameStateManager.GetGameState("PauseMenu")) 
@@ -32,6 +44,11 @@ public class Slot : SpriteGameObject
         }
     }
 
+    /// <summary>
+    /// Handles the unequipping of items, and checks if the mouse is hovering over the slot
+    /// </summary>
+    /// <param name="inputHelper"></param>
+    /// <param name="gameTime"></param>
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition))
@@ -40,6 +57,9 @@ public class Slot : SpriteGameObject
             {
                 switch (id)
                 {
+                    // Finds out what kind of slot this is and
+                    // calls the unequip (changes player stats)
+                    // and unequips the item
                     case "ArmourSlot":
                         Player.inventory.currentArmour.unequip();
                         Player.inventory.addItemToInventory(Player.inventory.currentArmour);

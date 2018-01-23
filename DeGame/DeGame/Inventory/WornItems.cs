@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
+/// <summary>
+/// Class that is used to draw the worn item slots
+/// </summary>
 public class WornItems : GameObjectList
 {
     public WeaponSlot weaponSlot;
@@ -44,6 +47,9 @@ public class WornItems : GameObjectList
         base.Update(gameTime);
     }
 
+    /// <summary>
+    /// Gets the position of the block, and sets the individual slots their position, if the main position is set
+    /// </summary>
     public override Vector2 Position
     {
         get
@@ -63,6 +69,11 @@ public class WornItems : GameObjectList
         }
     }
 
+    /// <summary>
+    /// Handles the input for each individual slot
+    /// </summary>
+    /// <param name="inputHelper"></param>
+    /// <param name="gameTime"></param>
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         weaponSlot.HandleInput(inputHelper, gameTime);

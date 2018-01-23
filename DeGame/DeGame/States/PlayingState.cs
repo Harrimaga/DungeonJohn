@@ -49,7 +49,7 @@ public class PlayingState : IGameObject
     public virtual void Update(GameTime gameTime)
     {
         player.Update(gameTime);
-        Console.WriteLine(player.position.ToString());
+        //Console.WriteLine(player.position.ToString());
         floor.Update(gameTime);
         //enemy.Update(gameTime);
         if (player.health <= 0)
