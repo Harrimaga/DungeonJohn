@@ -75,7 +75,7 @@ class E_Bullet : SpriteGameObject
 
         foreach (Solid solid in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
         {
-            if (CollidesWith(solid))
+            if (CollidesWith(solid) && solid.hittable)
             {
                 GameObjectList.RemovedObjects.Add(this);
                 return;

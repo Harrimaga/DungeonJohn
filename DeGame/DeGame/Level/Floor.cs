@@ -44,10 +44,12 @@ public class Floor
         DoorCheck();
         FloorGenerated = false;
     }
+
     int RandomRoom()
     {
         return random.Next(11) + 5;
     }
+
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
         if (CurrentRooms < RoomAmount)

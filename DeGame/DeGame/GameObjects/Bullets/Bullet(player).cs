@@ -72,7 +72,7 @@ class Bullet : SpriteGameObject
                 GameObjectList.RemovedObjects.Add(this);
 
         foreach (Solid solid in PlayingState.currentFloor.currentRoom.solid.Children)
-            if (CollidesWith(solid))
+            if (CollidesWith(solid) && solid.hittable)
                 GameObjectList.RemovedObjects.Add(this);
     }
 

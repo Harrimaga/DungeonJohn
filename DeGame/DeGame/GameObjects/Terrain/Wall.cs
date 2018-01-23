@@ -14,9 +14,7 @@ class Wall : Solid
     {
         position = startPosition;
         Rectangle newBoundingBox = new Rectangle((int)startPosition.X, (int)startPosition.Y, GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite").Width, GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite").Height);
-        //BoundingBox = newBoundingBox;
     }
-
 
     public override void Update(GameTime gameTime)
     {

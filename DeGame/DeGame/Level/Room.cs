@@ -437,7 +437,7 @@ public class Room : GameObjectList
                 break;
             case ("O"):
                 Pit pit = new Pit(TilePosition, 0, "Pit");
-                tiles.Add(pit);
+                solid.Add(pit);
                 roomarray[x, y] = "Background";
                 break;
             case ("-"):
