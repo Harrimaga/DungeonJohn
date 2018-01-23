@@ -22,6 +22,10 @@ class Rock : Solid
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        if(!PlayingState.player.HelicopterHat)
+        {
+            SolidCollision();
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
