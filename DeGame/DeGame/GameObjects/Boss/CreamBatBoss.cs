@@ -33,7 +33,7 @@ class CreamBatBoss : Boss
         base.Update(gameTime);
         
         shootcounter1--;
-        BossBox = new Rectangle((int)position.X - 61, (int)position.Y - 61, sprite.Width + 122, sprite.Height + 122);
+        //BossBox = new Rectangle((int)position.X - 61, (int)position.Y - 61, sprite.Width + 122, sprite.Height + 122);
         SolidCollision();
 
         if (Stage == 1)
