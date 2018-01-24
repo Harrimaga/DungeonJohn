@@ -30,7 +30,7 @@ public class SpamEnemy : Enemy
             BulletCounter++;
             Counter = 20;
         }
-        if (BulletCounter == 30)
+        if (BulletCounter == 20)
         {
             BulletCounter = 0;
             Counter = 100;
