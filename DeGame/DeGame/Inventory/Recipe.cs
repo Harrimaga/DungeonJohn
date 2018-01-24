@@ -25,6 +25,10 @@ class Recipe
         list1.Add(new StandardBow());
         list2.Add(new Mac10());
         listNewItem.Add(new DoubleGun());
+
+        list1.Add(new HardHelmet());
+        list2.Add(new HardHelmet());
+        listNewItem.Add(new PowerHelmet());
     }
 }
 
