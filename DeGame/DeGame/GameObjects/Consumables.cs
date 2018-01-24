@@ -40,8 +40,11 @@ class Consumables : SpriteGameObject
                     }
                     break;
                 case "ammo":
-                    PlayingState.player.ammo += 25;
-                    GameObjectList.RemovedObjects.Add(this);
+                    if (PlayingState.player.ammo >= 0)
+                    {
+                        PlayingState.player.ammo += 25;
+                        GameObjectList.RemovedObjects.Add(this);
+                    }
                     break;
                 case "gold":
                     PlayingState.player.gold += 5;
