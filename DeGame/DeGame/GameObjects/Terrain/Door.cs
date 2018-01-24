@@ -6,6 +6,7 @@ class Door : Solid
     bool onup = false, ondown = false, onleft = false, onright = false, closed = false;
     SpriteEffects Effect = SpriteEffects.None;
     Texture2D doorsprite;
+    Rectangle doorhitbox;
     int DoorNumber;
     int direction, counter = 0;
     int CellWidth = PlayingState.currentFloor.currentRoom.CellWidth;
@@ -16,9 +17,25 @@ class Door : Solid
     public Door(int doornumber, Vector2 Startposition, int Direction, int layer = 0, string id = "door")
     : base(Startposition, layer, id)
     {
+        doorhitbox = new Rectangle(BoundingBox.Left, BoundingBox.Top, BoundingBox.Width, BoundingBox.Height);
         position = Startposition;
         direction = Direction;
         DoorNumber = doornumber;
+        switch (direction)
+        {
+            case 1:
+                doorhitbox = new Rectangle(BoundingBox.Left, BoundingBox.Top, BoundingBox.Width, BoundingBox.Height - 20);
+                break;
+            case 2:
+                doorhitbox = new Rectangle(BoundingBox.Left, BoundingBox.Top + 20, BoundingBox.Width, BoundingBox.Height - 20);
+                break;               
+            case 3:
+                doorhitbox = new Rectangle(BoundingBox.Left, BoundingBox.Top, BoundingBox.Width - 30, BoundingBox.Height);
+                break;                
+            case 4:
+                doorhitbox = new Rectangle(BoundingBox.Left + 30, BoundingBox.Top, BoundingBox.Width - 20, BoundingBox.Height);
+                break;
+        }
     }
 
     void ChooseSprite()
@@ -122,7 +139,7 @@ class Door : Solid
     void ControlCamera()
     {
         Vector2 Cam = Camera.Position;
-        if (PlayingState.currentFloor.currentRoom.enemycounter == 0 && CollidesWith(PlayingState.player) && PlayingState.currentFloor.doortimer == 0)
+        if (PlayingState.currentFloor.currentRoom.enemycounter == 0 && doorhitbox.Intersects(PlayingState.player.collisionhitbox) && PlayingState.currentFloor.doortimer == 0)
             switch (direction)
             {
                 case (1):

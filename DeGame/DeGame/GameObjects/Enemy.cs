@@ -152,6 +152,20 @@ public class Enemy : SpriteGameObject
                     position.Y++;
             }
         }
+        foreach (Door d in Room.door.Children)
+        {
+            while (CollidesWith(d))
+            {
+                if (actualvelocity.X > 0)
+                    position.X--;
+                if (actualvelocity.X < 0)
+                    position.X++;
+                if (actualvelocity.Y > 0)
+                    position.Y--;
+                if (actualvelocity.Y < 0)
+                    position.Y++;
+            }
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
