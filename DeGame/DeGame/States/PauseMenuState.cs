@@ -31,7 +31,7 @@ class PauseMenuState : IGameObject
         wornItems.HandleInput(inputHelper, gameTime);
         try
         {
-            foreach (InventorySlot slot in inventory)
+            foreach (InventorySlot slot in oldInventory)
             {
                 slot.HandleInput(inputHelper, gameTime);
             }
@@ -70,7 +70,7 @@ class PauseMenuState : IGameObject
 
         try
         {
-            foreach (InventorySlot slot in inventory)
+            foreach (InventorySlot slot in oldInventory)
             {
                 slot.Update(gameTime);
             }
@@ -113,7 +113,7 @@ class PauseMenuState : IGameObject
             inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
         }
 
-        if (oldInventory != inventory)
+        if (!checkInventories(inventory, oldInventory))
         {
             oldInventory = inventory;
         }
@@ -122,5 +122,23 @@ class PauseMenuState : IGameObject
         {
             slot.Draw(gameTime, spriteBatch);
         }
+    }
+
+    bool checkInventories(List<InventorySlot> inventory, List<InventorySlot> oldInventory)
+    {
+        if (inventory.Count != oldInventory.Count)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < oldInventory.Count; i++)
+        {
+            if (inventory[i].item != oldInventory[i].item)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
