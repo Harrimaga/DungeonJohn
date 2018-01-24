@@ -20,14 +20,14 @@ public class StandardBow : Item, IWeapon
     {
         melee = false;
         twoHanded = true;
-        addedDamage = 50;
-        projectile_velocity = 0.67f;
-        attackspeed = 50;
-        range = 800;
+        addedDamage = 40;
+        projectile_velocity = 0.5f;
+        attackspeed = 4;
+        range = 400;
         ammo = -1;
         Type = "weapon";
         itemName = "StandardBow";
-        itemDescription = "Basic weapon with infinte ammo and suck damage.";
+        itemDescription = "Basic weapon with infinte ammo";
         bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/StandardBow_BulletLeft");
         bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/StandardBow_BulletUp");
     }
