@@ -56,6 +56,15 @@ class Bullet : SpriteGameObject
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
         if (counter + weapon.Projectile_Velocity * gameTime.ElapsedGameTime.Milliseconds >= weapon.Range)
         {
+            if (direction == 1)
+                position.Y -= weapon.Range - counter;
+            if (direction == 2)
+                position.Y += weapon.Range - counter;
+            if (direction == 3)
+                position.X -= weapon.Range - counter;
+            if (direction == 4)
+                position.X += weapon.Range - counter;
+
             GameObjectList.RemovedObjects.Add(this);
         }
         else
