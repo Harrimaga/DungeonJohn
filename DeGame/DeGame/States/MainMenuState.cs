@@ -28,6 +28,7 @@ class MainMenuState : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/DungeonJohn"), new Vector2(-350, -445));
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/NewBTeam"), new Vector2(-300, -350));
         start.Draw(gameTime, spriteBatch);
         option.Draw(gameTime, spriteBatch);
