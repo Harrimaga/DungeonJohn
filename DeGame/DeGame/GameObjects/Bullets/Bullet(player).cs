@@ -78,13 +78,17 @@ class Bullet : SpriteGameObject
     }
     public void CheckCollision()
     {
-        foreach (Door door in PlayingState.currentFloor.currentRoom.Children)
-            if (CollidesWith(door))
-                GameObjectList.RemovedObjects.Add(this);
-
         foreach (Solid solid in PlayingState.currentFloor.currentRoom.solid.Children)
             if (CollidesWith(solid) && solid.hittable)
                 GameObjectList.RemovedObjects.Add(this);
+        foreach (Door door in Room.door.Children)
+        {
+            if (CollidesWith(door))
+            {
+                GameObjectList.RemovedObjects.Add(this);
+                return;
+            }
+        }
     }
 
     // Draw the bullets
