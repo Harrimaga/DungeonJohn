@@ -69,7 +69,7 @@ class CreamBatBoss : Boss
             }
             else
             {
-                velocity = new Vector2(0.26f, 0.26f);
+                velocity = new Vector2(0.20f, 0.20f);
             }
             Shoot(); 
             BossChase(gameTime);
