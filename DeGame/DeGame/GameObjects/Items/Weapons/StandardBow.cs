@@ -23,7 +23,7 @@ public class StandardBow : Item, IWeapon
         addedDamage = 50;
         projectile_velocity = 0.67f;
         attackspeed = 50;
-        range = 800;
+        range = 650;
         ammo = -1;
         Type = "weapon";
         itemName = "StandardBow";
