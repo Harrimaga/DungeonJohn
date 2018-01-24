@@ -4,7 +4,7 @@ using System;
 
 public class RangedEnemy : Enemy
 {
-    int Counter = 300;
+    int Counter = 175;
     float bulletdamage;
     float speed = 0.13f;
     Vector2 direction;
@@ -13,7 +13,7 @@ public class RangedEnemy : Enemy
     {
         position = startPosition;
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
-        velocity = new Vector2(0.03f, 0.03f);
+        velocity = new Vector2(0.05f, 0.05f);
         bulletdamage = 3 * statmultiplier;
         health = 100 * statmultiplier;
         maxhealth = 100 * statmultiplier;
@@ -28,7 +28,7 @@ public class RangedEnemy : Enemy
         {
             Chase();
         }
-        if(Counter >= 300)
+        if(Counter >= 175)
         {
             Shoot();
             Counter = 0;
