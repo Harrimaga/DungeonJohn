@@ -27,7 +27,7 @@ public class Slot : SpriteGameObject
     /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
-        
+         
     }
 
     /// <summary>
