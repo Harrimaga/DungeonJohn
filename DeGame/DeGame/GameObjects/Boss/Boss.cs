@@ -8,9 +8,6 @@ public class Boss :  SpriteGameObject
     protected float maxhealth, statmultiplier;
     public float health;
     protected int expGive, LevelofBoss, poisoncounter = 0;
-    //protected float attack;
-    //protected float attackspeed;
-    //protected float range;
     protected Vector2 basevelocity = new Vector2((float)0.5, (float)0.5);
     public Vector2 PlayerOrigin;
     public Texture2D playersprite;
@@ -33,7 +30,7 @@ public class Boss :  SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        healthbar.Update(gameTime, health, maxhealth, new Vector2(Roomposition.X * PlayingState.currentFloor.currentRoom.roomwidth, Roomposition.Y * PlayingState.currentFloor.currentRoom.roomheight)); //<---
+        healthbar.Update(gameTime, health, maxhealth, new Vector2(Roomposition.X * PlayingState.currentFloor.currentRoom.roomwidth, Roomposition.Y * PlayingState.currentFloor.currentRoom.roomheight));
 
         List<GameObject> RemoveBullets = new List<GameObject>();
 

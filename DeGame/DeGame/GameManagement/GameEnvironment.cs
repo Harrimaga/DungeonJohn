@@ -38,7 +38,8 @@ public class GameEnvironment : Game
         IsMouseVisible = true;
         startup = true;
 
-        //ApplyResolutionSettings();
+
+        ApplyResolutionSettings();
     }
     
     protected override void LoadContent()
