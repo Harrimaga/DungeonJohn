@@ -47,7 +47,7 @@ public class Floor
 
     int RandomRoom()
     {
-        return random.Next(16) + 5;
+        return random.Next(18) + 5;
     }
 
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)

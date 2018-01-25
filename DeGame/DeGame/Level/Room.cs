@@ -123,6 +123,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "ChasingEnemy";
                 CreateObject(x, y, "C");
                 break;
+            case '2':
+                roomarray[x, y] = "TwoPartEnemy";
+                CreateObject(x, y, "2");
+                break;
             case 'R':
                 roomarray[x, y] = "RangedEnemy";
                 CreateObject(x, y, "R");
@@ -333,6 +337,12 @@ public class Room : GameObjectList
             case ("R"):
                 Enemy enemyRanged = new RangedEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "RangedEnemy");
                 enemies.Add(enemyRanged);
+                roomarray[x, y] = "Background";
+                enemycounter++;
+                break;
+            case ("2"):
+                Enemy TwoPartEnemy = new TwoPartEnemy(TilePosition, new Vector2(a, b), enemylevel, 0, "TwoPartEnemy");
+                enemies.Add(TwoPartEnemy);
                 roomarray[x, y] = "Background";
                 enemycounter++;
                 break;
