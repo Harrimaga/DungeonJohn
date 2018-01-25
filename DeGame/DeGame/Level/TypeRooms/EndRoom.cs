@@ -89,7 +89,7 @@ class EndRoom : Room
         switch (boss)
         {
             case ("HomingBoss"):
-                HomingBoss Homingboss = new HomingBoss(new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a, b));
+                HomingBoss Homingboss = new HomingBoss(new Vector2(8 * CellWidth + a * roomwidth - 3, 6 * CellHeight + b * roomheight - 50), new Vector2(a, b));
                 bosses.Add(Homingboss);
                 break;
             case ("MinionBoss"):
@@ -101,7 +101,7 @@ class EndRoom : Room
                 enemies.Add(factory2);
                 break;
             case ("HomingBoss2"):
-                HomingBoss Homingboss2 = new HomingBoss(new Vector2(8 * CellWidth + a * roomwidth, 6 * CellHeight + b * roomheight), new Vector2(a, b), 10);
+                HomingBoss Homingboss2 = new HomingBoss(new Vector2(8 * CellWidth + a * roomwidth - 3, 6 * CellHeight + b * roomheight - 50), new Vector2(a, b), 10);
                 bosses.Add(Homingboss2);
                 break;
             case ("MinionBoss2"):
