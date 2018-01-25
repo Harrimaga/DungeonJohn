@@ -10,7 +10,7 @@ public class BigMac : Item, IWeapon
 {
     bool melee, twoHanded;
     float addedDamage, projectile_velocity, attackspeed, range;
-    int ammo;
+    int ammo, maxammo;
     Texture2D bulletleft, bulletup;
 
     public BigMac()
@@ -22,7 +22,8 @@ public class BigMac : Item, IWeapon
         projectile_velocity = 0.7f;
         attackspeed = 0.5f;
         range = 2500;
-        ammo = 300;
+        maxammo = 300;
+        ammo = maxammo;
         Type = "weapon";
         itemName = "BigMac";
         itemDescription = "I'm lovin' it";
@@ -114,5 +115,12 @@ public class BigMac : Item, IWeapon
         }
     }
 
+    public int MaxAmmo
+    {
+        get
+        {
+            return maxammo;
+        }
+    }
 }
 

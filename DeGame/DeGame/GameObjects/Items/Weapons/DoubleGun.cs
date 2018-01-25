@@ -10,7 +10,7 @@ public class DoubleGun : Item, IWeapon
 {
     bool melee, twoHanded;
     float addedDamage, projectile_velocity, attackspeed, range;
-    int ammo;
+    int ammo, maxammo;
     Texture2D bulletleft, bulletup;
 
     public DoubleGun()
@@ -22,7 +22,8 @@ public class DoubleGun : Item, IWeapon
         projectile_velocity = 0.7f;
         attackspeed = 3.6f;
         range = 450;
-        ammo = 200;
+        maxammo = 200;
+        ammo = maxammo;
         Type = "weapon";
         itemName = "DoubleGun";
         itemDescription = "What is better than 1 gun? 2 guns!!";
@@ -132,5 +133,12 @@ public class DoubleGun : Item, IWeapon
         }
     }
 
+    public int MaxAmmo
+    {
+        get
+        {
+            return maxammo;
+        }
+    }
 }
 

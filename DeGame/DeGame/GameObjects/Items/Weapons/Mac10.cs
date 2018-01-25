@@ -10,7 +10,7 @@ public class Mac10 : Item, IWeapon
 {
     bool melee, twoHanded;
     float addedDamage, projectile_velocity, attackspeed, range;
-    int ammo;
+    int ammo, maxammo;
     Texture2D bulletleft, bulletup;
 
     public Mac10()
@@ -22,7 +22,8 @@ public class Mac10 : Item, IWeapon
         projectile_velocity = 0.8f;
         attackspeed = 0.3f;
         range = 250;
-        ammo = 200;
+        maxammo = 200;
+        ammo = maxammo;
         Type = "weapon";
         itemName = "Mac10";
         itemDescription = "You ought to know this weapon by now.";
@@ -114,4 +115,11 @@ public class Mac10 : Item, IWeapon
         }
     }
 
+    public int MaxAmmo
+    {
+        get
+        {
+            return maxammo;
+        }
+    }
 }

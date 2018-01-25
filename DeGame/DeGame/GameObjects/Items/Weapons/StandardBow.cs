@@ -13,7 +13,7 @@ public class StandardBow : Item, IWeapon
 {
     bool melee, twoHanded;
     float addedDamage, projectile_velocity, attackspeed, range;
-    int ammo;
+    int ammo, maxammo;
     Texture2D bulletleft, bulletup;
 
     public StandardBow()
@@ -24,7 +24,8 @@ public class StandardBow : Item, IWeapon
         projectile_velocity = 0.5f;
         attackspeed = 4;
         range = 400;
-        ammo = -1;
+        maxammo = -1;
+        ammo = maxammo;
         Type = "weapon";
         itemName = "StandardBow";
         itemDescription = "Basic weapon with infinte ammo";
@@ -158,4 +159,14 @@ public class StandardBow : Item, IWeapon
         }
     }
 
+    /// <summary>
+    /// Gets the maximum amount of ammo the player may carry for this weapon
+    /// </summary>
+    public int MaxAmmo
+    {
+        get
+        {
+            return maxammo;
+        }
+    }
 }

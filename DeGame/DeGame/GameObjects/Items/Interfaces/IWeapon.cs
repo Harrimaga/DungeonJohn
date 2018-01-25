@@ -58,6 +58,11 @@ public interface IWeapon
         get;
     }
 
+    int MaxAmmo
+    {
+        get;
+    }
+
     void Attack(int direction);
 }
 

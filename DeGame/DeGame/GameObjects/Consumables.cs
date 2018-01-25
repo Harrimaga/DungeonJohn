@@ -40,9 +40,12 @@ class Consumables : SpriteGameObject
                     }
                     break;
                 case "ammo":
-                    if (PlayingState.player.ammo >= 0)
+                    IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
+                    if (PlayingState.player.ammo >= 0 && weapon!= null && PlayingState.player.ammo < weapon.MaxAmmo)
                     {
                         PlayingState.player.ammo += 25;
+                        if (PlayingState.player.ammo > weapon.MaxAmmo)
+                            PlayingState.player.ammo = weapon.MaxAmmo;
                         GameObjectList.RemovedObjects.Add(this);
                     }
                     break;
