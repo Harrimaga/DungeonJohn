@@ -18,10 +18,10 @@ public class BigMac : Item, IWeapon
         Cost = 15;
         melee = false;
         twoHanded = true;
-        addedDamage = 40;
-        projectile_velocity = 1;
-        attackspeed = 10;
-        range = 700;
+        addedDamage = 450;
+        projectile_velocity = 0.7f;
+        attackspeed = 0.5f;
+        range = 2500;
         ammo = 300;
         Type = "weapon";
         itemName = "BigMac";

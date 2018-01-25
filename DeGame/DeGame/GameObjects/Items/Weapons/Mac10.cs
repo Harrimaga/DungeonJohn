@@ -18,9 +18,9 @@ public class Mac10 : Item, IWeapon
         Cost = 7;
         melee = false;
         twoHanded = false;
-        addedDamage = 8;
+        addedDamage = 10;
         projectile_velocity = 0.8f;
-        attackspeed = 8;
+        attackspeed = 0.3f;
         range = 250;
         ammo = 200;
         Type = "weapon";

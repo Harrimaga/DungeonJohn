@@ -6,23 +6,27 @@ public class HomingBoss : Boss
 {
     BossBullet bullet1, bullet2, bullet3;
     GameObjectList Bullets, HomingBullets;
-    Vector2 Roomposition;
+    Vector2 Roomposition, moving, MoveDirection;
     Texture2D bulletsprite;
     int Counter = 30;
+    int MoveTimer = 0;
     float speed = 0.3f;
     float bulletdamage;
+
     public HomingBoss(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Boss") : base(startPosition, roomposition, "Sprites/Enemies/CowboyBoss",Difficulty , layer, id)
     {
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet");
         Bullets = new GameObjectList();
         HomingBullets = new GameObjectList();
-        velocity = new Vector2(0.07f, 0.07f);
+        velocity = new Vector2(0.01f, 0.01f);
         velocity.Normalize();
         Roomposition = roomposition;
         expGive = (int)(240 * statmultiplier);
         maxhealth = 600 * statmultiplier;
         bulletdamage = 0 * statmultiplier;
         health = maxhealth;
+        MoveDirection = Vector2.Zero;
+        MoveDirection.Normalize();
     }
 
     public override void Update(GameTime gameTime)
@@ -33,6 +37,8 @@ public class HomingBoss : Boss
         if (PlayingState.currentFloor.currentRoom.position == Roomposition && alive == true)
         {
             Shoot();
+            Move(gameTime);
+            velocity = new Vector2(0.01f, 0.01f);
         }
         FinalStage();
     }
@@ -73,6 +79,21 @@ public class HomingBoss : Boss
                 Counter = 100;
             }
         }
+    }
+
+    public void Move(GameTime gameTime)
+    {
+        MoveTimer++;
+        if (MoveTimer < 30)
+            MoveDirection = new Vector2(0, -1);
+        else if (MoveTimer <= 90 && MoveTimer > 30)
+            MoveDirection = new Vector2(0, 1);
+        else if (MoveTimer <= 120 && MoveTimer > 90)
+            MoveDirection = new Vector2(0, -1);
+        else if (MoveTimer > 120)
+            MoveTimer = 0;
+        moving = MoveDirection * velocity;
+        position += moving * gameTime.ElapsedGameTime.Milliseconds;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

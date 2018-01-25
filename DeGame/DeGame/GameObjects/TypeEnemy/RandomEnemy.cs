@@ -28,14 +28,14 @@ public class RandomEnemy : Enemy
         if (Counter <= 0)
         {
             Vector2 bulletPosition = new Vector2(sprite.Width / 2, 50);
-            EnemyBullet bullet1 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(0, -1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
-            EnemyBullet bullet2 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(1, -1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
-            EnemyBullet bullet3 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(1, 0), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
-            EnemyBullet bullet4 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(1, 1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
-            EnemyBullet bullet5 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(0, 1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
-            EnemyBullet bullet6 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(-1, 1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
-            EnemyBullet bullet7 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(-1, 0), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
-            EnemyBullet bullet8 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(-1, -1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
+            EnemyBullet bullet1 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(0.5f, -1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
+            EnemyBullet bullet2 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(1, -0.5f), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
+            EnemyBullet bullet3 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(1, 0.5f), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
+            EnemyBullet bullet4 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(0.5f, 1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
+            EnemyBullet bullet5 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(-0.5f, 1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
+            EnemyBullet bullet6 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(-1, 0.5f), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
+            EnemyBullet bullet7 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(-1f, -0.5f), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
+            EnemyBullet bullet8 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(-0.5f, -1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet1);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet2);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet3);
@@ -57,7 +57,7 @@ public class RandomEnemy : Enemy
             Shoot();
             Chase();
         }
-
+        CheckAlive();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

@@ -177,19 +177,19 @@ public class Player : SpriteGameObject
             // Player shooting
             if (inputHelper.IsKeyDown(Keys.Up) || inputHelper.getThumpDirection("right") == "up")
             {
-                Shoot(1);
+                Shoot(1, gameTime);
             }
             else if (inputHelper.IsKeyDown(Keys.Down) || inputHelper.getThumpDirection("right") == "down")
             {
-                Shoot(2);
+                Shoot(2, gameTime);
             }
             else if (inputHelper.IsKeyDown(Keys.Left) || inputHelper.getThumpDirection("right") == "left")
             {
-                Shoot(3);
+                Shoot(3, gameTime);
             }
             else if (inputHelper.IsKeyDown(Keys.Right) || inputHelper.getThumpDirection("right") == "right")
             {
-                Shoot(4);
+                Shoot(4, gameTime);
             }
         }
         if (leveltokens > 0 && (inputHelper.KeyPressed(Keys.O) || inputHelper.ButtonPressed(Buttons.RightTrigger)))
@@ -255,7 +255,7 @@ public class Player : SpriteGameObject
         }
     }
 
-    public void Shoot(int direction)
+    public void Shoot(int direction, GameTime gametime)
     {
         if (shoottimer == 0)
         {
@@ -267,7 +267,7 @@ public class Player : SpriteGameObject
                 {
                     ammo--;
                 }
-                shoottimer += (float)(weapon.AttackSpeed * attackspeedreduction);
+                shoottimer += (float)(weapon.AttackSpeed * attackspeedreduction * gametime.ElapsedGameTime.Milliseconds);
             }
         }
     }

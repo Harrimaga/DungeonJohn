@@ -19,6 +19,7 @@ public class PlayingState : IGameObject
         floor = new Floor();
         currentFloor = floor;
         GameEnvironment.gameStateManager.LastState = "playing";
+        Player.inventory.currentWeapon = new BigMac();
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {

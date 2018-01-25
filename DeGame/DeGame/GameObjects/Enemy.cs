@@ -46,7 +46,7 @@ public class Enemy : SpriteGameObject
         base.Update(gameTime);
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         healthbar.Update(gameTime, health, maxhealth, position);
-
+        PlayerCollision();
         if (!flying)
             SolidCollision();
 
@@ -70,7 +70,7 @@ public class Enemy : SpriteGameObject
         foreach (Bullet bullet in RemoveBullets)        
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
-        CheckAlive();
+        //CheckAlive();
 
         if (poisoncounter > 0)
         {
@@ -83,7 +83,7 @@ public class Enemy : SpriteGameObject
             color = Color.White;
     }
 
-    void CheckAlive()
+    public void CheckAlive()
     {
         if ((int)health <= 0 && alive == true && killable || (bossenemy && EndRoom.cleared))
         {
@@ -166,6 +166,45 @@ public class Enemy : SpriteGameObject
                     position.Y++;
             }
         }
+    }
+
+    protected void PlayerCollision()
+    {
+        if (CollidesWith(PlayingState.player))
+        {
+            velocity = Vector2.Zero;
+            counter--;
+            if (counter == 0)
+            {
+
+                PlayingState.player.health -= 10;
+                counter = 100;
+            }
+        }
+        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Top)))
+            while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
+            {
+                PlayingState.player.position.Y++;
+                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+            }
+        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Bottom)))
+            while (CollidesWith(PlayingState.player))
+            {
+                PlayingState.player.position.Y--;
+                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+            }
+        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Left, PlayingState.player.collisionhitbox.Center.Y)))
+            while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
+            {
+                PlayingState.player.position.X++;
+                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+            }
+        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Right, PlayingState.player.collisionhitbox.Center.Y)))
+            while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
+            {
+                PlayingState.player.position.X--;
+                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
+            }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
