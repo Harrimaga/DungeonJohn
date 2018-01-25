@@ -54,12 +54,21 @@ class Bullet : SpriteGameObject
     {
         base.Update(gameTime);
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
-        if (counter + weapon.Projectile_Velocity >= weapon.Range)
+        if (counter + weapon.Projectile_Velocity * gameTime.ElapsedGameTime.Milliseconds >= weapon.Range)
         {
+            if (direction == 1)
+                position.Y -= weapon.Range - counter;
+            if (direction == 2)
+                position.Y += weapon.Range - counter;
+            if (direction == 3)
+                position.X -= weapon.Range - counter;
+            if (direction == 4)
+                position.X += weapon.Range - counter;
+
             GameObjectList.RemovedObjects.Add(this);
         }
         else
-            counter += weapon.Projectile_Velocity;
+            counter += weapon.Projectile_Velocity * gameTime.ElapsedGameTime.Milliseconds;
         position.X += velocity.X * gameTime.ElapsedGameTime.Milliseconds;
         position.Y += velocity.Y * gameTime.ElapsedGameTime.Milliseconds;
         CheckCollision();
@@ -78,13 +87,17 @@ class Bullet : SpriteGameObject
     }
     public void CheckCollision()
     {
-        foreach (Door door in PlayingState.currentFloor.currentRoom.Children)
-            if (CollidesWith(door))
-                GameObjectList.RemovedObjects.Add(this);
-
         foreach (Solid solid in PlayingState.currentFloor.currentRoom.solid.Children)
             if (CollidesWith(solid) && solid.hittable)
                 GameObjectList.RemovedObjects.Add(this);
+        foreach (Door door in Room.door.Children)
+        {
+            if (CollidesWith(door))
+            {
+                GameObjectList.RemovedObjects.Add(this);
+                return;
+            }
+        }
     }
 
     // Draw the bullets

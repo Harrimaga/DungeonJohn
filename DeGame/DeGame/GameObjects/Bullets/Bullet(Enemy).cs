@@ -81,6 +81,15 @@ class E_Bullet : SpriteGameObject
                 return;
             }
         }
+
+        foreach (Door door in Room.door.Children)
+        {
+            if (CollidesWith(door))
+            {
+                GameObjectList.RemovedObjects.Add(this);
+                return;
+            }
+        }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

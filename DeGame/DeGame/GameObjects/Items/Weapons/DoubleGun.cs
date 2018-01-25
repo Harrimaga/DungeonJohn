@@ -18,10 +18,10 @@ public class DoubleGun : Item, IWeapon
         Cost = 9;
         melee = false;
         twoHanded = false;
-        addedDamage = 30;
-        projectile_velocity = 0.8f;
-        attackspeed = 30;
-        range = 800;
+        addedDamage = 35;
+        projectile_velocity = 0.7f;
+        attackspeed = 3.6f;
+        range = 450;
         ammo = 200;
         Type = "weapon";
         itemName = "DoubleGun";

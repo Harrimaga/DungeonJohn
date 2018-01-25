@@ -11,8 +11,6 @@ public class SpriteGameObject : GameObject
 {
     protected Vector2 origin;
     public bool PerPixelCollisionDetection = true;
-    //public float UsesCameraX = 1;
-    //public float UsesCameraY = 1;
     public bool Die;
     protected Texture2D sprite;
 

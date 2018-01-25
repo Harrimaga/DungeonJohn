@@ -6,7 +6,7 @@ using System;
 
 
 public class GameEnvironment : Game
-    {
+{
     protected GraphicsDeviceManager graphics;
     protected SpriteBatch spriteBatch;
     public InputHelper inputHelper;
@@ -40,7 +40,7 @@ public class GameEnvironment : Game
 
         //ApplyResolutionSettings();
     }
-    
+
     protected override void LoadContent()
     {
         //DrawingHelper.Initialize(this.GraphicsDevice);
@@ -96,7 +96,7 @@ public class GameEnvironment : Game
             graphics.ApplyChanges();
         }
 
-        float targetAspectRatio = (float) WindowSize.X / (float) WindowSize.Y;
+        float targetAspectRatio = (float)WindowSize.X / (float)WindowSize.Y;
         int width = graphics.PreferredBackBufferWidth;
         int height = (int)(width / targetAspectRatio);
         if (height > graphics.PreferredBackBufferHeight)
@@ -112,8 +112,8 @@ public class GameEnvironment : Game
         viewport.Height = height;
         GraphicsDevice.Viewport = viewport;
 
-        inputHelper.Scale = new Vector2((float) GraphicsDevice.Viewport.Width / Dimensions.X,
-                                        (float) GraphicsDevice.Viewport.Height / Dimensions.Y);
+        inputHelper.Scale = new Vector2((float)GraphicsDevice.Viewport.Width / Dimensions.X,
+                                        (float)GraphicsDevice.Viewport.Height / Dimensions.Y);
         inputHelper.Offset = new Vector2(viewport.X, viewport.Y);
         spriteScale = Matrix.CreateScale(inputHelper.Scale.X, inputHelper.Scale.Y, 1);
 
