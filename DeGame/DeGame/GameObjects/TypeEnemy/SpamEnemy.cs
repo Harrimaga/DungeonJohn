@@ -51,6 +51,7 @@ public class SpamEnemy : Enemy
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Range();
+        CheckAlive();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
