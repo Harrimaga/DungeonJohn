@@ -38,7 +38,7 @@ public class BigMac : Item, IWeapon
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), direction);
+        Bullet bullet = new Bullet(PlayingState.player.position, direction);
         PlayingState.player.bullets.Add(bullet);
     }
 

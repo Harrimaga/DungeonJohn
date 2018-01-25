@@ -42,19 +42,19 @@ public class DoubleGun : Item, IWeapon
         Bullet bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), direction);
         if (direction == 1)
         {
-            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), 2);
+            bulletBack = new Bullet(PlayingState.player.position, 2);
         }
         if (direction == 2)
         {
-            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), 1);
+            bulletBack = new Bullet(PlayingState.player.position, 1);
         }
         if (direction == 3)
         {
-            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), 4);
+            bulletBack = new Bullet(PlayingState.player.position, 4);
         }
         if (direction == 4)
         {
-            bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), 3);
+            bulletBack = new Bullet(PlayingState.player.position, 3);
         }
         PlayingState.player.bullets.Add(bullet);
         PlayingState.player.bullets.Add(bulletBack);
