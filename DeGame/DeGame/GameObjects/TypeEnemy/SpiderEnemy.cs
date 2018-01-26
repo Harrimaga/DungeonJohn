@@ -26,7 +26,7 @@ public class SpiderEnemy : Enemy
     {
         base.Update(gameTime);
         ChargeCounter++;
-
+        velocity = new Vector2(0.2f, 0.2f);
         if (CollidesWith(PlayingState.player))
         {
             counter--;
