@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 class Bullet : SpriteGameObject
 {
-    Texture2D Bulletsprite;
+    Texture2D Bulletsprite, Playersprite;
     SpriteEffects Effect = SpriteEffects.None;
     float counter = 0;
     int direction;
@@ -17,30 +17,37 @@ class Bullet : SpriteGameObject
     : base("", layer, id)
     {
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
-        position = Startposition;
         // Determine the direction of the bullets
         direction = Direction;
         if (direction == 1)
         {
+            Playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerUp");
             velocity.Y = -weapon.Projectile_Velocity;
             Bulletsprite = weapon.BulletSpriteUp;
+            position = PlayingState.player.position + new Vector2((Playersprite.Width / 2) - (Bulletsprite.Width / 2), (-Bulletsprite.Width / 2));
         }
         else if (direction == 2)
         {
+            Playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
             velocity.Y = weapon.Projectile_Velocity;
             Bulletsprite = weapon.BulletSpriteUp;
             Effect = SpriteEffects.FlipVertically;
+            position = PlayingState.player.position + new Vector2((Playersprite.Width / 2) - (Bulletsprite.Width / 2), (Playersprite.Height - Bulletsprite.Height / 2));
         }
         else if (direction == 3)
         {
+            Playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
             velocity.X = -weapon.Projectile_Velocity;
             Bulletsprite = weapon.BulletSpriteLeft;
+            position = PlayingState.player.position + new Vector2(0, (Playersprite.Height / 2) - (Bulletsprite.Height / 2));
         }
         else if (direction == 4)
         {
+            Playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
             velocity.X = weapon.Projectile_Velocity;
             Bulletsprite = weapon.BulletSpriteLeft;
             Effect = SpriteEffects.FlipHorizontally;
+            position = PlayingState.player.position + new Vector2((Playersprite.Width - Bulletsprite.Width), (Playersprite.Height / 2) - (Bulletsprite.Height / 2));
         }
         if (PlayingState.player.VialOfPoison && random.Next(100) < 25)
         {
