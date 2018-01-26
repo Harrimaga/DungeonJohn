@@ -70,7 +70,7 @@ public class Enemy : SpriteGameObject
         foreach (Bullet bullet in RemoveBullets)        
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
-        CheckAlive();
+        //CheckAlive();
 
         if (poisoncounter > 0)
         {
@@ -83,7 +83,7 @@ public class Enemy : SpriteGameObject
             color = Color.White;
     }
 
-    void CheckAlive()
+    public void CheckAlive()
     {
         if ((int)health <= 0 && alive == true && killable || (bossenemy && EndRoom.cleared))
         {

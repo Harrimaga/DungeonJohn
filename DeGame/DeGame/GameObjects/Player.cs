@@ -61,11 +61,10 @@ public class Player : SpriteGameObject
             inventory.startUp();
             startup = false;
         }
-
         base.Update(gameTime);
-        collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
         healthbar.Update(gameTime, health, maxhealth, position);
         bullets.Update(gameTime);
+        collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
         NextLevel();
         if (health <= 0)
         {
