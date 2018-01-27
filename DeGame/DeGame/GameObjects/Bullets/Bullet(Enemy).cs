@@ -4,10 +4,10 @@ using System;
 
 class E_Bullet : SpriteGameObject
 {
-    public float Damage, Speed;
+    protected float Damage, Speed;
     Random random;
     int reflectchance = 0, blockchance = 0;
-    public bool reflected = false;
+    protected bool reflected = false;
     protected bool changedirection = false;
     Vector2 Roomposition;
 

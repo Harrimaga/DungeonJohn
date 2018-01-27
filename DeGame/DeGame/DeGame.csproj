@@ -165,7 +165,6 @@
     <Compile Include="States\Option.cs" />
     <Compile Include="States\PauseMenuState.cs" />
     <Compile Include="States\PlayingState.cs" />
-    <Compile Include="Structs\Circle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

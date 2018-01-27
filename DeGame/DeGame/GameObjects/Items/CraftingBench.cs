@@ -15,9 +15,11 @@ class CraftingBench : SpriteGameObject
     {
         position = startPosition;
     }
+
     public override void Update(GameTime gameTime)
     {
     }
+
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/items/Anvil"), position);
@@ -26,6 +28,7 @@ class CraftingBench : SpriteGameObject
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Press SpaceBar to Craft", position + new Vector2(-60,100), Color.White);
         }
     }
+
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if(CollidesWith(PlayingState.player)&& inputHelper.KeyPressed(Keys.Space))

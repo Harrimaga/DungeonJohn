@@ -9,10 +9,9 @@ public class Boss :  SpriteGameObject
     public float health;
     protected int expGive, LevelofBoss, poisoncounter = 0;
     protected Vector2 basevelocity = new Vector2((float)0.5, (float)0.5);
-    public Vector2 PlayerOrigin;
-    public Texture2D playersprite;
+    protected Vector2 PlayerOrigin;
+    protected Texture2D playersprite;
     Vector2 Roomposition;
-    public SpriteEffects Effects;
     HealthBar healthbar;
     public bool alive = true;
     protected Color color = Color.White;
