@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class Player : SpriteGameObject
 {
-    Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
+    public Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
     public bool CoolBoots, SlimyBoots, VialOfPoison, CrestShield, HelicopterHat;
     public bool onWeb, onIce, onSolid, next;
     bool startup;

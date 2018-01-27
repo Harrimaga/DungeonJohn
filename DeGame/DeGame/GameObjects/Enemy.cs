@@ -16,8 +16,8 @@ public class Enemy : SpriteGameObject
     protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true;
     protected int counter = 100, poisoncounter = 0;
     protected Vector2 direction, basevelocity = Vector2.Zero, PlayerOrigin;
-    public SpriteEffects Effects;
-    public Texture2D playersprite, bulletsprite;
+    protected SpriteEffects Effects;
+    protected Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
     protected Vector2 Roomposition;
     Vector2 actualvelocity;

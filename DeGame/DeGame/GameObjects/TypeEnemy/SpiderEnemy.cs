@@ -8,7 +8,7 @@ public class SpiderEnemy : Enemy
     int ChargeDirection;
     float damage;
     static Random random = new Random();
-    public float ChargeSpeed = 2f;
+    float ChargeSpeed = 2f;
 
     public SpiderEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/SpiderEnemy", Difficulty, layer, id)
     {
