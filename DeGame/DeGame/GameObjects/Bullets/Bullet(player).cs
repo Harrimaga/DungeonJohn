@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 class Bullet : SpriteGameObject
 {
-    Texture2D Bulletsprite, Playersprite;
+    Texture2D Bulletsprite, Playersprite, CurrentPlayersprite, PlayerSpriteLeft, PlayerSpriteRight;
     SpriteEffects Effect = SpriteEffects.None;
     float counter = 0;
     int direction;
@@ -19,6 +19,9 @@ class Bullet : SpriteGameObject
         IWeapon weapon = (IWeapon)Player.inventory.currentWeapon;
         // Determine the direction of the bullets
         direction = Direction;
+        CurrentPlayersprite = PlayingState.player.playersprite;
+        PlayerSpriteLeft = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
+        PlayerSpriteRight = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
         if (direction == 1)
         {
             Playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerUp");
@@ -34,12 +37,27 @@ class Bullet : SpriteGameObject
             Effect = SpriteEffects.FlipVertically;
             position = PlayingState.player.position + new Vector2((Playersprite.Width / 2) - (Bulletsprite.Width / 2), (Playersprite.Height - Bulletsprite.Height / 2));
         }
-        else if (direction == 3)
+        else if (direction == 3 && CurrentPlayersprite == PlayerSpriteLeft || direction == 3 && CurrentPlayersprite == PlayerSpriteRight)
         {
             Playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
             velocity.X = -weapon.Projectile_Velocity;
             Bulletsprite = weapon.BulletSpriteLeft;
             position = PlayingState.player.position + new Vector2(0, (Playersprite.Height / 2) - (Bulletsprite.Height / 2));
+        }
+        else if (direction == 3)
+        {
+            Playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
+            velocity.X = -weapon.Projectile_Velocity;
+            Bulletsprite = weapon.BulletSpriteLeft;
+            position = PlayingState.player.position + new Vector2(-Bulletsprite.Width / 3, (Playersprite.Height / 2) - (Bulletsprite.Height / 2));
+        }
+        else if (direction == 4 && CurrentPlayersprite == PlayerSpriteRight || direction == 4 && CurrentPlayersprite == PlayerSpriteLeft)
+        {
+            Playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerRight");
+            velocity.X = weapon.Projectile_Velocity;
+            Bulletsprite = weapon.BulletSpriteLeft;
+            Effect = SpriteEffects.FlipHorizontally;
+            position = PlayingState.player.position + new Vector2((Playersprite.Width - Bulletsprite.Width), (Playersprite.Height / 2) - (Bulletsprite.Height / 2));
         }
         else if (direction == 4)
         {
@@ -47,7 +65,7 @@ class Bullet : SpriteGameObject
             velocity.X = weapon.Projectile_Velocity;
             Bulletsprite = weapon.BulletSpriteLeft;
             Effect = SpriteEffects.FlipHorizontally;
-            position = PlayingState.player.position + new Vector2((Playersprite.Width - Bulletsprite.Width), (Playersprite.Height / 2) - (Bulletsprite.Height / 2));
+            position = PlayingState.player.position + new Vector2((Playersprite.Width - Bulletsprite.Width / 2), (Playersprite.Height / 2) - (Bulletsprite.Height / 2));
         }
         if (PlayingState.player.VialOfPoison && random.Next(100) < 25)
         {
