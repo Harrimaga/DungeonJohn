@@ -487,42 +487,58 @@ public class Room : GameObjectList
         anvils.HandleInput(inputHelper, gameTime);
     }
 
-    void WallShader (GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
+    void WallShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
-        if (CheckRoomarray(x, y - 1))
-        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite")), TilePosition, Color.Gray);
-        else if (CheckRoomarray(x, y + 1))
-        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite")), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipVertically, 0f);
-        //als er...
-        if (CheckRoomarray(x - 1, y))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Right2")), TilePosition, Color.Gray);
-        //links
-        else if (CheckRoomarray(x + 1, y))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Left2")), TilePosition, Color.Gray);
-        //rechts
-        else 
-        if (CheckRoomarray(x, y - 1))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Down2")), TilePosition, Color.Gray);
-        //boven
-        else if (CheckRoomarray(x, y + 1))
+        // check of er een bovenkant walltile moet komen
+        if (CheckRoomarray(x, y + 1))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite")), TilePosition, Color.Gray);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Up2")), TilePosition, Color.Gray);
-        //onder een steen is of een tile is waar men over kan lopen, teken dan een schaduw op de muur aan die kant.
-
-        //als er..
+        }
+        //...of een onderkant
+        else if (CheckRoomarray(x, y - 1))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite")), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipVertically, 0f);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Down2")), TilePosition, Color.Gray);
+        }
+        //...of een linkerkant
+        else if (CheckRoomarray(x + 1, y))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Left")), TilePosition, null, Color.Gray);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Left2")), TilePosition, Color.Gray);
+        }
+        //...of een rechterkant
+        else if (CheckRoomarray(x - 1, y))
+        {
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Left")), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Right2")), TilePosition, Color.Gray);
+        }
+        //check anders of er een rechteronderhoek moet komen
         else if (CheckRoomarray(x - 1, y - 1))
+        {
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner RD")), TilePosition, Color.Gray);
-        //linksboven
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall RD Shade")), TilePosition, Color.Gray);
+        }
+        //...of rechterbovenhoek
         else if (CheckRoomarray(x - 1, y + 1))
+        {
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner RU")), TilePosition, Color.Gray);
-        //linksonder
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall RU Shade")), TilePosition, Color.Gray);
+        }
+        //...of linksonderhoek
         else if (CheckRoomarray(x + 1, y - 1))
+        {
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner LD")), TilePosition, Color.Gray);
-        //rechtsboven
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall LD Shade")), TilePosition, Color.Gray);
+        }
+        //...of linksbovenhoek
         else if (CheckRoomarray(x + 1, y + 1))
+        {
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner LU")), TilePosition, Color.Gray);
-        //rechtsonder 
-        //...een steen is of een tile is waar men over kan lopen, teken dan een hoekstuk van een muur
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall LU Shade")), TilePosition, Color.Gray);
+        }
     }
+
 
     void BackgroundShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
