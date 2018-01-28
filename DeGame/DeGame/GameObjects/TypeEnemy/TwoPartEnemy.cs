@@ -8,9 +8,10 @@ public class TwoPartEnemy : Enemy
     public TwoPartEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/2PartEnemyFull", Difficulty, layer, id)
     {
         basevelocity = new Vector2(0.08f, 0.08f);
-        health = 120 * statmultiplier;
-        maxhealth = 120 * statmultiplier;
+        health = 100 * statmultiplier;
+        maxhealth = 100 * statmultiplier;
         expGive = 120 * statmultiplier;
+        contactdamage = 10 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)

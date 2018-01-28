@@ -5,7 +5,6 @@ using System;
 public class IceEnemy : Enemy
 {
     int Counter = 75;
-    float bulletdamage;
     float speed = 0.1f;
     Vector2 direction;
 
@@ -15,6 +14,7 @@ public class IceEnemy : Enemy
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyIceBullet");
         velocity = new Vector2(0.5f, 0.5f);
         bulletdamage = 5 * statmultiplier;
+        contactdamage = 2 * statmultiplier;
         Console.WriteLine("Playerposition" + PlayingState.player.position);
         Console.WriteLine("position = " + position);
         Console.WriteLine("direction =" + direction);

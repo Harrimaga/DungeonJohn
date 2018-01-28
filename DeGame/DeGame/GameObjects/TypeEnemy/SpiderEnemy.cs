@@ -20,6 +20,7 @@ public class SpiderEnemy : Enemy
         moving = false;
         damage = 10 * statmultiplier;
         expGive = 50 * statmultiplier;
+        contactdamage = 5 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)

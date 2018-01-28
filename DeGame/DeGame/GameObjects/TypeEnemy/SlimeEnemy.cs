@@ -4,9 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 public class SlimeEnemy : Enemy
 {
     int Counter = 0, Directioncount;
-    float bulletdamage;
     float speed = 0.2f;
-    Vector2 direction, BulletPosition;
+    Vector2 BulletPosition;
 
     public SlimeEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int Difficulty = 0, int layer = 0, string id = "SlimeEnemy") : base(startPosition, roomposition, "Sprites/Enemies/SlimeEnemy", Difficulty, layer, id)
     {
@@ -17,6 +16,7 @@ public class SlimeEnemy : Enemy
         health = 150 * statmultiplier;
         maxhealth = 150 * statmultiplier;
         expGive = 120 * statmultiplier;
+        bulletdamage = 5 * statmultiplier;
         switch (Directioncount)
         {
             case 1:
@@ -28,7 +28,7 @@ public class SlimeEnemy : Enemy
                 BulletPosition = new Vector2(sprite.Width, sprite.Height / 2 - 15);
                 break;
         }
-        bulletdamage = 5 * statmultiplier;
+        
     }
 
     public void Shoot()

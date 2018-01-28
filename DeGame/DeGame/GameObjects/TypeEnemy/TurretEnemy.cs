@@ -4,14 +4,16 @@ using Microsoft.Xna.Framework.Graphics;
 public class TurretEnemy : Enemy
 {
     int Counter = 0, Directioncount;
-    float bulletdamage;
     float speed = 0.2f;
-    Vector2 direction, BulletPosition;
+    Vector2 BulletPosition;
 
     public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int Difficulty = 0, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, "Sprites/Enemies/TurretEnemyUp", Difficulty, layer, id)
     {
         Directioncount = directioncount;
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/TurretEnemyRight");
+        bulletdamage = 7 * statmultiplier;
+        killable = false;
+
         switch (Directioncount)
         {
             case 1:
@@ -31,8 +33,7 @@ public class TurretEnemy : Enemy
                 BulletPosition = new Vector2(sprite.Width, sprite.Height / 2 - 15);
                 break;
         }
-        bulletdamage = 3 * statmultiplier;
-        killable = false;
+        
     }
 
     public void Shoot()

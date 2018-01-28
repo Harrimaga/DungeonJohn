@@ -8,11 +8,13 @@ public class Enemy : SpriteGameObject
     public float health;
     protected float maxhealth;
     protected float attack;
+    protected float contactdamage;
     protected float attackspeed;
     protected float EnemyLevel;
     protected float statmultiplier;
     protected float range = 100;
     protected float expGive = 120;
+    protected float bulletdamage;
     protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true;
     protected int counter = 100, poisoncounter = 0;
     protected Vector2 direction, basevelocity = Vector2.Zero, PlayerOrigin;
@@ -177,7 +179,7 @@ public class Enemy : SpriteGameObject
             if (counter == 0)
             {
 
-                PlayingState.player.health -= 10;
+                PlayingState.player.health -= contactdamage;
                 counter = 100;
             }
         }

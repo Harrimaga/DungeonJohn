@@ -5,9 +5,7 @@ public class SpamEnemy : Enemy
 {
     int Counter = 50;
     int BulletCounter = 0;
-    float bulletdamage;
     float speed = 0.2f;
-    Vector2 direction;
 
     public SpamEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/CutieEnemyPixel", Difficulty, layer, id)
     {
@@ -18,6 +16,7 @@ public class SpamEnemy : Enemy
         health = 100 * statmultiplier;
         maxhealth = 100 * statmultiplier;
         expGive = 120 * statmultiplier;
+        contactdamage = 2 * statmultiplier;
     }
 
     public void Range()
