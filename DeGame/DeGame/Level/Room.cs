@@ -87,6 +87,14 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Wall";
                 CreateObject(x, y, "+");
                 break;
+            case 'x':
+                roomarray[x, y] = "WoodenWall";
+                CreateObject(x, y, "x");
+                break;
+            case ',':
+                roomarray[x, y] = "ShopCounter";
+                CreateObject(x, y, ",");
+                break;
             case 'H':
                 roomarray[x, y] = "Lava";
                 CreateObject(x, y, "H");
@@ -422,6 +430,14 @@ public class Room : GameObjectList
             case ("+"):
                 Solid wall = new Wall(TilePosition, 0, "Wall");
                 solid.Add(wall);
+                break;
+            case ("x"):
+                Solid WoodenWall = new WoodenWall(TilePosition, 0, "WoodenWall");
+                solid.Add(WoodenWall);
+                break;
+            case (","):
+                Solid ShopCounter = new ShopCounter(TilePosition, 0, "ShopCounter");
+                solid.Add(ShopCounter);
                 break;
             case ("I"):
                 int v = random.Next(50);
