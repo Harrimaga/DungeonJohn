@@ -21,9 +21,9 @@ public class RandomEnemy : Enemy
 
     }
 
-    public void Shoot()
+    public void Shoot(GameTime gameTime)
     {
-        Counter--;
+        Counter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
 
         if (Counter <= 0)
         {
@@ -54,7 +54,7 @@ public class RandomEnemy : Enemy
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
         {
-            Shoot();
+            Shoot(gameTime);
             Chase();
         }
         CheckAlive();

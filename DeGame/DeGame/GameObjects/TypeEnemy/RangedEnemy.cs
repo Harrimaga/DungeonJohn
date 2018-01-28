@@ -20,9 +20,9 @@ public class RangedEnemy : Enemy
         basevelocity = new Vector2(0.08f, 0.08f);
     }
 
-    public void Range()
+    public void Range(GameTime gameTime)
     {
-        Counter++;
+        Counter += 1 * gameTime.ElapsedGameTime.Milliseconds;
         if ((PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
            PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y))
         {
@@ -50,7 +50,7 @@ public class RangedEnemy : Enemy
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-              Range();
+              Range(gameTime);
         direction = (PlayingState.player.position - position);
         CheckAlive();
     }
