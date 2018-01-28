@@ -6,6 +6,7 @@ public class RangedEnemy : Enemy
 {
     int Counter = 175;
     float speed = 0.13f;
+    new Vector2 direction;
     
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ShootingEnemy1", Difficulty, layer, id)
     {
@@ -52,7 +53,6 @@ public class RangedEnemy : Enemy
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
               Range(gameTime);
         direction = (PlayingState.player.position - position);
-        CheckAlive();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

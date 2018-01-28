@@ -22,7 +22,6 @@ public class ChasingEnemy : Enemy
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
         base.Update(gameTime);
-        CheckAlive();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

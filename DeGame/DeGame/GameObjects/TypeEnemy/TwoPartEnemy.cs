@@ -12,6 +12,7 @@ public class TwoPartEnemy : Enemy
         maxhealth = 100 * statmultiplier;
         expGive = 120 * statmultiplier;
         contactdamage = 10 * statmultiplier;
+        killable = false;
     }
 
     public override void Update(GameTime gameTime)
@@ -46,12 +47,14 @@ public class TwoPartEnemy : Enemy
                 maxhealth = 75;
                 health = 75;
                 Stage = 2;
-                //PlayingState.currentFloor.currentRoom.position.enemies.Add(TwoPartEnemy);
+                TwoPartEnemy TwoPartEnemy = new TwoPartEnemy(position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyFull").Height * 0.8f), Roomposition, PlayingState.currentFloor.displayint);
+                //PlayingState.currentFloor.currentRoom.addedenemies.Add(TwoPartEnemy);
+                //PlayingState.currentFloor.currentRoom.addedenemies.Add(TwoPartEnemy);
             }
         }
         if (Stage == 2)
         {
-            CheckAlive();
+            killable = true;
             basevelocity = new Vector2(0.03f, 0.03f);
         }
     }

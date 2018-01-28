@@ -52,7 +52,6 @@ public class TurretEnemy : Enemy
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Shoot(gameTime);
-        CheckAlive();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
