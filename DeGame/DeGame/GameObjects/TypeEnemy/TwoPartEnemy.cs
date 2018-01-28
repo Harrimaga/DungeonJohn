@@ -12,6 +12,7 @@ public class TwoPartEnemy : Enemy
         maxhealth = 100 * statmultiplier;
         expGive = 120 * statmultiplier;
         contactdamage = 10 * statmultiplier;
+        killable = false;
     }
 
     public override void Update(GameTime gameTime)
@@ -51,7 +52,7 @@ public class TwoPartEnemy : Enemy
         }
         if (Stage == 2)
         {
-            CheckAlive();
+            killable = true;
             basevelocity = new Vector2(0.03f, 0.03f);
         }
     }

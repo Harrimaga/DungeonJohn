@@ -57,7 +57,6 @@ public class RandomEnemy : Enemy
             Shoot();
             Chase();
         }
-        CheckAlive();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
