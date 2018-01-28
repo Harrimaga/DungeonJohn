@@ -639,6 +639,12 @@ public class Room : GameObjectList
                         case "Start":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/StartTile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight - 120), Color.Gray);
                             break;
+                        case "WoodenWall":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall1")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.White);
+                            break;
+                        case "ShopCounter":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop1")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.White);
+                            break;
                         default:
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Standardtile")), TilePosition, Color.Red);
                             break;
