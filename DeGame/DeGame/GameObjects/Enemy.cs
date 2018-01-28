@@ -179,7 +179,7 @@ public class Enemy : SpriteGameObject
             counter--;
             //if (counter == 0)
             //{
-            //    PlayingState.player.health -= 10;
+            //    PlayingState.player.health -= contactdamage;
             //    counter = 100;
             //}
         }
