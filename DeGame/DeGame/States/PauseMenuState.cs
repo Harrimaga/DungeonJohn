@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 class PauseMenuState : IGameObject
 {
     public static Vector2 BasisPosition;
-    public IGameObject playingState;
+    IGameObject playingState;
     WornItems wornItems;
     List<InventorySlot> inventory, oldInventory;
     bool startup = true;
@@ -42,7 +42,7 @@ class PauseMenuState : IGameObject
         }
     }
 
-    public void startUp()
+    void startUp()
     {
         inventory = new List<InventorySlot>();
         for (int i = 0; i < Player.inventory.items.Count; i++)
@@ -82,10 +82,28 @@ class PauseMenuState : IGameObject
 
         PlayingState.player.Update(gameTime);
     }
+
     public virtual void Reset()
     {
     }
 
+    bool checkInventories(List<InventorySlot> inventory, List<InventorySlot> oldInventory)
+    {
+        if (inventory.Count != oldInventory.Count)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < oldInventory.Count; i++)
+        {
+            if (inventory[i].item != oldInventory[i].item)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
@@ -122,23 +140,5 @@ class PauseMenuState : IGameObject
         {
             slot.Draw(gameTime, spriteBatch);
         }
-    }
-
-    bool checkInventories(List<InventorySlot> inventory, List<InventorySlot> oldInventory)
-    {
-        if (inventory.Count != oldInventory.Count)
-        {
-            return false;
-        }
-
-        for (int i = 0; i < oldInventory.Count; i++)
-        {
-            if (inventory[i].item != oldInventory[i].item)
-            {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

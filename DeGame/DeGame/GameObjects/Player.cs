@@ -8,30 +8,29 @@ public class Player : SpriteGameObject
 {
     public Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
     public bool CoolBoots, SlimyBoots, VialOfPoison, CrestShield, HelicopterHat;
-    public bool onWeb, onIce, onSolid, next;
+    public bool onWeb, onIce, onSolid;
     bool startup;
     new public bool Mirror;
     public double damagereduction, damagemultiplier;
     public double attackspeedreduction;
     public double attackmultiplier;
-    public double speed, extraspeed;
-    public float velocitybase;
+    public double extraspeed;
+    double speed;
+    float velocitybase;
     public float attack, extraattack;
     public float health, maxhealth;
     public float exp;
     float shoottimer = 0, nextLevelExp;
     public int leveltokens;
-    public int level;
+    int level;
     public int gold;
     public int ammo;
-    public SpriteEffects Effect;
+    SpriteEffects Effect;
     HealthBar healthbar;
-    public GameObjectList bullets;
-    public static InventoryManager inventory;
-
     public string lastUsedspeed;
+    public GameObjectList bullets;
     public Rectangle collisionhitbox;
-
+    public static InventoryManager inventory;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Characters/PlayerDown", 0, "Player")
@@ -226,10 +225,15 @@ public class Player : SpriteGameObject
         {
             PlayingState.player.bullets.Remove(bullet);
         }
+        for (int i = 0; i < inventory.items.Count; i++)
+        {
+            inventory.removeItemFromInventory(inventory.items[i]);
+        }
+
         startup = true;
     }
 
-    public void NextLevel()
+    void NextLevel()
     {
         if (exp >= nextLevelExp)
         {
@@ -254,7 +258,7 @@ public class Player : SpriteGameObject
         }
     }
 
-    public void Shoot(int direction, GameTime gametime)
+    void Shoot(int direction, GameTime gametime)
     {
         if (shoottimer == 0)
         {
