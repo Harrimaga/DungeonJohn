@@ -9,7 +9,7 @@ public class Player : SpriteGameObject
     public Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
     public bool CoolBoots, SlimyBoots, VialOfPoison, CrestShield, HelicopterHat;
     public bool onWeb, onIce, onSolid;
-    bool startup;
+    public bool startup;
     new public bool Mirror;
     public double damagereduction, damagemultiplier;
     public double attackspeedreduction;
@@ -229,7 +229,13 @@ public class Player : SpriteGameObject
         {
             inventory.removeItemFromInventory(inventory.items[i]);
         }
-
+        inventory.currentArmour = null;
+        inventory.currentBoots = null;
+        inventory.currentHelmet = null;
+        inventory.currentShield = null;
+        inventory.currentPassives[0] = null;
+        inventory.currentPassives[1] = null;
+        inventory.currentWeapon = new StandardBow();
         startup = true;
     }
 
