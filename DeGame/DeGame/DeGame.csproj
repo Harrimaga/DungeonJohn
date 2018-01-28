@@ -70,8 +70,8 @@
     <Compile Include="GameManagement\SpriteGameObject.cs" />
     <Compile Include="GameObjects\Boss\HomingBoss.cs" />
     <Compile Include="GameObjects\Boss\CreamBatBoss.cs" />
-    <Compile Include="GameObjects\Boss\MinionBoss\MinionBoss.cs" />
-    <Compile Include="GameObjects\Boss\MinionBoss\MinionSpawner.cs" />
+    <Compile Include="GameObjects\Boss\MinionBoss.cs" />
+    <Compile Include="GameObjects\TypeEnemy\MinionSpawner.cs" />
     <Compile Include="GameObjects\Bullets\BossBullet.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28player%29.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
@@ -113,12 +113,15 @@
     <Compile Include="GameObjects\Terrain\Lava.cs" />
     <Compile Include="GameObjects\Terrain\Pit.cs" />
     <Compile Include="GameObjects\Terrain\Rock.cs" />
+    <Compile Include="GameObjects\Terrain\ShopCounter.cs" />
+    <Compile Include="GameObjects\Terrain\Shopkeeper.cs" />
     <Compile Include="GameObjects\Terrain\Solid.cs" />
     <Compile Include="GameObjects\Terrain\SpiderWeb.cs" />
     <Compile Include="GameObjects\Terrain\Tiles.cs" />
+    <Compile Include="GameObjects\Terrain\WoodenWall.cs" />
     <Compile Include="GameObjects\TypeEnemy\TwoPartEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
-    <Compile Include="GameObjects\Boss\MinionBoss\ChasingMinion.cs" />
+    <Compile Include="GameObjects\TypeEnemy\ChasingMinion.cs" />
     <Compile Include="GameObjects\TypeEnemy\IceEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RandomEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\RangedEnemy.cs" />

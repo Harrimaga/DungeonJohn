@@ -21,9 +21,9 @@ public class IceEnemy : Enemy
         killable = false;
     }
 
-    public void Range()
+    public void Range(GameTime gameTime)
     {
-        Counter++;
+        Counter += 1 *gameTime.ElapsedGameTime.Milliseconds;
         if (Counter >= 100)
         {
             if (PlayingState.player.position.X + range > position.X || PlayingState.player.position.X - range < position.X ||
@@ -47,9 +47,8 @@ public class IceEnemy : Enemy
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Range();
+            Range(gameTime);
         direction = (PlayingState.player.position - position);
-        CheckAlive();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

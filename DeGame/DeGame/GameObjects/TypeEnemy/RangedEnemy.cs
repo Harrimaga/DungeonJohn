@@ -6,6 +6,7 @@ public class RangedEnemy : Enemy
 {
     int Counter = 175;
     float speed = 0.13f;
+    new Vector2 direction;
     
     public RangedEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/ShootingEnemy1", Difficulty, layer, id)
     {
@@ -20,9 +21,9 @@ public class RangedEnemy : Enemy
         basevelocity = new Vector2(0.08f, 0.08f);
     }
 
-    public void Range()
+    public void Range(GameTime gameTime)
     {
-        Counter++;
+        Counter += 1 * gameTime.ElapsedGameTime.Milliseconds;
         if ((PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
            PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y))
         {
@@ -50,9 +51,8 @@ public class RangedEnemy : Enemy
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-              Range();
+              Range(gameTime);
         direction = (PlayingState.player.position - position);
-        CheckAlive();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

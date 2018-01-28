@@ -78,11 +78,12 @@ public class Enemy : SpriteGameObject
         {
             if (poisoncounter % 75 == 0 && poisoncounter < 350)
                 health -= 4;
-            poisoncounter--;
+            poisoncounter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
             color = Color.YellowGreen;
         }
         else
             color = Color.White;
+        CheckAlive();
     }
 
     public void CheckAlive()
