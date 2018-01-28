@@ -489,6 +489,10 @@ public class Room : GameObjectList
 
     void WallShader (GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
+        if (CheckRoomarray(x, y - 1))
+        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite")), TilePosition, Color.Gray);
+        else if (CheckRoomarray(x, y + 1))
+        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite")), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipVertically, 0f);
         //als er...
         if (CheckRoomarray(x - 1, y))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Right2")), TilePosition, Color.Gray);
