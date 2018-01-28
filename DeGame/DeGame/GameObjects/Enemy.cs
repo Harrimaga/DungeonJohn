@@ -48,7 +48,7 @@ public class Enemy : SpriteGameObject
         base.Update(gameTime);
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         healthbar.Update(gameTime, health, maxhealth, position);
-        PlayerCollision();
+        //PlayerCollision();
         if (!flying)
             SolidCollision();
 
