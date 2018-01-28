@@ -445,7 +445,7 @@ public class Floor
                                 spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapTile")), MinimapTilePosition, Color.White);
                                 break;
                         }
-                    else if ((CheckNeighbours(x, y, true) && floor[x, y - 1].Visited) || (CheckNeighbours(x, y, false, true) && floor[x, y + 1].Visited) 
+                     else if ((CheckNeighbours(x, y, true) && floor[x, y - 1].Visited) || (CheckNeighbours(x, y, false, true) && floor[x, y + 1].Visited) 
                         || (CheckNeighbours(x,y, false, false, true) && floor[x - 1, y].Visited) || (CheckNeighbours(x, y, false, false, false, true) &&  floor[x + 1, y]. Visited))
                         spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapUnknownTile")), MinimapTilePosition, Color.White);
                 }

@@ -86,6 +86,14 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Wall";
                 CreateObject(x, y, "+");
                 break;
+            case 'x':
+                roomarray[x, y] = "WoodenWall";
+                CreateObject(x, y, "x");
+                break;
+            case ',':
+                roomarray[x, y] = "ShopCounter";
+                CreateObject(x, y, ",");
+                break;
             case 'H':
                 roomarray[x, y] = "Lava";
                 CreateObject(x, y, "H");
@@ -117,6 +125,10 @@ public class Room : GameObjectList
                 roomarray[x, y] = "RightDoor";
                 Right = TilePosition;
                 CreateObject(x, y, ">");
+                break;
+            case '0':
+                roomarray[x, y] = "Shopkeeper";
+                CreateObject(x, y, "0");
                 break;
             case 'C':
                 roomarray[x, y] = "ChasingEnemy";
@@ -422,6 +434,14 @@ public class Room : GameObjectList
                 Solid wall = new Wall(TilePosition, 0, "Wall");
                 solid.Add(wall);
                 break;
+            case ("x"):
+                Solid WoodenWall = new WoodenWall(TilePosition, 0, "WoodenWall");
+                solid.Add(WoodenWall);
+                break;
+            case (","):
+                Solid ShopCounter = new ShopCounter(TilePosition, 0, "ShopCounter");
+                solid.Add(ShopCounter);
+                break;
             case ("I"):
                 int v = random.Next(50);
                 ItemSpawn item = new ItemSpawn(TilePosition, false, v, 0, "Item");
@@ -467,6 +487,10 @@ public class Room : GameObjectList
             case (">"):
                 Door right = new Door(rightdoor, Right, 4);
                 door.Add(right);
+                break;
+            case ("0"):
+                Shopkeeper Shopkeeper = new Shopkeeper(TilePosition, 0, "Shopkeeper");
+                tiles.Add(Shopkeeper);
                 break;
         }
     }
@@ -612,11 +636,14 @@ public class Room : GameObjectList
                         case "ExitShop":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/EndTile")), TilePosition, Color.White);
                             break;
-                        case "Ice":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite")), position, Color.Red);
-                            break;
                         case "Start":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/StartTile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight - 120), Color.Gray);
+                            break;
+                        case "WoodenWall":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall1")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.White);
+                            break;
+                        case "ShopCounter":
+                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop1")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.White);
                             break;
                         default:
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Standardtile")), TilePosition, Color.Red);

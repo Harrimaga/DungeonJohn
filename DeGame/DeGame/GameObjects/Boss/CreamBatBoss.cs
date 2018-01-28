@@ -9,7 +9,7 @@ class CreamBatBoss : Boss
     int MoveCounter = 0;
     int Stage = 1;
     int MoveTimer = 0;
-    float bulletdamage = 10, speed = 0.3f;
+    float bulletdamage = 0, speed = 0.3f;
     Vector2 moving, MoveDirection, bulletPosition;
     Texture2D creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite1");
 
@@ -46,7 +46,7 @@ class CreamBatBoss : Boss
             }
             else
             {
-                velocity = new Vector2(0.13f, 0.13f);
+                velocity = new Vector2(0.15f, 0.15f);
                 MoveTimer++;
             }
             Shoot();
@@ -192,13 +192,13 @@ class CreamBatBoss : Boss
         if (MoveTimer < 50)
             MoveDirection = new Vector2(0,1.5f);
         else if (MoveTimer <= 150 && MoveTimer > 50)
-            MoveDirection = new Vector2(-2, -1);
+            MoveDirection = new Vector2(-1.5f, -1);
         else if (MoveTimer <= 250 && MoveTimer > 150)
-            MoveDirection = new Vector2(2, -1);
+            MoveDirection = new Vector2(1.5f, -1);
         else if (MoveTimer <= 350 && MoveTimer > 250)
-            MoveDirection = new Vector2(2, 1);
+            MoveDirection = new Vector2(1.5f, 1);
         else if (MoveTimer <= 450 && MoveTimer > 350)
-            MoveDirection = new Vector2(-2, 1);
+            MoveDirection = new Vector2(-1.5f, 1);
         else if (MoveTimer > 450)
             MoveTimer = 50;
         moving = MoveDirection * velocity;
