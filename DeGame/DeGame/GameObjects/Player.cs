@@ -226,6 +226,11 @@ public class Player : SpriteGameObject
         {
             PlayingState.player.bullets.Remove(bullet);
         }
+        for (int i = 0; i < inventory.items.Count; i++)
+        {
+            inventory.removeItemFromInventory(inventory.items[i]);
+        }
+
         startup = true;
     }
 
