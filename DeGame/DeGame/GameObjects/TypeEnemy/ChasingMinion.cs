@@ -35,7 +35,6 @@ public class ChasingMinion : Enemy
 
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
-        CheckAlive();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

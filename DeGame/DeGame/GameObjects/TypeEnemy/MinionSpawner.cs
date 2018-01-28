@@ -34,7 +34,6 @@ class MinionSpawner : Enemy
         }
         else
             counter = 100;
-        CheckAlive();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

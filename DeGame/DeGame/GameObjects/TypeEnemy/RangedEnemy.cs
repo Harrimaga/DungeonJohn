@@ -53,7 +53,6 @@ public class RangedEnemy : Enemy
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
               Range();
         direction = (PlayingState.player.position - position);
-        CheckAlive();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

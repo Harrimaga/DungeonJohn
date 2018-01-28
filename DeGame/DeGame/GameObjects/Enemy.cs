@@ -83,6 +83,7 @@ public class Enemy : SpriteGameObject
         }
         else
             color = Color.White;
+        CheckAlive();
     }
 
     public void CheckAlive()
