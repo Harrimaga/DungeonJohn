@@ -18,16 +18,20 @@ public class RangedEnemy : Enemy
         health = 100 * statmultiplier;
         maxhealth = 100 * statmultiplier;
         expGive = 100 * statmultiplier;
+        basevelocity = new Vector2(0.08f, 0.08f);
     }
 
     public void Range()
     {
         Counter++;
-        if (PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
-           PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y)
+        if ((PlayingState.player.position.X + range < position.X || PlayingState.player.position.X - range > position.X ||
+           PlayingState.player.position.Y + range < position.Y || PlayingState.player.position.Y - range > position.Y))
         {
             Chase();
         }
+        else
+        direction = Vector2.Zero;
+
         if(Counter >= 175)
         {
             Shoot();

@@ -17,6 +17,8 @@ public class ChasingEnemy : Enemy
         {
             velocity = basevelocity;
         }
+        else
+            direction = Vector2.Zero;
 
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
