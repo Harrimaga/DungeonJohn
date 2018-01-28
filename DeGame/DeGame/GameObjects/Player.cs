@@ -22,11 +22,10 @@ public class Player : SpriteGameObject
     public float exp;
     float shoottimer = 0, nextLevelExp;
     public int leveltokens;
-    int level;
+    public int level;
     public int gold;
     public int ammo;
     SpriteEffects Effect;
-    HealthBar healthbar;
     public string lastUsedspeed;
     public GameObjectList bullets;
     public Rectangle collisionhitbox;
@@ -36,7 +35,6 @@ public class Player : SpriteGameObject
     : base("Sprites/Characters/PlayerDown", 0, "Player")
     {
         bullets = new GameObjectList();
-        healthbar = new HealthBar(health, maxhealth, position, true);
         inventory = new InventoryManager();
         lastUsedspeed = "Down";
         CalculateDamage();
@@ -61,7 +59,6 @@ public class Player : SpriteGameObject
             startup = false;
         }
         base.Update(gameTime);
-        healthbar.Update(gameTime, health, maxhealth, position);
         bullets.Update(gameTime);
         collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
         NextLevel();
@@ -322,9 +319,9 @@ public class Player : SpriteGameObject
     {
         spriteBatch.Draw(playersprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
         if (ammo < 0)
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: infinite!", new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: infinite!", new Vector2(PlayingState.hud.screenwidth - 275 + (Camera.Position.X - PlayingState.hud.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.hud.screenheight / 2)), Color.White);
         else
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: " + Convert.ToString(ammo), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: " + Convert.ToString(ammo), new Vector2(PlayingState.hud.screenwidth - 275 + (Camera.Position.X - PlayingState.hud.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.hud.screenheight / 2)), Color.White);
 
         if (inventory.currentBoots != null)
             inventory.currentBoots.DrawOnPlayer(gameTime, spriteBatch);
@@ -353,10 +350,7 @@ public class Player : SpriteGameObject
         if (inventory.currentShield != null)
             inventory.currentShield.DrawOnPlayer(gameTime, spriteBatch);
 
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Player Level: " + Convert.ToString(level), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 200 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.White);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Damage: " + Convert.ToString((int)attack), new Vector2(PlayingState.currentFloor.screenwidth - 275 + (Camera.Position.X - PlayingState.currentFloor.screenwidth / 2), 225 + (Camera.Position.Y - PlayingState.currentFloor.screenheight / 2)), Color.Red);
         bullets.Draw(gameTime, spriteBatch);
-        healthbar.Draw(spriteBatch);
         if (leveltokens > 0)
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/HUD/LevelUp"), new Vector2(position.X, position.Y - 30), Color.White);
     }

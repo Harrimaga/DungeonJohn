@@ -11,12 +11,14 @@ public class PlayingState : IGameObject
 {
     public static Player player;
     public static Floor currentFloor;
+    public static HUD hud;
     Floor floor;
 
     public PlayingState()
     {
         player = new Player();
         floor = new Floor();
+        hud = new HUD();
         currentFloor = floor;
         GameEnvironment.gameStateManager.LastState = "playing";
     }
@@ -28,13 +30,14 @@ public class PlayingState : IGameObject
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
         }
-        floor.HandleInput(inputHelper, gameTime);        
+        floor.HandleInput(inputHelper, gameTime); 
     }
 
     public virtual void Update(GameTime gameTime)
     {
         player.Update(gameTime);
         floor.Update(gameTime);
+        hud.Update(gameTime);
         if (player.health <= 0)
         {
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
@@ -43,7 +46,6 @@ public class PlayingState : IGameObject
         {
             GameEnvironment.gameStateManager.SwitchTo("Victory");
         }
-        currentFloor.wornItems.Update(gameTime);
     }
 
     public virtual void Reset()
@@ -53,6 +55,7 @@ public class PlayingState : IGameObject
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         floor.Draw(gameTime, spriteBatch);
+        hud.Draw(gameTime, spriteBatch);
         player.Draw(gameTime, spriteBatch);
     }
 }

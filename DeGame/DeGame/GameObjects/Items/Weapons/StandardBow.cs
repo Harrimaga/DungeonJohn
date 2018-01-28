@@ -28,7 +28,7 @@ public class StandardBow : Item, IWeapon
         ammo = maxammo;
         Type = "weapon";
         itemName = "StandardBow";
-        itemDescription = "Basic weapon with infinte ammo";
+        itemDescription = "Basic weapon with infinite ammo";
         bulletleft = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/StandardBow_BulletLeft");
         bulletup = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/StandardBow_BulletUp");
     }
