@@ -17,6 +17,7 @@ public class Option : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Controls/keyboard controls"), new Vector2(-550, -380));
     }
     public virtual void Update(GameTime gameTime)
     {
