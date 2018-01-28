@@ -25,11 +25,16 @@ class MainMenuState : IGameObject
             GameEnvironment.gameStateManager.SwitchTo("Playing");
             Reset();
         }
+        if (inputHelper.KeyPressed(Keys.Z) || option.Pressed)
+        {
+            GameEnvironment.gameStateManager.SwitchTo("Option");
+            Reset();
+        }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/DungeonJohn"), new Vector2(-350, -445));
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/NewBTeam"), new Vector2(-300, -350));
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PauseMenu/DungeonJohn"), new Vector2(-550, -380));
+        //spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/NewBTeam"), new Vector2(-300, -350));
         start.Draw(gameTime, spriteBatch);
         option.Draw(gameTime, spriteBatch);
     }
