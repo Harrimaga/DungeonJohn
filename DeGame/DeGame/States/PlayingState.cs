@@ -21,6 +21,7 @@ public class PlayingState : IGameObject
         GameEnvironment.gameStateManager.LastState = "playing";
         Player.inventory.currentWeapon = new BigMac();
     }
+
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         player.HandleInput(inputHelper, gameTime);
@@ -30,11 +31,7 @@ public class PlayingState : IGameObject
         }
         floor.HandleInput(inputHelper, gameTime);        
     }
-    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        floor.Draw(gameTime, spriteBatch);
-        player.Draw(gameTime, spriteBatch);
-    }
+
     public virtual void Update(GameTime gameTime)
     {
         player.Update(gameTime);
@@ -49,8 +46,15 @@ public class PlayingState : IGameObject
         }
         currentFloor.wornItems.Update(gameTime);
     }
+
     public virtual void Reset()
     {
+    }
+
+    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        floor.Draw(gameTime, spriteBatch);
+        player.Draw(gameTime, spriteBatch);
     }
 }
 

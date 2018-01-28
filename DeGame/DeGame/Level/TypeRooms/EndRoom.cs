@@ -120,7 +120,7 @@ class EndRoom : Room
         enemycounter++;
     }
 
-    public override void CheckExit()
+    protected override void CheckExit()
     {
         //base.CheckExit();
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2);

@@ -11,12 +11,12 @@ using Microsoft.Xna.Framework.Graphics;
 /// </summary>
 public class WornItems : GameObjectList
 {
-    public WeaponSlot weaponSlot;
-    public HelmetSlot helmetSlot;
-    public ArmourSlot armourSlot;
-    public BootsSlot bootsSlot;
-    public ShieldSlot shieldShot;
-    public PassiveSlot passiveSlot1, passiveSlot2;
+    WeaponSlot weaponSlot;
+    HelmetSlot helmetSlot;
+    ArmourSlot armourSlot;
+    BootsSlot bootsSlot;
+    ShieldSlot shieldSlot;
+    PassiveSlot passiveSlot1, passiveSlot2;
     new Vector2 position;
 
 
@@ -27,7 +27,7 @@ public class WornItems : GameObjectList
         helmetSlot = new HelmetSlot(position + new Vector2(74, 0));
         armourSlot = new ArmourSlot(position + new Vector2(74, 74));
         bootsSlot = new BootsSlot(position + new Vector2(74, 212));
-        shieldShot = new ShieldSlot(position + new Vector2(212, 74));
+        shieldSlot = new ShieldSlot(position + new Vector2(212, 74));
         passiveSlot1 = new PassiveSlot(position, 1, Player.inventory.currentPassives[0]);
         passiveSlot2 = new PassiveSlot(position + new Vector2(212, 0), 2, Player.inventory.currentPassives[1]);
 
@@ -35,7 +35,7 @@ public class WornItems : GameObjectList
         Add(helmetSlot);
         Add(armourSlot);
         Add(bootsSlot);
-        Add(shieldShot);
+        Add(shieldSlot);
         Add(passiveSlot1);
         Add(passiveSlot2);
     }
@@ -63,7 +63,7 @@ public class WornItems : GameObjectList
             helmetSlot.position = position + new Vector2(74, 0);
             armourSlot.position = position + new Vector2(74, 74);
             bootsSlot.position = position + new Vector2(74, 212);
-            shieldShot.position = position + new Vector2(212, 74);
+            shieldSlot.position = position + new Vector2(212, 74);
             passiveSlot1.position = position;
             passiveSlot2.position = position + new Vector2(212, 0);
         }
@@ -80,7 +80,7 @@ public class WornItems : GameObjectList
         helmetSlot.HandleInput(inputHelper, gameTime);
         armourSlot.HandleInput(inputHelper, gameTime);
         bootsSlot.HandleInput(inputHelper, gameTime);
-        shieldShot.HandleInput(inputHelper, gameTime);
+        shieldSlot.HandleInput(inputHelper, gameTime);
         passiveSlot1.HandleInput(inputHelper, gameTime);
         passiveSlot2.HandleInput(inputHelper, gameTime);
     }

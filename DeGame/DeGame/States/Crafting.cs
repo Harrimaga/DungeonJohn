@@ -9,14 +9,16 @@ using System.Threading.Tasks;
 
 public class Crafting : IGameObject
 {
-    public List<CraftingInventorySlot> inventory;
+    List<CraftingInventorySlot> inventory;
     public static CraftingSlots craftingSlots;
     Item item1, item2, newItem;
     Vector2 BasisPosition;
+
     public Crafting()
     {
         craftingSlots = new CraftingSlots(new Vector2(GameEnvironment.WindowSize.X - 300 + (Camera.Position.X - GameEnvironment.WindowSize.X / 2), (Camera.Position.Y - GameEnvironment.WindowSize.Y / 2) + 510));
     }
+
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if(inputHelper.KeyPressed(Keys.Space))
@@ -42,6 +44,17 @@ public class Crafting : IGameObject
 
         craftingSlots.HandleInput(inputHelper, gameTime);
     }
+
+    public virtual void Update(GameTime gameTime)
+    {
+        BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
+        craftingSlots.Update(gameTime);
+    }
+
+    public virtual void Reset()
+    {
+    }
+
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         GameEnvironment.gameStateManager.GetGameState("Playing").Draw(gameTime, spriteBatch);
@@ -66,13 +79,4 @@ public class Crafting : IGameObject
             slot.Draw(gameTime, spriteBatch);
         }
     }
-    public virtual void Update(GameTime gameTime)
-    {
-        BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
-        craftingSlots.Update(gameTime);
-    }
-    public virtual void Reset()
-    {
-    }
-
 }

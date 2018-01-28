@@ -6,16 +6,16 @@ using Microsoft.Xna.Framework.Input;
 public class Floor
 {
     int maxRooms = 7, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, q;
+    public int screenwidth, screenheight, CurrentLevel = 1, doortimer = 0, displayint = 1;
+    int[,] possiblespecial, AdjacentRooms;
     public Room currentRoom;
-    public int screenwidth, screenheight, used, CurrentLevel = 1, doortimer = 0, displayint = 1;
-    public bool FloorGenerated = false;
+    public Room[,] floor;
+    bool FloorGenerated = false;
+    bool[,] Checked;
     public Vector2 startPlayerPosition;
     Random random = new Random();
     public WornItems wornItems;
     string Level;
-    int[,] possiblespecial, AdjacentRooms;
-    public Room[,] floor;
-    bool[,] Checked;
 
     public Floor()
     {
@@ -195,7 +195,7 @@ public class Floor
         return false;
     }
 
-    public void DoorCheck()
+    void DoorCheck()
     {
         for (int x = 0; x < floorWidth; x++)
             for (int y = 0; y < floorHeight; y++)
@@ -409,7 +409,7 @@ public class Floor
         return false;
     }
 
-    public void DrawMinimap(SpriteBatch spriteBatch)
+    void DrawMinimap(SpriteBatch spriteBatch)
     {
         //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
         //int roomheight = PlayingState.currentFloor.currentRoom.roomheight;
