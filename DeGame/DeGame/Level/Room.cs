@@ -8,20 +8,19 @@ using System.Collections;
 
 public class Room : GameObjectList
 {
-    public int RoomListIndex, a, b, CellWidth, CellHeight, roomwidth, roomheight, Lastentrypoint, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0;
-    public string Map;
-    public GameObjectList enemies, tiles, solid, consumable, bosses, altars, anvils, enemybullets, homingenemybullets;
+    public int RoomListIndex, CellWidth, CellHeight, roomwidth, roomheight, Lastentrypoint = 1, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0, lavatimer = 0;
+    protected int a, b, roomarraywidth, roomarrayheight;
     public static GameObjectList door;
-    public Vector2 Up, Down, Left, Right, Exit, ExitShop, LastEntryPoint;
+    public GameObjectList enemies, solid, bosses, enemybullets, homingenemybullets;
+    GameObjectList tiles, consumable, altars, anvils;
     public bool Visited = false, CameraMoving = false;
     public IList addedenemies = new List<Enemy>();
-    protected int roomarraywidth, roomarrayheight;
     public string Type = "normalroom";
-    Random random = new Random();
+    string Map;
     public string[,] roomarray;
-    public int lavatimer = 0;
-    Vector2 TilePosition;
-
+    Random random = new Random();
+    protected Vector2 Exit;
+    Vector2 TilePosition, Up, Down, Left, Right, ExitShop, LastEntryPoint;
 
     public Room(string map, int roomListIndex, int A, int B, int layer = 0, string id = "") : base(layer)
     {
@@ -251,9 +250,6 @@ public class Room : GameObjectList
 
     public override void Update(GameTime gameTime)
     {
-        int onicecounter = 0;
-        int onwebcounter = 0;
-        int onSolidcounter = 0;
         if (PlayingState.currentFloor.currentRoom.position == new Vector2(a, b))
         {
             Visited = true;
@@ -274,10 +270,36 @@ public class Room : GameObjectList
         enemybullets.Update(gameTime);
         homingenemybullets.Update(gameTime);
         CheckExit();
+        OnTileCheck();
         if (lavatimer > 0)
         {
             lavatimer--;
         }
+        switch (Lastentrypoint)
+        {
+            case 1:
+                LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 2 * CellHeight + b * roomheight);
+                break;
+            case 2:
+                LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 14 * CellHeight + b * roomheight - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height);
+                break;
+            case 3:
+                LastEntryPoint = new Vector2(2 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
+                break;
+            case 4:
+                LastEntryPoint = new Vector2(20 * CellWidth + a * roomwidth - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width, 7 * CellHeight + b * roomheight);
+                break;
+            default:
+                LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
+                break;
+        }
+    }
+
+    void OnTileCheck()
+    {
+        int onicecounter = 0;
+        int onwebcounter = 0;
+        int onSolidcounter = 0;
         if (tiles.Children.Count > 0)
         {
             foreach (Tiles tile in tiles.Children)
@@ -312,29 +334,10 @@ public class Room : GameObjectList
                 PlayingState.player.onSolid = false;
             else
                 PlayingState.player.onSolid = true;
-
-            switch (Lastentrypoint)
-            {
-                case 1:
-                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 2 * CellHeight + b * roomheight);
-                    break;
-                case 2:
-                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 14 * CellHeight + b * roomheight - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height);
-                    break;
-                case 3:
-                    LastEntryPoint = new Vector2(2 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
-                    break;
-                case 4:
-                    LastEntryPoint = new Vector2(20 * CellWidth + a * roomwidth - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width, 7 * CellHeight + b * roomheight);
-                    break;
-                default:
-                    LastEntryPoint = new Vector2(10 * CellWidth + a * roomwidth, 7 * CellHeight + b * roomheight);
-                    break;
-            }
         }
     }
 
-    public void CreateObject(int x, int y, string Type)
+    void CreateObject(int x, int y, string Type)
     {
         int enemylevel = PlayingState.currentFloor.displayint;
         TilePosition = new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight);
@@ -492,7 +495,7 @@ public class Room : GameObjectList
         }
     }
 
-    public virtual void CheckExit()
+    protected virtual void CheckExit()
     {
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2);
         if (RoomListIndex == 4)

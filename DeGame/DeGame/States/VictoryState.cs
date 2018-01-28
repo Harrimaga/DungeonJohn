@@ -20,7 +20,7 @@ class VictoryState : IGameObject
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         MainMenu.HandleInput(inputHelper, gameTime);
-        if (inputHelper.KeyPressed(Keys.Z))
+        if (inputHelper.KeyPressed(Keys.Z) || MainMenu.Pressed)
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 class SpiderWeb : Tiles
 {
     public bool OnThisTile = false;
+
     public SpiderWeb(Vector2 startPosition, int layer = 0, string id = "SpiderWeb")
     : base(startPosition, layer, id)
     {

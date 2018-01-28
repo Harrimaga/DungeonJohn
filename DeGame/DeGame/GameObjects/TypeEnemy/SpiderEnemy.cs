@@ -8,7 +8,7 @@ public class SpiderEnemy : Enemy
     int ChargeDirection;
     float damage;
     static Random random = new Random();
-    public float ChargeSpeed = 2f;
+    float ChargeSpeed = 2f;
 
     public SpiderEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/SpiderEnemy", Difficulty, layer, id)
     {
@@ -20,13 +20,14 @@ public class SpiderEnemy : Enemy
         moving = false;
         damage = 10 * statmultiplier;
         expGive = 50 * statmultiplier;
+        contactdamage = 5 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         ChargeCounter++;
-
+        velocity = new Vector2(0.2f, 0.2f);
         if (CollidesWith(PlayingState.player))
         {
             counter--;

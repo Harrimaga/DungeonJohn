@@ -8,16 +8,18 @@ public class Enemy : SpriteGameObject
     public float health;
     protected float maxhealth;
     protected float attack;
+    protected float contactdamage;
     protected float attackspeed;
     protected float EnemyLevel;
     protected float statmultiplier;
     protected float range = 100;
     protected float expGive = 120;
+    protected float bulletdamage;
     protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true;
     protected int counter = 100, poisoncounter = 0;
     protected Vector2 direction, basevelocity = Vector2.Zero, PlayerOrigin;
-    public SpriteEffects Effects;
-    public Texture2D playersprite, bulletsprite;
+    protected SpriteEffects Effects;
+    protected Texture2D playersprite, bulletsprite;
     HealthBar healthbar;
     protected Vector2 Roomposition;
     Vector2 actualvelocity;
@@ -46,7 +48,7 @@ public class Enemy : SpriteGameObject
         base.Update(gameTime);
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         healthbar.Update(gameTime, health, maxhealth, position);
-        PlayerCollision();
+        //PlayerCollision();
         if (!flying)
             SolidCollision();
 
@@ -172,14 +174,13 @@ public class Enemy : SpriteGameObject
     {
         if (CollidesWith(PlayingState.player))
         {
-            velocity = Vector2.Zero;
+            direction = Vector2.Zero;           
             counter--;
-            if (counter == 0)
-            {
-
-                PlayingState.player.health -= 10;
-                counter = 100;
-            }
+            //if (counter == 0)
+            //{
+            //    PlayingState.player.health -= 10;
+            //    counter = 100;
+            //}
         }
         if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Top)))
             while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))

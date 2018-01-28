@@ -9,6 +9,7 @@ public class ChasingEnemy : Enemy
         health = 120 * statmultiplier;
         maxhealth = 120 * statmultiplier;
         expGive = 120 * statmultiplier;
+        contactdamage = 10 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)

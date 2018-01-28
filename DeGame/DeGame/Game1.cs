@@ -40,6 +40,7 @@ namespace DeGame
             gameStateManager.AddGameState("PauseMenu", new PauseMenuState());
             gameStateManager.AddGameState("Leveling", new Leveling());
             gameStateManager.AddGameState("Victory", new VictoryState());
+            gameStateManager.AddGameState("Option", new Option());
             gameStateManager.SwitchTo("MainMenu");
         }
 

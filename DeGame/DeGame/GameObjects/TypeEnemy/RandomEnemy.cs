@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 public class RandomEnemy : Enemy
 {
     int Counter = 0;
-    float bulletdamage;
     float speed = 0.2f;
     Vector2 direction;
 
@@ -14,10 +13,11 @@ public class RandomEnemy : Enemy
         bulletsprite = GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet");
         basevelocity = new Vector2(0.06f, 0.06f);
         velocity = basevelocity;
-        bulletdamage = 3 * statmultiplier;
-        health = 100 * statmultiplier;
+        bulletdamage = 5 * statmultiplier;
+        health = 120 * statmultiplier;
         maxhealth = 100 * statmultiplier;
         expGive = 120 * statmultiplier;
+        contactdamage = 2 * statmultiplier;
 
     }
 

@@ -16,11 +16,13 @@ public class CraftingSlot : InventorySlot
 
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/InventorySlots/CraftingSlot");
     }
+
     public void AddItem(Item item)
     {
         this.item = item;
         itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
     }
+
     public override void Update(GameTime gameTime)
     {
         if (item != null)

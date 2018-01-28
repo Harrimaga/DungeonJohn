@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 class Recipe
 {
     public List<Item> list1, list2, listNewItem;
+
     public Recipe()
     {
         list1 = new List<Item>();

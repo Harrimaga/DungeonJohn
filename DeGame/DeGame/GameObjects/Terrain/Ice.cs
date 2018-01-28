@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 class Ice : Tiles
 {
     public bool OnThisTile = false;
+
     public Ice(Vector2 startPosition, int layer = 0, string id = "Ice")
     : base(startPosition, layer, id)
     {
