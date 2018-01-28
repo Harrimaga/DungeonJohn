@@ -119,6 +119,10 @@ public class Room : GameObjectList
                 Right = TilePosition;
                 CreateObject(x, y, ">");
                 break;
+            case '0':
+                roomarray[x, y] = "Shopkeeper";
+                CreateObject(x, y, "0");
+                break;
             case 'C':
                 roomarray[x, y] = "ChasingEnemy";
                 CreateObject(x, y, "C");
@@ -465,6 +469,10 @@ public class Room : GameObjectList
                 Door right = new Door(rightdoor, Right, 4);
                 door.Add(right);
                 break;
+            case ("0"):
+                Shopkeeper Shopkeeper = new Shopkeeper(TilePosition, 0, "Shopkeeper");
+                tiles.Add(Shopkeeper);
+                break;
         }
     }
 
@@ -608,9 +616,6 @@ public class Room : GameObjectList
                             break;
                         case "ExitShop":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/EndTile")), TilePosition, Color.White);
-                            break;
-                        case "Ice":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite")), position, Color.Red);
                             break;
                         case "Start":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/StartTile")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight - 120), Color.Gray);

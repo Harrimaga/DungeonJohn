@@ -45,7 +45,9 @@ public class TwoPartEnemy : Enemy
                 maxhealth = 75;
                 health = 75;
                 Stage = 2;
-                //PlayingState.currentFloor.currentRoom.position.enemies.Add(TwoPartEnemy);
+                TwoPartEnemy TwoPartEnemy = new TwoPartEnemy(position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyFull").Height * 0.8f), Roomposition, PlayingState.currentFloor.displayint);
+                //PlayingState.currentFloor.currentRoom.addedenemies.Add(TwoPartEnemy);
+                //PlayingState.currentFloor.currentRoom.addedenemies.Add(TwoPartEnemy);
             }
         }
         if (Stage == 2)
