@@ -32,8 +32,7 @@ class CreamBatBoss : Boss
     {
         base.Update(gameTime);
         
-        shootcounter1--;
-        //BossBox = new Rectangle((int)position.X - 61, (int)position.Y - 61, sprite.Width + 122, sprite.Height + 122);
+        shootcounter1 -= 1 * gameTime.ElapsedGameTime.Milliseconds;
         SolidCollision();
 
         if (Stage == 1)
@@ -93,7 +92,7 @@ class CreamBatBoss : Boss
             {
                 velocity = new Vector2(0.1f, 0.1f);
             }
-            Spam();
+            Spam(gameTime);
             
             BossChase(gameTime);
             if (health <= 0)
@@ -120,10 +119,10 @@ class CreamBatBoss : Boss
         }
     }
 
-    public void Spam()
+    public void Spam(GameTime gameTime)
     {
-        shootcounter2--;
-        shootcounter3--;
+        shootcounter2 -= 1 * gameTime.ElapsedGameTime.Milliseconds; ;
+        shootcounter3 -= 1 * gameTime.ElapsedGameTime.Milliseconds; ;
         if (shootcounter2 <= 0)
         {
             Vector2 bulletPosition = new Vector2(sprite.Width / 2, 50);

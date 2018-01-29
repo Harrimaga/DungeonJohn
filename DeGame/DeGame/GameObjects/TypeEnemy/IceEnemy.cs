@@ -24,7 +24,7 @@ public class IceEnemy : Enemy
     public void Range(GameTime gameTime)
     {
         Counter += 1 *gameTime.ElapsedGameTime.Milliseconds;
-        if (Counter >= 100)
+        if (Counter >= 1000)
         {
             if (PlayingState.player.position.X + range > position.X || PlayingState.player.position.X - range < position.X ||
             PlayingState.player.position.Y + range > position.Y || PlayingState.player.position.Y - range < position.Y)

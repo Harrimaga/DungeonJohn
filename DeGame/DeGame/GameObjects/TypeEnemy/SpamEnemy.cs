@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class SpamEnemy : Enemy
 {
-    int Counter = 50;
+    int Counter = 100;
     int BulletCounter = 0;
     float speed = 0.2f;
 
@@ -23,16 +23,16 @@ public class SpamEnemy : Enemy
     {
         Counter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
 
-        if (Counter <= 10)
+        if (Counter <= 0)
         {
             Shoot();
-            BulletCounter += 1 * gameTime.ElapsedGameTime.Milliseconds;
-            Counter = 20;
+            BulletCounter += 1;
+            Counter = 100;
         }
         if (BulletCounter == 20)
         {
             BulletCounter = 0;
-            Counter = 100;
+            Counter = 2000;
         }
     }
 

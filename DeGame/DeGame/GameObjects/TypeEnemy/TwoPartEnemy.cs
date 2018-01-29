@@ -65,6 +65,7 @@ public class TwoPartEnemy : Enemy
         if (Stage == 1)
         {
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyFull"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
+            
         }
         if (Stage == 2)
         {
