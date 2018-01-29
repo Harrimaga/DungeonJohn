@@ -36,17 +36,17 @@ public class HomingBoss : Boss
         HomingBullets.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition && alive == true)
         {
-            Shoot();
+            Shoot(gameTime);
             Move(gameTime);
             velocity = new Vector2(0.01f, 0.01f);
         }
         FinalStage();
     }
 
-    public void Shoot()
+    public void Shoot(GameTime gameTime)
     {
         bool Hmng = false;
-        Counter--;
+        Counter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
 
         if (Counter <= 0)
         {
@@ -65,7 +65,7 @@ public class HomingBoss : Boss
                 //PlayingState.currentFloor.currentRoom.enemybullets.Add(bullet1);uogifdsfdaasthdjfkjljlk
                 //PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].homingenemybullets.Add(bullet2);
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet1);
-                Counter = 100;
+                Counter = 1000;
         
             }
             else if (PlayingState.player.position.X < position.X + sprite.Width / 2)
@@ -76,7 +76,7 @@ public class HomingBoss : Boss
                 //PlayingState.currentFloor.currentRoom.enemybullets.Add(bullet1);
                 //PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].homingenemybullets.Add(bullet2);
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet1);
-                Counter = 100;
+                Counter = 1000;
             }
         }
     }

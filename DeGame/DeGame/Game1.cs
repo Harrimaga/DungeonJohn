@@ -41,7 +41,8 @@ namespace DeGame
             gameStateManager.AddGameState("Leveling", new Leveling());
             gameStateManager.AddGameState("Victory", new VictoryState());
             gameStateManager.AddGameState("Option", new Option());
-            gameStateManager.SwitchTo("MainMenu");
+            gameStateManager.AddGameState("Intro", new IntroState());
+            gameStateManager.SwitchTo("Intro");
         }
 
         protected override void UnloadContent()
