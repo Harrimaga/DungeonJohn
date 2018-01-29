@@ -20,6 +20,7 @@ public class ChasingMinion : Enemy
     {
         velocity = basevelocity;
         base.Update(gameTime);
+            velocity = basevelocity;
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
     }
