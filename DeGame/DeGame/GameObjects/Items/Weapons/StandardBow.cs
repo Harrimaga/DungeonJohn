@@ -21,7 +21,7 @@ public class StandardBow : Item, IWeapon
         melee = false;
         twoHanded = true;
         addedDamage = 40;
-        projectile_velocity = 0.5f;
+        projectile_velocity = 0.7f;
         attackspeed = 4;
         range = 400;
         maxammo = -1;

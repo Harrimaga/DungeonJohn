@@ -50,8 +50,8 @@ public class RandomEnemy : Enemy
 
     public override void Update(GameTime gameTime)
     {
-        direction = (PlayingState.player.position - position);
         base.Update(gameTime);
+        direction = (PlayingState.player.position - position);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
         {
             Shoot(gameTime);
@@ -61,6 +61,6 @@ public class RandomEnemy : Enemy
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/RandomEnemy"), position, null, Color.White, 0f, Vector2.Zero, 1f, Effects, 0f);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/RandomEnemy"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
     }
 }

@@ -14,25 +14,12 @@ public class ChasingMinion : Enemy
         flying = true;
         bossenemy = true;
         expGive = 0;
+        contactdamage = 10 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (CollidesWith(PlayingState.player))
-        {
-            counter--;
-            if (counter == 0)
-            {               
-                PlayingState.player.health -= 0;
-                counter = 100;
-            }
-        }
-        else
-        {
-            velocity = basevelocity;
-        }
-
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
     }

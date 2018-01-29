@@ -7,29 +7,18 @@ public class TwoPartEnemy : Enemy
     int Stage = 1;
     public TwoPartEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/2PartEnemyFull", Difficulty, layer, id)
     {
-        basevelocity = new Vector2(0.08f, 0.08f);
+        basevelocity = new Vector2(0.12f, 0.12f);
         health = 100 * statmultiplier;
         maxhealth = 100 * statmultiplier;
         expGive = 120 * statmultiplier;
         contactdamage = 10 * statmultiplier;
         killable = false;
         hpdisplay = true;
+        contactdamage = 10 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)
     {
-        if (CollidesWith(PlayingState.player))
-        {
-            velocity = Vector2.Zero;
-            counter--;
-            if (counter == 0)
-            {
-
-                PlayingState.player.health -= 10;
-                counter = 100;
-            }
-        }
-
         if (!CollidesWith(PlayingState.player))
         {
             velocity = basevelocity;

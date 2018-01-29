@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -25,11 +26,11 @@ public class Player : SpriteGameObject
     public int level;
     public int gold;
     public int ammo;
-    SpriteEffects Effect;
     public string lastUsedspeed;
     public GameObjectList bullets;
     public Rectangle collisionhitbox;
     public static InventoryManager inventory;
+    SoundEffect shootsound, hitsound;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Characters/PlayerDown", 0, "Player")
@@ -39,6 +40,8 @@ public class Player : SpriteGameObject
         lastUsedspeed = "Down";
         CalculateDamage();
         CalculateAmmo();
+        shootsound = GameEnvironment.assetManager.GetSound("SoundEffects/Shoot");
+        hitsound = GameEnvironment.assetManager.GetSound("SoundEffects/Hit");
     }
 
     public override Rectangle BoundingBox
@@ -233,7 +236,15 @@ public class Player : SpriteGameObject
         inventory.currentPassives[0] = null;
         inventory.currentPassives[1] = null;
         inventory.currentWeapon = new StandardBow();
+        IWeapon weapon = (IWeapon)inventory.currentWeapon;
+        attack = weapon.AddedDamage;
         startup = true;
+    }
+
+    public void TakeDamage(float enemydamage)
+    {
+        hitsound.Play();
+        health -= (float)(enemydamage * damagereduction);
     }
 
     void NextLevel()
@@ -276,6 +287,7 @@ public class Player : SpriteGameObject
             IWeapon weapon = (IWeapon)inventory.currentWeapon;
             if (weapon != null)
             {
+                shootsound.Play();
                 weapon.Attack(direction);
                 if (ammo > 0)
                 {
@@ -325,7 +337,7 @@ public class Player : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(playersprite, position, null, Color.White, 0f, Vector2.Zero, 1f, Effect, 0f);
+        spriteBatch.Draw(playersprite, position, null, Color.White);
         if (ammo < 0)
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Ammo: infinite!", new Vector2(PlayingState.hud.screenwidth - 275 + (Camera.Position.X - PlayingState.hud.screenwidth / 2), 175 + (Camera.Position.Y - PlayingState.hud.screenheight / 2)), Color.White);
         else

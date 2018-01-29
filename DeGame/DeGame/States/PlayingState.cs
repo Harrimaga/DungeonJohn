@@ -1,11 +1,7 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 public class PlayingState : IGameObject
 {
@@ -13,6 +9,7 @@ public class PlayingState : IGameObject
     public static Floor currentFloor;
     public static HUD hud;
     Floor floor;
+    SoundEffect Loss;
 
     public PlayingState()
     {
@@ -22,6 +19,7 @@ public class PlayingState : IGameObject
         currentFloor = floor;
         GameEnvironment.gameStateManager.LastState = "playing";
         Player.inventory.currentWeapon = new BigMac();
+        Loss = GameEnvironment.assetManager.GetSound("SoundEffects/Loss");
     }
 
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
@@ -41,6 +39,7 @@ public class PlayingState : IGameObject
         hud.Update(gameTime);
         if (player.health <= 0)
         {
+            Loss.Play();
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
         }
         if (currentFloor.CurrentLevel >= 10)

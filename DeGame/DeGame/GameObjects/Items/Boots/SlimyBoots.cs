@@ -10,20 +10,20 @@ class SlimyBoots : Item, IBoots
     {
         Cost = 7;
         itemName = "SlimyBoots";
-        itemDescription = "Ice stands no chance against these boots.";
+        itemDescription = "You move slightly slower but Ice stands no chance against these boots.";
         Type = "boots";
     }
 
     public override void equip()
     {
         PlayingState.player.SlimyBoots = true;
-        PlayingState.player.extraspeed *= 1.20f;
+        PlayingState.player.extraspeed *= 0.90f;
     }
 
     public override void unequip()
     {
         PlayingState.player.SlimyBoots = false;
-        PlayingState.player.extraspeed /= 1.20f;
+        PlayingState.player.extraspeed /= 0.90f;
         base.unequip();
     }
 }

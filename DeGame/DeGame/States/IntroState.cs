@@ -12,11 +12,10 @@ class IntroState : IGameObject
     Vector2 velocity = new Vector2(0,-0.1f);
     Vector2 position = new Vector2(Camera.Position.X - 300, Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2) + 1000);
     Vector2 TextPosition = new Vector2(Camera.Position.X - 300, Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2) + 1600);
+    Vector2 SkipPosition = new Vector2(Camera.Position.X - 800, Camera.Position.X - 600);
     int Counter = 0;
-    protected IGameObject playingState;
     public IntroState()
     {
-        playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
@@ -25,6 +24,7 @@ class IntroState : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "[Press 'Space' to skip]", SkipPosition, Color.White);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/NewBTeam"), position);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Dungeon John is a man with a mission:", TextPosition, Color.White);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "To take revenge on the infamous CreamBat that kidnapped his beloved toaster!", TextPosition + new Vector2(0, 25), Color.White);
@@ -41,7 +41,6 @@ class IntroState : IGameObject
         {
             Reset();
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
-
         }
     }
     public virtual void Reset()
