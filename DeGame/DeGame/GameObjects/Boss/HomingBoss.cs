@@ -25,6 +25,7 @@ public class HomingBoss : Boss
         maxhealth = 600 * statmultiplier;
         bulletdamage = 0 * statmultiplier;
         health = maxhealth;
+        contactdamage = 20;
         MoveDirection = Vector2.Zero;
         MoveDirection.Normalize();
     }

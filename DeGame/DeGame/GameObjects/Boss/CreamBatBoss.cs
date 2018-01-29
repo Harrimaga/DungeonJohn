@@ -19,6 +19,7 @@ class CreamBatBoss : Boss
         position = startPosition;
         expGive = 240;
         maxhealth = 300;
+        contactdamage = 10;
         health = maxhealth;
         sprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite1");
         velocity = Vector2.Zero;

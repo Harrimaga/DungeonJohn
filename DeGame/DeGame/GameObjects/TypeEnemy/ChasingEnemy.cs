@@ -5,7 +5,7 @@ public class ChasingEnemy : Enemy
 {
     public ChasingEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/BearEnemyPixel", Difficulty, layer, id)
     {
-        basevelocity = new Vector2(0.08f, 0.08f);
+        basevelocity = new Vector2(0.12f, 0.12f);
         health = 120 * statmultiplier;
         maxhealth = 120 * statmultiplier;
         expGive = 120 * statmultiplier;
