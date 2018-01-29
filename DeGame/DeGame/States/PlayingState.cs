@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework.Input;
 
 public class PlayingState : IGameObject
 {
+    /// <summary>
+    /// Hier worden de player, de floor en de hud aangemaakt
+    /// </summary>
     public static Player player;
     public static Floor currentFloor;
     public static HUD hud;
@@ -59,4 +62,3 @@ public class PlayingState : IGameObject
         player.Draw(gameTime, spriteBatch);
     }
 }
-
