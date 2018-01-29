@@ -21,7 +21,7 @@ class GameOverState : IGameObject
     {
         MainMenu.HandleInput(inputHelper, gameTime);
         if (inputHelper.KeyPressed(Keys.Z))
-            GameEnvironment.gameStateManager.SwitchTo("MainMenu");
+            GameEnvironment.gameStateManager.SwitchTo("IntroState");
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
@@ -33,7 +33,7 @@ class GameOverState : IGameObject
     {
         MainMenu.Update(gameTime);
         if (MainMenu.Pressed)
-            GameEnvironment.gameStateManager.SwitchTo("MainMenu"); 
+            GameEnvironment.gameStateManager.SwitchTo("Intro"); 
         BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2) - 60);
     }
     public virtual void Reset()
