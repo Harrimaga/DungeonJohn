@@ -32,7 +32,7 @@ public class RangedEnemy : Enemy
         else
         direction = Vector2.Zero;
 
-        if(Counter >= 1000)
+        if(Counter >= 900)
         {
             Shoot();
             Counter = 0;
