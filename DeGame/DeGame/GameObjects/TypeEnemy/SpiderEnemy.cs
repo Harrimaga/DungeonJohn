@@ -5,9 +5,8 @@ using System;
 public class SpiderEnemy : Enemy
 {
     int ChargeCounter = 0;
-    int ChargeDirection;
+    int ChargeDirection, max;
     static Random random = new Random();
-    float ChargeSpeed = 2f;
 
     public SpiderEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/SpiderEnemy", Difficulty, layer, id)
     {
@@ -19,6 +18,7 @@ public class SpiderEnemy : Enemy
         moving = false;
         expGive = 50 * statmultiplier;
         contactdamage = 10 * statmultiplier;
+        max = random.Next(40) + 60;
     }
 
     public override void Update(GameTime gameTime)
@@ -89,9 +89,10 @@ public class SpiderEnemy : Enemy
                     }       
                 }
             }
-            if (ChargeCounter >= 70)
+            if (ChargeCounter >= max)
             {
                 ChargeCounter = 0;
+                max = random.Next(30) + 60;
             }
         }
     }

@@ -38,22 +38,21 @@ class EndRoom : Room
 
     public string ChooseBoss(int currentlevel)
     {
-        //switch (currentlevel)
-        //{
-        //    case 1:
-        //        return "HomingBoss";
-        //    case 2:
-        //        return "MinionBoss";
-        //    case 3:
-        //        return "HomingBoss2";
-        //    case 4:
-        //        return "MinionBoss2";
-        //    case 5:
-        //        return "CreamBatBoss";
-        //    default:
-        //        return "HomingBoss";
-        //}
-        return "MinionBoss";
+        switch (currentlevel)
+        {
+            case 1:
+                return "HomingBoss";
+            case 2:
+                return "MinionBoss";
+            case 3:
+                return "HomingBoss2";
+            case 4:
+                return "MinionBoss2";
+            case 5:
+                return "CreamBatBoss";
+            default:
+                return "HomingBoss";
+        }
     }
 
     public void PlaceBoss(string boss)
