@@ -34,7 +34,7 @@ class Lava : Tiles
         }
     }
 
-         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Lava"), position);
     }

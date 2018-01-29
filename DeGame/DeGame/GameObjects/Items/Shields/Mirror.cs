@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-class Mirror : Item, IShield
+﻿class Mirror : Item, IShield
 {
     float addeddefence, defencemultiplier;
     public Mirror()

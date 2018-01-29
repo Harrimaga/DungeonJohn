@@ -3,9 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 class PauseMenuState : IGameObject
 {
@@ -51,14 +48,12 @@ class PauseMenuState : IGameObject
             int x, y;
             y = (int)Math.Floor((double)i / 9);
             x = i % 9;
-            //slotPosition = wornItems.position + new Vector2(0, 200) + new Vector2(x * 74, y * 74);
             slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
 
             inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
         }
 
         oldInventory = inventory;
-
         startup = false;
     }
 
@@ -125,7 +120,6 @@ class PauseMenuState : IGameObject
             int x, y;
             y = (int)Math.Floor((double)i / 9);
             x = i % 9;
-            //slotPosition = wornItems.position + new Vector2(0, 200) + new Vector2(x * 74, y * 74);
             slotPosition = BasisPosition + new Vector2(500 + x * 74, 450 + y * 74);
 
             inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));

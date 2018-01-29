@@ -18,7 +18,6 @@ public class RandomEnemy : Enemy
         maxhealth = 100 * statmultiplier;
         expGive = 120 * statmultiplier;
         contactdamage = 2 * statmultiplier;
-
     }
 
     public void Shoot(GameTime gameTime)

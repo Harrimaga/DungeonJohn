@@ -149,7 +149,6 @@ public class Player : SpriteGameObject
                     playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
                     break;
             }
-
         }
         else
         {
@@ -269,6 +268,14 @@ public class Player : SpriteGameObject
         {
             maxhealth += 50;
             health += 50;
+        }
+        if (type == 3)
+        {
+            extraspeed *= 1.15;
+        }
+        if (type == 4)
+        {
+            attackspeedreduction *= 0.85;
         }
     }
 

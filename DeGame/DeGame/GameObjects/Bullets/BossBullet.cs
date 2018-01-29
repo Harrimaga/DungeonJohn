@@ -24,8 +24,8 @@ class BossBullet : E_Bullet
         Effects = effects;
         difference = PlayerOrigin - position;
         difference.Normalize();
-
     }
+
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);

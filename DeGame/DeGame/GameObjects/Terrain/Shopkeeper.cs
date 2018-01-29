@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 class Shopkeeper : Tiles
 {
@@ -22,5 +16,4 @@ class Shopkeeper : Tiles
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Shopkeeper"), position);
     }
-
 }
