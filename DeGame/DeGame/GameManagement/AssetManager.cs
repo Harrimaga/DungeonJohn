@@ -24,8 +24,7 @@ public class AssetManager
         catch (Exception e)
         {
             return null;
-        }
-        
+        }        
     }
 
     public SpriteFont GetFont(string assetName)

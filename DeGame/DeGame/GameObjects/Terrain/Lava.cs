@@ -28,7 +28,7 @@ class Lava : Tiles
         {
             if(!PlayingState.player.HelicopterHat)
             {
-                PlayingState.player.health -= LavaDamage;
+                PlayingState.player.TakeDamage(LavaDamage);
                 PlayingState.currentFloor.currentRoom.lavatimer += 30;
             }
         }

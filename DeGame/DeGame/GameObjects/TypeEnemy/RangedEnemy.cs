@@ -16,7 +16,7 @@ public class RangedEnemy : Enemy
         bulletdamage = 7 * statmultiplier;
         health = 90 * statmultiplier;
         maxhealth = 100 * statmultiplier;
-        expGive = 100 * statmultiplier;
+        expGive = 1000 * statmultiplier;
         contactdamage = 2 * statmultiplier;
         basevelocity = new Vector2(0.08f, 0.08f);
     }

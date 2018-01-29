@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 class Consumables : SpriteGameObject
@@ -6,6 +7,7 @@ class Consumables : SpriteGameObject
     string type;
     Texture2D consumablesprite;
     public static InventoryManager inventory;
+    SoundEffect pickup;
 
     public Consumables(Vector2 startPosition, string consumablename, int layer = 0, string id = "consumable")
     : base("Sprites/Drops/Coin", layer, id)
@@ -20,6 +22,7 @@ class Consumables : SpriteGameObject
             consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Coin");
         else if (type == "toaster")
             consumablesprite = GameEnvironment.assetManager.GetSprite("Sprites/Drops/Toaster");
+        pickup = GameEnvironment.assetManager.GetSound("SoundEffects/Pickup");
     }
 
     public override void Update(GameTime gameTime)
@@ -36,6 +39,7 @@ class Consumables : SpriteGameObject
                             PlayingState.player.health += 20;
                         else
                             PlayingState.player.health += PlayingState.player.maxhealth - PlayingState.player.health;
+                        pickup.Play();
                         GameObjectList.RemovedObjects.Add(this);
                     }
                     break;
@@ -46,11 +50,13 @@ class Consumables : SpriteGameObject
                         PlayingState.player.ammo += 25;
                         if (PlayingState.player.ammo > weapon.MaxAmmo)
                             PlayingState.player.ammo = weapon.MaxAmmo;
+                        pickup.Play();
                         GameObjectList.RemovedObjects.Add(this);
                     }
                     break;
                 case "gold":
                     PlayingState.player.gold += 5;
+                    pickup.Play();
                     GameObjectList.RemovedObjects.Add(this);
                     break;
                 case "toaster":

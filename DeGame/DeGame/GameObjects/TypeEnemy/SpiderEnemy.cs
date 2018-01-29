@@ -6,7 +6,6 @@ public class SpiderEnemy : Enemy
 {
     int ChargeCounter = 0;
     int ChargeDirection;
-    float damage;
     static Random random = new Random();
     float ChargeSpeed = 2f;
 
@@ -18,9 +17,8 @@ public class SpiderEnemy : Enemy
         maxhealth = 50 * statmultiplier;
         range = 100;
         moving = false;
-        damage = 10 * statmultiplier;
         expGive = 50 * statmultiplier;
-        contactdamage = 5 * statmultiplier;
+        contactdamage = 10 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)
@@ -28,15 +26,6 @@ public class SpiderEnemy : Enemy
         base.Update(gameTime);
         ChargeCounter++;
         velocity = new Vector2(0.2f, 0.2f);
-        if (CollidesWith(PlayingState.player))
-        {
-            counter--;
-            if (counter == 0)
-            {
-                PlayingState.player.health -= damage;
-                counter = 100;
-            }
-        }
         Charge();
     }
 

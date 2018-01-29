@@ -16,7 +16,7 @@ class GameOverState : IGameObject
     {
         MainMenu.HandleInput(inputHelper, gameTime);
         if (inputHelper.KeyPressed(Keys.Z))
-            GameEnvironment.gameStateManager.SwitchTo("IntroState");
+            GameEnvironment.gameStateManager.SwitchTo("MainMenu");
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

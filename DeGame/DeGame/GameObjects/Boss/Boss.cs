@@ -16,7 +16,7 @@ public class Boss :  SpriteGameObject
     HealthBar healthbar;
     public bool alive = true;
     protected Color color = Color.White;
-    int counter = 10;
+    int counter = 0;
     public Boss(Vector2 startPosition, Vector2 roomposition, string assetname, int difficulty = 0, int layer = 0, string id = "Boss") : base(assetname, layer, id)
     {
         position = startPosition;
@@ -82,14 +82,15 @@ public class Boss :  SpriteGameObject
 
     public void PlayerCollision()
     {
+        counter--;
         if (CollidesWith(PlayingState.player))
         {
             velocity = Vector2.Zero;
-            counter--;
+           
             if (counter <= 0)
             {
-                PlayingState.player.health -= contactdamage;
-                counter = 100;
+                PlayingState.player.TakeDamage(contactdamage);
+                counter = 1000;
             }
         }
     }
