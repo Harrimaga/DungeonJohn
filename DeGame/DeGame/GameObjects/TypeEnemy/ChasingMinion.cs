@@ -9,7 +9,6 @@ public class ChasingMinion : Enemy
         basevelocity = new Vector2(0.08f, 0.08f);
         health = 30 * statmultiplier;
         maxhealth = 30 * statmultiplier;
-        attack = 5 * statmultiplier;
         drop = false;
         flying = true;
         bossenemy = true;
@@ -19,6 +18,7 @@ public class ChasingMinion : Enemy
 
     public override void Update(GameTime gameTime)
     {
+        velocity = basevelocity;
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
