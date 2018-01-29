@@ -16,7 +16,7 @@ public class Enemy : SpriteGameObject
     protected float expGive = 120;
     protected float bulletdamage;
     protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true, hpdisplay = false;
-    protected int counter = 100, poisoncounter = 0, hitcounter = 0;
+    protected int counter = 0, poisoncounter = 0, hitcounter = 0;
     protected Vector2 direction, basevelocity = Vector2.Zero, PlayerOrigin;
     protected SpriteEffects Effects;
     protected Texture2D playersprite, bulletsprite;
@@ -51,9 +51,7 @@ public class Enemy : SpriteGameObject
         PlayerCollision();
         if (!flying)
             SolidCollision();
-        if (counter > 0)
-            counter--;
-        counter--;
+        counter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
 
         if (moving)
         {
@@ -189,7 +187,7 @@ public class Enemy : SpriteGameObject
             if (counter <= 0)
             {
                 PlayingState.player.TakeDamage(contactdamage);
-                counter = 100;
+                counter = 500;
             }
         }
     }
