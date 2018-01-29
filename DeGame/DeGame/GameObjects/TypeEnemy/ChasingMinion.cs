@@ -14,6 +14,7 @@ public class ChasingMinion : Enemy
         flying = true;
         bossenemy = true;
         expGive = 0;
+        attack = 10;
     }
 
     public override void Update(GameTime gameTime)
@@ -23,8 +24,8 @@ public class ChasingMinion : Enemy
         {
             counter--;
             if (counter == 0)
-            {               
-                PlayingState.player.health -= 0;
+            {
+                PlayingState.player.TakeDamage(attack);
                 counter = 100;
             }
         }

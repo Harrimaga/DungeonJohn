@@ -188,7 +188,7 @@ public class Enemy : SpriteGameObject
             direction = Vector2.Zero;           
             if (counter <= 0)
             {
-                PlayingState.player.health -= contactdamage;
+                PlayingState.player.TakeDamage(contactdamage);
                 counter = 100;
             }
         }

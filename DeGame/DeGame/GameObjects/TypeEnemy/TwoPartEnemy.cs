@@ -14,22 +14,11 @@ public class TwoPartEnemy : Enemy
         contactdamage = 10 * statmultiplier;
         killable = false;
         hpdisplay = true;
+        contactdamage = 10 * statmultiplier;
     }
 
     public override void Update(GameTime gameTime)
     {
-        if (CollidesWith(PlayingState.player))
-        {
-            velocity = Vector2.Zero;
-            counter--;
-            if (counter == 0)
-            {
-
-                PlayingState.player.health -= 10;
-                counter = 100;
-            }
-        }
-
         if (!CollidesWith(PlayingState.player))
         {
             velocity = basevelocity;

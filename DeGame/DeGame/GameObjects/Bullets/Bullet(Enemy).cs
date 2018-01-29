@@ -54,7 +54,7 @@ class E_Bullet : SpriteGameObject
             {
                 if (reflectchance < 20)
                 {
-                    PlayingState.player.health -= (float)(Damage * PlayingState.player.damagereduction / 2);
+                    PlayingState.player.TakeDamage((float)(Damage * PlayingState.player.damagereduction / 2));
                     reflected = true;
                     Speed += 1;
                     changedirection = true;
@@ -66,7 +66,7 @@ class E_Bullet : SpriteGameObject
                 }
                 else
                 {
-                    PlayingState.player.health -= (float)(Damage * PlayingState.player.damagereduction);
+                    PlayingState.player.TakeDamage(Damage);
                     GameObjectList.RemovedObjects.Add(this);
                     return;
                 }

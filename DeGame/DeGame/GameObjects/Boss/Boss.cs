@@ -89,7 +89,7 @@ public class Boss :  SpriteGameObject
             counter--;
             if (counter <= 0)
             {
-                PlayingState.player.health -= contactdamage;
+                PlayingState.player.TakeDamage(contactdamage);
                 counter = 100;
             }
         }
