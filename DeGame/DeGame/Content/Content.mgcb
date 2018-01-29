@@ -715,30 +715,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Tiles/Wall Sprite Corner LU.png
 
-#begin Sprites/Tiles/Wall Sprite Corner RD.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Tiles/Wall Sprite Corner RD.png
-
-#begin Sprites/Tiles/Wall Sprite Corner RU.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Tiles/Wall Sprite Corner RU.png
-
 #begin Sprites/Tiles/Wall Sprite Down2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2898,30 +2874,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Tiles/WoodenWall3.png
-
-#begin Sprites/Tiles/WoodenWall4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Tiles/WoodenWall4.png
-
-#begin Sprites/Tiles/WoodenWall5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Tiles/WoodenWall5.png
 
 #begin Sprites/Tiles/WoodenWall6.png
 /importer:TextureImporter

@@ -86,10 +86,6 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Wall";
                 CreateObject(x, y, "+");
                 break;
-            case 'x':
-                roomarray[x, y] = "WoodenWall";
-                CreateObject(x, y, "x");
-                break;
             case ',':
                 roomarray[x, y] = "ShopCounter";
                 CreateObject(x, y, ",");
@@ -434,10 +430,6 @@ public class Room : GameObjectList
                 Solid wall = new Wall(TilePosition, 0, "Wall");
                 solid.Add(wall);
                 break;
-            case ("x"):
-                Solid WoodenWall = new WoodenWall(TilePosition, 0, "WoodenWall");
-                solid.Add(WoodenWall);
-                break;
             case (","):
                 Solid ShopCounter = new ShopCounter(TilePosition, 0, "ShopCounter");
                 solid.Add(ShopCounter);
@@ -523,10 +515,10 @@ public class Room : GameObjectList
         }
         else
         {
-            up = 
-                left =
-                LU = 
-                LD =
+            up = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall2");
+                left = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall1");
+                LU = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall3");
+                LD = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall6");
         }
         // check of er een bovenkant walltile moet komen
         if (CheckRoomarray(x, y + 1))
@@ -555,13 +547,13 @@ public class Room : GameObjectList
         //check anders of er een rechteronderhoek moet komen
         else if (CheckRoomarray(x - 1, y - 1))
         {
-            spriteBatch.Draw(LD, TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipVertically, 0f);
+            spriteBatch.Draw(LD, TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall RD Shade")), TilePosition, Color.Gray);
         }
         //...of rechterbovenhoek
         else if (CheckRoomarray(x - 1, y + 1))
         {
-            spriteBatch.Draw(LU, TilePosition,null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipVertically, 0f);
+            spriteBatch.Draw(LU, TilePosition,null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall RU Shade")), TilePosition, Color.Gray);
         }
         //...of linksonderhoek
@@ -629,7 +621,7 @@ public class Room : GameObjectList
                 if (roomarray[x, y] != "Pit")
                     return true;
             }
-            else if (roomarray[x, y] == "Background" || roomarray[x, y] == "Lava" || roomarray[x, y] == "Ice" || roomarray[x, y] == "SpiderWeb" || roomarray[x, y] == "IceRock" || roomarray[x,y] == "Pit")
+            else if (roomarray[x, y] == "Background" || roomarray[x, y] == "Lava" || roomarray[x, y] == "Ice" || roomarray[x, y] == "SpiderWeb" || roomarray[x, y] == "IceRock" || roomarray[x,y] == "Pit" || roomarray[x,y] == "ShopCounter")
                 return true;
         }
         return false;
@@ -663,7 +655,10 @@ public class Room : GameObjectList
                         case "LeftDoor":
                         case "UpDoor":
                         case "Wall":
-                            WallShader(gameTime, spriteBatch, x, y);
+                            if (PlayingState.currentFloor.CurrentLevel % 2 == 0)
+                                WallShader(gameTime, spriteBatch, x, y, true);
+                            else
+                                WallShader(gameTime, spriteBatch, x, y);
                             break;
                         case "Exit":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/EndTileClosed")), TilePosition, Color.White);
