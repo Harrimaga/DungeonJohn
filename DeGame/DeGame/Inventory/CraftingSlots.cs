@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 public class CraftingSlots : GameObjectList
 {
@@ -13,6 +14,7 @@ public class CraftingSlots : GameObjectList
     public CraftingSlot itemSlot1, itemSlot2, itemNew;
     new Vector2 position;
     protected bool clicked1 = false, clicked2 = false ;
+    SoundEffect craftingsound;
 
     public CraftingSlots(Vector2 position) : base()
     {
@@ -110,6 +112,8 @@ public class CraftingSlots : GameObjectList
             itemSlot1.item = null;
             itemSlot2.item = null;
             itemNew.item = null;
+            craftingsound = GameEnvironment.assetManager.GetSound("SoundEffects/Crafting");
+            craftingsound.Play();
         }
     }
 }
