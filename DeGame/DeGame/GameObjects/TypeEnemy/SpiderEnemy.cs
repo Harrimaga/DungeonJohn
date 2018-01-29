@@ -60,34 +60,44 @@ public class SpiderEnemy : Enemy
                 }
                 else
                 {
-                    ChargeDirection = random.Next(8);
-                    switch (ChargeDirection)
+                    foreach (Solid s in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
                     {
-                        case 0:
-                            direction = new Vector2(0, -1);
-                            break;
-                        case 1:
-                            direction = new Vector2(1, -1);
-                            break;
-                        case 2:
-                            direction = new Vector2(1, 0);
-                            break;
-                        case 3:
-                            direction = new Vector2(1, 1);
-                            break;
-                        case 4:
-                            direction = new Vector2(0, 1);
-                            break;
-                        case 5:
-                            direction = new Vector2(-1, 1);
-                            break;
-                        case 6:
-                            direction = new Vector2(-1, 0);
-                            break;
-                        case 7:
-                            direction = new Vector2(-1, -1);
-                            break;
-                    }
+                        if (CollidesWith(s))
+                        {
+                            direction = -direction;
+                        }
+                        else
+                        {
+                            ChargeDirection = random.Next(8);
+                            switch (ChargeDirection)
+                            {
+                                case 0:
+                                    direction = new Vector2(0, -1);
+                                    break;
+                                case 1:
+                                    direction = new Vector2(1, -1);
+                                    break;
+                                case 2:
+                                    direction = new Vector2(1, 0);
+                                    break;
+                                case 3:
+                                    direction = new Vector2(1, 1);
+                                    break;
+                                case 4:
+                                    direction = new Vector2(0, 1);
+                                    break;
+                                case 5:
+                                    direction = new Vector2(-1, 1);
+                                    break;
+                                case 6:
+                                    direction = new Vector2(-1, 0);
+                                    break;
+                                case 7:
+                                    direction = new Vector2(-1, -1);
+                                    break;
+                            }
+                        }
+                    }       
                 }
             }
             if (ChargeCounter >= 70)
