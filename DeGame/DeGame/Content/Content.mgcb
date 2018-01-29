@@ -3091,12 +3091,6 @@
 /processorParam:Quality=Best
 /build:SoundEffects/Levelup.wav
 
-#begin SoundEffects/MenuNavigation.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/MenuNavigation.wav
-
 #begin SoundEffects/Pickup.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
