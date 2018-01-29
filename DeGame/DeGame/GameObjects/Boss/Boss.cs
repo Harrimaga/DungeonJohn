@@ -47,7 +47,6 @@ public class Boss :  SpriteGameObject
 
         RemoveBullets.Clear();
         PlayerCollision();
-        //SolidCollision();
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         base.Update(gameTime);
         if (poisoncounter > 0)

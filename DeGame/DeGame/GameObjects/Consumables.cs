@@ -58,7 +58,6 @@ class Consumables : SpriteGameObject
                     GameObjectList.RemovedObjects.Add(this);
                     break;
             }
-
         }
     }
 

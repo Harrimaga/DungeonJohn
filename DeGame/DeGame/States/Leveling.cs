@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 class Leveling : IGameObject
 {
@@ -35,8 +29,6 @@ class Leveling : IGameObject
         attackB.Draw(gameTime, spriteBatch);
         healthB.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/LevelUp"), new Vector2(350,100) + BasisPosition);
-        //spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Level-Up",BasisPosition + new Vector2(600,240), Color.Black);
-        //spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/pauze"), BasisPosition);
     }
 
     public virtual void Update(GameTime gameTime)

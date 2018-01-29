@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 class MainMenuState : IGameObject
 {
@@ -34,7 +29,6 @@ class MainMenuState : IGameObject
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PauseMenu/DungeonJohn"), new Vector2(-550, -380));
-        //spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/NewBTeam"), new Vector2(-300, -350));
         start.Draw(gameTime, spriteBatch);
         option.Draw(gameTime, spriteBatch);
     }
@@ -50,6 +44,5 @@ class MainMenuState : IGameObject
         PlayingState.currentFloor.ResetFloor();
         PlayingState.player.position = PlayingState.currentFloor.startPlayerPosition;
     }
-
 }
 

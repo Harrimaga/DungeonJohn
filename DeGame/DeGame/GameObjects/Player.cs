@@ -146,7 +146,6 @@ public class Player : SpriteGameObject
                     playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerLeft");
                     break;
             }
-
         }
         else
         {

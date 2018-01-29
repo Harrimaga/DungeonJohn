@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-//TODO: Damage regulation;
-//TODO: Friendly Fire?;
 class EnemyBullet : E_Bullet
 {
     Vector2 direction, actualvelocity;

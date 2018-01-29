@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-/// <summary>
-/// Actives are unused
-/// </summary>
 public class Nani : Item, IActive
 {
     public int maxCharges, charges;

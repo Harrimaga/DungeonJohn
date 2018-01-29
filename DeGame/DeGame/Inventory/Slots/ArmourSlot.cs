@@ -1,15 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 public class ArmourSlot : Slot
 {
-
     public ArmourSlot(Vector2 position, int layer = 0, string id = "ArmourSlot") : base ("Sprites/InventorySlots/ArmourSlot", layer, id)
     {
         this.position = position;
