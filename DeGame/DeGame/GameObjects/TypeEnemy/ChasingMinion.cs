@@ -20,11 +20,6 @@ public class ChasingMinion : Enemy
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        else
-        {
-            velocity = basevelocity;
-        }
-
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
     }
