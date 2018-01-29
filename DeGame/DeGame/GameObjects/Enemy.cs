@@ -16,7 +16,7 @@ public class Enemy : SpriteGameObject
     protected float expGive = 120;
     protected float bulletdamage;
     protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true, hpdisplay = false;
-    protected int counter = 100, poisoncounter = 0;
+    protected int counter = 100, poisoncounter = 0, hitcounter = 0;
     protected Vector2 direction, basevelocity = Vector2.Zero, PlayerOrigin;
     protected SpriteEffects Effects;
     protected Texture2D playersprite, bulletsprite;
@@ -69,19 +69,26 @@ public class Enemy : SpriteGameObject
             {
                 health -= PlayingState.player.attack;
                 if (PlayingState.player.VialOfPoison && bullet.poisonbullet)
-                    poisoncounter = 350;
+                    poisoncounter = 5000;
                 RemoveBullets.Add(bullet);
+                hitcounter = 200;
             }
         foreach (Bullet bullet in RemoveBullets)        
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
+        if (hitcounter > 0)
+        {
+            hitcounter -= gameTime.ElapsedGameTime.Milliseconds;
+            color = Color.Salmon;
+        }
+        else if (poisoncounter > 0)
         CheckAlive();
 
         if (poisoncounter > 0)
         {
             if (poisoncounter % 75 == 0 && poisoncounter < 350)
                 health -= 4;
-            poisoncounter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
+            poisoncounter -= gameTime.ElapsedGameTime.Milliseconds;
             color = Color.YellowGreen;
         }
         else

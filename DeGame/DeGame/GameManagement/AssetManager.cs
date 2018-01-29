@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -26,6 +27,7 @@ public class AssetManager
         }
         
     }
+
     public SpriteFont GetFont(string assetName)
     {
         if (assetName == "")
@@ -33,6 +35,15 @@ public class AssetManager
             return null;
         }
         return contentManager.Load<SpriteFont>(assetName);
+    }
+
+    public SoundEffect GetSound(string assetName)
+    {
+        if (assetName == "")
+        {
+            return null;
+        }
+        return contentManager.Load<SoundEffect>(assetName);
     }
 }
 
