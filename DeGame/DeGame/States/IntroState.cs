@@ -37,7 +37,7 @@ class IntroState : IGameObject
         position += velocity * gameTime.ElapsedGameTime.Milliseconds;
         TextPosition += velocity * gameTime.ElapsedGameTime.Milliseconds;
         Counter++;
-        if (Counter >= 100)
+        if (Counter >= 1100)
         {
             Reset();
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
