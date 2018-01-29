@@ -14,10 +14,8 @@ class IntroState : IGameObject
     Vector2 TextPosition = new Vector2(Camera.Position.X - 300, Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2) + 1600);
     Vector2 SkipPosition = new Vector2(Camera.Position.X - 800, Camera.Position.X - 600);
     int Counter = 0;
-    protected IGameObject playingState;
     public IntroState()
     {
-        playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {

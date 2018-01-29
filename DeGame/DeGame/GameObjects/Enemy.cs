@@ -48,7 +48,7 @@ public class Enemy : SpriteGameObject
         base.Update(gameTime);
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         healthbar.Update(gameTime, health, maxhealth, position);
-        //PlayerCollision();
+        PlayerCollision();
         if (!flying)
             SolidCollision();
         if (counter > 0)
@@ -82,6 +82,9 @@ public class Enemy : SpriteGameObject
             color = Color.Salmon;
         }
         else if (poisoncounter > 0)
+        CheckAlive();
+
+        if (poisoncounter > 0)
         {
             if (poisoncounter % 75 == 0 && poisoncounter < 350)
                 health -= 4;
@@ -189,30 +192,6 @@ public class Enemy : SpriteGameObject
                 counter = 100;
             }
         }
-        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Top)))
-            while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
-            {
-                PlayingState.player.position.Y++;
-                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
-            }
-        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Bottom)))
-            while (CollidesWith(PlayingState.player))
-            {
-                PlayingState.player.position.Y--;
-                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
-            }
-        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Left, PlayingState.player.collisionhitbox.Center.Y)))
-            while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
-            {
-                PlayingState.player.position.X++;
-                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
-            }
-        if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Right, PlayingState.player.collisionhitbox.Center.Y)))
-            while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
-            {
-                PlayingState.player.position.X--;
-                PlayingState.player.collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Width);
-            }
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
