@@ -111,11 +111,9 @@ class CreamBatBoss : Boss
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + bulletPosition, ShootDirection, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/CreamBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
             if (Stage == 1)
-                shootcounter1 = 40;
+                shootcounter1 = 1000;
             if (Stage == 2)
-                shootcounter1 = 20;
-            if (Stage == 3)
-                shootcounter1 = 10;
+                shootcounter1 = 1100;
         }
     }
 
@@ -143,10 +141,10 @@ class CreamBatBoss : Boss
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet7);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet8);
             MoveCounter++;
-            shootcounter2 = 50;
+            shootcounter2 = 1000;
 
         }
-        if (shootcounter3 <= 25)
+        if (shootcounter3 <= 250)
         {
             Vector2 bulletPosition = new Vector2(sprite.Width / 2, 50);
             EnemyBullet bullet1 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(0.5f, -1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/CreamBullet"));
@@ -166,14 +164,14 @@ class CreamBatBoss : Boss
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet7);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet8);
             MoveCounter++;
-            shootcounter3 = 75;
+            shootcounter3 = 1750;
 
         }
         if (MoveCounter == 4)
         {
             MoveCounter = 0;
-            shootcounter2 = 100;
-            shootcounter3 = 100;
+            shootcounter2 = 1000;
+            shootcounter3 = 1000;
         }
 
     }

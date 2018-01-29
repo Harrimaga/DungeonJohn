@@ -112,6 +112,6 @@ class BossBullet : E_Bullet
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"), position, null, null, BulletOrigin, RotateAngle, null, null, Effects, 0);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, BulletOrigin, RotateAngle, null, null, Effects, 0);
     }
 }
