@@ -41,7 +41,7 @@ class EndRoom : Room
         switch (currentlevel)
         {
             case 1:
-                return "CreamBatBoss";
+                return "HomingBoss";
             case 2:
                 return "MinionBoss";
             case 3:

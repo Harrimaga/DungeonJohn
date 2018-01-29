@@ -608,6 +608,20 @@ public class Room : GameObjectList
         //als geen van bovenstaande wordt uitgevoerd, teken dan een normale backgroundsprite
     }
 
+    void Counter(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
+    {
+        if (CheckRoomarray( x + 1, y, 4) && CheckRoomarray(x - 1, y, 4))
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop1")), TilePosition, Color.Gray);
+        else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1,4) && x < 11)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop3"), TilePosition, Color.Gray);
+        else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1, 4) && x > 11)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop3"), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+        else if (CheckRoomarray(x + 1, y, 4) && CheckRoomarray(x, y - 1, 4))
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop2")), TilePosition, Color.Gray);
+        else if (CheckRoomarray(x - 1, y, 4) && CheckRoomarray(x, y - 1, 4))
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop2"), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+    }
+
     public bool CheckRoomarray(int x, int y, int type = 1)
     {
         if (x >= 0 && x < roomarray.GetLength(0) && y >= 0 && y < roomarray.GetLength(1))
@@ -620,6 +634,11 @@ public class Room : GameObjectList
             else if (type == 3)
             {
                 if (roomarray[x, y] != "Pit")
+                    return true;
+            }
+            else if (type == 4)
+            {
+                if (roomarray[x, y] == "ShopCounter" || CheckRoomarray(x, y, 2))
                     return true;
             }
             else if (roomarray[x, y] == "Background" || roomarray[x, y] == "Lava" || roomarray[x, y] == "Ice" || roomarray[x, y] == "SpiderWeb" || roomarray[x, y] == "IceRock" || roomarray[x,y] == "Pit" || roomarray[x,y] == "ShopCounter")
@@ -674,7 +693,7 @@ public class Room : GameObjectList
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall1")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.White);
                             break;
                         case "ShopCounter":
-                            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop1")), new Vector2(x * CellWidth + a * roomwidth, y * CellHeight + b * roomheight), Color.White);
+                            Counter(gameTime, spriteBatch, x, y);
                             break;
                         default:
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Standardtile")), TilePosition, Color.Red);
