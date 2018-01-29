@@ -48,6 +48,7 @@ class CreamBatBoss : Boss
                 velocity = new Vector2(0.15f, 0.15f);
                 MoveTimer++;
             }
+            bulletdamage = 10;
             Shoot();
             Move(gameTime);
             if (health <= 0)
@@ -70,6 +71,7 @@ class CreamBatBoss : Boss
             {
                 velocity = new Vector2(0.20f, 0.20f);
             }
+            bulletdamage = 10;
             Shoot(); 
             BossChase(gameTime);
             if (health <= 0)
@@ -92,8 +94,8 @@ class CreamBatBoss : Boss
             {
                 velocity = new Vector2(0.1f, 0.1f);
             }
+            bulletdamage = 5;
             Spam(gameTime);
-            
             BossChase(gameTime);
             if (health <= 0)
             {

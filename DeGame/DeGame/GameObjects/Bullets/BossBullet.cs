@@ -44,6 +44,7 @@ class BossBullet : E_Bullet
                 actualvelocity = Homingdirection * speed;
                 position.X += actualvelocity.X * gameTime.ElapsedGameTime.Milliseconds;
                 position.Y += actualvelocity.Y * gameTime.ElapsedGameTime.Milliseconds;
+                Damage = 20;
             }
         }
         if (!Homing)
@@ -52,6 +53,7 @@ class BossBullet : E_Bullet
             actualvelocity = direction * speed;
             position.X += actualvelocity.X * gameTime.ElapsedGameTime.Milliseconds;
             position.Y += actualvelocity.Y * gameTime.ElapsedGameTime.Milliseconds;
+            Damage = 30;
         }
         if (changedirection)
         {
@@ -110,6 +112,9 @@ class BossBullet : E_Bullet
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, BulletOrigin, 0, null, null, Effects, 0);
+        if(Homing == true)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBulletHoming"), position, null, null, BulletOrigin, 0, null, null, Effects, 0);
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, BulletOrigin, 0, null, null, Effects, 0);
     }
 }

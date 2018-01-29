@@ -13,8 +13,8 @@ class MinionBoss : Boss
         position = startPosition;
         expGive = (int)(240 * statmultiplier);
         maxhealth = 400 * statmultiplier;
-        bulletdamage = 20 * statmultiplier;
-        max = 120 / statmultiplier;
+        bulletdamage = 35 * statmultiplier;
+        max = 1500 / statmultiplier;
         shootcounter = (int)max;
         health = maxhealth;  
     }
@@ -23,7 +23,7 @@ class MinionBoss : Boss
     {
         base.Update(gameTime);
         if (!EndRoom.trigger || health < 150)
-            Shoot();
+            Shoot(gameTime);
         if (health < 300 && !EndRoom.cleared)
         {
             EndRoom.trigger = true;
@@ -31,9 +31,9 @@ class MinionBoss : Boss
         FinalStage();
     }
 
-    public void Shoot()
+    public void Shoot(GameTime gameTime)
     {
-        shootcounter--;
+        shootcounter -= gameTime.ElapsedGameTime.Milliseconds;
         if (shootcounter <= 0)
         {
             Vector2 bulletposition = new Vector2(sprite.Width / 2, sprite.Height * .6f);
