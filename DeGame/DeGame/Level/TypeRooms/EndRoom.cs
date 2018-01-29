@@ -20,7 +20,7 @@ class EndRoom : Room
     {
         base.Update(gameTime);
         currentlevel = PlayingState.currentFloor.displayint;
-        //TODO check player volgende floor mag nextFloor true maken
+
         if (!placed)
         {
             PlaceBoss(ChooseBoss(currentlevel));
@@ -122,7 +122,6 @@ class EndRoom : Room
 
     protected override void CheckExit()
     {
-        //base.CheckExit();
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2);
         if (cleared && !finalboss)
         {

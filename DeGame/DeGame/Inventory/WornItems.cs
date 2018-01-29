@@ -1,10 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
 
 /// <summary>
 /// Class that is used to draw the worn item slots
@@ -18,7 +12,6 @@ public class WornItems : GameObjectList
     ShieldSlot shieldSlot;
     PassiveSlot passiveSlot1, passiveSlot2;
     new Vector2 position;
-
 
     public WornItems(Vector2 position) : base()
     {

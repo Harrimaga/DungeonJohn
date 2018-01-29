@@ -49,5 +49,4 @@ class IntroState : IGameObject
         Vector2 position = new Vector2(Camera.Position.X - 300, Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2) + 1000);
         Vector2 TextPosition = new Vector2(Camera.Position.X - 300, Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2) + 1600);
     }
-
 }

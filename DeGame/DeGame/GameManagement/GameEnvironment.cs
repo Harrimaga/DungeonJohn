@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
-
-
 
 public class GameEnvironment : Game
 {
@@ -26,7 +23,6 @@ public class GameEnvironment : Game
 
     bool startup;
 
-
     public GameEnvironment()
     {
         graphics = new GraphicsDeviceManager(this);
@@ -37,13 +33,10 @@ public class GameEnvironment : Game
         Dimensions = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
         IsMouseVisible = true;
         startup = true;
-
-        //ApplyResolutionSettings();
     }
 
     protected override void LoadContent()
     {
-        //DrawingHelper.Initialize(this.GraphicsDevice);
         spriteBatch = new SpriteBatch(GraphicsDevice);
 
         System.Console.WriteLine(graphics.PreferredBackBufferHeight);
@@ -55,18 +48,6 @@ public class GameEnvironment : Game
     protected void HandleInput(GameTime gameTime)
     {
         inputHelper.Update();
-        /*if (inputHelper.KeyPressed(Keys.Escape))
-        {
-            Exit();
-        }
-        
-        /*
-        if (inputHelper.KeyPressed(Keys.F5))
-        {
-            FullScreen = !FullScreen;
-        }
-        */
-
         gameStateManager.HandleInput(inputHelper, gameTime);
     }
 

@@ -94,7 +94,6 @@ class E_Bullet : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-
     }
 }
 

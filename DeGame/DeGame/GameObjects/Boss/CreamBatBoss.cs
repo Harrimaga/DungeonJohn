@@ -168,7 +168,6 @@ class CreamBatBoss : Boss
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet8);
             MoveCounter++;
             shootcounter3 = 1750;
-
         }
         if (MoveCounter == 4)
         {
@@ -176,7 +175,6 @@ class CreamBatBoss : Boss
             shootcounter2 = 1000;
             shootcounter3 = 1000;
         }
-
     }
 
     public void BossChase(GameTime gameTime)
@@ -185,7 +183,6 @@ class CreamBatBoss : Boss
         MoveDirection.Normalize();
         moving = MoveDirection * velocity;
         position += moving * gameTime.ElapsedGameTime.Milliseconds;
-      
     }
     public void Move(GameTime gameTime)
     {
