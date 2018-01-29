@@ -31,9 +31,9 @@ public class SlimeEnemy : Enemy
         
     }
 
-    public void Shoot()
+    public void Shoot(GameTime gameTime)
     {
-        Counter++;
+        Counter += 1 * gameTime.ElapsedGameTime.Milliseconds;
 
         if (Counter >= 60)
         {
@@ -47,7 +47,7 @@ public class SlimeEnemy : Enemy
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Shoot();
+            Shoot(gameTime);
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

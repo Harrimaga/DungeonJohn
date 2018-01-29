@@ -19,14 +19,14 @@ public class SpamEnemy : Enemy
         contactdamage = 2 * statmultiplier;
     }
 
-    public void Range()
+    public void Range(GameTime gameTime)
     {
-        Counter--;
+        Counter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
 
         if (Counter <= 10)
         {
             Shoot();
-            BulletCounter++;
+            BulletCounter += 1 * gameTime.ElapsedGameTime.Milliseconds;
             Counter = 20;
         }
         if (BulletCounter == 20)
@@ -49,7 +49,7 @@ public class SpamEnemy : Enemy
         direction = (PlayingState.player.position - position);
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Range();
+            Range(gameTime);
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

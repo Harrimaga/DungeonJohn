@@ -78,7 +78,7 @@ public class Enemy : SpriteGameObject
         {
             if (poisoncounter % 75 == 0 && poisoncounter < 350)
                 health -= 4;
-            poisoncounter--;
+            poisoncounter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
             color = Color.YellowGreen;
         }
         else
@@ -179,7 +179,7 @@ public class Enemy : SpriteGameObject
             counter--;
             //if (counter == 0)
             //{
-            //    PlayingState.player.health -= 10;
+            //    PlayingState.player.health -= contactdamage;
             //    counter = 100;
             //}
         }

@@ -113,9 +113,12 @@
     <Compile Include="GameObjects\Terrain\Lava.cs" />
     <Compile Include="GameObjects\Terrain\Pit.cs" />
     <Compile Include="GameObjects\Terrain\Rock.cs" />
+    <Compile Include="GameObjects\Terrain\ShopCounter.cs" />
+    <Compile Include="GameObjects\Terrain\Shopkeeper.cs" />
     <Compile Include="GameObjects\Terrain\Solid.cs" />
     <Compile Include="GameObjects\Terrain\SpiderWeb.cs" />
     <Compile Include="GameObjects\Terrain\Tiles.cs" />
+    <Compile Include="GameObjects\Terrain\WoodenWall.cs" />
     <Compile Include="GameObjects\TypeEnemy\TwoPartEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\ChasingMinion.cs" />
@@ -142,6 +145,7 @@
     <Compile Include="Inventory\Slots\WeaponSlot.cs" />
     <Compile Include="Inventory\WornItems.cs" />
     <Compile Include="Level\Floor.cs" />
+    <Compile Include="Level\HUD.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
     <Compile Include="States\VictoryState.cs" />
