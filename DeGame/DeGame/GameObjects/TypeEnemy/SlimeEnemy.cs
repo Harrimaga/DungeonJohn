@@ -35,7 +35,7 @@ public class SlimeEnemy : Enemy
     {
         Counter += 1 * gameTime.ElapsedGameTime.Milliseconds;
 
-        if (Counter >= 1500)
+        if (Counter >= 1200)
         {
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + BulletPosition, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/SlimeBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
