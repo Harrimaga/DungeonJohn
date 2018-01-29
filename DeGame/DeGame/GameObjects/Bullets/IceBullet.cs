@@ -6,7 +6,7 @@ class IceBullet : E_Bullet
     Vector2 direction, actualvelocity;
     float speed, damage;
 
-    public IceBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, int layer = 0, string id = "IceBullet") : base(Damage, Speed, "Sprites/Characters/Random", layer, id)
+    public IceBullet(float Damage, float Speed, Vector2 Startpositon, Vector2 Direction, int layer = 0, string id = "IceBullet") : base(Damage, Speed, "Sprites/Bullets/EnemyIceBullet", layer, id)
     {
         position = Startpositon;
         Position = Startpositon;

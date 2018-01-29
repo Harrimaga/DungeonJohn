@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class SpamEnemy : Enemy
 {
-    int Counter = 50;
+    int Counter = 100;
     int BulletCounter = 0;
     float speed = 0.2f;
 
@@ -19,20 +19,20 @@ public class SpamEnemy : Enemy
         contactdamage = 2 * statmultiplier;
     }
 
-    public void Range()
+    public void Range(GameTime gameTime)
     {
-        Counter--;
+        Counter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
 
-        if (Counter <= 10)
+        if (Counter <= 0)
         {
             Shoot();
-            BulletCounter++;
-            Counter = 20;
+            BulletCounter += 1;
+            Counter = 100;
         }
         if (BulletCounter == 20)
         {
             BulletCounter = 0;
-            Counter = 100;
+            Counter = 2000;
         }
     }
 
@@ -49,8 +49,7 @@ public class SpamEnemy : Enemy
         direction = (PlayingState.player.position - position);
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Range();
-        CheckAlive();
+            Range(gameTime);
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

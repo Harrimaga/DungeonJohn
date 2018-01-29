@@ -38,7 +38,6 @@ public class SpiderEnemy : Enemy
             }
         }
         Charge();
-        CheckAlive();
     }
 
     void Charge()

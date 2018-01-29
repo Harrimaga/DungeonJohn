@@ -15,7 +15,6 @@ public class Boss :  SpriteGameObject
     HealthBar healthbar;
     public bool alive = true;
     protected Color color = Color.White;
-
     int counter = 10;
     public Boss(Vector2 startPosition, Vector2 roomposition, string assetname, int difficulty = 0, int layer = 0, string id = "Boss") : base(assetname, layer, id)
     {

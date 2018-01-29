@@ -9,7 +9,7 @@ class CreamBatBoss : Boss
     int MoveCounter = 0;
     int Stage = 1;
     int MoveTimer = 0;
-    float bulletdamage = 10, speed = 0.3f;
+    float bulletdamage = 0, speed = 0.3f;
     Vector2 moving, MoveDirection, bulletPosition;
     Texture2D creambatsprite = GameEnvironment.assetManager.GetSprite("Sprites/Enemies/CreamBatSprite1");
 
@@ -32,8 +32,7 @@ class CreamBatBoss : Boss
     {
         base.Update(gameTime);
         
-        shootcounter1--;
-        //BossBox = new Rectangle((int)position.X - 61, (int)position.Y - 61, sprite.Width + 122, sprite.Height + 122);
+        shootcounter1 -= 1 * gameTime.ElapsedGameTime.Milliseconds;
         SolidCollision();
 
         if (Stage == 1)
@@ -46,9 +45,10 @@ class CreamBatBoss : Boss
             }
             else
             {
-                velocity = new Vector2(0.13f, 0.13f);
+                velocity = new Vector2(0.15f, 0.15f);
                 MoveTimer++;
             }
+            bulletdamage = 10;
             Shoot();
             Move(gameTime);
             if (health <= 0)
@@ -71,6 +71,7 @@ class CreamBatBoss : Boss
             {
                 velocity = new Vector2(0.20f, 0.20f);
             }
+            bulletdamage = 10;
             Shoot(); 
             BossChase(gameTime);
             if (health <= 0)
@@ -93,8 +94,8 @@ class CreamBatBoss : Boss
             {
                 velocity = new Vector2(0.1f, 0.1f);
             }
-            Spam();
-            
+            bulletdamage = 5;
+            Spam(gameTime);
             BossChase(gameTime);
             if (health <= 0)
             {
@@ -112,18 +113,16 @@ class CreamBatBoss : Boss
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + bulletPosition, ShootDirection, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/CreamBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
             if (Stage == 1)
-                shootcounter1 = 40;
+                shootcounter1 = 1000;
             if (Stage == 2)
-                shootcounter1 = 20;
-            if (Stage == 3)
-                shootcounter1 = 10;
+                shootcounter1 = 1100;
         }
     }
 
-    public void Spam()
+    public void Spam(GameTime gameTime)
     {
-        shootcounter2--;
-        shootcounter3--;
+        shootcounter2 -= 1 * gameTime.ElapsedGameTime.Milliseconds; ;
+        shootcounter3 -= 1 * gameTime.ElapsedGameTime.Milliseconds; ;
         if (shootcounter2 <= 0)
         {
             Vector2 bulletPosition = new Vector2(sprite.Width / 2, 50);
@@ -144,10 +143,10 @@ class CreamBatBoss : Boss
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet7);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet8);
             MoveCounter++;
-            shootcounter2 = 50;
+            shootcounter2 = 1000;
 
         }
-        if (shootcounter3 <= 25)
+        if (shootcounter3 <= 250)
         {
             Vector2 bulletPosition = new Vector2(sprite.Width / 2, 50);
             EnemyBullet bullet1 = new EnemyBullet(bulletdamage, speed, position + bulletPosition, new Vector2(0.5f, -1), GameEnvironment.assetManager.GetSprite("Sprites/Bullets/CreamBullet"));
@@ -167,14 +166,14 @@ class CreamBatBoss : Boss
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet7);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet8);
             MoveCounter++;
-            shootcounter3 = 75;
+            shootcounter3 = 1750;
 
         }
         if (MoveCounter == 4)
         {
             MoveCounter = 0;
-            shootcounter2 = 100;
-            shootcounter3 = 100;
+            shootcounter2 = 1000;
+            shootcounter3 = 1000;
         }
 
     }
@@ -192,13 +191,13 @@ class CreamBatBoss : Boss
         if (MoveTimer < 50)
             MoveDirection = new Vector2(0,1.5f);
         else if (MoveTimer <= 150 && MoveTimer > 50)
-            MoveDirection = new Vector2(-2, -1);
+            MoveDirection = new Vector2(-1.5f, -1);
         else if (MoveTimer <= 250 && MoveTimer > 150)
-            MoveDirection = new Vector2(2, -1);
+            MoveDirection = new Vector2(1.5f, -1);
         else if (MoveTimer <= 350 && MoveTimer > 250)
-            MoveDirection = new Vector2(2, 1);
+            MoveDirection = new Vector2(1.5f, 1);
         else if (MoveTimer <= 450 && MoveTimer > 350)
-            MoveDirection = new Vector2(-2, 1);
+            MoveDirection = new Vector2(-1.5f, 1);
         else if (MoveTimer > 450)
             MoveTimer = 50;
         moving = MoveDirection * velocity;

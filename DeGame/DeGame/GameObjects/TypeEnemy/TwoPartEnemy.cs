@@ -12,11 +12,12 @@ public class TwoPartEnemy : Enemy
         maxhealth = 100 * statmultiplier;
         expGive = 120 * statmultiplier;
         contactdamage = 10 * statmultiplier;
+        killable = false;
+        hpdisplay = true;
     }
 
     public override void Update(GameTime gameTime)
     {
-
         if (CollidesWith(PlayingState.player))
         {
             velocity = Vector2.Zero;
@@ -41,17 +42,20 @@ public class TwoPartEnemy : Enemy
         {
             if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
+            
             if (health <= 0)
             {
                 maxhealth = 75;
                 health = 75;
                 Stage = 2;
-                //PlayingState.currentFloor.currentRoom.position.enemies.Add(TwoPartEnemy);
+                TwoPartEnemy TwoPartEnemy = new TwoPartEnemy(position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyFull").Height * 0.8f), Roomposition, PlayingState.currentFloor.displayint);
+                //PlayingState.currentFloor.currentRoom.addedenemies.Add(TwoPartEnemy);
+                //PlayingState.currentFloor.currentRoom.addedenemies.Add(TwoPartEnemy);
             }
         }
         if (Stage == 2)
         {
-            CheckAlive();
+            killable = true;
             basevelocity = new Vector2(0.03f, 0.03f);
         }
     }
@@ -62,10 +66,11 @@ public class TwoPartEnemy : Enemy
         if (Stage == 1)
         {
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyFull"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
+            
         }
         if (Stage == 2)
         {
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyBottom"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
-        }
+        }        
     }
 }
