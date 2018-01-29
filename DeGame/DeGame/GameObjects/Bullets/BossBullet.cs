@@ -12,11 +12,10 @@ class BossBullet : E_Bullet
     Vector2 Homingdirection, direction, actualvelocity, difference, BulletOrigin, HomingPlayerOrigin, PlayerOrigin;
     Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
     SpriteEffects Effects;
-    float speed = 0.13f;
-    int health = 100, maxhealth = 100;
+    float speed = 0.28f;
+    int health = 30, maxhealth = 30;
     bool Homing;
-    float RotateAngle;
-    
+
     public BossBullet(float damage, float speed, Vector2 Startposition, SpriteEffects effects, bool homing = false, int layer = 0, string id = "BossBullet") : base(damage, speed, "Sprites/Bullets/BossBullet", 0, "BossBullet") 
     {
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
@@ -29,7 +28,6 @@ class BossBullet : E_Bullet
         Effects = effects;
         difference = PlayerOrigin - position;
         difference.Normalize();
-        RotateAngle = (float)Math.Atan2(difference.Y, difference.X);
 
     }
     public override void Update(GameTime gameTime)
@@ -46,6 +44,7 @@ class BossBullet : E_Bullet
                 actualvelocity = Homingdirection * speed;
                 position.X += actualvelocity.X * gameTime.ElapsedGameTime.Milliseconds;
                 position.Y += actualvelocity.Y * gameTime.ElapsedGameTime.Milliseconds;
+                Damage = 20;
             }
         }
         if (!Homing)
@@ -54,6 +53,7 @@ class BossBullet : E_Bullet
             actualvelocity = direction * speed;
             position.X += actualvelocity.X * gameTime.ElapsedGameTime.Milliseconds;
             position.Y += actualvelocity.Y * gameTime.ElapsedGameTime.Milliseconds;
+            Damage = 30;
         }
         if (changedirection)
         {
@@ -112,6 +112,9 @@ class BossBullet : E_Bullet
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, BulletOrigin, RotateAngle, null, null, Effects, 0);
+        if(Homing == true)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBulletHoming"), position, null, null, BulletOrigin, 0, null, null, Effects, 0);
+        else
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/BossBullet"), position, null, null, BulletOrigin, 0, null, null, Effects, 0);
     }
 }
