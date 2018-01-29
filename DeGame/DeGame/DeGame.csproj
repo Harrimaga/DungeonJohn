@@ -270,6 +270,16 @@
     <Content Include="Content\Levels\9.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Buttons\AttackSpeed.png" />
+    <Content Include="Content\Sprites\Buttons\AttackSpeedPressed.png" />
+    <Content Include="Content\Sprites\Buttons\AttackUp.png" />
+    <Content Include="Content\Sprites\Buttons\AttackUpPressed.png" />
+    <Content Include="Content\Sprites\Buttons\HealthUp.png" />
+    <Content Include="Content\Sprites\Buttons\HealthUpPressed.png" />
+    <Content Include="Content\Sprites\Buttons\Ranged.png" />
+    <Content Include="Content\Sprites\Buttons\RangedPressed.png" />
+    <Content Include="Content\Sprites\Buttons\Speed.png" />
+    <Content Include="Content\Sprites\Buttons\SpeedPressed.png" />
     <Content Include="Content\Sprites\Controls\KeyboardControls.png" />
     <Content Include="Content\Sprites\Items\HardHelmetDown.png" />
     <Content Include="Content\Sprites\Items\HardHelmetLeft.png" />
