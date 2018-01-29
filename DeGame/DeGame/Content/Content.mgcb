@@ -3091,12 +3091,6 @@
 /processorParam:Quality=Best
 /build:SoundEffects/Levelup.wav
 
-#begin SoundEffects/Loss.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Loss.mp3
-
 #begin SoundEffects/MenuNavigation.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -3114,4 +3108,10 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:SoundEffects/Shoot.wav
+
+#begin SoundEffects/Loss.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Loss.wav
 

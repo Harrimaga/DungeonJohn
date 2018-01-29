@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -14,12 +15,14 @@ class Leveling : IGameObject
     bool picked = false;
     protected IGameObject playingState;
     int counter = 0;
+    SoundEffect levelingsound;
 
     public Leveling()
     {
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
         attackB = new Button(new Vector2(240,600), "Attack","AttackUp", "AttackUpPressed",true,1);
         healthB = new Button(new Vector2(620, 600), "Health", "HealthUp","HealthUpPressed",true, 1);
+        levelingsound = GameEnvironment.assetManager.GetSound("SoundEffects/LevelUp");
     }
 
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
@@ -47,11 +50,13 @@ class Leveling : IGameObject
         {
             PlayingState.player.StatIncrease(1);
             picked = true;
+            levelingsound.Play();
         }
         if (healthB.Pressed && !picked)
         {
             PlayingState.player.StatIncrease(2);
             picked = true;
+            levelingsound.Play();
         }
         if (picked && counter < 10)
         {
