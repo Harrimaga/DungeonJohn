@@ -36,11 +36,10 @@ public class TurretEnemy : Enemy
         
     }
 
-    public void Shoot()
+    public void Shoot(GameTime gameTime)
     {
-        Counter++;
-
-        if (Counter >= 70)
+        Counter += 1 * gameTime.ElapsedGameTime.Milliseconds;
+        if (Counter >= 900)
         {
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + BulletPosition, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
@@ -52,7 +51,7 @@ public class TurretEnemy : Enemy
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Shoot();
+            Shoot(gameTime);
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

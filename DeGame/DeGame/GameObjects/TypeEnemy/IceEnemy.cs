@@ -21,10 +21,10 @@ public class IceEnemy : Enemy
         killable = false;
     }
 
-    public void Range()
+    public void Range(GameTime gameTime)
     {
-        Counter++;
-        if (Counter >= 100)
+        Counter += 1 *gameTime.ElapsedGameTime.Milliseconds;
+        if (Counter >= 1000)
         {
             if (PlayingState.player.position.X + range > position.X || PlayingState.player.position.X - range < position.X ||
             PlayingState.player.position.Y + range > position.Y || PlayingState.player.position.Y - range < position.Y)
@@ -47,7 +47,7 @@ public class IceEnemy : Enemy
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Range();
+            Range(gameTime);
         direction = (PlayingState.player.position - position);
     }
 

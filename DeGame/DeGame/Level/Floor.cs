@@ -5,17 +5,16 @@ using Microsoft.Xna.Framework.Input;
 
 public class Floor
 {
-    int maxRooms = 7, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, q;
-    public int screenwidth, screenheight, CurrentLevel = 1, doortimer = 0, displayint = 1;
+    public int maxRooms = 7, minRooms = 5, floorWidth = 9, floorHeight = 9, CurrentRooms, b = 0, q;
+    public int CurrentLevel = 1, doortimer = 0, displayint = 1;
     int[,] possiblespecial, AdjacentRooms;
     public Room currentRoom;
     public Room[,] floor;
-    bool FloorGenerated = false;
+    public bool FloorGenerated = false;
     bool[,] Checked;
     public Vector2 startPlayerPosition;
     Random random = new Random();
-    public WornItems wornItems;
-    string Level;
+    public string Level;
 
     public Floor()
     {
@@ -23,9 +22,6 @@ public class Floor
         Checked = new bool[floorWidth, floorHeight];
         AdjacentRooms = new int[floorWidth, floorHeight];
         possiblespecial = new int[floorWidth * floorHeight / 2, 2];
-        screenwidth = GameEnvironment.WindowSize.X;
-        screenheight = GameEnvironment.WindowSize.Y;
-        wornItems = new WornItems(new Vector2(0, 0));
     }
 
     void FloorGenerator()
@@ -376,7 +372,7 @@ public class Floor
         PlayingState.player.Reset();
     }
 
-    bool CheckNeighbours(int x, int y, bool up = false, bool down = false, bool left = false, bool right = false)
+    public bool CheckNeighbours(int x, int y, bool up = false, bool down = false, bool left = false, bool right = false)
     {
         int boolcounter = 0;
         int truecounter = 0;
@@ -409,64 +405,8 @@ public class Floor
         return false;
     }
 
-    void DrawMinimap(SpriteBatch spriteBatch)
-    {
-        //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
-        //int roomheight = PlayingState.currentFloor.currentRoom.roomheight;
-        //krijgt soms 0 mee van currentroom
-        int FloorCellWidth = 15;
-        int FloorCellHeight = 15;
-        int currentroomx = (int)PlayingState.player.position.X / 1260;
-        int currentroomy = (int)PlayingState.player.position.Y / 900;
-        if (floor[currentroomx, currentroomy] != null)
-            currentRoom = floor[currentroomx, currentroomy];
-        else
-            currentRoom.position = new Vector2(currentroomx, currentroomy);
-
-        for (int x = 0; x < floorWidth; x++)
-            for (int y = 0; y < floorHeight; y++)
-            {
-                Vector2 MinimapTilePosition = new Vector2(screenwidth - 175 + x * (FloorCellWidth + 2) + (Camera.Position.X - screenwidth / 2), 15 + y * (FloorCellHeight + 2) + (Camera.Position.Y - screenheight / 2));
-                if (floor[x, y] != null)
-                {
-                    if (floor[x,y].Visited)
-                        switch (floor[x, y].RoomListIndex)
-                        {
-                            case (1):
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapStartTile")), MinimapTilePosition, Color.White);
-                                break;
-                            case (2):
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapBossTile")), MinimapTilePosition, Color.White);
-                                break;
-                            case (3):
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapItemTile")), MinimapTilePosition, Color.White);
-                                break;
-                            default:
-                                spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapTile")), MinimapTilePosition, Color.White);
-                                break;
-                        }
-                     else if ((CheckNeighbours(x, y, true) && floor[x, y - 1].Visited) || (CheckNeighbours(x, y, false, true) && floor[x, y + 1].Visited) 
-                        || (CheckNeighbours(x,y, false, false, true) && floor[x - 1, y].Visited) || (CheckNeighbours(x, y, false, false, false, true) &&  floor[x + 1, y]. Visited))
-                        spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/MinimapUnknownTile")), MinimapTilePosition, Color.White);
-                }
-                if (currentRoom.position == new Vector2(x, y))
-                {
-                    spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/CurrentMinimapTile")), MinimapTilePosition, Color.White);
-                }
-            }
-    }
-
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        string enemycount = "Count: " + PlayingState.currentFloor.currentRoom.enemycounter;
-        string Gold = "Gold: " + PlayingState.player.gold;
-        string tokens; 
-        if (PlayingState.player.leveltokens == 1)
-            tokens = "You have " + PlayingState.player.leveltokens + " unspent token,";
-        else
-            tokens = "You have " + PlayingState.player.leveltokens + " unspent tokens,";
-        string tokens2 = "press 'O' to level up";
-
         foreach (Room room in floor)
         {
             if (room != null)
@@ -485,21 +425,6 @@ public class Floor
             Camera.Position = startPlayerPosition + new Vector2(170, 0);
             FloorGenerated = true;
         }
-        else
-        {
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/HUD/HUDbackground")), new Vector2(screenwidth - 340 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2)));
-            DrawMinimap(spriteBatch);
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Level, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 50), Color.White);
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Gold, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 250), Color.Yellow);
-            if (PlayingState.player.leveltokens > 0)
-            {
-                spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), tokens, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 400), Color.White);
-                spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), tokens2, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 425), Color.White);
-            }
-                spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), enemycount, new Vector2(screenwidth - 275 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 450), Color.White);
-        }
-        wornItems.Position = new Vector2(screenwidth - 300 + (Camera.Position.X - screenwidth / 2), (Camera.Position.Y - screenheight / 2) + 510);
-        wornItems.Draw(gameTime, spriteBatch);
     }
 }
 

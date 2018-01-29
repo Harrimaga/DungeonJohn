@@ -31,11 +31,11 @@ public class SlimeEnemy : Enemy
         
     }
 
-    public void Shoot()
+    public void Shoot(GameTime gameTime)
     {
-        Counter++;
+        Counter += 1 * gameTime.ElapsedGameTime.Milliseconds;
 
-        if (Counter >= 60)
+        if (Counter >= 1200)
         {
             EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + BulletPosition, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/SlimeBullet"));
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
@@ -47,7 +47,7 @@ public class SlimeEnemy : Enemy
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-            Shoot();
+            Shoot(gameTime);
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

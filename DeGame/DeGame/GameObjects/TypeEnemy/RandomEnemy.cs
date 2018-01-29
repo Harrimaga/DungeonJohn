@@ -21,9 +21,9 @@ public class RandomEnemy : Enemy
 
     }
 
-    public void Shoot()
+    public void Shoot(GameTime gameTime)
     {
-        Counter--;
+        Counter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
 
         if (Counter <= 0)
         {
@@ -44,7 +44,7 @@ public class RandomEnemy : Enemy
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet6);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet7);
             PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet8);
-            Counter = 60;
+            Counter = 1000;
         }
     }
 
@@ -54,7 +54,7 @@ public class RandomEnemy : Enemy
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
         {
-            Shoot();
+            Shoot(gameTime);
             Chase();
         }
     }

@@ -86,10 +86,6 @@ public class Room : GameObjectList
                 roomarray[x, y] = "Wall";
                 CreateObject(x, y, "+");
                 break;
-            case 'x':
-                roomarray[x, y] = "WoodenWall";
-                CreateObject(x, y, "x");
-                break;
             case ',':
                 roomarray[x, y] = "ShopCounter";
                 CreateObject(x, y, ",");
@@ -434,10 +430,6 @@ public class Room : GameObjectList
                 Solid wall = new Wall(TilePosition, 0, "Wall");
                 solid.Add(wall);
                 break;
-            case ("x"):
-                Solid WoodenWall = new WoodenWall(TilePosition, 0, "WoodenWall");
-                solid.Add(WoodenWall);
-                break;
             case (","):
                 Solid ShopCounter = new ShopCounter(TilePosition, 0, "ShopCounter");
                 solid.Add(ShopCounter);
@@ -491,6 +483,7 @@ public class Room : GameObjectList
             case ("0"):
                 Shopkeeper Shopkeeper = new Shopkeeper(TilePosition, 0, "Shopkeeper");
                 tiles.Add(Shopkeeper);
+                roomarray[x, y] = "Background";
                 break;
         }
     }
@@ -511,38 +504,73 @@ public class Room : GameObjectList
         anvils.HandleInput(inputHelper, gameTime);
     }
 
-    void WallShader (GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
+    void WallShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y, bool shop = false)
     {
-        //als er...
-        if (CheckRoomarray(x - 1, y))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Right2")), TilePosition, Color.Gray);
-        //links
-        else if (CheckRoomarray(x + 1, y))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Left2")), TilePosition, Color.Gray);
-        //rechts
-        else 
-        if (CheckRoomarray(x, y - 1))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Down2")), TilePosition, Color.Gray);
-        //boven
-        else if (CheckRoomarray(x, y + 1))
+        Texture2D up, left, LU, LD;
+        if (!shop)
+        {
+            up = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite");
+            left = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Left");
+            LU = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner LU");
+            LD = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner LD");
+        }
+        else
+        {
+            up = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall2");
+                left = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall1");
+                LU = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall3");
+                LD = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall6");
+        }
+        // check of er een bovenkant walltile moet komen
+        if (CheckRoomarray(x, y + 1))
+        {
+            spriteBatch.Draw(up, TilePosition, Color.Gray);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Up2")), TilePosition, Color.Gray);
-        //onder een steen is of een tile is waar men over kan lopen, teken dan een schaduw op de muur aan die kant.
-
-        //als er..
+        }
+        //...of een onderkant
+        else if (CheckRoomarray(x, y - 1))
+        {
+            spriteBatch.Draw(up, TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipVertically, 0f);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Down2")), TilePosition, Color.Gray);
+        }
+        //...of een linkerkant
+        else if (CheckRoomarray(x + 1, y))
+        {
+            spriteBatch.Draw(left, TilePosition, null, Color.Gray);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Left2")), TilePosition, Color.Gray);
+        }
+        //...of een rechterkant
+        else if (CheckRoomarray(x - 1, y))
+        {
+            spriteBatch.Draw(left, TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Right2")), TilePosition, Color.Gray);
+        }
+        //check anders of er een rechteronderhoek moet komen
         else if (CheckRoomarray(x - 1, y - 1))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner RD")), TilePosition, Color.Gray);
-        //linksboven
+        {
+            spriteBatch.Draw(LD, TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall RD Shade")), TilePosition, Color.Gray);
+        }
+        //...of rechterbovenhoek
         else if (CheckRoomarray(x - 1, y + 1))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner RU")), TilePosition, Color.Gray);
-        //linksonder
+        {
+            spriteBatch.Draw(LU, TilePosition,null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall RU Shade")), TilePosition, Color.Gray);
+        }
+        //...of linksonderhoek
         else if (CheckRoomarray(x + 1, y - 1))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner LD")), TilePosition, Color.Gray);
-        //rechtsboven
+        {
+            spriteBatch.Draw(LD, TilePosition, Color.Gray);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall LD Shade")), TilePosition, Color.Gray);
+        }
+        //...of linksbovenhoek
         else if (CheckRoomarray(x + 1, y + 1))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Corner LU")), TilePosition, Color.Gray);
-        //rechtsonder 
-        //...een steen is of een tile is waar men over kan lopen, teken dan een hoekstuk van een muur
+        {
+            spriteBatch.Draw(LU, TilePosition, Color.Gray);
+            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall LU Shade")), TilePosition, Color.Gray);
+        }
     }
+
 
     void BackgroundShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
@@ -594,7 +622,7 @@ public class Room : GameObjectList
                 if (roomarray[x, y] != "Pit")
                     return true;
             }
-            else if (roomarray[x, y] == "Background" || roomarray[x, y] == "Lava" || roomarray[x, y] == "Ice" || roomarray[x, y] == "SpiderWeb" || roomarray[x, y] == "IceRock" || roomarray[x,y] == "Pit")
+            else if (roomarray[x, y] == "Background" || roomarray[x, y] == "Lava" || roomarray[x, y] == "Ice" || roomarray[x, y] == "SpiderWeb" || roomarray[x, y] == "IceRock" || roomarray[x,y] == "Pit" || roomarray[x,y] == "ShopCounter")
                 return true;
         }
         return false;
@@ -628,7 +656,10 @@ public class Room : GameObjectList
                         case "LeftDoor":
                         case "UpDoor":
                         case "Wall":
-                            WallShader(gameTime, spriteBatch, x, y);
+                            if (PlayingState.currentFloor.CurrentLevel % 2 == 0)
+                                WallShader(gameTime, spriteBatch, x, y, true);
+                            else
+                                WallShader(gameTime, spriteBatch, x, y);
                             break;
                         case "Exit":
                             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/EndTileClosed")), TilePosition, Color.White);

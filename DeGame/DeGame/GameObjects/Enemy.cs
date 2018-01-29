@@ -15,7 +15,7 @@ public class Enemy : SpriteGameObject
     protected float range = 100;
     protected float expGive = 120;
     protected float bulletdamage;
-    protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true;
+    protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true, hpdisplay = false;
     protected int counter = 100, poisoncounter = 0;
     protected Vector2 direction, basevelocity = Vector2.Zero, PlayerOrigin;
     protected SpriteEffects Effects;
@@ -51,6 +51,9 @@ public class Enemy : SpriteGameObject
         //PlayerCollision();
         if (!flying)
             SolidCollision();
+        if (counter > 0)
+            counter--;
+        counter--;
 
         if (moving)
         {
@@ -78,7 +81,7 @@ public class Enemy : SpriteGameObject
         {
             if (poisoncounter % 75 == 0 && poisoncounter < 350)
                 health -= 4;
-            poisoncounter--;
+            poisoncounter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
             color = Color.YellowGreen;
         }
         else
@@ -176,12 +179,11 @@ public class Enemy : SpriteGameObject
         if (CollidesWith(PlayingState.player))
         {
             direction = Vector2.Zero;           
-            counter--;
-            //if (counter == 0)
-            //{
-            //    PlayingState.player.health -= 10;
-            //    counter = 100;
-            //}
+            if (counter <= 0)
+            {
+                PlayingState.player.health -= contactdamage;
+                counter = 100;
+            }
         }
         if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Top)))
             while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
@@ -219,7 +221,7 @@ public class Enemy : SpriteGameObject
         {
             Effects = SpriteEffects.FlipHorizontally;
         }
-        if (killable)
+        if (killable || hpdisplay)
         {
             healthbar.Draw(spriteBatch);
         }
