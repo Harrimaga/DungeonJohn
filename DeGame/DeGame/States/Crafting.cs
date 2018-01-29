@@ -11,7 +11,6 @@ public class Crafting : IGameObject
 {
     List<CraftingInventorySlot> inventory;
     public static CraftingSlots craftingSlots;
-    Item item1, item2, newItem;
     Vector2 BasisPosition;
 
     public Crafting()
