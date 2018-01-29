@@ -21,7 +21,7 @@ class VictoryState : IGameObject
     {
         MainMenu.HandleInput(inputHelper, gameTime);
         if (inputHelper.KeyPressed(Keys.Z) || MainMenu.Pressed)
-            GameEnvironment.gameStateManager.SwitchTo("MainMenu");
+            GameEnvironment.gameStateManager.SwitchTo("Intro");
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

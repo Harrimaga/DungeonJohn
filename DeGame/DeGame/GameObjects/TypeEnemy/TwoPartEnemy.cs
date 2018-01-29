@@ -13,11 +13,11 @@ public class TwoPartEnemy : Enemy
         expGive = 120 * statmultiplier;
         contactdamage = 10 * statmultiplier;
         killable = false;
+        hpdisplay = true;
     }
 
     public override void Update(GameTime gameTime)
     {
-
         if (CollidesWith(PlayingState.player))
         {
             velocity = Vector2.Zero;
@@ -42,6 +42,7 @@ public class TwoPartEnemy : Enemy
         {
             if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Chase();
+            
             if (health <= 0)
             {
                 maxhealth = 75;
@@ -70,6 +71,6 @@ public class TwoPartEnemy : Enemy
         if (Stage == 2)
         {
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyBottom"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
-        }
+        }        
     }
 }

@@ -483,6 +483,7 @@ public class Room : GameObjectList
             case ("0"):
                 Shopkeeper Shopkeeper = new Shopkeeper(TilePosition, 0, "Shopkeeper");
                 tiles.Add(Shopkeeper);
+                roomarray[x, y] = "Background";
                 break;
         }
     }
