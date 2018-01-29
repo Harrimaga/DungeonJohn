@@ -39,10 +39,6 @@ class ItemSpawn : SpriteGameObject
         {
             buy = true;
         }
-        /*else
-        {
-            buy = false;
-        }*/
     }
     public override void Update(GameTime gameTime)
     {
