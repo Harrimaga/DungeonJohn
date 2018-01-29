@@ -502,6 +502,7 @@ public class Room : GameObjectList
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         anvils.HandleInput(inputHelper, gameTime);
+        altars.HandleInput(inputHelper, gameTime);
     }
 
     void WallShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y, bool shop = false)

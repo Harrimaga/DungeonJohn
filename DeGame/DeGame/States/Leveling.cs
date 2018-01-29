@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 class Leveling : IGameObject
 {
     Vector2 BasisPosition;
-    Button attackB, healthB, speedB, attackSpeedB, rangedB;
+    Button attackB, healthB, speedB, attackSpeedB;
     bool picked = false;
     protected IGameObject playingState;
     int counter = 0;

@@ -7,8 +7,6 @@ public class SpiderEnemy : Enemy
     int ChargeCounter = 0;
     int ChargeDirection;
     static Random random = new Random();
-    float ChargeSpeed = 2f;
-
     public SpiderEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/SpiderEnemy", Difficulty, layer, id)
     {
         velocity = new Vector2(0.2f, 0.2f);
