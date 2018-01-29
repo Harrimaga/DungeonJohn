@@ -8,6 +8,8 @@ namespace DeGame
 {
     public class Game1 : GameEnvironment
     {
+        //private SpriteSheet spriteSheet;
+
         [STAThread]
         static void Main()
         {
@@ -23,7 +25,10 @@ namespace DeGame
         protected override void Initialize()
         {
             this.IsMouseVisible = true;
+            //spriteSheet = new SpriteSheet("Sprites/PlayerPaperAnimated", 60, 86, 6, 11, true);
             base.Initialize();
+
+
         }
 
         protected override void LoadContent()
@@ -43,6 +48,8 @@ namespace DeGame
             gameStateManager.AddGameState("Option", new Option());
             gameStateManager.AddGameState("Intro", new IntroState());
             gameStateManager.SwitchTo("Intro");
+
+            //spriteSheet.LoadContent(Content, GraphicsDevice);
         }
 
         protected override void UnloadContent()
@@ -53,12 +60,21 @@ namespace DeGame
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            //if(gameTime.TotalGameTime.TotalSeconds > 5)
+            //{
+            //    spriteSheet.Update(gameTime);
+            //}
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            //spriteBatch.Begin();
+            //spriteBatch.Draw(spriteSheet.CurrentFrame, Vector2.Zero, Color.White);
+            //spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

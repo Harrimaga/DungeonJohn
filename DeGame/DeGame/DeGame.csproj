@@ -68,6 +68,8 @@
     <Compile Include="GameManagement\InputHelper.cs" />
     <Compile Include="GameManagement\InventoryManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
+    <Compile Include="GameManagement\SpriteSheet.cs" />
+    <Compile Include="GameManagement\Texture2DEx.cs" />
     <Compile Include="GameObjects\Boss\HomingBoss.cs" />
     <Compile Include="GameObjects\Boss\CreamBatBoss.cs" />
     <Compile Include="GameObjects\Boss\MinionBoss.cs" />
