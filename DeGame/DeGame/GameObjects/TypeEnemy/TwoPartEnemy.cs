@@ -6,6 +6,7 @@ public class TwoPartEnemy : Enemy
 {
     int Stage = 1, NextStage;
     static Random random = new Random();
+    bool Two = true;
 
     public TwoPartEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/2PartEnemyFull", Difficulty, layer, id)
     {
@@ -19,6 +20,10 @@ public class TwoPartEnemy : Enemy
         contactdamage = 10 * statmultiplier;
     }
 
+    /// <summary>
+    /// If it isnt colliding with player it is allowed to move; If in the current room and Stage 1 Chase, depending on which stage handle the right variables and methods
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         if (!CollidesWith(PlayingState.player))
@@ -50,23 +55,33 @@ public class TwoPartEnemy : Enemy
 
         if (Stage == 2)
         {
+            killable = true;
             maxhealth = 75;
             health = 75;
-            killable = true;
             expGive = 80 * statmultiplier;
             basevelocity = new Vector2(0.03f, 0.03f);
         }
 
         if (Stage == 3)
         {
-            killable = true;
-            HalfEnemy HalfEnemyLeft = new HalfEnemy(position + new Vector2(-50, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyLeft").Height * 0.8f), Roomposition, 1, PlayingState.currentFloor.displayint);
-            HalfEnemy HalfEnemyRight = new HalfEnemy(position + new Vector2(50, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyRight").Height * 0.8f), Roomposition, 2, PlayingState.currentFloor.displayint);
-            PlayingState.currentFloor.currentRoom.addedenemies.Add(HalfEnemyLeft);
-            PlayingState.currentFloor.currentRoom.addedenemies.Add(HalfEnemyRight);
+            if (Two == true)
+            {
+                killable = true;
+                HalfEnemy HalfEnemyLeft = new HalfEnemy(position + new Vector2(-50, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyLeft").Height * 0.8f), Roomposition, 1, PlayingState.currentFloor.displayint);
+                HalfEnemy HalfEnemyRight = new HalfEnemy(position + new Vector2(50, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyRight").Height * 0.8f), Roomposition, 2, PlayingState.currentFloor.displayint);
+                PlayingState.currentFloor.currentRoom.addedenemies.Add(HalfEnemyLeft);
+                PlayingState.currentFloor.currentRoom.addedenemies.Add(HalfEnemyRight);
+                PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter += 2;
+                Two = false;
+            }
         }
     }
 
+    /// <summary>
+    /// Draw the enemy based upon if it is still whole or not.
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

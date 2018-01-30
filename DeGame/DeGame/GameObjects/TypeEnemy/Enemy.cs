@@ -64,6 +64,7 @@ public class Enemy : SpriteGameObject
         }
         List<GameObject> RemoveBullets = new List<GameObject>();
         CollisionWithEnemy();
+
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
             if (CollidesWith(bullet))
             {
