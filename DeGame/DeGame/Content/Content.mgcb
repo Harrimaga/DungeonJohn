@@ -3302,3 +3302,15 @@
 /processorParam:Quality=Best
 /build:SoundEffects/Shop.mp3
 
+#begin SoundEffects/Menu.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Menu.mp3
+
+#begin SoundEffects/Base.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Base.mp3
+

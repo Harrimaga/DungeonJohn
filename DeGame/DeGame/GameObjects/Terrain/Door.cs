@@ -140,11 +140,13 @@ class Door : Solid
     {
         Vector2 Cam = Camera.Position;
         if (PlayingState.currentFloor.currentRoom.enemycounter == 0 && doorhitbox.Intersects(PlayingState.player.collisionhitbox) && PlayingState.currentFloor.doortimer == 0)
+        {
             switch (direction)
             {
                 case (1):
                     PlayingState.player.position -= new Vector2(0, 3 * CellHeight);
                     PlayingState.currentFloor.floor[(int)PlayingState.currentFloor.currentRoom.position.X, (int)PlayingState.currentFloor.currentRoom.position.Y - 1].Lastentrypoint = 2;
+                    if (PlayingState.currentFloor.floor[(int)PlayingState.currentFloor.currentRoom.position.X, (int)PlayingState.currentFloor.currentRoom.position.Y - 1].)
                     onup = true;
                     PlayingState.currentFloor.doortimer = 50;
                     break;
@@ -169,6 +171,7 @@ class Door : Solid
                 default:
                     break;
             }
+        }
 
         Vector2 CameraVelocity = new Vector2(0, 0);
 
