@@ -182,7 +182,7 @@ public class Enemy : SpriteGameObject
 
     protected void PlayerCollision()
     {
-        if (CollidesWith(PlayingState.player))
+        if (CollidesWith(PlayingState.player) && contactdamage > 0)
         {
             direction = Vector2.Zero;
             if (float.IsNaN(direction.X))

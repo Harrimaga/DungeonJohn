@@ -27,13 +27,12 @@ public class SlimeEnemy : Enemy
                 direction = new Vector2(1, 0);
                 BulletPosition = new Vector2(sprite.Width, sprite.Height / 2 - 15);
                 break;
-        }
-        
+        }        
     }
 
     public void Shoot(GameTime gameTime)
     {
-        Counter += 1 * gameTime.ElapsedGameTime.Milliseconds;
+        Counter += gameTime.ElapsedGameTime.Milliseconds;
 
         if (Counter >= 1200)
         {

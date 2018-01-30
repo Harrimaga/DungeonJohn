@@ -63,6 +63,7 @@ public class Player : SpriteGameObject
         }
         base.Update(gameTime);
         bullets.Update(gameTime);
+        //A special hitbox for terrain, so that part of your sprite has no collision with walls, rocks, etc, which looks nicer
         collisionhitbox = new Rectangle((int)PlayingState.player.position.X, (int)PlayingState.player.position.Y + 20, PlayingState.player.BoundingBox.Width, PlayingState.player.BoundingBox.Height - 20);
         NextLevel();
         if (health <= 0)
@@ -85,7 +86,7 @@ public class Player : SpriteGameObject
 
         if(!HelicopterHat)
         {
-            //Krijg weer originele snelheid als je over ijs glijdt en van een spinnenweb afkomt
+            //Makes sure your slidingspeed is back to normal if you are on ice and just got past a spiderweb
             if (onIce && !onWeb && speed != 0.3f * extraspeed)
             {
                 speed = 0.3f * extraspeed;
@@ -152,6 +153,7 @@ public class Player : SpriteGameObject
         }
         else
         {
+            //Decides which direction you should slide when on ice
             if (lastUsedspeed == "Up")
             {
                 position.Y -= (float)(speed * gameTime.ElapsedGameTime.TotalMilliseconds);
@@ -196,6 +198,9 @@ public class Player : SpriteGameObject
         }
     }
 
+    /// <summary>
+    /// Resets ALL player stats
+    /// </summary>
     public override void Reset()
     {
         List<GameObject> RemoveBullets = new List<GameObject>();
@@ -242,12 +247,19 @@ public class Player : SpriteGameObject
         startup = true;
     }
 
+    /// <summary>
+    /// Method used by enemies to damage the player, makes sure all damage sources can be tracked down to one method
+    /// </summary>
     public void TakeDamage(float enemydamage)
     {
-        GameEnvironment.soundManager.playSoundEffect("Hit");
+        if (enemydamage > 0)
+            GameEnvironment.soundManager.playSoundEffect("Hit");
         health -= (float)(enemydamage * damagereduction);
     }
 
+    /// <summary>
+    /// Checks if the player level should be raised
+    /// </summary>
     void NextLevel()
     {
         if (exp >= nextLevelExp)
@@ -259,6 +271,10 @@ public class Player : SpriteGameObject
         }
     }
 
+    /// <summary>
+    /// Applies a buff chosen by the player on levelup to his/her stats
+    /// </summary>
+    /// <param name="type"></param>
     public void StatIncrease(int type)
     {
         if (type == 1)
@@ -281,6 +297,9 @@ public class Player : SpriteGameObject
         }
     }
 
+    /// <summary>
+    /// Calls on the 'Attack' method of the currently equiped weapon
+    /// </summary>
     void Shoot(int direction, GameTime gametime)
     {
         if (shoottimer == 0)
@@ -299,6 +318,9 @@ public class Player : SpriteGameObject
         }
     }
 
+    /// <summary>
+    /// Calculates how much damage your weapon should do
+    /// </summary>
     public void CalculateDamage()
     {
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
@@ -315,6 +337,9 @@ public class Player : SpriteGameObject
         attack = (float)(weapon.AddedDamage * attackmultiplier + extraattack);
     }
 
+    /// <summary>
+    /// Calculates how much ammo each weapon should have
+    /// </summary>
     public void CalculateAmmo()
     {
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
@@ -336,6 +361,10 @@ public class Player : SpriteGameObject
         health = maxhealth * currentHealthPercentage;
     }
 
+    /// <summary>
+    /// Draws the player and all items the player has equiped
+    /// If no items are equiped, draw a normal set of clothes
+    /// </summary>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(playersprite, position, null, Color.White);
