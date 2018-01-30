@@ -10,6 +10,7 @@ class GameOverState : IGameObject
     public GameOverState()
     {
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
+        //button
         MainMenu = new Button(new Vector2(600, 60), "MainMenu", "MainMenu2", "MainMenu2Pressed", true, 1);
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
@@ -18,12 +19,14 @@ class GameOverState : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        //button draw and gameover picture
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/GameOver"), BasisPosition);
         MainMenu.Draw(gameTime, spriteBatch);
     }
 
     public virtual void Update(GameTime gameTime)
     {
+        //update button
         MainMenu.Update(gameTime);
         if (MainMenu.Pressed)
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
