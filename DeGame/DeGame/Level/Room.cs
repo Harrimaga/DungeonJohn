@@ -9,6 +9,7 @@ public class Room : GameObjectList
 {
     public int RoomListIndex, CellWidth, CellHeight, roomwidth, roomheight, Lastentrypoint = 1, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0, lavatimer = 0;
     protected int a, b, roomarraywidth, roomarrayheight;
+    int r;
     public static GameObjectList door;
     public GameObjectList enemies, solid, bosses, enemybullets, homingenemybullets;
     GameObjectList tiles, consumable, altars, anvils;
@@ -219,18 +220,18 @@ public class Room : GameObjectList
     {
         if (!toaster)
         {
-            int r = random.Next(100);
-            if (r < 10)
+            r = random.Next(100);
+            if (r < 30)
             {
                 Consumables golddrop = new Consumables(position, "gold");
                 consumable.Add(golddrop);
             }
-            else if (r < 30)
+            else if (r < 45)
             {
                 Consumables healthdrop = new Consumables(position, "heart");
                 consumable.Add(healthdrop);
             }
-            else if (r < 50)
+            else if (r < 60)
             {
                 Consumables ammodrop = new Consumables(position, "ammo");
                 consumable.Add(ammodrop);
