@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 
+/// <summary>
+/// Manages Background Music and SFX
+/// </summary>
 public class SoundManager
 {
     ContentManager contentManager;
@@ -18,32 +21,47 @@ public class SoundManager
         soundEffects = new List<SoundEffect>();
     }
 
+    /// <summary>
+    /// Plays a song as background music
+    /// </summary>
+    /// <param name="name">The song's title</param>
     public void PlaySong(string name)
     {
         try
         {
+            // Load the song
             song = contentManager.Load<Song>("SoundEffects/" + name);
+
+            // Play the song
             MediaPlayer.Play(song);
+
+            // Make the song repeat
             MediaPlayer.IsRepeating = true;
+
+            // Eventhandler
             MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
         }
         catch (Exception)
         {
-
             Console.WriteLine("Song not found!");
         }
     }
 
     private void MediaPlayer_MediaStateChanged(object sender, EventArgs e)
     {
-        MediaPlayer.Volume -= 0.1f;
+        MediaPlayer.Volume = 0.5f;
         MediaPlayer.Play(song);
     }
 
+    /// <summary>
+    /// Loads a sound effect into the contentmanager
+    /// </summary>
+    /// <param name="name">SFX name</param>
     public void loadSoundEffect(string name)
     {
         try
         {
+            // Adds a sfx to the sfx list
             soundEffects.Add(contentManager.Load<SoundEffect>("SoundEffects/" + name));
         }
         catch (Exception e)
@@ -52,31 +70,47 @@ public class SoundManager
         }   
     }
 
+    /// <summary>
+    /// Pauses a song
+    /// </summary>
     public void PauseSong()
     {
         MediaPlayer.Pause();
     }
 
+    /// <summary>
+    /// Resumes a paused song
+    /// </summary>
     public void ResumeSong()
     {
         MediaPlayer.Resume();
     }
 
+    /// <summary>
+    /// Plays a sound effect
+    /// </summary>
+    /// <param name="name">SFX name</param>
     public void playSoundEffect(string name)
     {
         try
         {
             foreach (SoundEffect sfx in soundEffects)
             {
-                if (sfx.Name == name)
+                if (sfx.Name == "SoundEffects/" + name)
                 {
-                    sfx.Play();
+                    // Make an instance of the SFX (This is so we can change the volume)
+                    SoundEffectInstance instance = sfx.CreateInstance();
+
+                    // Change the sfx volume
+                    instance.Volume = 0.1f;
+
+                    // Play the sfx
+                    instance.Play();
                 }
             }
         }
         catch (Exception)
         {
-
             Console.WriteLine("Sound effect not playable!");
         }
         

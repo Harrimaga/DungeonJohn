@@ -28,10 +28,12 @@ class PauseMenuState : IGameObject
         {
             PlayingState.currentFloor.ResetFloor();
             GameEnvironment.gameStateManager.SwitchTo("Playing");
+            GameEnvironment.soundManager.PlaySong("Base");
         }
         if (mainMenuB.Pressed)
         {
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
+            GameEnvironment.soundManager.PlaySong("Menu");
         }
         if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {

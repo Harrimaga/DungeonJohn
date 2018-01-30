@@ -8,7 +8,7 @@ class ItemSpawn : SpriteGameObject
     Item item;
     ItemList itemList;
     Rectangle hitbox;
-    bool price,buy = false, pickedUp = false;
+    bool price, buy = false, pickedUp = false;
     Random random = new Random();
 
     public ItemSpawn(Vector2 startPosition,bool Price, int randomint, int layer = 0, string id = "ItemAltar")
@@ -19,6 +19,7 @@ class ItemSpawn : SpriteGameObject
         itemList = new ItemList();
         hitbox =new Rectangle((int)position.X, (int)position.Y + 140, Width, Height);
         RandomItem(randomint);
+        GameEnvironment.soundManager.loadSoundEffect("Pickup");
     }
     void RandomItem(int randomint)
     {
@@ -46,6 +47,7 @@ class ItemSpawn : SpriteGameObject
         if (((hitbox.Intersects(PlayingState.player.BoundingBox) && price) || CollidesWith(PlayingState.player)) && !pickedUp && ((PlayingState.player.gold >= item.Cost && buy) || !price))
         {
             Player.inventory.addItemToInventory(item);
+            GameEnvironment.soundManager.playSoundEffect("Pickup");
             pickedUp = true;
             if(price)
             {
@@ -71,7 +73,7 @@ class ItemSpawn : SpriteGameObject
             itemPosition.X -= -5 - 25 + (itemSprite.Width * scale) / 2;
             spriteBatch.Draw(itemSprite, itemPosition, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
-        if (hitbox.Intersects(PlayingState.player.BoundingBox) && price)
+        if (hitbox.Intersects(PlayingState.player.BoundingBox) && price && !pickedUp)
         {
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Press spacebar to buy", position + new Vector2(-65, 20), Color.White);
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Convert.ToString(item.Cost), position + new Vector2(25, -50), Color.Yellow);

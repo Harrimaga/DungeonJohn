@@ -16,7 +16,7 @@ public class SpiderEnemy : Enemy
         maxhealth = 50 * statmultiplier;
         range = 100;
         moving = false;
-        expGive = 50 * statmultiplier;
+        expGive = 40 * statmultiplier;
         contactdamage = 10 * statmultiplier;
         max = random.Next(40) + 60;
     }
