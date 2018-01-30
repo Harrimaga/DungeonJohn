@@ -16,7 +16,7 @@ public class RandomEnemy : Enemy
         bulletdamage = 5 * statmultiplier;
         health = 120 * statmultiplier;
         maxhealth = 100 * statmultiplier;
-        expGive = 120 * statmultiplier;
+        expGive = 100 * statmultiplier;
         contactdamage = 2 * statmultiplier;
     }
 

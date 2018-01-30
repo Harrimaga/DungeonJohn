@@ -12,7 +12,7 @@ class MinionBoss : Boss
         Roomposition = roomposition;
         position = startPosition;
         contactdamage = 20;
-        expGive = (int)(240 * statmultiplier);
+        expGive = 250 * statmultiplier;
         maxhealth = 400 * statmultiplier;
         bulletdamage = 35 * statmultiplier;
         max = 1500 / statmultiplier;

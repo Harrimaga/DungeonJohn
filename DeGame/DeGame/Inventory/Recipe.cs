@@ -33,6 +33,10 @@ class Recipe
         list1.Add(new PowerHelmet());
         list2.Add(new MageJacket());
         listNewItem.Add(new HelicopterHat());
+
+        list1.Add(new CrestShield());
+        list2.Add(new CrestShield());
+        listNewItem.Add(new Mirror());
     }
 }
 

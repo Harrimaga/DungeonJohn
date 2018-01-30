@@ -20,6 +20,7 @@ public class GameModes : IGameObject
         {
             Boss.endless = false;
             GameEnvironment.gameStateManager.SwitchTo("Playing");
+            GameEnvironment.soundManager.PlaySong("Base");
         }
         if (endlessB.Pressed)
         {

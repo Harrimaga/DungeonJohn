@@ -204,7 +204,7 @@ public class Player : SpriteGameObject
         gold = 0;
         level = 1;
         exp = 0;
-        nextLevelExp = 400;
+        nextLevelExp = 500;
         attackspeedreduction = 1;
         damagereduction = 1;
         extraspeed = 1;
@@ -253,7 +253,7 @@ public class Player : SpriteGameObject
         if (exp >= nextLevelExp)
         {
             exp -= nextLevelExp;
-            nextLevelExp += 100;
+            nextLevelExp += 200;
             leveltokens++;
             level++;
         }
