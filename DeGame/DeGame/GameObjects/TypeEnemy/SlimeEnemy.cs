@@ -15,7 +15,7 @@ public class SlimeEnemy : Enemy
         basevelocity = new Vector2(0, 0);
         health = 150 * statmultiplier;
         maxhealth = 150 * statmultiplier;
-        expGive = 120 * statmultiplier;
+        expGive = 60 * statmultiplier;
         bulletdamage = 5 * statmultiplier;
         switch (Directioncount)
         {
