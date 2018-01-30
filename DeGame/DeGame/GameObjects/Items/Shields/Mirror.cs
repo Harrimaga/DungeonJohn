@@ -3,7 +3,7 @@
     float addeddefence, defencemultiplier;
     public Mirror()
     {
-        Cost = 9;
+        Cost = 12;
         addeddefence = 1;
         defencemultiplier = 1;
         itemName = "Mirror";

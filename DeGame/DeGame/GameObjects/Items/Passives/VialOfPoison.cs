@@ -2,7 +2,7 @@
 {
     public VialOfPoison()
     {
-        Cost = 10;
+        Cost = 12;
         itemName = "VialOfPoison";
         itemDescription = "As if bullets weren't deadly enough on their own";
         Type = "passive";

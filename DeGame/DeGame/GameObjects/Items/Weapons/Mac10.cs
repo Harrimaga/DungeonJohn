@@ -9,7 +9,7 @@ public class Mac10 : Item, IWeapon
 
     public Mac10()
     {
-        Cost = 7;
+        Cost = 6;
         melee = false;
         twoHanded = false;
         addedDamage = 10;

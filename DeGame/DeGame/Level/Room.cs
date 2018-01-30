@@ -221,17 +221,17 @@ public class Room : GameObjectList
         if (!toaster)
         {
             r = random.Next(100);
-            if (r < 30)
+            if (r < 20)
             {
                 Consumables golddrop = new Consumables(position, "gold");
                 consumable.Add(golddrop);
             }
-            else if (r < 45)
+            else if (r < 35)
             {
                 Consumables healthdrop = new Consumables(position, "heart");
                 consumable.Add(healthdrop);
             }
-            else if (r < 60)
+            else if (r < 50)
             {
                 Consumables ammodrop = new Consumables(position, "ammo");
                 consumable.Add(ammodrop);

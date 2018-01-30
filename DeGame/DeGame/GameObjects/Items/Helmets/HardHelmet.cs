@@ -10,12 +10,12 @@
     public override void equip()
     {
         PlayingState.player.damagereduction *= 0.8;
-        PlayingState.player.extraspeed*= 0.7f;
+        PlayingState.player.extraspeed*= 0.8f;
     }
     public override void unequip()
     {
         PlayingState.player.damagereduction /= 0.8;
-        PlayingState.player.extraspeed/= 0.7f;
+        PlayingState.player.extraspeed/= 0.8f;
         base.unequip();
     }
 }

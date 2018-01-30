@@ -9,7 +9,7 @@ public class BigMac : Item, IWeapon
 
     public BigMac()
     {
-        Cost = 15;
+        Cost = 18;
         melee = false;
         twoHanded = true;
         addedDamage = 45;
