@@ -67,6 +67,7 @@
     <Compile Include="GameManagement\IGameObject.cs" />
     <Compile Include="GameManagement\InputHelper.cs" />
     <Compile Include="GameManagement\InventoryManager.cs" />
+    <Compile Include="GameManagement\SoundManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
     <Compile Include="GameObjects\Boss\HomingBoss.cs" />
     <Compile Include="GameObjects\Boss\CreamBatBoss.cs" />
@@ -271,6 +272,8 @@
     <Content Include="Content\Sprites\Buttons\EndlessModePressed.png" />
     <Content Include="Content\Sprites\Buttons\HealthUp.png" />
     <Content Include="Content\Sprites\Buttons\HealthUpPressed.png" />
+    <Content Include="Content\Sprites\Buttons\MainMenu2.png" />
+    <Content Include="Content\Sprites\Buttons\MainMenu2Pressed.png" />
     <Content Include="Content\Sprites\Buttons\NormalMode.png" />
     <Content Include="Content\Sprites\Buttons\NormalModePressed.png" />
     <Content Include="Content\Sprites\Buttons\Ranged.png" />
@@ -314,7 +317,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\SoundEffects\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

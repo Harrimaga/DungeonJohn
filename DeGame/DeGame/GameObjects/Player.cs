@@ -31,7 +31,6 @@ public class Player : SpriteGameObject
     public GameObjectList bullets;
     public Rectangle collisionhitbox;
     public static InventoryManager inventory;
-    SoundEffect shootsound, hitsound;
 
     public Player(int layer = 0, string id = "Player")
     : base("Sprites/Characters/PlayerDown", 0, "Player")
@@ -41,8 +40,8 @@ public class Player : SpriteGameObject
         lastUsedspeed = "Down";
         CalculateDamage();
         CalculateAmmo();
-        shootsound = GameEnvironment.assetManager.GetSound("SoundEffects/Shoot");
-        hitsound = GameEnvironment.assetManager.GetSound("SoundEffects/Hit");
+        GameEnvironment.soundManager.loadSoundEffect("Shoot");
+        GameEnvironment.soundManager.loadSoundEffect("Hit");
     }
 
     public override Rectangle BoundingBox
@@ -244,7 +243,7 @@ public class Player : SpriteGameObject
 
     public void TakeDamage(float enemydamage)
     {
-        hitsound.Play();
+        GameEnvironment.soundManager.playSoundEffect("Hit");
         health -= (float)(enemydamage * damagereduction);
     }
 
@@ -288,7 +287,7 @@ public class Player : SpriteGameObject
             IWeapon weapon = (IWeapon)inventory.currentWeapon;
             if (weapon != null)
             {
-                shootsound.Play();
+                GameEnvironment.soundManager.playSoundEffect("Shoot");
                 weapon.Attack(direction);
                 if (ammo > 0)
                 {

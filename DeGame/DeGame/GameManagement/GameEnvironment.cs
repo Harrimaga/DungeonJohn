@@ -15,6 +15,7 @@ public class GameEnvironment : Game
     public static Point WindowSize;
 
     public static AssetManager assetManager;
+    public static SoundManager soundManager;
     protected static Camera cam;
 
     public static Point Dimensions;
@@ -30,6 +31,7 @@ public class GameEnvironment : Game
         gameStateManager = new GameStateManager();
         random = new Random();
         assetManager = new AssetManager(Content);
+        soundManager = new SoundManager(Content);
         Dimensions = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
         IsMouseVisible = true;
         startup = true;
