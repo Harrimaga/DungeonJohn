@@ -8,8 +8,8 @@ class Button : SpriteGameObject
     string buttontext;
     Vector2 buttonposition;
     string textureNormal, texturePressed;
-    int spriteWidth, spriteHeight;
-    bool withouttext;
+    int spriteWidth, spriteHeight, pressedcounter = 0;
+    bool withouttext;    
 
     public Button(Vector2 startposition, string text, string imageAsset, string imageAssetPressed,bool withoutText, int layer = 0, string id = "")
         : base("Sprites/Buttons/Button Sprite", 0, "button")
@@ -36,13 +36,20 @@ class Button : SpriteGameObject
 
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        pressed = inputHelper.MouseLeftButtonDown() && BoundingBox.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y);
+        pressed = inputHelper.MouseLeftButtonDown() && BoundingBox.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y) && pressedcounter <= 0;
         hover = BoundingBox.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y);
     }
 
     public override void Update(GameTime gameTime)
     {
         position = buttonposition + new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
+        if (pressed)
+        {
+            pressedcounter = 400;
+            pressed = false;
+        }
+        if (pressedcounter > 0)
+            pressedcounter -= gameTime.ElapsedGameTime.Milliseconds;
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
