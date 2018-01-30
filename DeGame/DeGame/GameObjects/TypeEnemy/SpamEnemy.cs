@@ -27,7 +27,7 @@ public class SpamEnemy : Enemy
         {
             Shoot();
             BulletCounter += 1;
-            Counter = 100;
+            Counter = 50;
         }
         if (BulletCounter == 20)
         {
