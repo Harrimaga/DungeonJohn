@@ -44,6 +44,7 @@ public class Enemy : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
+        bool ok;
         base.Update(gameTime);
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         healthbar.Update(gameTime, health, maxhealth, position);
@@ -55,13 +56,14 @@ public class Enemy : SpriteGameObject
         if (moving)
         {
             actualvelocity = velocity * direction;
+            if (float.IsNaN(direction.X))
+                actualvelocity = Vector2.Zero;
             position.X += actualvelocity.X * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             position.Y += actualvelocity.Y * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
         }
-
         List<GameObject> RemoveBullets = new List<GameObject>();
         CollisionWithEnemy();
-        foreach (Bullet bullet in PlayingState.player.bullets.Children)        
+        foreach (Bullet bullet in PlayingState.player.bullets.Children)
             if (CollidesWith(bullet))
             {
                 health -= PlayingState.player.attack;
@@ -70,7 +72,7 @@ public class Enemy : SpriteGameObject
                 RemoveBullets.Add(bullet);
                 hitcounter = 200;
             }
-        foreach (Bullet bullet in RemoveBullets)        
+        foreach (Bullet bullet in RemoveBullets)
             PlayingState.player.bullets.Remove(bullet);
         RemoveBullets.Clear();
         if (hitcounter > 0)
@@ -80,10 +82,13 @@ public class Enemy : SpriteGameObject
         }
         else if (poisoncounter > 0)
         {
-            if (poisoncounter % 500 == 0 && poisoncounter < 5000)
-                health -= 4;
-            poisoncounter -= gameTime.ElapsedGameTime.Milliseconds;
             color = Color.YellowGreen;
+            if (poisoncounter % 600 <= 20 && poisoncounter < 5000)
+            {
+                health -= 4;
+                color = Color.Salmon;
+            }
+            poisoncounter -= gameTime.ElapsedGameTime.Milliseconds;
         }
         else
             color = Color.White;
@@ -179,7 +184,7 @@ public class Enemy : SpriteGameObject
     {
         if (CollidesWith(PlayingState.player))
         {
-            direction = Vector2.Zero;           
+            direction = Vector2.Zero;
             if (counter <= 0)
             {
                 PlayingState.player.TakeDamage(contactdamage);

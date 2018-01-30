@@ -22,15 +22,6 @@ class IntroState : IGameObject
         if (inputHelper.KeyPressed(Keys.Space))
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
     }
-    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "[Press 'Space' to skip]", SkipPosition, Color.White);
-        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/NewBTeam"), position);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Dungeon John is a man with a mission:", TextPosition, Color.White);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "To take revenge on the infamous CreamBat that kidnapped his beloved toaster!", TextPosition + new Vector2(0, 25), Color.White);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Join John on his adventure through perilous dungeon floors,", TextPosition + new Vector2(0,50), Color.White);
-        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "As he gains powerful artifacts and fight even more powerful enemies in this totally original dungeon crawler!", TextPosition + new Vector2(0, 75), Color.White);
-    }
 
     public virtual void Update(GameTime gameTime)
     {
@@ -42,7 +33,20 @@ class IntroState : IGameObject
             Reset();
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
         }
+       
+
     }
+
+    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "[Press 'Space' to skip]", SkipPosition, Color.White);
+        spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/NewBTeam"), position);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Dungeon John is a man with a mission:", TextPosition, Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "To take revenge on the infamous CreamBat that kidnapped his beloved toaster!", TextPosition + new Vector2(0, 25), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Join John on his adventure through perilous dungeon floors,", TextPosition + new Vector2(0,50), Color.White);
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "As he gains powerful artifacts and fight even more powerful enemies in this totally original dungeon crawler!", TextPosition + new Vector2(0, 75), Color.White);
+    }
+
     public virtual void Reset()
     {
         Counter = 0;

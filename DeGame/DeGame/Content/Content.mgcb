@@ -28,7 +28,6 @@
 #begin Sprites/SpelFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Sprites/SpelFont.spritefont
 
@@ -2840,18 +2839,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Tiles/WoodenWall3.png
 
-#begin Sprites/Tiles/WoodenWall6.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Tiles/WoodenWall6.png
-
 #begin Sprites/Buttons/FullScreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3164,48 +3151,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Buttons/SpeedPressed.png
 
-#begin SoundEffects/background music.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/background music.wav
-
-#begin SoundEffects/Crafting.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Crafting.wav
-
-#begin SoundEffects/Hit.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Hit.wav
-
-#begin SoundEffects/Levelup.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Levelup.wav
-
-#begin SoundEffects/Pickup.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Pickup.wav
-
-#begin SoundEffects/Shoot.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Shoot.wav
-
-#begin SoundEffects/Loss.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Loss.wav
-
 #begin Sprites/Buttons/EndlessMode.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3266,30 +3211,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/PauseMenu/GameModes.png
 
-#begin Sprites/Enemies/BearEnemySheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Enemies/BearEnemySheet.png
-
-#begin Sprites/PlayerPaperAnimated.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/PlayerPaperAnimated.png
-
 #begin Sprites/Tiles/Shop4.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3343,4 +3264,118 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:SoundEffects/Shop.mp3
+
+#begin Sprites/Tiles/WoodenWall4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Tiles/WoodenWall4.png
+
+#begin Sprites/Buttons/Credits.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Buttons/Credits.png
+
+#begin Sprites/Buttons/CreditsPressed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Buttons/CreditsPressed.png
+
+#begin SoundEffects/Hit.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Hit.mp3
+
+#begin SoundEffects/background music.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/background music.wav
+
+#begin SoundEffects/Crafting.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crafting.mp3
+
+#begin SoundEffects/Crafting.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crafting.wav
+
+#begin SoundEffects/Hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Hit.wav
+
+#begin SoundEffects/Levelup.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Levelup.wav
+
+#begin SoundEffects/Loss.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Loss.wav
+
+#begin SoundEffects/Pickup.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Pickup.wav
+
+#begin SoundEffects/Shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Shoot.wav
+
+#begin SoundEffects/Menu.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Menu.mp3
+
+#begin SoundEffects/Base.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Base.mp3
+
+#begin Sprites/Bullets/FireBullet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Bullets/FireBullet.png
 
