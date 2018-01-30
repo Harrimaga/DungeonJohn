@@ -271,6 +271,8 @@
     <Content Include="Content\Sprites\Buttons\EndlessModePressed.png" />
     <Content Include="Content\Sprites\Buttons\HealthUp.png" />
     <Content Include="Content\Sprites\Buttons\HealthUpPressed.png" />
+    <Content Include="Content\Sprites\Buttons\MainMenu2.png" />
+    <Content Include="Content\Sprites\Buttons\MainMenu2Pressed.png" />
     <Content Include="Content\Sprites\Buttons\NormalMode.png" />
     <Content Include="Content\Sprites\Buttons\NormalModePressed.png" />
     <Content Include="Content\Sprites\Buttons\Ranged.png" />
