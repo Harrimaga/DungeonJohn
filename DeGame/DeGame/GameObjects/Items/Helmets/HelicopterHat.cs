@@ -2,7 +2,7 @@
 {
     public HelicopterHat()
     {
-        Cost = 13;
+        Cost = 20;
         itemName = "HelicopterHat";
         itemDescription = "Has anyone ever even worn one of these things? Grants the ability to fly";
         Type = "helmet";

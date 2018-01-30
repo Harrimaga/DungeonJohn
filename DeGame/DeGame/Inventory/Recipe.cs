@@ -37,6 +37,10 @@ class Recipe
         list1.Add(new CrestShield());
         list2.Add(new CrestShield());
         listNewItem.Add(new Mirror());
+
+        list1.Add(new CoolBoots());
+        list2.Add(new SlimyBoots());
+        listNewItem.Add(new MageJacket());
     }
 }
 
