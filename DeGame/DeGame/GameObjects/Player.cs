@@ -201,7 +201,7 @@ public class Player : SpriteGameObject
         List<GameObject> RemoveBullets = new List<GameObject>();
         health = 100;
         maxhealth = 100;
-        gold = 0;
+        gold = 100;
         level = 1;
         exp = 0;
         nextLevelExp = 500;

@@ -26,6 +26,7 @@ public class GameModes : IGameObject
         {
             Boss.endless = true;
             GameEnvironment.gameStateManager.SwitchTo("Playing");
+            GameEnvironment.soundManager.PlaySong("Base");
         }
 
         if (mainmenuB.Pressed)

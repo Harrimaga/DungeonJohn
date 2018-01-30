@@ -28,10 +28,12 @@ class PauseMenuState : IGameObject
         {
             PlayingState.currentFloor.ResetFloor();
             GameEnvironment.gameStateManager.SwitchTo("Playing");
+            GameEnvironment.soundManager.PlaySong("Base");
         }
         if (mainMenuB.Pressed)
         {
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
+            GameEnvironment.soundManager.PlaySong("Menu");
         }
         if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
@@ -125,7 +127,7 @@ class PauseMenuState : IGameObject
         wornItems = PlayingState.hud.wornItems;
         wornItems.Position = BasisPosition + new Vector2(500, 150);
         wornItems.Draw(gameTime, spriteBatch);
-
+        
         if (startup)
         {
             startUp();
