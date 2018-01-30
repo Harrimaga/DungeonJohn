@@ -12,7 +12,7 @@ class IntroState : IGameObject
     Vector2 velocity = new Vector2(0,-0.1f);
     Vector2 position = new Vector2(Camera.Position.X - 300, Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2) + 1000);
     Vector2 TextPosition = new Vector2(Camera.Position.X - 300, Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2) + 1600);
-    Vector2 SkipPosition = new Vector2(Camera.Position.X - 800, Camera.Position.X - 600);
+    Vector2 SkipPosition = new Vector2(Camera.Position.X - 790, Camera.Position.X - 600);
     int Counter = 0;
     public IntroState()
     {

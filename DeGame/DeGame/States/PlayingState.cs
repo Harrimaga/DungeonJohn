@@ -32,6 +32,10 @@ public class PlayingState : IGameObject
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
         }
+        if (inputHelper.KeyPressed(Keys.M) || inputHelper.ButtonPressed(Buttons.Start))
+        {
+            GameEnvironment.gameStateManager.SwitchTo("Credits");
+        }
         floor.HandleInput(inputHelper, gameTime); 
     }
 
@@ -47,7 +51,7 @@ public class PlayingState : IGameObject
         }
         if (currentFloor.CurrentLevel >= 10)
         {
-            GameEnvironment.gameStateManager.SwitchTo("Victory");
+            GameEnvironment.gameStateManager.SwitchTo("Credits");
         }
     }
 

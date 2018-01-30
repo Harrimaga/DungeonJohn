@@ -148,6 +148,7 @@
     <Compile Include="Level\HUD.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
+    <Compile Include="States\Credits.cs" />
     <Compile Include="States\IntroState.cs" />
     <Compile Include="States\VictoryState.cs" />
     <Compile Include="UI\Button.cs" />
