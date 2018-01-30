@@ -26,9 +26,21 @@ class Recipe
         list2.Add(new HardHelmet());
         listNewItem.Add(new PowerHelmet());
 
+        list1.Add(new BloodRing());
+        list2.Add(new BloodRing());
+        listNewItem.Add(new SimpleArmour());
+
+        list1.Add(new PowerHelmet());
+        list2.Add(new MageJacket());
+        listNewItem.Add(new HelicopterHat());
+
         list1.Add(new CrestShield());
         list2.Add(new CrestShield());
         listNewItem.Add(new Mirror());
+
+        list1.Add(new CoolBoots());
+        list2.Add(new SlimyBoots());
+        listNewItem.Add(new MageJacket());
     }
 }
 
