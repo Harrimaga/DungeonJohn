@@ -4,7 +4,7 @@ using System;
 
 public class TwoPartEnemy : Enemy
 {
-    int Stage = 1, NextStage;
+    int Stage = 1;
     static Random random = new Random();
     bool Two = true;
 
@@ -42,14 +42,6 @@ public class TwoPartEnemy : Enemy
                 Stage = 2;
             }
         }
-        //else if (Stage == 2)
-        //{
-        //    killable = true;
-        //    maxhealth = 75;
-        //    health = 75;
-        //    expGive = 80 * statmultiplier;
-        //    basevelocity = new Vector2(0.03f, 0.03f);            
-        //}
         else if (Stage == 2)
         {
             if (Two == true)
@@ -75,9 +67,5 @@ public class TwoPartEnemy : Enemy
         {
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyFull"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);     
         }
-        //if (Stage == 2)
-        //{
-        //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyBottom"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
-        //}
     }
 }
