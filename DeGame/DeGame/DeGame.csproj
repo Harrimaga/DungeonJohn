@@ -148,6 +148,7 @@
     <Compile Include="Level\HUD.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
+    <Compile Include="States\GameModes.cs" />
     <Compile Include="States\Credits.cs" />
     <Compile Include="States\IntroState.cs" />
     <Compile Include="States\VictoryState.cs" />
@@ -266,8 +267,12 @@
     <Content Include="Content\Sprites\Buttons\AttackSpeedPressed.png" />
     <Content Include="Content\Sprites\Buttons\AttackUp.png" />
     <Content Include="Content\Sprites\Buttons\AttackUpPressed.png" />
+    <Content Include="Content\Sprites\Buttons\EndlessMode.png" />
+    <Content Include="Content\Sprites\Buttons\EndlessModePressed.png" />
     <Content Include="Content\Sprites\Buttons\HealthUp.png" />
     <Content Include="Content\Sprites\Buttons\HealthUpPressed.png" />
+    <Content Include="Content\Sprites\Buttons\NormalMode.png" />
+    <Content Include="Content\Sprites\Buttons\NormalModePressed.png" />
     <Content Include="Content\Sprites\Buttons\Ranged.png" />
     <Content Include="Content\Sprites\Buttons\RangedPressed.png" />
     <Content Include="Content\Sprites\Buttons\Speed.png" />
@@ -295,6 +300,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\PauseMenu\DungeonJohn.png" />
+    <Content Include="Content\Sprites\PauseMenu\GameModes.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

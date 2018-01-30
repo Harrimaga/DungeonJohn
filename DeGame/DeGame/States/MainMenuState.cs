@@ -17,13 +17,13 @@ class MainMenuState : IGameObject
         option.HandleInput(inputHelper, gameTime);
         if (start.Pressed)
         {
-            GameEnvironment.gameStateManager.SwitchTo("Playing");
+            GameEnvironment.gameStateManager.SwitchTo("GameModes");
             Reset();
         }
         if (inputHelper.KeyPressed(Keys.Z) || option.Pressed)
         {
-            GameEnvironment.gameStateManager.SwitchTo("Option");
-            Reset();
+            GameEnvironment.gameStateManager.SwitchTo("Pause");
+            //Reset();
         }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
