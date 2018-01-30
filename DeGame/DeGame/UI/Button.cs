@@ -46,7 +46,6 @@ class Button : SpriteGameObject
         if (pressed)
         {
             pressedcounter = 400;
-            pressed = false;
         }
         if (pressedcounter > 0)
             pressedcounter -= gameTime.ElapsedGameTime.Milliseconds;
