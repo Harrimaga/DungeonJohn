@@ -115,32 +115,35 @@ public class Enemy : SpriteGameObject
 
     protected void CollisionWithEnemy()
     {
-        foreach (Enemy enemy in PlayingState.currentFloor.currentRoom.enemies.Children)
+        if (!backgroundenemy)
         {
-            if (enemy != this && !enemy.backgroundenemy)
+            foreach (Enemy enemy in PlayingState.currentFloor.currentRoom.enemies.Children)
             {
-                if (CollidesWith(enemy) && BoundingBox.Left < enemy.position.X + enemy.Width && BoundingBox.Left + (enemy.Width / 2) > enemy.position.X + enemy.Width)
+                if (enemy != this && !enemy.backgroundenemy)
                 {
-                    if (CollidesWith(enemy))
-                        enemy.position.X--;
-                }
+                    if (CollidesWith(enemy) && BoundingBox.Left < enemy.position.X + enemy.Width && BoundingBox.Left + (enemy.Width / 2) > enemy.position.X + enemy.Width)
+                    {
+                        if (CollidesWith(enemy))
+                            enemy.position.X--;
+                    }
 
-                if (CollidesWith(enemy) && BoundingBox.Right > enemy.position.X && BoundingBox.Right - (enemy.Width / 2) < enemy.position.X)
-                {
-                    if (CollidesWith(enemy))
-                        enemy.position.X++;
-                }
+                    if (CollidesWith(enemy) && BoundingBox.Right > enemy.position.X && BoundingBox.Right - (enemy.Width / 2) < enemy.position.X)
+                    {
+                        if (CollidesWith(enemy))
+                            enemy.position.X++;
+                    }
 
-                if (CollidesWith(enemy) && BoundingBox.Top < enemy.position.Y + enemy.Height && BoundingBox.Top + (enemy.Height / 2) > enemy.position.Y + enemy.Height)
-                {
-                    if (CollidesWith(enemy))
-                        enemy.position.Y--;
-                }
+                    if (CollidesWith(enemy) && BoundingBox.Top < enemy.position.Y + enemy.Height && BoundingBox.Top + (enemy.Height / 2) > enemy.position.Y + enemy.Height)
+                    {
+                        if (CollidesWith(enemy))
+                            enemy.position.Y--;
+                    }
 
-                if (CollidesWith(enemy) && BoundingBox.Bottom > enemy.position.Y && BoundingBox.Bottom - (enemy.Height / 2) < enemy.position.Y)
-                {
-                    if (CollidesWith(enemy))
-                        enemy.position.Y++;
+                    if (CollidesWith(enemy) && BoundingBox.Bottom > enemy.position.Y && BoundingBox.Bottom - (enemy.Height / 2) < enemy.position.Y)
+                    {
+                        if (CollidesWith(enemy))
+                            enemy.position.Y++;
+                    }
                 }
             }
         }
