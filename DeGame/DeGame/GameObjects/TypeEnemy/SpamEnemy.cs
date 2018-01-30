@@ -17,6 +17,7 @@ public class SpamEnemy : Enemy
         maxhealth = 100 * statmultiplier;
         expGive = 120 * statmultiplier;
         contactdamage = 2 * statmultiplier;
+        backgroundenemy = true;
     }
 
     public void Range(GameTime gameTime)
