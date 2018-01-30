@@ -103,7 +103,7 @@
     <Compile Include="GameObjects\Items\Shields\Mirror.cs" />
     <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
     <Compile Include="GameObjects\Boss\Boss.cs" />
-    <Compile Include="GameObjects\Enemy.cs" />
+    <Compile Include="GameObjects\TypeEnemy\Enemy.cs" />
     <Compile Include="GameObjects\Bullets\EnemyBullet.cs" />
     <Compile Include="GameObjects\Consumables.cs" />
     <Compile Include="GameObjects\Items\Weapons\Mac10.cs" />
