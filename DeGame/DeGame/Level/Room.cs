@@ -612,14 +612,14 @@ public class Room : GameObjectList
     {
         if (CheckRoomarray(x + 1, y, 4) && CheckRoomarray(x - 1, y, 4))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop1")), TilePosition, Color.Gray);
-        else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1,4) && x < 11 && y > 1)
+        else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1, 4) && x < 11 && y > 1)
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop3"), TilePosition, Color.Gray);
         else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1, 4) && x > 11 && y > 1)
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop3"), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
         else if (CheckRoomarray(x + 1, y, 4) && CheckRoomarray(x, y - 1, 4))
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop2"), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop2"), TilePosition, Color.Gray);
         else if (CheckRoomarray(x - 1, y, 4) && CheckRoomarray(x, y - 1, 4))
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop2"), TilePosition, null, Color.Gray);
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop2"), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
         else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1, 4) && x < 11 && y == 1)
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop4"), TilePosition, Color.Gray);
         else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1, 4) && x > 11 && y == 1)
