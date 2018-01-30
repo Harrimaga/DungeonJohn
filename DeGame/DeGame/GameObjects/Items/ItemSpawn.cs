@@ -57,10 +57,6 @@ class ItemSpawn : SpriteGameObject
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Altar"), position);
-        if (price && !pickedUp)
-        {
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Convert.ToString(item.Cost), position + new Vector2(18, 60), Color.Yellow);
-        }
         if (!pickedUp)
         {
             Texture2D itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
@@ -77,8 +73,9 @@ class ItemSpawn : SpriteGameObject
         }
         if (hitbox.Intersects(PlayingState.player.BoundingBox) && price)
         {
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Press spacebar to buy", position + new Vector2(-60, 260), Color.White);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Press spacebar to buy", position + new Vector2(-65, 20), Color.White);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Convert.ToString(item.Cost), position + new Vector2(25, -50), Color.Yellow);
         }
-    }
+    }        
 }
 

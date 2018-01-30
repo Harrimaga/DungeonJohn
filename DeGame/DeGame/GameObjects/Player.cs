@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class Player : SpriteGameObject
 {
     public Texture2D playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
-    public bool CoolBoots, SlimyBoots, VialOfPoison, CrestShield, HelicopterHat;
+    public bool CoolBoots, SlimyBoots, CrestShield, HelicopterHat;
     public bool onWeb, onIce, onSolid;
     public bool startup;
     new public bool Mirror;
@@ -16,6 +16,7 @@ public class Player : SpriteGameObject
     public double attackspeedreduction;
     public double attackmultiplier;
     public double extraspeed;
+    public double poisonchance;
     double speed;
     float velocitybase;
     public float attack, extraattack;
@@ -209,12 +210,13 @@ public class Player : SpriteGameObject
         extraspeed = 1;
         extraattack = 0;
         attackmultiplier = 1;
+        poisonchance = 0;
         leveltokens = 0;
         velocitybase = 0.3f;
         CalculateAmmo();
         CalculateDamage();
         onIce = false; onWeb = false; onSolid = false;
-        CoolBoots = false; SlimyBoots = false; Mirror = false; VialOfPoison = false; CrestShield = false;
+        CoolBoots = false; SlimyBoots = false; Mirror = false; CrestShield = false;
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
         {
             RemoveBullets.Add(bullet);
@@ -265,16 +267,16 @@ public class Player : SpriteGameObject
         }
         if (type == 2)
         {
-            maxhealth += 50;
-            health += 50;
+            maxhealth += 20;
+            health += 20;
         }
         if (type == 3)
         {
-            extraspeed *= 1.15;
+            extraspeed *= 1.10;
         }
         if (type == 4)
         {
-            attackspeedreduction *= 0.85;
+            attackspeedreduction *= 0.90;
         }
     }
 
