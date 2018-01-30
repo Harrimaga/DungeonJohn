@@ -62,13 +62,13 @@ public class HomingBoss : Boss
                 
                 bullet = new BossBullet(bulletdamage, speed, position + new Vector2(sprite.Width, (sprite.Height / 2) - (2 * bulletsprite.Height) + 10), SpriteEffects.None, Hmng);
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
-                Counter = 1000;
+                Counter = 900;
             }
             else if (PlayingState.player.position.X < position.X + sprite.Width / 2)
             {
                 bullet = new BossBullet(bulletdamage, speed, position + new Vector2(0, (sprite.Height / 2) - (2 *bulletsprite.Height) + 10), SpriteEffects.None , Hmng);
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
-                Counter = 1000;
+                Counter = 900;
             }
         }
     }
