@@ -1,10 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 class EndRoom : Room
 {
     static public bool cleared = false, trigger = false, placed = false, finalboss = false;
     int currentlevel;
+    Random random = new Random();
 
     public EndRoom(string map, int roomListIndex, int a, int b, int layer = 0, string id = "") : base(map, roomListIndex, a, b, layer)
     {
@@ -50,9 +52,9 @@ class EndRoom : Room
                 return "MinionBoss2";
             case 5:
                 return "CreamBatBoss";
-            default:
-                return "HomingBoss";
         }
+        int randomboss = random.Next(5) + 1;
+        return ChooseBoss(randomboss);
     }
 
     public void PlaceBoss(string boss)
