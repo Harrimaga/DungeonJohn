@@ -12,7 +12,7 @@ public class Enemy : SpriteGameObject
     protected float EnemyLevel;
     protected float statmultiplier;
     protected float range = 100;
-    protected float expGive = 120;
+    protected float expGive = 50;
     protected float bulletdamage;
     protected bool drop = true, flying = false, backgroundenemy = false, bossenemy = false, killable = true, moving = true, hpdisplay = false;
     protected int counter = 0, poisoncounter = 0, hitcounter = 0;
