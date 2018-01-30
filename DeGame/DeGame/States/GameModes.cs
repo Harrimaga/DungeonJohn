@@ -9,7 +9,7 @@ public class GameModes : IGameObject
     {
         normalB = new Button(new Vector2(600, 340), "NormalMode", "NormalMode", "NormalModePressed", true, 1);
         endlessB = new Button(new Vector2(600, 440), "EndlessMode", "EndlessMode", "EndlessModePressed", true, 1);
-        mainmenuB = new Button(new Vector2(600, 540), "ReturnToMainMenu", "ReturnToMainMenu", "ReturnToMainMenuPressed", true, 1);
+        mainmenuB = new Button(new Vector2(600, 540), "MainMenu", "MainMenu2", "MainMenu2Pressed", true, 1);
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {

@@ -103,7 +103,7 @@
     <Compile Include="GameObjects\Items\Shields\Mirror.cs" />
     <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
     <Compile Include="GameObjects\Boss\Boss.cs" />
-    <Compile Include="GameObjects\Enemy.cs" />
+    <Compile Include="GameObjects\TypeEnemy\Enemy.cs" />
     <Compile Include="GameObjects\Bullets\EnemyBullet.cs" />
     <Compile Include="GameObjects\Consumables.cs" />
     <Compile Include="GameObjects\Items\Weapons\Mac10.cs" />
@@ -272,6 +272,8 @@
     <Content Include="Content\Sprites\Buttons\EndlessModePressed.png" />
     <Content Include="Content\Sprites\Buttons\HealthUp.png" />
     <Content Include="Content\Sprites\Buttons\HealthUpPressed.png" />
+    <Content Include="Content\Sprites\Buttons\MainMenu2.png" />
+    <Content Include="Content\Sprites\Buttons\MainMenu2Pressed.png" />
     <Content Include="Content\Sprites\Buttons\NormalMode.png" />
     <Content Include="Content\Sprites\Buttons\NormalModePressed.png" />
     <Content Include="Content\Sprites\Buttons\Ranged.png" />
