@@ -20,7 +20,6 @@ public class PlayingState : IGameObject
         hud = new HUD();
         currentFloor = floor;
         GameEnvironment.gameStateManager.LastState = "playing";
-        Player.inventory.currentWeapon = new BigMac();
         GameEnvironment.soundManager.loadSoundEffect("Loss");
     }
 
