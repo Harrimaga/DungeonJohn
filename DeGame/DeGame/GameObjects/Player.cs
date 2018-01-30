@@ -266,16 +266,16 @@ public class Player : SpriteGameObject
         }
         if (type == 2)
         {
-            maxhealth += 50;
-            health += 50;
+            maxhealth += 20;
+            health += 20;
         }
         if (type == 3)
         {
-            extraspeed *= 1.15;
+            extraspeed *= 1.10;
         }
         if (type == 4)
         {
-            attackspeedreduction *= 0.85;
+            attackspeedreduction *= 0.90;
         }
     }
 
