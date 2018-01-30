@@ -11,6 +11,9 @@ class ItemList
         MakeShopList();
     }
 
+    /// <summary>
+    /// Here items are added to a item list to make sure items spawn in the shop and/or in the rooms
+    /// </summary>
     public void MakeItemList()
     {
         for(int x = 0; x < 2; x++)

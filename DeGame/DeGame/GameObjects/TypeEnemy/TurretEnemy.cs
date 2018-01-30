@@ -7,6 +7,15 @@ public class TurretEnemy : Enemy
     float speed = 0.2f;
     Vector2 BulletPosition;
 
+    /// <summary>
+    /// Pre-determine the direction in which is shot based upon received parameters.
+    /// </summary>
+    /// <param name="startPosition"></param>
+    /// <param name="roomposition"></param>
+    /// <param name="directioncount"></param>
+    /// <param name="Difficulty"></param>
+    /// <param name="layer"></param>
+    /// <param name="id"></param>
     public TurretEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int Difficulty = 0, int layer = 0, string id = "TurretEnemy") : base(startPosition, roomposition, "Sprites/Enemies/TurretEnemyUp", Difficulty, layer, id)
     {
         Directioncount = directioncount;
@@ -36,6 +45,10 @@ public class TurretEnemy : Enemy
         
     }
 
+    /// <summary>
+    /// Shoot the bullet in the determined direction
+    /// </summary>
+    /// <param name="gameTime"></param>
     public void Shoot(GameTime gameTime)
     {
         Counter += 1 * gameTime.ElapsedGameTime.Milliseconds;
@@ -47,12 +60,22 @@ public class TurretEnemy : Enemy
         }
     }
 
+    /// <summary>
+    /// If it is in the currentroom: Shoot.
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Shoot(gameTime);
     }
+
+    /// <summary>
+    /// Draw the Turret based upon the received parameters.
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

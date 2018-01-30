@@ -19,11 +19,14 @@ class Solid : SpriteGameObject
             OnThisTile = true;
         }
         else
+        {
             OnThisTile = false;
+        }
     }
 
     protected void SolidCollision()
     {
+        /// When the player hits something that is solid, the player will be set back to its previous position
         if (BoundingBox.Contains(new Vector2(PlayingState.player.collisionhitbox.Center.X, PlayingState.player.collisionhitbox.Top)))
             while (BoundingBox.Intersects(PlayingState.player.collisionhitbox))
             {

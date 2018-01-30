@@ -12,6 +12,7 @@ class Wall : Solid
 
     public override void Update(GameTime gameTime)
     {
+        /// All walls are solid
         base.Update(gameTime);
         SolidCollision();
     }

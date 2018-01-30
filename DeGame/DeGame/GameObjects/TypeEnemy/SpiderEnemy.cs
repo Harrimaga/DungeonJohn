@@ -20,7 +20,11 @@ public class SpiderEnemy : Enemy
         contactdamage = 10 * statmultiplier;
         max = random.Next(40) + 60;
     }
-
+    
+    /// <summary>
+    /// Updates the velocity and makes it move(Charge).
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         Vector2 oldposition = position;
@@ -30,6 +34,9 @@ public class SpiderEnemy : Enemy
         Charge();
     }
 
+    /// <summary>
+    /// It it is in the current room, move it randomly. Unless it is near the Player, then move it towards the player; If it collides with solids and/or door turn it back.
+    /// </summary>
     void Charge()
     {
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
@@ -97,7 +104,13 @@ public class SpiderEnemy : Enemy
             }
         }
     }
+    
 
+    /// <summary>
+    /// Draw the Enemy.
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

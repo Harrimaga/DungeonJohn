@@ -40,6 +40,10 @@ public class CraftingSlots : GameObjectList
         }
     }
 
+    /// <summary>
+    /// A selected item will be put in the first possible slot (a empty one)
+    /// </summary>
+    /// <returns></returns>
     public CraftingSlot CheckForEmptySlot()
     {
         if (itemSlot1.item == null)
@@ -58,6 +62,9 @@ public class CraftingSlots : GameObjectList
         slot.AddItem(item);
     }
 
+    /// <summary>
+    /// Here is a check to make sure the items that are selected are both in the same recipe
+    /// </summary>
     public void RecipeCheck()
     {
         if (itemSlot1.item != null && itemSlot2.item != null)
@@ -76,6 +83,7 @@ public class CraftingSlots : GameObjectList
             }
         }
     }
+
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         craftingB.HandleInput(inputHelper, gameTime);
@@ -84,6 +92,11 @@ public class CraftingSlots : GameObjectList
         children[2].HandleInput(inputHelper, gameTime);
     }
 
+    /// <summary>
+    /// Draw the craftingslots
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         foreach (CraftingSlot slot in children)
@@ -102,6 +115,7 @@ public class CraftingSlots : GameObjectList
         itemNew.item = null;
         RecipeCheck();
         
+        /// Here the crafting is handeled
         if (craftingB.Pressed && itemNew.item != null)
         {
             Player.inventory.addItemToInventory(itemNew.item);

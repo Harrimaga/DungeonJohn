@@ -17,10 +17,16 @@ class ItemSpawn : SpriteGameObject
         position = startPosition;
         price = Price;
         itemList = new ItemList();
-        hitbox =new Rectangle((int)position.X, (int)position.Y + 140, Width, Height);
+        hitbox = new Rectangle((int)position.X, (int)position.Y + 140, Width, Height);
         RandomItem(randomint);
         GameEnvironment.soundManager.loadSoundEffect("Pickup");
     }
+
+    /// <summary>
+    /// Here items that have a price will be retrieved from the shoplist 
+    /// Otherwise they will be retrieved from the roomlist
+    /// </summary>
+    /// <param name="randomint"></param>
     void RandomItem(int randomint)
     {
         if (!price)
@@ -28,12 +34,18 @@ class ItemSpawn : SpriteGameObject
             int r = randomint % itemList.RoomList.Count;
             item = itemList.RoomList[r];
         }
-        else if(price)
+        else
         {
             int r = randomint % itemList.ShopList.Count;
             item = itemList.ShopList[r];
         }
     }
+
+    /// <summary>
+    /// Here a player can buy the item he/she is standing on
+    /// </summary>
+    /// <param name="inputHelper"></param>
+    /// <param name="gameTime"></param>
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if(inputHelper.KeyPressed(Keys.Space) && hitbox.Intersects(PlayingState.player.BoundingBox))
@@ -41,9 +53,13 @@ class ItemSpawn : SpriteGameObject
             buy = true;
         }
     }
+
+    /// <summary>
+    /// Here a item is taken or purchased
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
-
         if (((hitbox.Intersects(PlayingState.player.BoundingBox) && price) || CollidesWith(PlayingState.player)) && !pickedUp && ((PlayingState.player.gold >= item.Cost && buy) || !price))
         {
             Player.inventory.addItemToInventory(item);
@@ -58,6 +74,7 @@ class ItemSpawn : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        /// Here a itempedestal is drawn with a item
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Altar"), position);
         if (!pickedUp)
         {
@@ -73,6 +90,7 @@ class ItemSpawn : SpriteGameObject
             itemPosition.X -= -5 - 25 + (itemSprite.Width * scale) / 2;
             spriteBatch.Draw(itemSprite, itemPosition, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
+        /// A string will appear for buying the item the player is standing on
         if (hitbox.Intersects(PlayingState.player.BoundingBox) && price && !pickedUp)
         {
             spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Press spacebar to buy", position + new Vector2(-65, 20), Color.White);

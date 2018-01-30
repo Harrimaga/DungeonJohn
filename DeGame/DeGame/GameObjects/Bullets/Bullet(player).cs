@@ -12,6 +12,14 @@ class Bullet : SpriteGameObject
     Random random = new Random();
     Color color = Color.White;
 
+    /// <summary>
+    /// Based upon the direction parameter which it is given it will determing wich way the bullet shall go, which sprite to use and where it will be drawn.
+    /// And if its a poisonbullet it will be reflected in the spritecolour.
+    /// </summary>
+    /// <param name="Startposition"></param>
+    /// <param name="Direction"></param>
+    /// <param name="layer"></param>
+    /// <param name="id"></param>
     public Bullet(Vector2 Startposition, int Direction, int layer = 0, string id = "bullet")
     : base("", layer, id)
     {
@@ -73,7 +81,10 @@ class Bullet : SpriteGameObject
         }
     }
 
-    // Update the bullets
+    /// <summary>
+    /// Updates the bullet depending on which weapon is used; Executes Checkcollision
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -98,6 +109,9 @@ class Bullet : SpriteGameObject
         CheckCollision();
     }
 
+    /// <summary>
+    /// Changes the Boundingbox depending on wich bullet, and consequently which sprite, is used.
+    /// </summary>
     public override Rectangle BoundingBox
     {
         get
@@ -109,6 +123,10 @@ class Bullet : SpriteGameObject
             return new Rectangle(topx, topy, Width, Height);
         }
     }
+    
+    /// <summary>
+    /// Checks if it collides with solids and/or door and removes itself if it does. 
+    /// </summary>
     public void CheckCollision()
     {
         foreach (Solid solid in PlayingState.currentFloor.currentRoom.solid.Children)
@@ -124,7 +142,11 @@ class Bullet : SpriteGameObject
         }
     }
 
-    // Draw the bullets
+    /// <summary>
+    /// Draws the bullet depending on the bullet used.
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(Bulletsprite, position, null, color, 0f, Vector2.Zero, 1f, Effect, 0f);
