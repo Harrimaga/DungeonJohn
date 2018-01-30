@@ -5,9 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 public class PlayingState : IGameObject
 {
-    /// <summary>
-    /// Hier worden de player, de floor en de hud aangemaakt
-    /// </summary>
+    // Hier worden de player, de floor en de hud aangemaakt
     public static Player player;
     public static Floor currentFloor;
     public static HUD hud;
@@ -15,6 +13,7 @@ public class PlayingState : IGameObject
 
     public PlayingState()
     {
+
         player = new Player();
         floor = new Floor();
         hud = new HUD();
@@ -26,13 +25,9 @@ public class PlayingState : IGameObject
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         player.HandleInput(inputHelper, gameTime);
-        if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
+        if (inputHelper.KeyPressed(Keys.P))
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
-        }
-        if (inputHelper.KeyPressed(Keys.M) || inputHelper.ButtonPressed(Buttons.Start))
-        {
-            GameEnvironment.gameStateManager.SwitchTo("Victory");
         }
         floor.HandleInput(inputHelper, gameTime); 
     }
@@ -42,11 +37,13 @@ public class PlayingState : IGameObject
         player.Update(gameTime);
         floor.Update(gameTime);
         hud.Update(gameTime);
+        //switching state if you are dead
         if (player.health <= 0)
         {
             GameEnvironment.soundManager.playSoundEffect("Loss");
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
         }
+        //switching state if you win
         if (currentFloor.CurrentLevel >= 10 && !Boss.endless)
         {
             GameEnvironment.gameStateManager.SwitchTo("Victory");
@@ -59,6 +56,7 @@ public class PlayingState : IGameObject
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        //draws floor and player and hud
         floor.Draw(gameTime, spriteBatch);
         hud.Draw(gameTime, spriteBatch);
         player.Draw(gameTime, spriteBatch);

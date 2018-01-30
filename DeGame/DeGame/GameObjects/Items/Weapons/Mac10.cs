@@ -13,9 +13,9 @@ public class Mac10 : Item, IWeapon
         melee = false;
         twoHanded = false;
         addedDamage = 10;
-        projectile_velocity = 0.8f;
+        projectile_velocity = 0.9f;
         attackspeed = 0.3f;
-        range = 250;
+        range = 260;
         maxammo = 200;
         ammo = maxammo;
         Type = "weapon";

@@ -7,11 +7,13 @@ public class Option : IGameObject
     Button MainMenu;
     public Option()
     {
+        //button
         MainMenu = new Button(new Vector2(655, 840), "ReturnToMainMenu", "ReturnToMainMenu", "ReturnToMainMenuPressed", true, 1);
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         MainMenu.HandleInput(inputHelper, gameTime);
+        //button switching state
         if (inputHelper.KeyPressed(Keys.X) || MainMenu.Pressed)
         {
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");

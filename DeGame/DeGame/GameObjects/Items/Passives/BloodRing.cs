@@ -9,11 +9,11 @@
     }
     public override void equip()
     {
-        PlayingState.player.changeMaxHealth(75);
+        PlayingState.player.changeMaxHealth(50);
     }
     public override void unequip()
     {
-        PlayingState.player.changeMaxHealth(-75);
+        PlayingState.player.changeMaxHealth(-50);
         base.unequip();
     }
 }

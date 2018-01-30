@@ -11,13 +11,13 @@
     public override void equip()
     {
         PlayingState.player.SlimyBoots = true;
-        PlayingState.player.extraspeed *= 0.90f;
+        PlayingState.player.extraspeed *= 1.10f;
     }
 
     public override void unequip()
     {
         PlayingState.player.SlimyBoots = false;
-        PlayingState.player.extraspeed /= 0.90f;
+        PlayingState.player.extraspeed /= 1.10f;
         base.unequip();
     }
 }

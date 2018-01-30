@@ -9,13 +9,13 @@ public class BigMac : Item, IWeapon
 
     public BigMac()
     {
-        Cost = 15;
+        Cost = 18;
         melee = false;
         twoHanded = true;
-        addedDamage = 45;
+        addedDamage = 35;
         projectile_velocity = 0.7f;
-        attackspeed = 1.5f;
-        range = 250;
+        attackspeed = 1.4f;
+        range = 290;
         maxammo = 300;
         ammo = maxammo;
         Type = "weapon";

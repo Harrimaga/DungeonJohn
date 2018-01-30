@@ -8,6 +8,7 @@ class MainMenuState : IGameObject
 
     public MainMenuState()
     {
+       //buttons
        start = new Button(new Vector2(620, 725), "Start", "Start","StartPressed",true, 1);
        option = new Button(new Vector2(620, 800), "Option", "Controls", "ControlsPressed", true, 1);
     }
@@ -15,6 +16,7 @@ class MainMenuState : IGameObject
     {
         start.HandleInput(inputHelper, gameTime);
         option.HandleInput(inputHelper, gameTime);
+        //button check switching state
         if (start.Pressed)
         {
             GameEnvironment.gameStateManager.SwitchTo("GameModes");
