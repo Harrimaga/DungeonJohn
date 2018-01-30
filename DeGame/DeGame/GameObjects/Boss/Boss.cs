@@ -7,7 +7,8 @@ public class Boss :  SpriteGameObject
 {
     protected float maxhealth, statmultiplier, contactdamage;
     public float health;
-    protected int expGive, LevelofBoss, poisoncounter = 0, hitcounter = 0;
+    protected int LevelofBoss, poisoncounter = 0, hitcounter = 0;
+    protected float expGive;
     int counter = 0;
     protected Vector2 basevelocity = new Vector2((float)0.5, (float)0.5);
     protected Vector2 PlayerOrigin;

@@ -25,6 +25,10 @@ class Recipe
         list1.Add(new HardHelmet());
         list2.Add(new HardHelmet());
         listNewItem.Add(new PowerHelmet());
+
+        list1.Add(new CrestShield());
+        list2.Add(new CrestShield());
+        listNewItem.Add(new Mirror());
     }
 }
 
