@@ -21,7 +21,7 @@ public class HomingBoss : Boss
         velocity = new Vector2(0.01f, 0.01f);
         velocity.Normalize();
         Roomposition = roomposition;
-        expGive = (int)(240 * statmultiplier);
+        expGive = 200 * statmultiplier;
         maxhealth = 650 * statmultiplier;
         bulletdamage = 0 * statmultiplier;
         health = maxhealth;

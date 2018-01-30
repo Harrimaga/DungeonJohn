@@ -17,7 +17,7 @@ class CreamBatBoss : Boss
     {
         Roomposition = roomposition;
         position = startPosition;
-        expGive = 240;
+        expGive = 300 * statmultiplier;
         maxhealth = 300;
         contactdamage = 10;
         health = maxhealth;
