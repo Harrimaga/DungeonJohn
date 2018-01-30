@@ -19,7 +19,6 @@ public class Slot : SpriteGameObject
     /// <summary>
     /// Update method should be overridden in the subclasses
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {       
     }
@@ -27,8 +26,6 @@ public class Slot : SpriteGameObject
     /// <summary>
     /// Draws the item name and description if you hover over the item in the pause menu
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         if (hover && item != null && GameEnvironment.gameStateManager.currentGameState == GameEnvironment.gameStateManager.GetGameState("PauseMenu")) 
@@ -41,8 +38,6 @@ public class Slot : SpriteGameObject
     /// <summary>
     /// Handles the unequipping of items, and checks if the mouse is hovering over the slot
     /// </summary>
-    /// <param name="inputHelper"></param>
-    /// <param name="gameTime"></param>
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (inputHelper.MouseLeftButtonPressed() && BoundingBox.Contains(inputHelper.MousePosition))

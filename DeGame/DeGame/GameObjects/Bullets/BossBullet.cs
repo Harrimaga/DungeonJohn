@@ -30,7 +30,6 @@ class BossBullet : E_Bullet
     /// Determines where the homing bullet should keep aiming for(HomingPlayerOrigin); Updates the Healtbar; Executes the shooting for both Homingbullets and regular ones; 
     /// And if the bullets are reflected it gives the bullets the right parameters.
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -71,8 +70,6 @@ class BossBullet : E_Bullet
     /// <summary>
     /// Calculates the direction in which the reflected bullet should now be moving.
     /// </summary>
-    /// <param name="direction"></param>
-    /// <returns></returns>
     Vector2 CalculateReflect(Vector2 direction)
     {
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2);
@@ -124,8 +121,6 @@ class BossBullet : E_Bullet
     /// <summary>
     /// Draws the bullets depending on wether ther are homing or not.
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         if(Homing == true)

@@ -45,7 +45,6 @@ public class Enemy : SpriteGameObject
     /// <summary>
     /// Updates the PlayerOrigin to its currentposition; Checks if it is hit with a bullet and if so, takes damage; Handles poisondamage.
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -218,8 +217,6 @@ public class Enemy : SpriteGameObject
     /// <summary>
     /// Draws the enemy and flips it so it faces the player; Draws the healtbar if the enemy should have one.
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         if (position.X + playersprite.Width > PlayingState.player.position.X + 1)

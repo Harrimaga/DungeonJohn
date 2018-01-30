@@ -17,8 +17,6 @@ class CraftingBench : SpriteGameObject
     /// <summary>
     /// When the player stands next to an anvil, a string with instructions will appear
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/items/Anvil"), position);

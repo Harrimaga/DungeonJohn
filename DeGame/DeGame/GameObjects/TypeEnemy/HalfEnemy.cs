@@ -8,12 +8,6 @@ public class HalfEnemy : Enemy
     /// <summary>
     /// Gives both the halves their own velocity
     /// </summary>
-    /// <param name="startPosition"></param>
-    /// <param name="roomposition"></param>
-    /// <param name="side"></param>
-    /// <param name="Difficulty"></param>
-    /// <param name="layer"></param>
-    /// <param name="id"></param>
     public HalfEnemy(Vector2 startPosition, Vector2 roomposition, int side, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/2PartEnemyLeft", Difficulty, layer, id)
     {
         Side = side;
@@ -39,7 +33,6 @@ public class HalfEnemy : Enemy
     /// <summary>
     /// If in currentroom: Chase
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -57,8 +50,6 @@ public class HalfEnemy : Enemy
     /// <summary>
     /// Draws the different sides of the enemy.
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

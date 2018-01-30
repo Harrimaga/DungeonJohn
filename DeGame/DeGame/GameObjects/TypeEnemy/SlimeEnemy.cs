@@ -10,12 +10,6 @@ public class SlimeEnemy : Enemy
     /// <summary>
     /// Based on the direction parameter shoots in a pre-determined direction
     /// </summary>
-    /// <param name="startPosition"></param>
-    /// <param name="roomposition"></param>
-    /// <param name="directioncount"></param>
-    /// <param name="Difficulty"></param>
-    /// <param name="layer"></param>
-    /// <param name="id"></param>
     public SlimeEnemy(Vector2 startPosition, Vector2 roomposition, int directioncount, int Difficulty = 0, int layer = 0, string id = "SlimeEnemy") : base(startPosition, roomposition, "Sprites/Enemies/SlimeEnemy", Difficulty, layer, id)
     {
         Directioncount = directioncount;
@@ -42,7 +36,6 @@ public class SlimeEnemy : Enemy
     /// <summary>
     /// Shoots the bullets in the already determined direction.
     /// </summary>
-    /// <param name="gameTime"></param>
     public void Shoot(GameTime gameTime)
     {
         Counter += gameTime.ElapsedGameTime.Milliseconds;
@@ -58,7 +51,6 @@ public class SlimeEnemy : Enemy
     /// <summary>
     /// If in the current Room: Shoot.
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -69,8 +61,6 @@ public class SlimeEnemy : Enemy
     /// <summary>
     /// Draw the enemy based upon earlier received parameters.
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

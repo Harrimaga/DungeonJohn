@@ -23,7 +23,6 @@ public class TwoPartEnemy : Enemy
     /// <summary>
     /// If it isnt colliding with player it is allowed to move; If in the current room and Stage 1 Chase, depending on which stage handle the right variables and methods
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         if (!CollidesWith(PlayingState.player))
@@ -40,29 +39,18 @@ public class TwoPartEnemy : Enemy
 
             if (health <= 0)
             {
-                NextStage = random.Next(2);
-                switch (NextStage)
-                {
-                    case 0:
-                        Stage = 2;
-                        break;
-                    case 1:
-                        Stage = 3;
-                        break;
-                }
+                Stage = 2;
             }
         }
-
-        if (Stage == 2)
-        {
-            killable = true;
-            maxhealth = 75;
-            health = 75;
-            expGive = 80 * statmultiplier;
-            basevelocity = new Vector2(0.03f, 0.03f);
-        }
-
-        if (Stage == 3)
+        //else if (Stage == 2)
+        //{
+        //    killable = true;
+        //    maxhealth = 75;
+        //    health = 75;
+        //    expGive = 80 * statmultiplier;
+        //    basevelocity = new Vector2(0.03f, 0.03f);            
+        //}
+        else if (Stage == 2)
         {
             if (Two == true)
             {
@@ -80,8 +68,6 @@ public class TwoPartEnemy : Enemy
     /// <summary>
     /// Draw the enemy based upon if it is still whole or not.
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
@@ -89,9 +75,9 @@ public class TwoPartEnemy : Enemy
         {
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyFull"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);     
         }
-        if (Stage == 2)
-        {
-            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyBottom"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
-        }
+        //if (Stage == 2)
+        //{
+        //    spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyBottom"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
+        //}
     }
 }

@@ -206,7 +206,7 @@ public class Player : SpriteGameObject
         List<GameObject> RemoveBullets = new List<GameObject>();
         health = 100;
         maxhealth = 100;
-        gold = 100;
+        gold = 0;
         level = 1;
         exp = 0;
         nextLevelExp = 500;
@@ -274,7 +274,6 @@ public class Player : SpriteGameObject
     /// <summary>
     /// Applies a buff chosen by the player on levelup to his/her stats
     /// </summary>
-    /// <param name="type"></param>
     public void StatIncrease(int type)
     {
         if (type == 1)

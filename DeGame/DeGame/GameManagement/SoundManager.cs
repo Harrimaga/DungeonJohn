@@ -24,7 +24,6 @@ public class SoundManager
     /// <summary>
     /// Plays a song as background music
     /// </summary>
-    /// <param name="name">The song's title</param>
     public void PlaySong(string name)
     {
         try
@@ -56,7 +55,6 @@ public class SoundManager
     /// <summary>
     /// Loads a sound effect into the contentmanager
     /// </summary>
-    /// <param name="name">SFX name</param>
     public void loadSoundEffect(string name)
     {
         try
@@ -89,7 +87,6 @@ public class SoundManager
     /// <summary>
     /// Plays a sound effect
     /// </summary>
-    /// <param name="name">SFX name</param>
     public void playSoundEffect(string name)
     {
         try

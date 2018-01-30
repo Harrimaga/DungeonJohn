@@ -36,7 +36,6 @@ public class StandardBow : Item, IWeapon
     /// <summary>
     /// Shoots a projectile in a given direction
     /// </summary>
-    /// <param name="direction">Direction int (1 - 4)</param>
     public void Attack(int direction)
     {
         // Creates a new bullet

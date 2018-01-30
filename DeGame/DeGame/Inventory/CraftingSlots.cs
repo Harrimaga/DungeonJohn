@@ -95,8 +95,6 @@ public class CraftingSlots : GameObjectList
     /// <summary>
     /// Draw the craftingslots
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         foreach (CraftingSlot slot in children)

@@ -88,8 +88,6 @@ public class Item
     /// <summary>
     /// Draws the item onto the player sprite
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public void DrawOnPlayer(GameTime gameTime, SpriteBatch spriteBatch)
     {
         // Sets the 4 different sprites

@@ -33,7 +33,6 @@ public class HomingBoss : Boss
     /// <summary>
     /// Executes the bullet updates, shooting and moving and the FinalStageMethod(from the Boss superclass).
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -51,7 +50,6 @@ public class HomingBoss : Boss
     /// <summary>
     /// Handles the shooting. It decides based on a random if the bullet will be homing or not, and based on the player position from wich side it shoots.
     /// </summary>
-    /// <param name="gameTime"></param>
     public void Shoot(GameTime gameTime)
     {
         bool Hmng = false;
@@ -84,7 +82,6 @@ public class HomingBoss : Boss
     /// <summary>
     /// Moves the Boss via a pre-determined pattern
     /// </summary>
-    /// <param name="gameTime"></param>
     public void Move(GameTime gameTime)
     {
         MoveTimer++;
@@ -103,8 +100,6 @@ public class HomingBoss : Boss
     /// <summary>
     /// Draws the boss and its bullets.
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

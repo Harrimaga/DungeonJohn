@@ -14,7 +14,6 @@ class Ice : Tiles
     /// <summary>
     /// Check if the player is on the icetiles
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         if (BoundingBox.Intersects(PlayingState.player.collisionhitbox))

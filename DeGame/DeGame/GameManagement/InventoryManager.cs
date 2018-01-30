@@ -17,7 +17,6 @@ public class InventoryManager
     /// <summary>
     /// Right here is the code to activate/equip a specific item
     /// </summary>
-    /// <param name="item"></param>
     public void equip(Item item)
     {
         switch (item.Type)

@@ -24,7 +24,6 @@ public class IceEnemy : Enemy
     /// <summary>
     /// If Enemy is in within Range shoot.
     /// </summary>
-    /// <param name="gameTime"></param>
     public void Range(GameTime gameTime)
     {
         Counter += 1 *gameTime.ElapsedGameTime.Milliseconds;
@@ -52,7 +51,6 @@ public class IceEnemy : Enemy
     /// <summary>
     /// Executes Range & calculates the direction
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -64,8 +62,6 @@ public class IceEnemy : Enemy
     /// <summary>
     /// Draws Enemy.
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

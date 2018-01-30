@@ -25,8 +25,6 @@ public class InventorySlot : Slot
     /// For normal inventory slots, this draw is only called when an item is actually
     /// present in the slot. But the check is there for consistency
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {     
         // Draws the slot
@@ -45,8 +43,6 @@ public class InventorySlot : Slot
     /// <summary>
     /// Handles the equipping of items, and checks for hovering
     /// </summary>
-    /// <param name="inputHelper"></param>
-    /// <param name="gameTime"></param>
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         // If clicked on, equip the item in it's approperiate slot
@@ -71,7 +67,6 @@ public class InventorySlot : Slot
     /// <summary>
     /// Adds an item to the player's inventory
     /// </summary>
-    /// <param name="item"></param>
     public void ToInventory(Item item)
     {
         Player.inventory.addItemToInventory(item);
@@ -81,11 +76,6 @@ public class InventorySlot : Slot
     /// <summary>
     /// Draws an item scaled to a specified slot
     /// </summary>
-    /// <param name="sprite">The slot sprite</param>
-    /// <param name="itemSprite">The item sprite</param>
-    /// <param name="position">The position of the slot</param>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public static void DrawItem(Texture2D sprite, Texture2D itemSprite, Vector2 position, GameTime gameTime, SpriteBatch spriteBatch)
     {
         Vector2 itemSpritePosition;
@@ -118,9 +108,6 @@ public class InventorySlot : Slot
     /// <summary>
     /// Calculates the scale of a sprite, so that it fits in a specified other sprite
     /// </summary>
-    /// <param name="sprite">Sprite to be draw in</param>
-    /// <param name="itemSprite">Sprite to be drawn in the other sprite</param>
-    /// <returns></returns>
     public static float CalculateScale(Texture2D sprite, Texture2D itemSprite)
     {
         // Set the scale to the height of the main sprite / the height of the item sprite

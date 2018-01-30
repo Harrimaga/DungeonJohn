@@ -26,7 +26,6 @@ class ItemSpawn : SpriteGameObject
     /// Here items that have a price will be retrieved from the shoplist 
     /// Otherwise they will be retrieved from the roomlist
     /// </summary>
-    /// <param name="randomint"></param>
     void RandomItem(int randomint)
     {
         if (!price)
@@ -44,8 +43,6 @@ class ItemSpawn : SpriteGameObject
     /// <summary>
     /// Here a player can buy the item he/she is standing on
     /// </summary>
-    /// <param name="inputHelper"></param>
-    /// <param name="gameTime"></param>
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if(inputHelper.KeyPressed(Keys.Space) && hitbox.Intersects(PlayingState.player.BoundingBox))
@@ -57,7 +54,6 @@ class ItemSpawn : SpriteGameObject
     /// <summary>
     /// Here a item is taken or purchased
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         if (((hitbox.Intersects(PlayingState.player.BoundingBox) && price) || CollidesWith(PlayingState.player)) && !pickedUp && ((PlayingState.player.gold >= item.Cost && buy) || !price))

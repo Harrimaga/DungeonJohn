@@ -22,7 +22,6 @@ class E_Bullet : SpriteGameObject
     /// <summary>
     /// Executes check collission
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         CheckCollision();

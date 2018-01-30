@@ -229,8 +229,6 @@ class Door : Solid
     /// <summary>
     /// Here the doors are being drawn
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         if (DoorNumber > 0)

@@ -24,7 +24,6 @@ public class SpiderEnemy : Enemy
     /// <summary>
     /// Updates the velocity and makes it move(Charge).
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         Vector2 oldposition = position;
@@ -109,8 +108,6 @@ public class SpiderEnemy : Enemy
     /// <summary>
     /// Draw the Enemy.
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

@@ -18,7 +18,6 @@ class IceBullet : E_Bullet
     /// <summary>
     /// Updates the bullets depending on if it is reflected or not
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -37,8 +36,6 @@ class IceBullet : E_Bullet
     /// <summary>
     /// Calculates the direction of the reflected bullet.
     /// </summary>
-    /// <param name="direction"></param>
-    /// <returns></returns>
     Vector2 CalculateReflect(Vector2 direction)
     {
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/Random").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/Random").Height / 2);
@@ -57,8 +54,6 @@ class IceBullet : E_Bullet
     /// <summary>
     /// Draws the bullet.
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyIceBullet"), position);

@@ -32,7 +32,6 @@ public class Boss :  SpriteGameObject
     /// <summary>
     /// Healtbarupdate; Collission with playerbullets is gecheckt; Collission with Player; Poison damage is being updated; When the boss is hit, he'll colour red.
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         healthbar.Update(gameTime, health, maxhealth, new Vector2(Roomposition.X * PlayingState.currentFloor.currentRoom.roomwidth, Roomposition.Y * PlayingState.currentFloor.currentRoom.roomheight));
@@ -119,8 +118,6 @@ public class Boss :  SpriteGameObject
     /// <summary>
     /// Draws the healthbar
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

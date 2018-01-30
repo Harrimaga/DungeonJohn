@@ -21,7 +21,6 @@ class MinionSpawner : Enemy
     /// <summary>
     /// If the Boss has triggered it: Spawns new enemies
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -43,8 +42,6 @@ class MinionSpawner : Enemy
     /// <summary>
     /// Draw Enemy
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

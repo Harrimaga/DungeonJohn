@@ -66,8 +66,6 @@ public class WornItems : GameObjectList
     /// <summary>
     /// Handles the input for each individual slot
     /// </summary>
-    /// <param name="inputHelper"></param>
-    /// <param name="gameTime"></param>
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         weaponSlot.HandleInput(inputHelper, gameTime);

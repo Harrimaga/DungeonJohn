@@ -23,7 +23,6 @@ public class RandomEnemy : Enemy
     /// <summary>
     /// Shoot Bullets in a pre-determined pattern
     /// </summary>
-    /// <param name="gameTime"></param>
     public void Shoot(GameTime gameTime)
     {
         Counter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
@@ -54,7 +53,6 @@ public class RandomEnemy : Enemy
     /// <summary>
     /// Calculates the direction; If in the current room: Chase an Shoot;
     /// </summary>
-    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -69,8 +67,6 @@ public class RandomEnemy : Enemy
     /// <summary>
     /// Draw Enemy
     /// </summary>
-    /// <param name="gameTime"></param>
-    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
