@@ -519,7 +519,7 @@ public class Room : GameObjectList
             up = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall2");
                 left = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall1");
                 LU = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall3");
-                LD = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall6");
+                LD = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall4");
         }
         // check of er een bovenkant walltile moet komen
         if (CheckRoomarray(x, y + 1))

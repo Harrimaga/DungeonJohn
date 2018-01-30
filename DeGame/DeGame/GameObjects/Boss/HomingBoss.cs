@@ -22,7 +22,7 @@ public class HomingBoss : Boss
         velocity.Normalize();
         Roomposition = roomposition;
         expGive = (int)(240 * statmultiplier);
-        maxhealth = 600 * statmultiplier;
+        maxhealth = 650 * statmultiplier;
         bulletdamage = 0 * statmultiplier;
         health = maxhealth;
         contactdamage = 20;
