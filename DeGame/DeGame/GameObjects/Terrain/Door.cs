@@ -146,7 +146,6 @@ class Door : Solid
                 case (1):
                     PlayingState.player.position -= new Vector2(0, 3 * CellHeight);
                     PlayingState.currentFloor.floor[(int)PlayingState.currentFloor.currentRoom.position.X, (int)PlayingState.currentFloor.currentRoom.position.Y - 1].Lastentrypoint = 2;
-                    if (PlayingState.currentFloor.floor[(int)PlayingState.currentFloor.currentRoom.position.X, (int)PlayingState.currentFloor.currentRoom.position.Y - 1].)
                     onup = true;
                     PlayingState.currentFloor.doortimer = 50;
                     break;
