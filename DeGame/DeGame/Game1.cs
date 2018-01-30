@@ -18,6 +18,7 @@ namespace DeGame
         public Game1()
         {
             Content.RootDirectory = "Content";
+            GameEnvironment.soundManager.PlaySong("Menu");
         }
 
         protected override void Initialize()

@@ -29,10 +29,6 @@ public class GameStateManager : IGameObject
         {
             GameEnvironment.soundManager.PlaySong("Base");
         }
-        else if (name == "MainMenu")
-        {
-            GameEnvironment.soundManager.PlaySong("Menu");
-        }     
     }
 
     public void AddGameState(string name, IGameObject state)

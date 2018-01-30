@@ -19,6 +19,7 @@ class ItemSpawn : SpriteGameObject
         itemList = new ItemList();
         hitbox =new Rectangle((int)position.X, (int)position.Y + 140, Width, Height);
         RandomItem(randomint);
+        GameEnvironment.soundManager.loadSoundEffect("Pickup");
     }
     void RandomItem(int randomint)
     {
@@ -46,6 +47,7 @@ class ItemSpawn : SpriteGameObject
         if (((hitbox.Intersects(PlayingState.player.BoundingBox) && price) || CollidesWith(PlayingState.player)) && !pickedUp && ((PlayingState.player.gold >= item.Cost && buy) || !price))
         {
             Player.inventory.addItemToInventory(item);
+            GameEnvironment.soundManager.playSoundEffect("Pickup");
             pickedUp = true;
             if(price)
             {
