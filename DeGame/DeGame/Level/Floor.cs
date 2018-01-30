@@ -23,7 +23,9 @@ public class Floor
         AdjacentRooms = new int[floorWidth, floorHeight];
         possiblespecial = new int[floorWidth * floorHeight / 2, 2];
     }
-
+    /// <summary>
+    /// Creates a new floor with boss-, start- and itemrooms
+    /// </summary>
     void FloorGenerator()
     {
         ClearFloor();
@@ -41,11 +43,18 @@ public class Floor
         FloorGenerated = false;
     }
 
+    /// <summary>
+    /// Return an int that decides which room will be used, filters out any special rooms
+    /// </summary>
     int RandomRoom()
     {
         return random.Next(31) + 5;
     }
 
+    /// <summary>
+    /// Checks on each side of a given coordinate in the floor grid if a new room should be placed,
+    /// then repeats the method on placed rooms until a desired amount of rooms is reached
+    /// </summary>
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)
     {
         if (CurrentRooms < RoomAmount)
@@ -119,6 +128,9 @@ public class Floor
         }
     }
 
+    /// <summary>
+    /// Composes a list of al possible places a itemroom could be placed at, then chooses one randomly
+    /// </summary>
     void SpawnItemRoom()
     {
         if (b == 0)
@@ -148,6 +160,9 @@ public class Floor
         possiblespecial[q, 1] = possiblespecial[b, 1];
     }
 
+    /// <summary>
+    /// Uses a place from the beforementioned list that is the farthest away from the startroom
+    /// </summary>
     void SpawnBossRoom(int x, int y)
     {
         int DistancefromStart = 0;
@@ -170,6 +185,9 @@ public class Floor
         }
     }
 
+    /// <summary>
+    /// Checks if the given coordinate is adjacent to any other special room or has more than 1 neighbour
+    /// </summary>
     bool CanSpawnSpecialRoom(int x, int y)
     {
         if (floor[x, y] == null)
@@ -191,6 +209,9 @@ public class Floor
         return false;
     }
 
+    /// <summary>
+    /// Hands info to each room about what kind of doors it should have
+    /// </summary>
     void DoorCheck()
     {
         for (int x = 0; x < floorWidth; x++)
@@ -252,6 +273,9 @@ public class Floor
                 }
     }
 
+    /// <summary>
+    /// Checks the amount of neighbours a coordinate has and what the change should be that a new room would appear that location
+    /// </summary>
     int CheckAdjacent(int x, int y)
     {
         int RoomSpawnChance = 80;
@@ -297,6 +321,9 @@ public class Floor
         AdjacentRooms = new int[floorWidth, floorHeight];
     }
 
+    /// <summary>
+    /// Makes sure only rooms containing the player or rooms directly next to the player are updated
+    /// </summary>
     public void Update(GameTime gameTime)
     {
         foreach (Room room in floor)
@@ -313,7 +340,6 @@ public class Floor
                     room.homingenemybullets.Update(gameTime);
                 }
             }
-
         if (doortimer > 0)
         {
             doortimer--;
@@ -362,6 +388,9 @@ public class Floor
         FloorGenerated = false;
     }
 
+    /// <summary>
+    /// Completely resets the game; puts you back at level 1
+    /// </summary>
     public void ResetFloor()
     {
         ClearFloor();
@@ -374,6 +403,9 @@ public class Floor
         PlayingState.player.Reset();
     }
 
+    /// <summary>
+    /// Checks if a given coordinate has neighbours in specific places
+    /// </summary>
     public bool CheckNeighbours(int x, int y, bool up = false, bool down = false, bool left = false, bool right = false)
     {
         int boolcounter = 0;
@@ -407,6 +439,10 @@ public class Floor
         return false;
     }
 
+
+    /// <summary>
+    /// Makes sure only rooms around the player and the room with the player are drawn
+    /// </summary>
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         foreach (Room room in floor)

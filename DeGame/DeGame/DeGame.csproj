@@ -72,6 +72,7 @@
     <Compile Include="GameObjects\Boss\HomingBoss.cs" />
     <Compile Include="GameObjects\Boss\CreamBatBoss.cs" />
     <Compile Include="GameObjects\Boss\MinionBoss.cs" />
+    <Compile Include="GameObjects\TypeEnemy\HalfEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\MinionSpawner.cs" />
     <Compile Include="GameObjects\Bullets\BossBullet.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28player%29.cs" />
@@ -145,7 +146,7 @@
     <Compile Include="Inventory\Slots\WeaponSlot.cs" />
     <Compile Include="Inventory\WornItems.cs" />
     <Compile Include="Level\Floor.cs" />
-    <Compile Include="Level\HUD.cs" />
+    <Compile Include="UI\HUD.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
     <Compile Include="States\GameModes.cs" />
