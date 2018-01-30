@@ -36,7 +36,7 @@ public class SoundManager
 
     private void MediaPlayer_MediaStateChanged(object sender, EventArgs e)
     {
-        MediaPlayer.Volume -= 0.1f;
+        MediaPlayer.Volume = 0.5f;
         MediaPlayer.Play(song);
     }
 
@@ -70,7 +70,9 @@ public class SoundManager
             {
                 if (sfx.Name == "SoundEffects/" + name)
                 {
-                    sfx.Play();
+                    SoundEffectInstance instance = sfx.CreateInstance();
+                    instance.Volume = 0.1f;
+                    instance.Play();
                 }
             }
         }

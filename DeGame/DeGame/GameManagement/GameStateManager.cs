@@ -24,11 +24,6 @@ public class GameStateManager : IGameObject
         {
             throw new KeyNotFoundException("Could not find game state: " + name);
         }
-
-        if (name == "Playing")
-        {
-            GameEnvironment.soundManager.PlaySong("Base");
-        }
     }
 
     public void AddGameState(string name, IGameObject state)
