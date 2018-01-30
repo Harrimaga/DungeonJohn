@@ -11,7 +11,7 @@ public class HalfEnemy : Enemy
         basevelocity = new Vector2(0.03f, 0.03f);
         health = 100 * statmultiplier;
         maxhealth = 100 * statmultiplier;
-        expGive = 100 * statmultiplier;
+        expGive = 50 * statmultiplier;
         contactdamage = 10 * statmultiplier;
         killable = true;
         hpdisplay = true;

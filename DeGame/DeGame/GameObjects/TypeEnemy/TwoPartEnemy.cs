@@ -12,7 +12,7 @@ public class TwoPartEnemy : Enemy
         basevelocity = new Vector2(0.12f, 0.12f);
         health = 100 * statmultiplier;
         maxhealth = 100 * statmultiplier;
-        expGive = 100 * statmultiplier;
+        expGive = 0 * statmultiplier;
         contactdamage = 10 * statmultiplier;
         killable = false;
         hpdisplay = true;
@@ -53,6 +53,7 @@ public class TwoPartEnemy : Enemy
             maxhealth = 75;
             health = 75;
             killable = true;
+            expGive = 80 * statmultiplier;
             basevelocity = new Vector2(0.03f, 0.03f);
         }
 
