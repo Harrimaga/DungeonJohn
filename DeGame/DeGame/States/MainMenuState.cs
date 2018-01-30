@@ -15,7 +15,7 @@ class MainMenuState : IGameObject
     {
         start.HandleInput(inputHelper, gameTime);
         option.HandleInput(inputHelper, gameTime);
-        if (inputHelper.KeyPressed(Keys.Space) || start.Pressed)
+        if (start.Pressed)
         {
             GameEnvironment.gameStateManager.SwitchTo("Playing");
             Reset();
