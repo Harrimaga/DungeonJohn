@@ -14,20 +14,28 @@ public class InventoryManager
         items = new List<Item>();
     }
 
+    /// <summary>
+    /// Right here is the code to activate/equip a specific item
+    /// </summary>
+    /// <param name="item"></param>
     public void equip(Item item)
     {
         switch (item.Type)
         {
+            /// Right here a helmet is being equiped
             case "helmet":
                 if (currentHelmet != null)
                 {
+                    /// Right here the current helmet is being removed and the new helmet is set to currentHelmet
                     currentHelmet.unequip();
                     items[items.IndexOf(item)] = currentHelmet;
                 }
+                /// Right here the new helmet is being equiped and removed from the inventory
                 currentHelmet = item;
                 currentHelmet.equip();
                 removeItemFromInventory(item);
                 break;
+            /// Same for the armour
             case "armour":
                 if (currentArmour != null)
                 {
@@ -38,6 +46,7 @@ public class InventoryManager
                 currentArmour.equip();
                 removeItemFromInventory(item);
                 break;
+            /// Same for the boots
             case "boots":
                 if (currentBoots != null)
                 {
@@ -48,6 +57,7 @@ public class InventoryManager
                 currentBoots.equip();
                 removeItemFromInventory(item);
                 break;
+            /// Same for a weapon
             case "weapon":
                 if (currentWeapon != null)
                 {
@@ -60,6 +70,7 @@ public class InventoryManager
                 PlayingState.player.CalculateAmmo();
                 PlayingState.player.CalculateDamage();
                 break;
+            /// Same for a shield
             case "shield":
                 if (currentShield != null)
                 {
@@ -70,6 +81,7 @@ public class InventoryManager
                 currentShield.equip();
                 removeItemFromInventory(item);
                 break;
+            /// There is 2 passive slots, so it is the same code as above but twice
             case "passive":
                 if (currentPassives[0] == null)
                 {
@@ -97,6 +109,9 @@ public class InventoryManager
         }
     }
 
+    /// <summary>
+    /// Here the standard items are being equiped to start the game
+    /// </summary>
     public void startUp()
     {
         if (currentArmour != null)
