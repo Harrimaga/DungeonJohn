@@ -73,9 +73,6 @@ public class Room : GameObjectList
             case '.':
                 roomarray[x, y] = "Background";
                 break;
-            case '*':
-                roomarray[x, y] = "ShopBackground";
-                break;
             case '!':
                 roomarray[x, y] = "Rock";
                 CreateObject(x, y, "!");
