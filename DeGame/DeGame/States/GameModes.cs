@@ -16,11 +16,13 @@ public class GameModes : IGameObject
         endlessB.HandleInput(inputHelper, gameTime);
         if (normalB.Pressed)
         {
-         //iets doen voor naar normalmode
+            Boss.endless = false;
+            GameEnvironment.gameStateManager.SwitchTo("Playing");
         }
         if (endlessB.Pressed)
         {
-            //iets doen voor naar endlessmode
+            Boss.endless = true;
+            GameEnvironment.gameStateManager.SwitchTo("Playing");
         }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
