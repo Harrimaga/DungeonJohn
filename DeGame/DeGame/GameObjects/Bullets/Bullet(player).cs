@@ -66,7 +66,7 @@ class Bullet : SpriteGameObject
             Effect = SpriteEffects.FlipHorizontally;
             position = PlayingState.player.position + new Vector2((Playersprite.Width - Bulletsprite.Width / 2), (Playersprite.Height / 2) - (Bulletsprite.Height / 2));
         }
-        if (PlayingState.player.VialOfPoison && random.Next(100) < 25)
+        if (PlayingState.player.poisonchance > 0 && random.Next(100) < PlayingState.player.poisonchance * 100)
         {
             poisonbullet = true;
             color = Color.YellowGreen;

@@ -36,13 +36,13 @@ public class AssetManager
         return contentManager.Load<SpriteFont>(assetName);
     }
 
-    public SoundEffect GetSound(string assetName)
-    {
-        if (assetName == "")
-        {
-            return null;
-        }
-        return contentManager.Load<SoundEffect>(assetName);
-    }
+    //public SoundEffect GetSound(string assetName)
+    //{
+    //    if (assetName == "")
+    //    {
+    //        return null;
+    //    }
+    //    return contentManager.Load<SoundEffect>(assetName);
+    //}
 }
 
