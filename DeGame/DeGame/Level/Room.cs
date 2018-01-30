@@ -505,6 +505,9 @@ public class Room : GameObjectList
         altars.HandleInput(inputHelper, gameTime);
     }
 
+    /// <summary>
+    /// checks what kind of wall sprite should be used and what shadow should be drawn on them
+    /// </summary>
     void WallShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y, bool shop = false)
     {
         Texture2D up, left, LU, LD;
@@ -522,49 +525,41 @@ public class Room : GameObjectList
                 LU = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall3");
                 LD = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall4");
         }
-        // check of er een bovenkant walltile moet komen
         if (CheckRoomarray(x, y + 1))
         {
             spriteBatch.Draw(up, TilePosition, Color.Gray);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Up2")), TilePosition, Color.Gray);
         }
-        //...of een onderkant
         else if (CheckRoomarray(x, y - 1))
         {
             spriteBatch.Draw(up, TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipVertically, 0f);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Down2")), TilePosition, Color.Gray);
         }
-        //...of een linkerkant
         else if (CheckRoomarray(x + 1, y))
         {
             spriteBatch.Draw(left, TilePosition, null, Color.Gray);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Left2")), TilePosition, Color.Gray);
         }
-        //...of een rechterkant
         else if (CheckRoomarray(x - 1, y))
         {
             spriteBatch.Draw(left, TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall Sprite Right2")), TilePosition, Color.Gray);
         }
-        //check anders of er een rechteronderhoek moet komen
         else if (CheckRoomarray(x - 1, y - 1))
         {
             spriteBatch.Draw(LD, TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall RD Shade")), TilePosition, Color.Gray);
         }
-        //...of rechterbovenhoek
         else if (CheckRoomarray(x - 1, y + 1))
         {
             spriteBatch.Draw(LU, TilePosition,null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall RU Shade")), TilePosition, Color.Gray);
         }
-        //...of linksonderhoek
         else if (CheckRoomarray(x + 1, y - 1))
         {
             spriteBatch.Draw(LD, TilePosition, Color.Gray);
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Wall LD Shade")), TilePosition, Color.Gray);
         }
-        //...of linksbovenhoek
         else if (CheckRoomarray(x + 1, y + 1))
         {
             spriteBatch.Draw(LU, TilePosition, Color.Gray);
@@ -572,41 +567,29 @@ public class Room : GameObjectList
         }
     }
 
-
+    /// <summary>
+    /// checks where the shadows on backgroundtiles should be placed
+    /// </summary>
     void BackgroundShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
-        //als er...
         if (CheckRoomarray(x - 1, y, 2) && CheckRoomarray(x, y - 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite LU")), TilePosition, Color.Gray);
-        //links en boven
         else if (CheckRoomarray(x - 1, y, 2) && CheckRoomarray(x, y + 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite LD")), TilePosition, Color.Gray);
-        //links en onder
         else if (CheckRoomarray(x + 1, y, 2) && CheckRoomarray(x, y - 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite RU")), TilePosition, Color.Gray);
-        //rechts en boven
         else if (CheckRoomarray(x + 1, y, 2) && CheckRoomarray(x, y + 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite RD")), TilePosition, Color.Gray);
-        //rechts en onder
-        //...muren staan, teken dan een backgroundsprite die aan die twee kanten schaduw heeft.
-
-        //als er...
         else if (CheckRoomarray(x - 1, y, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite Left")), TilePosition, Color.Gray);
-        //links
         else if (CheckRoomarray(x + 1, y, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite Right")), TilePosition, Color.Gray);
-        //rechts
         else if (CheckRoomarray(x, y - 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite Up")), TilePosition, Color.Gray);
-        //boven
         else if (CheckRoomarray(x, y + 1, 2))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite Down")), TilePosition, Color.Gray);
-        //onder
-        //...een muur of deur staat, teken dan een backgroundsprite die aan die kant een schaduw heeft.
         else
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite")), TilePosition, Color.Gray);
-        //als geen van bovenstaande wordt uitgevoerd, teken dan een normale backgroundsprite
     }
 
     void Counter(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)

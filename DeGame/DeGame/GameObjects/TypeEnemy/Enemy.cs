@@ -44,7 +44,6 @@ public class Enemy : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
-        bool ok;
         base.Update(gameTime);
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         healthbar.Update(gameTime, health, maxhealth, position);
@@ -56,8 +55,6 @@ public class Enemy : SpriteGameObject
         if (moving)
         {
             actualvelocity = velocity * direction;
-            if (float.IsNaN(direction.X))
-                actualvelocity = Vector2.Zero;
             position.X += actualvelocity.X * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             position.Y += actualvelocity.Y * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
         }
@@ -188,6 +185,8 @@ public class Enemy : SpriteGameObject
         if (CollidesWith(PlayingState.player))
         {
             direction = Vector2.Zero;
+            if (float.IsNaN(direction.X))
+                actualvelocity = Vector2.Zero;
             if (counter <= 0)
             {
                 PlayingState.player.TakeDamage(contactdamage);
