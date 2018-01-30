@@ -49,7 +49,7 @@ public class PlayingState : IGameObject
             Loss.Play();
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
         }
-        if (currentFloor.CurrentLevel >= 10)
+        if (currentFloor.CurrentLevel >= 10 && !Boss.endless)
         {
             GameEnvironment.gameStateManager.SwitchTo("Credits");
         }
