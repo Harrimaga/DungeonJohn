@@ -15,6 +15,7 @@ class Credits : IGameObject
     {
         if (inputHelper.KeyPressed(Keys.Space))
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
+        GameEnvironment.soundManager.PlaySong("Menu");
     }
 
     public virtual void Update(GameTime gameTime)
@@ -31,6 +32,7 @@ class Credits : IGameObject
         {
             //Reset();
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
+            GameEnvironment.soundManager.PlaySong("Menu");
         }
     }
 
