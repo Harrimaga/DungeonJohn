@@ -10,11 +10,11 @@
 
     public override void equip()
     {
-        PlayingState.player.VialOfPoison = true;
+        PlayingState.player.poisonchance += 0.08;
     }
     public override void unequip()
     {
-        PlayingState.player.VialOfPoison = false;
+        PlayingState.player.poisonchance -= 0.08;
         base.unequip();
     }
 }
