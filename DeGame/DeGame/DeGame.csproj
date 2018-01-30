@@ -313,6 +313,8 @@
     <Content Include="Content\Sprites\Buttons\NormalModePressed.png" />
     <Content Include="Content\Sprites\Buttons\Ranged.png" />
     <Content Include="Content\Sprites\Buttons\RangedPressed.png" />
+    <Content Include="Content\Sprites\Buttons\Restart.png" />
+    <Content Include="Content\Sprites\Buttons\RestartPressed.png" />
     <Content Include="Content\Sprites\Buttons\Speed.png" />
     <Content Include="Content\Sprites\Buttons\SpeedPressed.png" />
     <Content Include="Content\Sprites\Controls\KeyboardControls.png" />
