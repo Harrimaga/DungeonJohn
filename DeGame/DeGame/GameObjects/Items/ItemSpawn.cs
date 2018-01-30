@@ -1,14 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 
 class ItemSpawn : SpriteGameObject
 {
-    //betere naam voor de class is welkom
-    //als het een shopitem moet zijn dan is price true
     Item item;
     ItemList itemList;
-    bool price, pickedUp = false;
+    Rectangle hitbox;
+    bool price, buy = false, pickedUp = false;
     Random random = new Random();
 
     public ItemSpawn(Vector2 startPosition,bool Price, int randomint, int layer = 0, string id = "ItemAltar")
@@ -17,7 +17,9 @@ class ItemSpawn : SpriteGameObject
         position = startPosition;
         price = Price;
         itemList = new ItemList();
+        hitbox =new Rectangle((int)position.X, (int)position.Y + 140, Width, Height);
         RandomItem(randomint);
+        GameEnvironment.soundManager.loadSoundEffect("Pickup");
     }
     void RandomItem(int randomint)
     {
@@ -32,11 +34,20 @@ class ItemSpawn : SpriteGameObject
             item = itemList.ShopList[r];
         }
     }
+    public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
+    {
+        if(inputHelper.KeyPressed(Keys.Space) && hitbox.Intersects(PlayingState.player.BoundingBox))
+        {
+            buy = true;
+        }
+    }
     public override void Update(GameTime gameTime)
     {
-        if (CollidesWith(PlayingState.player) && !pickedUp && (PlayingState.player.gold >= 5 || !price))
+
+        if (((hitbox.Intersects(PlayingState.player.BoundingBox) && price) || CollidesWith(PlayingState.player)) && !pickedUp && ((PlayingState.player.gold >= item.Cost && buy) || !price))
         {
             Player.inventory.addItemToInventory(item);
+            GameEnvironment.soundManager.playSoundEffect("Pickup");
             pickedUp = true;
             if(price)
             {
@@ -48,10 +59,6 @@ class ItemSpawn : SpriteGameObject
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Items/Altar"), position);
-        if (price)
-        {
-            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Convert.ToString(item.Cost), position + new Vector2(18, 60), Color.Yellow);
-        }
         if (!pickedUp)
         {
             Texture2D itemSprite = GameEnvironment.assetManager.GetSprite("Sprites/Items/" + item.itemName);
@@ -66,6 +73,11 @@ class ItemSpawn : SpriteGameObject
             itemPosition.X -= -5 - 25 + (itemSprite.Width * scale) / 2;
             spriteBatch.Draw(itemSprite, itemPosition, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
-    }
+        if (hitbox.Intersects(PlayingState.player.BoundingBox) && price && !pickedUp)
+        {
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Press spacebar to buy", position + new Vector2(-65, 20), Color.White);
+            spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), Convert.ToString(item.Cost), position + new Vector2(25, -50), Color.Yellow);
+        }
+    }        
 }
 

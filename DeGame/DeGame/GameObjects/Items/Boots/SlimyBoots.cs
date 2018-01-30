@@ -4,7 +4,7 @@
     {
         Cost = 7;
         itemName = "SlimyBoots";
-        itemDescription = "You move slightly slower but Ice stands no chance against these boots.";
+        itemDescription = "Ice stands no chance against these boots.";
         Type = "boots";
     }
 

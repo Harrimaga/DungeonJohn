@@ -9,6 +9,7 @@ public class Room : GameObjectList
 {
     public int RoomListIndex, CellWidth, CellHeight, roomwidth, roomheight, Lastentrypoint = 1, enemycounter = 0, updoor = 0, downdoor = 0, leftdoor = 0, rightdoor = 0, lavatimer = 0;
     protected int a, b, roomarraywidth, roomarrayheight;
+    int r;
     public static GameObjectList door;
     public GameObjectList enemies, solid, bosses, enemybullets, homingenemybullets;
     GameObjectList tiles, consumable, altars, anvils;
@@ -219,18 +220,18 @@ public class Room : GameObjectList
     {
         if (!toaster)
         {
-            int r = random.Next(100);
-            if (r < 10)
+            r = random.Next(100);
+            if (r < 30)
             {
                 Consumables golddrop = new Consumables(position, "gold");
                 consumable.Add(golddrop);
             }
-            else if (r < 30)
+            else if (r < 45)
             {
                 Consumables healthdrop = new Consumables(position, "heart");
                 consumable.Add(healthdrop);
             }
-            else if (r < 50)
+            else if (r < 60)
             {
                 Consumables ammodrop = new Consumables(position, "ammo");
                 consumable.Add(ammodrop);
@@ -501,6 +502,7 @@ public class Room : GameObjectList
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         anvils.HandleInput(inputHelper, gameTime);
+        altars.HandleInput(inputHelper, gameTime);
     }
 
     void WallShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y, bool shop = false)
@@ -518,7 +520,7 @@ public class Room : GameObjectList
             up = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall2");
                 left = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall1");
                 LU = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall3");
-                LD = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall6");
+                LD = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/WoodenWall4");
         }
         // check of er een bovenkant walltile moet komen
         if (CheckRoomarray(x, y + 1))
@@ -609,16 +611,20 @@ public class Room : GameObjectList
 
     void Counter(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
-        if (CheckRoomarray( x + 1, y, 4) && CheckRoomarray(x - 1, y, 4))
+        if (CheckRoomarray(x + 1, y, 4) && CheckRoomarray(x - 1, y, 4))
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop1")), TilePosition, Color.Gray);
-        else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1,4) && x < 11)
+        else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1, 4) && x < 11 && y > 1)
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop3"), TilePosition, Color.Gray);
-        else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1, 4) && x > 11)
+        else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1, 4) && x > 11 && y > 1)
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop3"), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
-        else if (CheckRoomarray(x + 1, y, 4) && CheckRoomarray(x, y - 1, 4))
-            spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop2")), TilePosition, Color.Gray);
         else if (CheckRoomarray(x - 1, y, 4) && CheckRoomarray(x, y - 1, 4))
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop2"), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+        else if (CheckRoomarray(x + 1, y, 4) && CheckRoomarray(x, y - 1, 4))
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop2"), TilePosition, Color.Gray);
+        else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1, 4) && x < 11 && y == 1)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop4"), TilePosition, Color.Gray);
+        else if (CheckRoomarray(x, y - 1, 4) && CheckRoomarray(x, y + 1, 4) && x > 11 && y == 1)
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop4"), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
     }
 
     public bool CheckRoomarray(int x, int y, int type = 1)

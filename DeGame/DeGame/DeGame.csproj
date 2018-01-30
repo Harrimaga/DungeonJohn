@@ -67,6 +67,7 @@
     <Compile Include="GameManagement\IGameObject.cs" />
     <Compile Include="GameManagement\InputHelper.cs" />
     <Compile Include="GameManagement\InventoryManager.cs" />
+    <Compile Include="GameManagement\SoundManager.cs" />
     <Compile Include="GameManagement\SpriteGameObject.cs" />
     <Compile Include="GameObjects\Boss\HomingBoss.cs" />
     <Compile Include="GameObjects\Boss\CreamBatBoss.cs" />
@@ -102,7 +103,7 @@
     <Compile Include="GameObjects\Items\Shields\Mirror.cs" />
     <Compile Include="GameObjects\Items\Weapons\StandardBow.cs" />
     <Compile Include="GameObjects\Boss\Boss.cs" />
-    <Compile Include="GameObjects\Enemy.cs" />
+    <Compile Include="GameObjects\TypeEnemy\Enemy.cs" />
     <Compile Include="GameObjects\Bullets\EnemyBullet.cs" />
     <Compile Include="GameObjects\Consumables.cs" />
     <Compile Include="GameObjects\Items\Weapons\Mac10.cs" />
@@ -148,6 +149,8 @@
     <Compile Include="Level\HUD.cs" />
     <Compile Include="Level\Room.cs" />
     <Compile Include="Level\TypeRooms\EndRoom.cs" />
+    <Compile Include="States\GameModes.cs" />
+    <Compile Include="States\Credits.cs" />
     <Compile Include="States\IntroState.cs" />
     <Compile Include="States\VictoryState.cs" />
     <Compile Include="UI\Button.cs" />
@@ -240,7 +243,40 @@
     <Content Include="Content\Levels\24.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Levels\25.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\26.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\27.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\28.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\29.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Levels\3.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\30.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\31.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\32.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\33.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\34.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\35.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Levels\4.txt">
@@ -255,15 +291,6 @@
     <Content Include="Content\Levels\7.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Levels\Pitrooms\1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Levels\Pitrooms\2.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Levels\Pitrooms\3.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Levels\8.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -274,10 +301,20 @@
     <Content Include="Content\Sprites\Buttons\AttackSpeedPressed.png" />
     <Content Include="Content\Sprites\Buttons\AttackUp.png" />
     <Content Include="Content\Sprites\Buttons\AttackUpPressed.png" />
+    <Content Include="Content\Sprites\Buttons\Credits.png" />
+    <Content Include="Content\Sprites\Buttons\CreditsPressed.png" />
+    <Content Include="Content\Sprites\Buttons\EndlessMode.png" />
+    <Content Include="Content\Sprites\Buttons\EndlessModePressed.png" />
     <Content Include="Content\Sprites\Buttons\HealthUp.png" />
     <Content Include="Content\Sprites\Buttons\HealthUpPressed.png" />
+    <Content Include="Content\Sprites\Buttons\MainMenu2.png" />
+    <Content Include="Content\Sprites\Buttons\MainMenu2Pressed.png" />
+    <Content Include="Content\Sprites\Buttons\NormalMode.png" />
+    <Content Include="Content\Sprites\Buttons\NormalModePressed.png" />
     <Content Include="Content\Sprites\Buttons\Ranged.png" />
     <Content Include="Content\Sprites\Buttons\RangedPressed.png" />
+    <Content Include="Content\Sprites\Buttons\Restart.png" />
+    <Content Include="Content\Sprites\Buttons\RestartPressed.png" />
     <Content Include="Content\Sprites\Buttons\Speed.png" />
     <Content Include="Content\Sprites\Buttons\SpeedPressed.png" />
     <Content Include="Content\Sprites\Controls\KeyboardControls.png" />
@@ -303,6 +340,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\PauseMenu\DungeonJohn.png" />
+    <Content Include="Content\Sprites\PauseMenu\GameModes.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -316,7 +354,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\SoundEffects\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

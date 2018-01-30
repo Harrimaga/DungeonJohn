@@ -17,7 +17,7 @@ class CreamBatBoss : Boss
     {
         Roomposition = roomposition;
         position = startPosition;
-        expGive = 240;
+        expGive = 300 * statmultiplier;
         maxhealth = 300;
         contactdamage = 10;
         health = maxhealth;
@@ -26,7 +26,10 @@ class CreamBatBoss : Boss
         MoveDirection = Vector2.Zero;
         MoveDirection.Normalize();
         bulletPosition = new Vector2(sprite.Width / 2, 50);
-        EndRoom.finalboss = true;
+        if (endless)
+            EndRoom.finalboss = false;
+        else
+            EndRoom.finalboss = true;
     }
 
     public override void Update(GameTime gameTime)

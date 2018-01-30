@@ -4,31 +4,27 @@ using Microsoft.Xna.Framework.Input;
 
 class VictoryState : IGameObject
 {
-    Button MainMenu;
+    Button Credits;
     Vector2 BasisPosition;
-    protected IGameObject playingState;
     public VictoryState()
     {
-        playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
-        MainMenu = new Button(new Vector2(655, 775), "ReturnToMainMenu", "ReturnToMainMenu", "ReturnToMainMenuPressed", true, 1);
+        Credits = new Button(new Vector2(605, 775), "Credits", "Credits", "CreditsPressed", true, 1);
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
-        MainMenu.HandleInput(inputHelper, gameTime);
-        if (inputHelper.KeyPressed(Keys.Z) || MainMenu.Pressed)
-            GameEnvironment.gameStateManager.SwitchTo("Intro");
+        Credits.HandleInput(inputHelper, gameTime);
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/VictoryScreen"), BasisPosition);
-        MainMenu.Draw(gameTime, spriteBatch);
+        Credits.Draw(gameTime, spriteBatch);
     }
 
     public virtual void Update(GameTime gameTime)
     {
-        MainMenu.Update(gameTime);
-        if (MainMenu.Pressed)
-            GameEnvironment.gameStateManager.SwitchTo("MainMenu");
+        Credits.Update(gameTime);
+        if (Credits.Pressed)
+            GameEnvironment.gameStateManager.SwitchTo("Credits");
         BasisPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
     }
     public virtual void Reset()

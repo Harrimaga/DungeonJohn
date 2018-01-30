@@ -82,7 +82,6 @@ class BossBullet : E_Bullet
     {
         List<GameObject> RemoveBullets = new List<GameObject>();
 
-
         foreach (Bullet bullet in PlayingState.player.bullets.Children)
             if (CollidesWith(bullet))
             {

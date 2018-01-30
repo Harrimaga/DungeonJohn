@@ -43,7 +43,7 @@ public class Floor
 
     int RandomRoom()
     {
-        return random.Next(20) + 5;
+        return random.Next(31) + 5;
     }
 
     void FloorGeneratorRecursive(int x, int y, int RoomAmount)
@@ -339,6 +339,7 @@ public class Floor
     public void NextFloor()
     {
         ClearFloor();
+        GameEnvironment.soundManager.PlaySong("Base");
         if (displayint <= 5)
         {
             maxRooms += 3;
@@ -353,6 +354,7 @@ public class Floor
     public void NextShop()
     {
         ClearFloor();
+        GameEnvironment.soundManager.PlaySong("Shop");
         floor[4, 4] = new Room("", 4, 4, 4);
         currentRoom = floor[4, 4];
         CurrentLevel++;

@@ -17,6 +17,7 @@ public class SpamEnemy : Enemy
         maxhealth = 100 * statmultiplier;
         expGive = 120 * statmultiplier;
         contactdamage = 2 * statmultiplier;
+        backgroundenemy = true;
     }
 
     public void Range(GameTime gameTime)
@@ -27,7 +28,7 @@ public class SpamEnemy : Enemy
         {
             Shoot();
             BulletCounter += 1;
-            Counter = 100;
+            Counter = 50;
         }
         if (BulletCounter == 20)
         {
@@ -40,7 +41,7 @@ public class SpamEnemy : Enemy
     {
         Vector2 direction = (PlayingState.player.position - position);
         Vector2 middleofsprite = new Vector2(sprite.Width / 4, sprite.Height / 4);
-        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/EnemyBullet"));
+        EnemyBullet bullet = new EnemyBullet(bulletdamage, speed, position + middleofsprite, direction, GameEnvironment.assetManager.GetSprite("Sprites/Bullets/FireBullet"));
         PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
 
     }

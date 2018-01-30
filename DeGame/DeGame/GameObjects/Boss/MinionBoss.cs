@@ -12,7 +12,7 @@ class MinionBoss : Boss
         Roomposition = roomposition;
         position = startPosition;
         contactdamage = 20;
-        expGive = (int)(240 * statmultiplier);
+        expGive = 250 * statmultiplier;
         maxhealth = 400 * statmultiplier;
         bulletdamage = 35 * statmultiplier;
         max = 1500 / statmultiplier;
@@ -23,8 +23,7 @@ class MinionBoss : Boss
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (!EndRoom.trigger || health < 150)
-            Shoot(gameTime);
+        Shoot(gameTime);
         if (health < 300 && !EndRoom.cleared)
         {
             EndRoom.trigger = true;

@@ -5,18 +5,21 @@ using System;
 
 public class Boss :  SpriteGameObject
 {
-    protected float maxhealth, statmultiplier;
+    protected float maxhealth, statmultiplier, contactdamage;
     public float health;
-    protected int expGive, LevelofBoss, poisoncounter = 0;
+    protected int LevelofBoss, poisoncounter = 0, hitcounter = 0;
+    protected float expGive;
+    int counter = 0;
     protected Vector2 basevelocity = new Vector2((float)0.5, (float)0.5);
     protected Vector2 PlayerOrigin;
     protected Texture2D playersprite;
-    protected float contactdamage;
     Vector2 Roomposition;
     HealthBar healthbar;
     public bool alive = true;
+    static public bool endless = true;
     protected Color color = Color.White;
-    int counter = 0;
+
+
     public Boss(Vector2 startPosition, Vector2 roomposition, string assetname, int difficulty = 0, int layer = 0, string id = "Boss") : base(assetname, layer, id)
     {
         position = startPosition;
@@ -37,8 +40,9 @@ public class Boss :  SpriteGameObject
             if (CollidesWith(bullet))
             {
                 health -= PlayingState.player.attack;
-                if (PlayingState.player.VialOfPoison && bullet.poisonbullet)
-                    poisoncounter = 350;
+                if (PlayingState.player.poisonchance > 0 && bullet.poisonbullet)
+                    poisoncounter = 5000;
+                hitcounter = 200;
                 RemoveBullets.Add(bullet);
             }
          
@@ -49,12 +53,20 @@ public class Boss :  SpriteGameObject
         PlayerCollision();
         PlayerOrigin = new Vector2(PlayingState.player.position.X + playersprite.Width / 2, PlayingState.player.position.Y + playersprite.Height / 2);
         base.Update(gameTime);
-        if (poisoncounter > 0)
+        if (hitcounter > 0)
         {
-            if (poisoncounter % 75 == 0 && poisoncounter < 350)
-                health -= 4;
-            poisoncounter--;
+            hitcounter -= gameTime.ElapsedGameTime.Milliseconds;
+            color = Color.Salmon;
+        }
+        else if (poisoncounter > 0)
+        {
             color = Color.YellowGreen;
+            if (poisoncounter % 600 <= 20 && poisoncounter < 5000)
+            {
+                health -= 4;
+                color = Color.Salmon;
+            }
+            poisoncounter -= gameTime.ElapsedGameTime.Milliseconds;
         }
         else
             color = Color.White;

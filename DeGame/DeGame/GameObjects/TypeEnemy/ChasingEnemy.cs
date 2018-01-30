@@ -8,7 +8,7 @@ public class ChasingEnemy : Enemy
         basevelocity = new Vector2(0.12f, 0.12f);
         health = 120 * statmultiplier;
         maxhealth = 120 * statmultiplier;
-        expGive = 120 * statmultiplier;
+        expGive = 80 * statmultiplier;
         contactdamage = 10 * statmultiplier;
     }
 

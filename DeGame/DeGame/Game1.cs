@@ -18,6 +18,7 @@ namespace DeGame
         public Game1()
         {
             Content.RootDirectory = "Content";
+            GameEnvironment.soundManager.PlaySong("Menu");
         }
 
         protected override void Initialize()
@@ -34,6 +35,7 @@ namespace DeGame
             FullScreen = false;
 
             gameStateManager.AddGameState("Crafting", new Crafting());
+            gameStateManager.AddGameState("GameModes", new GameModes());
             gameStateManager.AddGameState("MainMenu", new MainMenuState());
             gameStateManager.AddGameState("Playing", new PlayingState());
             gameStateManager.AddGameState("GameOver", new GameOverState());
@@ -42,6 +44,7 @@ namespace DeGame
             gameStateManager.AddGameState("Victory", new VictoryState());
             gameStateManager.AddGameState("Option", new Option());
             gameStateManager.AddGameState("Intro", new IntroState());
+            gameStateManager.AddGameState("Credits", new Credits());
             gameStateManager.SwitchTo("Intro");
         }
 

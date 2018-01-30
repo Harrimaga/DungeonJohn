@@ -12,7 +12,6 @@ public class PlayingState : IGameObject
     public static Floor currentFloor;
     public static HUD hud;
     Floor floor;
-    SoundEffect Loss;
 
     public PlayingState()
     {
@@ -21,8 +20,7 @@ public class PlayingState : IGameObject
         hud = new HUD();
         currentFloor = floor;
         GameEnvironment.gameStateManager.LastState = "playing";
-        Player.inventory.currentWeapon = new BigMac();
-        Loss = GameEnvironment.assetManager.GetSound("SoundEffects/Loss");
+        GameEnvironment.soundManager.loadSoundEffect("Loss");
     }
 
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
@@ -31,6 +29,10 @@ public class PlayingState : IGameObject
         if (inputHelper.KeyPressed(Keys.P) || inputHelper.ButtonPressed(Buttons.Start))
         {
             GameEnvironment.gameStateManager.SwitchTo("PauseMenu");
+        }
+        if (inputHelper.KeyPressed(Keys.M) || inputHelper.ButtonPressed(Buttons.Start))
+        {
+            GameEnvironment.gameStateManager.SwitchTo("Victory");
         }
         floor.HandleInput(inputHelper, gameTime); 
     }
@@ -42,10 +44,10 @@ public class PlayingState : IGameObject
         hud.Update(gameTime);
         if (player.health <= 0)
         {
-            Loss.Play();
+            GameEnvironment.soundManager.playSoundEffect("Loss");
             GameEnvironment.gameStateManager.SwitchTo("GameOver");
         }
-        if (currentFloor.CurrentLevel >= 10)
+        if (currentFloor.CurrentLevel >= 10 && !Boss.endless)
         {
             GameEnvironment.gameStateManager.SwitchTo("Victory");
         }

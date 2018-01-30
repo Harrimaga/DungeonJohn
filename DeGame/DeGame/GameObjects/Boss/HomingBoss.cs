@@ -21,8 +21,8 @@ public class HomingBoss : Boss
         velocity = new Vector2(0.01f, 0.01f);
         velocity.Normalize();
         Roomposition = roomposition;
-        expGive = (int)(240 * statmultiplier);
-        maxhealth = 600 * statmultiplier;
+        expGive = 200 * statmultiplier;
+        maxhealth = 650 * statmultiplier;
         bulletdamage = 0 * statmultiplier;
         health = maxhealth;
         contactdamage = 20;
@@ -62,13 +62,13 @@ public class HomingBoss : Boss
                 
                 bullet = new BossBullet(bulletdamage, speed, position + new Vector2(sprite.Width, (sprite.Height / 2) - (2 * bulletsprite.Height) + 10), SpriteEffects.None, Hmng);
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
-                Counter = 1000;
+                Counter = 900;
             }
             else if (PlayingState.player.position.X < position.X + sprite.Width / 2)
             {
                 bullet = new BossBullet(bulletdamage, speed, position + new Vector2(0, (sprite.Height / 2) - (2 *bulletsprite.Height) + 10), SpriteEffects.None , Hmng);
                 PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
-                Counter = 1000;
+                Counter = 900;
             }
         }
     }

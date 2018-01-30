@@ -15,15 +15,15 @@ class MainMenuState : IGameObject
     {
         start.HandleInput(inputHelper, gameTime);
         option.HandleInput(inputHelper, gameTime);
-        if (inputHelper.KeyPressed(Keys.Space) || start.Pressed)
+        if (start.Pressed)
         {
-            GameEnvironment.gameStateManager.SwitchTo("Playing");
+            GameEnvironment.gameStateManager.SwitchTo("GameModes");
             Reset();
         }
         if (inputHelper.KeyPressed(Keys.Z) || option.Pressed)
         {
             GameEnvironment.gameStateManager.SwitchTo("Option");
-            Reset();
+            //Reset();
         }
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

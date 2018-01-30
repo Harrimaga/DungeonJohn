@@ -36,11 +36,11 @@ class EnemyBullet : E_Bullet
     {
         Vector2 MiddleofPlayer = new Vector2(PlayingState.player.position.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2, PlayingState.player.position.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2);
         Vector2 newdirection = direction;
-        if (position.X < MiddleofPlayer.X - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2 || position.X > MiddleofPlayer.X + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Width / 2)
+        if (position.X < MiddleofPlayer.X || position.X > MiddleofPlayer.X)
         {
             newdirection.X = -direction.X;
         }
-        if (position.Y < MiddleofPlayer.Y - GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2 || position.Y > MiddleofPlayer.Y + GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 2)
+        if (position.Y < MiddleofPlayer.Y|| position.Y > MiddleofPlayer.Y)
         {
             newdirection.Y = -direction.Y;
         }
