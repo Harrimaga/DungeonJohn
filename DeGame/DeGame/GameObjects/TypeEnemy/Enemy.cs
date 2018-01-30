@@ -81,7 +81,7 @@ public class Enemy : SpriteGameObject
         else if (poisoncounter > 0)
         {
             color = Color.YellowGreen;
-            if (poisoncounter % 500 == 0 && poisoncounter < 5000)
+            if (poisoncounter % 600 <= 20 && poisoncounter < 5000)
             {
                 health -= 4;
                 color = Color.Salmon;
