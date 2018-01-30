@@ -125,7 +125,7 @@ class PauseMenuState : IGameObject
         wornItems = PlayingState.hud.wornItems;
         wornItems.Position = BasisPosition + new Vector2(500, 150);
         wornItems.Draw(gameTime, spriteBatch);
-
+        
         if (startup)
         {
             startUp();
