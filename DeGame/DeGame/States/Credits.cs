@@ -14,14 +14,15 @@ class Credits : IGameObject
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         if (inputHelper.KeyPressed(Keys.Space))
-            GameEnvironment.gameStateManager.SwitchTo("Victory");
+            GameEnvironment.gameStateManager.SwitchTo("MainMenu");
     }
 
     public virtual void Update(GameTime gameTime)
     {
+        Vector2 SkipPosition = new Vector2(Camera.Position.X - 790, Camera.Position.X - 600);
         if (w == false)
         {
-            position = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
+            position = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2) + 800);
             w = true;
         }
 
@@ -37,6 +38,7 @@ class Credits : IGameObject
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/Credits"), Baseposition);
+        Vector2 SkipPosition = new Vector2(Camera.Position.X - 790, Camera.Position.X - 600);
     }
 
     public virtual void Reset()
