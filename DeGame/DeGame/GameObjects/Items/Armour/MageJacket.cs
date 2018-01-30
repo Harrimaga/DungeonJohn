@@ -10,11 +10,11 @@
 
     public override void equip()
     {
-        PlayingState.player.extraspeed *= 1.30f;
+        PlayingState.player.extraspeed *= 1.15f;
     }
     public override void unequip()
     {
-        PlayingState.player.extraspeed /= 1.30f;
+        PlayingState.player.extraspeed /= 1.15f;
         base.unequip();
     }
 }

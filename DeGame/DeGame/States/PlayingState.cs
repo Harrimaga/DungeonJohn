@@ -20,7 +20,6 @@ public class PlayingState : IGameObject
         hud = new HUD();
         currentFloor = floor;
         GameEnvironment.gameStateManager.LastState = "playing";
-        Player.inventory.currentWeapon = new BigMac();
         GameEnvironment.soundManager.loadSoundEffect("Loss");
     }
 
@@ -33,7 +32,7 @@ public class PlayingState : IGameObject
         }
         if (inputHelper.KeyPressed(Keys.M) || inputHelper.ButtonPressed(Buttons.Start))
         {
-            GameEnvironment.gameStateManager.SwitchTo("Credits");
+            GameEnvironment.gameStateManager.SwitchTo("Victory");
         }
         floor.HandleInput(inputHelper, gameTime); 
     }
@@ -50,7 +49,7 @@ public class PlayingState : IGameObject
         }
         if (currentFloor.CurrentLevel >= 10 && !Boss.endless)
         {
-            GameEnvironment.gameStateManager.SwitchTo("Credits");
+            GameEnvironment.gameStateManager.SwitchTo("Victory");
         }
     }
 
