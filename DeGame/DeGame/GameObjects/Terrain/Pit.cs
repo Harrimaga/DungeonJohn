@@ -37,7 +37,6 @@ class Pit : Solid
         }
     }
 
-
     void PitShader()
     {
         pitsprite1 = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitTile");

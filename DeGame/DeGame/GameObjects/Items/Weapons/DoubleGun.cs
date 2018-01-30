@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class DoubleGun : Item, IWeapon
@@ -39,26 +34,24 @@ public class DoubleGun : Item, IWeapon
 
     public void Attack(int direction)
     {
-        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), direction);
-        Bullet bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), direction);
-        if (direction == 1)
-        {
-            bulletBack = new Bullet(PlayingState.player.position, 2);
-        }
+        int forwarddirection = direction;
         if (direction == 2)
+            forwarddirection = 1;
+        else if (direction == 4)
+            forwarddirection = 3;
+        Bullet bullet = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), forwarddirection);
+        if (direction == 1 || direction == 2)
         {
-            bulletBack = new Bullet(PlayingState.player.position, 1);
+            Bullet bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), 2);
+            PlayingState.player.bullets.Add(bulletBack);
         }
-        if (direction == 3)
+
+        else if (direction == 3 || direction == 4)
         {
-            bulletBack = new Bullet(PlayingState.player.position, 4);
-        }
-        if (direction == 4)
-        {
-            bulletBack = new Bullet(PlayingState.player.position, 3);
+            Bullet bulletBack = new Bullet(PlayingState.player.position + new Vector2(0, GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown").Height / 4), 4);
+            PlayingState.player.bullets.Add(bulletBack);
         }
         PlayingState.player.bullets.Add(bullet);
-        PlayingState.player.bullets.Add(bulletBack);
     }
 
     public float AddedDamage

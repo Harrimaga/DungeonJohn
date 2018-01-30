@@ -33,7 +33,6 @@ public class IceEnemy : Enemy
                 Counter = 0;
             }
         }
-
     }
 
     public void Shoot()
@@ -55,6 +54,5 @@ public class IceEnemy : Enemy
     {
         base.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/IceEnemy"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
-
     }
 }

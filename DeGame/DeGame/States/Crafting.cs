@@ -3,15 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 public class Crafting : IGameObject
 {
     List<CraftingInventorySlot> inventory;
     public static CraftingSlots craftingSlots;
-    Item item1, item2, newItem;
     Vector2 BasisPosition;
 
     public Crafting()

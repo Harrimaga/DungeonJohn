@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /// <summary>
 /// Superclass for all different kinds of slots
@@ -17,8 +13,7 @@ public class Slot : SpriteGameObject
     public bool text = false, hover;
 
     public Slot(string name, int layer = 0, string id = "slot") : base(name, layer, id)
-    {
-        
+    {    
     }
 
     /// <summary>
@@ -26,8 +21,7 @@ public class Slot : SpriteGameObject
     /// </summary>
     /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
-    {
-         
+    {       
     }
 
     /// <summary>

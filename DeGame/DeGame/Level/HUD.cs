@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 public class HUD
 {
@@ -28,9 +24,6 @@ public class HUD
 
     void DrawMinimap(SpriteBatch spriteBatch)
     {
-        //int roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
-        //int roomheight = PlayingState.currentFloor.currentRoom.roomheight;
-        //krijgt soms 0 mee van currentroom
         int FloorCellWidth = 15;
         int FloorCellHeight = 15;
         int currentroomx = (int)PlayingState.player.position.X / 1260;
