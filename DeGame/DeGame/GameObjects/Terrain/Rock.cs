@@ -12,9 +12,9 @@ class Rock : Solid
         IceRock = icerock;
     }
 
-
     public override void Update(GameTime gameTime)
     {
+        /// When the player is not wearing the helicopterhat, all the rocks will be solid
         base.Update(gameTime);
         if(!PlayingState.player.HelicopterHat)
         {
@@ -24,6 +24,7 @@ class Rock : Solid
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        /// When a rock is a icerock, a icerock will be drawn instead
         if (!IceRock)
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Rock Sprite"), position);
         else

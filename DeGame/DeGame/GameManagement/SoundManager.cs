@@ -18,6 +18,11 @@ public class SoundManager
         soundEffects = new List<SoundEffect>();
     }
 
+    /// <summary>
+    /// Here a song is being played
+    /// When there is no song to play, a exception will show
+    /// </summary>
+    /// <param name="name"></param>
     public void PlaySong(string name)
     {
         try
@@ -62,6 +67,10 @@ public class SoundManager
         MediaPlayer.Resume();
     }
 
+    /// <summary>
+    /// Here a soundeffect is being played
+    /// </summary>
+    /// <param name="name"></param>
     public void playSoundEffect(string name)
     {
         try

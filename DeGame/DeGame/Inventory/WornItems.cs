@@ -35,6 +35,7 @@ public class WornItems : GameObjectList
 
     public override void Update(GameTime gameTime)
     {
+        /// This is to make sure 2 passive items are not in the same slot
         passiveSlot1.item = Player.inventory.currentPassives[0];
         passiveSlot2.item = Player.inventory.currentPassives[1];
         base.Update(gameTime);

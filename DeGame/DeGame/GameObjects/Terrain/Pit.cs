@@ -18,10 +18,12 @@ class Pit : Solid
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        /// When a player is not wearing a helicopterhat, he/she cant move over a pit
         if (!PlayingState.player.HelicopterHat)
         {
             SolidCollision();
         }
+        /// Here the size of the room is being determined...
         if (roomx == 0)
         {
             roomx = (int)position.X / 1260;
@@ -29,6 +31,7 @@ class Pit : Solid
             x = ((int)position.X - roomx * 1260) / BoundingBox.Width;
             y = ((int)position.Y - roomy * 900) / BoundingBox.Height;
         }
+        ///...otherwise the edges of the pit will get a shader
         else if (!check)
         {
             TilePosition = new Vector2(x * BoundingBox.Width + roomx * 1260, y * BoundingBox.Height + roomy * 900);
@@ -39,6 +42,7 @@ class Pit : Solid
 
     void PitShader()
     {
+        /// Here the correct shading is being drawn by checking if there is a pittile or a normaltile is next to it
         pitsprite1 = GameEnvironment.assetManager.GetSprite("Sprites/Tiles/PitTile");
         if (PlayingState.currentFloor.floor[roomx, roomy].CheckRoomarray(x - 1, y, 3) && PlayingState.currentFloor.floor[roomx, roomy].CheckRoomarray(x + 1, y, 3) && PlayingState.currentFloor.floor[roomx, roomy].CheckRoomarray(x, y - 1, 3) && PlayingState.currentFloor.floor[roomx, roomy].CheckRoomarray(x, y + 1, 3))
         {

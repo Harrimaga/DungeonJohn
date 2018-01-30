@@ -76,7 +76,6 @@
     <Compile Include="GameObjects\Bullets\BossBullet.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28player%29.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28Enemy%29.cs" />
-    <Compile Include="GameObjects\Items\Actives\Nani.cs" />
     <Compile Include="GameObjects\Bullets\IceBullet.cs" />
     <Compile Include="GameObjects\Items\Armour\MageJacket.cs" />
     <Compile Include="GameObjects\Items\Armour\SimpleArmour.cs" />
