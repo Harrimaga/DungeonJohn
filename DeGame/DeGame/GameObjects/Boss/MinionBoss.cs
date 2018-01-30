@@ -23,8 +23,7 @@ class MinionBoss : Boss
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (!EndRoom.trigger || health < 150)
-            Shoot(gameTime);
+        Shoot(gameTime);
         if (health < 300 && !EndRoom.cleared)
         {
             EndRoom.trigger = true;

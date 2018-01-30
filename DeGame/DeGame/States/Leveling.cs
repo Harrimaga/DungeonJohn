@@ -46,27 +46,30 @@ class Leveling : IGameObject
         healthB.Update(gameTime);
         speedB.Update(gameTime);
         attackSpeedB.Update(gameTime);
-        if (attackB.Pressed && !picked)
+        if (!picked)
         {
-            PlayingState.player.StatIncrease(1);
-            picked = true;
-            levelingsound.Play();
-        }
-        if (healthB.Pressed && !picked)
-        {
-            PlayingState.player.StatIncrease(2);
-            picked = true;
-            levelingsound.Play();
-        }
-        if (speedB.Pressed && !picked)
-        {
-            PlayingState.player.StatIncrease(3);
-            picked = true;
-        }
-        if (attackSpeedB.Pressed && !picked)
-        {
-            PlayingState.player.StatIncrease(4);
-            picked = true;
+            if (attackB.Pressed)
+            {
+                PlayingState.player.StatIncrease(1);
+                picked = true;
+            }
+            if (healthB.Pressed)
+            {
+                PlayingState.player.StatIncrease(2);
+                picked = true;
+            }
+            if (speedB.Pressed)
+            {
+                PlayingState.player.StatIncrease(3);
+                picked = true;
+            }
+            if (attackSpeedB.Pressed)
+            {
+                PlayingState.player.StatIncrease(4);
+                picked = true;
+            }
+            if (picked)
+                levelingsound.Play();
         }
         if (picked && counter < 10)
         {

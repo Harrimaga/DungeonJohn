@@ -65,7 +65,7 @@ public class Enemy : SpriteGameObject
             if (CollidesWith(bullet))
             {
                 health -= PlayingState.player.attack;
-                if (PlayingState.player.VialOfPoison && bullet.poisonbullet)
+                if (PlayingState.player.poisonchance > 0 && bullet.poisonbullet)
                     poisoncounter = 5000;
                 RemoveBullets.Add(bullet);
                 hitcounter = 200;
@@ -79,11 +79,8 @@ public class Enemy : SpriteGameObject
             color = Color.Salmon;
         }
         else if (poisoncounter > 0)
-        CheckAlive();
-
-        if (poisoncounter > 0)
         {
-            if (poisoncounter % 75 == 0 && poisoncounter < 350)
+            if (poisoncounter % 500 == 0 && poisoncounter < 5000)
                 health -= 4;
             poisoncounter -= gameTime.ElapsedGameTime.Milliseconds;
             color = Color.YellowGreen;
