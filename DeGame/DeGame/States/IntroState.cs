@@ -33,6 +33,8 @@ class IntroState : IGameObject
             Reset();
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
         }
+       
+
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

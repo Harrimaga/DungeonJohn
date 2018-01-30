@@ -23,10 +23,14 @@ public class SpiderEnemy : Enemy
 
     public override void Update(GameTime gameTime)
     {
+        Vector2 oldposition = position;
         base.Update(gameTime);
+        if (position.X == null || position.Y == null)
+            position = oldposition;
         ChargeCounter++;
         velocity = new Vector2(0.2f, 0.2f);
         Charge();
+        Console.WriteLine(position);
     }
 
     void Charge()
