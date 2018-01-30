@@ -68,7 +68,7 @@ public class SoundManager
         {
             foreach (SoundEffect sfx in soundEffects)
             {
-                if (sfx.Name == name)
+                if (sfx.Name == "SoundEffects/" + name)
                 {
                     sfx.Play();
                 }
