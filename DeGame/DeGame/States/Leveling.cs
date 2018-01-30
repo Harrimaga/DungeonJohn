@@ -9,12 +9,11 @@ class Leveling : IGameObject
     bool picked = false;
     protected IGameObject playingState;
     int counter = 0;
-    SoundEffect levelingsound;
 
     public Leveling()
     {
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
-        levelingsound = GameEnvironment.assetManager.GetSound("SoundEffects/LevelUp");
+        GameEnvironment.soundManager.loadSoundEffect("LevelUp");
         attackB = new Button(new Vector2(300,500), "Attack","AttackUp", "AttackUpPressed",true,1);
         healthB = new Button(new Vector2(680, 500), "Health", "HealthUp","HealthUpPressed",true, 1);
         speedB = new Button(new Vector2(300, 600), "Speed", "Speed", "SpeedPressed", true, 1);
@@ -50,13 +49,13 @@ class Leveling : IGameObject
         {
             PlayingState.player.StatIncrease(1);
             picked = true;
-            levelingsound.Play();
+            GameEnvironment.soundManager.playSoundEffect("LevelUp");
         }
         if (healthB.Pressed && !picked)
         {
             PlayingState.player.StatIncrease(2);
             picked = true;
-            levelingsound.Play();
+            GameEnvironment.soundManager.playSoundEffect("LevelUp");
         }
         if (speedB.Pressed && !picked)
         {

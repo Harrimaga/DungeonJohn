@@ -28,6 +28,7 @@
 #begin Sprites/SpelFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Sprites/SpelFont.spritefont
 
@@ -3163,48 +3164,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Buttons/SpeedPressed.png
 
-#begin SoundEffects/background music.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/background music.wav
-
-#begin SoundEffects/Crafting.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Crafting.wav
-
-#begin SoundEffects/Hit.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Hit.wav
-
-#begin SoundEffects/Levelup.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Levelup.wav
-
-#begin SoundEffects/Pickup.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Pickup.wav
-
-#begin SoundEffects/Shoot.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Shoot.wav
-
-#begin SoundEffects/Loss.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Loss.wav
-
 #begin Sprites/Enemies/BearEnemySheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3252,4 +3211,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/States/Credits.png
+
+#begin SoundEffects/Shop.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Shop.mp3
 

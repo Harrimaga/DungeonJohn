@@ -22,7 +22,7 @@ public class CraftingSlots : GameObjectList
         Add(itemSlot1);
         Add(itemSlot2);
         Add(itemNew);
-        craftingsound = GameEnvironment.assetManager.GetSound("SoundEffects/Crafting");
+        GameEnvironment.soundManager.loadSoundEffect("Crafting");
     }
 
     public override Vector2 Position
@@ -108,7 +108,7 @@ public class CraftingSlots : GameObjectList
             itemSlot1.item = null;
             itemSlot2.item = null;
             itemNew.item = null;
-            craftingsound.Play();
+            GameEnvironment.soundManager.playSoundEffect("Crafting");
         }
     }
 }
