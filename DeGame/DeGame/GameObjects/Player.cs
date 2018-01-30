@@ -236,6 +236,10 @@ public class Player : SpriteGameObject
         inventory.currentPassives[0] = null;
         inventory.currentPassives[1] = null;
         inventory.currentWeapon = new StandardBow();
+        //for cheating
+        /*inventory.addItemToInventory(new Mac10());
+        inventory.addItemToInventory(new BigMac());
+        inventory.addItemToInventory(new DoubleGun());*/
         ammo = -1;
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
         attack = weapon.AddedDamage;
@@ -263,13 +267,13 @@ public class Player : SpriteGameObject
     {
         if (type == 1)
         {
-            attackmultiplier *= 1.05;
+            attackmultiplier *= 1.10;
             CalculateDamage();
         }
         if (type == 2)
         {
-            maxhealth += 20;
-            health += 20;
+            maxhealth += 25;
+            health += 25;
         }
         if (type == 3)
         {
