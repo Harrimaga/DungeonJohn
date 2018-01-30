@@ -6,17 +6,15 @@ class VictoryState : IGameObject
 {
     Button MainMenu;
     Vector2 BasisPosition;
-    protected IGameObject playingState;
     public VictoryState()
     {
-        playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
         MainMenu = new Button(new Vector2(655, 775), "ReturnToMainMenu", "ReturnToMainMenu", "ReturnToMainMenuPressed", true, 1);
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
         MainMenu.HandleInput(inputHelper, gameTime);
         if (inputHelper.KeyPressed(Keys.Z) || MainMenu.Pressed)
-            GameEnvironment.gameStateManager.SwitchTo("Intro");
+            GameEnvironment.gameStateManager.SwitchTo("MainMenu");
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
