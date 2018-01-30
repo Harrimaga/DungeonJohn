@@ -8,6 +8,10 @@ class Consumables : SpriteGameObject
     Texture2D consumablesprite;
     public static InventoryManager inventory;
 
+
+    /// <summary>
+    /// Determines what kind of consumable this instance is
+    /// </summary>
     public Consumables(Vector2 startPosition, string consumablename, int layer = 0, string id = "consumable")
     : base("Sprites/Drops/Coin", layer, id)
     {
@@ -24,6 +28,9 @@ class Consumables : SpriteGameObject
         GameEnvironment.soundManager.loadSoundEffect("Pickup");
     }
 
+    /// <summary>
+    /// Decides what should happen if the player walks over a consumable
+    /// </summary>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);

@@ -506,7 +506,7 @@ public class Room : GameObjectList
     }
 
     /// <summary>
-    /// checks what kind of wall sprite should be used and what shadow should be drawn on them
+    /// Checks what kind of wall sprite should be used and what shadow should be drawn on them
     /// </summary>
     void WallShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y, bool shop = false)
     {
@@ -568,7 +568,7 @@ public class Room : GameObjectList
     }
 
     /// <summary>
-    /// checks where the shadows on backgroundtiles should be placed
+    /// Checks where the shadows on backgroundtiles should be placed
     /// </summary>
     void BackgroundShader(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
@@ -592,6 +592,9 @@ public class Room : GameObjectList
             spriteBatch.Draw((GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Background Sprite")), TilePosition, Color.Gray);
     }
 
+    /// <summary>
+    /// Decides what sprite should be used to draw the counter in shop levels
+    /// </summary>
     void Counter(GameTime gameTime, SpriteBatch spriteBatch, int x, int y)
     {
         if (CheckRoomarray(x + 1, y, 4) && CheckRoomarray(x - 1, y, 4))
@@ -610,6 +613,9 @@ public class Room : GameObjectList
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Tiles/Shop4"), TilePosition, null, Color.Gray, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
     }
 
+    /// <summary>
+    /// Checks if a tile is of a certain type
+    /// </summary>
     public bool CheckRoomarray(int x, int y, int type = 1)
     {
         if (x >= 0 && x < roomarray.GetLength(0) && y >= 0 && y < roomarray.GetLength(1))
@@ -635,6 +641,9 @@ public class Room : GameObjectList
         return false;
     }
 
+    /// <summary>
+    /// Draws everything based on their tiletype in roomarray
+    /// </summary>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         for (int x = 0; x < roomarray.GetLength(0); x++)

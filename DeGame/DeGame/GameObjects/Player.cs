@@ -85,7 +85,7 @@ public class Player : SpriteGameObject
 
         if(!HelicopterHat)
         {
-            //krijg weer originele snelheid als je over ijs glijdt en van een spinnenweb afkomt
+            //Krijg weer originele snelheid als je over ijs glijdt en van een spinnenweb afkomt
             if (onIce && !onWeb && speed != 0.3f * extraspeed)
             {
                 speed = 0.3f * extraspeed;
