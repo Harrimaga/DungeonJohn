@@ -20,6 +20,10 @@ public class SpamEnemy : Enemy
         backgroundenemy = true;
     }
 
+    /// <summary>
+    /// Makes it shoot in intervals
+    /// </summary>
+    /// <param name="gameTime"></param>
     public void Range(GameTime gameTime)
     {
         Counter -= 1 * gameTime.ElapsedGameTime.Milliseconds;
@@ -37,6 +41,9 @@ public class SpamEnemy : Enemy
         }
     }
 
+    /// <summary>
+    /// Shoots the bullets at the player
+    /// </summary>
     public void Shoot()
     {
         Vector2 direction = (PlayingState.player.position - position);
@@ -45,6 +52,11 @@ public class SpamEnemy : Enemy
         PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
 
     }
+
+    /// <summary>
+    /// If in the current room: Range; Calculates the direction in which is shot.
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         direction = (PlayingState.player.position - position);
@@ -52,6 +64,12 @@ public class SpamEnemy : Enemy
         if (PlayingState.currentFloor.currentRoom.position == Roomposition)
             Range(gameTime);
     }
+
+    /// <summary>
+    /// Draw the enemy
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

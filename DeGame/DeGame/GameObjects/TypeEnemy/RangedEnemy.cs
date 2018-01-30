@@ -21,6 +21,10 @@ public class RangedEnemy : Enemy
         basevelocity = new Vector2(0.08f, 0.08f);
     }
 
+    /// <summary>
+    /// If the player is far away, move closer; Shoot;
+    /// </summary>
+    /// <param name="gameTime"></param>
     public void Range(GameTime gameTime)
     {
         Counter += 1 * gameTime.ElapsedGameTime.Milliseconds;
@@ -39,6 +43,9 @@ public class RangedEnemy : Enemy
         }
     }
 
+    /// <summary>
+    /// Shoots the bullet at the player
+    /// </summary>
     public void Shoot()
     {
         Vector2 middleofsprite = new Vector2(sprite.Width / 2, sprite.Height / 2);
@@ -47,6 +54,10 @@ public class RangedEnemy : Enemy
         PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
     }
 
+    /// <summary>
+    /// If in the current room: Range; Calculates the direction in which is shot and moved;
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -55,6 +66,11 @@ public class RangedEnemy : Enemy
         direction = (PlayingState.player.position - position);
     }
 
+    /// <summary>
+    /// Draws Enemy
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

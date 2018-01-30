@@ -19,11 +19,19 @@ class E_Bullet : SpriteGameObject
         Roomposition = PlayingState.currentFloor.currentRoom.position;
     }
 
+    /// <summary>
+    /// Executes check collission
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         CheckCollision();
     }
 
+    /// <summary>
+    /// Checks if the bullet collides with enemies or bosses when it is reflected and if it collides deals damage; Decides the change of it being blocked/reflected by an equiped shield,
+    /// if its either of those it removes itself without doing damage, if not it does do damage; If it Collides with Solids and/or door it removes itself;
+    /// </summary>
     public void CheckCollision()
     {
         if (reflected)

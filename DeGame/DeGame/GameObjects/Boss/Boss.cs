@@ -29,7 +29,10 @@ public class Boss :  SpriteGameObject
         LevelofBoss = difficulty;
         playersprite = GameEnvironment.assetManager.GetSprite("Sprites/Characters/PlayerDown");
     }
-
+    /// <summary>
+    /// Healtbarupdate; Collission with playerbullets is gecheckt; Collission with Player; Poison damage is being updated; When the boss is hit, he'll colour red.
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         healthbar.Update(gameTime, health, maxhealth, new Vector2(Roomposition.X * PlayingState.currentFloor.currentRoom.roomwidth, Roomposition.Y * PlayingState.currentFloor.currentRoom.roomheight));
@@ -72,6 +75,10 @@ public class Boss :  SpriteGameObject
             color = Color.White;
     }
 
+    /// <summary>
+    /// Checks if it is the final boss and consequently if the toaster has to be dropped; if it is not the final boss drop other consumables; 
+    /// If de boss is dead give the player xp for defeating the boss and remove the boss; 
+    /// </summary>
     public void FinalStage()
     {
         if (health <= 0 && alive)
@@ -92,6 +99,9 @@ public class Boss :  SpriteGameObject
         }
     }
 
+    /// <summary>
+    /// Checks if de boss collides with de player, if yes do damage.
+    /// </summary>
     public void PlayerCollision()
     {
         counter--;
@@ -106,6 +116,11 @@ public class Boss :  SpriteGameObject
             }
         }
     }
+    /// <summary>
+    /// Draws the healthbar
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

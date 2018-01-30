@@ -21,6 +21,10 @@ public class IceEnemy : Enemy
         killable = false;
     }
 
+    /// <summary>
+    /// If Enemy is in within Range shoot.
+    /// </summary>
+    /// <param name="gameTime"></param>
     public void Range(GameTime gameTime)
     {
         Counter += 1 *gameTime.ElapsedGameTime.Milliseconds;
@@ -35,6 +39,9 @@ public class IceEnemy : Enemy
         }
     }
 
+    /// <summary>
+    /// Shoots the bullet at the player
+    /// </summary>
     public void Shoot()
     {
         Vector2 MiddenOfSprite = new Vector2(sprite.Width / 4 - 10, sprite.Height / 4);
@@ -42,6 +49,10 @@ public class IceEnemy : Enemy
         PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemybullets.Add(bullet);
     }
 
+    /// <summary>
+    /// Executes Range & calculates the direction
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -50,6 +61,11 @@ public class IceEnemy : Enemy
         direction = (PlayingState.player.position - position);
     }
 
+    /// <summary>
+    /// Draws Enemy.
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

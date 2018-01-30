@@ -42,6 +42,10 @@ public class Enemy : SpriteGameObject
         healthbar = new HealthBar(health, maxhealth, position);
     }
 
+    /// <summary>
+    /// Updates the PlayerOrigin to its currentposition; Checks if it is hit with a bullet and if so, takes damage; Handles poisondamage.
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         bool ok;
@@ -95,6 +99,9 @@ public class Enemy : SpriteGameObject
         CheckAlive();
     }
 
+    /// <summary>
+    /// If it is shot by the enemy, determines if it is possible to be killed and if it is killed drops consumable and removes it.
+    /// </summary>
     public void CheckAlive()
     {
         if ((int)health <= 0 && alive == true && killable || (bossenemy && EndRoom.cleared))
@@ -109,12 +116,18 @@ public class Enemy : SpriteGameObject
         }
     }
 
+    /// <summary>
+    /// Makes the enemy chase after the player
+    /// </summary>
     public void Chase()
     {
         direction = PlayerOrigin - position;
         direction.Normalize();
     }
 
+    /// <summary>
+    /// Checks if it collides with anaother enemy and if it does moves them apart.
+    /// </summary>
     protected void CollisionWithEnemy()
     {
         if (!backgroundenemy)
@@ -151,6 +164,9 @@ public class Enemy : SpriteGameObject
         }
     }
 
+    /// <summary>
+    /// Checks if it collides with solids and/or door and if so moves them so the dont pass through them.
+    /// </summary>
     protected void SolidCollision()
     {
         foreach (Solid s in PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].solid.Children)
@@ -183,6 +199,9 @@ public class Enemy : SpriteGameObject
         }
     }
 
+    /// <summary>
+    /// Checks if it collides with player and if so, it does damage.
+    /// </summary>
     protected void PlayerCollision()
     {
         if (CollidesWith(PlayingState.player))
@@ -196,6 +215,11 @@ public class Enemy : SpriteGameObject
         }
     }
 
+    /// <summary>
+    /// Draws the enemy and flips it so it faces the player; Draws the healtbar if the enemy should have one.
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         if (position.X + playersprite.Width > PlayingState.player.position.X + 1)

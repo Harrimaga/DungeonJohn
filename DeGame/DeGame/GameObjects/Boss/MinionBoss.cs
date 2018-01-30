@@ -20,6 +20,10 @@ class MinionBoss : Boss
         health = maxhealth;  
     }
 
+    /// <summary>
+    /// Executes the shoot method and turns the spawntrigger for its minions true when lower than 300hp.
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -31,6 +35,10 @@ class MinionBoss : Boss
         FinalStage();
     }
 
+    /// <summary>
+    /// Handles the shooting aimed at he player
+    /// </summary>
+    /// <param name="gameTime"></param>
     public void Shoot(GameTime gameTime)
     {
         shootcounter -= gameTime.ElapsedGameTime.Milliseconds;
@@ -44,6 +52,11 @@ class MinionBoss : Boss
         }
     }
 
+    /// <summary>
+    /// Draws the Boss depending on if its poisoned or not or level 0 or not
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

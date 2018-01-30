@@ -31,7 +31,11 @@ class CreamBatBoss : Boss
         else
             EndRoom.finalboss = true;
     }
-
+    
+    /// <summary>
+    /// Execute Solidcollision and Handle the Stages
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -108,6 +112,9 @@ class CreamBatBoss : Boss
         }
     }
 
+    /// <summary>
+    /// Shoots bullets directly at the player
+    /// </summary>
     public void Shoot()
     {
         if (shootcounter1 <= 0)
@@ -123,6 +130,10 @@ class CreamBatBoss : Boss
         }
     }
 
+    /// <summary>
+    /// Shoots bullets in a pre-determined pattern 
+    /// </summary>
+    /// <param name="gameTime"></param>
     public void Spam(GameTime gameTime)
     {
         shootcounter2 -= 1 * gameTime.ElapsedGameTime.Milliseconds; ;
@@ -179,7 +190,11 @@ class CreamBatBoss : Boss
             shootcounter3 = 1000;
         }
     }
-
+    
+    /// <summary>
+    /// Makes the Boss chase after the player (Stage 2 & 3)
+    /// </summary>
+    /// <param name="gameTime"></param>
     public void BossChase(GameTime gameTime)
     {
         MoveDirection = PlayingState.player.position - position;
@@ -187,6 +202,11 @@ class CreamBatBoss : Boss
         moving = MoveDirection * velocity;
         position += moving * gameTime.ElapsedGameTime.Milliseconds;
     }
+
+    /// <summary>
+    /// Makes the Boss follow a pre-determined path(Stage1)
+    /// </summary>
+    /// <param name="gameTime"></param>
     public void Move(GameTime gameTime)
     {
         if (MoveTimer < 50)
@@ -205,6 +225,9 @@ class CreamBatBoss : Boss
         position += moving * gameTime.ElapsedGameTime.Milliseconds;       
     }
 
+    /// <summary>
+    /// While the boss isnt in stage 1, when de boss collides with the solids(wall etc.) place him back. Preventing him from going through the solids.
+    /// </summary>
     protected void SolidCollision()
     {
         if (Stage != 1)
@@ -228,6 +251,11 @@ class CreamBatBoss : Boss
         }
     }
 
+    /// <summary>
+    /// Draw the CreamBat, depending on the Stage's variables(sprites, etc.).
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);

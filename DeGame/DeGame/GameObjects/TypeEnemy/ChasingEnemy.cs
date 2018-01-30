@@ -12,6 +12,10 @@ public class ChasingEnemy : Enemy
         contactdamage = 10 * statmultiplier;
     }
 
+    /// <summary>
+    /// If it doesnt collide with player it can move; If it is in the currently used room it wil execute chase.
+    /// </summary>
+    /// <param name="gameTime"></param>
     public override void Update(GameTime gameTime)
     {
         if (!CollidesWith(PlayingState.player))
@@ -24,6 +28,11 @@ public class ChasingEnemy : Enemy
         base.Update(gameTime);
     }
 
+    /// <summary>
+    /// Draws the enemy.
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         base.Draw(gameTime, spriteBatch);
