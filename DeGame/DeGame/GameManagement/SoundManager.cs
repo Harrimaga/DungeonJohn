@@ -49,8 +49,17 @@ public class SoundManager
         catch (Exception e)
         {
             Console.WriteLine("SoundEffect not found!");
-        }
-        
+        }   
+    }
+
+    public void PauseSong()
+    {
+        MediaPlayer.Pause();
+    }
+
+    public void ResumeSong()
+    {
+        MediaPlayer.Resume();
     }
 
     public void playSoundEffect(string name)

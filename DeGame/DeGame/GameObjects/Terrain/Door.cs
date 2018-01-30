@@ -140,6 +140,7 @@ class Door : Solid
     {
         Vector2 Cam = Camera.Position;
         if (PlayingState.currentFloor.currentRoom.enemycounter == 0 && doorhitbox.Intersects(PlayingState.player.collisionhitbox) && PlayingState.currentFloor.doortimer == 0)
+        {
             switch (direction)
             {
                 case (1):
@@ -169,6 +170,7 @@ class Door : Solid
                 default:
                     break;
             }
+        }
 
         Vector2 CameraVelocity = new Vector2(0, 0);
 
