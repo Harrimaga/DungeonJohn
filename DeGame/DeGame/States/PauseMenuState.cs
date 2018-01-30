@@ -15,6 +15,7 @@ class PauseMenuState : IGameObject
 
     public PauseMenuState()
     {
+        //buttons
         restartB = new Button(new Vector2(10, 140), "Restart", "Restart", "RestartPressed", true, 1);
         mainMenuB = new Button(new Vector2(10, 240), "MainMenu2", "MainMenu2", "MainMenu2Pressed", true, 1);
         playingState = GameEnvironment.gameStateManager.GetGameState("Playing");
@@ -24,6 +25,7 @@ class PauseMenuState : IGameObject
     {
         restartB.HandleInput(inputHelper, gameTime);
         mainMenuB.HandleInput(inputHelper, gameTime);
+        //button switching states
         if (restartB.Pressed)
         {
             PlayingState.currentFloor.ResetFloor();
@@ -124,6 +126,7 @@ class PauseMenuState : IGameObject
         mainMenuB.Draw(gameTime, spriteBatch);
         playingState.Draw(gameTime, spriteBatch);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PauseMenu/PauseMenu"), BasisPosition);
+        //draws items on player
         wornItems = PlayingState.hud.wornItems;
         wornItems.Position = BasisPosition + new Vector2(500, 150);
         wornItems.Draw(gameTime, spriteBatch);
@@ -134,6 +137,7 @@ class PauseMenuState : IGameObject
         }
 
         inventory = new List<InventorySlot>();
+        //draws inventory of player
         for (int i = 0; i < Player.inventory.items.Count; i++)
         {
             Vector2 slotPosition;
@@ -144,12 +148,12 @@ class PauseMenuState : IGameObject
 
             inventory.Add(new InventorySlot(slotPosition, Player.inventory.items[i]));
         }
-
+        //checks inventories 
         if (!checkInventories(inventory, oldInventory))
         {
             oldInventory = inventory;
         }
-
+        //draws inventory slots
         foreach (InventorySlot slot in oldInventory)
         {
             slot.Draw(gameTime, spriteBatch);

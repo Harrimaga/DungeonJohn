@@ -13,24 +13,30 @@ class Credits : IGameObject
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
+        //switch mainmenu
         if (inputHelper.KeyPressed(Keys.Space))
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
+        //music
         GameEnvironment.soundManager.PlaySong("Menu");
     }
 
     public virtual void Update(GameTime gameTime)
     {
+        //update the positions
+
+        //position for skip tekst
         SkipPosition = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2)+10, Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2)+10);
         if (w == false)
         {
             position = new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2) + 900);
             w = true;
         }
+        //update position for credits and updates time(counter)
         Baseposition = position += velocity * gameTime.ElapsedGameTime.Milliseconds;
         Counter += 1 * gameTime.ElapsedGameTime.Milliseconds;
+        //switch state when credits is done
         if (Counter >= 55000)
         {
-            //Reset();
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
             GameEnvironment.soundManager.PlaySong("Menu");
         }
@@ -38,6 +44,7 @@ class Credits : IGameObject
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        //draws credits
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/Credits"), Baseposition);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "[Press 'Space' to skip]", SkipPosition, Color.White);
     }

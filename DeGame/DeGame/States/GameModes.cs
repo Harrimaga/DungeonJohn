@@ -7,6 +7,7 @@ public class GameModes : IGameObject
     Button normalB, endlessB, mainmenuB;
     public GameModes()
     {
+        //buttons
         normalB = new Button(new Vector2(600, 340), "NormalMode", "NormalMode", "NormalModePressed", true, 1);
         endlessB = new Button(new Vector2(600, 440), "EndlessMode", "EndlessMode", "EndlessModePressed", true, 1);
         mainmenuB = new Button(new Vector2(600, 540), "MainMenu", "MainMenu2", "MainMenu2Pressed", true, 1);
@@ -16,6 +17,8 @@ public class GameModes : IGameObject
         normalB.HandleInput(inputHelper, gameTime);
         endlessB.HandleInput(inputHelper, gameTime);
         mainmenuB.HandleInput(inputHelper, gameTime);
+
+        //which states buttons has to switch
         if (normalB.Pressed)
         {
             Boss.endless = false;
@@ -36,6 +39,7 @@ public class GameModes : IGameObject
     }
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        //draw tekst picture and draws buttons
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/PauseMenu/GameModes"), new Vector2(-400, -380));
         normalB.Draw(gameTime, spriteBatch);
         endlessB.Draw(gameTime, spriteBatch);
@@ -43,6 +47,7 @@ public class GameModes : IGameObject
     }
     public virtual void Update(GameTime gameTime)
     {
+        //updates buttons
         normalB.Update(gameTime);
         endlessB.Update(gameTime);
         mainmenuB.Update(gameTime);

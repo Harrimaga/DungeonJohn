@@ -4,7 +4,7 @@
 
     public CrestShield()
     {
-        Cost = 7;
+        Cost = 8;
         addeddefence = 1;
         defencemultiplier = 1;
         itemName = "CrestShield";

@@ -10,13 +10,13 @@ public class DoubleGun : Item, IWeapon
 
     public DoubleGun()
     {
-        Cost = 9;
+        Cost = 10;
         melee = false;
         twoHanded = false;
-        addedDamage = 35;
+        addedDamage = 40;
         projectile_velocity = 0.7f;
-        attackspeed = 3.6f;
-        range = 450;
+        attackspeed = 3.0f;
+        range = 550;
         maxammo = 200;
         ammo = maxammo;
         Type = "weapon";

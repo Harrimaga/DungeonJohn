@@ -19,6 +19,7 @@ class IntroState : IGameObject
     }
     public virtual void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
+        //switch states
         if (inputHelper.KeyPressed(Keys.Space))
             GameEnvironment.gameStateManager.SwitchTo("MainMenu");
     }
@@ -27,6 +28,7 @@ class IntroState : IGameObject
     {
         position += velocity * gameTime.ElapsedGameTime.Milliseconds;
         TextPosition += velocity * gameTime.ElapsedGameTime.Milliseconds;
+        //counter = timer
         Counter++;
         if (Counter >= 1100)
         {
@@ -39,6 +41,7 @@ class IntroState : IGameObject
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        //tekst for intro
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "[Press 'Space' to skip]", SkipPosition, Color.White);
         spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/States/NewBTeam"), position);
         spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Dungeon John is a man with a mission:", TextPosition, Color.White);
