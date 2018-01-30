@@ -24,6 +24,9 @@ class Button : SpriteGameObject
         spriteHeight = GameEnvironment.assetManager.GetSprite("Sprites/buttons/" + imageAsset).Height;
     }
 
+    /// <summary>
+    /// Each button gets its own hitbox
+    /// </summary>
     public override Rectangle BoundingBox
     {
         get
@@ -36,12 +39,14 @@ class Button : SpriteGameObject
 
     public override void HandleInput(InputHelper inputHelper, GameTime gameTime)
     {
+        /// The interaction with the players mouse
         pressed = inputHelper.MouseLeftButtonDown() && BoundingBox.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y) && pressedcounter <= 0;
         hover = BoundingBox.Contains((int)inputHelper.MousePosition.X, (int)inputHelper.MousePosition.Y);
     }
 
     public override void Update(GameTime gameTime)
     {
+        /// A timer to make sure a button cannot be clicked a huge amount of times in a sort amount of time
         position = buttonposition + new Vector2(Camera.Position.X - (GameEnvironment.WindowSize.X / 2), Camera.Position.Y - (GameEnvironment.WindowSize.Y / 2));
         if (pressed)
         {

@@ -12,6 +12,7 @@ class ShopCounter : Solid
 
     public override void Update(GameTime gameTime)
     {
+        /// The counter is made solid
         base.Update(gameTime);
         SolidCollision();
     }

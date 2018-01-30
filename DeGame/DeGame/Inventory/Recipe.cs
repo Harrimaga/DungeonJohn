@@ -14,6 +14,8 @@ class Recipe
 
     void MakeList()
     {
+        /// These are specific recipes to craft items
+        /// The first to lines are the requirements en the last line is the crafted item
         list1.Add(new Mac10());
         list2.Add(new Mac10());
         listNewItem.Add(new BigMac());

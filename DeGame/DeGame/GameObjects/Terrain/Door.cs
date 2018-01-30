@@ -21,6 +21,8 @@ class Door : Solid
         position = Startposition;
         direction = Direction;
         DoorNumber = doornumber;
+        
+        /// Here the doorhitbox is determined (door rotates)
         switch (direction)
         {
             case 1:
@@ -43,10 +45,12 @@ class Door : Solid
         closed = false;
         if (direction == 1 || direction == 2)
         {
+            /// The sprite is being drawn upside down, when the door is in the opposite wall
             if (direction == 2)
             {
                 Effect = SpriteEffects.FlipVertically;
             }
+            /// When there are enemies in the room or when the played just entered the room, the doors are being drawn closed...
             if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || PlayingState.currentFloor.doortimer > 0)
             {
                 switch(DoorNumber)
@@ -63,6 +67,7 @@ class Door : Solid
                 }
                 closed = true;
             }
+            /// ...else they are being drawn open
             else
                 switch (DoorNumber)
                 {
@@ -77,6 +82,7 @@ class Door : Solid
                         break;
                 }
         }
+        /// Here the same happens as above
         else
         {
             if (direction == 4)
@@ -119,12 +125,14 @@ class Door : Solid
     {
         if (CellWidth == 0)
         {
+            /// Tile height and width are being determined
             CellWidth = PlayingState.currentFloor.currentRoom.CellWidth;
             CellHeight = PlayingState.currentFloor.currentRoom.CellHeight;
             roomwidth = PlayingState.currentFloor.currentRoom.roomwidth;
             roomheight = PlayingState.currentFloor.currentRoom.roomheight;
         }
 
+        /// If a door is closed or enemies are still in the room, then the doors will be solid (the player cannot move through)
         if (PlayingState.currentFloor.currentRoom.enemycounter > 0 || DoorNumber == 0 || closed)
         {
             base.Update(gameTime);
@@ -136,6 +144,10 @@ class Door : Solid
         }
     }
 
+    /// <summary>
+    /// When the player hits a open door, the camera is moved to the next room as is the player
+    /// The doors that are in the new room will also close for a short amount of time
+    /// </summary>
     void ControlCamera()
     {
         Vector2 Cam = Camera.Position;
@@ -195,12 +207,14 @@ class Door : Solid
             PlayingState.currentFloor.currentRoom.CameraMoving = true;
         }
 
+        /// The camera will move slowly until it reaches the next room
         if ((onup || ondown || onleft || onright) && counter < 30)
         {
             Camera.Position += CameraVelocity;
             counter++;
         }
 
+        /// When the camera reaches the next room, it will stop moving
         if (counter >= 30)
         {
             onup = false;
@@ -212,6 +226,11 @@ class Door : Solid
         }
     }
 
+    /// <summary>
+    /// Here the doors are being drawn
+    /// </summary>
+    /// <param name="gameTime"></param>
+    /// <param name="spriteBatch"></param>
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         if (DoorNumber > 0)
