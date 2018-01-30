@@ -72,6 +72,7 @@
     <Compile Include="GameObjects\Boss\HomingBoss.cs" />
     <Compile Include="GameObjects\Boss\CreamBatBoss.cs" />
     <Compile Include="GameObjects\Boss\MinionBoss.cs" />
+    <Compile Include="GameObjects\TypeEnemy\HalfEnemy.cs" />
     <Compile Include="GameObjects\TypeEnemy\MinionSpawner.cs" />
     <Compile Include="GameObjects\Bullets\BossBullet.cs" />
     <Compile Include="GameObjects\Bullets\Bullet%28player%29.cs" />
