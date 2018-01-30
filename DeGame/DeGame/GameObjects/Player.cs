@@ -235,7 +235,10 @@ public class Player : SpriteGameObject
         inventory.currentShield = null;
         inventory.currentPassives[0] = null;
         inventory.currentPassives[1] = null;
-        inventory.currentWeapon = new StandardBow();
+        inventory.currentWeapon.unequip();
+        Item bow = new StandardBow();
+        bow.equip();
+        inventory.currentWeapon = bow;
         IWeapon weapon = (IWeapon)inventory.currentWeapon;
         attack = weapon.AddedDamage;
         startup = true;
