@@ -28,8 +28,6 @@ class ItemList
         RoomList.Add(new SlimyBoots());  
         RoomList.Add(new CrestShield());       
         RoomList.Add(new VialOfPoison());       
-        RoomList.Add(new PowerHelmet());
-        RoomList.Add(new HelicopterHat());
     }
 
     public void MakeShopList()

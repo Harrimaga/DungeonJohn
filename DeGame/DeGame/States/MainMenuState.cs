@@ -22,7 +22,7 @@ class MainMenuState : IGameObject
         }
         if (inputHelper.KeyPressed(Keys.Z) || option.Pressed)
         {
-            GameEnvironment.gameStateManager.SwitchTo("Pause");
+            GameEnvironment.gameStateManager.SwitchTo("Option");
             //Reset();
         }
     }
