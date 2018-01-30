@@ -59,10 +59,13 @@ public class Boss :  SpriteGameObject
         }
         else if (poisoncounter > 0)
         {
-            if (poisoncounter % 500 == 0 && poisoncounter < 5000)
-                health -= 4;
-            poisoncounter -= gameTime.ElapsedGameTime.Milliseconds;
             color = Color.YellowGreen;
+            if (poisoncounter % 500 == 0 && poisoncounter < 5000)
+            {
+                health -= 4;
+                color = Color.Salmon;
+            }
+            poisoncounter -= gameTime.ElapsedGameTime.Milliseconds;
         }
         else
             color = Color.White;
