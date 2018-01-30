@@ -74,5 +74,6 @@ public class Crafting : IGameObject
         {
             slot.Draw(gameTime, spriteBatch);
         }
+        spriteBatch.DrawString(GameEnvironment.assetManager.GetFont("Sprites/SpelFont"), "Press spacebar to leave crafting", BasisPosition + new Vector2(700, 850), Color.White);
     }
 }
