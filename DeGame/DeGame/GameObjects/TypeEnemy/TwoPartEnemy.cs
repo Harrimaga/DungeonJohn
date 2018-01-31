@@ -5,15 +5,13 @@ using System;
 public class TwoPartEnemy : Enemy
 {
     int Stage = 1;
-    static Random random = new Random();
-    bool Two = true;
-
+    bool Start2 = false;
     public TwoPartEnemy(Vector2 startPosition, Vector2 roomposition, int Difficulty = 0, int layer = 0, string id = "Enemy") : base(startPosition, roomposition, "Sprites/Enemies/2PartEnemyFull", Difficulty, layer, id)
     {
         basevelocity = new Vector2(0.12f, 0.12f);
         health = 100 * statmultiplier;
         maxhealth = 100 * statmultiplier;
-        expGive = 0 * statmultiplier;
+        expGive = 80 * statmultiplier;
         contactdamage = 10 * statmultiplier;
         killable = false;
         hpdisplay = true;
@@ -30,30 +28,25 @@ public class TwoPartEnemy : Enemy
             velocity = basevelocity;
         }
 
+        if (PlayingState.currentFloor.currentRoom.position == Roomposition)
+            Chase();
         base.Update(gameTime);
 
         if (Stage == 1)
         {
-            if (PlayingState.currentFloor.currentRoom.position == Roomposition)
-                Chase();
-
             if (health <= 0)
             {
                 Stage = 2;
+                Start2 = true;
             }
         }
-        else if (Stage == 2)
+        if (Stage == 2 && Start2)
         {
-            if (Two == true)
-            {
-                killable = true;
-                HalfEnemy HalfEnemyLeft = new HalfEnemy(position + new Vector2(-50, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyLeft").Height * 0.8f), Roomposition, 1, PlayingState.currentFloor.displayint);
-                HalfEnemy HalfEnemyRight = new HalfEnemy(position + new Vector2(50, GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyRight").Height * 0.8f), Roomposition, 2, PlayingState.currentFloor.displayint);
-                PlayingState.currentFloor.currentRoom.addedenemies.Add(HalfEnemyLeft);
-                PlayingState.currentFloor.currentRoom.addedenemies.Add(HalfEnemyRight);
-                PlayingState.currentFloor.floor[(int)Roomposition.X, (int)Roomposition.Y].enemycounter += 2;
-                Two = false;
-            }
+            Start2 = false;
+            maxhealth = 75 * statmultiplier;
+            health = 75 * statmultiplier;
+            basevelocity = new Vector2(0.03f, 0.03f);
+            killable = true;
         }
     }
 
@@ -66,6 +59,10 @@ public class TwoPartEnemy : Enemy
         if (Stage == 1)
         {
             spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyFull"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);     
+        }
+        if(Stage == 2)
+        {
+            spriteBatch.Draw(GameEnvironment.assetManager.GetSprite("Sprites/Enemies/2PartEnemyBottom"), position, null, color, 0f, Vector2.Zero, 1f, Effects, 0f);
         }
     }
 }
